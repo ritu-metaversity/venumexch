@@ -1,0 +1,21 @@
+.body .content .right-pane {
+    width: 312px;
+    max-width: 312px;
+    min-width: 312px;
+}
+
+._table-cell, .body .content .left-pane, .body .content .mid-pane, .body .content .right-pane, .sports-wrapper {
+    display: table-cell;
+    vertical-align: top;
+}
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #444 #aaa;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}

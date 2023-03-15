@@ -1,0 +1,183 @@
+/* .modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+}
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#rulesModal .modal-body .tab-content {
+    max-height: 75vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: url(./main-bg.jpg) center center;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #444 #aaa;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #444;
+}
+*::-webkit-scrollbar-track {
+    background: #aaa;
+}
+
+.tab-content>.active {
+    display: block;
+}
+.tab-content>.tab-pane {
+    display: none;
+}
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #444 #aaa;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+div {
+    display: block;
+}
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #444 #aaa;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+div {
+    display: block;
+}
+.table-responsive>.table-bordered {
+    border: 0;
+}
+
+.table-bordered, .table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+table {
+    border-collapse: collapse;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+table {
+    border-collapse: collapse;
+}
+
+table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+table tbody tr {
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+table tbody tr {
+    padding-bottom: 20px;
+    text-align: left;
+}
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #444 #aaa;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+} */
+ .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    background-color: #0f2327;
+    border-right: 1px solid #0f2327;
+    border-bottom: 1px solid #0f2327;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    border: 0;
+    font-weight: bold;
+    color: #fff;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+.nav-tabs .nav-link {
+    background-color: #1f5058;
+    border-right: 1px solid #0f2327 !important;
+    border-bottom: 1px solid #0f2327 !important;
+    color: #fff;
+}
+.nav-tabs .nav-link {
+    border: 0;
+    border-radius: 0;
+}
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+

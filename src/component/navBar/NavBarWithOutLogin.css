@@ -1,0 +1,10 @@
+header.header .logo-area1 {
+    width: 175px;
+    height: 83px;
+    margin-left: -240px;
+}
+header.header .logo-area1 img {
+    width: 85px;
+    height: 58px;
+    margin-top: 12px;
+}

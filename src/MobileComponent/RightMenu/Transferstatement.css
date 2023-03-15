@@ -1,0 +1,29 @@
+.main-content section {
+    float: left;
+    width: 100%;
+}
+/* .m-t-10 {
+    margin-top: 10px !important;
+} */
+.page-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+.p-l-15 {
+    padding-left: 15px !important;
+}
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.transfer .table thead tr {
+    background-color: #0f2327;
+    color: #fff;
+}

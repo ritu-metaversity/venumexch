@@ -1,0 +1,40 @@
+.security-auth .nav-tabs .nav-link {
+    color: #ddd !important;
+    background-color: #1f5058;
+    border-right: 1px solid #0f2327;
+}
+.nav-tabs .nav-item {
+    white-space: normal;
+    flex-grow: 1;
+}
+
+.nav-tabs .nav-item {
+    margin-bottom: -1px;
+}
+
+.security-auth .nav-tabs {
+    border-bottom: 0;
+    justify-content: center;
+}
+.security-auth .nav-tabs .nav-link {
+    color: #ddd !important;
+    background-color: #1f5058 !important;
+    border-right: 1px solid #0f2327 !important;
+    border-radius: unset;
+}
+.nav-tabs .nav-item {
+    white-space: normal;
+    flex-grow: 1;
+}
+a:not([href]):not([tabindex]) {
+    color: inherit;
+    text-decoration: none;
+}
+.nav-tabs .nav-link {
+    color: #5bafc0;
+}
+.nav-tabs .nav-link {
+    padding: 15px 6px 13px;
+    text-transform: uppercase;
+    text-align: center;
+}

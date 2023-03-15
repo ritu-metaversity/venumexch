@@ -1,0 +1,156 @@
+.rules-regs {
+    background-color: #fff;
+    padding: 16px;
+    font-size: 14px;
+}
+.home-page {
+    margin-top: 90px;
+}
+.rules-regs .intro, .rules-regs .general, .rules-regs .specific {
+    counter-reset: rules;
+}
+.rules-regs h2 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h2, .h2 {
+    font-size: 2rem;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.rules-regs {
+    background-color: #fff;
+    padding: 16px;
+    font-size: 14px;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.rules-regs .specific ul {
+    padding-left: 30px;
+}
+
+.rules-regs .intro ul, .rules-regs .general ul, .rules-regs .specific ul, .rules-regs .intro li, .rules-regs .general li, .rules-regs .specific li {
+    list-style: disc;
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ol, ul, dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.rules-regs .intro li, .rules-regs .general li, .rules-regs .specific li {
+    margin-top: 10px;
+}
+
+.rules-regs .intro ul, .rules-regs .general ul, .rules-regs .specific ul, .rules-regs .intro li, .rules-regs .general li, .rules-regs .specific li {
+    list-style: disc;
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+::marker {
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    text-transform: none;
+    text-indent: 0px !important;
+    text-align: start !important;
+    text-align-last: start !important;
+}
+.rules-regs .intro ul, .rules-regs .general ul, .rules-regs .specific ul, .rules-regs .intro li, .rules-regs .general li, .rules-regs .specific li {
+    list-style: disc;
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+user agent stylesheet
+li {
+    text-align: -webkit-match-parent;
+}
+user agent stylesheet
+ul {
+    list-style-type: disc;
+}
+.rules-regs {
+    background-color: #fff;
+    padding: 16px;
+    font-size: 14px;
+}
+.rules-regs h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: -4px;
+}
+
+.intro>ul{
+    margin-left: 20px;
+}
+.intro>p {
+    font-size: 13px;
+}
+.general ul {
+    margin-left: 38px;
+}
+.specific li {
+    margin-left: -43px;
+}

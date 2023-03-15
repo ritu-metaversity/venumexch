@@ -1,0 +1,148 @@
+element.style {
+    float: left;
+    width: 100%;
+}
+
+.footer.custom-footer[data-v-7c8a6852] {
+    position: fixed;
+    bottom: -20px;
+}
+.theme2bg {
+    background-color: #2c4f58 !important;
+}
+
+
+
+.p-t-10 {
+    padding-top: 10px !important;
+}
+
+.m-b-0 {
+    margin-bottom: 0 !important;
+}
+footer .lower-footer[data-v-7c8a6852] {
+    background-color: #222;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.d-block {
+    display: block !important;
+}
+
+
+div {
+    display: block;
+}
+.theme2font {
+    color: #fff !important;
+}
+
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+footer .upper-footer .gamecare[data-v-7c8a6852]{
+width: 80px;
+filter: brightness(0) invert(1);
+}
+
+
+img {
+overflow-clip-margin: content-box;
+overflow: clip;
+}
+a, a:hover, a:focus, a:active {
+color: #000;
+text-decoration: none;
+}
+a {
+color: #007bff;
+text-decoration: none;
+background-color: transparent;
+}
+
+a:-webkit-any-link {
+color: -webkit-link;
+cursor: pointer;
+}
+.theme2font {
+color: #fff !important;
+}
+.text-center {
+text-align: center !important;
+}
+
+footer .upper-footer .begambleaware[data-v-7c8a6852] {
+    width: 115px;
+    filter: brightness(0) invert(1);
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+a, a:hover, a:focus, a:active {
+    color: #000;
+    text-decoration: none;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+}
+footer .upper-footer .plus18[data-v-7c8a6852] {
+    width: 28px;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.text-center {
+    text-align: center !important;
+}
+footer .lower-footer[data-v-7c8a6852] {
+    background-color: #222;
+    margin: 0px -31px;
+}
+.footer.custom-footer[data-v-7c8a6852] {
+    position: fixed;
+    bottom: 0px;
+    padding: 0px;
+}
+modal-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: baseline;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    margin: auto;
+    /* margin-left: 100% !important; */
+    right: -126%;
+}
+@media screen and (max-width: 800px) {
+    .eighteen-plus1{
+        top: 35vh  !important;
+    }
+}

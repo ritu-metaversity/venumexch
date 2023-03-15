@@ -1,0 +1,261 @@
+
+element.style {
+    overflow-y: auto;
+}
+.right-menu {
+    display: block;
+    position: fixed;
+    z-index: 2;
+}
+.right-menu {
+    transform: translateX(0);
+    position: absolute;
+    left: auto;
+    right: 0;
+    background: #fff;
+    width: 260px;
+    height: 100%;
+    top: 0;
+    display: block;
+    padding-top: 10px;
+}
+
+div {
+    display: block;
+}
+
+.right-menu .menu-top-wrap {
+    min-height: calc(100% - 44px);
+}
+.account-overview {
+    color: #000;
+}
+
+.account-overview .login-name {
+    margin: 0 10px;
+    padding: 24px 0 19px;
+    font-weight: 700;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    font-size: 20px;
+}
+.account-overview .menu-item .content .group {
+    width: 100%;
+    display: inline-block;
+}
+.account-overview .menu-item .content .group div {
+    float: left;
+    margin-bottom: 16px;
+}
+.account-overview .menu-item .content .group span {
+    float: right;
+}
+b, strong {
+    font-weight: bolder;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+ol, ul, dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+a, a:hover, a:focus, a:active {
+    color: #000;
+    text-decoration: none;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+li {
+    text-align: -webkit-match-parent;
+}
+.menu-lvl-1 {
+    padding: 0 13px;
+}
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+}
+.menu-lvl-1 .item {
+    padding-left: 0;
+    font-weight: 700;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    color: #000;
+}
+.left-menu .item i, .left-menu .item img, .right-menu .item img, .logout-button .item img {
+    margin: 9px 8px 9px 0;
+    margin-right: 16px;
+}
+
+.menu-item img, .logout-button img, .right-menu-bottom img, .left-menu .item img {
+    width: 16px;
+    margin-right: 16px;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+.left-menu .menu-name, .right-menu .menu-name, .logout-button .menu-name {
+    margin: 13px 8px 13px 0;
+    display: inline-block;
+}
+
+.menu-lvl-1 .item {
+    padding-left: 0;
+    font-weight: 700;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    color: #000;
+}
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+.menu-lvl-1 .item {
+    padding-left: 0;
+    font-weight: 700;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    color: #000;
+}
+.account-overview .menu-item {
+    border-bottom: 1px solid #ddd;
+    margin: 0 10px;
+    padding: 0 5px 9px 10px;
+}
+div {
+    display: block;
+}
+account-overview .login-name {
+    margin: 0 10px;
+    padding: 24px 0 19px;
+    font-weight: 700;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    font-size: 20px;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.account-overview .menu-item {
+    border-bottom: 1px solid #ddd;
+    margin: 0 10px;
+    padding: 0 5px 9px 10px;
+}
+
+div {
+    display: block;
+}
+
+
+.account-overview .menu-item .label {
+    font-weight: 700;
+    font-size: 16px;
+    margin: 11px 0 25px;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.menu-item img, .logout-button img, .right-menu-bottom img, .left-menu .item img {
+    width: 16px;
+    margin-right: 16px;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+.account-overview .menu-item .label {
+    font-weight: 700;
+    font-size: 16px;
+    margin: 11px 0 25px;
+}
+
+.account-overview .menu-item .label {
+    font-weight: 700;
+    font-size: 16px;
+    margin: 11px 0 25px;
+}
+
+div {
+    display: block;
+}
+
+.account-overview .menu-item .content .group {
+    width: 100%;
+    display: inline-block;
+}
+div {
+    display: block;
+}
+
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+ul {
+    list-style-type: disc;
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-lvl-1 {
+    padding: 0 13px;
+}
+
+
+.right-menu {
+    position: fixed;
+}
+.settings .item{
+    border-top: 1px solid #000;
+    border-width: 80%; 
+}
+.sign-out{
+    border-top: 1px solid #ddd;
+}
