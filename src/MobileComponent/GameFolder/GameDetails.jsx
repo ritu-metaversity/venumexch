@@ -25,7 +25,9 @@ const GameDetails = () => {
   const { PostGameDetailsByMatchID, PostBetListByMatchIdData } = useSelector(
     (state) => state.auth
   );
-  console.log(PostBetListByMatchIdData?.data, "PostBetListByMatchIdData?.data");
+  console.log(PostGameDetailsByMatchID?.data, "PostBetListByMatchIdData?.data");
+  // console.log(PostGameDetailsByMatchID?.data?.Odds[0]?.runners[1]?.name, "PostBetListByMatchIdData?.data");
+  // console.log(PostGameDetailsByMatchID?.data?.Odds?.runners[1]?.name, "PostBetListByMatchIdData?.data");
   // const {  } = useSelector((state) => state.auth);
   // const [PostBetListByMatchId,setPostBetListByMatchId ]= useState("")
 
@@ -196,7 +198,7 @@ const GameDetails = () => {
                   alt=""
                   src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
                 />
-                <h4 className="m-b-0">Bengaluru Bulls vs Puneri Paltan</h4>
+                <h4 className="m-b-0">{PostGameDetailsByMatchID?.data?.Odds[0]?.runners[0]?.name} VS {PostGameDetailsByMatchID?.data?.Odds[0]?.runners[1]?.name}</h4>
               </div>
               <div className="text-right">
                 <span>20/11/2022 20:30</span>

@@ -6,7 +6,7 @@ import { PostBalance } from "../../App/Features/auth/authActions";
 
 import "./NavbarM.css";
 
-const NavbarM = ({RightSideBar,LiftSideBar}) => {
+const NavbarM = ({RightSideBar,LiftSideBar,RightValue}) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -16,8 +16,9 @@ const NavbarM = ({RightSideBar,LiftSideBar}) => {
   const [sideBarOpen, setRightBar] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
   const [MrqueeClose, setMarqueeClose] = useState(true);
-
-console.log(pathname)
+// const RightValue
+// console.log(RightValue,"RightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValue")
+// console.log(sideBarOpen,"RightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValue")
   // useEffect(()=>{
 
   //   PostTotalBalance?.data?.data?.libality
@@ -29,6 +30,10 @@ console.log(pathname)
     //    dispatch(PostBalance())
     // },[dispatch])
 
+
+    useEffect(()=>{
+      setRightBar(RightValue)
+    },[RightValue])
     const token = localStorage.getItem("TokenId")
     
     useEffect(()=>{
@@ -41,6 +46,7 @@ console.log(pathname)
 
   // console.log(props.LeftValueData)
   const hanldeinput = (vl) => {
+
     if (sideBarOpen === false) {
       setRightBar(true);
       RightSideBar(true);
@@ -72,6 +78,11 @@ console.log(pathname)
   const handleRules = () => {
     navigate("./rules-casino");
   };
+  const handleback=()=>{
+    "history.back()"
+    window.history.back()
+    console.log("history.back()")
+  }
   return (
     <div>
       <header className="header">
@@ -106,7 +117,7 @@ console.log(pathname)
             </button>:
 
 
-<span  className="navbar-toggler"><i  onClick="history.back()" className="fas fa-arrow-left m-r-10 m-t-5"></i></span>
+<span  className="navbar-toggler"><i  onClick={handleback} className="fas fa-arrow-left m-r-10 m-t-5"></i></span>
             
 
             }

@@ -27,8 +27,9 @@ const LayoutForMobile = () => {
   const [BetTypeFooter, setBetTypeFooter] = useState(false);
 
   const RightSideBarClose = (vl) => {
+    console.log(vl,"RightSideBarCloseRightSideBarCloseRightSideBarClose")
     setRightValue(false);
-    setRightValue(false);
+    // setRightValue(false);
   };
 
   const handleClose = () => {
@@ -36,7 +37,7 @@ const LayoutForMobile = () => {
   };
 
   const RightSideBar = (vl) => {
-    // console.log(vl)
+    console.log(vl,"RightSideBar")
     setRightValue(vl);
   };
   const LiftSideBar = (vl) => {
@@ -90,7 +91,7 @@ useEffect(()=>{
           {/* <div className={`main-cointainer ${ LeftValue===true? "left-menu-open" :""}`} >     */}
 
           <div>
-            <NavbarM RightSideBar={RightSideBar} LiftSideBar={LiftSideBar} />
+            <NavbarM RightSideBar={RightSideBar} LiftSideBar={LiftSideBar} RightValue={RightValue}/>
           </div>
           <Outlet context={datatata} datatata={datatata} />
 

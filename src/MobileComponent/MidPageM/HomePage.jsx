@@ -30,12 +30,13 @@ const { Postmatchsport } = useSelector((state) => state.auth);
 // console.log
 const handleGameDetails=(id,item)=>{
   // console.log("home page load ")
-  // console.log(item)
+  console.log(item?.openDate)
  let data= {
   matchName:item?.matchName,
   openDate:item?.openDate,
   Odds:""
  } 
+ 
       datatata(data)
  navigate(`/m/gamedetail/${id}`)
 }
@@ -78,7 +79,7 @@ const handleGameDetails=(id,item)=>{
             
   
   <section style={{marginTop:"-14px"}}>
-  <h2 class="page-title p-l-15">{GameName}</h2>
+  <h2 class="page-title p-l-15" style={{marginTop: "10px"}}>{GameName}</h2>
     <div   className="in-play page-title m-t-20 m-l-15" style={{paddingTop: "0px"}}>
       <i   className="fas fa-play-circle"></i>{""}
       <span   className="label">In Play</span>
