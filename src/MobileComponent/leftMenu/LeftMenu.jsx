@@ -92,6 +92,9 @@ const LeftMenu = (props) => {
           <div   className="menu-lvl-1">
              <div   className="item" onClick={()=>handleRoute("70","Table Tennis")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/70.png" alt=''   className="game-icon"/> <span   className="menu-name">Table Tennis</span></div>
           </div>
+
+
+          
        </a>
     </li>
     <li>
