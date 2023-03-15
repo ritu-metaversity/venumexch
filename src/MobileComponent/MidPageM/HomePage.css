@@ -1,0 +1,10 @@
+.box-w1 {
+    width: 20% !important;
+    max-width: 20% !important;
+    min-width: 20% !important;
+}
+.box-w4 {
+    width: 60% !important;
+    max-width: 60% !important;
+    min-width: 60% !important;
+}

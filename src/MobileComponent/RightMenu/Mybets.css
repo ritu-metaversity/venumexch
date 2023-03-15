@@ -1,0 +1,269 @@
+.main-content section {
+    float: left;
+    width: 100%;
+}
+section {
+    display: block;
+}
+.page-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+.p-l-15 {
+    padding-left: 15px !important;
+}
+.m-t-20 {
+    margin-top: 20px !important;
+}
+h2, .h2 {
+    font-size: 2rem;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.toggleable-list-title {
+    background: #0f2327;
+}
+.toggleable-list-title {
+    margin: 0;
+    color: #fff;
+    display: block;
+    font-weight: bold;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+   
+    transition: background-color ease 0.2s;
+}
+.toggleable-list-title i {
+font-size: 22px;
+}
+
+.m-r-10 {
+    margin-right: 10px !important;
+}
+.float-right {
+    float: right !important;
+}
+.fa, .fas {
+    font-weight: 900;
+}
+.fa, .far, .fas {
+    font-family: "Font Awesome 5 Free";
+}
+.fa, .fab, .fal, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+i {
+    font-style: italic;
+}
+.toggleable-list-title i {
+    font-size: 22px;
+}
+
+.m-r-10 {
+    margin-right: 10px !important;
+}
+.float-right {
+    float: right !important;
+}
+.fa, .fas {
+    font-weight: 900;
+}
+.fa, .far, .fas {
+    font-family: "Font Awesome 5 Free";
+}
+.fa, .fab, .fal, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+i {
+    font-style: italic;
+}
+.my-bets-container .message {
+    padding: 8px 12px;
+    background: #fff;
+    margin: 0;
+}
+.toggleable-list-title {
+    background: #0f2327;
+}
+
+/* .m-t-10 {
+    margin-top: 10px !important;
+} */
+section {
+    display: block;
+    padding: 0px;
+}
+.toggleable-list-title i {
+    font-size: 22px;
+}
+
+.m-r-10 {
+    margin-right: 10px !important;
+}
+.float-right {
+    float: right !important;
+}
+.fa, .fas {
+    font-weight: 900;
+}
+.fa, .far, .fas {
+    font-family: "Font Awesome 5 Free";
+}
+.fa, .fab, .fal, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+.toggleable-list-title i {
+    font-size: 22px;
+}
+.m-r-10 {
+    margin-right: 10px !important;
+}
+.float-right {
+    float: right !important;
+}
+.fa, .fas {
+    font-weight: 900;
+}
+.fa, .far, .fas {
+    font-family: "Font Awesome 5 Free";
+}
+.fa, .fab, .fal, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+.collapse:not(.show) {
+    display: none;
+}
+.fa-angle-down:before {
+    content: "\f107";
+}
+.toggleable-list-title i {
+    font-size: 22px;
+}
+.fa, .fas {
+    font-weight: 900;
+}
+.fa, .far, .fas {
+    font-family: "Font Awesome 5 Free";
+}
+.fa, .fab, .fal, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+.toggleable-list-title {
+    margin: 0;
+    color: #fff;
+    display: block;
+    font-weight: bold;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color ease 0.2s;
+    text-align: left !important;
+}
+.table thead tr th {
+    font-size: 12px !important;
+}
+.events-icons.float-right {
+    position: absolute;
+    right: 20px;
+    top: 50px;
+}
+i.market-list-item {
+    position: relative !important;
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.my-bets-container .events li {
+    background-color: #fff;
+    margin: 4px 0;
+    position: relative;
+    padding: 16px 12px;
+}
+.my-bets-container .events li .back-bet {
+    color: #2587d0;
+}
+.my-bets-container .events li .back-bet {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+a, a:hover, a:focus, a:active {
+    color: #000;
+    text-decoration: none;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+u {
+    text-decoration: underline;
+}
+
+li {
+    text-align: -webkit-match-parent;
+}
+b, strong {
+    font-weight: bolder;
+}
+section {
+    display: block;
+    width: 95%;
+    margin-left: 2%;
+
+}
+.m-t-10 {
+    margin-top: 26px !important;
+}

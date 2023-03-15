@@ -1,0 +1,10 @@
+element.style {
+    min-height: calc(100% - 163px);
+}
+.main-content {
+    /* padding: 5px; */
+}
+
+div {
+    display: block;
+}

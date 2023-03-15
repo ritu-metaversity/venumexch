@@ -1,0 +1,72 @@
+.left-menu {
+    display: block;
+    position: fixed;
+    z-index: 2;
+}
+
+.left-menu {
+    transform: translateX(0);
+    position: absolute;
+    left: 0;
+    right: auto;
+    background: #fff;
+    width: 260px;
+    height: 100%;
+    top: 0;
+    display: none;
+    padding-top: 10px;
+    overflow: auto;
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ol, ul, dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+a, a:hover, a:focus, a:active {
+    color: #000;
+    text-decoration: none;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+user agent stylesheet
+li {
+    text-align: -webkit-match-parent;
+}

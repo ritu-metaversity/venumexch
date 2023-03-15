@@ -1,0 +1,190 @@
+/* .login-form {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-top: -1%;
+}
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #444;
+}
+*::-webkit-scrollbar-track {
+    background: #aaa;
+} */
+.login-confirm-modal .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+ margin-top: 414px;
+    height: 161px !important;
+    margin-left: 92%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+
+.btn-secondary {
+    background-color: #dc3545;
+    color: #FFFFFF;
+    border-color: #dc3545;
+    border-right-color: #dc3545;
+}
+
+/* .btn-info {
+        color: #fff;
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    } */
+.btn-primary {
+    background-color: #17a2b8;
+    color: #FFFFFF;
+    border-color: #17a2b8;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+/* border-right-color: #497958; */
+/* border-left-color: unset; */
+/* border-top-color: unset; */
+
+
+.btn {
+    padding: 1px 5px !important;
+}
+
+.recaptchaTerms {
+    color: #fff;
+    font-size: 9px;
+    font-weight: bold;
+}
+@media only screen and (min-width:800px) and (max-width: 2000px){
+    .login-modal>.login-confirm-modal{
+        position: absolute;
+        color: #000;
+        background: #fff;
+        top: 30vh;
+        width: 100%;
+        left: 40%;
+    }
+}
+footer a {
+    color: #fff !important;
+}
+.recaptchaTerms a {
+    color: #4cb4f9 !important;
+}
+.login-form .login-panel {
+    width: unset;
+    margin: 0 auto;
+    text-align: center;
+    /* margin-inline: 3px; */
+}
+.login {
+    background: url(https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/login-bg.jpg) center center !important;
+    background-size: unset !important;
+    overflow-y: auto;
+   
+}
+.form-group {
+    margin-left: 7px;
+    margin-right: 15px;
+}
+.login-form .login-panel .panel-body .btn-login {
+    margin-top: 15px;
+    width: 95%;
+    margin-right: 9px;
+}
+@media screen and (max-width: 500px) {
+    .footer {
+        text-align: center;
+        line-height: 20px;
+        padding: 20px;
+        background: #2c4f58 !important;
+        margin-top: 0;
+    }
+    .m-b-0.text-center.d-inline-block {
+        background: #222;
+        width: 116%;
+        margin-left: -21px;
+        padding: 4px;
+        margin-top: -18pxpx;
+    }
+    footer.footer {
+        height: 92px;
+        overflow: hidden;
+    }
+    .login-form .login-panel {
+        width: 99%;
+        margin: 0 auto;
+        text-align: center;
+        /* margin-inline: 3%; */
+    }
+    .login-form .login-panel .panel-heading .logo img {
+        height: 61px;
+    }
+    
+}
+
+@media only screen and (min-width:350) and (max-width: 400px) {
+    .footer {
+        text-align: center;
+        line-height: 20px;
+        padding: 20px;
+        background: #2c4f58 !important;
+        margin-top: 0;
+    }
+    .m-b-0.text-center.d-inline-block {
+        background: #000 !important;
+        width: 116%;
+        margin-left: -21px;
+        padding: 4px;
+        margin-top: 12px;
+    }
+    footer.footer {
+        height: 120px;
+        overflow: hidden;
+    }
+    .login-form .login-panel {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        /* margin-inline: 3px; */
+    }
+}
