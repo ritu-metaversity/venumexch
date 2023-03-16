@@ -16,27 +16,29 @@ function App() {
   const [mobileRoutes, setMoileRoutes] = useState(true);
 
   const { pathname } = useLocation();
-  useEffect(() => {
-    if (window.innerWidth <= 1024) {
-      setMoileRoutes(true);
-      if (!pathname.includes("/m/")) {
-        navigate("./m/home");
-      }
-      // console.log("mobile")
-    } else {
-      setMoileRoutes(false);
-      if (pathname.includes("/m/")) {
-        navigate("./home");
-      }
-      // console.log("pc")
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (window.innerWidth <= 1024) {
+  //     setMoileRoutes(true);
+  //     if (!pathname.includes("/m/")) {
+  //       navigate("./m/home");
+  //     }
+  //     // console.log("mobile")
+  //   } else {
+  //     setMoileRoutes(false);
+  //     if (pathname.includes("/m/")) {
+  //       navigate("./home");
+  //     }
+  //     // console.log("pc")
+  //   }
+  // }, [navigate]);
 
   return (
 
       <div className="App">
 
-        {mobileRoutes === true ? <RouteMobile /> : <RoutesPages />}
+        {/* {mobileRoutes === true ? <RoutesPages /> : */}
+         <RouteMobile />
+         {/* } */}
 
       </div>
 

@@ -825,3 +825,15 @@ h4.m-b-0 {
  .bet-modal {
     margin-top: -69px;
 }
+/* .bbbbbb{
+    width: 10px;
+} */
+.btn-cancel {
+    background: transparent;
+    border: 1px solid #222;
+    color: #000;
+    height: 45px;
+    padding: 0 5px;
+    border-radius: 2px;
+    width: 100%;
+}

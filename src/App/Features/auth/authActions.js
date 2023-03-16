@@ -2,7 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 const token = localStorage.getItem("TokenId");
-
+// console.log(REACT_APP_API_URL)
+let REACT_APP_API_URL= "api.a2zscore.com"
 axios.defaults.headers.common.Authorization= `Bearer ${token}`
 
 export const getAllPostsComments = createAsyncThunk('auth/getAllPostsComments', async (_, { rejectWithValue }) => {
@@ -19,7 +20,7 @@ export const getAllPostsComments = createAsyncThunk('auth/getAllPostsComments', 
 
 export const postLogin = createAsyncThunk('auth/postLogin', async (login, { rejectWithValue }) => {
     try {
-        const postsLoginRespose = await axios.post('http://api.247365.exchange/admin-new-apis/login/client-login', login);
+        const postsLoginRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/client-login`, login);
         return postsLoginRespose
     } catch (err) {
         if (err) {
@@ -30,7 +31,7 @@ export const postLogin = createAsyncThunk('auth/postLogin', async (login, { reje
 })
 export const getActiveSportList = createAsyncThunk('auth/getActiveSportList', async (login, { rejectWithValue }) => {
     try {
-        const getActiveSportListtt = await axios.post('http://api.247365.exchange/admin-new-apis/enduser/active-sport-list', login);
+        const getActiveSportListtt = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/active-sport-list`, login);
         return getActiveSportListtt
     } catch (err) {
         if (err) {
@@ -43,7 +44,7 @@ export const getActiveSportList = createAsyncThunk('auth/getActiveSportList', as
 export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTime', async (OldPassWordData, { rejectWithValue }) => {
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
-        const postOldPassRespose = await axios.post('http://api.247365.exchange/admin-new-apis/user/first-login-cp', OldPassWordData);
+        const postOldPassRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/user/first-login-cp`, OldPassWordData);
         return postOldPassRespose
     } catch (err) {
         if (err) {
@@ -57,7 +58,7 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
 export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', async (passwordChanege, { rejectWithValue }) => {
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
-        const postPasswordChangeRespose = await axios.post('http://api.247365.exchange/admin-new-apis/enduser/change-password', passwordChanege);
+        const postPasswordChangeRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/change-password`, passwordChanege);
         return postPasswordChangeRespose
     } catch (err) {
         if (err) {
@@ -70,7 +71,7 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
 export const PostGameDetailsBySportsId = createAsyncThunk('auth/PostGameDetailsBySportsId', async (sportsId, { rejectWithValue }) => {
     try {
         
-        const postGameDetailsBySportsIdRespose = await axios.post('http://api.247365.exchange/admin-new-apis/enduser/active-sport-match-wise-open', sportsId);
+        const postGameDetailsBySportsIdRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/active-sport-match-wise-open`, sportsId);
         return postGameDetailsBySportsIdRespose
     } catch (err) {
         if (err) {
@@ -82,7 +83,7 @@ export const PostGameDetailsBySportsId = createAsyncThunk('auth/PostGameDetailsB
 // export const PostBalance = createAsyncThunk('auth/PostBalance', async ( { rejectWithValue }) => {
 //     console.log("baclcdlklsfdklfk")
 //     try {
-//         const PostGameBalance = await axios.post('http://api.247365.exchange/admin-new-apis/enduser/get-user-balance');
+//         const PostGameBalance = await axios.post(`http://${}/admin-new-apis/enduser/get-user-balance');
 //         return PostGameBalance
 //     } catch (err) {
 //         if (err) {
@@ -107,7 +108,7 @@ export const PostGameDetailsByMI = createAsyncThunk('auth/PostGameDetailsByMI', 
 export const PostGetStackApi = createAsyncThunk('auth/PostGetStackApi', async (id, { rejectWithValue }) => {
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + sportsId
-        const PostGetStackData = await axios.post("http://api.247365.exchange/admin-new-apis/enduser/get-stake-button");
+        const PostGetStackData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/get-stake-button`);
         return PostGetStackData
     } catch (err) {
         if (err) {
@@ -118,7 +119,7 @@ export const PostGetStackApi = createAsyncThunk('auth/PostGetStackApi', async (i
 });
 export const PostEditStack = createAsyncThunk('auth/PostEditStack', async (data, { rejectWithValue }) => {
     try {
-        const PostEditStackData = await axios.post("http://api.247365.exchange/admin-new-apis/enduser/set-stake-button", data);
+        const PostEditStackData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/set-stake-button`, data);
         return PostEditStackData
     } catch (err) {
         if (err) {
@@ -133,7 +134,7 @@ export const PostBetListByMatchId = createAsyncThunk('auth/PostBetListByMatchId'
     try {
 
         // axios.defaults.headers.post['Authorization'] = "Bearer "+token
-        const BetListByMatchId = await axios.post("http://api.247365.exchange/admin-new-apis/enduser/bet-list-by-matchid", data);
+        const BetListByMatchId = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/bet-list-by-matchid`, data);
         return BetListByMatchId
     } catch (err) {
         if (err) {
@@ -147,7 +148,7 @@ export const PostBetListByMatchId = createAsyncThunk('auth/PostBetListByMatchId'
 export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', async (data, { rejectWithValue }) => {
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer "+token
-        const TransferStatementData = await axios.post("http://api.247365.exchange/admin-new-apis/enduser/account-statement", data);
+        const TransferStatementData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/account-statement`, data);
         return TransferStatementData
     } catch (err) {
         if (err) {
@@ -159,7 +160,7 @@ export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', 
 
 export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, { rejectWithValue }) => {
     try {
-        const PlaceBet = await axios.post("http://api.247365.exchange/admin-new-apis/enduser/place-bets", data);
+        const PlaceBet = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/place-bets`, data);
         return PlaceBet
     } catch (err) {
         if (err) {
@@ -172,7 +173,7 @@ export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, {
 
 export const Postactivematchsport = createAsyncThunk('auth/Postactivematchsport', async (data, { rejectWithValue }) => {
     try {
-        const PlaceActivematchsport = await axios.post("http://api.247365.exchange/admin-new-apis/enduser/active-match-sport-wise-open", data);
+        const PlaceActivematchsport = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/active-match-sport-wise-open`, data);
         return PlaceActivematchsport
     } catch (err) {
         if (err) {
@@ -183,7 +184,7 @@ export const Postactivematchsport = createAsyncThunk('auth/Postactivematchsport'
 });
 export const PostBalance = createAsyncThunk('auth/PostBalance', async (data, { rejectWithValue }) => {
     try {
-        const getBalance = await axios.post("http://api.247365.exchange/admin-new-apis/enduser/get-user-balance", data);
+        const getBalance = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/get-user-balance`, data);
         return getBalance
     } catch (err) {
         if (err) {
@@ -194,7 +195,7 @@ export const PostBalance = createAsyncThunk('auth/PostBalance', async (data, { r
 });
 export const Postunsettleddddd = createAsyncThunk('auth/Postunsettleddddd', async (data, { rejectWithValue }) => {
     try {
-        const Postunsettled = await axios.post("http://api.247365.exchange/admin-new-apis/enduser/unsettled-bet", data);
+        const Postunsettled = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/unsettled-bet`, data);
         return Postunsettled
     } catch (err) {
         if (err) {
@@ -207,7 +208,7 @@ export const Postunsettleddddd = createAsyncThunk('auth/Postunsettleddddd', asyn
 
 export const Postcasino = createAsyncThunk('auth/Postcasino', async (data, { rejectWithValue }) => {
     try {
-        const PostcasinoDataaaaaa = await axios.post("http://api.247365.exchange/admin-new-apis/casino/all-casino-types", data);
+        const PostcasinoDataaaaaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/casino/all-casino-types`, data);
         return PostcasinoDataaaaaa
     } catch (err) {
         if (err) {
@@ -218,14 +219,14 @@ export const Postcasino = createAsyncThunk('auth/Postcasino', async (data, { rej
 
 });
 
-// export const Postcasino = createAsyncThunk('auth/Postcasino', async (data, { rejectWithValue }) => {
-//     try {
-//         const PostcasinoDataaaaaa = await axios.post("http://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types”", data);
-//         return PostcasinoDataaaaaa
-//     } catch (err) {
-//         if (err) {
-//             throw err
-//         }
-//         return rejectWithValue(err.response.data)
-//     }
-// });
+export const Postprofitlossmatchwise = createAsyncThunk('auth/Postprofitlossmatchwise', async (data, { rejectWithValue }) => {
+    try {
+        const PostprofitlossmatchwiseData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/report/profit-loss-match-wise`, data);
+        return PostprofitlossmatchwiseData
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});

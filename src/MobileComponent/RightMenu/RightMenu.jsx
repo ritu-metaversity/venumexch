@@ -112,13 +112,13 @@ if(token){
                </div>
             {/* </Link> */}
          </li>
-         {/* <li>
+         <li>
 
                <div   className="menu-lvl-1" onClick={()=>handleInput("Betting")}>
                   <div   className="item"><img alt="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/betting-p-l.png"/> <span   className="menu-name">Betting P&amp;L</span></div>
                </div>
 
-         </li> */}
+         </li>
          <li>
             {/* <Link href="/m/transfer-statement"   className=""> */}
                <div   className="menu-lvl-1" onClick={()=>handleInput("TransferStatement")}>

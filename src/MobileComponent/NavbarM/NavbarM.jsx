@@ -6,7 +6,7 @@ import { PostBalance } from "../../App/Features/auth/authActions";
 
 import "./NavbarM.css";
 
-const NavbarM = ({RightSideBar,LiftSideBar,RightValue}) => {
+const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -30,6 +30,8 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue}) => {
     //    dispatch(PostBalance())
     // },[dispatch])
 
+console.log(leftBar,"leftBarleftBar")
+
 
     useEffect(()=>{
       setRightBar(RightValue)
@@ -43,6 +45,11 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue}) => {
     }
     },[dispatch, token])
 
+    useEffect(()=>{
+      setLeftBar(LeftValue);
+      LiftSideBar(LeftValue);
+      
+    },[LeftValue, LiftSideBar])
 
   // console.log(props.LeftValueData)
   const hanldeinput = (vl) => {

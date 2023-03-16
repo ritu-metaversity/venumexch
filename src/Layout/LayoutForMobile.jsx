@@ -26,6 +26,8 @@ const LayoutForMobile = () => {
   const [BetType, setBetType] = useState("");
   const [BetTypeFooter, setBetTypeFooter] = useState(false);
 
+  const [closeeee, setCloseeeee] = useState(false);
+
   const RightSideBarClose = (vl) => {
     console.log(vl,"RightSideBarCloseRightSideBarCloseRightSideBarClose")
     setRightValue(false);
@@ -42,7 +44,7 @@ const LayoutForMobile = () => {
   };
   const LiftSideBar = (vl) => {
     setLeftValue(vl);
-    // console.log(vl)
+    console.log(vl,"LiftSideBarLiftSideBarLiftSideBarLiftSideBar")
   };
   const datatata = (vl) => {
     // console.log(vl?.Odds ,"LayoutForMobileLayoutForMobile")
@@ -55,10 +57,10 @@ const LayoutForMobile = () => {
       // console.log(vl);
       setBetType(vl?.isBack);
     }
-    // console.log(vl)
   };
+  console.log(LeftValue)
   const eftMenuClose = (vl) => {
-    setLeftValue(false);
+    setLeftValue(vl);
     // console.log(vl);
   };
 
@@ -74,6 +76,10 @@ useEffect(()=>{
   const cssClasssss = (vl) => {
     console.log(vl)
     setCssClassssssssss(vl)
+};
+  const closePopUp = (vl) => {
+   
+    setShow(false)
 };
   return (
     <>
@@ -91,7 +97,8 @@ useEffect(()=>{
           {/* <div className={`main-cointainer ${ LeftValue===true? "left-menu-open" :""}`} >     */}
 
           <div>
-            <NavbarM RightSideBar={RightSideBar} LiftSideBar={LiftSideBar} RightValue={RightValue}/>
+            
+            <NavbarM RightSideBar={RightSideBar} LiftSideBar={LiftSideBar} RightValue={RightValue} LeftValue={LeftValue}/>
           </div>
           <Outlet context={datatata} datatata={datatata} />
 
@@ -121,7 +128,7 @@ useEffect(()=>{
           } ${cssClsssssssssssss?cssClsssssssssssss:""}` }
         >
           <Modal.Body>
-            <BitPopup bitValue={bitValue} datatattatattat={datatattatattat} cssClasssss={cssClasssss}/>
+            <BitPopup bitValue={bitValue} datatattatattat={datatattatattat} cssClasssss={cssClasssss} closePopUp={closePopUp}/>
           </Modal.Body>
         </div>
       </Modal>

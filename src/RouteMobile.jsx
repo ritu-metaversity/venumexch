@@ -26,6 +26,7 @@ import LoginForMobile from "./LoginForMobile/LoginForMobile";
 import MarketPage from "./MobileComponent/EyeIcon/MarketPage";
 import { useState } from "react";
 import Casinolist from "./MobileComponent/Livecasino/Casinolist";
+import Casino from "./MobileComponent/Livecasino/Casino";
 // const Login = lazy(() => import('./logincomponents/Login'))
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -55,13 +56,14 @@ const RouteMobile = () => {
           <Route path="/m/game/:id" element={<Midpage />} />
           <Route path="/m/gamedetail/:id" element={<GameDetails />} />
           <Route path="casino-list" element={<Casinolist />} />
+          <Route path="/m/casino/:id" element={<Casino />} />
           {/* <Route path="/m/login" element={<Login />} /> */}
 
         </Route>
         <Route path="/m/login" element={<><Login /></>}/>
 
 
-        {/* <Route path="*" element={<Navigate to="m/home" />} /> */}
+        <Route path="*" element={<Navigate to="m/home" />} />
 
         {/* <Route path="*" element={<Navigate to="/m/home" />} /> */}
       </Routes>

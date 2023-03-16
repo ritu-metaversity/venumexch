@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {getAllPostsComments ,getActiveSportList,postLogin,PostPwChangeFirstTime,PostPasswordChange,PostGameDetailsBySportsId,PostBalance,
     PostGameDetailsByMI,PostGetStackApi,PostEditStack,PostBetListByMatchId,PostTransferStatement,PostPlaceBet,Postactivematchsport,
-    Postunsettleddddd,Postcasino} from './authActions' 
+    Postunsettleddddd,Postcasino,Postprofitlossmatchwise} from './authActions' 
 
 const INITAL_STATE = {
 
@@ -76,9 +76,9 @@ const INITAL_STATE = {
     PostcasinoDataLoading:false,
     PostcasinoDataError:null,
 
-    // GetGeolocationIP:null,
-    // GetGeolocationIPLoading:false,
-    // GetGeolocationIPError:null,
+    PostprofitlossmatchwiseDatatata:null,
+    PostprofitlossmatchwiseDatatataLoading:false,
+    PostprofitlossmatchwiseDatatataError:null,
 
 }
 
@@ -293,6 +293,19 @@ const authSlice = createSlice({
             state.PostcasinoData = action.payload.data;
             state.PostcasinoDataLoading =false;
             state.PostcasinoDataError = null;
+        })
+        .addCase(Postprofitlossmatchwise.pending, (state) => {
+            state.PostprofitlossmatchwiseDatatata = null;
+            state.PostprofitlossmatchwiseDatatataLoading =true;
+            state.PostprofitlossmatchwiseDatatataError = null;
+        }).addCase(Postprofitlossmatchwise.rejected, (state, action) => {
+            state.PostprofitlossmatchwiseDatatata = null;
+            state.PostprofitlossmatchwiseDatatataLoading =false;
+            state.PostprofitlossmatchwiseDatatataError = action.error.message;;
+        }).addCase(Postprofitlossmatchwise.fulfilled, (state, action) => {
+            state.PostprofitlossmatchwiseDatatata = action.payload.data;
+            state.PostprofitlossmatchwiseDatatataLoading =false;
+            state.PostprofitlossmatchwiseDatatataError = null;
         })
 
     }

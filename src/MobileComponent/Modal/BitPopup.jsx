@@ -5,13 +5,14 @@ import { useParams } from "react-router";
 import { PostGetStackApi, PostPlaceBet } from "../../App/Features/auth/authActions";
 import "./BitPopup.css";
 
-const BitPopup = ({ bitValue, datatattatattat,cssClasssss }) => {
+const BitPopup = ({ bitValue, datatattatattat,cssClasssss ,closePopUp}) => {
   // console.log(bitValue,"llllll")
   const { PostGetStack } = useSelector((state) => state.auth);
   const [Bitvalue, setBitValue] = useState(bitValue?.Odds);
   const [updated, setUpdated] = useState("");
   const [ConfirmBet, setConfirmBet] = useState(false);
   const [userIP, setUserIP] = useState("");
+  // const [closePopUp, setClosePopUp] = useState(false);
   // const [cssClsssss, setCssClasssss] = useState("bet-modal");
   const {PostBetingOnGameDetail,GetGeolocationIP } = useSelector((state) => state.auth);
   let { id } = useParams();
@@ -101,11 +102,18 @@ let data =  {
     }
  }
   dispatch(PostPlaceBet(data))
+  if(updated!==""){
+    closePopUp("false")
+  }
   // let userAgent = navigator.userAgent;
   // let chromeAgent = userAgent.indexOf() > -1;
   // alert(userAgent)
 }
 
+const handleCloseButton=()=>{
+  closePopUp("false")
+
+}
   return (
     <div>
       {/* <div
@@ -203,15 +211,18 @@ let data =  {
               <div className="row m-t-10 m-l-5 m-r-5 p-b-20">
                 
                 <div className="col-6 p-l-5 p-r-5">
-                  <button type="button" className="btn btn-cancel">
+                  <button type="button" 
+                  className="btn btn-cancel"
+                  onClick={handleCloseButton}>
                     Cancel
                   </button>
                 </div>
-                <div className="col-6 p-l-5 p-r-5" onClick={handleSubmit}>
+                <div className="col-6 p-l-5 p-r-5" >
                   <button
                     type="button"
-                    disabled="disabled"
+                    disabled={updated===""?"disabled":""}
                     className="btn btn-submit"
+                    onClick={handleSubmit}
                   >
                     Submit
                     <span className="d-block">
@@ -220,7 +231,7 @@ let data =  {
                   </button>
                 </div>
               </div>
-              <div className="row m-t-10 m-l-5 m-r-5">
+             { /*<div className="row m-t-10 m-l-5 m-r-5">
                 <div className="col-12 p-l-5 p-r-5">
                   <h5 className="float-left">Confirm Bet Before Placing</h5>
                   <div className="switchToggle float-right m-t-5">
@@ -228,7 +239,7 @@ let data =  {
                     <label for="switch"></label>
                   </div>
                 </div>
-              </div>
+              </div>*/}
 
               {ConfirmBet ? (
                 <>

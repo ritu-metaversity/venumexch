@@ -50,11 +50,11 @@ const LeftMenu = (props) => {
   return (
     <>
     {/* <div   className='left-menu'></div> */}
-    {/* <li>   
+    <li>   
           <div   className="menu-lvl-1 "  onClick={()=>handleMyMarket() }> 
              <div   className="item"><i   className="fas fa-eye"></i> <span   className="menu-name">My Markets</span></div>
           </div>
-    </li> */}
+    </li>
     {getActiveSportListData?.data?.data &&
                 getActiveSportListData?.data?.data ? (
                   getActiveSportListData?.data?.data.map((item) => (

@@ -138,3 +138,10 @@ img {
 .CasinolButton{
     padding: 20px;
 }
+.casino-body-images {
+    width: 75%;
+}
+.casino-images{
+    width: 39px;
+    margin-right: 8px;
+}

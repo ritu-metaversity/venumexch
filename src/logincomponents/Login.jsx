@@ -95,6 +95,8 @@ if(apiHit===true){
       // appUrl: window.location.hostname,
 
     });
+console.log(process.env.REACT_APP_API_URL)
+
     setShow(true);
   };
 
