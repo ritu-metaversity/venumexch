@@ -885,7 +885,6 @@ const GameDetails = () => {
                       data-toggle="collapse"
                       data-target=".unmatched-bet"
                       className="toggleable-list-title m-t-10"
-
                     >
                       <span>Unmatched Bets</span>{" "}
                       <i className="fas fa-angle-down toggle-icon float-right m-r-10"></i>

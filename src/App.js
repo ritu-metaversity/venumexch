@@ -31,7 +31,7 @@ function App() {
   //     // console.log("pc")
   //   }
   // }, [navigate]);
-
+s
   return (
 
       <div className="App">
