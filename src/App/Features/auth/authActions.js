@@ -230,3 +230,16 @@ export const Postprofitlossmatchwise = createAsyncThunk('auth/Postprofitlossmatc
         return rejectWithValue(err.response.data)
     }
 });
+
+
+export const postBetMarketAndUser = createAsyncThunk('auth/postBetMarketAndUser', async (data, { rejectWithValue }) => {
+    try {
+        const postBetMarketAndUserDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/bets/search-bet-market-and-user`, data);
+        return postBetMarketAndUserDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});

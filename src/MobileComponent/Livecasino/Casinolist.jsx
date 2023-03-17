@@ -73,7 +73,7 @@ const Casinolist = () => {
                         <div data-v-6a7f44cc="" className="events-row text-center">
                           <div data-v-6a7f44cc="" className="d-inline-block ">
                             <div className="row">
-                        
+                        {console.log(item)}
                                 <Link
                               data-v-6a7f44cc=""
                               

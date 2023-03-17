@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PostTransferStatement } from "../../App/Features/auth/authActions";
+import {
+  postBetMarketAndUser,
+  PostTransferStatement,
+} from "../../App/Features/auth/authActions";
 import "./Transferstatement.css";
+import Modal from "react-bootstrap/Modal";
+import TransferstatementModal from "./TransferstatementModal";
 
 const Transferstatement = () => {
-  const { PostTransferStatementData } = useSelector((state) => state.auth);
+  const { PostTransferStatementData } = useSelector(
+    (state) => state.auth
+  );
 
   const dispatch = useDispatch();
+  const [trueee, setTrueee] = useState(false);
+  const [matchId, setMatchId] = useState("");
 
-  // console.log(PostTransferStatementData?.data?.dataList, "Transfer Statement");
-
-  console.log(PostTransferStatementData);
 
   useEffect(() => {
     if (PostTransferStatementData?.data === "") {
@@ -37,6 +43,13 @@ const Transferstatement = () => {
     // console.log();
   }, [dispatch]);
 
+  const handleDetailsStatement = (item1,item2) => {
+    setMatchId({"matchid":item1,
+    remark:item2
+  })
+    setTrueee(true);
+  };
+
   return (
     <>
       <div className="home-page home-page-news">
@@ -55,7 +68,7 @@ const Transferstatement = () => {
                 {PostTransferStatementData?.data &&
                 PostTransferStatementData?.data?.dataList ? (
                   PostTransferStatementData?.data?.dataList.map((el) => (
-                    <tbody>
+                    <tbody onClick={()=>handleDetailsStatement(el?.marketid,el?.remark)}>
                       <tr>
                         <td colspan="3" class="">
                           <b>
@@ -86,6 +99,22 @@ const Transferstatement = () => {
           </section>
         </div>
       </div>
+      <Modal
+        show={trueee}
+        onHide={() => setTrueee(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton style={{width: "100%"}} className="back1">
+          <Modal.Title id="contained-modal-title-vcenter">Result</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{width:"100%"}}>
+          <div >
+            <TransferstatementModal matchId={matchId}/>
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

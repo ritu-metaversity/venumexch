@@ -171,3 +171,95 @@ a {
     text-decoration: none;
     background-color: transparent;
 }
+.btnnnn{
+    color: #ffffff;
+    background-color: #2c4f58;
+    border: #000;
+    width: 118px;
+    height: 36px;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 4px;
+}
+
+.casinooooo{
+    width: 86px;
+    /* margin-right: 8px; */
+}
+.buttttt{
+    margin-top: 93px;
+}
+.CasinolButton{
+    padding: 20px;
+}
+.casino-body-images {
+    width: 75%;
+}
+input#tbg-radio-3 {
+    display: none;
+}
+input#tbg-radio-2 {
+    display: none;
+}
+.active1{
+    background-color: #007bff !important;
+}
+label.active1.btn.btn-primary {
+    background: #317383 !important;
+    font-size: 18px;
+}
+.btn.btn-primary {
+    background: #2c4f58 !important;
+    font-size: 18px;
+    border-color: unset !important;
+}
+.btn-primary:hover {
+    color: unset !important;
+    border-color: unset !important;
+}
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    width: 100% !important
+}
+.selectionnnn{
+    width: 150px;
+    height: 34px;
+    font-size: 15px;
+    margin-left: 16px;
+    margin: 7px;
+}
+.dsdsdsdsd{
+    width: 10px;
+}
+.dateee{
+    width: 100px;
+    height: 41px;
+}
+.nodataforund {
+    margin-top: 29px;
+    margin-left: 31px;
+    width: 100%;
+    height: 40px;
+    font-size: 15px;
+    color: red;
+}
+.selectionnnn {
+    width: 50%;
+    height: 34px;
+    font-size: 15px;
+    margin-left: 16px;
+    margin: 7px;
+    background: #2c4f58;
+    color: #fff;
+    text-align: center;
+    padding: 6px 22px;
+    margin: 8px;
+    margin-left: 1px;
+}
+.sport-data-list {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

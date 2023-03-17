@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {getAllPostsComments ,getActiveSportList,postLogin,PostPwChangeFirstTime,PostPasswordChange,PostGameDetailsBySportsId,PostBalance,
     PostGameDetailsByMI,PostGetStackApi,PostEditStack,PostBetListByMatchId,PostTransferStatement,PostPlaceBet,Postactivematchsport,
-    Postunsettleddddd,Postcasino,Postprofitlossmatchwise} from './authActions' 
+    Postunsettleddddd,Postcasino,Postprofitlossmatchwise,postBetMarketAndUser} from './authActions' 
 
 const INITAL_STATE = {
 
@@ -79,6 +79,11 @@ const INITAL_STATE = {
     PostprofitlossmatchwiseDatatata:null,
     PostprofitlossmatchwiseDatatataLoading:false,
     PostprofitlossmatchwiseDatatataError:null,
+
+
+    postBetMarketAndUserData:null,
+    postBetMarketAndUserDataLoading:false,
+    postBetMarketAndUserDataError:null,
 
 }
 
@@ -306,6 +311,19 @@ const authSlice = createSlice({
             state.PostprofitlossmatchwiseDatatata = action.payload.data;
             state.PostprofitlossmatchwiseDatatataLoading =false;
             state.PostprofitlossmatchwiseDatatataError = null;
+        })
+        .addCase(postBetMarketAndUser.pending, (state) => {
+            state.postBetMarketAndUserData = null;
+            state.postBetMarketAndUserDataLoading =true;
+            state.postBetMarketAndUserDataError = null;
+        }).addCase(postBetMarketAndUser.rejected, (state, action) => {
+            state.postBetMarketAndUserData = null;
+            state.postBetMarketAndUserDataLoading =false;
+            state.postBetMarketAndUserDataError = action.error.message;;
+        }).addCase(postBetMarketAndUser.fulfilled, (state, action) => {
+            state.postBetMarketAndUserData = action.payload.data;
+            state.postBetMarketAndUserDataLoading =false;
+            state.postBetMarketAndUserDataError = null;
         })
 
     }

@@ -1,0 +1,57 @@
+stack-value {
+    display: flex;
+    align-items: center;
+    margin-left: -10px;
+    margin-top: 2px;
+}
+.stack-value p {
+    font-size: 13px;
+    margin-top: 16px;
+    margin-left: 0px;
+}
+.stack-value p:first-child {
+    padding-left: 2px;
+}
+.stack-value p:nth-child(2){
+    padding-left: 9px;
+}
+.p-l{
+    padding-left: 0px !important;
+}
+.cback{
+    color: #0088CC;
+}
+.remark-name{
+    font-size: 14px;
+    font-weight: 400 !important;
+}
+.s-table th{
+    border: none !important;
+    font-size: 14px;
+}
+.bet-details td {
+    font-size: 14px;
+}
+.reamrk-main{
+    display: flex;
+    flex-direction: column;
+
+}
+.stack-value {
+    display: flex;
+}
+button.btn-close:after {
+    content: "x";
+    /* background-color: #72bbef; */
+    width: 100%;
+    font-size: 25px;
+    color: #fff;
+}
+button.btn-close {
+    text-decoration: none !important;
+    background: none !important;
+    border: none;
+}
+.account-list{
+    margin-top: -23px;
+}

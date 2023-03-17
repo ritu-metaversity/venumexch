@@ -218,11 +218,7 @@ section {
 .ant-picker.css-dev-only-do-not-override-1km3mtt {
     width: 100%;
 }
-.btn-primary:hover {
-    color: #fff !important;
-    background-color: #0069d9 !important;
-    border-color: #0062cc !important;
-}
+
 .messages{
     margin-top: 20px;
 }

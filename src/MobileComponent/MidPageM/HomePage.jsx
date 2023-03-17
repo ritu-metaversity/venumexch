@@ -49,13 +49,12 @@ const handleGameDetails=(id,item)=>{
 
       useEffect(() => {
         
-        const activeMatchSportWise = {sportId: id?id:"4" };
+        const activeMatchSportWise = id? id :"4" 
 
         // dispatch(PostGameDetailsBySportsId(activeMatchSportWise))
         axios
-          .post(
-            "http://api.a2zscore.com/admin-new-apis/enduser/active-match-sport-wise-open",
-            activeMatchSportWise
+          .get(
+           ` http://43.205.50.127:9000/active_match/${activeMatchSportWise}`
           )
           .then((res) => {
             setGamesData(res?.data?.data);
@@ -630,12 +629,13 @@ const handleGameDetails=(id,item)=>{
          {gamesData?.length > 0
           ? gamesData.map((item) => {
             return (
-        <li   className="market-list-item"  >
+        <li   className="market-list-item" style={{    padding: "2px"        }} >
             <div   className="item-inner">
               
               <span   className="m-l-10 game-name v-m"onClick={()=>handleGameDetails(item?.matchId,item)} >
                {item?.matchName}
               </span>
+              <div className='timeeeee'>{item?.openDate}</div>
               <div   className="events-icons float-right">
                 {/* <i   className="fas fa-tv"></i>{" "} */}
                 {item?.inPlay===true ?<i   className="fas fa-play-circle m-l-5"></i>
