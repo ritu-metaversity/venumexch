@@ -54,7 +54,7 @@ const handleGameDetails=(id,item)=>{
         // dispatch(PostGameDetailsBySportsId(activeMatchSportWise))
         axios
           .get(
-           ` http://43.205.50.127:9000/active_match/${activeMatchSportWise}`
+           ` http://43.205.50.127:9000/betfair_api/active_match/${activeMatchSportWise}`
           )
           .then((res) => {
             setGamesData(res?.data?.data);

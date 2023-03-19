@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {getAllPostsComments ,getActiveSportList,postLogin,PostPwChangeFirstTime,PostPasswordChange,PostGameDetailsBySportsId,PostBalance,
     PostGameDetailsByMI,PostGetStackApi,PostEditStack,PostBetListByMatchId,PostTransferStatement,PostPlaceBet,Postactivematchsport,
-    Postunsettleddddd,Postcasino,Postprofitlossmatchwise,postBetMarketAndUser} from './authActions' 
+    Postunsettleddddd,Postcasino,Postprofitlossmatchwise,postBetMarketAndUser,Postisselfbyappurl,Postdepsositrequestclient,Postpaymnetdetailapp,
+    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient} from './authActions' 
 
 const INITAL_STATE = {
 
@@ -85,6 +86,30 @@ const INITAL_STATE = {
     postBetMarketAndUserDataLoading:false,
     postBetMarketAndUserDataError:null,
 
+    postisselfbyappurlData:null,
+    postisselfbyappurlDataLoading:false,
+    postisselfbyappurlDataError:null,
+
+    PostdepsositrequestclientData:null,
+    PostdepsositrequestclientDataLoading:false,
+    PostdepsositrequestclientDataError:null,
+
+    PostpaymnetdetailappDataData:null,
+    PostpaymnetdetailappDataDataLoading:false,
+    PostpaymnetdetailappDataDataError:null,
+
+    PostselfdepositappData:null,
+    PostselfdepositappDataLoading:false,
+    PostselfdepositappDataError:null,
+
+    PostselfwithdrawappData:null,
+    PostselfwithdrawappDataLoading:false,
+    PostselfwithdrawappDataError:null,
+
+    PostwithdrawrequestclientData:null,
+    PostwithdrawrequestclientDataLoading:false,
+    PostwithdrawrequestclientDataError:null,
+
 }
 
 const authSlice = createSlice({
@@ -137,9 +162,9 @@ const authSlice = createSlice({
         }).addCase(PostPwChangeFirstTime.rejected, (state, action) => {
             state.postFirstTimeLogin = null;
             state.postFirstTimeLoginLoading =false;
-            state.postFirstTimeLoginError = action.error.message;;
+            state.postFirstTimeLoginError = action.error.message;
         }).addCase(PostPwChangeFirstTime.fulfilled, (state, action) => {
-            state.postFirstTimeLogin = action.payload;;
+            state.postFirstTimeLogin = action.payload;
             state.postFirstTimeLoginLoading =false;
             state.postFirstTimeLoginError = null;
         })
@@ -150,9 +175,9 @@ const authSlice = createSlice({
         }).addCase(PostPasswordChange.rejected, (state, action) => {
             state.postPasswordChange = null;
             state.postPasswordChangeLoading =false;
-            state.postPasswordChangeError = action.error.message;;
+            state.postPasswordChangeError = action.error.message;
         }).addCase(PostPasswordChange.fulfilled, (state, action) => {
-            state.postPasswordChange = action.payload;;
+            state.postPasswordChange = action.payload;
             state.postPasswordChangeLoading =false;
             state.postPasswordChangeError = null;
         })
@@ -163,9 +188,9 @@ const authSlice = createSlice({
         }).addCase(PostGameDetailsBySportsId.rejected, (state, action) => {
             state.PostGamesById = null;
             state.PostGamesByIdLoading =false;
-            state.PostGamesByIdError = action.error.message;;
+            state.PostGamesByIdError = action.error.message;
         }).addCase(PostGameDetailsBySportsId.fulfilled, (state, action) => {
-            state.PostGamesById = action.payload;;
+            state.PostGamesById = action.payload;
             state.PostGamesByIdLoading =false;
             state.PostGamesByIdError = null;
         })
@@ -176,9 +201,9 @@ const authSlice = createSlice({
         }).addCase(PostBalance.rejected, (state, action) => {
             state.PostTotalBalance = null;
             state.PostTotalBalanceLoading =false;
-            state.PostTotalBalanceError = action.error.message;;
+            state.PostTotalBalanceError = action.error.message;
         }).addCase(PostBalance.fulfilled, (state, action) => {
-            state.PostTotalBalance = action.payload;;
+            state.PostTotalBalance = action.payload;
             state.PostTotalBalanceLoading =false;
             state.PostTotalBalanceError = null;
         })
@@ -189,9 +214,9 @@ const authSlice = createSlice({
         }).addCase(PostGameDetailsByMI.rejected, (state, action) => {
             state.PostGameDetailsByMatchID = null;
             state.PostGameDetailsByMatchIDLoading =false;
-            state.PostGameDetailsByMatchIDError = action.error.message;;
+            state.PostGameDetailsByMatchIDError = action.error.message;
         }).addCase(PostGameDetailsByMI.fulfilled, (state, action) => {
-            state.PostGameDetailsByMatchID = action.payload;;
+            state.PostGameDetailsByMatchID = action.payload;
             state.PostGameDetailsByMatchIDLoading =false;
             state.PostGameDetailsByMatchIDError = null;
         })
@@ -202,7 +227,7 @@ const authSlice = createSlice({
         }).addCase(PostGetStackApi.rejected, (state, action) => {
             state.PostGetStack = null;
             state.PostGetStackLoading =false;
-            state.PostGetStackError = action.error.message;;
+            state.PostGetStackError = action.error.message;
         }).addCase(PostGetStackApi.fulfilled, (state, action) => {
             state.PostGetStack = action.payload.data;
             state.PostGetStackLoading =false;
@@ -215,7 +240,7 @@ const authSlice = createSlice({
         }).addCase(PostEditStack.rejected, (state, action) => {
             state.PostEditStack = null;
             state.PostEditStackLoading =false;
-            state.PostEditStackError = action.error.message;;
+            state.PostEditStackError = action.error.message;
         }).addCase(PostEditStack.fulfilled, (state, action) => {
             state.PostEditStack = action.payload.data;
             state.PostEditStackLoading =false;
@@ -228,7 +253,7 @@ const authSlice = createSlice({
         }).addCase(PostBetListByMatchId.rejected, (state, action) => {
             // state.PostBetListByMatchIdData = null;
             state.PostBetListByMatchIdDataLoading =false;
-            state.PostBetListByMatchIdDataError = action.error.message;;
+            state.PostBetListByMatchIdDataError = action.error.message;
         }).addCase(PostBetListByMatchId.fulfilled, (state, action) => {
             state.PostBetListByMatchIdData = action.payload.data;
             state.PostBetListByMatchIdDataLoading =false;
@@ -241,7 +266,7 @@ const authSlice = createSlice({
         }).addCase(PostTransferStatement.rejected, (state, action) => {
             state.PostTransferStatementData = null;
             state.PostTransferStatementDataLoading =false;
-            state.PostTransferStatementDataError = action.error.message;;
+            state.PostTransferStatementDataError = action.error.message;
         }).addCase(PostTransferStatement.fulfilled, (state, action) => {
             state.PostTransferStatementData = action.payload.data;
             state.PostTransferStatementDataLoading =false;
@@ -254,7 +279,7 @@ const authSlice = createSlice({
         }).addCase(PostPlaceBet.rejected, (state, action) => {
             state.PostBetingOnGameDetail = null;
             state.PostBetingOnGameDetailLoading =false;
-            state.PostBetingOnGameDetailError = action.error.message;;
+            state.PostBetingOnGameDetailError = action.error.message;
         }).addCase(PostPlaceBet.fulfilled, (state, action) => {
             state.PostBetingOnGameDetail = action.payload.data;
             state.PostBetingOnGameDetailLoading =false;
@@ -267,7 +292,7 @@ const authSlice = createSlice({
         }).addCase(Postactivematchsport.rejected, (state, action) => {
             state.Postmatchsport = null;
             state.PostmatchsportLoading =false;
-            state.PostmatchsportError = action.error.message;;
+            state.PostmatchsportError = action.error.message;
         }).addCase(Postactivematchsport.fulfilled, (state, action) => {
             state.Postmatchsport = action.payload.data;
             state.PostmatchsportLoading =false;
@@ -280,7 +305,7 @@ const authSlice = createSlice({
         }).addCase(Postunsettleddddd.rejected, (state, action) => {
             state.PostunsettledData = null;
             state.PostunsettledDataLoading =false;
-            state.PostunsettledDataError = action.error.message;;
+            state.PostunsettledDataError = action.error.message;
         }).addCase(Postunsettleddddd.fulfilled, (state, action) => {
             state.PostunsettledData = action.payload.data;
             state.PostunsettledDataLoading =false;
@@ -293,7 +318,7 @@ const authSlice = createSlice({
         }).addCase(Postcasino.rejected, (state, action) => {
             state.PostcasinoData = null;
             state.PostcasinoDataLoading =false;
-            state.PostcasinoDataError = action.error.message;;
+            state.PostcasinoDataError = action.error.message;
         }).addCase(Postcasino.fulfilled, (state, action) => {
             state.PostcasinoData = action.payload.data;
             state.PostcasinoDataLoading =false;
@@ -306,7 +331,7 @@ const authSlice = createSlice({
         }).addCase(Postprofitlossmatchwise.rejected, (state, action) => {
             state.PostprofitlossmatchwiseDatatata = null;
             state.PostprofitlossmatchwiseDatatataLoading =false;
-            state.PostprofitlossmatchwiseDatatataError = action.error.message;;
+            state.PostprofitlossmatchwiseDatatataError = action.error.message;
         }).addCase(Postprofitlossmatchwise.fulfilled, (state, action) => {
             state.PostprofitlossmatchwiseDatatata = action.payload.data;
             state.PostprofitlossmatchwiseDatatataLoading =false;
@@ -319,11 +344,92 @@ const authSlice = createSlice({
         }).addCase(postBetMarketAndUser.rejected, (state, action) => {
             state.postBetMarketAndUserData = null;
             state.postBetMarketAndUserDataLoading =false;
-            state.postBetMarketAndUserDataError = action.error.message;;
+            state.postBetMarketAndUserDataError = action.error.message;
         }).addCase(postBetMarketAndUser.fulfilled, (state, action) => {
             state.postBetMarketAndUserData = action.payload.data;
             state.postBetMarketAndUserDataLoading =false;
             state.postBetMarketAndUserDataError = null;
+        })
+        .addCase(Postisselfbyappurl.pending, (state) => {
+            state.postisselfbyappurlData = null;
+            state.postisselfbyappurlDataLoading =true;
+            state.postisselfbyappurlDataError = null;
+        }).addCase(Postisselfbyappurl.rejected, (state, action) => {
+            state.postisselfbyappurlData = null;
+            state.postisselfbyappurlDataLoading =false;
+            state.postisselfbyappurlDataError = action.error.message;
+        }).addCase(Postisselfbyappurl.fulfilled, (state, action) => {
+            state.postisselfbyappurlData = action.payload.data;
+            state.postisselfbyappurlDataLoading =false;
+            state.postisselfbyappurlDataError = null;
+        })
+        .addCase(Postdepsositrequestclient.pending, (state) => {
+            state.PostdepsositrequestclientData = null;
+            state.PostdepsositrequestclientDataLoading =true;
+            state.PostdepsositrequestclientDataError = null;
+        }).addCase(Postdepsositrequestclient.rejected, (state, action) => {
+            state.PostdepsositrequestclientData = null;
+            state.PostdepsositrequestclientDataLoading =false;
+            state.PostdepsositrequestclientDataError = action.error.message;
+        }).addCase(Postdepsositrequestclient.fulfilled, (state, action) => {
+            state.PostdepsositrequestclientData = action.payload.data;
+            state.PostdepsositrequestclientDataLoading =false;
+            state.PostdepsositrequestclientDataError = null;
+        })
+        .addCase(Postpaymnetdetailapp.pending, (state) => {
+            state.PostpaymnetdetailappDataData = null;
+            state.PostpaymnetdetailappDataDataLoading =true;
+            state.PostpaymnetdetailappDataDataError = null;
+        }).addCase(Postpaymnetdetailapp.rejected, (state, action) => {
+            state.PostpaymnetdetailappDataData = null;
+            state.PostpaymnetdetailappDataDataLoading =false;
+            state.PostpaymnetdetailappDataDataError = action.error.message;
+        }).addCase(Postpaymnetdetailapp.fulfilled, (state, action) => {
+            state.PostpaymnetdetailappDataData = action.payload.data;
+            state.PostpaymnetdetailappDataDataLoading =false;
+            state.PostpaymnetdetailappDataDataError = null;
+        })
+
+        .addCase(Postselfdepositapp.pending, (state) => {
+            state.PostselfdepositappData = null;
+            state.PostselfdepositappDataLoading =true;
+            state.PostselfdepositappDataError = null;
+        }).addCase(Postselfdepositapp.rejected, (state, action) => {
+            state.PostselfdepositappData = null;
+            state.PostselfdepositappDataLoading =false;
+            state.PostselfdepositappDataError = action.error.message;
+        }).addCase(Postselfdepositapp.fulfilled, (state, action) => {
+            state.PostselfdepositappData = action.payload.data;
+            state.PostselfdepositappDataLoading =false;
+            state.PostselfdepositappDataError = null;
+        })
+
+        .addCase(Postselfwithdrawapp.pending, (state) => {
+            state.PostselfwithdrawappData = null;
+            state.PostselfwithdrawappDataLoading =true;
+            state.PostselfwithdrawappDataError = null;
+        }).addCase(Postselfwithdrawapp.rejected, (state, action) => {
+            state.PostselfwithdrawappData = null;
+            state.PostselfwithdrawappDataLoading =false;
+            state.PostselfwithdrawappDataError = action.error.message;
+        }).addCase(Postselfwithdrawapp.fulfilled, (state, action) => {
+            state.PostselfwithdrawappData = action.payload.data;
+            state.PostselfwithdrawappDataLoading =false;
+            state.PostselfwithdrawappDataError = null;
+        })
+
+        .addCase(Postwithdrawrequestclient.pending, (state) => {
+            state.PostwithdrawrequestclientData = null;
+            state.PostwithdrawrequestclientDataLoading =true;
+            state.PostwithdrawrequestclientDataError = null;
+        }).addCase(Postwithdrawrequestclient.rejected, (state, action) => {
+            state.PostwithdrawrequestclientData = null;
+            state.PostwithdrawrequestclientDataLoading =false;
+            state.PostwithdrawrequestclientDataError = action.error.message;
+        }).addCase(Postwithdrawrequestclient.fulfilled, (state, action) => {
+            state.PostwithdrawrequestclientData = action.payload.data;
+            state.PostwithdrawrequestclientDataLoading =false;
+            state.PostwithdrawrequestclientDataError = null;
         })
 
     }

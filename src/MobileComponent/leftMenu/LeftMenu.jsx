@@ -33,7 +33,7 @@ const LeftMenu = (props) => {
    //    "foo":"https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/1.png",
    // }
 
-   console.log(getActiveSportListData?.data)
+   // console.log(getActiveSportListData?.data)
    const handleRoute=(id ,id2 )=>{
       // props.gameNamePass(id2)
    props.eftMenuClose(false)

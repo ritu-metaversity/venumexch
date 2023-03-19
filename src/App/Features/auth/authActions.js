@@ -243,3 +243,93 @@ export const postBetMarketAndUser = createAsyncThunk('auth/postBetMarketAndUser'
         return rejectWithValue(err.response.data)
     }
 });
+
+
+// DEPOSIT  APPPIIIIIIIII
+
+
+export const Postisselfbyappurl = createAsyncThunk('auth/Postisselfbyappurl', async (appUrll, { rejectWithValue }) => {
+    try {
+        const postBetisselfbyappurlDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/is-self-by-app-url`, appUrll);
+        return postBetisselfbyappurlDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+// depsosit-request-client
+export const Postdepsositrequestclient = createAsyncThunk('auth/Postdepsositrequestclient', async (data, { rejectWithValue }) => {
+    try {
+        const postdepsositrequestclientDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/depsosit-request-client`, data);
+        return postdepsositrequestclientDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+
+// get-paymnet-detail-app-id-wise
+export const Postpaymnetdetailapp = createAsyncThunk('auth/Postpaymnetdetailapp', async (data, { rejectWithValue }) => {
+    try {
+        const PostpaymnetdetailappDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/get-paymnet-detail-app-id-wise`, data,
+       
+    );
+        return PostpaymnetdetailappDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+// /self-deposit-app
+
+export const Postselfdepositapp = createAsyncThunk('auth/Postselfdepositapp', async (data, { rejectWithValue }) => {
+    try {
+        const PostselfdepositappDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/self-deposit-app`, data, {headers:{"Content-Type":"multipart/form-data"}
+    });
+        return PostselfdepositappDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+
+// self-withdraw-app
+
+export const Postselfwithdrawapp = createAsyncThunk('auth/Postselfwithdrawapp', async (data, { rejectWithValue }) => {
+    try {
+        const PostselfwithdrawappDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/self-withdraw-app`, data
+        );
+        return PostselfwithdrawappDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+// withdraw-request-client
+export const Postwithdrawrequestclient = createAsyncThunk('auth/Postwithdrawrequestclient', async (data, { rejectWithValue }) => {
+    try {
+        const PostwithdrawrequestclientDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/withdraw-request-client`, data
+        );
+        return PostwithdrawrequestclientDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});

@@ -5,16 +5,17 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import { PostBalance } from '../../App/Features/auth/authActions'
+import { PostBalance, Postisselfbyappurl } from '../../App/Features/auth/authActions'
 import "./RightMenu.css"
 
 const RightMenu = (props) => {
    const dispatch = useDispatch();
    let  navigate =useNavigate()
 // console.log(props)
-   const { PostTotalBalance } = useSelector(state => state.auth)
+   const { PostTotalBalance ,postisselfbyappurlData} = useSelector(state => state.auth)
    const [ avaliablebalance,setAvaliablebalance] = useState("")
   
+let appUrll=window.location.hostname
  
 useEffect(()=>{
 
@@ -29,8 +30,14 @@ useEffect(()=>{
 if(token){
 
    dispatch(PostBalance())
+   dispatch(Postisselfbyappurl({"appUrl":appUrll}))
+   
 }
-},[dispatch, token])
+},[dispatch,appUrll, token])
+
+
+console.log(postisselfbyappurlData?.data?.selfAllowed,"postisselfbyappurlData")
+console.log(appUrll,"appUrll")
 
 // console.log(PostTotalBalance,"PostTotalBalance")
    const handleInput=(vl)=>{
@@ -40,6 +47,12 @@ if(token){
 
       }else if (vl==="Betting"){
          navigate("./profitloss")
+
+      }else if (vl==="Deposit"){
+         navigate("./deposit")
+
+      }else if (vl==="withDraw"){
+         navigate("./withDraw")
 
       }else if (vl==="TransferStatement"){
          navigate("./transferstatement")
@@ -112,6 +125,24 @@ if(token){
                </div>
             {/* </Link> */}
          </li>
+         {postisselfbyappurlData?.data?.selfAllowed===true?
+<>
+         
+         <li>
+            {/* <Link href="/m/mybets"   className=""> */}
+               <div   className="menu-lvl-1" onClick={()=>handleInput("Deposit")}>
+                  <div   className="item" > <span   className="menu-name">Deposit</span></div>
+               </div>
+            {/* </Link> */}
+         </li>
+         <li>
+            {/* <Link href="/m/mybets"   className=""> */}
+               <div   className="menu-lvl-1" onClick={()=>handleInput("withDraw")}>
+                  <div   className="item" > <span   className="menu-name">WithDraw</span></div>
+               </div>
+            {/* </Link> */}
+         </li></>:""
+         }
          <li>
 
                <div   className="menu-lvl-1" onClick={()=>handleInput("Betting")}>

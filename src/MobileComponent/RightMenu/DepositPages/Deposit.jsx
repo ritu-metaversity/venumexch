@@ -1,0 +1,126 @@
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Postdepsositrequestclient, Postpaymnetdetailapp } from "../../../App/Features/auth/authActions";
+
+import "./Deposit.css";
+import PayManually from "./PayManually";
+const Deposit = () => {
+
+
+  const dispatch = useDispatch();
+  const { PostdepsositrequestclientData,PostpaymnetdetailappDataData} = useSelector(state => state.auth)
+  const [Bitvalue, setBitValue] = useState(0);
+
+
+  const token = localStorage.getItem("TokenId")
+
+  const increment = () => {
+    setBitValue(Bitvalue + 10);
+  };
+  const decrement = () => {
+    setBitValue(Bitvalue - 10);
+  };
+
+ console.log(PostpaymnetdetailappDataData,"line 24")
+
+  const handleStaticAmount =(vl)=>{
+
+setBitValue(Bitvalue + vl);
+
+  }
+const UpdateList=(vl)=>{
+  if(vl===true){
+  dispatch(Postdepsositrequestclient())
+}
+}
+  useEffect(()=>{
+  if(token){
+     dispatch(Postdepsositrequestclient())
+     dispatch(Postpaymnetdetailapp())
+  }
+  },[token])
+// console.log(PostdepsositrequestclientData,"line 18")
+  
+  return (
+    <>
+      
+      <div className="wrapper main-conatiner">
+        <PayManually UpdateList={UpdateList}/>
+   
+        <div className="row row5 mt-2">
+          <div className="col-12">
+            <div className="table-responsive">
+              <table
+                role="table"
+                aria-busy="false"
+                aria-colcount="6"
+                className="table b-table table-bordered"
+                id="__BVID__104">
+                <thead>
+                    <tr className="previous-deposite">
+                        <th colSpan="4">
+                            Previous Deposite
+                        </th>
+                    </tr>
+                  <tr role="row" className="deposit-list">
+                    <th
+                      role="columnheader"
+                      scope="col"
+                      aria-colindex="1"
+                      className="text-left">
+                      Amount
+                    </th>
+                    <th
+                      role="columnheader"
+                      scope="col"
+                      aria-colindex="2"
+                      className="text-left">
+                      Image
+                    </th>
+                    <th
+                      role="columnheader"
+                      scope="col"
+                      aria-colindex="3"
+                      className="text-right">
+                      Data
+                    </th>
+                    <th
+                      role="columnheader"
+                      scope="col"
+                      aria-colindex="4"
+                      className="text-right">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                {PostdepsositrequestclientData?.data.map((item)=>(
+                  
+                
+                <tbody>
+                  <tr role="row">
+                    <td aria-colindex="1" className="text-left">
+                      {item?.amount}
+                    </td>
+                    <td aria-colindex="2" className="text-left">
+                      <img alt="" className="fkjsdfsdkfjsd" src={item?.image}/>
+                    </td>
+                    <td aria-colindex="3" className="text-right text-success">
+                   
+                      {moment(item?.time).format('MM-DD-YYYY - hh:mm')}
+                    </td>
+                    <td aria-colindex="4" className="text-right text-danger">
+                      {item?.status}
+                    </td>
+                  </tr>
+                </tbody>
+                ))}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+export default Deposit;
