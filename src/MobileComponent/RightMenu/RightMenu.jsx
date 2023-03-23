@@ -28,6 +28,7 @@ const token = localStorage.getItem("TokenId")
 useEffect(()=>{
    // console.log("balaaac")
 if(token){
+   console.log("token found")
 
    dispatch(PostBalance())
    dispatch(Postisselfbyappurl({"appUrl":appUrll}))
@@ -131,6 +132,7 @@ console.log(appUrll,"appUrll")
          <li>
             {/* <Link href="/m/mybets"   className=""> */}
                <div   className="menu-lvl-1" onClick={()=>handleInput("Deposit")}>
+                  
                   <div   className="item" > <span   className="menu-name">Deposit</span></div>
                </div>
             {/* </Link> */}

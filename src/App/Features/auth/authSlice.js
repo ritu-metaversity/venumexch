@@ -2,10 +2,10 @@ import {createSlice} from '@reduxjs/toolkit'
 import {getAllPostsComments ,getActiveSportList,postLogin,PostPwChangeFirstTime,PostPasswordChange,PostGameDetailsBySportsId,PostBalance,
     PostGameDetailsByMI,PostGetStackApi,PostEditStack,PostBetListByMatchId,PostTransferStatement,PostPlaceBet,Postactivematchsport,
     Postunsettleddddd,Postcasino,Postprofitlossmatchwise,postBetMarketAndUser,Postisselfbyappurl,Postdepsositrequestclient,Postpaymnetdetailapp,
-    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient} from './authActions' 
+    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient,Postvalidatejwttoken,Postuserselfregister,PostMinMaxGameDetails} from './authActions' 
 
 const INITAL_STATE = {
-
+    
     auth: '',
     authLoading: false,
     authError: null,
@@ -109,6 +109,18 @@ const INITAL_STATE = {
     PostwithdrawrequestclientData:null,
     PostwithdrawrequestclientDataLoading:false,
     PostwithdrawrequestclientDataError:null,
+
+    PostvalidatejwttokenData:null,
+    PostvalidatejwttokenDataLoading:false,
+    PostvalidatejwttokenDataError:null,
+
+    PostuserselfregisterData:null,
+    PostuserselfregisterDataLoading:false,
+    PostuserselfregisterDataError:null,
+
+    PostMinMaxGameDetailsData:null,
+    PostMinMaxGameDetailsDataLoading:false,
+    PostMinMaxGameDetailsDataError:null,
 
 }
 
@@ -430,6 +442,45 @@ const authSlice = createSlice({
             state.PostwithdrawrequestclientData = action.payload.data;
             state.PostwithdrawrequestclientDataLoading =false;
             state.PostwithdrawrequestclientDataError = null;
+        })
+        .addCase(Postvalidatejwttoken.pending, (state) => {
+            state.PostvalidatejwttokenData = null;
+            state.PostvalidatejwttokenDataLoading =true;
+            state.PostvalidatejwttokenDataError = null;
+        }).addCase(Postvalidatejwttoken.rejected, (state, action) => {
+            state.PostvalidatejwttokenData = null;
+            state.PostvalidatejwttokenDataLoading =false;
+            state.PostvalidatejwttokenDataError = action.error.message;
+        }).addCase(Postvalidatejwttoken.fulfilled, (state, action) => {
+            state.PostvalidatejwttokenData = action.payload.data;
+            state.PostvalidatejwttokenDataLoading =false;
+            state.PostvalidatejwttokenDataError = null;
+        })
+        .addCase(Postuserselfregister.pending, (state) => {
+            state.PostuserselfregisterData = null;
+            state.PostuserselfregisterDataLoading =true;
+            state.PostuserselfregisterDataError = null;
+        }).addCase(Postuserselfregister.rejected, (state, action) => {
+            state.PostuserselfregisterData = null;
+            state.PostuserselfregisterDataLoading =false;
+            state.PostuserselfregisterDataError = action.error.message;
+        }).addCase(Postuserselfregister.fulfilled, (state, action) => {
+            state.PostuserselfregisterData = action.payload.data;
+            state.PostuserselfregisterDataLoading =false;
+            state.PostuserselfregisterDataError = null;
+        })
+        .addCase(PostMinMaxGameDetails.pending, (state) => {
+            state.PostMinMaxGameDetailsData = null;
+            state.PostMinMaxGameDetailsDataLoading =true;
+            state.PostMinMaxGameDetailsDataError = null;
+        }).addCase(PostMinMaxGameDetails.rejected, (state, action) => {
+            state.PostMinMaxGameDetailsData = null;
+            state.PostMinMaxGameDetailsDataLoading =false;
+            state.PostMinMaxGameDetailsDataError = action.error.message;
+        }).addCase(PostMinMaxGameDetails.fulfilled, (state, action) => {
+            state.PostMinMaxGameDetailsData = action.payload.data;
+            state.PostMinMaxGameDetailsDataLoading =false;
+            state.PostMinMaxGameDetailsDataError = null;
         })
 
     }

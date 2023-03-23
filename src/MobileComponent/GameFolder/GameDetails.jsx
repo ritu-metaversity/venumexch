@@ -5,6 +5,7 @@ import { useOutletContext, useParams } from "react-router";
 import {
   PostBetListByMatchId,
   PostGameDetailsByMI,
+  PostMinMaxGameDetails,
 } from "../../App/Features/auth/authActions";
 import "./GameDetails.css";
 import moment from "moment";
@@ -22,12 +23,13 @@ const GameDetails = () => {
   const [previousState, setPreviousState] = useState("");
 
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
-  const { PostGameDetailsByMatchID, PostBetListByMatchIdData } = useSelector(
-    (state) => state.auth
-  );
-  console.log(PostGameDetailsByMatchID?.data, "PostBetListByMatchIdData?.data");
-  // console.log(PostGameDetailsByMatchID?.data?.Odds[0]?.runners[1]?.name, "PostBetListByMatchIdData?.data");
-  // console.log(PostGameDetailsByMatchID?.data?.Odds?.runners[1]?.name, "PostBetListByMatchIdData?.data");
+  const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
+  const {
+    PostGameDetailsByMatchID,
+    PostBetListByMatchIdData,
+    PostMinMaxGameDetailsData,
+  } = useSelector((state) => state.auth);
+
   // const {  } = useSelector((state) => state.auth);
   // const [PostBetListByMatchId,setPostBetListByMatchId ]= useState("")
 
@@ -36,7 +38,6 @@ const GameDetails = () => {
   //   setPostBetListByMatchId(PostBetListByMatchIdData)
   // }
   // },[PostBetListByMatchIdData])
-  // console.log(PostBetListByMatchId,"PostBetListByMatchIdPostBetListByMatchIdPostBetListByMatchId")
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
       setUnmatchedBets(false);
@@ -68,10 +69,7 @@ const GameDetails = () => {
       alert("Pleace select other bit");
     }
   };
-  // console.log(
-  //   PostBetListByMatchIdData?.data,
-  //   "PostBetListByMatchIdDataPostBetListByMatchIdData"
-  // );
+
   const handleBitValueBookmaker = (price, name, color, item1) => {
     if (price > 0) {
       datatata({
@@ -88,6 +86,7 @@ const GameDetails = () => {
       alert("Pleace select other bit");
     }
   };
+
   const handleBitValueFancy = (price, name, color, trueData, item, keykey) => {
     if (price > 0) {
       datatata({
@@ -119,8 +118,12 @@ const GameDetails = () => {
   useEffect(() => {
     const tiem = setInterval(() => {
     dispatch(PostGameDetailsByMI(id));
-    }, 2000);
+    }, 1000);
     return () => clearInterval(tiem);
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    dispatch(PostMinMaxGameDetails(id));
   }, [dispatch, id]);
 
   const handlematched = () => {
@@ -135,10 +138,6 @@ const GameDetails = () => {
     setOpenBet(false);
   };
 
-  // useEffect(()=>{
-  // DIS
-  // },[])
-
   const handleOpneBet = () => {
     setOpenBet(true);
     setMarket(false);
@@ -148,21 +147,38 @@ const GameDetails = () => {
 
   const handleNationName = (name) => {};
 
+useEffect(()=>{
+
+if (PostMinMaxGameDetailsData) {
+  let arrData = PostMinMaxGameDetailsData;
+  let newObject = {};
+  for (let x in arrData) {
+    if (x !== "Odds" && x !== "Bookmaker") {
+      newObject[x] = arrData[x];
+    }
+  }
+  const newArr = newObject;
+  let FinalData = {};
+  for (let x in newArr) {
+    if (newArr[x].length) {
+      FinalData[x] = newArr[x];
+    }
+  }
+  setOnlyFancyMaxMinDetails(FinalData);
+} else {
+}
+},[PostMinMaxGameDetailsData])
   useEffect(() => {
     if (gameDetailsData) {
       let arrData = gameDetailsData?.data;
       let newObject = {};
-
       for (let x in arrData) {
         if (x !== "Odds" && x !== "Bookmaker") {
           newObject[x] = arrData[x];
         }
       }
-
       const newArr = newObject;
-
       let FinalData = {};
-
       for (let x in newArr) {
         if (newArr[x].length) {
           FinalData[x] = newArr[x];
@@ -170,19 +186,8 @@ const GameDetails = () => {
       }
       setOnlyFancyDetails(FinalData);
     } else {
-      // console.log("no data");
     }
   }, [gameDetailsData]);
-
-  // useEffect(() => {
-  //   // Object.keys(onlyFancyDetails).map(key=>onlyFancyDetails[key].map(item=>console.log(key,item)))
-  //   // onlyFancyDetails &&onlyFancyDetails?.Fancy2.map((item)=>{
-  //   //   return(
-  //   //   )
-  //   // })
-  // }, [onlyFancyDetails]);
-
-  // console.log(PostBetListByMatchIdData ,"dushyant")
 
   return (
     <div>
@@ -198,7 +203,10 @@ const GameDetails = () => {
                   alt=""
                   src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
                 />
-                <h4 className="m-b-0">{PostGameDetailsByMatchID?.data?.Odds[0]?.runners[0]?.name} VS {PostGameDetailsByMatchID?.data?.Odds[0]?.runners[1]?.name}</h4>
+                <h4 className="m-b-0">
+                  {PostGameDetailsByMatchID?.data?.Odds[0]?.runners[0]?.name} VS{" "}
+                  {PostGameDetailsByMatchID?.data?.Odds[0]?.runners[1]?.name}
+                </h4>
               </div>
               <div className="text-right">
                 <span>20/11/2022 20:30</span>
@@ -222,7 +230,7 @@ const GameDetails = () => {
                   class={`nav-link ${openBet ? "active " : ""}`}
                   onClick={handleOpneBet}
                 >
-                  Open Bets(0)
+                  Open Bets
                 </Link>
               </li>
             </ul>
@@ -316,7 +324,6 @@ const GameDetails = () => {
                               <div className=" m-b-10 main-market w-100 float-left">
                                 <div className="table-header">
                                   <div className="float-left box-w4 country-name">
-                                    {/* {console.log(item11,"item11item11item11")} */}
                                     <b>{item11?.Name}</b>
                                   </div>
                                   <div className="box-w1 float-left hidden-portrait dis-none"></div>
@@ -329,24 +336,29 @@ const GameDetails = () => {
                                   </div>
                                   <div className="box-w1 float-left hidden-portrait dis-none"></div>
                                   <div className="box-w1 float-left hidden-portrait ddis-none"></div>
-                                </div>
+                                </div> 
+                                <div className="matchoddsmax">
 
-                                {/* {item?.runners?.map} */}
+                                
+                                  max:{PostMinMaxGameDetailsData?.Odds&&PostMinMaxGameDetailsData?.Odds[id1]?.maxBet}
+                                  </div>  <div className="matchoddsmin">
 
+                                 
+                                  max:{PostMinMaxGameDetailsData?.Odds&&PostMinMaxGameDetailsData?.Odds[id1]?.minBet}
+                                  </div>
+                               
                                 <div
                                   data-title="OPEN"
                                   className="table-body"
                                   style={{ marginTop: "7px" }}
                                 >
                                   {item11?.runners?.map((item1, index) => {
-                                    // console.log(index);
                                     return (
                                       <>
                                         <div
                                           data-title="OPEN"
                                           className="table-row"
                                         >
-                                          {/* {console.log(item11,"ittttetetetetetet")} */}
                                           <div
                                             className="float-left box-w4 country-name"
                                             onClick={handleNationName(
@@ -365,7 +377,6 @@ const GameDetails = () => {
 
                                           {item1?.ex?.availableToBack.map(
                                             (item, id) => {
-                                              // console.log(item?.size,  previousState?.data.Odds[id1].runners[index]?.ex?.availableToBack[id].size)
                                               return (
                                                 <div
                                                   className={`box-w1 float-left back hidden-portrait  ${
@@ -413,7 +424,6 @@ const GameDetails = () => {
                                           )}
                                           {item1?.ex?.availableToLay.map(
                                             (item, id) => {
-                                              // console.log(item?.price, previousState?.data.Odds[id1].runners[index]?.ex?.availableToLay[id].price)
                                               return (
                                                 <div
                                                   className={`box-w1 lay float-left ${
@@ -434,7 +444,6 @@ const GameDetails = () => {
                                                 >
                                                   <button
                                                     type="button"
-                                                    // className="lay"
                                                     onClick={() =>
                                                       handleBitValue(
                                                         item?.price,
@@ -520,107 +529,134 @@ const GameDetails = () => {
                               <div className="box-w3 float-left hidden-portrait "></div>
                               <div className="box-w3 float-left hidden-portrait "></div>
                             </div>
-                            {gameDetailsData?.data?.Bookmaker.map((item) => {
-                              return (
-                                <>
-                                  <div data-title="OPEN" className="table-body">
+                            <div className="max">
+                              Max:
+                              {PostMinMaxGameDetailsData &&
+                                PostMinMaxGameDetailsData?.Bookmaker[0].maxBet}
+                            </div>
+                            <div className="min">
+                              MIN:
+                              {PostMinMaxGameDetailsData &&
+                                PostMinMaxGameDetailsData?.Bookmaker[0].minBet}
+                            </div>
+                            {/* {PostMinMaxGameDetailsData&&PostMinMaxGameDetailsData?.Bookmaker[index]
+                            .map((item222)=>{ */}
+
+                            {gameDetailsData?.data?.Bookmaker.map(
+                              (item, index) => {
+                                return (
+                                  <>
                                     <div
                                       data-title="OPEN"
-                                      className={`table-row ${
-                                        item?.gstatus === "SUSPENDED"
-                                          ? "suspended"
-                                          : ""
-                                      }`}
+                                      className="table-body"
                                     >
-                                      <div className="float-left box-w6 country-name">
-                                        <span className="team-name">
-                                          <b> {item?.nation}</b>
-                                        </span>
-                                        <p className="box-w4">
-                                          <span className="float-left ubook">
-                                            0
+                                      <div
+                                        data-title="OPEN"
+                                        className={`table-row ${
+                                          item?.gstatus === "SUSPENDED"
+                                            ? "suspended"
+                                            : ""
+                                        }`}
+                                      >
+                                        <div className="float-left box-w6 country-name">
+                                          <span className="team-name">
+                                            <b> {item?.nation}</b>
                                           </span>
-                                        </p>
-                                      </div>
-                                      <div className="box-w3 float-left back ">
-                                        <button type="button" className="back">
-                                          <span className="odd">0</span>
-                                          <span>
-                                            <span>0</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 float-left back ">
-                                        <button type="button" className="back">
-                                          <span className="odd">0</span>
-                                          <span>
-                                            <span>0</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 float-left back ">
-                                        <button
-                                          type="button"
-                                          className="back"
-                                          onClick={() =>
-                                            handleBitValueBookmaker(
-                                              item?.b1,
-                                              "Bookmaker",
-                                              "back",
-                                              item
-                                            )
-                                          }
-                                        >
-                                          <span className="odd">
-                                            {item?.b1}
-                                          </span>
-                                          <span>
-                                            <span>{item?.bs1}</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 float-left lay hidden-portrait">
-                                        <button
-                                          type="button"
-                                          className="lay"
-                                          onClick={() =>
-                                            handleBitValueBookmaker(
-                                              item?.l1,
-                                              "Bookmaker",
-                                              "lay",
-                                              item
-                                            )
-                                          }
-                                        >
-                                          <span className="odd">
-                                            {item?.l1}
-                                          </span>
-                                          <span>
-                                            <span>{item?.ls1}</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 lay float-left ">
-                                        <button type="button" className=" lay">
-                                          <span className="odd">0</span>
-                                          <span>
-                                            <span>0</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 lay float-left ">
-                                        <button type="button" className="lay">
-                                          <span className="odd">0</span>{" "}
-                                          <span>
-                                            <span>0</span>
-                                          </span>
-                                        </button>
+                                          <p className="box-w4">
+                                            <span className="float-left ubook">
+                                              0
+                                            </span>
+                                          </p>
+                                        </div>
+                                        <div className="box-w3 float-left back ">
+                                          <button
+                                            type="button"
+                                            className="back"
+                                          >
+                                            <span className="odd">0</span>
+                                            <span>
+                                              <span>0</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 float-left back ">
+                                          <button
+                                            type="button"
+                                            className="back"
+                                          >
+                                            <span className="odd">0</span>
+                                            <span>
+                                              <span>0</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 float-left back ">
+                                          <button
+                                            type="button"
+                                            className="back"
+                                            onClick={() =>
+                                              handleBitValueBookmaker(
+                                                item?.b1,
+                                                "Bookmaker",
+                                                "back",
+                                                item
+                                              )
+                                            }
+                                          >
+                                            <span className="odd">
+                                              {item?.b1}
+                                            </span>
+                                            <span>
+                                              <span>{item?.bs1}</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 float-left lay hidden-portrait">
+                                          <button
+                                            type="button"
+                                            className="lay"
+                                            onClick={() =>
+                                              handleBitValueBookmaker(
+                                                item?.l1,
+                                                "Bookmaker",
+                                                "lay",
+                                                item
+                                              )
+                                            }
+                                          >
+                                            <span className="odd">
+                                              {item?.l1}
+                                            </span>
+                                            <span>
+                                              <span>{item?.ls1}</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 lay float-left ">
+                                          <button
+                                            type="button"
+                                            className=" lay"
+                                          >
+                                            <span className="odd">0</span>
+                                            <span>
+                                              <span>0</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 lay float-left ">
+                                          <button type="button" className="lay">
+                                            <span className="odd">0</span>{" "}
+                                            <span>
+                                              <span>0</span>
+                                            </span>
+                                          </button>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </>
-                              );
-                            })}
+                                  </>
+                                );
+                              }
+                            )}
                           </div>
                         </div>
                       </div>
@@ -635,17 +671,11 @@ const GameDetails = () => {
                               className="fancy-market-container"
                             >
                               <div data-v-e03c6f20="" className="fancy-market">
-                                {/* {gameDetailsData &&gameDetailsData?.data && gameDetailsData?.data?.map((item) => {
-                                        return (
-                                          <> {console.log(item,"dushyant")}</> )})}
-                             */}
-
                                 <div data-v-e03c6f20="">
                                   <div data-v-e03c6f20="">
                                     {Object.keys(onlyFancyDetails).map(
                                       (key) => (
-                                        <>
-                                          <div
+                                        <>                                          <div
                                             data-v-e03c6f20=""
                                             className="table-header"
                                           >
@@ -693,173 +723,176 @@ const GameDetails = () => {
                                             className="table-body"
                                           ></div>
 
-                                          {onlyFancyDetails[key].map((item) => (
-                                            <>
-                                              <div
-                                                data-v-e03c6f20=""
-                                                className="fancy-tripple "
-                                              >
+                                          {onlyFancyDetails[key].map(
+                                            (item, index) => (
+                                              <>
+                                             
                                                 <div
                                                   data-v-e03c6f20=""
-                                                  data-title=""
-                                                  // className="table-row"
-                                                  className={`table-row ${
-                                                    item?.gstatus ===
-                                                    "SUSPENDED"
-                                                      ? "suspended"
-                                                      : ""
-                                                  }`}
+                                                  className="fancy-tripple "
                                                 >
                                                   <div
                                                     data-v-e03c6f20=""
-                                                    className="float-left box-w4 country-name"
+                                                    data-title=""
+                                                    // className="table-row"
+                                                    className={`table-row ${
+                                                      item?.gstatus ===
+                                                      "SUSPENDED"
+                                                        ? "suspended"
+                                                        : ""
+                                                    }`}
                                                   >
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      className="float-left fancy-items"
+                                                      className="float-left box-w4 country-name"
                                                     >
-                                                      <span
+                                                      <div
                                                         data-v-e03c6f20=""
-                                                        className="team-name"
-                                                      >
-                                                        <b data-v-e03c6f20="">
-                                                          {item?.nation}
-                                                        </b>
-                                                      </span>
-                                                      <p
-                                                        data-v-e03c6f20=""
-                                                        className="m-b-0"
+                                                        className="float-left fancy-items"
                                                       >
                                                         <span
                                                           data-v-e03c6f20=""
-                                                          className="float-left ubook fancy-span"
+                                                          className="team-name"
                                                         >
-                                                          0
+                                                          <b data-v-e03c6f20="">
+                                                            {item?.nation}
+                                                          </b>
                                                         </span>
-                                                      </p>
+                                                        <p
+                                                          data-v-e03c6f20=""
+                                                          className="m-b-0"
+                                                        >
+                                                          <span
+                                                            data-v-e03c6f20=""
+                                                            className="float-left ubook fancy-span"
+                                                          >
+                                                            0
+                                                          </span>
+                                                        </p>
+                                                      </div>
+                                                      <div
+                                                        data-v-e03c6f20=""
+                                                        className="float-right v-m"
+                                                      >
+                                                        <img
+                                                          src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder.png"
+                                                          className="float-right ladder-icon"
+                                                          alt=""
+                                                        />
+                                                      </div>
                                                     </div>
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      className="float-right v-m"
+                                                      className="box-w1 float-left  lay hidden-portrait dis-none"
+                                                    ></div>
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 float-left lay  hidden-portrait dis-none"
+                                                    ></div>
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 lay float-left text-center"
                                                     >
-                                                      <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder.png"
-                                                        className="float-right ladder-icon"
-                                                        alt=""
-                                                      />
+                                                      <button
+                                                        data-v-e03c6f20=""
+                                                        className="lay"
+                                                        onClick={() =>
+                                                          handleBitValueFancy(
+                                                            item?.b1,
+                                                            item.nation,
+                                                            "back",
+                                                            true,
+                                                            item,
+                                                            key
+                                                          )
+                                                        }
+                                                      >
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="odd d-block"
+                                                        >
+                                                          {item?.b1}
+                                                        </span>{" "}
+                                                        <span data-v-e03c6f20="">
+                                                          {item?.bs1}
+                                                        </span>
+                                                      </button>
                                                     </div>
-                                                  </div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 float-left  lay hidden-portrait dis-none"
-                                                  ></div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 float-left lay  hidden-portrait dis-none"
-                                                  ></div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 lay float-left text-center"
-                                                  >
-                                                    <button
+                                                    <div
                                                       data-v-e03c6f20=""
-                                                      className="lay"
-                                                      onClick={() =>
-                                                        handleBitValueFancy(
-                                                          item?.b1,
-                                                          item.nation,
-                                                          "back",
-                                                          true,
-                                                          item,
-                                                          key
-                                                        )
-                                                      }
+                                                      className="box-w1 back float-left text-center"
                                                     >
-                                                      <span
+                                                      <button
                                                         data-v-e03c6f20=""
-                                                        className="odd d-block"
+                                                        className="back"
+                                                        onClick={() =>
+                                                          handleBitValueFancy(
+                                                            item?.l1,
+                                                            item.nation,
+                                                            "lay",
+                                                            true,
+                                                            item,
+                                                            key
+                                                          )
+                                                        }
                                                       >
-                                                        {item?.b1}
-                                                      </span>{" "}
-                                                      <span data-v-e03c6f20="">
-                                                        {item?.bs1}
-                                                      </span>
-                                                    </button>
-                                                  </div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 back float-left text-center"
-                                                  >
-                                                    <button
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="odd d-block"
+                                                        >
+                                                          {item?.l1}
+                                                        </span>{" "}
+                                                        <span data-v-e03c6f20="">
+                                                          {item?.ls1}
+                                                        </span>
+                                                      </button>
+                                                    </div>
+                                                    <div
                                                       data-v-e03c6f20=""
-                                                      className="back"
-                                                      onClick={() =>
-                                                        handleBitValueFancy(
-                                                          item?.l1,
-                                                          item.nation,
-                                                          "lay",
-                                                          true,
-                                                          item,
-                                                          key
-                                                        )
-                                                      }
-                                                    >
-                                                      <span
-                                                        data-v-e03c6f20=""
-                                                        className="odd d-block"
-                                                      >
-                                                        {item?.l1}
-                                                      </span>{" "}
-                                                      <span data-v-e03c6f20="">
-                                                        {item?.ls1}
-                                                      </span>
-                                                    </button>
+                                                      className="box-w1 float-left back   hidden-portrait dis-none"
+                                                    ></div>
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 float-left back  hidden-portrait dis-none"
+                                                    ></div>
                                                   </div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 float-left back   hidden-portrait dis-none"
-                                                  ></div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 float-left back  hidden-portrait dis-none"
-                                                  ></div>
-                                                </div>
 
-                                                <div
-                                                  data-v-e03c6f20=""
-                                                  className="fancy-tripple"
-                                                ></div>
-                                                <div
-                                                  data-v-e03c6f20=""
-                                                  className="min-max  text-right"
-                                                >
-                                                  <p
+                                                  <div
                                                     data-v-e03c6f20=""
-                                                    className="m-b-0"
+                                                    className="fancy-tripple"
+                                                  ></div>
+                                                  <div
+                                                    data-v-e03c6f20=""
+                                                    className="min-max  text-right"
                                                   >
-                                                    <span
+                                                    <p
                                                       data-v-e03c6f20=""
-                                                      className="text-dark"
+                                                      className="m-b-0"
                                                     >
-                                                      Min:{" "}
-                                                      <span data-v-e03c6f20="">
-                                                        50
+                                                      <span
+                                                        data-v-e03c6f20=""
+                                                        className="text-dark"
+                                                      >
+                                                        Min:{" "}
+                                                        <span data-v-e03c6f20="">
+                                                      {onlyFancyMaxMinDetails&&onlyFancyMaxMinDetails[key]?.[index]?.maxBet}
+                                                        </span>
+                                                      </span>{" "}
+                                                      <span
+                                                        data-v-e03c6f20=""
+                                                        className="text-dark"
+                                                      >
+                                                        Max:{" "}
+                                                        <span data-v-e03c6f20="">
+                                                          {onlyFancyMaxMinDetails&&onlyFancyMaxMinDetails[key]?.[index]?.minBet}
+                                                        </span>
                                                       </span>
-                                                    </span>{" "}
-                                                    <span
-                                                      data-v-e03c6f20=""
-                                                      className="text-dark"
-                                                    >
-                                                      Max:{" "}
-                                                      <span data-v-e03c6f20="">
-                                                        5K
-                                                      </span>
-                                                    </span>
-                                                  </p>
+                                                    </p>
+                                                  </div>
                                                 </div>
-                                              </div>
-                                            </>
-                                          ))}
+                                              </>
+                                            )
+                                          )}
                                         </>
                                       )
                                     )}
@@ -880,7 +913,10 @@ const GameDetails = () => {
                   className="tab-pane fade"
                   style={{ marginTop: "14px" }}
                 >
-                  <section className="my-bets-container" style={{marginTop: "0px"}}> 
+                  <section
+                    className="my-bets-container"
+                    style={{ marginTop: "0px" }}
+                  >
                     <div
                       data-toggle="collapse"
                       data-target=".unmatched-bet"
@@ -908,7 +944,7 @@ const GameDetails = () => {
             </div>
             <div
               id="open-bets"
-              class={`tab-pane fade ${openBet ? "active show " : ""}`}
+              class={`tab-pane fade ${openBet ? "active show " : ""} opennnnn`}
             >
               {/* m-t-10 */}
               <section className="my-bets-container">
@@ -934,7 +970,6 @@ const GameDetails = () => {
                   <div className="message">You have no unmatched bets</div>
                 </div> */}
 
-
                 <div
                   data-toggle="collapse"
                   data-target=".matched-bet"
@@ -953,12 +988,11 @@ const GameDetails = () => {
                     matchedBets === true ? "collapse " : "collapse show"
                   } `}
                 >
-                 {/* <div className="message">You have no matched bet</div>  */}
-                  
-                 { PostBetListByMatchIdData?.data &&
+                  {/* <div className="message">You have no matched bet</div>  */}
+
+                  {PostBetListByMatchIdData?.data &&
                     Object.keys(PostBetListByMatchIdData?.data).map((key) => (
                       <>
-                        {console.log(key)}
 
                         {PostBetListByMatchIdData?.data[key].map((item) => (
                           <>
@@ -968,7 +1002,9 @@ const GameDetails = () => {
                                   <div>
                                     <Link
                                       to={`/m/gamedetail/${id}`}
-                                      class="back-bet"
+                                      className={`${
+                                        item?.back === false ? "lay" : "back"
+                                      }-bet`}
                                     >
                                       <u>
                                         {item?.back === true ? "BACK" : "LAY"}{" "}

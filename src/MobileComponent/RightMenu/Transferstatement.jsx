@@ -72,6 +72,7 @@ const Transferstatement = () => {
                       <tr>
                         <td colspan="3" class="">
                           <b>
+                           
                             <span>
                               {moment(el?.date).format(" Do MMMM YYYY")}
                             </span>

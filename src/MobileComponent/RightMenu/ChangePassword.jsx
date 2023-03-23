@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { PostPasswordChange, PostPwChangeFirstTime } from "../../App/Features/auth/authActions";
+import ValidationFile from "../../Validation/ValidationFile";
 import "./ChangePassword.css";
 
 const ChangePassword = () => {
@@ -21,6 +22,7 @@ const ChangePassword = () => {
   const [emptyCurrent, setemptyCurrent] = useState(false);
   const [emptyNewPassWord, setemptyPassWord] = useState(false);
   const [emptyConfirm, setemptyConfirm] = useState(false);
+  const [infoError, setInfoError] = useState(false);
 
   let dispatch = useDispatch();
   // const { postLoginData } = useSelector(state => state.auth)
@@ -39,16 +41,19 @@ useEffect(()=>{
     let inputValue = e.target.value;
     switch (inputName) {
       case "CurrentPassword":
-        setCurrentPassWord(inputValue);
-        setemptyCurrent(false)
+     
+        setCurrentPassWord(ValidationFile.spaceNotAccept(inputValue));
+        setemptyCurrent(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
         break;
       case "NewPassword":
-        setNewPassWord(inputValue);
-        setemptyPassWord(false)
+      
+        setNewPassWord(ValidationFile.spaceNotAccept(inputValue));
+        setemptyPassWord(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
         break;
       case "ConfirmNewPassword":
-        setConfirmPassword(inputValue);
-        setemptyConfirm(false)
+       
+        setConfirmPassword(ValidationFile.spaceNotAccept(inputValue));
+        setemptyConfirm(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
         break;
       default:
         return false;
@@ -57,27 +62,32 @@ useEffect(()=>{
 
   const handleSavePassWordFirstTime = () => {
 
-    // setPasswordTypeOld({
-    //   currentPassword:currentPassword,
-    //   newPassword :newPassword
-    // })
-    if(newPassword===confirmPassword){
-      // console.log("same pas")
-      let passwordData ={
-        newPassword:newPassword,
-        currentPassword: currentPassword,
-        confirmPassword: confirmPassword,
-        userid: userId,
-        token: TokeN,
-        oldPassword:currentPassword
-      }
-     
-      dispatch(PostPwChangeFirstTime(passwordData))
-      navigate("/m/home");
+    setInfoError(true);
 
+    let passwordData ={
+      newPassword:newPassword,
+      currentPassword: currentPassword,
+      confirmPassword: confirmPassword,
+      userid: userId,
+      token: TokeN,
+      oldPassword:currentPassword
     }
-// console.log("hello")
-  };
+  if (ValidationFile.isEmpty(currentPassword)) {
+    setemptyCurrent(true);
+  }
+  if (ValidationFile.isEmpty(newPassword)) {
+    setemptyPassWord(true);
+  }
+  if (ValidationFile.isEmpty(confirmPassword)) {
+    setemptyConfirm(true);
+  }if (
+    !ValidationFile.isEmpty(currentPassword) &&
+    !ValidationFile.isEmpty(newPassword) &&
+    !ValidationFile.isEmpty(confirmPassword)
+  ) {
+    dispatch(PostPwChangeFirstTime(passwordData))
+    // navigate("/m/home");
+}}
 
 
 const handleSavePassWord=()=>{
@@ -97,7 +107,7 @@ const handleSavePassWord=()=>{
   return (
     <>
       <div
-        className="home-page home-page-news"
+        className="home-page home-page-news hjhjjh"
         style={{ height: "100vh !importent" }}
       >
         {invalidPassword ==="Invalid Current Password" ?
@@ -127,7 +137,7 @@ const handleSavePassWord=()=>{
                 aria-invalid="false"
                 onChange={handleInput}
               />
-             { emptyCurrent   ? <><span className="text-danger">
+             { emptyCurrent&&infoError   ? <><span className="text-danger">
                 {" "}
                 The CurrentPassword field is required.
               </span> {" "} </>:""}
@@ -143,7 +153,7 @@ const handleSavePassWord=()=>{
                 aria-invalid="false"
                 onChange={handleInput}
               />
-              { emptyNewPassWord   ? <><span className="text-danger">
+              { emptyNewPassWord &&infoError  ? <><span className="text-danger">
                 {" "}
                 The CurrentPassword field is required.
               </span> {" "} </>:""}
@@ -156,8 +166,8 @@ const handleSavePassWord=()=>{
                 </>
               ) : (
                 ""
-              )} */}
-              {/* <span class="text-danger">
+              )}
+              <span class="text-danger">
                 The password must contain at least: 1 uppercase letter, 1
                 lowercase letter, 1 number and 8 to 15 characters needed !
               </span> */}
@@ -175,11 +185,11 @@ const handleSavePassWord=()=>{
               />
               
               {" "}
-              { emptyConfirm   ? <><span className="text-danger">
+              { emptyConfirm &&infoError  ? <><span className="text-danger">
                 {" "}
                 The CurrentPassword field is required.
               </span> {" "} </>:""}
-              {passWordSame ? (
+              {passWordSame&&infoError ? (
                 <>
                   <span className="text-danger">
                     {" "}
@@ -201,6 +211,7 @@ const handleSavePassWord=()=>{
               type="submit"
               className="btn btn-login"
               onClick={handleSavePassWordFirstTime}
+              style={{    marginRight: "4%"}}
             >
             Save 
             </button>:
@@ -208,6 +219,7 @@ const handleSavePassWord=()=>{
                 type="submit"
                 className="btn btn-login"
                 onClick={handleSavePassWord}
+                style={{    marginRight: "4%"}}
               >
                 Save
               </button>

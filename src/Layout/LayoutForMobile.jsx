@@ -13,10 +13,12 @@ import Modal from "react-bootstrap/Modal";
 // import Mybets from "../MobileComponent/RightMenu/Mybets";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Postvalidatejwttoken } from "../App/Features/auth/authActions";
 
 const LayoutForMobile = () => {
-  //  let  navigate =useNavigate()
-
+   let  navigate =useNavigate()
+const dispatch =useDispatch()
   const [RightValue, setRightValue] = useState(false);
   const [LeftValue, setLeftValue] = useState(false);
   const [show, setShow] = useState(false);
@@ -26,6 +28,8 @@ const LayoutForMobile = () => {
   const [BetType, setBetType] = useState("");
   const [BetTypeFooter, setBetTypeFooter] = useState(false);
 
+const { PostvalidatejwttokenData ,PostuserselfregisterDataError} = useSelector((state) => state.auth);
+
   const [closeeee, setCloseeeee] = useState(false);
 
   const RightSideBarClose = (vl) => {
@@ -33,7 +37,25 @@ const LayoutForMobile = () => {
     setRightValue(false);
     // setRightValue(false);
   };
+// useEffect(()=>{
 
+//   const tiem = setInterval(() => {
+//     dispatch(Postvalidatejwttoken())
+//     }, 1000);
+//     return () => clearInterval(tiem);
+
+
+// },[])
+
+// useEffect(()=>{
+// if(PostvalidatejwttokenData===null){
+//   navigate("/m/login")
+  
+// }
+// },[])
+console.log(PostvalidatejwttokenData,"PostvalidatejwttokenData")
+console.log(PostuserselfregisterDataError,"PostuserselfregisterDataError")
+// JWT Token Expired
   const handleClose = () => {
     setShow(false);
   };
@@ -58,7 +80,7 @@ const LayoutForMobile = () => {
       setBetType(vl?.isBack);
     }
   };
-  console.log(LeftValue)
+  // console.log(LeftValue)
   const eftMenuClose = (vl) => {
     setLeftValue(vl);
     // console.log(vl);

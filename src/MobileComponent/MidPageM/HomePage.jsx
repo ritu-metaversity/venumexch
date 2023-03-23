@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useOutletContext } from 'react-router';
 import {Link, useParams } from "react-router-dom";
-import { Postactivematchsport, PostGameDetailsBySportsId } from '../../App/Features/auth/authActions';
+import { Postactivematchsport, PostGameDetailsBySportsId, Postunsettleddddd } from '../../App/Features/auth/authActions';
 import './HomePage.css'
 
 const HomePage = () => {
@@ -70,6 +70,23 @@ const handleGameDetails=(id,item)=>{
 //       },[dispatch, id])
 
 
+
+const { PostunsettledData } = useSelector(state => state.auth)
+
+  console.log(PostunsettledData?.data?.dataList?.length)
+
+  // const dispatch = useDispatch();
+// console.log(PostBetListByMatchIdData ,"dushyant")
+
+useEffect(()=>{
+  let data ={betType:1,
+    index:0,
+    noOfRecords:5,
+    sportType:1}
+
+  dispatch(Postunsettleddddd(data))
+},[dispatch])
+
   return (
     <> <div   className="master-flash-message">
     <div   className="flash__wrapper"></div>
@@ -84,7 +101,7 @@ const handleGameDetails=(id,item)=>{
       <span   className="label">In Play</span>
     </div>
     <Link to="/m/mybets"  className="">
-      <span   className="open-bets-link">Open Bets(0)</span>
+      <span   className="open-bets-link">Open Bets {""}({PostunsettledData?.data&&PostunsettledData?.data?.dataList&&PostunsettledData?.data?.dataList?.length})</span>
     </Link>
     <div>
       <ul   className="market-listing m-t-10">

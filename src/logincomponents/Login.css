@@ -31,14 +31,15 @@ html {
     position: relative;
     display: flex;
     flex-direction: column;
- margin-top: 414px;
+ margin-top: 77%;
     height: 161px !important;
     margin-left: 92%;
     pointer-events: auto;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .2);
-    border-radius: 0.3rem;
+    border-radius: 0.9rem;
+    /* margin-left: 23% !important; */
     outline: 0;
 }
 
@@ -147,7 +148,7 @@ footer a {
         margin-top: -18pxpx;
     }
     footer.footer {
-        height: 92px;
+        height: 98px;
         overflow: hidden;
     }
     .login-form .login-panel {
@@ -161,6 +162,28 @@ footer a {
     }
     
 }
+.user-id {
+    display: flex;
+    justify-content: space-between;
+}
+.user{
+    margin-bottom: 15px;
+}
+.user-id p{
+    font-size: 14px;
+}
+.register-head{
+    display: block !important;
+    text-align: center;
+    background: #16272c;
+    width: 100%;
+    color: #fff;
+}
+.rotate-btn{
+    rotate: 180deg;
+    margin-right: 5px;
+}
+
 
 @media only screen and (min-width:350) and (max-width: 400px) {
     .footer {
@@ -187,4 +210,10 @@ footer a {
         text-align: center;
         /* margin-inline: 3px; */
     }
+}
+.regTital{
+    float: left;
+}
+.register-head button {
+    float: right;
 }

@@ -1,8 +1,9 @@
-import moment from "moment";
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Postdepsositrequestclient, Postpaymnetdetailapp } from "../../../App/Features/auth/authActions";
-
+import Modal  from 'react-bootstrap/Modal';
+import moment from "moment";
 import "./Deposit.css";
 import PayManually from "./PayManually";
 const Deposit = () => {
@@ -12,9 +13,11 @@ const Deposit = () => {
   const { PostdepsositrequestclientData,PostpaymnetdetailappDataData} = useSelector(state => state.auth)
   const [Bitvalue, setBitValue] = useState(0);
 
+  const [trueee, setTrueee] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
 
   const token = localStorage.getItem("TokenId")
-
+console.log(trueee,"imgUrlimgUrl")
   const increment = () => {
     setBitValue(Bitvalue + 10);
   };
@@ -41,7 +44,13 @@ const UpdateList=(vl)=>{
   }
   },[token])
 // console.log(PostdepsositrequestclientData,"line 18")
-  
+  const handleModal=(e,url)=>{
+    e.preventDefault()
+    setImgUrl(url)
+    setTrueee(true)
+    console.log(url)
+  }
+  console.log(trueee)
   return (
     <>
       
@@ -102,9 +111,26 @@ const UpdateList=(vl)=>{
                     <td aria-colindex="1" className="text-left">
                       {item?.amount}
                     </td>
-                    <td aria-colindex="2" className="text-left">
-                      <img alt="" className="fkjsdfsdkfjsd" src={item?.image}/>
+                    <td aria-colindex="2" className="text-left" onClick={(e)=>handleModal(e,item?.image)}>
+                    
+                      <img alt="" className="fkjsdfsdkfjsd" src={item?.image} />
+                         
                     </td>
+                    <Modal
+                    show={trueee}
+                    onHide={() => setTrueee(false)}
+                    size="lg"
+                    centered
+                  >
+                    <Modal.Body>
+                      {console.log("nsjdsjdnjnf")}
+                    <img
+                    src={imgUrl}
+                    alt=""
+                    className="imgggggggg"
+                  />
+                    </Modal.Body>
+                  </Modal>
                     <td aria-colindex="3" className="text-right text-success">
                    
                       {moment(item?.time).format('MM-DD-YYYY - hh:mm')}
@@ -113,14 +139,20 @@ const UpdateList=(vl)=>{
                       {item?.status}
                     </td>
                   </tr>
+                  
                 </tbody>
+                
                 ))}
+              
               </table>
+             
             </div>
           </div>
         </div>
       </div>
+     
     </>
+    
   );
 };
 export default Deposit;

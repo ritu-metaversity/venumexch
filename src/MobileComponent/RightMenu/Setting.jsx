@@ -83,7 +83,7 @@ console.log(PostGetStack?.data,"PostGetStackPostGetStack")
             <div className="flash__wrapper"></div>
           </div>
           <div className="setting-page">
-            <h2 className="page-title">Settings</h2>
+            {/* <h2 className="page-title">Settings</h2>
             <h2 className="page-title">
               One Click Settings
               <i
@@ -122,7 +122,6 @@ console.log(PostGetStack?.data,"PostGetStackPostGetStack")
               <div className="stake-group">
                 <div className="stake readonly active">
                   <p className="m-b-0">10</p>
-                  {/* <span>Active Stake</span> */}
                 </div>
                 <div className="stake readonly">
                   <p className="m-b-0">200</p>
@@ -137,7 +136,7 @@ console.log(PostGetStack?.data,"PostGetStackPostGetStack")
               >
                 Edit
               </button>
-            </div>
+            </div> */}
 
             <div className="stake-buttons m-t-20" style={{paddingTop: "0px"}}>
               <h2 className="page-title">Edit Stakes</h2>

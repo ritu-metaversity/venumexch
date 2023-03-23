@@ -31,7 +31,7 @@ const Casinolist = () => {
     const id = {
       id: sportId
     }
-    axios.post("http://api.a2zscore.com/admin-new-apis/casino/casino-tables-by-types", id).then((res)=>{
+    axios.post("http://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types", id).then((res)=>{
       setCasinoList(res.data.data)
     })
   },[sportId])

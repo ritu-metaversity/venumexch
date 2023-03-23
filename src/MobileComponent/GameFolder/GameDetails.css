@@ -1106,3 +1106,30 @@ b, strong {
     margin-left: 2%;
 
 } */
+.opennnnn{
+    
+width: 95%;
+margin-left: 2%;
+}
+.min {
+    margin-left: 91%;
+    margin-top: -16px;
+    font-size: 10px;
+    font-weight: 800;
+}
+.max {
+    margin-left: 74%;
+    font-size: 10px;
+    font-weight: 800;
+}
+.matchoddsmin {
+    margin-left: 16%;
+    margin-top: -18px;
+    font-size: 10px;
+    font-weight: 800;
+}
+.matchoddsmax {
+    margin-left: 1%;
+    font-size: 10px;
+    font-weight: 800;
+}

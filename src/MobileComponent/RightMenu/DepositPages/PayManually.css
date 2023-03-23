@@ -179,8 +179,9 @@ button.download {
     border-radius: unset;
     margin-top: 9px;
     margin-bottom: -5px;
-    padding: 10px 19px;
+    padding: 10px 13%;
     border: 1px solid #ddd;
+    width: 100%;
 }
 label.images-section {
     border: 1px solid #ddd;
@@ -227,8 +228,8 @@ label.images-section {
     width: 17vh;
     height: 6vh;
 }
-.imgggggggg{
-    width: 40vh !important;
+.imgggggggg {
+    width: 100% !important;
     height: 35vh;
 }
 @media screen and (max-width: 500px) {
@@ -254,12 +255,7 @@ label.images-section {
         margin-top: 17px;
     }
 }
-
-
-
-
-
-
-
-
-
+.active3 {
+    border: 1px solid  #2c4f58;
+    border-radius: 5px;
+}

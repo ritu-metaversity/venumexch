@@ -175,7 +175,7 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
 }
 .setting-page {
     margin-inline: 13px;
-    padding-top: 22px;
+    /* padding-top: 22px; */
 }
 .stake-buttons.m-t-20>h2 {
     margin-left: 6px;

@@ -70,26 +70,17 @@ const BettingProfitLoss = () => {
         activeMatchSportWise
       )
       .then((res) => {
-        //   console.log(res, "adsdassdsadasd");
+          console.log(res, "adsdassdsadasd");
         setGamesData(res?.data?.data);
       });
     let d = new Date();
     d.setDate(d.getDate() - 14);
-    // let ProfitLossPayload= {
-    //    sportId: "4",
-    //    matchId: "32177964",
-    //    fromDate: moment(d).format("YYYY-MM-DD"),
-    //    toDate: moment(new Date()).format("YYYY-MM-DD"),
-    //    userId: "sumana6748",
-    //    index: 2,
-    //    noOfRecords: 10,
-    //    totalPages: 1
-    //  }
+  
     let ProfitLossPayload = {
       sportId: inputValue,
       matchId: "",
-      fromDate: endDate,
-      toDate: startDate,
+      fromDate:startDate,
+      toDate: endDate,
       userId: "",
       index: "",
       noOfRecords: "",
@@ -106,8 +97,8 @@ const BettingProfitLoss = () => {
     let ProfitLossPayload = {
       sportId: sportidddd,
       matchId: inputValue,
-      fromDate: endDate,
-      toDate: startDate,
+      fromDate:startDate,
+      toDate: endDate,
       userId: "",
       index: "",
       noOfRecords: "",
@@ -125,8 +116,8 @@ const BettingProfitLoss = () => {
       let ProfitLossPayload = {
         sportId: "4",
         matchId: "",
-        fromDate: endDate,
-        toDate: startDate,
+        fromDate:startDate,
+        toDate: endDate,
         userId: "",
         index: "",
         noOfRecords: "",
@@ -139,8 +130,8 @@ const BettingProfitLoss = () => {
       let ProfitLossPayload = {
         sportId: "323334",
         matchId: "",
-        fromDate: endDate,
-        toDate: startDate,
+        fromDate:startDate,
+        toDate: endDate,
         userId: "",
         index: "",
         noOfRecords: "",
@@ -159,8 +150,39 @@ const BettingProfitLoss = () => {
   };
 
   useEffect(() => {
+    // if (Active === 2) {
     dispatch(Postcasino());
-  }, [dispatch]);
+  }, [])
+
+
+  useEffect(() => {
+ const id = {
+      id: "323334",
+    };
+    setCasinoId("323334");
+
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types",
+        id
+      )
+      .then((res) => {
+        setCasinoList(res.data.data);
+      });
+  }, [Active])
+
+  useEffect(() => {
+   const activeMatchSportWise = { sportId: "4" };
+    axios
+      .post(
+        "http://api.a2zscore.com/admin-new-apis/enduser/active-match-sport-wise-open",
+        activeMatchSportWise
+      )
+      .then((res) => {
+          console.log(res, "adsdassdsadasd");
+        setGamesData(res?.data?.data);
+      });
+  }, [Active])
 
   const handleCasino = (e) => {
     let inputValue = e.target.value;
@@ -171,7 +193,7 @@ const BettingProfitLoss = () => {
     };
     axios
       .post(
-        "http://api.a2zscore.com/admin-new-apis/casino/casino-tables-by-types",
+        "http://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types",
         id
       )
       .then((res) => {
@@ -180,8 +202,8 @@ const BettingProfitLoss = () => {
     let ProfitLossPayload = {
       sportId: inputValue,
       matchId: "",
-      fromDate: endDate,
-      toDate: startDate,
+      fromDate: startDate,
+      toDate: endDate,
       userId: "",
       index: "",
       noOfRecords: "",
@@ -196,8 +218,8 @@ const BettingProfitLoss = () => {
     let ProfitLossPayload = {
       sportId: casinoId,
       matchId: inputValue,
-      fromDate: endDate,
-      toDate: startDate,
+      fromDate: startDate,
+      toDate:endDate ,
       userId: "",
       index: "",
       noOfRecords: "",
@@ -232,6 +254,7 @@ const BettingProfitLoss = () => {
                   id="tbg-radio-2"
                   className={`${Active === 1 ? "active1" : ""}`}
                   value={1}
+                  style={{marginRight: "18px"}}
                   onClick={() => handleActive(1, "Sports")}
                 >
                   Sports id
@@ -240,19 +263,21 @@ const BettingProfitLoss = () => {
                   id="tbg-radio-3"
                   className={`${Active === 2 ? "active1" : ""}`}
                   value={2}
+                  style={{width: "15%"}}
                   onClick={() => handleActive(2, "casino")}
                 >
                   casino
                 </ToggleButton>
               </ToggleButtonGroup>
             </div>
+          
 
             {Active === 1 ? (
               <div className="sport-data-list">
                 <select
                   className="selectionnnn"
-                  name="cars"
-                  id="cars"
+                  // name="cars"
+                  // id="cars"
                   onChange={handleSelectGame}
                 >
                   {/* <option value="">Select Sports</option> */}
@@ -273,12 +298,12 @@ const BettingProfitLoss = () => {
 
                 <select
                   className="selectionnnn"
-                  style={{marginLeft:"1px"}}
+                  style={{marginLeft:"21px"}}
                   name="cars"
                   id="cars"
                   onChange={handleGameName}
                 >
-                  <option value="">Select Match</option>
+                  <option value="">Select Mafsdfstch</option>
 
                   {gamesData?.length > 0
                     ? gamesData.map((item) => {
@@ -292,8 +317,7 @@ const BettingProfitLoss = () => {
                 </select>
               </div>
             ) : (
-              <>
-                {" "}
+              <div className="casino-section">
                 <select
                   className="selectionnnn"
                   name="cars"
@@ -312,10 +336,10 @@ const BettingProfitLoss = () => {
                   className="selectionnnn"
                   name="cars"
                   id="cars"
-                  style={{marginLeft:"7px"}}
+                  style={{marginLeft:"14px"}}
                   onChange={handleCasinoMatch}
                 >
-                  <option value="">Select Match</option>
+                  <option value="">Select  Match</option>
 
                   {casinoList?.length &&
                     casinoList.map((item) => {
@@ -324,10 +348,10 @@ const BettingProfitLoss = () => {
                       );
                     })}
                 </select>
-              </>
+              </div>
             )}
             <DatePicker
-              style={{ width: "50%", height: "41px" }}
+              style={{ width: "45%", height: "41px", marginLeft: "12px"}}
               defaultValue={dayjs(startDate)}
               format={dateFormat}
               onChange={StartDateValue}
@@ -338,7 +362,7 @@ const BettingProfitLoss = () => {
               }
             />
             <DatePicker
-              style={{ width: "50%", height: "41px" }}
+              style={{ width: "45%", height: "41px" ,marginLeft: "12px" }}
               defaultValue={dayjs}
               format={dateFormat}
               onChange={EndDateValue}
@@ -357,9 +381,9 @@ const BettingProfitLoss = () => {
 
               {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
 
-              {PostprofitlossmatchwiseDatatata?.data &&
-              PostprofitlossmatchwiseDatatata?.data.length > 0 ? (
-                PostprofitlossmatchwiseDatatata?.data.map((el) => (
+              {PostprofitlossmatchwiseDatatata?.data&&PostprofitlossmatchwiseDatatata?.data?.market &&
+              PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
+                PostprofitlossmatchwiseDatatata?.data?.market.map((el) => (
                   <div class="wrapper">
                     <div class="info">
                       <p class="m-b-0  game-name">
