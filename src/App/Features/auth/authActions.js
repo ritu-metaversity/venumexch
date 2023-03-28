@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
+
 const token = localStorage.getItem("TokenId");
-// console.log(REACT_APP_API_URL)
 let REACT_APP_API_URL= "api.247365.exchange"
 axios.defaults.headers.common.Authorization= `Bearer ${token}`
-
+ 
 export const getAllPostsComments = createAsyncThunk('auth/getAllPostsComments', async (_, { rejectWithValue }) => {
     try {
         const postsCommentsRespose = await axios.get('https://jsonplaceholder.typicode.com/posts/1/comments');

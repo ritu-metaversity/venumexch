@@ -21,6 +21,7 @@ const GameDetails = () => {
   const [matchedBets, setmatchedBets] = useState(false);
   const [gameDetailsData, setGameDetailsData] = useState(false);
   const [previousState, setPreviousState] = useState("");
+  const [isLoading, setIsloading] = useState(true);
 
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
@@ -28,6 +29,7 @@ const GameDetails = () => {
     PostGameDetailsByMatchID,
     PostBetListByMatchIdData,
     PostMinMaxGameDetailsData,
+    PostGameDetailsByMatchIDLoading
   } = useSelector((state) => state.auth);
 
   // const {  } = useSelector((state) => state.auth);
@@ -45,6 +47,13 @@ const GameDetails = () => {
       setUnmatchedBets(true);
     }
   };
+  useEffect(()=>{
+  setIsloading(PostGameDetailsByMatchIDLoading)
+
+  },[PostGameDetailsByMatchIDLoading])
+  // setIsloading(PostGameDetailsByMatchIDLoading)
+
+  console.log(isLoading, "dfdsfgsdfhdhd")
 
   const handleBitValue = (
     price,
@@ -55,8 +64,8 @@ const GameDetails = () => {
     item1,
     item
   ) => {
-    if (price > 0) {
-      datatata({
+     if (price > 0) {
+        datatata({
         Odds: price,
         matchname: name,
         isBack: color,
@@ -69,7 +78,7 @@ const GameDetails = () => {
       alert("Pleace select other bit");
     }
   };
-
+ 
   const handleBitValueBookmaker = (price, name, color, item1) => {
     if (price > 0) {
       datatata({
@@ -116,10 +125,10 @@ const GameDetails = () => {
   }, [PostGameDetailsByMatchID, gameDetailsData]);
 
   useEffect(() => {
-    const tiem = setInterval(() => {
+    // const tiem = setInterval(() => {
     dispatch(PostGameDetailsByMI(id));
-    }, 1000);
-    return () => clearInterval(tiem);
+    // }, 1000);
+    // return () => clearInterval(tiem);
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -191,7 +200,12 @@ if (PostMinMaxGameDetailsData) {
 
   return (
     <div>
-      <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
+      {
+        isLoading===true?<div className="mani-loading">
+          <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 
+          <p className="loading-text">Loading...</p>
+        </div>:(
+          <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
         <div className="home-page home-page-news">
           <div>
             <div className="master-flash-message">
@@ -1038,6 +1052,9 @@ if (PostMinMaxGameDetailsData) {
           </div>
         </div>
       </div>
+        )
+      }
+      
     </div>
   );
 };

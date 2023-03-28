@@ -20,38 +20,41 @@ const ChangePassword = () => {
   const [passWordSame, setPassWordSame] = useState(false);
 
   const [emptyCurrent, setemptyCurrent] = useState(false);
+  const [emptyCurrentLength, setemptyCurrentLength] = useState(false);
   const [emptyNewPassWord, setemptyPassWord] = useState(false);
   const [emptyConfirm, setemptyConfirm] = useState(false);
   const [infoError, setInfoError] = useState(false);
 
   let dispatch = useDispatch();
-  // const { postLoginData } = useSelector(state => state.auth)
+
   const { postPasswordChange } = useSelector((state) => state.auth);
 useEffect(()=>{
   setInvalidPassword(postPasswordChange?.data?.message)
 },[postPasswordChange?.data?.message])
   let id = useParams();
-  // console.log(id, "parems");
+
   let PasswordStatus = localStorage.getItem("PassWordType");
   let TokeN = localStorage.getItem("TokenId");
   let userId = localStorage.getItem("userId");
-// console.log(postPasswordChange,"postPasswordChangepostPasswordChangepapapapappa")
+
   const handleInput = (e) => {
     let inputName = e.target.name;
     let inputValue = e.target.value;
+    // if(inputValue?.length >5 && inputValue?.length<9) {
+    //   console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
+    // }
     switch (inputName) {
       case "CurrentPassword":
-     
+        console.log("hello")
+        
         setCurrentPassWord(ValidationFile.spaceNotAccept(inputValue));
         setemptyCurrent(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
         break;
       case "NewPassword":
-      
         setNewPassWord(ValidationFile.spaceNotAccept(inputValue));
         setemptyPassWord(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
         break;
       case "ConfirmNewPassword":
-       
         setConfirmPassword(ValidationFile.spaceNotAccept(inputValue));
         setemptyConfirm(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
         break;
@@ -61,9 +64,16 @@ useEffect(()=>{
   };
 
   const handleSavePassWordFirstTime = () => {
-
+    if(currentPassword?.length <= 7) {
+      console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
+      setemptyCurrentLength(true)
+    }if(currentPassword?.length >= 10) {
+      console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
+      setemptyCurrentLength(true)
+    }else{
+      setemptyCurrentLength(false)
+    }
     setInfoError(true);
-
     let passwordData ={
       newPassword:newPassword,
       currentPassword: currentPassword,
@@ -90,22 +100,47 @@ useEffect(()=>{
 }}
 
 
+
 const handleSavePassWord=()=>{
-  if(newPassword===confirmPassword){
+  // if(currentPassword?.length <= 7) {
+  //   console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
+  //   setemptyCurrentLength(true)
+  // }if(currentPassword?.length >= 10) {
+  //   console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
+  //   setemptyCurrentLength(true)
+  // }else{
+  //   setemptyCurrentLength(false)
+  // }
+  setInfoError(true);
 
-    let passwordData ={
-      currentPassword: currentPassword,
-      newPassword: newPassword,
-    }
-    // console.log("hello")
-    dispatch(PostPasswordChange(passwordData))
-    navigate("/m/home");
-
-  }
+let passwordData ={
+  newPassword:newPassword,
+  currentPassword: currentPassword,
+  confirmPassword: confirmPassword,
+  userid: userId,
+  token: TokeN,
+  oldPassword:currentPassword
 }
+if (ValidationFile.isEmpty(currentPassword)) {
+setemptyCurrent(true);
+}
+if (ValidationFile.isEmpty(newPassword)) {
+setemptyPassWord(true);
+}
+if (ValidationFile.isEmpty(confirmPassword)) {
+setemptyConfirm(true);
+}if (
+!ValidationFile.isEmpty(currentPassword) &&
+!ValidationFile.isEmpty(newPassword) &&
+!ValidationFile.isEmpty(confirmPassword)
+) {
+  dispatch(PostPasswordChange(passwordData))
+  navigate("/m/home");
+}}
 
   return (
     <>
+    
       <div
         className="home-page home-page-news hjhjjh"
         style={{ height: "100vh !importent" }}
@@ -115,6 +150,7 @@ const handleSavePassWord=()=>{
       :
       ""
       }
+      {/* {emptyCurrentLength?"error":""} */}
         <div className="home-page">
           <section className="change-password">
             <h2
@@ -130,32 +166,29 @@ const handleSavePassWord=()=>{
             <div className="form-group m-b-10">
               <input
                 name="CurrentPassword"
-                type="password"
+                type="text"
                 placeholder="Current Password"
                 className="form-control"
-                aria-required="true"
-                aria-invalid="false"
+               
                 onChange={handleInput}
               />
              { emptyCurrent&&infoError   ? <><span className="text-danger">
                 {" "}
-                The CurrentPassword field is required.
+                The Current Password is required.
               </span> {" "} </>:""}
            
             </div>
             <div className="form-group m-b-10">
               <input
                 name="NewPassword"
-                type="password"
+                type="text"
                 placeholder="New Password"
                 className="form-control"
-                aria-required="false"
-                aria-invalid="false"
                 onChange={handleInput}
               />
               { emptyNewPassWord &&infoError  ? <><span className="text-danger">
                 {" "}
-                The CurrentPassword field is required.
+                The New Password is required.
               </span> {" "} </>:""}
               {/* {passWordSame ? (
                 <>
@@ -176,20 +209,18 @@ const handleSavePassWord=()=>{
               <input
                 name="ConfirmNewPassword"
                 data-vv-as="NewPassword"
-                type="password"
+                type="text"
                 placeholder="Confirm New Password"
                 className="form-control"
-                aria-required="true"
-                aria-invalid="false"
                 onChange={handleInput}
               />
-              
+
               {" "}
               { emptyConfirm &&infoError  ? <><span className="text-danger">
                 {" "}
-                The CurrentPassword field is required.
+                The Confirm New Password is required.
               </span> {" "} </>:""}
-              {passWordSame&&infoError ? (
+              {/* {passWordSame&&infoError ? (
                 <>
                   <span className="text-danger">
                     {" "}
@@ -198,7 +229,7 @@ const handleSavePassWord=()=>{
                 </>
               ) : (
                 ""
-              )}
+              )} */}
               {/* <span class="text-danger">
                 The password must contain at least: 1 uppercase letter, 1
                 lowercase letter, 1 number and 8 to 15 characters needed !

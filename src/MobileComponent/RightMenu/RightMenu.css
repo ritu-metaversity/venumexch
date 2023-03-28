@@ -259,3 +259,9 @@ ul, li {
 .sign-out{
     border-top: 1px solid #ddd;
 }
+i.fas.fa-money-check-alt {
+    margin-right: 18px;
+}
+.deposit-image{
+    rotate: 180deg;
+}

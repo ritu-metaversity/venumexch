@@ -28,7 +28,7 @@ const dispatch =useDispatch()
   const [BetType, setBetType] = useState("");
   const [BetTypeFooter, setBetTypeFooter] = useState(false);
 
-const { PostvalidatejwttokenData ,PostuserselfregisterDataError} = useSelector((state) => state.auth);
+const { PostvalidatejwttokenData ,PostvalidatejwttokenDataError,PostuserselfregisterDataError} = useSelector((state) => state.auth);
 
   const [closeeee, setCloseeeee] = useState(false);
 
@@ -37,24 +37,24 @@ const { PostvalidatejwttokenData ,PostuserselfregisterDataError} = useSelector((
     setRightValue(false);
     // setRightValue(false);
   };
-// useEffect(()=>{
 
-//   const tiem = setInterval(() => {
-//     dispatch(Postvalidatejwttoken())
-//     }, 1000);
-//     return () => clearInterval(tiem);
+useEffect(()=>{
+  const time = setInterval(() => {
+    dispatch(Postvalidatejwttoken())
+    }, 10000);
+    return () => clearInterval(time);
+},[])
 
+useEffect(()=>{
+if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
+  navigate("/m/login")
+}
+},[PostvalidatejwttokenData])
 
-// },[])
-
-// useEffect(()=>{
-// if(PostvalidatejwttokenData===null){
-//   navigate("/m/login")
-  
-// }
-// },[])
 console.log(PostvalidatejwttokenData,"PostvalidatejwttokenData")
-console.log(PostuserselfregisterDataError,"PostuserselfregisterDataError")
+console.log(PostvalidatejwttokenDataError,"PostvalidatejwttokenDataError")
+// console.log(PostuserselfregisterDataError,"PostuserselfregisterDataError")
+
 // JWT Token Expired
   const handleClose = () => {
     setShow(false);
