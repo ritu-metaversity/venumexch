@@ -1150,3 +1150,42 @@ margin-left: 2%;
     top: 62%;
     font-size: 18px;
 }
+
+
+
+
+@media screen and (min-width: 500px){
+    button.btn.btn-secondary.btn-block.mb-2 {
+        background-color: red;
+        height: 135%;
+    }
+    .price-values {
+        margin-top: 12px;
+        width: 109%;
+        margin-left: -11%;
+    }
+    .inputfield {
+
+        margin-left: 34% !important;
+    }
+    .enter-amount {
+        margin-top: 0%!important;
+        margin-left: 20%!important;
+        /* margin-bottom: 0%; */
+        height: 15px!important;
+        font-size: 160%!important;
+        
+    }
+    .head-deposit {
+        background-color: #2C3D50;
+        color: #fff;
+        /* width: 102.5% !important; */
+        margin-left: -9px;
+        margin-top: -10px;
+        border-radius: 8px 8px 0px 0px;
+    }
+    .bank-logo {
+        width: 50% !important;
+        margin: auto !important;
+    }
+}

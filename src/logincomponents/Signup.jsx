@@ -22,7 +22,7 @@ const { PostuserselfregisterData } = useSelector(state => state.auth)
 
 const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
 
-console.log(PostuserselfregisterData,"PostuserselfregisterData User Created")
+// console.log(PostuserselfregisterData,"PostuserselfregisterData User Created")
 const [infoError, setInfoError] = useState(false);
 
 const handleLogin = () => {
@@ -50,7 +50,7 @@ const handleLogin = () => {
         // setErrorMobile(false);
        
         if(inputValue.length === 4){
-          console.log("mobile no leass then 9")
+          // console.log("mobile no leass then 9")
         }
         setMobileumber(ValidationFile.spaceNotAccept(inputValue));
         setErrorMobile(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));

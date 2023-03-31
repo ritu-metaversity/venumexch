@@ -114,8 +114,8 @@ if(PostselfwithdrawappData?.message==="Withdraw Request Submited Successfully"){
     dispatch(Postwithdrawrequestclient())
   },[])
 
-  console.log(PostselfwithdrawappData,"post datatata")
-  console.log(PostwithdrawrequestclientData,"gett  dataatatatat ")
+  // console.log(PostselfwithdrawappData,"post datatata")
+  // console.log(PostwithdrawrequestclientData,"gett  dataatatatat ")
 
  
 
@@ -127,7 +127,6 @@ if(PostselfwithdrawappData?.message==="Withdraw Request Submited Successfully"){
           <div className="main-account-containor">
             <div className="mx-input-wrapper account-field">
               <label className="account-lable">Amount</label>
-              <br />
               <input name="Amount" type="number"className="account-input" onChange={handleInput} onKeyDown={(e) =>
                               symbolsArrMail.includes(e.key) && e.preventDefault()
                             }/>
@@ -143,7 +142,6 @@ if(PostselfwithdrawappData?.message==="Withdraw Request Submited Successfully"){
         
             <div className="mx-input-wrapper account-field">
               <label className="account-lable">Account Number</label>
-              <br />
               <input name="AccountNumber" type="number" className="account-input" onChange={handleInput} onKeyDown={(e) =>
                               symbolsArrMail.includes(e.key) && e.preventDefault()
                             }/>
@@ -159,7 +157,6 @@ if(PostselfwithdrawappData?.message==="Withdraw Request Submited Successfully"){
             
             <div className="mx-input-wrapper account-field">
               <label className="account-lable">Account Name</label>
-              <br />
               <input  name="AccountName" type="text" className="account-input" onChange={handleInput}/>
               {accountHolderNameError&&infoError ? (
                             <span className="text-danger">
@@ -172,7 +169,6 @@ if(PostselfwithdrawappData?.message==="Withdraw Request Submited Successfully"){
             </div>
             <div className="mx-input-wrapper account-field">
               <label className="account-lable">Bank Name</label>
-              <br />
               <input name="BankName" type="type" className="account-input" onChange={handleInput}/>
               {bankNameError&&infoError ? (
                             <span className="text-danger">
@@ -185,7 +181,6 @@ if(PostselfwithdrawappData?.message==="Withdraw Request Submited Successfully"){
             </div>
             <div className="mx-input-wrapper account-field">
               <label className="account-lable">IFSC</label>
-              <br />
               <input name="IFSC" type="type" className="account-input" onChange={handleInput}/>
               {ifscError&&infoError ? (
                             <span className="text-danger">
@@ -198,7 +193,6 @@ if(PostselfwithdrawappData?.message==="Withdraw Request Submited Successfully"){
             </div>
             <div className="mx-input-wrapper account-field">
               <label className="account-lable">Account Type</label>
-              <br />
               <select name="reportType" onChange={(e)=>setAccountType(e.target.value)} className="custom-select" >
                   <option value="Saving1">Saving</option>
                   <option value="Current">Current</option>

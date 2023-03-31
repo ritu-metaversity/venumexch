@@ -70,7 +70,7 @@ const BettingProfitLoss = () => {
         activeMatchSportWise
       )
       .then((res) => {
-          console.log(res, "adsdassdsadasd");
+          // console.log(res, "adsdassdsadasd");
         setGamesData(res?.data?.data);
       });
     let d = new Date();
@@ -143,7 +143,7 @@ const BettingProfitLoss = () => {
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
-    console.log(dateString);
+    // console.log(dateString);
   };
   const EndDateValue = (date, dateString) => {
     setEndDate(dateString);
@@ -179,14 +179,14 @@ const BettingProfitLoss = () => {
         activeMatchSportWise
       )
       .then((res) => {
-          console.log(res, "adsdassdsadasd");
+          // console.log(res, "adsdassdsadasd");
         setGamesData(res?.data?.data);
       });
   }, [Active])
 
   const handleCasino = (e) => {
     let inputValue = e.target.value;
-    console.log(inputValue, "inputValue");
+    // console.log(inputValue, "inputValue");
     setCasinoId(inputValue);
     const id = {
       id: inputValue,
@@ -214,7 +214,7 @@ const BettingProfitLoss = () => {
 
   const handleCasinoMatch = (e) => {
     let inputValue = e.target.value;
-    console.log(inputValue, "inputValue");
+    // console.log(inputValue, "inputValue");
     let ProfitLossPayload = {
       sportId: casinoId,
       matchId: inputValue,
@@ -233,7 +233,7 @@ const BettingProfitLoss = () => {
     //    setCasinoList(res.data.data)
     //  })
   };
-  console.log(casinoList, "casinoListcasinoList");
+  // console.log(casinoList, "casinoListcasinoList");
 
   return (
     <>

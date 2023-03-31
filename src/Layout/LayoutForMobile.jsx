@@ -33,7 +33,7 @@ const { PostvalidatejwttokenData ,PostvalidatejwttokenDataError,Postuserselfregi
   const [closeeee, setCloseeeee] = useState(false);
 
   const RightSideBarClose = (vl) => {
-    console.log(vl,"RightSideBarCloseRightSideBarCloseRightSideBarClose")
+    // console.log(vl,"RightSideBarCloseRightSideBarCloseRightSideBarClose")
     setRightValue(false);
     // setRightValue(false);
   };
@@ -51,8 +51,8 @@ if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
 }
 },[PostvalidatejwttokenData])
 
-console.log(PostvalidatejwttokenData,"PostvalidatejwttokenData")
-console.log(PostvalidatejwttokenDataError,"PostvalidatejwttokenDataError")
+// console.log(PostvalidatejwttokenData,"PostvalidatejwttokenData")
+// console.log(PostvalidatejwttokenDataError,"PostvalidatejwttokenDataError")
 // console.log(PostuserselfregisterDataError,"PostuserselfregisterDataError")
 
 // JWT Token Expired
@@ -61,12 +61,12 @@ console.log(PostvalidatejwttokenDataError,"PostvalidatejwttokenDataError")
   };
 
   const RightSideBar = (vl) => {
-    console.log(vl,"RightSideBar")
+    // console.log(vl,"RightSideBar")
     setRightValue(vl);
   };
   const LiftSideBar = (vl) => {
     setLeftValue(vl);
-    console.log(vl,"LiftSideBarLiftSideBarLiftSideBarLiftSideBar")
+    // console.log(vl,"LiftSideBarLiftSideBarLiftSideBarLiftSideBar")
   };
   const datatata = (vl) => {
     // console.log(vl?.Odds ,"LayoutForMobileLayoutForMobile")
@@ -96,7 +96,7 @@ useEffect(()=>{
   };
 
   const cssClasssss = (vl) => {
-    console.log(vl)
+    // console.log(vl)
     setCssClassssssssss(vl)
 };
   const closePopUp = (vl) => {

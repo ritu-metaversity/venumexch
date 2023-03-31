@@ -40,7 +40,7 @@ const Login = () => {
 
     // }
     if (PostuserselfregisterData?.message === "User Created"&&signUpClose===false) {
-      console.log("new user")
+      // console.log("new user")
       setSignUpShow(true);
     }
     
@@ -73,7 +73,7 @@ const Login = () => {
     setLoginData(postLoginData);
   }, [apiHit, navigate, postLoginData]);
 
-  console.log(PostuserselfregisterData, "registerData");
+  // console.log(PostuserselfregisterData, "registerData");
   const handleInput = (e) => {
     let inputName = e.target.name;
     let inputValue = e.target.value;

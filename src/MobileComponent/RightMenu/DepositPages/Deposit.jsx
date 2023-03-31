@@ -17,7 +17,7 @@ const Deposit = () => {
   const [imgUrl, setImgUrl] = useState("");
 
   const token = localStorage.getItem("TokenId")
-console.log(trueee,"imgUrlimgUrl")
+// console.log(trueee,"imgUrlimgUrl")
   const increment = () => {
     setBitValue(Bitvalue + 10);
   };
@@ -25,7 +25,7 @@ console.log(trueee,"imgUrlimgUrl")
     setBitValue(Bitvalue - 10);
   };
 
- console.log(PostpaymnetdetailappDataData,"line 24")
+//  console.log(PostpaymnetdetailappDataData,"line 24")
 
   const handleStaticAmount =(vl)=>{
 
@@ -48,9 +48,9 @@ const UpdateList=(vl)=>{
     e.preventDefault()
     setImgUrl(url)
     setTrueee(true)
-    console.log(url)
+    // console.log(url)
   }
-  console.log(trueee)
+  // console.log(trueee)
   return (
     <>
       
@@ -64,7 +64,7 @@ const UpdateList=(vl)=>{
                 role="table"
                 aria-busy="false"
                 aria-colcount="6"
-                className="table b-table table-bordered"
+                className="table b-table table-bordered deposit-table"
                 id="__BVID__104">
                 <thead>
                     <tr className="previous-deposite">
@@ -84,7 +84,7 @@ const UpdateList=(vl)=>{
                       role="columnheader"
                       scope="col"
                       aria-colindex="2"
-                      className="text-left">
+                      className="text-center">
                       Image
                     </th>
                     <th
@@ -111,7 +111,7 @@ const UpdateList=(vl)=>{
                     <td aria-colindex="1" className="text-left">
                       {item?.amount}
                     </td>
-                    <td aria-colindex="2" className="text-left" onClick={(e)=>handleModal(e,item?.image)}>
+                    <td aria-colindex="2" className="text-center" onClick={(e)=>handleModal(e,item?.image)}>
                     
                       <img alt="" className="fkjsdfsdkfjsd" src={item?.image} />
                          

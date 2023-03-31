@@ -30,7 +30,7 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
     //    dispatch(PostBalance())
     // },[dispatch])
 
-console.log(leftBar,"leftBarleftBar")
+// console.log(leftBar,"leftBarleftBar")
 
 
     useEffect(()=>{
@@ -42,20 +42,20 @@ console.log(leftBar,"leftBarleftBar")
     useEffect(()=>{
       if(token===null){
         navigate("./login")
-        console.log("dushyantdlaflkjsdjd")
+        // console.log("dushyantdlaflkjsdjd")
       }
     },[token])
-    console.log(token)
+    // console.log(token)
     // const token = localStorage.getItem("TokenId")
     
     useEffect(()=>{
       //  console.log("balaaac")
     if(token!==""){
-      console.log("token found")
+      // console.log("token found")
        dispatch(PostBalance())
     }
     },[dispatch, token])
-console.log(token,"tokentokentokentokentokentokentoken")
+// console.log(token,"tokentokentokentokentokentokentoken")
     useEffect(()=>{
       setLeftBar(LeftValue);
       LiftSideBar(LeftValue);

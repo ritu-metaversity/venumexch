@@ -46,9 +46,9 @@ const INITAL_STATE = {
     PostGetStackLoading:false,
     PostGetStackError:null,
 
-    PostEditStack:null,
-    PostEditStackLoading:false,
-    PostEditStackError:null,
+    PostEditStackData:null,
+    PostEditStackDataLoading:false,
+    PostEditStackDataError:null,
 
     PostBetListByMatchIdData:null,
     PostBetListByMatchIdDataLoading:false,
@@ -246,17 +246,17 @@ const authSlice = createSlice({
             state.PostGetStackError = null;
         })
         .addCase(PostEditStack.pending, (state) => {
-            state.PostEditStack = null;
-            state.PostEditStackLoading =true;
-            state.PostEditStackError = null;
+            state.PostEditStackData = null;
+            state.PostEditStackDataLoading =true;
+            state.PostEditStackDataError = null;
         }).addCase(PostEditStack.rejected, (state, action) => {
-            state.PostEditStack = null;
-            state.PostEditStackLoading =false;
-            state.PostEditStackError = action.error.message;
+            state.PostEditStackData = null;
+            state.PostEditStackDataLoading =false;
+            state.PostEditStackDataError = action.error.message;
         }).addCase(PostEditStack.fulfilled, (state, action) => {
-            state.PostEditStack = action.payload.data;
-            state.PostEditStackLoading =false;
-            state.PostEditStackError = null;
+            state.PostEditStackData = action.payload.data;
+            state.PostEditStackDataLoading =false;
+            state.PostEditStackDataError = null;
         })
         .addCase(PostBetListByMatchId.pending, (state) => {
             // state.PostBetListByMatchIdData = null;

@@ -31,7 +31,9 @@ const GameDetails = () => {
     PostMinMaxGameDetailsData,
     PostGameDetailsByMatchIDLoading
   } = useSelector((state) => state.auth);
-
+console.log(PostGameDetailsByMatchID)
+console.log(PostBetListByMatchIdData)
+console.log(PostMinMaxGameDetailsData)
   // const {  } = useSelector((state) => state.auth);
   // const [PostBetListByMatchId,setPostBetListByMatchId ]= useState("")
 
@@ -53,7 +55,7 @@ const GameDetails = () => {
   },[PostGameDetailsByMatchIDLoading])
   // setIsloading(PostGameDetailsByMatchIDLoading)
 
-  console.log(isLoading, "dfdsfgsdfhdhd")
+  // console.log(isLoading, "dfdsfgsdfhdhd")
 
   const handleBitValue = (
     price,
@@ -200,11 +202,12 @@ if (PostMinMaxGameDetailsData) {
 
   return (
     <div>
-      {
+      {/* {
         isLoading===true?<div className="mani-loading">
           <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 
-          <p className="loading-text">Loading...</p>
-        </div>:(
+          <p className="loading-text">Loading...</p> */}
+        {/* </div>: */}
+        {/* ( */}
           <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
         <div className="home-page home-page-news">
           <div>
@@ -546,12 +549,12 @@ if (PostMinMaxGameDetailsData) {
                             <div className="max">
                               Max:
                               {PostMinMaxGameDetailsData &&
-                                PostMinMaxGameDetailsData?.Bookmaker[0].maxBet}
+                                PostMinMaxGameDetailsData?.Bookmaker[0]?.maxBet}
                             </div>
                             <div className="min">
                               MIN:
                               {PostMinMaxGameDetailsData &&
-                                PostMinMaxGameDetailsData?.Bookmaker[0].minBet}
+                                PostMinMaxGameDetailsData?.Bookmaker[0]?.minBet}
                             </div>
                             {/* {PostMinMaxGameDetailsData&&PostMinMaxGameDetailsData?.Bookmaker[index]
                             .map((item222)=>{ */}
@@ -1052,8 +1055,8 @@ if (PostMinMaxGameDetailsData) {
           </div>
         </div>
       </div>
-        )
-      }
+         {/* )
+       } */}
       
     </div>
   );

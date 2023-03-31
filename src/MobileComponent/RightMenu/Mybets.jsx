@@ -29,7 +29,7 @@ const Mybets = () => {
 
   const { PostunsettledData } = useSelector(state => state.auth)
 
-  console.log(PostunsettledData?.data?.dataList)
+  // console.log(PostunsettledData?.data?.dataList)
 
   const dispatch = useDispatch();
 // console.log(PostBetListByMatchIdData ,"dushyant")

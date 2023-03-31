@@ -24,7 +24,7 @@ const PayManually = (props) => {
   //       setUpiDetail(res.data.upiDetail);
   //     });
   //   }, []);
-  console.log(files,"filesfiles")
+  // console.log(files,"filesfiles")
 
   const dispatch = useDispatch();
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
@@ -37,7 +37,7 @@ const PayManually = (props) => {
 
   const token = localStorage.getItem("TokenId");
   // console.log(PostselfdepositappData, "PostselfdepositappData");
-  console.log(Bitvalue, "PostpaymnetdetailappDataData");
+  // console.log(Bitvalue, "PostpaymnetdetailappDataData");
   // useEffect(()=>{
   //     setPayMethods(PostpaymnetdetailappDataData?.data)
   // },[])

@@ -30,7 +30,7 @@ const { Postmatchsport } = useSelector((state) => state.auth);
 // console.log
 const handleGameDetails=(id,item)=>{
   // console.log("home page load ")
-  console.log(item?.openDate)
+  // console.log(item?.openDate)
  let data= {
   matchName:item?.matchName,
   openDate:item?.openDate,
@@ -73,7 +73,7 @@ const handleGameDetails=(id,item)=>{
 
 const { PostunsettledData } = useSelector(state => state.auth)
 
-  console.log(PostunsettledData?.data?.dataList?.length)
+  // console.log(PostunsettledData?.data?.dataList?.length)
 
   // const dispatch = useDispatch();
 // console.log(PostBetListByMatchIdData ,"dushyant")

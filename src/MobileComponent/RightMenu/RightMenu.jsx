@@ -29,7 +29,7 @@ const token = localStorage.getItem("TokenId")
 useEffect(()=>{
    // console.log("balaaac")
 if(token!==""){
-   console.log("token found")
+   // console.log("token found")
 
    dispatch(PostBalance())
    dispatch(Postisselfbyappurl({"appUrl":appUrll}))
@@ -38,8 +38,8 @@ if(token!==""){
 },[dispatch,appUrll, token])
 
 
-console.log(postisselfbyappurlData?.data?.selfAllowed,"postisselfbyappurlData")
-console.log(appUrll,"appUrll")
+// console.log(postisselfbyappurlData?.data?.selfAllowed,"postisselfbyappurlData")
+// console.log(appUrll,"appUrll")
 
 // console.log(PostTotalBalance,"PostTotalBalance")
    const handleInput=(vl)=>{

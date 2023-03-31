@@ -45,7 +45,7 @@ useEffect(()=>{
     // }
     switch (inputName) {
       case "CurrentPassword":
-        console.log("hello")
+        // console.log("hello")
         
         setCurrentPassWord(ValidationFile.spaceNotAccept(inputValue));
         setemptyCurrent(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
@@ -65,10 +65,10 @@ useEffect(()=>{
 
   const handleSavePassWordFirstTime = () => {
     if(currentPassword?.length <= 7) {
-      console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
+      // console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
       setemptyCurrentLength(true)
     }if(currentPassword?.length >= 10) {
-      console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
+      // console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
       setemptyCurrentLength(true)
     }else{
       setemptyCurrentLength(false)

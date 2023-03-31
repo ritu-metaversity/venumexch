@@ -76,3 +76,23 @@ button.stakeactionminus.btn {
     margin-left: 10%;
     border-radius: 118px;
 }
+
+@media screen and (min-width: 500px) {
+    .deposit-table{
+        width: 50%;
+        margin: auto;
+    }
+    .table th, .table td {
+        font-size: 14px;
+    }
+    .table::-webkit-scrollbar{
+        display: none;
+    }
+    .wrapper.main-conatiner {
+        overflow: unset;
+    }
+    .mx-input-wrapper.account-field {
+        display: flex;
+        flex-direction: column;
+    }
+}
