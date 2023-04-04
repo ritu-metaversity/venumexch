@@ -24,18 +24,19 @@ const GameDetails = () => {
   const [unmatchedBets, setUnmatchedBets] = useState(false);
   const [matchedBets, setmatchedBets] = useState(false);
   const [gameDetailsData, setGameDetailsData] = useState(false);
-  const [previousState, setPreviousState] = useState("");
-  const [isLoading, setIsloading] = useState(true);
+  const [previousState, setPreviousState] = useState({});
+  // const [isLoading, setIsloading] = useState(true);
   const [gameIframeId, setGameIframeId] = useState(4);
+  const [PostMinMaxGameDetailsData,setPostMinMaxGameDetailsData]=useState({})
 
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
-  const {
-    PostGameDetailsByMatchID,
-    // PostBetListByMatchIdData,
-    // PostMinMaxGameDetailsData,
-    PostGameDetailsByMatchIDLoading
-  } = useSelector((state) => state.auth);
+  // const {
+  //   // PostGameDetailsByMatchID,
+  //   // PostBetListByMatchIdData,
+  //   // PostMinMaxGameDetailsData,
+  //   PostGameDetailsByMatchIDLoading
+  // } = useSelector((state) => state.auth);
 
   // const {  } = useSelector((state) => state.auth);
   // const [PostBetListByMatchId,setPostBetListByMatchId ]= useState("")
@@ -47,6 +48,7 @@ const iddd = localStorage.getItem("SportId");
 setGameIframeId(iddd)
   },[localStorage])
   console.log(gameIframeId)
+  
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
       setUnmatchedBets(false);
@@ -54,10 +56,10 @@ setGameIframeId(iddd)
       setUnmatchedBets(true);
     }
   };
-  useEffect(()=>{
-  setIsloading(PostGameDetailsByMatchIDLoading)
+  // useEffect(()=>{
+  // setIsloading(PostGameDetailsByMatchIDLoading)
 
-  },[PostGameDetailsByMatchIDLoading])
+  // },[PostGameDetailsByMatchIDLoading])
   // setIsloading(PostGameDetailsByMatchIDLoading)
 
   // console.log(isLoading, "dfdsfgsdfhdhd")
@@ -122,25 +124,29 @@ setGameIframeId(iddd)
   };
 
   useEffect(() => {
-    if (gameDetailsData) {
-      const oldOdds = { ...gameDetailsData };
-      setPreviousState(oldOdds);
-    } else {
-      setPreviousState(PostGameDetailsByMatchID);
-    }
-    setGameDetailsData(PostGameDetailsByMatchID);
-  }, [PostGameDetailsByMatchID, gameDetailsData]);
+if(Object.keys(PostMinMaxGameDetailsData).length){
 
-  useEffect(() => {
-    // const tiem = setInterval(() => {
-    dispatch(PostGameDetailsByMI(id));
-    // }, 1000);
-    // return () => clearInterval(tiem);
-  }, [dispatch, id]);
+  if (gameDetailsData) {
+    const oldOdds = { ...gameDetailsData };
+    setPreviousState(oldOdds);
+  } else {
+    setPreviousState({data:PostMinMaxGameDetailsData});
+  }
+  setGameDetailsData({data:PostMinMaxGameDetailsData});
+}
 
-  useEffect(() => {
-    dispatch(PostMinMaxGameDetails(id));
-  }, [dispatch, id]);
+  }, [PostMinMaxGameDetailsData]);
+
+  // useEffect(() => {
+  //   // const tiem = setInterval(() => {
+  //   dispatch(PostGameDetailsByMI(id));
+  //   // }, 1000);
+  //   // return () => clearInterval(tiem);
+  // }, [dispatch, id]);
+
+  // useEffect(() => {
+  //   dispatch(PostMinMaxGameDetails(id));
+  // }, [dispatch, id]);
 
 
 
@@ -184,8 +190,6 @@ const [OddSocketConnected,setOddSocketConnected]=useState({})
 // // *********
 // console.log(oddSocketConnected)
 
-const [PostMinMaxGameDetailsData,setPostMinMaxGameDetailsData]=useState({})
-console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
 
 const oddFromSocketSlower = (res) => {
   if (res) {
@@ -239,6 +243,10 @@ useEffect(() => {
   };
 
   const handleNationName = (name) => {};
+
+console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
+
+// console.log(PostGameDetailsByMatchID?.data,"PostGameDetailsByMatchID")
 
 useEffect(()=>{
 
@@ -327,8 +335,8 @@ console.log(id,"ididid")
                   src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
                 />
                 <h4 className="m-b-0">
-                  {PostGameDetailsByMatchID?.data?.Odds[0]?.runners[0]?.name} VS{" "}
-                  {PostGameDetailsByMatchID?.data?.Odds[0]?.runners[1]?.name}
+                  {gameDetailsData?.data?.Odds&& gameDetailsData?.data?.Odds[0]?.runners[0]?.name} VS{" "}
+                  {gameDetailsData?.data?.Odds&&gameDetailsData?.data?.Odds[0]?.runners[1]?.name}
                 </h4>
               </div>
               <div className="text-right">
@@ -519,17 +527,9 @@ console.log(id,"ididid")
                                                       ? "dis-none"
                                                       : ""
                                                   }
-                                                      ${
-                                                        item?.price !==
-                                                        previousState?.data
-                                                          ?.Odds[id1]?.runners[
-                                                          index
-                                                        ]?.ex?.availableToBack[
-                                                          id
-                                                        ]?.price
-                                                          ? "blink1"
-                                                          : " "
-                                                      }`}
+                                                       ${item?.price !== 
+                                                        previousState?.data?.Odds[id1]?.runners[index]?.ex?.availableToBack[id]?.price? "blink1": " "}`}
+                                                
                                                 >
                                                   <button
                                                     type="button"
@@ -675,7 +675,7 @@ console.log(id,"ididid")
                             {/* {PostMinMaxGameDetailsData&&PostMinMaxGameDetailsData?.Bookmaker[index]
                             .map((item222)=>{ */}
 
-                            {gameDetailsData?.data?.Bookmaker.map(
+                            {gameDetailsData?.data?.Bookmaker?.map(
                               (item, index) => {
                                 return (
                                   <>

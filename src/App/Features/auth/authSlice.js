@@ -452,7 +452,7 @@ const authSlice = createSlice({
             state.PostvalidatejwttokenDataLoading =false;
             state.PostvalidatejwttokenDataError = action.error.message;
         }).addCase(Postvalidatejwttoken.fulfilled, (state, action) => {
-            state.PostvalidatejwttokenData = action.payload.data;
+            state.PostvalidatejwttokenData = action.payload.status;
             state.PostvalidatejwttokenDataLoading =false;
             state.PostvalidatejwttokenDataError = null;
         })

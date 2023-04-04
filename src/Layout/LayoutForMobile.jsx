@@ -38,23 +38,22 @@ const { PostvalidatejwttokenData ,PostvalidatejwttokenDataError,Postuserselfregi
     // setRightValue(false);
   };
 
-// useEffect(()=>{
-//   const time = setInterval(() => {
-//     dispatch(Postvalidatejwttoken())
-//     }, 1000);
-//     return () => clearInterval(time);
-// },[])
-// console.log(PostvalidatejwttokenDataError)
-// console.log(PostvalidatejwttokenData)
-// useEffect(()=>{
-// if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
-//   navigate("/m/login")
-// }
-// },[PostvalidatejwttokenDataError])
+useEffect(()=>{
+  const time = setInterval(() => {
+    dispatch(Postvalidatejwttoken())
+    }, 1000);
+    return () => clearInterval(time);
+},[dispatch])
+console.log(PostvalidatejwttokenDataError)
+console.log(PostvalidatejwttokenData)
 
-// console.log(PostvalidatejwttokenData,"PostvalidatejwttokenData")
-// console.log(PostvalidatejwttokenDataError,"PostvalidatejwttokenDataError")
-// console.log(PostuserselfregisterDataError,"PostuserselfregisterDataError")
+
+useEffect(()=>{
+if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
+  console.log("no token")
+  navigate("/m/login")
+}
+},[PostvalidatejwttokenDataError])
 
 // JWT Token Expired
   const handleClose = () => {
@@ -62,22 +61,18 @@ const { PostvalidatejwttokenData ,PostvalidatejwttokenDataError,Postuserselfregi
   };
 
   const RightSideBar = (vl) => {
-    // console.log(vl,"RightSideBar")
     setRightValue(vl);
   };
   const LiftSideBar = (vl) => {
     setLeftValue(vl);
-    // console.log(vl,"LiftSideBarLiftSideBarLiftSideBarLiftSideBar")
+
   };
   const datatata = (vl) => {
-    // console.log(vl?.Odds ,"LayoutForMobileLayoutForMobile")
     setBitValue(vl);
     if (vl?.Odds === ""||vl?.Odds === "undefined") {
       setShow(false );
-      // console.log("false")
     } else {
       setShow(true);
-      // console.log(vl);
       setBetType(vl?.isBack);
     }
   };

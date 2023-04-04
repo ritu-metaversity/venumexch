@@ -58,10 +58,13 @@ const Login = () => {
         setErrorPassword(true);
       } else if (postLoginData?.data?.token) {
         setApiHit(false);
+        console.log("login succccss")
         localStorage.setItem("TokenId", postLoginData?.data?.token);
         localStorage.setItem("PassWordType", postLoginData?.data?.passwordtype);
         localStorage.setItem("userId", postLoginData?.data?.userId);
-  localStorage.setItem("SportId", 4);
+        localStorage.setItem("SportId", 4);
+axios.defaults.headers.common.Authorization= `Bearer ${postLoginData?.data?.token}`
+
         if (postLoginData?.data?.passwordtype === "old") {
           // console.log("ChangePassWord")
           navigate("/m/changepassword");
@@ -72,7 +75,7 @@ const Login = () => {
       }
     }
     setLoginData(postLoginData);
-  }, [apiHit, navigate, postLoginData]);
+  }, [postLoginData]);
 
   // console.log(PostuserselfregisterData, "registerData");
   const handleInput = (e) => {

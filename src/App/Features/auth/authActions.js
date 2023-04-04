@@ -1,8 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
+import { useEffect } from "react";
 
 
 const token = localStorage.getItem("TokenId");
+
 let REACT_APP_API_URL= "api.247365.exchange"
 axios.defaults.headers.common.Authorization= `Bearer ${token}`
  
