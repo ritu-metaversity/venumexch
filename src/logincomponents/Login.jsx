@@ -17,7 +17,7 @@ const Login = () => {
   const [userName, setUserName] = useState("sumana6748");
   const [password, setPassword] = useState("1111111");
   // const [userName, setUserName] = useState("reshmi8396");
-  // const [password, setPassword] = useState("342845");
+  // const [password, setPassword] = useState("342845"); 
   // const [userName, setUserName] = useState("arya2452");
   // const [password, setPassword] = useState("1111111");
   //   const [confirmLogin, setConfirmLogin] = useState("false");
@@ -61,6 +61,7 @@ const Login = () => {
         localStorage.setItem("TokenId", postLoginData?.data?.token);
         localStorage.setItem("PassWordType", postLoginData?.data?.passwordtype);
         localStorage.setItem("userId", postLoginData?.data?.userId);
+  localStorage.setItem("SportId", 4);
         if (postLoginData?.data?.passwordtype === "old") {
           // console.log("ChangePassWord")
           navigate("/m/changepassword");
@@ -96,7 +97,7 @@ const Login = () => {
     setLogin({
       userId: userName,
       password: password,
-      appUrl: "localhost",
+      appUrl: window.location.hostname,
       // appUrl: "atozscore.com",
 
       // appUrl: window.location.hostname,
@@ -286,6 +287,7 @@ const Login = () => {
             <Modal
               className="login-confirm-modal"
               show={show}
+              style={{marginLeft: "11%"}}
               onHide={handleClose}
               backdrop="static"
               keyboard={false}
@@ -301,12 +303,9 @@ const Login = () => {
                 <Button variant="secondary" onClick={handleClose}>
                   Exit
                 </Button>
-                <Button
+                <Button style={{    height: "24px" ,width: "61.5%",fontSize: "13px"}}
                   variant="primary"
                   onClick={() => handleLoginConfirm("true")}
-                  style={{
-                    fontSize: "13px"
-                }}
                 >
                   Confirm
                 </Button>

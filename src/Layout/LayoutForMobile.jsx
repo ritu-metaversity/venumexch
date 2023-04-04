@@ -38,18 +38,19 @@ const { PostvalidatejwttokenData ,PostvalidatejwttokenDataError,Postuserselfregi
     // setRightValue(false);
   };
 
-useEffect(()=>{
-  const time = setInterval(() => {
-    dispatch(Postvalidatejwttoken())
-    }, 10000);
-    return () => clearInterval(time);
-},[])
-
-useEffect(()=>{
-if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
-  navigate("/m/login")
-}
-},[PostvalidatejwttokenData])
+// useEffect(()=>{
+//   const time = setInterval(() => {
+//     dispatch(Postvalidatejwttoken())
+//     }, 1000);
+//     return () => clearInterval(time);
+// },[])
+// console.log(PostvalidatejwttokenDataError)
+// console.log(PostvalidatejwttokenData)
+// useEffect(()=>{
+// if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
+//   navigate("/m/login")
+// }
+// },[PostvalidatejwttokenDataError])
 
 // console.log(PostvalidatejwttokenData,"PostvalidatejwttokenData")
 // console.log(PostvalidatejwttokenDataError,"PostvalidatejwttokenDataError")

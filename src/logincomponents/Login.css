@@ -121,6 +121,7 @@ footer a {
     background: url(https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/login-bg.jpg) center center !important;
     background-size: unset !important;
     overflow-y: auto;
+    height: calc(98vh - 98px) !important;
    
 }
 .form-group {

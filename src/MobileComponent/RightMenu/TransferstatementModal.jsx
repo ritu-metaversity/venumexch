@@ -7,7 +7,7 @@ const TransferstatementModal = ({ matchId }) => {
   const [betValue, setBetValue] = useState(1);
   const [betListData, setBetListData] = useState();
   const dispatch = useDispatch();
-  console.log(matchId);
+  // console.log(matchId);
   const userId = localStorage.getItem("userId");
   const { postBetMarketAndUserData } = useSelector((state) => state.auth);
   useEffect(() => {
@@ -18,10 +18,10 @@ const TransferstatementModal = ({ matchId }) => {
     };
     dispatch(postBetMarketAndUser(data));
   }, [dispatch, betValue, userId, matchId]);
-  console.log(
-    postBetMarketAndUserData?.data,
-    "postBetMarketAndUserDatapostBetMarketAndUserData"
-  );
+  // console.log(
+  //   postBetMarketAndUserData?.data,
+  //   "postBetMarketAndUserDatapostBetMarketAndUserData"
+  // );
   // betList
 
   return (

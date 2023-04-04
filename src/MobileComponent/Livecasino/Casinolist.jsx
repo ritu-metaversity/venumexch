@@ -23,7 +23,7 @@ const Casinolist = () => {
   
 
   const handleButton = (item) => {
-    console.log(item)
+    // console.log(item)
     setSportId(item);
   };
 
@@ -37,7 +37,7 @@ const Casinolist = () => {
   },[sportId])
 
   const handleChangeaa = (val)=>{
-    console.log(val)
+    // console.log(val)
     // /m/casino/:id
     navigate(`/m/casino/${val}`)
   }
@@ -73,7 +73,7 @@ const Casinolist = () => {
                         <div data-v-6a7f44cc="" className="events-row text-center">
                           <div data-v-6a7f44cc="" className="d-inline-block ">
                             <div className="row">
-                        {console.log(item)}
+                        {/* {console.log(item)} */}
                                 <Link
                               data-v-6a7f44cc=""
                               

@@ -9,7 +9,11 @@ import {
 } from "../../App/Features/auth/authActions";
 import "./GameDetails.css";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
+import { useMediaQuery } from "@mui/material";
+import { socket } from "./socket";
+
 
 const GameDetails = () => {
   let { id } = useParams();
@@ -22,26 +26,27 @@ const GameDetails = () => {
   const [gameDetailsData, setGameDetailsData] = useState(false);
   const [previousState, setPreviousState] = useState("");
   const [isLoading, setIsloading] = useState(true);
+  const [gameIframeId, setGameIframeId] = useState(4);
 
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
   const {
     PostGameDetailsByMatchID,
-    PostBetListByMatchIdData,
-    PostMinMaxGameDetailsData,
+    // PostBetListByMatchIdData,
+    // PostMinMaxGameDetailsData,
     PostGameDetailsByMatchIDLoading
   } = useSelector((state) => state.auth);
-console.log(PostGameDetailsByMatchID)
-console.log(PostBetListByMatchIdData)
-console.log(PostMinMaxGameDetailsData)
+
   // const {  } = useSelector((state) => state.auth);
   // const [PostBetListByMatchId,setPostBetListByMatchId ]= useState("")
 
-  // useEffect(()=>{
-  // if(PostBetListByMatchIdData?.data){
-  //   setPostBetListByMatchId(PostBetListByMatchIdData)
-  // }
-  // },[PostBetListByMatchIdData])
+const [PostBetListByMatchIdData, setPostBetListByMatchIdData] = useState({})
+
+  useEffect(()=>{
+const iddd = localStorage.getItem("SportId");
+setGameIframeId(iddd)
+  },[localStorage])
+  console.log(gameIframeId)
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
       setUnmatchedBets(false);
@@ -137,6 +142,83 @@ console.log(PostMinMaxGameDetailsData)
     dispatch(PostMinMaxGameDetails(id));
   }, [dispatch, id]);
 
+
+
+// *********
+
+
+const [OddSocketConnected,setOddSocketConnected]=useState({})
+
+// const oddFromSocketSlower = (response) => {
+//   if (response) {
+//     console.log(response)
+//     // setFancyOddsSlower(response);
+//   }
+// };
+// // const eventId = searchParams.get("match-id");
+
+// useEffect(() => {
+//   socket.on("OddsUpdated", oddFromSocketSlower);
+//   socket.on("JoinedSuccessfully", () => {
+//     setOddSocketConnected(true);
+//   });
+// }, []);
+
+// useEffect(() => {
+//   let timer = setInterval(
+//     () =>
+//       !oddSocketConnected &&
+//       socket.emit("JoinRoom", {
+//         id,
+//       }),
+//     1000
+//   );
+//   return () => {
+//     clearInterval(timer);
+//   };
+// }, [oddSocketConnected]);
+
+// useEffect(() => {
+//   oddSocketConnected && setOddSocketConnected(false);
+// }, [id]);
+// // *********
+// console.log(oddSocketConnected)
+
+const [PostMinMaxGameDetailsData,setPostMinMaxGameDetailsData]=useState({})
+console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
+
+const oddFromSocketSlower = (res) => {
+  if (res) {
+
+    setPostMinMaxGameDetailsData(res)
+    // setMFancyOdds(res);
+    // setMaxBet(res.Bookmaker[0]);
+    //   setMinBet(res);
+  }
+};
+useEffect(() => {
+  socket.on("OddsUpdated", oddFromSocketSlower);
+  socket.on("JoinedSuccessfully", () => {
+    setOddSocketConnected(true);
+  });
+}, []);
+useEffect(() => {
+  let timer = setInterval(
+    () =>
+      !OddSocketConnected &&
+      socket.emit("JoinRoom", {
+        eventId:id,
+      }),
+    1000
+  );
+  return () => {
+    clearInterval(timer);
+  };
+}, [OddSocketConnected]);
+useEffect(() => {
+  OddSocketConnected && setOddSocketConnected(false);
+}, [id]);
+
   const handlematched = () => {
     if (matchedBets === true) {
       setmatchedBets(false);
@@ -153,7 +235,7 @@ console.log(PostMinMaxGameDetailsData)
     setOpenBet(true);
     setMarket(false);
     let data = { matchId: id };
-    dispatch(PostBetListByMatchId(data));
+    // dispatch(PostBetListByMatchId(data));
   };
 
   const handleNationName = (name) => {};
@@ -200,6 +282,30 @@ if (PostMinMaxGameDetailsData) {
     }
   }, [gameDetailsData]);
 
+
+
+
+  const [searchParams] = useSearchParams();
+
+
+  const { lastMessage } = useWebSocket(
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/chat/${id}/${localStorage.getItem("TokenId")}`,
+    { shouldReconnect: (event) => true }
+  );
+  const matches = useMediaQuery("(min-width : 1280px)");
+
+
+
+  useEffect(() => {
+    if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data){
+      setPostBetListByMatchIdData(JSON.parse(lastMessage?.data))
+      console.log(JSON.parse(lastMessage?.data).data)
+    }
+  }, [lastMessage]);
+
+console.log(id,"ididid")
   return (
     <div>
       {/* {
@@ -332,7 +438,19 @@ if (PostMinMaxGameDetailsData) {
                         </div>
                       </div>
                     </div> */}
-
+<div id="scoreboard-box">
+                    <div className="scorecard scorecard-mobile">
+                      <div className="score-inner">
+                        <iframe
+                          src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                          width="100%"
+                          height="290px"
+                          className="score-card"
+                          title="scorecord"
+                          allowFullScreen={true}></iframe>
+                      </div>
+                    </div>
+                  </div>
                     <div className="m-b-10 main-market w-100 float-left">
                       {gameDetailsData?.data?.Odds?.map((item11, id1) => {
                         return (
@@ -548,13 +666,11 @@ if (PostMinMaxGameDetailsData) {
                             </div>
                             <div className="max">
                               Max:
-                              {PostMinMaxGameDetailsData &&
-                                PostMinMaxGameDetailsData?.Bookmaker[0]?.maxBet}
+                              {PostMinMaxGameDetailsData && PostMinMaxGameDetailsData?.Bookmaker&&PostMinMaxGameDetailsData?.Bookmaker[0]?.maxBet}
                             </div>
                             <div className="min">
                               MIN:
-                              {PostMinMaxGameDetailsData &&
-                                PostMinMaxGameDetailsData?.Bookmaker[0]?.minBet}
+                              {PostMinMaxGameDetailsData &&PostMinMaxGameDetailsData?.Bookmaker && PostMinMaxGameDetailsData?.Bookmaker[0]?.minBet}
                             </div>
                             {/* {PostMinMaxGameDetailsData&&PostMinMaxGameDetailsData?.Bookmaker[index]
                             .map((item222)=>{ */}
@@ -743,7 +859,34 @@ if (PostMinMaxGameDetailsData) {
                                           {onlyFancyDetails[key].map(
                                             (item, index) => (
                                               <>
-                                             
+                                               <div
+                                                    data-v-e03c6f20=""
+                                                    className="min-max  text-right"
+                                                  >
+                                                    <p
+                                                      data-v-e03c6f20=""
+                                                      className="m-b-0"
+                                                    >
+                                                      <span
+                                                        data-v-e03c6f20=""
+                                                        className="text-dark"
+                                                      >
+                                                        Min:{" "}
+                                                        <span data-v-e03c6f20="">
+                                                      {onlyFancyMaxMinDetails&&onlyFancyMaxMinDetails[key]?.[index]?.maxBet}
+                                                        </span>
+                                                      </span>{" "}
+                                                      <span
+                                                        data-v-e03c6f20=""
+                                                        className="text-dark"
+                                                      >
+                                                        Max:{" "}
+                                                        <span data-v-e03c6f20="">
+                                                          {onlyFancyMaxMinDetails&&onlyFancyMaxMinDetails[key]?.[index]?.minBet}
+                                                        </span>
+                                                      </span>
+                                                    </p>
+                                                  </div>
                                                 <div
                                                   data-v-e03c6f20=""
                                                   className="fancy-tripple "
@@ -878,34 +1021,7 @@ if (PostMinMaxGameDetailsData) {
                                                     data-v-e03c6f20=""
                                                     className="fancy-tripple"
                                                   ></div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="min-max  text-right"
-                                                  >
-                                                    <p
-                                                      data-v-e03c6f20=""
-                                                      className="m-b-0"
-                                                    >
-                                                      <span
-                                                        data-v-e03c6f20=""
-                                                        className="text-dark"
-                                                      >
-                                                        Min:{" "}
-                                                        <span data-v-e03c6f20="">
-                                                      {onlyFancyMaxMinDetails&&onlyFancyMaxMinDetails[key]?.[index]?.maxBet}
-                                                        </span>
-                                                      </span>{" "}
-                                                      <span
-                                                        data-v-e03c6f20=""
-                                                        className="text-dark"
-                                                      >
-                                                        Max:{" "}
-                                                        <span data-v-e03c6f20="">
-                                                          {onlyFancyMaxMinDetails&&onlyFancyMaxMinDetails[key]?.[index]?.minBet}
-                                                        </span>
-                                                      </span>
-                                                    </p>
-                                                  </div>
+                                                
                                                 </div>
                                               </>
                                             )

@@ -27,8 +27,8 @@ const Setting = () => {
   useEffect(() => {
     setStakeState(PostGetStack?.data || {});
   }, [PostGetStack]);
-console.log(PostEditStackData,"PostEditStackData")
-console.log(PostEditStackDataError,"PostEditStackDataError")
+// console.log(PostEditStackData,"PostEditStackData")
+// console.log(PostEditStackDataError,"PostEditStackDataError")
   // console.log(PostGetStack);
 
   const handleInput = (e) => {

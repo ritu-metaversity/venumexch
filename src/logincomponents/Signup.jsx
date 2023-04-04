@@ -68,7 +68,7 @@ const handleLogin = () => {
     let data ={
       username: userName,
       password: password,
-      appUrl: "localhost",
+      appUrl: window.location.hostname,
       mobile: mobileNumber
     }
     if (ValidationFile.isEmpty(userName)) {

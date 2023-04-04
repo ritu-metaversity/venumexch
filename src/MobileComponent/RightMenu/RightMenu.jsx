@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { PostBalance, Postisselfbyappurl } from '../../App/Features/auth/authActions'
 import "./RightMenu.css"
-import deposit from './DepositPages/deposit.png' 
+// import deposit from './DepositPages/deposit.png' 
 
 const RightMenu = (props) => {
    const dispatch = useDispatch();
@@ -134,14 +134,14 @@ if(token!==""){
             {/* <Link href="/m/mybets"   className=""> */}
                <div   className="menu-lvl-1" onClick={()=>handleInput("Deposit")}>
                   
-                  <div   className="item" ><img src={deposit} alt="" className='deposit-image'/><span   className="menu-name">Deposit</span></div>
+                  <div   className="item" ><img src={"deposit"} alt="" className='deposit-image'/><span   className="menu-name">Deposit</span></div>
                </div>
             {/* </Link> */}
          </li>
          <li>
             {/* <Link href="/m/mybets"   className=""> */}
                <div   className="menu-lvl-1" onClick={()=>handleInput("withDraw")}>
-                  <div   className="item" ><img src={deposit} alt=""/> <span   className="menu-name">WithDraw</span></div>
+                  <div   className="item" ><img src={"deposit"} alt=""/> <span   className="menu-name">WithDraw</span></div>
                </div>
             {/* </Link> */}
          </li></>:""
