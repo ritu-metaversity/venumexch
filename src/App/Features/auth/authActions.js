@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
+import { useEffect } from "react";
+
 
 const token = localStorage.getItem("TokenId");
-// console.log(REACT_APP_API_URL)
-let REACT_APP_API_URL= "api.a2zscore.com"
-axios.defaults.headers.common.Authorization= `Bearer ${token}`
 
+let REACT_APP_API_URL= "api.247365.exchange"
+axios.defaults.headers.common.Authorization= `Bearer ${token}`
+ 
 export const getAllPostsComments = createAsyncThunk('auth/getAllPostsComments', async (_, { rejectWithValue }) => {
     try {
         const postsCommentsRespose = await axios.get('https://jsonplaceholder.typicode.com/posts/1/comments');
@@ -326,6 +328,48 @@ export const Postwithdrawrequestclient = createAsyncThunk('auth/Postwithdrawrequ
         const PostwithdrawrequestclientDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/withdraw-request-client`, data
         );
         return PostwithdrawrequestclientDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+// util/validate-jwt-token
+export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken', async (data, { rejectWithValue }) => {
+    try {
+        const PostvalidatejwttokenDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/util/validate-jwt-token`, data
+        );
+        return PostvalidatejwttokenDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+// /user/self-register
+export const Postuserselfregister = createAsyncThunk('auth/Postuserselfregister', async (data, { rejectWithValue }) => {
+    try {
+        const PostuserselfregisterDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/user/self-register`, data
+        )
+        return PostuserselfregisterDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+// MIN AND MAX API 
+
+export const PostMinMaxGameDetails = createAsyncThunk('auth/PostMinMaxGameDetails', async (data, { rejectWithValue }) => {
+    try {
+        const PostMinMaxGameDetailsDataaa = await axios.get(`http://43.205.50.127:9000/betfair_api/fancy/${data}`
+        )
+        return PostMinMaxGameDetailsDataaa
     } catch (err) {
         if (err) {
             throw err

@@ -24,3 +24,28 @@
     background-color: #2C3E50;
     color: #fff;
 }
+
+@media screen and (min-width: 500px) {
+    select.custom-select {
+        width: 200%;
+    }
+    button.btn.btn-primary.btn-block.btn-sm {
+        margin-left: 101%;
+        width: 170%;
+        height: 31px;
+        margin-top: 35% !important;
+    }
+    .main-account-containor {
+        justify-content: center !important;
+    }
+    .main-account-containor {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 85px;
+        margin-left: -105px;
+    } 
+    input[type="text" i] {
+        padding: 3px 2px;
+    }
+    
+}

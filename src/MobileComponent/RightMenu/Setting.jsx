@@ -2,7 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {PostEditStack, PostGetStackApi} from "../../App/Features/auth/authActions";
+import {
+  PostEditStack,
+  PostGetStackApi
+} from "../../App/Features/auth/authActions";
 import "./Setting.css";
 
 const Setting = () => {
@@ -15,20 +18,23 @@ const Setting = () => {
   // console.log(stakeOne, "stakeOne");
   // console.log(stakeThree, "stakeThree");
   // console.log(stakeThree, "stakeThree");
-  const { PostGetStack } = useSelector((state) => state.auth);
+  const { PostGetStack,PostEditStackData ,PostEditStackDataError} = useSelector((state) => state.auth);
   // console.log(token);
   useEffect(() => {
     dispatch(PostGetStackApi());
-  }, [dispatch,stakeUpdate,EditStake]);
+  }, [dispatch, stakeUpdate, EditStake]);
 
-  useEffect(()=>{setStakeState(PostGetStack?.data||{})},[PostGetStack])
-
+  useEffect(() => {
+    setStakeState(PostGetStack?.data || {});
+  }, [PostGetStack]);
+// console.log(PostEditStackData,"PostEditStackData")
+// console.log(PostEditStackDataError,"PostEditStackDataError")
   // console.log(PostGetStack);
 
   const handleInput = (e) => {
     let inputValue = e.target.value;
     let inputName = e.target.name;
-    setStakeState(prev=>({...prev,[inputName]:inputValue}))
+    setStakeState((prev) => ({ ...prev, [inputName]: inputValue }));
     // switch (inputName) {
     //   case "stackOne":
     //     setStakeOne(inputValue);
@@ -67,14 +73,13 @@ const Setting = () => {
   };
   const handleSaveStakes = () => {
     setEditStake(false);
-    console.log("postapi")
-    dispatch(PostEditStack(stakeState))
-    setStackUpadte(true)
+    // console.log("postapi");
+    dispatch(PostEditStack(stakeState));
+    setStackUpadte(true);
     dispatch(PostGetStackApi());
-
   };
-  console.log(stakeState,"stakeStatestakeState")
-console.log(PostGetStack?.data,"PostGetStackPostGetStack")
+  // console.log(stakeState, "stakeStatestakeState");
+  // console.log(PostGetStack?.data, "PostGetStackPostGetStack");
   return (
     <>
       <div className="home-page home-page-news">
@@ -83,7 +88,7 @@ console.log(PostGetStack?.data,"PostGetStackPostGetStack")
             <div className="flash__wrapper"></div>
           </div>
           <div className="setting-page">
-            <h2 className="page-title">Settings</h2>
+            {/* <h2 className="page-title">Settings</h2>
             <h2 className="page-title">
               One Click Settings
               <i
@@ -122,7 +127,6 @@ console.log(PostGetStack?.data,"PostGetStackPostGetStack")
               <div className="stake-group">
                 <div className="stake readonly active">
                   <p className="m-b-0">10</p>
-                  {/* <span>Active Stake</span> */}
                 </div>
                 <div className="stake readonly">
                   <p className="m-b-0">200</p>
@@ -137,27 +141,32 @@ console.log(PostGetStack?.data,"PostGetStackPostGetStack")
               >
                 Edit
               </button>
-            </div>
-
-            <div className="stake-buttons m-t-20" style={{paddingTop: "0px"}}>
+            </div> */}
+<div className="eroorrr">
+{  PostEditStackDataError === "Request failed with status code 400" ? " Enter Stacks more then 100 " : ""}
+ 
+</div>
+            <div className="stake-buttons m-t-20" style={{ paddingTop: "0px" }}>
               <h2 className="page-title">Edit Stakes</h2>
               <div>
                 <div className="stake-group">
                   {EditStake === true ? (
-                     PostGetStack?.data ?
-                     Object.keys(PostGetStack?.data).map((key,index)=>{
-                       return(
-                         <input
-                         name={key}
-                         text="number"
-                         value={stakeState[key]}
-                         onChange={handleInput}
-                         className="stake readonly"
-                       />  
-                     
-                       )
-                     }):""
-                    
+                    PostGetStack?.data ? (
+                      Object.keys(PostGetStack?.data).map((key, index) => {
+                        return (
+                          <input
+                            name={key}
+                            text="number"
+                            value={stakeState[key]}
+                            onChange={handleInput}
+                            className="stake readonly"
+                          />
+                        );
+                      })
+                    ) : (
+                      ""
+                    )
+                  ) : (
                     // <>
                     //   <input
                     //     name={"stack"}
@@ -186,47 +195,47 @@ console.log(PostGetStack?.data,"PostGetStackPostGetStack")
                     //   />
                     //   {/* </div> */}
                     // </>
-                 
-                
-                  ) : 
-                   <>
-                   {
-                    PostGetStack?.data ? 
-                    Object.values(PostGetStack?.data).map((key,value)=>{
-                      return(
-                        <div
-                        name="stackOne"
-                        text="number"
-                        // onChange={handleInput}
-                        className="stake readonly"
-                      >
-                
-                        <p className="m-b-0">{key}</p>
-                        {/* {item} */}
-                      </div>
-                      )
-                    }):""
-                   }
-                    
+
+                    <>
+                      {PostGetStack?.data
+                        ? Object.values(PostGetStack?.data).map(
+                            (key, value) => {
+                              return (
+                                <div
+                                  name="stackOne"
+                                  text="number"
+                                  // onChange={handleInput}
+                                  className="stake readonly"
+                                >
+                                  <p className="m-b-0">{key}</p>
+                                  {/* {item} */}
+                                </div>
+                              );
+                            }
+                          )
+                        : ""}
                     </>
-                  }
+                  )}
 
                   {/* <div   className="stake readonly"> */}
                 </div>
                 {EditStake === true ? (
-                <button
-                  className="btn btn-lg float-right btn-primary m-t-20"
-                  style={{ paddingTop: "7px", fontSize: "14px" }}
-                  onClick={handleSaveStakes}
-                >
-                  Save
-                </button>):( <button
-                  className="btn btn-lg float-right btn-primary m-t-20"
-                  style={{ paddingTop: "7px", fontSize: "14px" }}
-                  onClick={ handleEditStakes}
-                >
-                  Edit
-                </button>)}
+                  <button
+                    className="btn btn-lg float-right btn-primary m-t-20"
+                    style={{ paddingTop: "7px", fontSize: "14px" }}
+                    onClick={handleSaveStakes}
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-lg float-right btn-primary m-t-20"
+                    style={{ paddingTop: "7px", fontSize: "14px" }}
+                    onClick={handleEditStakes}
+                  >
+                    Edit
+                  </button>
+                )}
               </div>
             </div>
           </div>

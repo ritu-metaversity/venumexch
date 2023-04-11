@@ -1,0 +1,242 @@
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+
+import Footer from "../component/Footer/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { Postuserselfregister } from "../App/Features/auth/authActions";
+import ValidationFile from "../Validation/ValidationFile";
+
+const Signup = () => {
+   const dispatch = useDispatch();
+  let navigate = useNavigate();
+  // const [login, setLogin] = useState({});
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [mobileNumber, setMobileumber] = useState();
+  const [errorId, setErrorId] = useState(false);
+  const [errorPassword, setErrorPassword] = useState(false);
+  const [errorMobile, setErrorMobile] = useState(false);
+
+const { PostuserselfregisterData } = useSelector(state => state.auth)
+
+const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
+
+// console.log(PostuserselfregisterData,"PostuserselfregisterData User Created")
+const [infoError, setInfoError] = useState(false);
+
+const handleLogin = () => {
+  navigate("/m/login");
+}
+  const handleInput = (e) => {
+    let inputName = e.target.name;
+    let inputValue = e.target.value;
+    switch (inputName) {
+      case "Username":
+        setUserName(ValidationFile.spaceNotAccept(inputValue));
+        setErrorId(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
+
+        // setErrorId(false);
+        break;
+      case "Password":
+        // setPassword(inputValue);
+        // setErrorPassword(false);
+        setPassword(ValidationFile.spaceNotAccept(inputValue));
+        setErrorPassword(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
+
+        break;
+      case "mobileNumber":
+        // setMobileumber(inputValue);
+        // setErrorMobile(false);
+       
+        if(inputValue.length === 4){
+          // console.log("mobile no leass then 9")
+        }
+        setMobileumber(ValidationFile.spaceNotAccept(inputValue));
+        setErrorMobile(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
+
+        break;
+      default:
+        return false;
+    }
+  };
+
+
+  const handleSignup = (e) => {
+    setInfoError(true);
+
+    let data ={
+      username: userName,
+      password: password,
+      appUrl: window.location.hostname,
+      mobile: mobileNumber
+    }
+    if (ValidationFile.isEmpty(userName)) {
+      setErrorId(true);
+    }
+    if (ValidationFile.isEmpty(password)) {
+      setErrorPassword(true);
+    }
+    if (ValidationFile.isEmpty(mobileNumber)) {
+      setErrorMobile(true);
+    } if (
+      !ValidationFile.isEmpty(userName) &&
+      !ValidationFile.isEmpty(password) &&
+      !ValidationFile.isEmpty(mobileNumber)
+    ) {
+      dispatch(Postuserselfregister(data))
+      navigate("/m/login")
+
+  }
+
+   
+  }
+
+ 
+  return (
+    <div id="app">
+      <div>
+        <div className="login">
+          <div className="login-view">
+            <div className="login-container">
+              <div className="login-form" style={{marginTop: "3%"}}>
+                <div className="login-panel">
+                  <div className="panel-heading">
+                    <div className="logo">
+                      <img
+                        alt=""
+                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/front/logo-login.png"
+                        className="logo"
+                      />
+                    </div>
+                  </div>
+                  <div className="panel-body">
+                    {/* <form
+                      data-vv-scope="form-login"
+                      onSubmit={(e) => e.preventDefault()}
+                    > */}
+                      <div className="m-b-10">
+                        <div className="flash__wrapper"></div>
+                      </div>
+                      <fieldset>
+                        {/* <button onClick={hanndsnd}> hello</button> */}
+                        <div className="form-group">
+                          <input
+                            name="Username"
+                            type="text"
+                            placeholder="Username"
+                            className="form-control"
+                            onChange={handleInput}
+                            value={userName}
+                          />
+                          {errorId&&infoError ? (
+                            <span className="text-danger">
+                             Username is required.
+
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      
+                        <div className="form-group">
+                          <input
+                            name="Password"
+                            type="password"
+                            placeholder="Password"
+                            className="form-control"
+                            onChange={handleInput}
+                            value={password}
+                          />
+
+                          {errorPassword &&infoError? (
+                            <span className="text-danger">
+                              Password is required.
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                        <div className="form-group">
+                          <input
+                            name="mobileNumber"
+                            type="number"
+                            placeholder="Mobile Number"
+                            className="form-control"
+                            onChange={handleInput}
+                            maxlength="10"
+                            onKeyDown={(e) =>
+                              symbolsArrMail.includes(e.key) && e.preventDefault()
+                            }
+                            value={mobileNumber}
+                          />
+                          {errorMobile&&infoError ? (
+                            <span className="text-danger">
+                              Mobile Number is required.
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                          {PostuserselfregisterData?.message==="Mobile Number Already Registered" ? (
+                            <span className="text-danger">
+                              Mobile Number Already Registered
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                           {PostuserselfregisterData?.message=== "mobile: must be greater than or equal to 1111111111" ? (
+                            <span className="text-danger">
+                              Mobile Number  must be between 9-10
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                           {PostuserselfregisterData?.message === "mobile: must be less than or equal to 9999999999" ? (
+                            <span className="text-danger">
+                              Mobile Number  must be between 9-10
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                        <button className="btn btn-login" onClick={handleSignup}>
+                          Sign Up
+                          <i className="ml-2 fas fa-sign-in-alt"></i>
+
+                        </button>
+                        <button className="btn btn-login" onClick={handleLogin}>
+                          <i className="ml-2 fas fa-sign-in-alt rotate-btn"></i>
+                           Login
+                        </button>
+                        <p className="m-b-0">
+                          <small className="recaptchaTerms">
+                            This site is protected by reCAPTCHA and the Google
+                            <a href="https://policies.google.com/privacy">
+                              Privacy Policy
+                            </a>{" "}
+                            and
+                            <a href="https://policies.google.com/terms">
+                              Terms of Service
+                            </a>{" "}
+                            apply.
+                          </small>
+                        </p>
+                      </fieldset>
+                    {/* </form> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <>
+       
+        </>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default Signup;

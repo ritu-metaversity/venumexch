@@ -11,62 +11,73 @@ import { useDispatch, useSelector } from "react-redux";
 import { postLogin } from "../App/Features/auth/authActions";
 
 const Login = () => {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   const [login, setLogin] = useState({});
   const [userName, setUserName] = useState("sumana6748");
   const [password, setPassword] = useState("1111111");
   // const [userName, setUserName] = useState("reshmi8396");
-  // const [password, setPassword] = useState("342845");
+  // const [password, setPassword] = useState("342845"); 
   // const [userName, setUserName] = useState("arya2452");
   // const [password, setPassword] = useState("1111111");
-//   const [confirmLogin, setConfirmLogin] = useState("false");
+  //   const [confirmLogin, setConfirmLogin] = useState("false");
   const [errorId, setErrorId] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
 
   const [loginData, setLoginData] = useState("");
   const [apiHit, setApiHit] = useState(false);
   const [show, setShow] = useState(false);
+  const [signUpShow, setSignUpShow] = useState(false);
+  const [signUpClose, setSignUpClose] = useState(false);
   const handleClose = () => setShow(false);
 
-  const { postLoginData } = useSelector(state => state.auth)
-  
+  const { postLoginData, PostuserselfregisterData } = useSelector(
+    (state) => state.auth
+  );
 
-  useEffect(()=>{
+  useEffect(() => {
+    // if(signUpShow===false){
+
+    // }
+    if (PostuserselfregisterData?.message === "User Created"&&signUpClose===false) {
+      // console.log("new user")
+      setSignUpShow(true);
+    }
     
-  })
-// console.log(postLoginData,"post data dushyant")
-// magno 1111111 superAdmin
+  }, [PostuserselfregisterData?.message, signUpClose, signUpShow]);
 
-// edi2150	05e944 subAdmin
-// edi2150	1111111 subAdmin
+  const handleSignUpShow = () => {
+    setSignUpClose(true)
+    setSignUpShow(false)}
 
-// reshmi8396	342845 client
-useEffect(()=>{
-if(apiHit===true){
-   if(postLoginData?.data?.message==="Invalid Username or password"){
-            setShow(false)
-            setErrorId(true)
-            setErrorPassword(true)
-   }else if(postLoginData?.data?.token){
-         setApiHit(false)
+  useEffect(() => {
+    if (apiHit === true) {
+      if (postLoginData?.data?.message === "Invalid Username or password") {
+        setShow(false);
+        setErrorId(true);
+        setErrorPassword(true);
+      } else if (postLoginData?.data?.token) {
+        setApiHit(false);
+        // console.log("login succccss")
         localStorage.setItem("TokenId", postLoginData?.data?.token);
         localStorage.setItem("PassWordType", postLoginData?.data?.passwordtype);
         localStorage.setItem("userId", postLoginData?.data?.userId);
-        if(postLoginData?.data?.passwordtype==="old"){
-// console.log("ChangePassWord")
-         navigate("/m/changepassword");
+        localStorage.setItem("SportId", 4);
+axios.defaults.headers.common.Authorization= `Bearer ${postLoginData?.data?.token}`
 
-        }else{
-        //  console.log("Home")
-         navigate("/m/home");
+        if (postLoginData?.data?.passwordtype === "old") {
+          // console.log("ChangePassWord")
+          navigate("/m/changepassword");
+        } else {
+          //  console.log("Home")
+          navigate("/m/home");
         }
-   }
-}
-   setLoginData(postLoginData)
-},[apiHit, navigate, postLoginData])
+      }
+    }
+    setLoginData(postLoginData);
+  }, [postLoginData]);
 
-
+  // console.log(PostuserselfregisterData, "registerData");
   const handleInput = (e) => {
     let inputName = e.target.name;
     let inputValue = e.target.value;
@@ -84,55 +95,50 @@ if(apiHit===true){
         return false;
     }
   };
-
+console.log(window.location.hostname)
   const handleLogin = (e) => {
     setLogin({
       userId: userName,
       password: password,
-      appUrl: "localhost",
-      // appUrl: "atozscore.com",
-
-      // appUrl: window.location.hostname,
-
+      appUrl: window.location.hostname,
     });
-console.log(process.env.REACT_APP_API_URL)
+    // console.log(process.env.REACT_APP_API_URL)
 
     setShow(true);
   };
 
   const handleLoginConfirm = (val) => {
+    dispatch(postLogin(login));
+    setShow(false);
+    setApiHit(true);
+    //  navigate("/m/home");
+  };
+  //   axios
+  //   .post("http://api.a2zscore.com/admin-new-apis/login/client-login", login)
+  //   .then((response) => {
+  //    if(response?.data?.message ==="Invalid Username or password"){
+  //       setShow(false)
+  //       setErrorId(true)
+  //       setErrorPassword(true)
+  //       console.log(response?.data?.message,"ERROR")
+  //    }else{
+  //       console.log(response, "responseresponse");
+  //       navigate("/m/home");
 
-   dispatch(postLogin(login))
-   setShow(false);
-   setApiHit(true)
-  //  navigate("/m/home");
+  //       localStorage.setItem("TokenId", response?.data?.token);
+  //    }
 
-}
-   //   axios
-   //   .post("http://api.a2zscore.com/admin-new-apis/login/client-login", login)
-   //   .then((response) => {
-   //    if(response?.data?.message ==="Invalid Username or password"){
-   //       setShow(false)
-   //       setErrorId(true)
-   //       setErrorPassword(true)
-   //       console.log(response?.data?.message,"ERROR")
-   //    }else{
-   //       console.log(response, "responseresponse");
-   //       navigate("/m/home");
- 
-   //       localStorage.setItem("TokenId", response?.data?.token);
-   //    }
+  //    })
+  //   .catch((error) => {
+  //     setShow(false)
+  //     setErrorId(true)
+  //     setErrorPassword(true)
+  //     console.log(error?.response?.data,"ERROR")
+  //  });
 
-   //    })
-   //   .catch((error) => {
-   //     setShow(false)
-   //     setErrorId(true)
-   //     setErrorPassword(true)
-   //     console.log(error?.response?.data,"ERROR")
-   //  });
-
-
-
+  const handleSignUp = () => {
+    navigate("/m/signup");
+  };
 
   return (
     <div id="app">
@@ -198,6 +204,14 @@ console.log(process.env.REACT_APP_API_URL)
                         </div>
                         <button className="btn btn-login" onClick={handleLogin}>
                           Login
+                          <i className="ml-2 fas fa-sign-in-alt"></i>
+                        </button>
+                        <button
+                          className="btn btn-login"
+                          onClick={handleSignUp}
+                        >
+                           Sign Up
+                          <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
                         <p className="m-b-0">
                           <small className="recaptchaTerms">
@@ -220,7 +234,51 @@ console.log(process.env.REACT_APP_API_URL)
             </div>
           </div>
         </div>
+        <>
+        <div className="">
+          <Modal
+            className=""
+            show={signUpShow}
+            onHide={handleSignUpShow}
+            backdrop="static"
+            keyboard={false}
+            centered
+          >
+            <Modal.Header className="register-head" closeButton>
+              <Modal.Title className="regTital">Register</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div>
+                <div>
+                  <div className="">
+                    <div className="user-id user">
+                      <p>User Created</p>
+                      <p>Registration successful </p>
 
+                    </div>
+                    <div className="user-id user">
+                      <p>User Name:</p>
+                      <p>{PostuserselfregisterData?.username}</p>
+                    </div>
+                    <div className="user-id">
+                      <p>Password:</p>
+                      <p>{PostuserselfregisterData?.password}</p>
+
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div className="text-danger">
+                  <p>
+                    Please save the details and login with this username and
+                    password{" "}
+                  </p>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
+        </div>
+        </>
         <>
           {/* <button variant="primary" onClick={handleShow}>
         Launch demo modal
@@ -228,8 +286,8 @@ console.log(process.env.REACT_APP_API_URL)
           <div className="login-modal">
             <Modal
               className="login-confirm-modal"
-            
               show={show}
+              style={{marginLeft: "11%"}}
               onHide={handleClose}
               backdrop="static"
               keyboard={false}
@@ -245,7 +303,7 @@ console.log(process.env.REACT_APP_API_URL)
                 <Button variant="secondary" onClick={handleClose}>
                   Exit
                 </Button>
-                <Button
+                <Button style={{    height: "24px" ,width: "61.5%",fontSize: "13px"}}
                   variant="primary"
                   onClick={() => handleLoginConfirm("true")}
                 >

@@ -5,10 +5,14 @@ import { useOutletContext, useParams } from "react-router";
 import {
   PostBetListByMatchId,
   PostGameDetailsByMI,
+  PostMinMaxGameDetails,
 } from "../../App/Features/auth/authActions";
 import "./GameDetails.css";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
+import { useMediaQuery } from "@mui/material";
+import { socket } from "./socket";
 
 const GameDetails = () => {
   let { id } = useParams();
@@ -18,25 +22,25 @@ const GameDetails = () => {
   const [openBet, setOpenBet] = useState(false);
   const [unmatchedBets, setUnmatchedBets] = useState(false);
   const [matchedBets, setmatchedBets] = useState(false);
-  const [gameDetailsData, setGameDetailsData] = useState(false);
-  const [previousState, setPreviousState] = useState("");
-
-  const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
-  const { PostGameDetailsByMatchID, PostBetListByMatchIdData } = useSelector(
-    (state) => state.auth
+  const [gameDetailsData, setGameDetailsData] = useState();
+  const [previousState, setPreviousState] = useState({});
+  // const [isLoading, setIsloading] = useState(true);
+  const [gameIframeId, setGameIframeId] = useState(4);
+  const [PostMinMaxGameDetailsData, setPostMinMaxGameDetailsData] = useState(
+    {}
   );
-  console.log(PostGameDetailsByMatchID?.data, "PostBetListByMatchIdData?.data");
-  // console.log(PostGameDetailsByMatchID?.data?.Odds[0]?.runners[1]?.name, "PostBetListByMatchIdData?.data");
-  // console.log(PostGameDetailsByMatchID?.data?.Odds?.runners[1]?.name, "PostBetListByMatchIdData?.data");
-  // const {  } = useSelector((state) => state.auth);
-  // const [PostBetListByMatchId,setPostBetListByMatchId ]= useState("")
+// console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
+  const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
+  const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
+ 
+  const [PostBetListByMatchIdData, setPostBetListByMatchIdData] = useState({});
 
-  // useEffect(()=>{
-  // if(PostBetListByMatchIdData?.data){
-  //   setPostBetListByMatchId(PostBetListByMatchIdData)
-  // }
-  // },[PostBetListByMatchIdData])
-  // console.log(PostBetListByMatchId,"PostBetListByMatchIdPostBetListByMatchIdPostBetListByMatchId")
+  useEffect(() => {
+    const iddd = localStorage.getItem("SportId");
+    setGameIframeId(iddd);
+  }, [localStorage]);
+
+
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
       setUnmatchedBets(false);
@@ -63,16 +67,19 @@ const GameDetails = () => {
         marketId: marketId,
         selectionId: item?.selectionId,
         bettingTime: new Date(),
+        marketNameeee:item?.name,
+        "Gamenamemeeee ":"odds ",
+        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker
       });
     } else {
       alert("Pleace select other bit");
     }
+    // console.log(item1,"item1")
   };
-  // console.log(
-  //   PostBetListByMatchIdData?.data,
-  //   "PostBetListByMatchIdDataPostBetListByMatchIdData"
-  // );
+
   const handleBitValueBookmaker = (price, name, color, item1) => {
+    console.log(item1)
+    console.log(gameDetailsData?.data?.Bookmaker)
     if (price > 0) {
       datatata({
         Odds: price,
@@ -83,12 +90,16 @@ const GameDetails = () => {
         selectionId: item1?.sid,
         t: item1?.t,
         bettingTime: new Date(),
+        "Gamenamemeeee ":"Bookmaker ",
+        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker
       });
     } else {
       alert("Pleace select other bit");
     }
   };
+
   const handleBitValueFancy = (price, name, color, trueData, item, keykey) => {
+    
     if (price > 0) {
       datatata({
         Odds: price,
@@ -97,9 +108,10 @@ const GameDetails = () => {
         isFancy: trueData,
         gameName: item?.nation,
         marketId: item?.sid,
-        selectionId: item?.sid,
+        selectionId: 0,
         t: item?.t,
         bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
+        "Gamenamemeeee ":"Fancy "
       });
     } else {
       alert("Pleace select other bit");
@@ -107,22 +119,57 @@ const GameDetails = () => {
   };
 
   useEffect(() => {
-    if (gameDetailsData) {
-      const oldOdds = { ...gameDetailsData };
-      setPreviousState(oldOdds);
-    } else {
-      setPreviousState(PostGameDetailsByMatchID);
+
+    if (Object.keys(PostMinMaxGameDetailsData).length) {
+      if (gameDetailsData) {
+        const oldOdds = { ...gameDetailsData };
+        setPreviousState(oldOdds);
+      } else {
+        setPreviousState({ data: PostMinMaxGameDetailsData });
+      }
+      setGameDetailsData({ data: PostMinMaxGameDetailsData });
     }
-    setGameDetailsData(PostGameDetailsByMatchID);
-  }, [PostGameDetailsByMatchID, gameDetailsData]);
+    
+  }, [PostMinMaxGameDetailsData]);
+
+
+
+  const [OddSocketConnected, setOddSocketConnected] = useState({});
+
+ 
+  const oddFromSocketSlower = (res) => {
+    if (res) {
+      setPostMinMaxGameDetailsData(res);
+      // setMFancyOdds(res);
+      // setMaxBet(res.Bookmaker[0]);
+      //   setMinBet(res);
+    }
+  };
+  useEffect(() => {
+    socket.on("OddsUpdated", oddFromSocketSlower);
+    socket.on("JoinedSuccessfully", () => {
+      setOddSocketConnected(true);
+    });
+  }, []);
 
   useEffect(() => {
-    const tiem = setInterval(() => {
-    dispatch(PostGameDetailsByMI(id));
-    }, 2000);
-    return () => clearInterval(tiem);
-  }, [dispatch, id]);
+    let timer = setInterval(
+      () =>
+        !OddSocketConnected &&
+        socket.emit("JoinRoom", {
+          eventId: id,
+        }),
+      1000
+    );
+    return () => {
+      clearInterval(timer);
+    };
+  }, [OddSocketConnected]);
 
+  useEffect(() => {
+    OddSocketConnected && setOddSocketConnected(false);
+  }, [id]);
+// console.log(OddSocketConnected)
   const handlematched = () => {
     if (matchedBets === true) {
       setmatchedBets(false);
@@ -135,34 +182,46 @@ const GameDetails = () => {
     setOpenBet(false);
   };
 
-  // useEffect(()=>{
-  // DIS
-  // },[])
-
   const handleOpneBet = () => {
     setOpenBet(true);
     setMarket(false);
     let data = { matchId: id };
-    dispatch(PostBetListByMatchId(data));
+    // dispatch(PostBetListByMatchId(data));
   };
 
   const handleNationName = (name) => {};
 
   useEffect(() => {
-    if (gameDetailsData) {
-      let arrData = gameDetailsData?.data;
+    if (PostMinMaxGameDetailsData) {
+      let arrData = PostMinMaxGameDetailsData;
       let newObject = {};
-
       for (let x in arrData) {
         if (x !== "Odds" && x !== "Bookmaker") {
           newObject[x] = arrData[x];
         }
       }
-
       const newArr = newObject;
-
       let FinalData = {};
-
+      for (let x in newArr) {
+        if (newArr[x].length) {
+          FinalData[x] = newArr[x];
+        }
+      }
+      setOnlyFancyMaxMinDetails(FinalData);
+    } else {
+    }
+  }, [PostMinMaxGameDetailsData]);
+  useEffect(() => {
+    if (gameDetailsData) {
+      let arrData = gameDetailsData?.data;
+      let newObject = {};
+      for (let x in arrData) {
+        if (x !== "Odds" && x !== "Bookmaker") {
+          newObject[x] = arrData[x];
+        }
+      }
+      const newArr = newObject;
+      let FinalData = {};
       for (let x in newArr) {
         if (newArr[x].length) {
           FinalData[x] = newArr[x];
@@ -170,22 +229,149 @@ const GameDetails = () => {
       }
       setOnlyFancyDetails(FinalData);
     } else {
-      // console.log("no data");
     }
   }, [gameDetailsData]);
+// ************* PNL DATA ODDS
 
-  // useEffect(() => {
-  //   // Object.keys(onlyFancyDetails).map(key=>onlyFancyDetails[key].map(item=>console.log(key,item)))
-  //   // onlyFancyDetails &&onlyFancyDetails?.Fancy2.map((item)=>{
-  //   //   return(
-  //   //   )
-  //   // })
-  // }, [onlyFancyDetails]);
+  const { lastMessage: datataatatatta } = useWebSocket(
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/chat/${id}/${localStorage.getItem("TokenId")}`,
+    { shouldReconnect: (event) => true }
+  );
 
-  // console.log(PostBetListByMatchIdData ,"dushyant")
+  useEffect(() => {
+    if (datataatatatta?.data && JSON.parse(datataatatatta?.data)?.data) {
+      setPostBetListByMatchIdData(JSON.parse(datataatatatta?.data));
+
+    }
+  }, [datataatatatta]);
+
+  const [oddsPnl, setOddsPnl] = useState({});
+
+  const { lastMessage: lastOddsPnl } = useWebSocket(
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/enduserodd/${id}/${localStorage.getItem("TokenId")}`,
+    { shouldReconnect: (event) => true }
+  );
+
+  useEffect(() => {
+    if (lastOddsPnl?.data && JSON.parse(lastOddsPnl?.data))
+      if (
+        lastOddsPnl?.data &&
+        JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data !== null
+      ) {
+        setOddsPnl(
+          lastOddsPnl?.data &&
+            JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data
+        );
+      } else {
+        setOddsPnl(null);
+      }
+  }, [lastOddsPnl]);
+
+
+  const [oddsssss, setOddsssss] = useState({});
+  const [bookmakerPnl, setBookmakerPnl] = useState({});
+
+  useEffect(() => {
+    if(oddsPnl){
+    let bookmakerPnlllll = [
+      {
+        selection: oddsPnl[0]?.selection1,
+        pnl: oddsPnl[0]?.pnl1,
+      },
+      {
+        selection: oddsPnl[0]?.selection2,
+        pnl: oddsPnl[0]?.pnl2,
+      },
+      {
+        selection: oddsPnl[0]?.selection3,
+        pnl: oddsPnl[0]?.pnl3,
+      },
+    ];
+
+    let odsssss = [
+      {
+        selection: oddsPnl[1]?.selection1,
+        pnl: oddsPnl[1]?.pnl1,
+      },
+      {
+        selection: oddsPnl[1]?.selection2,
+        pnl: oddsPnl[1]?.pnl2,
+      },
+      {
+        selection: oddsPnl[1]?.selection3,
+        pnl: oddsPnl[1]?.pnl3,
+      },
+    ];
+
+    setOddsssss(odsssss);
+    setBookmakerPnl(bookmakerPnlllll);}
+  }, [oddsPnl]);
+
+  // ******* PNL DATA FANCY
+
+  // const [oddsPnl, setOddsPnl] = useState({});
+  const [FancyPNL, setFacnyPNL] = useState({});
+
+  const { lastMessage: lastFancyPnl } = useWebSocket(
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/enduserfancy/${id}/${localStorage.getItem("TokenId")}`,
+    { shouldReconnect: (event) => true }
+  );
+console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data)")
+// console.log(onlyFancyDetails)
+
+  useEffect(() => {
+
+    if (lastFancyPnl?.data && JSON.parse(lastFancyPnl?.data))
+      if (lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data) ) {
+        // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl")
+        setFacnyPNL(
+          lastFancyPnl?.data &&
+            JSON.parse(lastFancyPnl && lastFancyPnl?.data)
+        );
+      } else {
+        // console.log("FancyPNL")
+        setFacnyPNL(null);
+      }
+  }, [lastFancyPnl]);
+        console.log(FancyPNL?.data,"FancyPNL")
+
+
+
+
+//   useEffect(() => {
+//     let fancyyyyyypnl = [
+//       {
+//         selection: oddsPnl[0]?.selection1,
+//         pnl: oddsPnl[0]?.pnl1,
+//       },
+//       {
+//         selection: oddsPnl[0]?.selection2,
+//         pnl: oddsPnl[0]?.pnl2,
+//       },
+//       {
+//         selection: oddsPnl[0]?.selection3,
+//         pnl: oddsPnl[0]?.pnl3,
+//       },
+//     ];
+
+// setFacnyPNL(fancyyyyyypnl)
+//   }, []);
+
 
   return (
     <div>
+      {/* {
+        isLoading===true?<div className="mani-loading">
+          <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 
+          <p className="loading-text">Loading...</p> */}
+      {/* </div>: */}
+      {/* ( */}
       <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
         <div className="home-page home-page-news">
           <div>
@@ -198,7 +384,13 @@ const GameDetails = () => {
                   alt=""
                   src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
                 />
-                <h4 className="m-b-0">{PostGameDetailsByMatchID?.data?.Odds[0]?.runners[0]?.name} VS {PostGameDetailsByMatchID?.data?.Odds[0]?.runners[1]?.name}</h4>
+                <h4 className="m-b-0">
+                  {gameDetailsData?.data?.Odds &&
+                    gameDetailsData?.data?.Odds[0]?.runners[0]?.name}{" "}
+                  VS{" "}
+                  {gameDetailsData?.data?.Odds &&
+                    gameDetailsData?.data?.Odds[0]?.runners[1]?.name}
+                </h4>
               </div>
               <div className="text-right">
                 <span>20/11/2022 20:30</span>
@@ -222,7 +414,7 @@ const GameDetails = () => {
                   class={`nav-link ${openBet ? "active " : ""}`}
                   onClick={handleOpneBet}
                 >
-                  Open Bets(0)
+                  Open Bets
                 </Link>
               </li>
             </ul>
@@ -242,72 +434,21 @@ const GameDetails = () => {
                       className="collapse"
                       style={{ display: "none" }}
                     ></div>
-                    {/* <div className="scorecard m-b-10">
-                      <div className="scorecard-top-container">
-                        <div className="col-6 p-l-0 p-r-0">
-                          <div className="scorecard-left">
-                            <div className="team-block active-innings">
-                              <span className="float-left m-r-5 ball-bet-img">
-                                <img
-                                  alt=""
-                                  src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/bat-icon.png"
-                                />
-                              </span>
-                              <div className="float-right" style={{paddingTop: "9px"}}>
-                                <h6 className="m-b-0">PNG</h6>
-                                <div className="score">
-                                  <p className="m-b-0">
-                                    <span>3-0 (1.1)</span>
-                                  </p>
-                                  <p className="m-b-0">
-                                    <span>CRR 2.57</span>
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="scorecard-right">
-                            <div className="team-block">
-                              <span className="float-left m-r-5 ball-bet-img" style={{marginLeft:"-16px"}}>
-                                <img
-                                  alt=""
-                                  className="ball"
-                                  src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ball-icon.png"
-                                />
-                              </span>
-                              <div className="float-right">
-                                <h6 className="m-b-0">
-                                  <span>NEP</span>
-                                  
-                                  </h6>
-                                <div className="score" style={{marginLeft: "11px"}}>
-                                  <p className="m-b-0">
-                                    <span>0-0 (0.0)</span>
-                                  </p>
-                                  <p className="m-b-0"></p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="scorecard-center col-6 p-l-5 p-r-5">
-                          <div className="text-center">
-                            <div>
-                              <div>
-                                <span className="ball-runs m-l-5">0</span>
-                                <span className="ball-runs m-l-5">2</span>
-                                <span className="ball-runs m-l-5">1</span>
-                                <span className="ball-runs m-l-5">0</span>
-                                <span className="ball-runs m-l-5">0</span>
-                                <span className="ball-runs m-l-5">0</span>
-                              </div>
-                            </div>
-                          </div>
-                          <p className="m-b-0"></p>
+                   
+                    <div id="scoreboard-box">
+                      <div className="scorecard scorecard-mobile">
+                        <div className="score-inner">
+                          <iframe
+                            src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                            width="100%"
+                            height="290px"
+                            className="score-card"
+                            title="scorecord"
+                            allowFullScreen={true}
+                          ></iframe>
                         </div>
                       </div>
-                    </div> */}
-
+                    </div>
                     <div className="m-b-10 main-market w-100 float-left">
                       {gameDetailsData?.data?.Odds?.map((item11, id1) => {
                         return (
@@ -316,7 +457,6 @@ const GameDetails = () => {
                               <div className=" m-b-10 main-market w-100 float-left">
                                 <div className="table-header">
                                   <div className="float-left box-w4 country-name">
-                                    {/* {console.log(item11,"item11item11item11")} */}
                                     <b>{item11?.Name}</b>
                                   </div>
                                   <div className="box-w1 float-left hidden-portrait dis-none"></div>
@@ -330,23 +470,32 @@ const GameDetails = () => {
                                   <div className="box-w1 float-left hidden-portrait dis-none"></div>
                                   <div className="box-w1 float-left hidden-portrait ddis-none"></div>
                                 </div>
-
-                                {/* {item?.runners?.map} */}
-
+                                <div className="matchoddsmax">
+                                  max:
+                                  {PostMinMaxGameDetailsData?.Odds &&
+                                    PostMinMaxGameDetailsData?.Odds[id1]
+                                      ?.maxBet}
+                                </div>{" "}
+                                <div className="matchoddsmin">
+                                  max:
+                                  {PostMinMaxGameDetailsData?.Odds &&
+                                    PostMinMaxGameDetailsData?.Odds[id1]
+                                      ?.minBet}
+                                </div>
                                 <div
                                   data-title="OPEN"
                                   className="table-body"
                                   style={{ marginTop: "7px" }}
                                 >
                                   {item11?.runners?.map((item1, index) => {
-                                    // console.log(index);
                                     return (
-                                      <>
+                                      <>{
+                                        // console.log(item11?.runners)
+                                      }
                                         <div
                                           data-title="OPEN"
                                           className="table-row"
                                         >
-                                          {/* {console.log(item11,"ittttetetetetetet")} */}
                                           <div
                                             className="float-left box-w4 country-name"
                                             onClick={handleNationName(
@@ -357,34 +506,40 @@ const GameDetails = () => {
                                               <b>{item1?.name}</b>
                                             </span>
                                             <p className="box-w4">
-                                              <span className="float-left ubook">
-                                                0
-                                              </span>
+
+                                              {/* <span className="float-left ubook" style={{color: "red"}}> */}
+                                                {(oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl)>0 ?    
+                                                 <span className="float-left ubook" style={{color: "red"}}>{oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl }</span> :
+                                                 <span className="float-left ubook" style={{color: "green"}}>{oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl }</span>}
+                                            
+
                                             </p>
                                           </div>
 
                                           {item1?.ex?.availableToBack.map(
                                             (item, id) => {
-                                              // console.log(item?.size,  previousState?.data.Odds[id1].runners[index]?.ex?.availableToBack[id].size)
                                               return (
+                                                
                                                 <div
                                                   className={`box-w1 float-left back hidden-portrait  ${
                                                     id === 0 || id === 1
                                                       ? "dis-none"
                                                       : ""
                                                   }
-                                                      ${
-                                                        item?.price !==
-                                                        previousState?.data
-                                                          ?.Odds[id1]?.runners[
-                                                          index
-                                                        ]?.ex?.availableToBack[
-                                                          id
-                                                        ]?.price
-                                                          ? "blink1"
-                                                          : " "
-                                                      }`}
+                                                       ${
+                                                         item?.price !==
+                                                         previousState?.data
+                                                           ?.Odds[id1]?.runners[
+                                                           index
+                                                         ]?.ex?.availableToBack[
+                                                           id
+                                                         ]?.price
+                                                           ? "blink1"
+                                                           : " "
+                                                       }`}
                                                 >
+
+                                                  {/* {console.log(item1,"itemitemitem")} */}
                                                   <button
                                                     type="button"
                                                     className="back"
@@ -413,7 +568,6 @@ const GameDetails = () => {
                                           )}
                                           {item1?.ex?.availableToLay.map(
                                             (item, id) => {
-                                              // console.log(item?.price, previousState?.data.Odds[id1].runners[index]?.ex?.availableToLay[id].price)
                                               return (
                                                 <div
                                                   className={`box-w1 lay float-left ${
@@ -434,7 +588,6 @@ const GameDetails = () => {
                                                 >
                                                   <button
                                                     type="button"
-                                                    // className="lay"
                                                     onClick={() =>
                                                       handleBitValue(
                                                         item?.price,
@@ -520,107 +673,142 @@ const GameDetails = () => {
                               <div className="box-w3 float-left hidden-portrait "></div>
                               <div className="box-w3 float-left hidden-portrait "></div>
                             </div>
-                            {gameDetailsData?.data?.Bookmaker.map((item) => {
-                              return (
-                                <>
-                                  <div data-title="OPEN" className="table-body">
+                            <div className="max">
+                              Max:
+                              {PostMinMaxGameDetailsData &&
+                                PostMinMaxGameDetailsData?.Bookmaker &&
+                                PostMinMaxGameDetailsData?.Bookmaker[0]?.maxBet}
+                            </div>
+                            <div className="min">
+                              MIN:
+                              {PostMinMaxGameDetailsData &&
+                                PostMinMaxGameDetailsData?.Bookmaker &&
+                                PostMinMaxGameDetailsData?.Bookmaker[0]?.minBet}
+                            </div>
+                            {/* {PostMinMaxGameDetailsData&&PostMinMaxGameDetailsData?.Bookmaker[index]
+                            .map((item222)=>{ */}
+
+                            {gameDetailsData?.data?.Bookmaker?.map(
+                              (item, index) => {
+                                return (
+                                  <>
                                     <div
                                       data-title="OPEN"
-                                      className={`table-row ${
-                                        item?.gstatus === "SUSPENDED"
-                                          ? "suspended"
-                                          : ""
-                                      }`}
+                                      className="table-body"
                                     >
-                                      <div className="float-left box-w6 country-name">
-                                        <span className="team-name">
-                                          <b> {item?.nation}</b>
-                                        </span>
-                                        <p className="box-w4">
-                                          <span className="float-left ubook">
-                                            0
+                                      <div
+                                        data-title="OPEN"
+                                        className={`table-row ${
+                                          item?.gstatus === "SUSPENDED"
+                                            ? "suspended"
+                                            : ""
+                                        }`}
+                                      >
+                                        <div className="float-left box-w6 country-name">
+                                          <span className="team-name">
+                                            <b> {item?.nation}</b>
+                                            {/* {console.log(item?.sid,"item")} */}
                                           </span>
-                                        </p>
-                                      </div>
-                                      <div className="box-w3 float-left back ">
-                                        <button type="button" className="back">
-                                          <span className="odd">0</span>
-                                          <span>
-                                            <span>0</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 float-left back ">
-                                        <button type="button" className="back">
-                                          <span className="odd">0</span>
-                                          <span>
-                                            <span>0</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 float-left back ">
-                                        <button
-                                          type="button"
-                                          className="back"
-                                          onClick={() =>
-                                            handleBitValueBookmaker(
-                                              item?.b1,
-                                              "Bookmaker",
-                                              "back",
-                                              item
-                                            )
-                                          }
-                                        >
-                                          <span className="odd">
-                                            {item?.b1}
-                                          </span>
-                                          <span>
-                                            <span>{item?.bs1}</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 float-left lay hidden-portrait">
-                                        <button
-                                          type="button"
-                                          className="lay"
-                                          onClick={() =>
-                                            handleBitValueBookmaker(
-                                              item?.l1,
-                                              "Bookmaker",
-                                              "lay",
-                                              item
-                                            )
-                                          }
-                                        >
-                                          <span className="odd">
-                                            {item?.l1}
-                                          </span>
-                                          <span>
-                                            <span>{item?.ls1}</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 lay float-left ">
-                                        <button type="button" className=" lay">
-                                          <span className="odd">0</span>
-                                          <span>
-                                            <span>0</span>
-                                          </span>
-                                        </button>
-                                      </div>
-                                      <div className="box-w3 lay float-left ">
-                                        <button type="button" className="lay">
-                                          <span className="odd">0</span>{" "}
-                                          <span>
-                                            <span>0</span>
-                                          </span>
-                                        </button>
+                                          <p className="box-w4">
+
+                                          {(bookmakerPnl.find((itemPnl) =>itemPnl.selection ==item.sid)?.pnl)>0 ?    
+                                                 <span className="float-left ubook" style={{color: "red"}}> {bookmakerPnl.find((itemPnl) =>itemPnl.selection ==item.sid)?.pnl}</span> :
+                                                 <span className="float-left ubook" style={{color: "green"}}> {bookmakerPnl.find((itemPnl) =>itemPnl.selection ==item.sid)?.pnl}</span>}
+                                            
+
+
+                                         
+                                          </p>
+                                        </div>
+                                        <div className="box-w3 float-left back ">
+                                          <button
+                                            type="button"
+                                            className="back"
+                                          >
+                                            <span className="odd">0</span>
+                                            <span>
+                                              <span>0</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 float-left back ">
+                                          <button
+                                            type="button"
+                                            className="back"
+                                          >
+                                            <span className="odd">0</span>
+                                            <span>
+                                              <span>0</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 float-left back ">
+                                          <button
+                                            type="button"
+                                            className="back"
+                                            onClick={() =>
+                                              handleBitValueBookmaker(
+                                                item?.b1,
+                                                "Bookmaker",
+                                                "back",
+                                                item
+                                              )
+                                            }
+                                          >
+                                            <span className="odd">
+                                              {item?.b1}
+                                            </span>
+                                            <span>
+                                              <span>{item?.bs1}</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 float-left lay hidden-portrait">
+                                          <button
+                                            type="button"
+                                            className="lay"
+                                            onClick={() =>
+                                              handleBitValueBookmaker(
+                                                item?.l1,
+                                                "Bookmaker",
+                                                "lay",
+                                                item
+                                              )
+                                            }
+                                          >
+                                            <span className="odd">
+                                              {item?.l1}
+                                            </span>
+                                            <span>
+                                              <span>{item?.ls1}</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 lay float-left ">
+                                          <button
+                                            type="button"
+                                            className=" lay"
+                                          >
+                                            <span className="odd">0</span>
+                                            <span>
+                                              <span>0</span>
+                                            </span>
+                                          </button>
+                                        </div>
+                                        <div className="box-w3 lay float-left ">
+                                          <button type="button" className="lay">
+                                            <span className="odd">0</span>{" "}
+                                            <span>
+                                              <span>0</span>
+                                            </span>
+                                          </button>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </>
-                              );
-                            })}
+                                  </>
+                                );
+                              }
+                            )}
                           </div>
                         </div>
                       </div>
@@ -635,16 +823,15 @@ const GameDetails = () => {
                               className="fancy-market-container"
                             >
                               <div data-v-e03c6f20="" className="fancy-market">
-                                {/* {gameDetailsData &&gameDetailsData?.data && gameDetailsData?.data?.map((item) => {
-                                        return (
-                                          <> {console.log(item,"dushyant")}</> )})}
-                             */}
-
                                 <div data-v-e03c6f20="">
                                   <div data-v-e03c6f20="">
                                     {Object.keys(onlyFancyDetails).map(
                                       (key) => (
                                         <>
+                                        {console.log(onlyFancyDetails)}
+                                        {/* {console.log(key)} */}
+                                        {/* {oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl} */}
+                                          {" "}
                                           <div
                                             data-v-e03c6f20=""
                                             className="table-header"
@@ -692,144 +879,9 @@ const GameDetails = () => {
                                             data-v-e03c6f20=""
                                             className="table-body"
                                           ></div>
-
-                                          {onlyFancyDetails[key].map((item) => (
-                                            <>
-                                              <div
-                                                data-v-e03c6f20=""
-                                                className="fancy-tripple "
-                                              >
-                                                <div
-                                                  data-v-e03c6f20=""
-                                                  data-title=""
-                                                  // className="table-row"
-                                                  className={`table-row ${
-                                                    item?.gstatus ===
-                                                    "SUSPENDED"
-                                                      ? "suspended"
-                                                      : ""
-                                                  }`}
-                                                >
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="float-left box-w4 country-name"
-                                                  >
-                                                    <div
-                                                      data-v-e03c6f20=""
-                                                      className="float-left fancy-items"
-                                                    >
-                                                      <span
-                                                        data-v-e03c6f20=""
-                                                        className="team-name"
-                                                      >
-                                                        <b data-v-e03c6f20="">
-                                                          {item?.nation}
-                                                        </b>
-                                                      </span>
-                                                      <p
-                                                        data-v-e03c6f20=""
-                                                        className="m-b-0"
-                                                      >
-                                                        <span
-                                                          data-v-e03c6f20=""
-                                                          className="float-left ubook fancy-span"
-                                                        >
-                                                          0
-                                                        </span>
-                                                      </p>
-                                                    </div>
-                                                    <div
-                                                      data-v-e03c6f20=""
-                                                      className="float-right v-m"
-                                                    >
-                                                      <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder.png"
-                                                        className="float-right ladder-icon"
-                                                        alt=""
-                                                      />
-                                                    </div>
-                                                  </div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 float-left  lay hidden-portrait dis-none"
-                                                  ></div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 float-left lay  hidden-portrait dis-none"
-                                                  ></div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 lay float-left text-center"
-                                                  >
-                                                    <button
-                                                      data-v-e03c6f20=""
-                                                      className="lay"
-                                                      onClick={() =>
-                                                        handleBitValueFancy(
-                                                          item?.b1,
-                                                          item.nation,
-                                                          "back",
-                                                          true,
-                                                          item,
-                                                          key
-                                                        )
-                                                      }
-                                                    >
-                                                      <span
-                                                        data-v-e03c6f20=""
-                                                        className="odd d-block"
-                                                      >
-                                                        {item?.b1}
-                                                      </span>{" "}
-                                                      <span data-v-e03c6f20="">
-                                                        {item?.bs1}
-                                                      </span>
-                                                    </button>
-                                                  </div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 back float-left text-center"
-                                                  >
-                                                    <button
-                                                      data-v-e03c6f20=""
-                                                      className="back"
-                                                      onClick={() =>
-                                                        handleBitValueFancy(
-                                                          item?.l1,
-                                                          item.nation,
-                                                          "lay",
-                                                          true,
-                                                          item,
-                                                          key
-                                                        )
-                                                      }
-                                                    >
-                                                      <span
-                                                        data-v-e03c6f20=""
-                                                        className="odd d-block"
-                                                      >
-                                                        {item?.l1}
-                                                      </span>{" "}
-                                                      <span data-v-e03c6f20="">
-                                                        {item?.ls1}
-                                                      </span>
-                                                    </button>
-                                                  </div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 float-left back   hidden-portrait dis-none"
-                                                  ></div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="box-w1 float-left back  hidden-portrait dis-none"
-                                                  ></div>
-                                                </div>
-
-                                                <div
-                                                  data-v-e03c6f20=""
-                                                  className="fancy-tripple"
-                                                ></div>
-                                                <div
+                                          {onlyFancyDetails[key].map(
+                                            (item, index) => (
+                                              <><div
                                                   data-v-e03c6f20=""
                                                   className="min-max  text-right"
                                                 >
@@ -843,7 +895,10 @@ const GameDetails = () => {
                                                     >
                                                       Min:{" "}
                                                       <span data-v-e03c6f20="">
-                                                        50
+                                                        {onlyFancyMaxMinDetails &&
+                                                          onlyFancyMaxMinDetails[
+                                                            key
+                                                          ]?.[index]?.maxBet}
                                                       </span>
                                                     </span>{" "}
                                                     <span
@@ -852,14 +907,161 @@ const GameDetails = () => {
                                                     >
                                                       Max:{" "}
                                                       <span data-v-e03c6f20="">
-                                                        5K
+                                                        {onlyFancyMaxMinDetails &&
+                                                          onlyFancyMaxMinDetails[
+                                                            key
+                                                          ]?.[index]?.minBet}
                                                       </span>
                                                     </span>
                                                   </p>
                                                 </div>
-                                              </div>
-                                            </>
-                                          ))}
+                                                <div
+                                                  data-v-e03c6f20=""
+                                                  className="fancy-tripple "
+                                                >
+                                                  <div
+                                                    data-v-e03c6f20=""
+                                                    data-title=""
+                                                    // className="table-row"
+                                                    className={`table-row ${
+                                                      item?.gstatus ===
+                                                      "SUSPENDED"
+                                                        ? "suspended"
+                                                        : ""
+                                                    }`}>
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="float-left box-w4 country-name"
+                                                    >
+                                                      <div
+                                                        data-v-e03c6f20=""
+                                                        className="float-left fancy-items"
+                                                      >
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="team-name"
+                                                        >
+                                                          <b data-v-e03c6f20="">
+                                                            {item?.nation}
+                                                          </b>
+                                                        </span>
+                                                        <p
+                                                          data-v-e03c6f20=""
+                                                          className="m-b-0"
+                                                        >
+                                                          <span
+                                                            data-v-e03c6f20=""
+                                                            className="float-left ubook fancy-span"
+                                                          >
+ 
+
+                                        {FancyPNL?.data? ((FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl)>0 ?    
+                                                 <span className="float-left ubook" style={{color: "red"}}> {FancyPNL?.data?  (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl):0 }</span> :
+                                                 <span className="float-left ubook" style={{color: "green"}}> {FancyPNL?.data?  (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl):0 }</span>)
+                                            :(0) }
+                                                            0
+                                                          </span>
+                                                        </p>
+                                                      </div>
+                                                      <div
+                                                        data-v-e03c6f20=""
+                                                        className="float-right v-m"
+                                                      >
+                                                        <img
+                                                          src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder.png"
+                                                          className="float-right ladder-icon"
+                                                          alt=""
+                                                        />
+                                                      </div>
+                                                    </div>
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 float-left  lay hidden-portrait dis-none"
+                                                    ></div>
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 float-left lay  hidden-portrait dis-none"
+                                                    ></div>
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 lay float-left text-center"
+                                                    >
+                                                      <button
+                                                        data-v-e03c6f20=""
+                                                        className="lay"
+                                                        onClick={() =>
+                                                          handleBitValueFancy(
+                                                            item?.l1,
+                                                            item.nation,
+                                                            "lay",
+                                                            true,
+                                                            item,
+                                                            key
+                                                          )
+                                                        }
+                                                      >
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="odd d-block"
+                                                        >
+                                                          {item?.l1}
+                                                        </span>{" "}
+                                                        <span data-v-e03c6f20="">
+                                                          {item?.ls1}
+                                                        </span>
+                                                      </button>
+                                                    </div>
+
+
+
+
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 back float-left text-center"
+                                                    >
+                                                      <button
+                                                        data-v-e03c6f20=""
+                                                        className="back"
+                                                        onClick={() =>
+                                                          handleBitValueFancy(
+                                                            item?.b1,
+                                                            item.nation,
+                                                            "back",
+                                                            true,
+                                                            item,
+                                                            key
+                                                          )
+                                                        }
+                                                      >
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="odd d-block"
+                                                        >
+                                                          {item?.b1}
+                                                        </span>{" "}
+                                                        <span data-v-e03c6f20="">
+                                                          {item?.bs1}
+                                                        </span>
+                                                      </button>
+                                                    </div>
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 float-left back   hidden-portrait dis-none"
+                                                    ></div>
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 float-left back  hidden-portrait dis-none"
+                                                    ></div>
+                                                  </div>
+
+                                                  <div
+                                                    data-v-e03c6f20=""
+                                                    className="fancy-tripple"
+                                                  ></div>
+                                                </div>
+                                              </>
+                                            )
+                                          )}
                                         </>
                                       )
                                     )}
@@ -880,7 +1082,10 @@ const GameDetails = () => {
                   className="tab-pane fade"
                   style={{ marginTop: "14px" }}
                 >
-                  <section className="my-bets-container" style={{marginTop: "0px"}}> 
+                  <section
+                    className="my-bets-container"
+                    style={{ marginTop: "0px" }}
+                  >
                     <div
                       data-toggle="collapse"
                       data-target=".unmatched-bet"
@@ -908,7 +1113,7 @@ const GameDetails = () => {
             </div>
             <div
               id="open-bets"
-              class={`tab-pane fade ${openBet ? "active show " : ""}`}
+              class={`tab-pane fade ${openBet ? "active show " : ""} opennnnn`}
             >
               {/* m-t-10 */}
               <section className="my-bets-container">
@@ -934,7 +1139,6 @@ const GameDetails = () => {
                   <div className="message">You have no unmatched bets</div>
                 </div> */}
 
-
                 <div
                   data-toggle="collapse"
                   data-target=".matched-bet"
@@ -953,13 +1157,11 @@ const GameDetails = () => {
                     matchedBets === true ? "collapse " : "collapse show"
                   } `}
                 >
-                 {/* <div className="message">You have no matched bet</div>  */}
-                  
-                 { PostBetListByMatchIdData?.data &&
+                  {/* <div className="message">You have no matched bet</div>  */}
+
+                  {PostBetListByMatchIdData?.data &&
                     Object.keys(PostBetListByMatchIdData?.data).map((key) => (
                       <>
-                        {console.log(key)}
-
                         {PostBetListByMatchIdData?.data[key].map((item) => (
                           <>
                             <div class="events matched-bet collapse show">
@@ -968,7 +1170,9 @@ const GameDetails = () => {
                                   <div>
                                     <Link
                                       to={`/m/gamedetail/${id}`}
-                                      class="back-bet"
+                                      className={`${
+                                        item?.back === false ? "lay" : "back"
+                                      }-bet`}
                                     >
                                       <u>
                                         {item?.back === true ? "BACK" : "LAY"}{" "}
@@ -1002,6 +1206,8 @@ const GameDetails = () => {
           </div>
         </div>
       </div>
+      {/* )
+       } */}
     </div>
   );
 };

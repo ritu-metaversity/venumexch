@@ -221,7 +221,9 @@ label.active1.btn.btn-primary {
     position: relative;
     display: inline-flex;
     vertical-align: middle;
-    width: 100% !important
+    width: 93% !important;
+    margin-left: 3%;
+
 }
 .selectionnnn{
     width: 150px;
@@ -261,5 +263,10 @@ label.active1.btn.btn-primary {
 .sport-data-list {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 93%;
+    margin-left: 3%;
+}
+.casino-section{
+    display: flex;
+    justify-content: space-around;
 }

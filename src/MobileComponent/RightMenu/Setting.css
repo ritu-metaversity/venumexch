@@ -175,7 +175,7 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
 }
 .setting-page {
     margin-inline: 13px;
-    padding-top: 22px;
+    /* padding-top: 22px; */
 }
 .stake-buttons.m-t-20>h2 {
     margin-left: 6px;
@@ -185,4 +185,30 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
 }
 .one-click.m-t-10.m-b-10>p {
     margin-left: 6px;
+}
+.eroorrr{
+    font-size: 200%;
+    padding-top: 23px;
+    color: red;
+}
+.btn.btn-primary {
+    background: #2c4f58 !important;
+    font-size: 18px;
+    width: 29.5%;
+    margin-right: 4%;
+    height: 45px;
+    border-color: unset !important;
+}
+@media screen and (min-width: 500px){
+
+.btn.btn-primary {
+    background: #2c4f58 !important;
+    font-size: 18px;
+    width: 29.5%;
+    margin-right: 7%;
+    height: 45px;
+    border-color: unset !important;
+}
+
+
 }

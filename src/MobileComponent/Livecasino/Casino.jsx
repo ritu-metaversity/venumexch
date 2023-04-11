@@ -5,7 +5,7 @@ import "./Casino.css";
 const Casino = () => {
   let { id } = useParams();
   const token = localStorage.getItem("TokenId");
-  console.log(token,id,"idid");
+  // console.log(token,id,"idid");
 if(!id){
     return<></>
 }

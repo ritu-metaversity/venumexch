@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { PostBalance, Postisselfbyappurl } from '../../App/Features/auth/authActions'
 import "./RightMenu.css"
+// import deposit from './DepositPages/deposit.png' 
 
 const RightMenu = (props) => {
    const dispatch = useDispatch();
@@ -27,17 +28,27 @@ setAvaliablebalance(PostTotalBalance?.data?.data?.balance)
 const token = localStorage.getItem("TokenId")
 useEffect(()=>{
    // console.log("balaaac")
-if(token){
+   const time = setInterval(() => {
+      if(token!==""){
+         // console.log("token found")
+      
+         dispatch(PostBalance())
+         
+      }
+      }, 1000);
+      return () => clearInterval(time);
 
-   dispatch(PostBalance())
-   dispatch(Postisselfbyappurl({"appUrl":appUrll}))
-   
-}
+
 },[dispatch,appUrll, token])
+useEffect(()=>{
+  
+      dispatch(Postisselfbyappurl({"appUrl":appUrll}))
+
+},[appUrll])
 
 
-console.log(postisselfbyappurlData?.data?.selfAllowed,"postisselfbyappurlData")
-console.log(appUrll,"appUrll")
+// console.log(postisselfbyappurlData?.data?.selfAllowed,"postisselfbyappurlData")
+// console.log(appUrll,"appUrll")
 
 // console.log(PostTotalBalance,"PostTotalBalance")
    const handleInput=(vl)=>{
@@ -131,14 +142,15 @@ console.log(appUrll,"appUrll")
          <li>
             {/* <Link href="/m/mybets"   className=""> */}
                <div   className="menu-lvl-1" onClick={()=>handleInput("Deposit")}>
-                  <div   className="item" > <span   className="menu-name">Deposit</span></div>
+                  
+                  <div   className="item" ><img src={"deposit"} alt="" className='deposit-image'/><span   className="menu-name">Deposit</span></div>
                </div>
             {/* </Link> */}
          </li>
          <li>
             {/* <Link href="/m/mybets"   className=""> */}
                <div   className="menu-lvl-1" onClick={()=>handleInput("withDraw")}>
-                  <div   className="item" > <span   className="menu-name">WithDraw</span></div>
+                  <div   className="item" ><img src={"deposit"} alt=""/> <span   className="menu-name">WithDraw</span></div>
                </div>
             {/* </Link> */}
          </li></>:""

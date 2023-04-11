@@ -16,6 +16,7 @@ const PayManually = (props) => {
   const [files, setFiles] = useState(null);
   const [loading, setLoading] = useState(false);
   const [trueee, setTrueee] = useState(false);
+  const [active, setActive] = useState(0);
 
   //   useEffect(() => {
   //     UserAPI.Get_Payment_Detail_By_Id().then((res) => {
@@ -23,7 +24,7 @@ const PayManually = (props) => {
   //       setUpiDetail(res.data.upiDetail);
   //     });
   //   }, []);
-  console.log(files,"filesfiles")
+  // console.log(files,"filesfiles")
 
   const dispatch = useDispatch();
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
@@ -36,12 +37,13 @@ const PayManually = (props) => {
 
   const token = localStorage.getItem("TokenId");
   // console.log(PostselfdepositappData, "PostselfdepositappData");
-  console.log(Bitvalue, "PostpaymnetdetailappDataData");
+  // console.log(Bitvalue, "PostpaymnetdetailappDataData");
   // useEffect(()=>{
   //     setPayMethods(PostpaymnetdetailappDataData?.data)
   // },[])
-  const handlePaymentName = (VL) => {
+  const handlePaymentName = (VL, id) => {
     setPymentMode(VL);
+    setActive(id)
   };
 
   const increment = () => {
@@ -162,9 +164,9 @@ const PayManually = (props) => {
           <div className="bank-logo">
             <Row>
               {PostpaymnetdetailappDataData?.data?.paymentMethods.map(
-                (item) => (
-                  <Col onClick={() => handlePaymentName(item.methodName)}>
-                    <div className="css-1502y4u">
+                (item, id) => (
+                  <Col onClick={() => handlePaymentName(item.methodName, id)}>
+                    <div className={`css-1502y4u ${active===id?"active3":""}`}>
                       <img src={item.logo} className="css-37vfbv" alt="Bank" />
                       <p className="Typography-root ">{item.methodName}</p>
                     </div>

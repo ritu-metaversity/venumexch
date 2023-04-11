@@ -29,7 +29,7 @@ const Mybets = () => {
 
   const { PostunsettledData } = useSelector(state => state.auth)
 
-  console.log(PostunsettledData?.data?.dataList)
+  // console.log(PostunsettledData?.data?.dataList)
 
   const dispatch = useDispatch();
 // console.log(PostBetListByMatchIdData ,"dushyant")
@@ -46,8 +46,8 @@ useEffect(()=>{
 
   return (
     <>
-      <section className="my-bets-container">
-        <h2 className="page-title m-t-20 p-l-15">Open Bets</h2>
+      <section className="my-bets-container  manit">
+        <h2 className="page-title m-t-20 p-l-15 " style={{marginBottom: "4px"}}>Open Bets</h2>
         {/* <div
           data-toggle="collapse"
           data-target=".unmatched-bet"

@@ -1055,8 +1055,19 @@ button.btn.btn-login {
     margin-top: 20px;
 }
 .blink1{
-    background-color: #FDCF13 !important;
+    /* background-color: #FDCF13 !important; */
+animation: blinking 100ms !important;
+background-color: #ffc01a !important;
 }
+
+
+@keyframes blinking {
+100% {
+    background-color: #ffc01a !important;
+}
+}
+
+
 section {
     display: block;
     width: 95% !important;
@@ -1106,3 +1117,86 @@ b, strong {
     margin-left: 2%;
 
 } */
+.opennnnn{
+    
+width: 95%;
+margin-left: 2%;
+}
+.min {
+    margin-left: 91%;
+    margin-top: -16px;
+    font-size: 10px;
+    font-weight: 800;
+}
+.max {
+    margin-left: 74%;
+    font-size: 10px;
+    font-weight: 800;
+}
+.matchoddsmin {
+    margin-left: 16%;
+    margin-top: -18px;
+    font-size: 10px;
+    font-weight: 800;
+}
+.matchoddsmax {
+    margin-left: 1%;
+    font-size: 10px;
+    font-weight: 800;
+}
+.mani-loading {
+    background-color: rgb(66 61 61 / 59%);
+    height: 108vh;
+    margin-bottom: -5px;
+}
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: unset;
+}
+.loading-text{
+    position:absolute;
+    top: 62%;
+    font-size: 18px;
+}
+
+
+
+
+@media screen and (min-width: 500px){
+    button.btn.btn-secondary.btn-block.mb-2 {
+        background-color: red;
+        height: 135%;
+    }
+    .price-values {
+        margin-top: 12px;
+        width: 109%;
+        margin-left: -11%;
+    }
+    .inputfield {
+
+        margin-left: 34% !important;
+    }
+    .enter-amount {
+        margin-top: 0%!important;
+        margin-left: 20%!important;
+        /* margin-bottom: 0%; */
+        height: 15px!important;
+        font-size: 160%!important;
+        
+    }
+    .head-deposit {
+        background-color: #2C3D50;
+        color: #fff;
+        /* width: 102.5% !important; */
+        margin-left: -9px;
+        margin-top: -10px;
+        border-radius: 8px 8px 0px 0px;
+    }
+    .bank-logo {
+        width: 50% !important;
+        margin: auto !important;
+    }
+}

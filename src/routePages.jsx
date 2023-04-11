@@ -30,7 +30,7 @@ const RoutesPages = () => {
 {/* <BrowserRouter>
         <Suspense > */}
           <Routes>
-          <Route exact path="/" element={<Layout />} >
+          <Route exact path="/m/login" element={<Layout />} >
           <Route  path="home" element={<Home />} />
           <Route  path="/ResponsibleGambling" element={<ResponsibleGambling />} />
           <Route  path="/mybets" element={<Mybets />} />
