@@ -58,7 +58,7 @@ const Login = () => {
         setErrorPassword(true);
       } else if (postLoginData?.data?.token) {
         setApiHit(false);
-        console.log("login succccss")
+        // console.log("login succccss")
         localStorage.setItem("TokenId", postLoginData?.data?.token);
         localStorage.setItem("PassWordType", postLoginData?.data?.passwordtype);
         localStorage.setItem("userId", postLoginData?.data?.userId);
@@ -95,15 +95,12 @@ axios.defaults.headers.common.Authorization= `Bearer ${postLoginData?.data?.toke
         return false;
     }
   };
-
+console.log(window.location.hostname)
   const handleLogin = (e) => {
     setLogin({
       userId: userName,
       password: password,
       appUrl: window.location.hostname,
-      // appUrl: "atozscore.com",
-
-      // appUrl: window.location.hostname,
     });
     // console.log(process.env.REACT_APP_API_URL)
 

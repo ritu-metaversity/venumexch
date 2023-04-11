@@ -207,7 +207,7 @@ const authSlice = createSlice({
             state.PostGamesByIdError = null;
         })
         .addCase(PostBalance.pending, (state) => {
-            state.PostTotalBalance = null;
+            // state.PostTotalBalance = null;
             state.PostTotalBalanceLoading =true;
             state.PostTotalBalanceError = null;
         }).addCase(PostBalance.rejected, (state, action) => {

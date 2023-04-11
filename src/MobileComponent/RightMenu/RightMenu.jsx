@@ -28,14 +28,23 @@ setAvaliablebalance(PostTotalBalance?.data?.data?.balance)
 const token = localStorage.getItem("TokenId")
 useEffect(()=>{
    // console.log("balaaac")
-if(token!==""){
-   // console.log("token found")
+   const time = setInterval(() => {
+      if(token!==""){
+         // console.log("token found")
+      
+         dispatch(PostBalance())
+         
+      }
+      }, 1000);
+      return () => clearInterval(time);
 
-   dispatch(PostBalance())
-   dispatch(Postisselfbyappurl({"appUrl":appUrll}))
-   
-}
+
 },[dispatch,appUrll, token])
+useEffect(()=>{
+  
+      dispatch(Postisselfbyappurl({"appUrl":appUrll}))
+
+},[appUrll])
 
 
 // console.log(postisselfbyappurlData?.data?.selfAllowed,"postisselfbyappurlData")

@@ -1055,8 +1055,19 @@ button.btn.btn-login {
     margin-top: 20px;
 }
 .blink1{
-    background-color: #FDCF13 !important;
+    /* background-color: #FDCF13 !important; */
+animation: blinking 100ms !important;
+background-color: #ffc01a !important;
 }
+
+
+@keyframes blinking {
+100% {
+    background-color: #ffc01a !important;
+}
+}
+
+
 section {
     display: block;
     width: 95% !important;

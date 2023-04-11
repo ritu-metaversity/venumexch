@@ -14,7 +14,6 @@ import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 import { useMediaQuery } from "@mui/material";
 import { socket } from "./socket";
 
-
 const GameDetails = () => {
   let { id } = useParams();
   const dispatch = useDispatch();
@@ -23,32 +22,25 @@ const GameDetails = () => {
   const [openBet, setOpenBet] = useState(false);
   const [unmatchedBets, setUnmatchedBets] = useState(false);
   const [matchedBets, setmatchedBets] = useState(false);
-  const [gameDetailsData, setGameDetailsData] = useState(false);
+  const [gameDetailsData, setGameDetailsData] = useState();
   const [previousState, setPreviousState] = useState({});
   // const [isLoading, setIsloading] = useState(true);
   const [gameIframeId, setGameIframeId] = useState(4);
-  const [PostMinMaxGameDetailsData,setPostMinMaxGameDetailsData]=useState({})
-
+  const [PostMinMaxGameDetailsData, setPostMinMaxGameDetailsData] = useState(
+    {}
+  );
+// console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
-  // const {
-  //   // PostGameDetailsByMatchID,
-  //   // PostBetListByMatchIdData,
-  //   // PostMinMaxGameDetailsData,
-  //   PostGameDetailsByMatchIDLoading
-  // } = useSelector((state) => state.auth);
+ 
+  const [PostBetListByMatchIdData, setPostBetListByMatchIdData] = useState({});
 
-  // const {  } = useSelector((state) => state.auth);
-  // const [PostBetListByMatchId,setPostBetListByMatchId ]= useState("")
+  useEffect(() => {
+    const iddd = localStorage.getItem("SportId");
+    setGameIframeId(iddd);
+  }, [localStorage]);
 
-const [PostBetListByMatchIdData, setPostBetListByMatchIdData] = useState({})
 
-  useEffect(()=>{
-const iddd = localStorage.getItem("SportId");
-setGameIframeId(iddd)
-  },[localStorage])
-  console.log(gameIframeId)
-  
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
       setUnmatchedBets(false);
@@ -56,13 +48,6 @@ setGameIframeId(iddd)
       setUnmatchedBets(true);
     }
   };
-  // useEffect(()=>{
-  // setIsloading(PostGameDetailsByMatchIDLoading)
-
-  // },[PostGameDetailsByMatchIDLoading])
-  // setIsloading(PostGameDetailsByMatchIDLoading)
-
-  // console.log(isLoading, "dfdsfgsdfhdhd")
 
   const handleBitValue = (
     price,
@@ -73,8 +58,8 @@ setGameIframeId(iddd)
     item1,
     item
   ) => {
-     if (price > 0) {
-        datatata({
+    if (price > 0) {
+      datatata({
         Odds: price,
         matchname: name,
         isBack: color,
@@ -82,13 +67,19 @@ setGameIframeId(iddd)
         marketId: marketId,
         selectionId: item?.selectionId,
         bettingTime: new Date(),
+        marketNameeee:item?.name,
+        "Gamenamemeeee ":"odds ",
+        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker
       });
     } else {
       alert("Pleace select other bit");
     }
+    // console.log(item1,"item1")
   };
- 
+
   const handleBitValueBookmaker = (price, name, color, item1) => {
+    console.log(item1)
+    console.log(gameDetailsData?.data?.Bookmaker)
     if (price > 0) {
       datatata({
         Odds: price,
@@ -99,6 +90,8 @@ setGameIframeId(iddd)
         selectionId: item1?.sid,
         t: item1?.t,
         bettingTime: new Date(),
+        "Gamenamemeeee ":"Bookmaker ",
+        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker
       });
     } else {
       alert("Pleace select other bit");
@@ -106,6 +99,7 @@ setGameIframeId(iddd)
   };
 
   const handleBitValueFancy = (price, name, color, trueData, item, keykey) => {
+    
     if (price > 0) {
       datatata({
         Odds: price,
@@ -114,9 +108,10 @@ setGameIframeId(iddd)
         isFancy: trueData,
         gameName: item?.nation,
         marketId: item?.sid,
-        selectionId: item?.sid,
+        selectionId: 0,
         t: item?.t,
         bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
+        "Gamenamemeeee ":"Fancy "
       });
     } else {
       alert("Pleace select other bit");
@@ -124,105 +119,57 @@ setGameIframeId(iddd)
   };
 
   useEffect(() => {
-if(Object.keys(PostMinMaxGameDetailsData).length){
 
-  if (gameDetailsData) {
-    const oldOdds = { ...gameDetailsData };
-    setPreviousState(oldOdds);
-  } else {
-    setPreviousState({data:PostMinMaxGameDetailsData});
-  }
-  setGameDetailsData({data:PostMinMaxGameDetailsData});
-}
-
+    if (Object.keys(PostMinMaxGameDetailsData).length) {
+      if (gameDetailsData) {
+        const oldOdds = { ...gameDetailsData };
+        setPreviousState(oldOdds);
+      } else {
+        setPreviousState({ data: PostMinMaxGameDetailsData });
+      }
+      setGameDetailsData({ data: PostMinMaxGameDetailsData });
+    }
+    
   }, [PostMinMaxGameDetailsData]);
 
-  // useEffect(() => {
-  //   // const tiem = setInterval(() => {
-  //   dispatch(PostGameDetailsByMI(id));
-  //   // }, 1000);
-  //   // return () => clearInterval(tiem);
-  // }, [dispatch, id]);
-
-  // useEffect(() => {
-  //   dispatch(PostMinMaxGameDetails(id));
-  // }, [dispatch, id]);
 
 
+  const [OddSocketConnected, setOddSocketConnected] = useState({});
 
-// *********
-
-
-const [OddSocketConnected,setOddSocketConnected]=useState({})
-
-// const oddFromSocketSlower = (response) => {
-//   if (response) {
-//     console.log(response)
-//     // setFancyOddsSlower(response);
-//   }
-// };
-// // const eventId = searchParams.get("match-id");
-
-// useEffect(() => {
-//   socket.on("OddsUpdated", oddFromSocketSlower);
-//   socket.on("JoinedSuccessfully", () => {
-//     setOddSocketConnected(true);
-//   });
-// }, []);
-
-// useEffect(() => {
-//   let timer = setInterval(
-//     () =>
-//       !oddSocketConnected &&
-//       socket.emit("JoinRoom", {
-//         id,
-//       }),
-//     1000
-//   );
-//   return () => {
-//     clearInterval(timer);
-//   };
-// }, [oddSocketConnected]);
-
-// useEffect(() => {
-//   oddSocketConnected && setOddSocketConnected(false);
-// }, [id]);
-// // *********
-// console.log(oddSocketConnected)
-
-
-const oddFromSocketSlower = (res) => {
-  if (res) {
-
-    setPostMinMaxGameDetailsData(res)
-    // setMFancyOdds(res);
-    // setMaxBet(res.Bookmaker[0]);
-    //   setMinBet(res);
-  }
-};
-useEffect(() => {
-  socket.on("OddsUpdated", oddFromSocketSlower);
-  socket.on("JoinedSuccessfully", () => {
-    setOddSocketConnected(true);
-  });
-}, []);
-useEffect(() => {
-  let timer = setInterval(
-    () =>
-      !OddSocketConnected &&
-      socket.emit("JoinRoom", {
-        eventId:id,
-      }),
-    1000
-  );
-  return () => {
-    clearInterval(timer);
+ 
+  const oddFromSocketSlower = (res) => {
+    if (res) {
+      setPostMinMaxGameDetailsData(res);
+      // setMFancyOdds(res);
+      // setMaxBet(res.Bookmaker[0]);
+      //   setMinBet(res);
+    }
   };
-}, [OddSocketConnected]);
-useEffect(() => {
-  OddSocketConnected && setOddSocketConnected(false);
-}, [id]);
+  useEffect(() => {
+    socket.on("OddsUpdated", oddFromSocketSlower);
+    socket.on("JoinedSuccessfully", () => {
+      setOddSocketConnected(true);
+    });
+  }, []);
 
+  useEffect(() => {
+    let timer = setInterval(
+      () =>
+        !OddSocketConnected &&
+        socket.emit("JoinRoom", {
+          eventId: id,
+        }),
+      1000
+    );
+    return () => {
+      clearInterval(timer);
+    };
+  }, [OddSocketConnected]);
+
+  useEffect(() => {
+    OddSocketConnected && setOddSocketConnected(false);
+  }, [id]);
+// console.log(OddSocketConnected)
   const handlematched = () => {
     if (matchedBets === true) {
       setmatchedBets(false);
@@ -244,31 +191,26 @@ useEffect(() => {
 
   const handleNationName = (name) => {};
 
-console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
-
-// console.log(PostGameDetailsByMatchID?.data,"PostGameDetailsByMatchID")
-
-useEffect(()=>{
-
-if (PostMinMaxGameDetailsData) {
-  let arrData = PostMinMaxGameDetailsData;
-  let newObject = {};
-  for (let x in arrData) {
-    if (x !== "Odds" && x !== "Bookmaker") {
-      newObject[x] = arrData[x];
+  useEffect(() => {
+    if (PostMinMaxGameDetailsData) {
+      let arrData = PostMinMaxGameDetailsData;
+      let newObject = {};
+      for (let x in arrData) {
+        if (x !== "Odds" && x !== "Bookmaker") {
+          newObject[x] = arrData[x];
+        }
+      }
+      const newArr = newObject;
+      let FinalData = {};
+      for (let x in newArr) {
+        if (newArr[x].length) {
+          FinalData[x] = newArr[x];
+        }
+      }
+      setOnlyFancyMaxMinDetails(FinalData);
+    } else {
     }
-  }
-  const newArr = newObject;
-  let FinalData = {};
-  for (let x in newArr) {
-    if (newArr[x].length) {
-      FinalData[x] = newArr[x];
-    }
-  }
-  setOnlyFancyMaxMinDetails(FinalData);
-} else {
-}
-},[PostMinMaxGameDetailsData])
+  }, [PostMinMaxGameDetailsData]);
   useEffect(() => {
     if (gameDetailsData) {
       let arrData = gameDetailsData?.data;
@@ -289,40 +231,148 @@ if (PostMinMaxGameDetailsData) {
     } else {
     }
   }, [gameDetailsData]);
+// ************* PNL DATA ODDS
 
-
-
-
-  const [searchParams] = useSearchParams();
-
-
-  const { lastMessage } = useWebSocket(
+  const { lastMessage: datataatatatta } = useWebSocket(
     `${
       process.env.REACT_APP_ANKIT_SOCKET_BET
     }/chat/${id}/${localStorage.getItem("TokenId")}`,
     { shouldReconnect: (event) => true }
   );
-  const matches = useMediaQuery("(min-width : 1280px)");
-
-
 
   useEffect(() => {
-    if (lastMessage?.data && JSON.parse(lastMessage?.data)?.data){
-      setPostBetListByMatchIdData(JSON.parse(lastMessage?.data))
-      console.log(JSON.parse(lastMessage?.data).data)
-    }
-  }, [lastMessage]);
+    if (datataatatatta?.data && JSON.parse(datataatatatta?.data)?.data) {
+      setPostBetListByMatchIdData(JSON.parse(datataatatatta?.data));
 
-console.log(id,"ididid")
+    }
+  }, [datataatatatta]);
+
+  const [oddsPnl, setOddsPnl] = useState({});
+
+  const { lastMessage: lastOddsPnl } = useWebSocket(
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/enduserodd/${id}/${localStorage.getItem("TokenId")}`,
+    { shouldReconnect: (event) => true }
+  );
+
+  useEffect(() => {
+    if (lastOddsPnl?.data && JSON.parse(lastOddsPnl?.data))
+      if (
+        lastOddsPnl?.data &&
+        JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data !== null
+      ) {
+        setOddsPnl(
+          lastOddsPnl?.data &&
+            JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data
+        );
+      } else {
+        setOddsPnl(null);
+      }
+  }, [lastOddsPnl]);
+
+
+  const [oddsssss, setOddsssss] = useState({});
+  const [bookmakerPnl, setBookmakerPnl] = useState({});
+
+  useEffect(() => {
+    if(oddsPnl){
+    let bookmakerPnlllll = [
+      {
+        selection: oddsPnl[0]?.selection1,
+        pnl: oddsPnl[0]?.pnl1,
+      },
+      {
+        selection: oddsPnl[0]?.selection2,
+        pnl: oddsPnl[0]?.pnl2,
+      },
+      {
+        selection: oddsPnl[0]?.selection3,
+        pnl: oddsPnl[0]?.pnl3,
+      },
+    ];
+
+    let odsssss = [
+      {
+        selection: oddsPnl[1]?.selection1,
+        pnl: oddsPnl[1]?.pnl1,
+      },
+      {
+        selection: oddsPnl[1]?.selection2,
+        pnl: oddsPnl[1]?.pnl2,
+      },
+      {
+        selection: oddsPnl[1]?.selection3,
+        pnl: oddsPnl[1]?.pnl3,
+      },
+    ];
+
+    setOddsssss(odsssss);
+    setBookmakerPnl(bookmakerPnlllll);}
+  }, [oddsPnl]);
+
+  // ******* PNL DATA FANCY
+
+  // const [oddsPnl, setOddsPnl] = useState({});
+  const [FancyPNL, setFacnyPNL] = useState({});
+
+  const { lastMessage: lastFancyPnl } = useWebSocket(
+    `${
+      process.env.REACT_APP_ANKIT_SOCKET_BET
+    }/enduserfancy/${id}/${localStorage.getItem("TokenId")}`,
+    { shouldReconnect: (event) => true }
+  );
+console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data)")
+// console.log(onlyFancyDetails)
+
+  useEffect(() => {
+
+    if (lastFancyPnl?.data && JSON.parse(lastFancyPnl?.data))
+      if (lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data) ) {
+        // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl")
+        setFacnyPNL(
+          lastFancyPnl?.data &&
+            JSON.parse(lastFancyPnl && lastFancyPnl?.data)
+        );
+      } else {
+        // console.log("FancyPNL")
+        setFacnyPNL(null);
+      }
+  }, [lastFancyPnl]);
+        console.log(FancyPNL?.data,"FancyPNL")
+
+
+
+
+//   useEffect(() => {
+//     let fancyyyyyypnl = [
+//       {
+//         selection: oddsPnl[0]?.selection1,
+//         pnl: oddsPnl[0]?.pnl1,
+//       },
+//       {
+//         selection: oddsPnl[0]?.selection2,
+//         pnl: oddsPnl[0]?.pnl2,
+//       },
+//       {
+//         selection: oddsPnl[0]?.selection3,
+//         pnl: oddsPnl[0]?.pnl3,
+//       },
+//     ];
+
+// setFacnyPNL(fancyyyyyypnl)
+//   }, []);
+
+
   return (
     <div>
       {/* {
         isLoading===true?<div className="mani-loading">
           <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 
           <p className="loading-text">Loading...</p> */}
-        {/* </div>: */}
-        {/* ( */}
-          <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
+      {/* </div>: */}
+      {/* ( */}
+      <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
         <div className="home-page home-page-news">
           <div>
             <div className="master-flash-message">
@@ -335,8 +385,11 @@ console.log(id,"ididid")
                   src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
                 />
                 <h4 className="m-b-0">
-                  {gameDetailsData?.data?.Odds&& gameDetailsData?.data?.Odds[0]?.runners[0]?.name} VS{" "}
-                  {gameDetailsData?.data?.Odds&&gameDetailsData?.data?.Odds[0]?.runners[1]?.name}
+                  {gameDetailsData?.data?.Odds &&
+                    gameDetailsData?.data?.Odds[0]?.runners[0]?.name}{" "}
+                  VS{" "}
+                  {gameDetailsData?.data?.Odds &&
+                    gameDetailsData?.data?.Odds[0]?.runners[1]?.name}
                 </h4>
               </div>
               <div className="text-right">
@@ -381,84 +434,21 @@ console.log(id,"ididid")
                       className="collapse"
                       style={{ display: "none" }}
                     ></div>
-                    {/* <div className="scorecard m-b-10">
-                      <div className="scorecard-top-container">
-                        <div className="col-6 p-l-0 p-r-0">
-                          <div className="scorecard-left">
-                            <div className="team-block active-innings">
-                              <span className="float-left m-r-5 ball-bet-img">
-                                <img
-                                  alt=""
-                                  src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/bat-icon.png"
-                                />
-                              </span>
-                              <div className="float-right" style={{paddingTop: "9px"}}>
-                                <h6 className="m-b-0">PNG</h6>
-                                <div className="score">
-                                  <p className="m-b-0">
-                                    <span>3-0 (1.1)</span>
-                                  </p>
-                                  <p className="m-b-0">
-                                    <span>CRR 2.57</span>
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="scorecard-right">
-                            <div className="team-block">
-                              <span className="float-left m-r-5 ball-bet-img" style={{marginLeft:"-16px"}}>
-                                <img
-                                  alt=""
-                                  className="ball"
-                                  src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ball-icon.png"
-                                />
-                              </span>
-                              <div className="float-right">
-                                <h6 className="m-b-0">
-                                  <span>NEP</span>
-                                  
-                                  </h6>
-                                <div className="score" style={{marginLeft: "11px"}}>
-                                  <p className="m-b-0">
-                                    <span>0-0 (0.0)</span>
-                                  </p>
-                                  <p className="m-b-0"></p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                   
+                    <div id="scoreboard-box">
+                      <div className="scorecard scorecard-mobile">
+                        <div className="score-inner">
+                          <iframe
+                            src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                            width="100%"
+                            height="290px"
+                            className="score-card"
+                            title="scorecord"
+                            allowFullScreen={true}
+                          ></iframe>
                         </div>
-                        <div className="scorecard-center col-6 p-l-5 p-r-5">
-                          <div className="text-center">
-                            <div>
-                              <div>
-                                <span className="ball-runs m-l-5">0</span>
-                                <span className="ball-runs m-l-5">2</span>
-                                <span className="ball-runs m-l-5">1</span>
-                                <span className="ball-runs m-l-5">0</span>
-                                <span className="ball-runs m-l-5">0</span>
-                                <span className="ball-runs m-l-5">0</span>
-                              </div>
-                            </div>
-                          </div>
-                          <p className="m-b-0"></p>
-                        </div>
-                      </div>
-                    </div> */}
-<div id="scoreboard-box">
-                    <div className="scorecard scorecard-mobile">
-                      <div className="score-inner">
-                        <iframe
-                          src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
-                          width="100%"
-                          height="290px"
-                          className="score-card"
-                          title="scorecord"
-                          allowFullScreen={true}></iframe>
                       </div>
                     </div>
-                  </div>
                     <div className="m-b-10 main-market w-100 float-left">
                       {gameDetailsData?.data?.Odds?.map((item11, id1) => {
                         return (
@@ -479,17 +469,19 @@ console.log(id,"ididid")
                                   </div>
                                   <div className="box-w1 float-left hidden-portrait dis-none"></div>
                                   <div className="box-w1 float-left hidden-portrait ddis-none"></div>
-                                </div> 
+                                </div>
                                 <div className="matchoddsmax">
-
-                                
-                                  max:{PostMinMaxGameDetailsData?.Odds&&PostMinMaxGameDetailsData?.Odds[id1]?.maxBet}
-                                  </div>  <div className="matchoddsmin">
-
-                                 
-                                  max:{PostMinMaxGameDetailsData?.Odds&&PostMinMaxGameDetailsData?.Odds[id1]?.minBet}
-                                  </div>
-                               
+                                  max:
+                                  {PostMinMaxGameDetailsData?.Odds &&
+                                    PostMinMaxGameDetailsData?.Odds[id1]
+                                      ?.maxBet}
+                                </div>{" "}
+                                <div className="matchoddsmin">
+                                  max:
+                                  {PostMinMaxGameDetailsData?.Odds &&
+                                    PostMinMaxGameDetailsData?.Odds[id1]
+                                      ?.minBet}
+                                </div>
                                 <div
                                   data-title="OPEN"
                                   className="table-body"
@@ -497,7 +489,9 @@ console.log(id,"ididid")
                                 >
                                   {item11?.runners?.map((item1, index) => {
                                     return (
-                                      <>
+                                      <>{
+                                        // console.log(item11?.runners)
+                                      }
                                         <div
                                           data-title="OPEN"
                                           className="table-row"
@@ -512,25 +506,40 @@ console.log(id,"ididid")
                                               <b>{item1?.name}</b>
                                             </span>
                                             <p className="box-w4">
-                                              <span className="float-left ubook">
-                                                0
-                                              </span>
+
+                                              {/* <span className="float-left ubook" style={{color: "red"}}> */}
+                                                {(oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl)>0 ?    
+                                                 <span className="float-left ubook" style={{color: "red"}}>{oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl }</span> :
+                                                 <span className="float-left ubook" style={{color: "green"}}>{oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl }</span>}
+                                            
+
                                             </p>
                                           </div>
 
                                           {item1?.ex?.availableToBack.map(
                                             (item, id) => {
                                               return (
+                                                
                                                 <div
                                                   className={`box-w1 float-left back hidden-portrait  ${
                                                     id === 0 || id === 1
                                                       ? "dis-none"
                                                       : ""
                                                   }
-                                                       ${item?.price !== 
-                                                        previousState?.data?.Odds[id1]?.runners[index]?.ex?.availableToBack[id]?.price? "blink1": " "}`}
-                                                
+                                                       ${
+                                                         item?.price !==
+                                                         previousState?.data
+                                                           ?.Odds[id1]?.runners[
+                                                           index
+                                                         ]?.ex?.availableToBack[
+                                                           id
+                                                         ]?.price
+                                                           ? "blink1"
+                                                           : " "
+                                                       }`}
                                                 >
+
+                                                  {/* {console.log(item1,"itemitemitem")} */}
                                                   <button
                                                     type="button"
                                                     className="back"
@@ -666,11 +675,15 @@ console.log(id,"ididid")
                             </div>
                             <div className="max">
                               Max:
-                              {PostMinMaxGameDetailsData && PostMinMaxGameDetailsData?.Bookmaker&&PostMinMaxGameDetailsData?.Bookmaker[0]?.maxBet}
+                              {PostMinMaxGameDetailsData &&
+                                PostMinMaxGameDetailsData?.Bookmaker &&
+                                PostMinMaxGameDetailsData?.Bookmaker[0]?.maxBet}
                             </div>
                             <div className="min">
                               MIN:
-                              {PostMinMaxGameDetailsData &&PostMinMaxGameDetailsData?.Bookmaker && PostMinMaxGameDetailsData?.Bookmaker[0]?.minBet}
+                              {PostMinMaxGameDetailsData &&
+                                PostMinMaxGameDetailsData?.Bookmaker &&
+                                PostMinMaxGameDetailsData?.Bookmaker[0]?.minBet}
                             </div>
                             {/* {PostMinMaxGameDetailsData&&PostMinMaxGameDetailsData?.Bookmaker[index]
                             .map((item222)=>{ */}
@@ -694,11 +707,17 @@ console.log(id,"ididid")
                                         <div className="float-left box-w6 country-name">
                                           <span className="team-name">
                                             <b> {item?.nation}</b>
+                                            {/* {console.log(item?.sid,"item")} */}
                                           </span>
                                           <p className="box-w4">
-                                            <span className="float-left ubook">
-                                              0
-                                            </span>
+
+                                          {(bookmakerPnl.find((itemPnl) =>itemPnl.selection ==item.sid)?.pnl)>0 ?    
+                                                 <span className="float-left ubook" style={{color: "red"}}> {bookmakerPnl.find((itemPnl) =>itemPnl.selection ==item.sid)?.pnl}</span> :
+                                                 <span className="float-left ubook" style={{color: "green"}}> {bookmakerPnl.find((itemPnl) =>itemPnl.selection ==item.sid)?.pnl}</span>}
+                                            
+
+
+                                         
                                           </p>
                                         </div>
                                         <div className="box-w3 float-left back ">
@@ -808,7 +827,12 @@ console.log(id,"ididid")
                                   <div data-v-e03c6f20="">
                                     {Object.keys(onlyFancyDetails).map(
                                       (key) => (
-                                        <>                                          <div
+                                        <>
+                                        {console.log(onlyFancyDetails)}
+                                        {/* {console.log(key)} */}
+                                        {/* {oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl} */}
+                                          {" "}
+                                          <div
                                             data-v-e03c6f20=""
                                             className="table-header"
                                           >
@@ -855,38 +879,42 @@ console.log(id,"ididid")
                                             data-v-e03c6f20=""
                                             className="table-body"
                                           ></div>
-
                                           {onlyFancyDetails[key].map(
                                             (item, index) => (
-                                              <>
-                                               <div
+                                              <><div
+                                                  data-v-e03c6f20=""
+                                                  className="min-max  text-right"
+                                                >
+                                                  <p
                                                     data-v-e03c6f20=""
-                                                    className="min-max  text-right"
+                                                    className="m-b-0"
                                                   >
-                                                    <p
+                                                    <span
                                                       data-v-e03c6f20=""
-                                                      className="m-b-0"
+                                                      className="text-dark"
                                                     >
-                                                      <span
-                                                        data-v-e03c6f20=""
-                                                        className="text-dark"
-                                                      >
-                                                        Min:{" "}
-                                                        <span data-v-e03c6f20="">
-                                                      {onlyFancyMaxMinDetails&&onlyFancyMaxMinDetails[key]?.[index]?.maxBet}
-                                                        </span>
-                                                      </span>{" "}
-                                                      <span
-                                                        data-v-e03c6f20=""
-                                                        className="text-dark"
-                                                      >
-                                                        Max:{" "}
-                                                        <span data-v-e03c6f20="">
-                                                          {onlyFancyMaxMinDetails&&onlyFancyMaxMinDetails[key]?.[index]?.minBet}
-                                                        </span>
+                                                      Min:{" "}
+                                                      <span data-v-e03c6f20="">
+                                                        {onlyFancyMaxMinDetails &&
+                                                          onlyFancyMaxMinDetails[
+                                                            key
+                                                          ]?.[index]?.maxBet}
                                                       </span>
-                                                    </p>
-                                                  </div>
+                                                    </span>{" "}
+                                                    <span
+                                                      data-v-e03c6f20=""
+                                                      className="text-dark"
+                                                    >
+                                                      Max:{" "}
+                                                      <span data-v-e03c6f20="">
+                                                        {onlyFancyMaxMinDetails &&
+                                                          onlyFancyMaxMinDetails[
+                                                            key
+                                                          ]?.[index]?.minBet}
+                                                      </span>
+                                                    </span>
+                                                  </p>
+                                                </div>
                                                 <div
                                                   data-v-e03c6f20=""
                                                   className="fancy-tripple "
@@ -900,8 +928,7 @@ console.log(id,"ididid")
                                                       "SUSPENDED"
                                                         ? "suspended"
                                                         : ""
-                                                    }`}
-                                                  >
+                                                    }`}>
                                                     <div
                                                       data-v-e03c6f20=""
                                                       className="float-left box-w4 country-name"
@@ -926,6 +953,12 @@ console.log(id,"ididid")
                                                             data-v-e03c6f20=""
                                                             className="float-left ubook fancy-span"
                                                           >
+ 
+
+                                        {FancyPNL?.data? ((FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl)>0 ?    
+                                                 <span className="float-left ubook" style={{color: "red"}}> {FancyPNL?.data?  (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl):0 }</span> :
+                                                 <span className="float-left ubook" style={{color: "green"}}> {FancyPNL?.data?  (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl):0 }</span>)
+                                            :(0) }
                                                             0
                                                           </span>
                                                         </p>
@@ -958,6 +991,39 @@ console.log(id,"ididid")
                                                         className="lay"
                                                         onClick={() =>
                                                           handleBitValueFancy(
+                                                            item?.l1,
+                                                            item.nation,
+                                                            "lay",
+                                                            true,
+                                                            item,
+                                                            key
+                                                          )
+                                                        }
+                                                      >
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="odd d-block"
+                                                        >
+                                                          {item?.l1}
+                                                        </span>{" "}
+                                                        <span data-v-e03c6f20="">
+                                                          {item?.ls1}
+                                                        </span>
+                                                      </button>
+                                                    </div>
+
+
+
+
+                                                    <div
+                                                      data-v-e03c6f20=""
+                                                      className="box-w1 back float-left text-center"
+                                                    >
+                                                      <button
+                                                        data-v-e03c6f20=""
+                                                        className="back"
+                                                        onClick={() =>
+                                                          handleBitValueFancy(
                                                             item?.b1,
                                                             item.nation,
                                                             "back",
@@ -980,35 +1046,6 @@ console.log(id,"ididid")
                                                     </div>
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      className="box-w1 back float-left text-center"
-                                                    >
-                                                      <button
-                                                        data-v-e03c6f20=""
-                                                        className="back"
-                                                        onClick={() =>
-                                                          handleBitValueFancy(
-                                                            item?.l1,
-                                                            item.nation,
-                                                            "lay",
-                                                            true,
-                                                            item,
-                                                            key
-                                                          )
-                                                        }
-                                                      >
-                                                        <span
-                                                          data-v-e03c6f20=""
-                                                          className="odd d-block"
-                                                        >
-                                                          {item?.l1}
-                                                        </span>{" "}
-                                                        <span data-v-e03c6f20="">
-                                                          {item?.ls1}
-                                                        </span>
-                                                      </button>
-                                                    </div>
-                                                    <div
-                                                      data-v-e03c6f20=""
                                                       className="box-w1 float-left back   hidden-portrait dis-none"
                                                     ></div>
                                                     <div
@@ -1021,7 +1058,6 @@ console.log(id,"ididid")
                                                     data-v-e03c6f20=""
                                                     className="fancy-tripple"
                                                   ></div>
-                                                
                                                 </div>
                                               </>
                                             )
@@ -1126,7 +1162,6 @@ console.log(id,"ididid")
                   {PostBetListByMatchIdData?.data &&
                     Object.keys(PostBetListByMatchIdData?.data).map((key) => (
                       <>
-
                         {PostBetListByMatchIdData?.data[key].map((item) => (
                           <>
                             <div class="events matched-bet collapse show">
@@ -1171,9 +1206,8 @@ console.log(id,"ididid")
           </div>
         </div>
       </div>
-         {/* )
+      {/* )
        } */}
-      
     </div>
   );
 };

@@ -16,7 +16,10 @@ const BitPopup = ({ bitValue, datatattatattat,cssClasssss ,closePopUp}) => {
   // const [cssClsssss, setCssClasssss] = useState("bet-modal");
   const {PostBetingOnGameDetail,GetGeolocationIP } = useSelector((state) => state.auth);
   let { id } = useParams();
-
+console.log(bitValue?.Gamenamemeeee)
+console.log(datatattatattat)
+console.log(cssClasssss)
+console.log(closePopUp)
   // const [getBetValue, setgetBetValue] = useState();
   // console.log(bitValue, "bitValuebitValue");
   const dispatch = useDispatch();
@@ -26,7 +29,9 @@ const BitPopup = ({ bitValue, datatattatattat,cssClasssss ,closePopUp}) => {
   const handleInput = (val) => {
     // console.log(val);
     setUpdated(val);
-    setConfirmBet(true);
+    if(bitValue?.Gamenamemeeee!=="Fancy "){
+    setConfirmBet(true)}
+
     cssClasssss("bet-modal")
     // console.log(val + updated);
     datatattatattat("true");
@@ -85,7 +90,8 @@ let data =  {
     "name": bitValue?.cname,
     "marketName": bitValue?.vl2,
     "selectionId": bitValue?.selectionId,
-    "priceValue": bitValue?.Odds,
+    "priceValue": updated,
+    // "marketName":bitValue?.marketNameeee,
     "placeTime": bitValue?.bettingTime,
     "marketId":bitValue?.marketId,
     "matchId": id,
@@ -246,7 +252,7 @@ const handleCloseButton=()=>{
                   <div>
                     <div class="row p-b-10 m-l-5 m-r-5">
                       <div class="col-4 p-l-5 p-r-5 text-left">
-                        <span> South Africa </span>
+                        <span> {bitValue?.AllBookmakerData&&bitValue?.AllBookmakerData[0]?.nation} </span>
                       </div>
                       <div class="col-4 p-l-5 p-r-5 text-center">
                         {" "}
@@ -268,7 +274,7 @@ const handleCloseButton=()=>{
                     </div>
                     <div class="row p-b-10 m-l-5 m-r-5">
                       <div class="col-4 p-l-5 p-r-5 text-left">
-                        <span> West Indies </span>
+                        <span> {bitValue?.AllBookmakerData&&bitValue?.AllBookmakerData[1]?.nation} </span>
                       </div>
                       <div class="col-4 p-l-5 p-r-5 text-center">
                         {" "}
@@ -284,7 +290,7 @@ const handleCloseButton=()=>{
                         </span>
                       </div>
                     </div>
-                    <div class="row p-b-10 m-l-5 m-r-5">
+                    {/* <div class="row p-b-10 m-l-5 m-r-5">
                       <div class="col-4 p-l-5 p-r-5 text-left">
                         <span> The Draw </span>
                       </div>
@@ -301,7 +307,7 @@ const handleCloseButton=()=>{
                           <b>{updated === "" ? "0.00" : -updated}</b>
                         </span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </>
               ) : (

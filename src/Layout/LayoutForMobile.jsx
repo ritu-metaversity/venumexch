@@ -28,14 +28,10 @@ const dispatch =useDispatch()
   const [BetType, setBetType] = useState("");
   const [BetTypeFooter, setBetTypeFooter] = useState(false);
 
-const { PostvalidatejwttokenData ,PostvalidatejwttokenDataError,PostuserselfregisterDataError} = useSelector((state) => state.auth);
-
-  const [closeeee, setCloseeeee] = useState(false);
+const { PostvalidatejwttokenDataError} = useSelector((state) => state.auth);
 
   const RightSideBarClose = (vl) => {
-    // console.log(vl,"RightSideBarCloseRightSideBarCloseRightSideBarClose")
     setRightValue(false);
-    // setRightValue(false);
   };
 
 useEffect(()=>{
@@ -44,13 +40,10 @@ useEffect(()=>{
     }, 1000);
     return () => clearInterval(time);
 },[dispatch])
-console.log(PostvalidatejwttokenDataError)
-console.log(PostvalidatejwttokenData)
-
 
 useEffect(()=>{
 if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
-  console.log("no token")
+  localStorage.clear();
   navigate("/m/login")
 }
 },[PostvalidatejwttokenDataError])

@@ -96,7 +96,7 @@ useEffect(()=>{
     !ValidationFile.isEmpty(confirmPassword)
   ) {
     dispatch(PostPwChangeFirstTime(passwordData))
-    // navigate("/m/home");
+    navigate("/m/login");
 }}
 
 
