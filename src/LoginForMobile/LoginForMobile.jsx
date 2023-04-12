@@ -75,7 +75,7 @@ let  navigate =useNavigate()
 //    userId: userName,
 //    password: password
 // }
-//         axios.post('http://api.a2zscore.com/admin-new-apis/login/client-login', data)
+//         axios.post('http://api.247365.exchange/admin-new-apis/enduser/get-user-message', data)
 //        .then((response) => {
 
 //          if(window.innerWidth < 461){

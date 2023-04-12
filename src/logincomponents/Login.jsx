@@ -287,7 +287,7 @@ console.log(window.location.hostname)
             <Modal
               className="login-confirm-modal"
               show={show}
-              style={{marginLeft: "11%"}}
+              style={{marginLeft: "1%"}}
               onHide={handleClose}
               backdrop="static"
               keyboard={false}

@@ -6,6 +6,8 @@ import {
   PostBetListByMatchId,
   PostGameDetailsByMI,
   PostMinMaxGameDetails,
+  PostUserfancypnl,
+  PostUserOddPnl,
 } from "../../App/Features/auth/authActions";
 import "./GameDetails.css";
 import moment from "moment";
@@ -13,6 +15,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 import { useMediaQuery } from "@mui/material";
 import { socket } from "./socket";
+import { createProfits } from "./eventUtils";
+import AlertBtn from "../Alert/AlertBtn";
 
 const GameDetails = () => {
   let { id } = useParams();
@@ -26,20 +30,30 @@ const GameDetails = () => {
   const [previousState, setPreviousState] = useState({});
   // const [isLoading, setIsloading] = useState(true);
   const [gameIframeId, setGameIframeId] = useState(4);
+  const [msg, setMsg] = useState("");
+
   const [PostMinMaxGameDetailsData, setPostMinMaxGameDetailsData] = useState(
     {}
   );
 // console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
- 
-  const [PostBetListByMatchIdData, setPostBetListByMatchIdData] = useState({});
+ const [betDetails,setBetDetails] = useState({})
+  // const [PostBetListByMatchIdData, setPostBetListByMatchIdData] = useState({});
+  const { PostBetingOnGameDetail,PostUserOddPnlData,PostUserfancypnlata,PostBetListByMatchIdData } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     const iddd = localStorage.getItem("SportId");
     setGameIframeId(iddd);
   }, [localStorage]);
 
+  const [profits, setProfits] = useState({
+    Odds: {},
+    Bookmaker: [],
+    Fancy: [],
+  });
 
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
@@ -56,8 +70,10 @@ const GameDetails = () => {
     gamename,
     marketId,
     item1,
-    item
+    item,item11,
+    oddsssss
   ) => {
+    console.log(item11)
     if (price > 0) {
       datatata({
         Odds: price,
@@ -69,8 +85,20 @@ const GameDetails = () => {
         bettingTime: new Date(),
         marketNameeee:item?.name,
         "Gamenamemeeee ":"odds ",
-        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker
+        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker,
+        "matchDetails":item11,
+        "oddsssss":oddsssss,
+        profits,
       });
+setBetDetails({
+  isBack: color,
+  odds: price,
+  stake: 0,
+  selectionId: item.selectionId ,
+  marketId: marketId,
+  priceValue: price,
+  isFancy: false,
+})
     } else {
       alert("Pleace select other bit");
     }
@@ -78,8 +106,8 @@ const GameDetails = () => {
   };
 
   const handleBitValueBookmaker = (price, name, color, item1) => {
-    console.log(item1)
-    console.log(gameDetailsData?.data?.Bookmaker)
+    // console.log(item1)
+    // console.log(gameDetailsData?.data?.Bookmaker)
     if (price > 0) {
       datatata({
         Odds: price,
@@ -91,8 +119,21 @@ const GameDetails = () => {
         t: item1?.t,
         bettingTime: new Date(),
         "Gamenamemeeee ":"Bookmaker ",
-        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker
+        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker,
+        "matchDetails":gameDetailsData?.data?.Bookmaker,
+        "bookmakerPnl":bookmakerPnl,
+        profits,
+
       });
+      setBetDetails({
+        isBack: color,
+        odds: price,
+        stake: 0,
+        selectionId: item1.sid ,
+        marketId: item1?.mid,
+        priceValue: price,
+        isFancy: false,
+      })
     } else {
       alert("Pleace select other bit");
     }
@@ -111,8 +152,18 @@ const GameDetails = () => {
         selectionId: 0,
         t: item?.t,
         bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
-        "Gamenamemeeee ":"Fancy "
+        "Gamenamemeeee ":"Fancy ",
+        profits,
       });
+      setBetDetails({
+        isBack: color,
+        odds: price,
+        stake: 0,
+        selectionId: 0 ,
+        marketId: item?.sid,
+        priceValue: price,
+        isFancy: false,
+      })
     } else {
       alert("Pleace select other bit");
     }
@@ -153,8 +204,7 @@ const GameDetails = () => {
   }, []);
 
   useEffect(() => {
-    let timer = setInterval(
-      () =>
+    let timer = setInterval(() =>
         !OddSocketConnected &&
         socket.emit("JoinRoom", {
           eventId: id,
@@ -164,7 +214,7 @@ const GameDetails = () => {
     return () => {
       clearInterval(timer);
     };
-  }, [OddSocketConnected]);
+  }, [OddSocketConnected, id]);
 
   useEffect(() => {
     OddSocketConnected && setOddSocketConnected(false);
@@ -186,7 +236,7 @@ const GameDetails = () => {
     setOpenBet(true);
     setMarket(false);
     let data = { matchId: id };
-    // dispatch(PostBetListByMatchId(data));
+    dispatch(PostBetListByMatchId(data));
   };
 
   const handleNationName = (name) => {};
@@ -240,12 +290,25 @@ const GameDetails = () => {
     { shouldReconnect: (event) => true }
   );
 
-  useEffect(() => {
-    if (datataatatatta?.data && JSON.parse(datataatatatta?.data)?.data) {
-      setPostBetListByMatchIdData(JSON.parse(datataatatatta?.data));
 
-    }
-  }, [datataatatatta]);
+useEffect(()=>{
+  dispatch(PostUserOddPnl({"matchId":id}))
+
+},[])
+
+useEffect(()=>{
+  dispatch(PostUserfancypnl({"matchId":id}))
+},[])
+
+// console.log(PostUserOddPnlData,"PostUserOddPnlData")
+// console.log(PostUserfancypnlata,"PostUserfancypnlata")
+// console.log(datataatatatta,"datataatatatta")
+  // useEffect(() => {
+  //   if (PostUserOddPnlData?.data && JSON.parse(PostUserOddPnlData?.data)?.data) {
+  //     setPostBetListByMatchIdData(JSON.parse(PostUserOddPnlData?.data));
+
+  //   }
+  // }, [PostUserOddPnlData]);
 
   const [oddsPnl, setOddsPnl] = useState({});
 
@@ -275,8 +338,12 @@ const GameDetails = () => {
   const [oddsssss, setOddsssss] = useState({});
   const [bookmakerPnl, setBookmakerPnl] = useState({});
 
+  console.log(bookmakerPnl)
+
   useEffect(() => {
     if(oddsPnl){
+    if(oddsPnl[0]?.marketId.includes("BM")){
+      console.log("0 BM")
     let bookmakerPnlllll = [
       {
         selection: oddsPnl[0]?.selection1,
@@ -291,8 +358,11 @@ const GameDetails = () => {
         pnl: oddsPnl[0]?.pnl3,
       },
     ];
-
-    let odsssss = [
+setBookmakerPnl(bookmakerPnlllll);
+    }else{
+      console.log("1 BM")
+   
+    let bookmakerPnlllll = [
       {
         selection: oddsPnl[1]?.selection1,
         pnl: oddsPnl[1]?.pnl1,
@@ -306,10 +376,55 @@ const GameDetails = () => {
         pnl: oddsPnl[1]?.pnl3,
       },
     ];
-
+setBookmakerPnl(bookmakerPnlllll);
+    }
+    if(!oddsPnl[0]?.marketId.includes("BM")){
+      console.log(" 0 not BM")
+    let odsssss = [
+       {
+          selection: oddsPnl[0]?.selection1,
+          pnl: oddsPnl[0]?.pnl1,
+        },
+        {
+          selection: oddsPnl[0]?.selection2,
+          pnl: oddsPnl[0]?.pnl2,
+        },
+        {
+          selection: oddsPnl[0]?.selection3,
+          pnl: oddsPnl[0]?.pnl3,
+        },
+      ];
     setOddsssss(odsssss);
-    setBookmakerPnl(bookmakerPnlllll);}
+
+
+
+    }else{
+      console.log("1 BM")
+
+       let odsssss = [
+       
+          {
+          selection: oddsPnl[1]?.selection1,
+          pnl: oddsPnl[1]?.pnl1,
+        },
+        {
+          selection: oddsPnl[1]?.selection2,
+          pnl: oddsPnl[1]?.pnl2,
+        },
+        {
+          selection: oddsPnl[1]?.selection3,
+          pnl: oddsPnl[1]?.pnl3,
+        },
+        
+      ];
+    setOddsssss(odsssss);
+
+
+    }
+  }
   }, [oddsPnl]);
+
+
 
   // ******* PNL DATA FANCY
 
@@ -322,7 +437,7 @@ const GameDetails = () => {
     }/enduserfancy/${id}/${localStorage.getItem("TokenId")}`,
     { shouldReconnect: (event) => true }
   );
-console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data)")
+// console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data)")
 // console.log(onlyFancyDetails)
 
   useEffect(() => {
@@ -339,7 +454,7 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
         setFacnyPNL(null);
       }
   }, [lastFancyPnl]);
-        console.log(FancyPNL?.data,"FancyPNL")
+        // console.log(FancyPNL?.data,"FancyPNL")
 
 
 
@@ -363,9 +478,48 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
 // setFacnyPNL(fancyyyyyypnl)
 //   }, []);
 
+console.log(gameDetailsData,"odsds ---------")
 
+useEffect(() => {
+  console.log(gameDetailsData,"oods22---")
+  createProfits({
+    fancyOdds:gameDetailsData?.data,
+    fancyPnl: setFacnyPNL?.data,
+    betDetails,
+    rechange: true,
+    pnl: oddsPnl,
+    setProfits,
+  });
+}, [
+  betDetails?.stake,
+  oddsPnl,
+  FancyPNL,
+  gameDetailsData?.data?.Odds && gameDetailsData?.data?.Odds[0]?.marketId,
+  betDetails?.marketId,
+  betDetails?.selectionId,
+]);
+
+
+console.log(msg, "sadafgsdfhgdfghgf")
+
+
+useEffect(()=>{
+  if(  PostBetingOnGameDetail?.status===true){
+    setMsg(PostBetingOnGameDetail?.message);
+    // console.log(PostBetingOnGameDetail, "PostBetingOnGameDetail")
+  }
+},[PostBetingOnGameDetail])
+console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
   return (
     <div>
+      {
+        PostBetingOnGameDetail?.status===true?
+<div className="alertPopup">
+      <AlertBtn  val={msg }/>
+      </div>
+        :""
+      }
+      
       {/* {
         isLoading===true?<div className="mani-loading">
           <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 
@@ -453,6 +607,11 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                       {gameDetailsData?.data?.Odds?.map((item11, id1) => {
                         return (
                           <div>
+                               <marquee className="news-line">
+                      {
+ item11?.display_message
+}
+            </marquee>
                             <div>
                               <div className=" m-b-10 main-market w-100 float-left">
                                 <div className="table-header">
@@ -482,6 +641,13 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                     PostMinMaxGameDetailsData?.Odds[id1]
                                       ?.minBet}
                                 </div>
+                                <div className="matchdelay">
+                                BetDelay:
+                                  {PostMinMaxGameDetailsData?.Odds &&
+                                    PostMinMaxGameDetailsData?.Odds[id1]
+                                      ?.betDelay
+                                    }
+                                </div>
                                 <div
                                   data-title="OPEN"
                                   className="table-body"
@@ -490,7 +656,7 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                   {item11?.runners?.map((item1, index) => {
                                     return (
                                       <>{
-                                        // console.log(item11?.runners)
+                                        // console.log(item11,"item11item11")
                                       }
                                         <div
                                           data-title="OPEN"
@@ -508,9 +674,9 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                             <p className="box-w4">
 
                                               {/* <span className="float-left ubook" style={{color: "red"}}> */}
-                                                {(oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl)>0 ?    
-                                                 <span className="float-left ubook" style={{color: "red"}}>{oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl }</span> :
-                                                 <span className="float-left ubook" style={{color: "green"}}>{oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl }</span>}
+                                                 <span className="float-left ubook" style={{color: (profits.Odds[item11?.marketId]?.find((itemPnl) =>itemPnl.sid == item1.selectionId)?.value)<0 ?"red":"green"}}>
+                                                {(profits.Odds[item11?.marketId]?.find((itemPnl) =>itemPnl.sid == item1.selectionId)?.value)}
+                                                  </span> 
                                             
 
                                             </p>
@@ -538,7 +704,7 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                                            : " "
                                                        }`}
                                                 >
-
+{/* {console.log(item1,"item1item1item1")} */}
                                                   {/* {console.log(item1,"itemitemitem")} */}
                                                   <button
                                                     type="button"
@@ -551,7 +717,8 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                                         item11?.Name,
                                                         item11?.marketId,
                                                         item,
-                                                        item1
+                                                        item1,item11,oddsssss
+
                                                       )
                                                     }
                                                   >
@@ -685,6 +852,12 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                 PostMinMaxGameDetailsData?.Bookmaker &&
                                 PostMinMaxGameDetailsData?.Bookmaker[0]?.minBet}
                             </div>
+                            <div className="betDelay">
+                            BetDelay:
+                              {PostMinMaxGameDetailsData &&
+                                PostMinMaxGameDetailsData?.Bookmaker &&
+                                PostMinMaxGameDetailsData?.Bookmaker[0]?.betDelay}
+                            </div>
                             {/* {PostMinMaxGameDetailsData&&PostMinMaxGameDetailsData?.Bookmaker[index]
                             .map((item222)=>{ */}
 
@@ -710,10 +883,14 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                             {/* {console.log(item?.sid,"item")} */}
                                           </span>
                                           <p className="box-w4">
-
-                                          {(bookmakerPnl.find((itemPnl) =>itemPnl.selection ==item.sid)?.pnl)>0 ?    
-                                                 <span className="float-left ubook" style={{color: "red"}}> {bookmakerPnl.find((itemPnl) =>itemPnl.selection ==item.sid)?.pnl}</span> :
-                                                 <span className="float-left ubook" style={{color: "green"}}> {bookmakerPnl.find((itemPnl) =>itemPnl.selection ==item.sid)?.pnl}</span>}
+                                          {
+}
+                                          {profits.Bookmaker?.find(
+(profit) => profit?.sid === item.sid)?.value<0 ?    
+                                                 <span className="float-left ubook" style={{color: "red"}}> {profits.Bookmaker?.find(
+                                                  (profit) => profit?.sid === item.sid)?.value}</span> :
+                                                 <span className="float-left ubook" style={{color: "green"}}> {profits.Bookmaker?.find(
+                                                  (profit) => profit?.sid === item.sid)?.value}</span>}
                                             
 
 
@@ -751,7 +928,8 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                                 item?.b1,
                                                 "Bookmaker",
                                                 "back",
-                                                item
+                                                item,
+                                                bookmakerPnl
                                               )
                                             }
                                           >
@@ -812,6 +990,11 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                           </div>
                         </div>
                       </div>
+                      <marquee className="news-line">
+                      {
+  gameDetailsData?.data&&gameDetailsData?.data?.Bookmaker[0]?.display_message
+}
+            </marquee>
 
                       {/*  */}
                       <div></div>
@@ -891,7 +1074,7 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                                   >
                                                     <span
                                                       data-v-e03c6f20=""
-                                                      className="text-dark"
+                                                      className="text-dark" style={{marginRight: "8px"}}
                                                     >
                                                       Min:{" "}
                                                       <span data-v-e03c6f20="">
@@ -903,14 +1086,26 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                                     </span>{" "}
                                                     <span
                                                       data-v-e03c6f20=""
-                                                      className="text-dark"
+                                                      className="text-dark" style={{marginRight: "7px"}}
                                                     >
                                                       Max:{" "}
-                                                      <span data-v-e03c6f20="">
+                                                      <span data-v-e03c6f20="" >
                                                         {onlyFancyMaxMinDetails &&
                                                           onlyFancyMaxMinDetails[
                                                             key
                                                           ]?.[index]?.minBet}
+                                                      </span>
+                                                    </span>
+                                                    <span
+                                                      data-v-e03c6f20=""
+                                                      className="text-dark"
+                                                    >
+                                                      BetDelay:{" "}
+                                                      <span data-v-e03c6f20="">
+                                                        {onlyFancyMaxMinDetails &&
+                                                          onlyFancyMaxMinDetails[
+                                                            key
+                                                          ]?.[index]?.betDelay}
                                                       </span>
                                                     </span>
                                                   </p>
@@ -959,7 +1154,7 @@ console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),
                                                  <span className="float-left ubook" style={{color: "red"}}> {FancyPNL?.data?  (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl):0 }</span> :
                                                  <span className="float-left ubook" style={{color: "green"}}> {FancyPNL?.data?  (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl):0 }</span>)
                                             :(0) }
-                                                            0
+                                                       
                                                           </span>
                                                         </p>
                                                       </div>

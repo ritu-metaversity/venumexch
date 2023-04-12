@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import {getAllPostsComments ,getActiveSportList,postLogin,PostPwChangeFirstTime,PostPasswordChange,PostGameDetailsBySportsId,PostBalance,
     PostGameDetailsByMI,PostGetStackApi,PostEditStack,PostBetListByMatchId,PostTransferStatement,PostPlaceBet,Postactivematchsport,
     Postunsettleddddd,Postcasino,Postprofitlossmatchwise,postBetMarketAndUser,Postisselfbyappurl,Postdepsositrequestclient,Postpaymnetdetailapp,
-    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient,Postvalidatejwttoken,Postuserselfregister,PostMinMaxGameDetails} from './authActions' 
+    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient,Postvalidatejwttoken,Postuserselfregister,PostMinMaxGameDetails,PostUserOddPnl,PostUserfancypnl} from './authActions' 
 
 const INITAL_STATE = {
     
@@ -121,6 +121,15 @@ const INITAL_STATE = {
     PostMinMaxGameDetailsData:null,
     PostMinMaxGameDetailsDataLoading:false,
     PostMinMaxGameDetailsDataError:null,
+
+
+    PostUserOddPnlData:null,
+    PostUserOddPnlDataLoading:false,
+    PostUserOddPnlDataError:null,
+
+    PostUserfancypnlata:null,
+    PostUserfancypnlataLoading:false,
+    PostUserfancypnlataError:null,
 
 }
 
@@ -481,6 +490,32 @@ const authSlice = createSlice({
             state.PostMinMaxGameDetailsData = action.payload.data;
             state.PostMinMaxGameDetailsDataLoading =false;
             state.PostMinMaxGameDetailsDataError = null;
+        })
+        .addCase(PostUserOddPnl.pending, (state) => {
+            state.PostUserOddPnlData = null;
+            state.PostUserOddPnlDataLoading =true;
+            state.PostUserOddPnlDataError = null;
+        }).addCase(PostUserOddPnl.rejected, (state, action) => {
+            state.PostUserOddPnlData = null;
+            state.PostUserOddPnlDataLoading =false;
+            state.PostUserOddPnlDataError = action.error.message;
+        }).addCase(PostUserOddPnl.fulfilled, (state, action) => {
+            state.PostUserOddPnlData = action.payload.data;
+            state.PostUserOddPnlDataLoading =false;
+            state.PostUserOddPnlDataError = null;
+        })
+        .addCase(PostUserfancypnl.pending, (state) => {
+            state.PostUserfancypnlata = null;
+            state.PostUserfancypnlataLoading =true;
+            state.PostUserfancypnlataError = null;
+        }).addCase(PostUserfancypnl.rejected, (state, action) => {
+            state.PostUserfancypnlata = null;
+            state.PostUserfancypnlataLoading =false;
+            state.PostUserfancypnlataError = action.error.message;
+        }).addCase(PostUserfancypnl.fulfilled, (state, action) => {
+            state.PostUserfancypnlata = action.payload.data;
+            state.PostUserfancypnlataLoading =false;
+            state.PostUserfancypnlataError = null;
         })
 
     }

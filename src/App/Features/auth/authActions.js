@@ -377,3 +377,30 @@ export const PostMinMaxGameDetails = createAsyncThunk('auth/PostMinMaxGameDetail
         return rejectWithValue(err.response.data)
     }
 });
+
+
+export const PostUserOddPnl = createAsyncThunk('auth/PostUserOddPnl', async (data, { rejectWithValue }) => {
+    try {
+        const PostUserOddPnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-odds-pnl`,data
+        )
+        return PostUserOddPnlDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+export const PostUserfancypnl= createAsyncThunk('auth/PostUserfancypnl', async (data, { rejectWithValue }) => {
+    try {
+        const PostUserfancypnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/xadmin-new-apis/enduser/user-fancy-pnl`,data
+        )
+        return PostUserfancypnlDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});

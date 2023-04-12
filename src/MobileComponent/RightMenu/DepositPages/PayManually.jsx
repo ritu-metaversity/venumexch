@@ -18,29 +18,16 @@ const PayManually = (props) => {
   const [trueee, setTrueee] = useState(false);
   const [active, setActive] = useState(0);
 
-  //   useEffect(() => {
-  //     UserAPI.Get_Payment_Detail_By_Id().then((res) => {
-  //       setPayMethods(res.data.paymentMethods);
-  //       setUpiDetail(res.data.upiDetail);
-  //     });
-  //   }, []);
-  // console.log(files,"filesfiles")
-
   const dispatch = useDispatch();
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
     (state) => state.auth
   );
   const [Bitvalue, setBitValue] = useState(0);
-  // const [payMethods, setPayMethods] = useState({});
-  const [UpiDetail, setUpiDetail] = useState();
+
   const [pymentMode, setPymentMode] = useState("UPI");
 
   const token = localStorage.getItem("TokenId");
-  // console.log(PostselfdepositappData, "PostselfdepositappData");
-  // console.log(Bitvalue, "PostpaymnetdetailappDataData");
-  // useEffect(()=>{
-  //     setPayMethods(PostpaymnetdetailappDataData?.data)
-  // },[])
+
   const handlePaymentName = (VL, id) => {
     setPymentMode(VL);
     setActive(id)
@@ -53,8 +40,6 @@ const PayManually = (props) => {
     setBitValue(Bitvalue - 10);
   };
 
-  // console.log(PostpaymnetdetailappDataData?.data?.paymentMethods,"line 24")
-
   const handleStaticAmount = (vl) => {
     setBitValue(Bitvalue + vl);
   };
@@ -65,17 +50,12 @@ const PayManually = (props) => {
     }
   }, [token]);
 
-  // const handeImage=(e)=>{
-  // setFiles(e.target.files)
-  // }
-  // console.log(files[0]?.name,"line 24")
-  // console.log(files,"line 24")
   const handleSubmit = () => {
     const data = new FormData();
     data.append("amount", Bitvalue.toString());
 
     data.append("image", files || "");
-    // console.log(data, "datadatadatadatadatadata");
+
     dispatch(Postselfdepositapp(data));
     props.UpdateList(true)
   };
@@ -83,8 +63,8 @@ const PayManually = (props) => {
     <div>
       <h3 className="enter-amount"> Enter Amount</h3>
       <div className="row row5 main-pricecontainor">
-        <div className="text-lef col-6 price-input">
-          <div className="float-left d-flex inputfield">
+        <div className="text-lef col-6 price-input pValue" style={{marginLeft: "-6%"}}>
+          <div className="d-flex inputfield">
             <button
               className="stakeactionminus priceminus btn"
               onClick={decrement}
@@ -100,7 +80,7 @@ const PayManually = (props) => {
               placeholder="Enter Amount"
               className="priceinput"
               value={Bitvalue}
-              // onChange={(e)=>setBitValue(e.target.value)}
+              onChange={(e)=>setBitValue(e.target.value)}
             />
             <button
               className="stakeactionminus priceminus btn"
@@ -114,7 +94,7 @@ const PayManually = (props) => {
             </button>
           </div>
         </div>
-        <div className="col-6">
+        <div className="col-6 pValue">
           <div className="row price-values">
             <div className="col-3 price-data">
               <button
@@ -167,7 +147,7 @@ const PayManually = (props) => {
                 (item, id) => (
                   <Col onClick={() => handlePaymentName(item.methodName, id)}>
                     <div className={`css-1502y4u ${active===id?"active3":""}`}>
-                      <img src={item.logo} className="css-37vfbv" alt="Bank" />
+                      <img src={item.logo} className="css-37vfbv" alt="Bank"  style={{width:"100%"}}/>
                       <p className="Typography-root ">{item.methodName}</p>
                     </div>
                   </Col>
@@ -331,7 +311,10 @@ const PayManually = (props) => {
                   <Col>
                     <div className="">
                       <p>Display Name</p>
-                      <input value={PostpaymnetdetailappDataData&&PostpaymnetdetailappDataData?.data&&PostpaymnetdetailappDataData?.data?.qrCode&&PostpaymnetdetailappDataData?.data?.qrCode?.displayName} type="text" />
+                      <input 
+                      value={PostpaymnetdetailappDataData&&PostpaymnetdetailappDataData?.data&&PostpaymnetdetailappDataData?.data?.qrCode&&PostpaymnetdetailappDataData?.data?.qrCode?.displayName} 
+                      type="text" 
+                      disabled/>
                     </div>
                   </Col>
                 </Row>

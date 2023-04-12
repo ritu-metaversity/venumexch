@@ -34,7 +34,6 @@ useEffect(()=>{
 const handleGameDetails=(id,item)=>{
   // console.log("home page load ")
   // console.log(item?.openDate)
-  console.log(id,"ididid")
  let data= {
   matchName:item?.matchName,
   openDate:item?.openDate,
@@ -44,6 +43,7 @@ const handleGameDetails=(id,item)=>{
       datatata(data)
  navigate(`/m/gamedetail/${id}`)
 }
+console.log(gamesData,"gamesData")
 
     const handleInput = (vl) => {
       // console.log("das")
@@ -57,9 +57,8 @@ const handleGameDetails=(id,item)=>{
 
         // dispatch(PostGameDetailsBySportsId(activeMatchSportWise))
         axios
-          .get(
-           ` http://43.205.50.127:9000/betfair_api/active_match/${activeMatchSportWise}`
-          )
+          // .get(" http://43.205.50.127:9000/betfair_api/active_match")
+          .get(` http://43.205.50.127:9000/betfair_api/active_match/${activeMatchSportWise}`)
           .then((res) => {
             setGamesData(res?.data?.data);
             // console.log(res?.data)
@@ -72,7 +71,6 @@ const handleGameDetails=(id,item)=>{
 //         let data = {sportId: id?id:"4"}
 // dispatch(Postactivematchsport(data))
 //       },[dispatch, id])
-
 
 
 const { PostunsettledData } = useSelector(state => state.auth)
@@ -107,8 +105,23 @@ useEffect(()=>{
     </Link>
     <div>
       <ul   className="market-listing m-t-10">
+{/* 
+      {Object.keys(gamesData?.gamesData).map((key) => (
+    <>
+  
+    
+    
+     { gamesData?.gamesData[key].map(
+        (item, index) => (
+          <>
+          {console.log(item)}
+          </>
+        ))}
+        </>
+         ))} */}
 
-     
+
+
          {gamesData?.length > 0
           ? gamesData.map((item) => {
             return (

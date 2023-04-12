@@ -43,7 +43,7 @@ useEffect(()=>{
   dispatch(Postunsettleddddd(data))
 },[dispatch])
 
-
+console.log(PostunsettledData,"PostunsettledData")
   return (
     <>
       <section className="my-bets-container  manit">
@@ -97,6 +97,7 @@ useEffect(()=>{
 
                          <div class="events matched-bet collapse show">
    <ul>
+    {console.log(el,"elelelel")}
       <li>
          <div><a href="/m/gamedetail/32181223" class={`${el?.isback===false? "lay" :"back"}-bet`}><u>{el?.isback===false? "lay" :"Back"} "IU Will Win the Toss bhav(IU vs PZ)adv for 100.00 @ 1.95" </u></a></div>
          <div class="bet-details">
