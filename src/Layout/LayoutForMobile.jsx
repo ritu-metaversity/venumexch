@@ -35,10 +35,10 @@ const { PostvalidatejwttokenDataError} = useSelector((state) => state.auth);
   };
 
 useEffect(()=>{
-  // const time = setInterval(() => {
+  const time = setInterval(() => {
     dispatch(Postvalidatejwttoken())
-    // }, 1000);
-    // return () => clearInterval(time);
+    }, 1000);
+    return () => clearInterval(time);
 },[dispatch])
 
 useEffect(()=>{

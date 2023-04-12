@@ -44,13 +44,13 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
     },[])
 
     useEffect(()=>{
-      //  const time = setInterval(() => {
+       const time = setInterval(() => {
           if(token!==""){
 
              dispatch(PostBalance())
           }
-          // }, 1000);
-          // return () => clearInterval(time);
+          }, 1000);
+          return () => clearInterval(time);
     },[token])
 
 

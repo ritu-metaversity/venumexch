@@ -168,7 +168,7 @@ export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, {
         if (err) {
             throw err
         }
-        return rejectWithValue(err.response.data)
+        return err.response
     }
 });
 

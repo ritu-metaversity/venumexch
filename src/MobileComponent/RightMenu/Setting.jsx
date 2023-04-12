@@ -19,10 +19,16 @@ const Setting = () => {
   // console.log(stakeThree, "stakeThree");
   // console.log(stakeThree, "stakeThree");
   const { PostGetStack,PostEditStackData ,PostEditStackDataError} = useSelector((state) => state.auth);
-  // console.log(token);
+  console.log(PostEditStackData,"PostEditStackData");
   useEffect(() => {
     dispatch(PostGetStackApi());
   }, [dispatch, stakeUpdate, EditStake]);
+
+
+  useEffect(() => {
+   if(PostEditStackData?.status===true){
+    dispatch(PostGetStackApi());}
+  }, [PostEditStackData?.status]);
 
   useEffect(() => {
     setStakeState(PostGetStack?.data || {});
@@ -144,6 +150,7 @@ const Setting = () => {
             </div> */}
 <div className="eroorrr">
 {  PostEditStackDataError === "Request failed with status code 400" ? " Enter Stacks more then 100 " : ""}
+{  PostEditStackData?.message === "Stake Button Values Saved" ? "Stake successfully updated" : ""}
  
 </div>
             <div className="stake-buttons m-t-20" style={{ paddingTop: "0px" }}>

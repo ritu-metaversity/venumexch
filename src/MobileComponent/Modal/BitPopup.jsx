@@ -45,7 +45,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
     // console.log(val + updated);
     datatattatattat("true");
   };
-  // console.log(bitValue?.data);
+  console.log(userIP,"userIPuserIP");
   // const value = updated;
   // console.log(value);
 
@@ -90,6 +90,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
       marketId: bitValue?.marketId,
       matchId: id,
       t: "",
+      "marketName":"",
       deviceInfo: {
         userAgent:
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",

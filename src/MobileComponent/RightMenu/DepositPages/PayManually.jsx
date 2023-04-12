@@ -6,6 +6,7 @@ import Image from "./Image";
 import { useDispatch, useSelector } from "react-redux";
 import "./PayManually.css";
 import Modal from 'react-bootstrap/Modal';
+import AlertBtn from '../../Alert/AlertBtn';
 
 import {
   Postpaymnetdetailapp,
@@ -22,6 +23,8 @@ const PayManually = (props) => {
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
     (state) => state.auth
   );
+  // Deposit Request Submitted Successfully
+  console.log(PostselfdepositappData?.message,"PostselfdepositappDataPostselfdepositappData")
   const [Bitvalue, setBitValue] = useState(0);
 
   const [pymentMode, setPymentMode] = useState("UPI");
@@ -61,6 +64,14 @@ const PayManually = (props) => {
   };
   return (
     <div>
+       {
+        PostselfdepositappData?.status===true?
+<div className="alertPopup">
+<AlertBtn val={PostselfdepositappData?.message}/>
+      </div>
+        :""
+      }
+      
       <h3 className="enter-amount"> Enter Amount</h3>
       <div className="row row5 main-pricecontainor">
         <div className="text-lef col-6 price-input pValue" style={{marginLeft: "-6%"}}>

@@ -18,6 +18,19 @@ import { socket } from "./socket";
 import { createProfits } from "./eventUtils";
 import AlertBtn from "../Alert/AlertBtn";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 const GameDetails = () => {
   let { id } = useParams();
   const dispatch = useDispatch();
@@ -40,10 +53,11 @@ const GameDetails = () => {
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
  const [betDetails,setBetDetails] = useState({})
   // const [PostBetListByMatchIdData, setPostBetListByMatchIdData] = useState({});
-  const { PostBetingOnGameDetail,PostUserOddPnlData,PostUserfancypnlata,PostBetListByMatchIdData } = useSelector(
+  const { PostBetingOnGameDetail,PostUserOddPnlData,PostUserfancypnlata,PostBetListByMatchIdData,PostBetingOnGameDetailError,PostBetingOnGameDetailErrorrr } = useSelector(
     (state) => state.auth
   );
-
+console.log(PostBetingOnGameDetailError,"PostBetingOnGameDetailError")
+console.log(PostBetingOnGameDetail,"PostBetingOnGameDetail")
   useEffect(() => {
     const iddd = localStorage.getItem("SportId");
     setGameIframeId(iddd);
@@ -364,7 +378,6 @@ clearInterval(timer);
   const [oddsssss, setOddsssss] = useState({});
   const [bookmakerPnl, setBookmakerPnl] = useState({});
 
-  console.log(bookmakerPnl)
 
 
 
@@ -383,20 +396,20 @@ clearInterval(timer);
   // );
 // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data)")
 // console.log(onlyFancyDetails)
-
+console.log(PostUserfancypnlata,"PostUserfancypnlata")
   useEffect(() => {
 
-    // if (lastFancyPnl?.data && JSON.parse(lastFancyPnl?.data))
-      if (PostUserfancypnlata?.data ) {
+    if (PostUserfancypnlata ){
+      if (PostUserfancypnlata ) {
         // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl")
         setFacnyPNL(
-          PostUserfancypnlata?.data
+          PostUserfancypnlata
         );
       }
-      //  else {
-      //   // console.log("FancyPNL")
-      //   setFacnyPNL(null);
-      // }
+       else {
+        // console.log("FancyPNL")
+        setFacnyPNL(null);
+      }}
   }, [PostUserfancypnlata]);
         // console.log(FancyPNL?.data,"FancyPNL")
 

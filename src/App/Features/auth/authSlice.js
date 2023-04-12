@@ -256,11 +256,11 @@ const authSlice = createSlice({
         })
         .addCase(PostEditStack.pending, (state) => {
             state.PostEditStackData = null;
-            state.PostEditStackDataLoading =true;
+            // state.PostEditStackDataLoading =true;
             state.PostEditStackDataError = null;
         }).addCase(PostEditStack.rejected, (state, action) => {
             state.PostEditStackData = null;
-            state.PostEditStackDataLoading =false;
+            // state.PostEditStackDataLoading =false;
             state.PostEditStackDataError = action.error.message;
         }).addCase(PostEditStack.fulfilled, (state, action) => {
             state.PostEditStackData = action.payload.data;
