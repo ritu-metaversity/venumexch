@@ -125,7 +125,7 @@ useEffect(()=>{
          {gamesData?.length > 0
           ? gamesData.map((item) => {
             return (
-        <li   className="market-list-item" style={{    padding: "2px"}} >
+        <li   className="market-list-item" style={{    padding: "2px" ,cursor: "pointer"}} >
             <div   className="item-inner">
               
               <span   className="m-l-10 game-name v-m"onClick={()=>handleGameDetails(item?.matchId,item)} >

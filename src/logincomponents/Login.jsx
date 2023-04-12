@@ -14,8 +14,8 @@ const Login = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [login, setLogin] = useState({});
-  const [userName, setUserName] = useState("sumana6748");
-  const [password, setPassword] = useState("1111111");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   // const [userName, setUserName] = useState("reshmi8396");
   // const [password, setPassword] = useState("342845"); 
   // const [userName, setUserName] = useState("arya2452");

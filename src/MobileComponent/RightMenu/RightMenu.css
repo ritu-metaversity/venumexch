@@ -39,6 +39,12 @@ div {
     text-align: center;
     font-size: 20px;
 }
+.right-menu-bottom li{
+cursor: pointer;
+}
+.logout-button li{
+cursor: pointer;
+}
 .account-overview .menu-item .content .group {
     width: 100%;
     display: inline-block;

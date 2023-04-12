@@ -132,13 +132,14 @@ useEffect(()=>{
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} >
         <div
           className={`eighteen-plus  ${BetType}-border  ${
             BetTypeFooter ? "" : "modal-design"
           } ${cssClsssssssssssss?cssClsssssssssssss:""}` }
+          
         >
-          <Modal.Body>
+          <Modal.Body style={{marginLeft: "-72% !important"}}> 
             <BitPopup bitValue={bitValue} datatattatattat={datatattatattat} cssClasssss={cssClasssss} closePopUp={closePopUp}/>
           </Modal.Body>
         </div>

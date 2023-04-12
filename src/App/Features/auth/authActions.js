@@ -394,7 +394,7 @@ export const PostUserOddPnl = createAsyncThunk('auth/PostUserOddPnl', async (dat
 
 export const PostUserfancypnl= createAsyncThunk('auth/PostUserfancypnl', async (data, { rejectWithValue }) => {
     try {
-        const PostUserfancypnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/xadmin-new-apis/enduser/user-fancy-pnl`,data
+        const PostUserfancypnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-fancy-pnl`,data
         )
         return PostUserfancypnlDataaa
     } catch (err) {

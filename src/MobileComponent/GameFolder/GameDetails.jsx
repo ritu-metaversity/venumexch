@@ -283,22 +283,51 @@ setBetDetails({
   }, [gameDetailsData]);
 // ************* PNL DATA ODDS
 
-  const { lastMessage: datataatatatta } = useWebSocket(
-    `${
-      process.env.REACT_APP_ANKIT_SOCKET_BET
-    }/chat/${id}/${localStorage.getItem("TokenId")}`,
-    { shouldReconnect: (event) => true }
-  );
+  // const { lastMessage: datataatatatta } = useWebSocket(
+  //   `${
+  //     process.env.REACT_APP_ANKIT_SOCKET_BET
+  //   }/chat/${id}/${localStorage.getItem("TokenId")}`,
+  //   { shouldReconnect: (event) => true }
+  // );
 
 
 useEffect(()=>{
-  dispatch(PostUserOddPnl({"matchId":id}))
+
+  let timer = setInterval(() =>
+  dispatch(PostUserOddPnl({"matchId":id})),
+
+2000
+);
+return () => {
+clearInterval(timer);
+};
+
 
 },[])
-
 useEffect(()=>{
-  dispatch(PostUserfancypnl({"matchId":id}))
+
+  let timer = setInterval(() =>
+  dispatch(PostUserfancypnl({"matchId":id})),
+
+2000
+);
+return () => {
+clearInterval(timer);
+};
+
+
 },[])
+
+// useEffect(()=>{
+
+//   let timer = setInterval(() =>
+  
+// 1000
+// )
+// return () => {
+// clearInterval(timer)
+
+// },[])
 
 // console.log(PostUserOddPnlData,"PostUserOddPnlData")
 // console.log(PostUserfancypnlata,"PostUserfancypnlata")
@@ -312,27 +341,24 @@ useEffect(()=>{
 
   const [oddsPnl, setOddsPnl] = useState({});
 
-  const { lastMessage: lastOddsPnl } = useWebSocket(
-    `${
-      process.env.REACT_APP_ANKIT_SOCKET_BET
-    }/enduserodd/${id}/${localStorage.getItem("TokenId")}`,
-    { shouldReconnect: (event) => true }
-  );
+  // const { lastMessage: lastOddsPnl } = useWebSocket(
+  //   `${
+  //     process.env.REACT_APP_ANKIT_SOCKET_BET
+  //   }/enduserodd/${id}/${localStorage.getItem("TokenId")}`,
+  //   { shouldReconnect: (event) => true }
+  // );
 
+  console.log(PostUserOddPnlData,"PostUserOddPnlData")
   useEffect(() => {
-    if (lastOddsPnl?.data && JSON.parse(lastOddsPnl?.data))
+
       if (
-        lastOddsPnl?.data &&
-        JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data !== null
+        PostUserOddPnlData?.data !== null
       ) {
         setOddsPnl(
-          lastOddsPnl?.data &&
-            JSON.parse(lastOddsPnl && lastOddsPnl?.data)?.data
+          PostUserOddPnlData?.data 
         );
-      } else {
-        setOddsPnl(null);
-      }
-  }, [lastOddsPnl]);
+      } 
+  }, [PostUserOddPnlData]);
 
 
   const [oddsssss, setOddsssss] = useState({});
@@ -340,89 +366,7 @@ useEffect(()=>{
 
   console.log(bookmakerPnl)
 
-  useEffect(() => {
-    if(oddsPnl){
-    if(oddsPnl[0]?.marketId.includes("BM")){
-      console.log("0 BM")
-    let bookmakerPnlllll = [
-      {
-        selection: oddsPnl[0]?.selection1,
-        pnl: oddsPnl[0]?.pnl1,
-      },
-      {
-        selection: oddsPnl[0]?.selection2,
-        pnl: oddsPnl[0]?.pnl2,
-      },
-      {
-        selection: oddsPnl[0]?.selection3,
-        pnl: oddsPnl[0]?.pnl3,
-      },
-    ];
-setBookmakerPnl(bookmakerPnlllll);
-    }else{
-      console.log("1 BM")
-   
-    let bookmakerPnlllll = [
-      {
-        selection: oddsPnl[1]?.selection1,
-        pnl: oddsPnl[1]?.pnl1,
-      },
-      {
-        selection: oddsPnl[1]?.selection2,
-        pnl: oddsPnl[1]?.pnl2,
-      },
-      {
-        selection: oddsPnl[1]?.selection3,
-        pnl: oddsPnl[1]?.pnl3,
-      },
-    ];
-setBookmakerPnl(bookmakerPnlllll);
-    }
-    if(!oddsPnl[0]?.marketId.includes("BM")){
-      console.log(" 0 not BM")
-    let odsssss = [
-       {
-          selection: oddsPnl[0]?.selection1,
-          pnl: oddsPnl[0]?.pnl1,
-        },
-        {
-          selection: oddsPnl[0]?.selection2,
-          pnl: oddsPnl[0]?.pnl2,
-        },
-        {
-          selection: oddsPnl[0]?.selection3,
-          pnl: oddsPnl[0]?.pnl3,
-        },
-      ];
-    setOddsssss(odsssss);
 
-
-
-    }else{
-      console.log("1 BM")
-
-       let odsssss = [
-       
-          {
-          selection: oddsPnl[1]?.selection1,
-          pnl: oddsPnl[1]?.pnl1,
-        },
-        {
-          selection: oddsPnl[1]?.selection2,
-          pnl: oddsPnl[1]?.pnl2,
-        },
-        {
-          selection: oddsPnl[1]?.selection3,
-          pnl: oddsPnl[1]?.pnl3,
-        },
-        
-      ];
-    setOddsssss(odsssss);
-
-
-    }
-  }
-  }, [oddsPnl]);
 
 
 
@@ -431,29 +375,29 @@ setBookmakerPnl(bookmakerPnlllll);
   // const [oddsPnl, setOddsPnl] = useState({});
   const [FancyPNL, setFacnyPNL] = useState({});
 
-  const { lastMessage: lastFancyPnl } = useWebSocket(
-    `${
-      process.env.REACT_APP_ANKIT_SOCKET_BET
-    }/enduserfancy/${id}/${localStorage.getItem("TokenId")}`,
-    { shouldReconnect: (event) => true }
-  );
+  // const { lastMessage: lastFancyPnl } = useWebSocket(
+  //   `${
+  //     process.env.REACT_APP_ANKIT_SOCKET_BET
+  //   }/enduserfancy/${id}/${localStorage.getItem("TokenId")}`,
+  //   { shouldReconnect: (event) => true }
+  // );
 // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data)")
 // console.log(onlyFancyDetails)
 
   useEffect(() => {
 
-    if (lastFancyPnl?.data && JSON.parse(lastFancyPnl?.data))
-      if (lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data) ) {
+    // if (lastFancyPnl?.data && JSON.parse(lastFancyPnl?.data))
+      if (PostUserfancypnlata?.data ) {
         // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl")
         setFacnyPNL(
-          lastFancyPnl?.data &&
-            JSON.parse(lastFancyPnl && lastFancyPnl?.data)
+          PostUserfancypnlata?.data
         );
-      } else {
-        // console.log("FancyPNL")
-        setFacnyPNL(null);
       }
-  }, [lastFancyPnl]);
+      //  else {
+      //   // console.log("FancyPNL")
+      //   setFacnyPNL(null);
+      // }
+  }, [PostUserfancypnlata]);
         // console.log(FancyPNL?.data,"FancyPNL")
 
 
@@ -1371,8 +1315,7 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                     >
                                       <u>
                                         {item?.back === true ? "BACK" : "LAY"}{" "}
-                                        IU Will Win the Toss bhav(IU vs PZ)adv
-                                        for {item?.amount} @ {item?.rate}{" "}
+                                        {item?.nation} for {item?.amount} @ {item?.rate}{" "}
                                       </u>
                                     </Link>
                                   </div>

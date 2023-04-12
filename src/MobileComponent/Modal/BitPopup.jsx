@@ -237,7 +237,20 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
                   >
                     Submit
                     <span className="d-block">
-                      Profit: {(Bitvalue * updated - updated).toFixed(0)}
+
+                      Profit:
+                      
+                      {bitValue?.isBack === "back"
+                ? bitValue.isFancy
+                  ? (updated * bitValue.priceValue) / 100
+                  :(marketId?.includes("BM") ||
+                  marketId?.includes("bm") ||
+                  marketId?.includes("Bm")
+                      ? (bitValue.Odds * updated) / 100
+                      : (bitValue.Odds - 1) * updated
+                    ).toFixed(2)
+                : updated}
+                      
                     </span>
                   </button>
                 </div>
