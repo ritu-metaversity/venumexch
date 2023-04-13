@@ -20,7 +20,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
   const { PostBetingOnGameDetail, GetGeolocationIP } = useSelector(
     (state) => state.auth
   );
-  console.log(PostBetingOnGameDetail,"PostBetingOnGameDetail")
+  console.log(bitValue?.priceValue,"bitValue?.priceValue")
   let { id } = useParams();
   // console.log(bitValue?.oddsssss);
   // console.log(bitValue?.bookmakerPnl);
@@ -84,7 +84,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
       name: bitValue?.cname,
       marketName: bitValue?.vl2,
       selectionId: bitValue?.selectionId,
-      priceValue: updated,
+      priceValue:bitValue?.isFancy=== true ?bitValue?.priceValue:  updated,
       // "marketName":bitValue?.marketNameeee,
       placeTime: bitValue?.bettingTime,
       marketId: bitValue?.marketId,

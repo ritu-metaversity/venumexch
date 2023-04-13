@@ -153,7 +153,7 @@ setBetDetails({
     }
   };
 
-  const handleBitValueFancy = (price, name, color, trueData, item, keykey) => {
+  const handleBitValueFancy = (price, name, color, trueData, item, keykey,ls1) => {
     
     if (price > 0) {
       datatata({
@@ -168,6 +168,7 @@ setBetDetails({
         bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
         "Gamenamemeeee ":"Fancy ",
         profits,
+        "priceValue":ls1
       });
       setBetDetails({
         isBack: color,
@@ -1138,6 +1139,9 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                       data-v-e03c6f20=""
                                                       className="box-w1 lay float-left text-center"
                                                     >
+                                                      {
+console.log(item)
+                                                    }
                                                       <button
                                                         data-v-e03c6f20=""
                                                         className="lay"
@@ -1148,7 +1152,8 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                             "lay",
                                                             true,
                                                             item,
-                                                            key
+                                                            key,
+                                                            item?.ls1
                                                           )
                                                         }
                                                       >
@@ -1181,7 +1186,8 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                             "back",
                                                             true,
                                                             item,
-                                                            key
+                                                            key,
+                                                            item?.bs1
                                                           )
                                                         }
                                                       >

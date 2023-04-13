@@ -28,8 +28,10 @@
 }
 .login-confirm-modal .modal-dialog {
     position: relative;
-    width: auto;
-    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
     pointer-events: none;
 }
 /* .login-confirm-modal */
