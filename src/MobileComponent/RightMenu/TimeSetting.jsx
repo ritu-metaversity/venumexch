@@ -9,7 +9,7 @@ const TimeSetting = () => {
     let time =new Date();
     setDateState(time)
  }
- setInterval(liveTime,1000)
+ setInterval(liveTime,5000)
  
 
   return (

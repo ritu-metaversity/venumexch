@@ -417,3 +417,16 @@ export const Postuserfancybook= createAsyncThunk('auth/Postuserfancybook', async
         return rejectWithValue(err.response.data)
     }
 });
+export const Postloginlogout= createAsyncThunk('auth/Postloginlogout', async (data, { rejectWithValue }) => {
+    try {
+        console.log("loooogogoogogogoog")
+        const PostloginlogoutDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/logout`
+        )
+        return PostloginlogoutDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});

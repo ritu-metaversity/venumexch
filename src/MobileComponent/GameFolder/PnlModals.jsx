@@ -52,9 +52,20 @@ console.log(Postuserfancybookdata,"PostuserfancybookdataPostuserfancybookdata")
                       <td aria-colindex="1" className="text-left">
                         {item?.odds}
                       </td>
-                      <td aria-colindex="4" style={{ color: "#f44336" }}>
+
+                      {item?.pnl < 0?  <td aria-colindex="4" style={{ color: "#f44336" }}>
+                      
+                      {item?.pnl}
+                    </td>
+                  : <td aria-colindex="4" style={{ color: "green" }}>
+                      
+                  {item?.pnl}
+                </td>  
+                  }
+                      {/* <td aria-colindex="4" style={{ color: "#f44336" }}>
+                      
                         {item?.pnl}
-                      </td>
+                      </td> */}
                     </tr>
                     )
                   })

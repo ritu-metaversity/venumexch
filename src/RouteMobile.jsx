@@ -30,6 +30,7 @@ import Casino from "./MobileComponent/Livecasino/Casino";
 import Deposit from "./MobileComponent/RightMenu/DepositPages/Deposit";
 import WithDraw from "./MobileComponent/RightMenu/WithDrawPage/WithDraw";
 import Signup from "./logincomponents/Signup";
+import Gamepage from "./MobileComponent/MidPageM/Gamepage";
 // const Login = lazy(() => import('./logincomponents/Login'))
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -58,7 +59,7 @@ const RouteMobile = () => {
           <Route path="deposit" element={<Deposit />} />
           <Route path="withDraw" element={<WithDraw />} />
 
-          <Route path="/m/game/:id" element={<Midpage />} />
+          <Route path="/m/game/:id" element={<Gamepage />} />
           <Route path="/m/gamedetail/:id" element={<GameDetails />} />
           <Route path="casino-list" element={<Casinolist />} />
           <Route path="/m/casino/:id" element={<Casino />} />

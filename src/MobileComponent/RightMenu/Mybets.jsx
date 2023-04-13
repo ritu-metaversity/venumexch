@@ -48,29 +48,7 @@ console.log(PostunsettledData,"PostunsettledData")
     <>
       <section className="my-bets-container  manit">
         <h2 className="page-title m-t-20 p-l-15 " style={{marginBottom: "4px"}}>Open Bets</h2>
-        {/* <div
-          data-toggle="collapse"
-          data-target=".unmatched-bet"
-          className={`toggleable-list-title ${
-            unmatchedBets === true ? "" : "collapsed"
-          }`}
-          aria-expanded="true"
-          // aria-expanded={`${unmatchedBets===true? "true":"false"}`}
-        >
-          <span>Unmatched Bets</span>{" "}
-          <i
-            className="fas fa-angle-down toggle-icon float-right m-r-10 "
-            onClick={handleUnmatched}
-          ></i>
-        </div>
-        <div
-          className={`events unmatched-bet ${
-            unmatchedBets === true ? "collapse " : "collapse show"
-          } `}
-        >
-          <div className="message">You have no unmatched bets</div>
-        </div> */}
-
+      
         <div
           data-toggle="collapse"
           data-target=".matched-bet"

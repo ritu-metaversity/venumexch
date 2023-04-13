@@ -44,14 +44,25 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
     },[])
 
     useEffect(()=>{
-       const time = setInterval(() => {
+      dispatch(PostBalance())
+
+      if(pathname.includes("m/gamedetail")){
+        const time = setInterval(() => {
           if(token!==""){
 
              dispatch(PostBalance())
           }
           }, 1000);
           return () => clearInterval(time);
-    },[token])
+      }
+       const time = setInterval(() => {
+          if(token!==""){
+
+             dispatch(PostBalance())
+          }
+          }, 5000);
+          return () => clearInterval(time);
+    },[token,pathname])
 
 
     useEffect(()=>{

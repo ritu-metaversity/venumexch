@@ -2,7 +2,8 @@ import {createSlice} from '@reduxjs/toolkit'
 import {getAllPostsComments ,getActiveSportList,postLogin,PostPwChangeFirstTime,PostPasswordChange,PostGameDetailsBySportsId,PostBalance,
     PostGameDetailsByMI,PostGetStackApi,PostEditStack,PostBetListByMatchId,PostTransferStatement,PostPlaceBet,Postactivematchsport,
     Postunsettleddddd,Postcasino,Postprofitlossmatchwise,postBetMarketAndUser,Postisselfbyappurl,Postdepsositrequestclient,Postpaymnetdetailapp,
-    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient,Postvalidatejwttoken,Postuserselfregister,PostMinMaxGameDetails,PostUserOddPnl,PostUserfancypnl,Postuserfancybook} from './authActions' 
+    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient,Postvalidatejwttoken,Postuserselfregister,PostMinMaxGameDetails,PostUserOddPnl,PostUserfancypnl,
+    Postuserfancybook,Postloginlogout} from './authActions' 
 
 const INITAL_STATE = {
     
@@ -134,6 +135,10 @@ const INITAL_STATE = {
     Postuserfancybookdata:null,
     PostuserfancybookdataLoading:false,
     PostuserfancybookdataError:null,
+
+    Postloginlogoutdata:null,
+    PostloginlogoutdataLoading:false,
+    PostloginlogoutdataError:null,
 
 }
 
@@ -533,6 +538,19 @@ const authSlice = createSlice({
             state.Postuserfancybookdata = action.payload.data;
             state.PostuserfancybookdataLoading =false;
             state.PostuserfancybookdataError = null;
+        })
+        .addCase(Postloginlogout.pending, (state) => {
+            state.Postloginlogoutdata = null;
+            state.PostloginlogoutdataLoading =true;
+            state.PostloginlogoutdataError = null;
+        }).addCase(Postloginlogout.rejected, (state, action) => {
+            state.Postloginlogoutdata = null;
+            state.PostloginlogoutdataLoading =false;
+            state.PostloginlogoutdataError = action.error.message;
+        }).addCase(Postloginlogout.fulfilled, (state, action) => {
+            state.Postloginlogoutdata = action.payload.data;
+            state.PostloginlogoutdataLoading =false;
+            state.PostloginlogoutdataError = null;
         })
 
     }

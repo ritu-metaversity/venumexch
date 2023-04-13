@@ -31,7 +31,7 @@ const GameDetails = () => {
   const [matchedBets, setmatchedBets] = useState(false);
   const [gameDetailsData, setGameDetailsData] = useState();
   const [previousState, setPreviousState] = useState({});
-  // const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsloading] = useState(true);
   const [gameIframeId, setGameIframeId] = useState(4);
   const [msg, setMsg] = useState("");
   const [showFancyModals, setShowFancyModals] = useState(false);
@@ -41,6 +41,7 @@ console.log(showFancyModals,"FancyIDFancyID")
   const [PostMinMaxGameDetailsData, setPostMinMaxGameDetailsData] = useState(
     {}
   );
+  console.log(gameDetailsData?.data?.Bookmaker,"gameDetailsDatagameDetailsDatagameDetailsData")
   // console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
@@ -48,13 +49,14 @@ console.log(showFancyModals,"FancyIDFancyID")
   // const [PostBetListByMatchIdData, setPostBetListByMatchIdData] = useState({});
   const {
     PostBetingOnGameDetail,
+    PostBetingOnGameDetailLoading,
     PostUserOddPnlData,
     PostUserfancypnlata,
     PostBetListByMatchIdData,
     PostBetingOnGameDetailError,
     PostBetingOnGameDetailErrorrr,
   } = useSelector((state) => state.auth);
-  // console.log(PostBetingOnGameDetailError, "PostBetingOnGameDetailError");
+  console.log(PostBetingOnGameDetailLoading, "PostBetingOnGameDetailLoading");
   // console.log(PostBetingOnGameDetail, "PostBetingOnGameDetail");
   useEffect(() => {
     const iddd = localStorage.getItem("SportId");
@@ -147,7 +149,7 @@ console.log(showFancyModals,"FancyIDFancyID")
         isFancy: false,
       });
     } else {
-      alert("Pleace select other bit");
+      // alert("Pleace select other bit");
     }
   };
 
@@ -206,6 +208,7 @@ console.log(showFancyModals,"FancyIDFancyID")
   const oddFromSocketSlower = (res) => {
     if (res) {
       setPostMinMaxGameDetailsData(res);
+      console.log(res,"resresresresres")
       // setMFancyOdds(res);
       // setMaxBet(res.Bookmaker[0]);
       //   setMinBet(res);
@@ -235,6 +238,7 @@ console.log(showFancyModals,"FancyIDFancyID")
   useEffect(() => {
     OddSocketConnected && setOddSocketConnected(false);
   }, [id]);
+  
   // console.log(OddSocketConnected)
   const handlematched = () => {
     if (matchedBets === true) {
@@ -306,9 +310,18 @@ console.log(showFancyModals,"FancyIDFancyID")
   //   { shouldReconnect: (event) => true }
   // );
 
+  useEffect(()=>{
+    dispatch(PostUserOddPnl({ matchId: id }))
+    dispatch(PostUserfancypnl({ matchId: id }))
+    console.log("sdfldlkfjsdlfjsdfksdf")
+  },[])
+
+  
   useEffect(() => {
+
     let timer = setInterval(
-      () => dispatch(PostUserOddPnl({ matchId: id })),
+      () => {dispatch(PostUserOddPnl({ matchId: id }))
+      console.log("345tfdswertgfds")},
 
       5000
     );
@@ -466,12 +479,14 @@ console.log("hekemlldfnsdlnfls")
         ""
       )}
 
-      {/* {
-        isLoading===true?<div className="mani-loading">
+
+        {/* {isLoading===true?(<div className="mani-loading">
           <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 
-          <p className="loading-text">Loading...</p> */}
-      {/* </div>: */}
-      {/* ( */}
+          <p className="loading-text">Loading...</p> </div>)
+:
+         */}
+
+
       <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
         <div className="home-page home-page-news">
           <div>
@@ -550,7 +565,7 @@ console.log("hekemlldfnsdlnfls")
                       </div>
                     </div>
                     <div className="m-b-10 main-market w-100 float-left">
-                      {gameDetailsData?.data?.Odds?.map((item11, id1) => {
+                      {gameDetailsData?.data&&gameDetailsData?.data?.Odds?.map((item11, id1) => {
                         return (
                           <div>
                             <marquee className="news-line">
@@ -596,6 +611,7 @@ console.log("hekemlldfnsdlnfls")
                                   className="table-body"
                                   style={{ marginTop: "7px" }}
                                 >
+                                  {console.log(item11,"item11item11item11")}
                                   {item11?.runners?.map((item1, index) => {
                                     return (
                                       <>
@@ -647,7 +663,8 @@ console.log("hekemlldfnsdlnfls")
                                             </p>
                                           </div>
 
-                                          {item1?.ex?.availableToBack.map(
+                                          {[...item1?.ex?.availableToBack].reverse().map(
+                                       
                                             (item, id) => {
                                               return (
                                                 <div
@@ -698,7 +715,7 @@ console.log("hekemlldfnsdlnfls")
                                               );
                                             }
                                           )}
-                                          {item1?.ex?.availableToLay.map(
+                                          {  [...item1?.ex?.availableToLay].reverse().map(
                                             (item, id) => {
                                               return (
                                                 <div
@@ -782,6 +799,9 @@ console.log("hekemlldfnsdlnfls")
                       {/*  */}
 
                       {/*  */}
+
+                      {gameDetailsData?.data?.Bookmaker?.length>0
+                      ?
                       <div>
                         <div className="bm1">
                           <div className=" m-b-10 main-market w-100 float-left">
@@ -843,7 +863,7 @@ console.log("hekemlldfnsdlnfls")
                                             : ""
                                         }`}
                                       >
-                                        <div className="float-left box-w6 country-name">
+                                        <div className="float-left box-w6 country-name" >
                                           <span className="team-name">
                                             <b> {item?.nation}</b>
                                             {/* {console.log(item?.sid,"item")} */}
@@ -974,7 +994,9 @@ console.log("hekemlldfnsdlnfls")
                             )}
                           </div>
                         </div>
-                      </div>
+                      </div>:""
+                      }
+                      
                       <marquee className="news-line">
                         {gameDetailsData?.data &&
                           gameDetailsData?.data?.Bookmaker[0]?.display_message}
@@ -1117,7 +1139,11 @@ console.log("hekemlldfnsdlnfls")
                                                   >
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      className="float-left box-w4 country-name"
+                                                      className="float-left box-w4 country-name"  style={{cursor:'pointer'}} onClick={(e) =>
+                                                        handleFancyBook(
+                                                          item.sid
+                                                        )
+                                                      }
                                                     >
                                                       <div
                                                         data-v-e03c6f20=""
@@ -1132,14 +1158,10 @@ console.log("hekemlldfnsdlnfls")
                                                           </b>
                                                         </span>
                                                         <p
-                                                        style={{cursor:'pointer'}}
+                                                       
                                                           data-v-e03c6f20=""
                                                           className="m-b-0"
-                                                          onClick={(e) =>
-                                                            handleFancyBook(
-                                                              item.sid
-                                                            )
-                                                          }
+
                                                         >
                                                           <span
                                                             data-v-e03c6f20=""
@@ -1147,51 +1169,20 @@ console.log("hekemlldfnsdlnfls")
                                                           
                                                           >
                                                             {FancyPNL?.data ? (
-                                                              FancyPNL?.data.find(
-                                                                (itemPnl) =>
-                                                                  itemPnl?.marketId ==
-                                                                  item?.sid
-                                                              )?.pnl > 0 ? (
-                                                                <span
-                                                                  className="float-left ubook"
-                                                                  style={{
-                                                                    color:
-                                                                      "red",
-                                                                  }}
-                                                                >
+                                                              FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl < 0 ? (
+                                                                <span className="float-left ubook"style={{color:"red"}}>
                                                                   {" "}
-                                                                  {FancyPNL?.data
-                                                                    ? FancyPNL?.data.find(
-                                                                        (
-                                                                          itemPnl
-                                                                        ) =>
-                                                                          itemPnl?.marketId ==
-                                                                          item?.sid
-                                                                      )?.pnl
-                                                                    : 0}
+                                                                  {FancyPNL?.data? FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl: 0}
                                                                 </span>
                                                               ) : (
-                                                                <span
-                                                                  className="float-left ubook"
-                                                                  style={{
-                                                                    color:
-                                                                      "green",
-                                                                  }}
+                                                                <span className="float-left ubook"style={{color:"green",}}
                                                                 >
                                                                   {" "}
-                                                                  {FancyPNL?.data
-                                                                    ? FancyPNL?.data.find(
-                                                                        (
-                                                                          itemPnl
-                                                                        ) =>
-                                                                          itemPnl?.marketId ==
-                                                                          item?.sid
-                                                                      )?.pnl
-                                                                    : 0}
+                                                                  {FancyPNL?.data? FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl: 0}
                                                                 </span>
                                                               )
                                                             ) : (
-                                                              0
+                                                              ""
                                                             )}
                                                           </span>
                                                         </p>
@@ -1397,10 +1388,13 @@ console.log("hekemlldfnsdlnfls")
                       <>
                         {PostBetListByMatchIdData?.data[key].map((item) => (
                           <>
+                      {console.log(key,"keykeykey")}
+
                             <div class="events matched-bet collapse show">
                               <ul>
                                 <li>
                                   <div>
+                                    {/* {console.log(item,"itemitemitemitem")} */}
                                     <Link
                                       to={`/m/gamedetail/${id}`}
                                       className={`${
@@ -1422,7 +1416,7 @@ console.log("hekemlldfnsdlnfls")
                                       <b>{item?.marketName}</b>
                                     </div>
                                     <div>
-                                      <b>Placed: </b>{" "}
+                                      <b>Placed: ---------------------------- Remark </b>{" "}
                                       <span>14/03/2023 13:26</span>
                                     </div>
                                   </div>
@@ -1439,9 +1433,8 @@ console.log("hekemlldfnsdlnfls")
           </div>
         </div>
       </div>
-      {/* )
-       } */}
-
+      {/* } */}
+  
       <Modal
         show={showFancyModals}
         className={`sdfghjkl`}
