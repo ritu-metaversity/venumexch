@@ -303,7 +303,7 @@ const BettingProfitLoss = () => {
                   id="cars"
                   onChange={handleGameName}
                 >
-                  <option value="">Select Mafsdfstch</option>
+                  <option value="">Select Match</option>
 
                   {gamesData?.length > 0
                     ? gamesData.map((item) => {
@@ -405,9 +405,18 @@ const BettingProfitLoss = () => {
                       </p>
                     </div>
                     <div class="pnl-numbers">
-                      <p class="m-b-0 negative">
+                      {
+                        el?.pnl<0 ?
+<p class="m-b-0 negative">
                         <b>{el?.pnl}</b>
                       </p>
+                        :
+<p style={{color:"green"}}>
+                        <b>{el?.pnl}</b>
+                      </p>
+
+                      }
+                      
                     </div>
                   </div>
                 ))

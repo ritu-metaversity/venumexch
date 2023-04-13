@@ -738,6 +738,7 @@ span.fa.fa-plus {
     border-radius: 4px;
     margin: 3px;
     padding-top: 7px;
+    cursor: pointer;
 }
 .btn-bet{
     color: #fff;

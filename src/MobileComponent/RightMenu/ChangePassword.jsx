@@ -102,17 +102,7 @@ useEffect(()=>{
 
 
 const handleSavePassWord=()=>{
-  // if(currentPassword?.length <= 7) {
-  //   console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
-  //   setemptyCurrentLength(true)
-  // }if(currentPassword?.length >= 10) {
-  //   console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
-  //   setemptyCurrentLength(true)
-  // }else{
-  //   setemptyCurrentLength(false)
-  // }
   setInfoError(true);
-
 let passwordData ={
   newPassword:newPassword,
   currentPassword: currentPassword,
@@ -135,7 +125,8 @@ setemptyConfirm(true);
 !ValidationFile.isEmpty(confirmPassword)
 ) {
   dispatch(PostPasswordChange(passwordData))
-  navigate("/m/home");
+  navigate("/m/login");
+
 }}
 
   return (

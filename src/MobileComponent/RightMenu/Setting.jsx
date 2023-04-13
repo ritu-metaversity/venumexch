@@ -6,6 +6,7 @@ import {
   PostEditStack,
   PostGetStackApi
 } from "../../App/Features/auth/authActions";
+import AlertBtn from "../Alert/AlertBtn";
 import "./Setting.css";
 
 const Setting = () => {
@@ -19,10 +20,16 @@ const Setting = () => {
   // console.log(stakeThree, "stakeThree");
   // console.log(stakeThree, "stakeThree");
   const { PostGetStack,PostEditStackData ,PostEditStackDataError} = useSelector((state) => state.auth);
-  // console.log(token);
+  console.log(PostEditStackData,"PostEditStackData");
   useEffect(() => {
     dispatch(PostGetStackApi());
   }, [dispatch, stakeUpdate, EditStake]);
+
+
+  useEffect(() => {
+   if(PostEditStackData?.status===true){
+    dispatch(PostGetStackApi());}
+  }, [PostEditStackData?.status]);
 
   useEffect(() => {
     setStakeState(PostGetStack?.data || {});
@@ -80,71 +87,36 @@ const Setting = () => {
   };
   // console.log(stakeState, "stakeStatestakeState");
   // console.log(PostGetStack?.data, "PostGetStackPostGetStack");
+  let errrorrmsg = " Enter Stacks more then 100"
+  let successfullymsg =  "Stake successfully updated"
   return (
     <>
       <div className="home-page home-page-news">
+        
         <div className="home-page">
           <div className="master-flash-message">
             <div className="flash__wrapper"></div>
           </div>
           <div className="setting-page">
-            {/* <h2 className="page-title">Settings</h2>
-            <h2 className="page-title">
-              One Click Settings
-              <i
-                data-toggle="collapse"
-                data-target=".one-click-info-content"
-                className="fas fa-info-circle m-t-10 m-l-10"
-              ></i>
-              <div className="one-click-info-content collapse">
-                <p className="m-b-0">Using 1 Click Bet is easy.</p>
-                <ul>
-                  <li>Enable 1 Click Betting.</li>
-                  <li>Edit your 1 Click stake values below.</li>
-                  <li>Choose your active stake.</li>
-                  <li>
-                    When 1 Click Betting is activated, choose different stakes
-                    by clicking on the red bar.
-                  </li>
-                  <li>
-                    When done with 1 Click Betting, turn off by tapping the
-                    toggle to off.
-                  </li>
-                </ul>
-              </div>
-            </h2>
-            <div className="one-click m-t-10 m-b-10">
-              <p className="float-left">Tap to turn on one click betting</p>
-              <div className="switchToggle float-right">
-                <input type="checkbox" id="switch" />{" "}
-                <label for="switch"></label>
-              </div>
-            </div>
-            <div
-              className="stake-buttons m-t-20"
-              style={{ paddingTop: "unset" }}
-            >
-              <div className="stake-group">
-                <div className="stake readonly active">
-                  <p className="m-b-0">10</p>
-                </div>
-                <div className="stake readonly">
-                  <p className="m-b-0">200</p>
-                </div>
-                <div className="stake readonly">
-                  <p className="m-b-0">300</p>
-                </div>
-              </div>
-              <button
-                className="btn btn-lg float-right btn-primary m-t-20"
-                style={{ paddingTop: "7px", fontSize: "14px" }}
-              >
-                Edit
-              </button>
-            </div> */}
+         
 <div className="eroorrr">
-{  PostEditStackDataError === "Request failed with status code 400" ? " Enter Stacks more then 100 " : ""}
- 
+{/* {  PostEditStackDataError === "Request failed with status code 400" ? " Enter Stacks more then 100 " : ""}
+{  PostEditStackData?.message === "Stake Button Values Saved" ? "Stake successfully updated" : ""}
+  */}
+{PostEditStackDataError === "Request failed with status code 400"  ? (
+        <div className="Request failed with status code 400">
+          <AlertBtn val={errrorrmsg} />
+        </div>
+      ) : (
+        ""
+      )}
+{PostEditStackData?.message === "Stake Button Values Saved" ? (
+        <div className="Request failed with status code 400">
+          <AlertBtn val={successfullymsg} />
+        </div>
+      ) : (
+        ""
+      )}
 </div>
             <div className="stake-buttons m-t-20" style={{ paddingTop: "0px" }}>
               <h2 className="page-title">Edit Stakes</h2>

@@ -31,9 +31,10 @@ html {
     position: relative;
     display: flex;
     flex-direction: column;
+    left:0;
  margin-top: 77%;
     height: 161px !important;
-    margin-left: 92%;
+    /* margin-left: 92%; */
     pointer-events: auto;
     background-color: #fff;
     background-clip: padding-box;
@@ -88,6 +89,7 @@ html {
 
 .btn {
     padding: 1px 5px !important;
+    border-radius: 5px !important;
 }
 
 .recaptchaTerms {

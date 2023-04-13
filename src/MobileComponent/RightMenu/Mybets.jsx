@@ -43,34 +43,12 @@ useEffect(()=>{
   dispatch(Postunsettleddddd(data))
 },[dispatch])
 
-
+console.log(PostunsettledData,"PostunsettledData")
   return (
     <>
       <section className="my-bets-container  manit">
         <h2 className="page-title m-t-20 p-l-15 " style={{marginBottom: "4px"}}>Open Bets</h2>
-        {/* <div
-          data-toggle="collapse"
-          data-target=".unmatched-bet"
-          className={`toggleable-list-title ${
-            unmatchedBets === true ? "" : "collapsed"
-          }`}
-          aria-expanded="true"
-          // aria-expanded={`${unmatchedBets===true? "true":"false"}`}
-        >
-          <span>Unmatched Bets</span>{" "}
-          <i
-            className="fas fa-angle-down toggle-icon float-right m-r-10 "
-            onClick={handleUnmatched}
-          ></i>
-        </div>
-        <div
-          className={`events unmatched-bet ${
-            unmatchedBets === true ? "collapse " : "collapse show"
-          } `}
-        >
-          <div className="message">You have no unmatched bets</div>
-        </div> */}
-
+      
         <div
           data-toggle="collapse"
           data-target=".matched-bet"
@@ -97,8 +75,9 @@ useEffect(()=>{
 
                          <div class="events matched-bet collapse show">
    <ul>
+    {console.log(el,"elelelel")}
       <li>
-         <div><a href="/m/gamedetail/32181223" class={`${el?.isback===false? "lay" :"back"}-bet`}><u>{el?.isback===false? "lay" :"Back"} "IU Will Win the Toss bhav(IU vs PZ)adv for 100.00 @ 1.95" </u></a></div>
+         <div><a href="/m/gamedetail/32181223" class={`${el?.isback===false? "lay" :"back"}-bet`}><u>{el?.isback===false? "lay" :"Back"} {el?.nation}for {el?.price} @ {el?.rate} </u></a></div>
          <div class="bet-details">
             <div><b>{el?.eventName}</b></div>
             <div><b>{el?.marketname}</b></div>

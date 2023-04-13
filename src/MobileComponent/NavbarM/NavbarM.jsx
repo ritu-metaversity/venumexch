@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -5,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PostBalance } from "../../App/Features/auth/authActions";
 
 import "./NavbarM.css";
-
+                         
 const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,21 +17,7 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
   const [sideBarOpen, setRightBar] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
   const [MrqueeClose, setMarqueeClose] = useState(true);
-// const RightValue
-// console.log(RightValue,"RightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValue")
-// console.log(sideBarOpen,"RightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValueRightValue")
-  // useEffect(()=>{
 
-  //   PostTotalBalance?.data?.data?.libality
-  //   },[PostTotalBalance])
-    
-    // useEffect(()=>{
-    //   if()
-    //    console.log("balaaac")
-    //    dispatch(PostBalance())
-    // },[dispatch])
-
-// console.log(leftBar,"leftBarleftBar")
 
 
     useEffect(()=>{
@@ -45,26 +32,46 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
         // console.log("dushyantdlaflkjsdjd")
       }
     },[token])
-    // console.log(token)
-    // const token = localStorage.getItem("TokenId")
-    
+   
+
+    const [movingMessage ,setMovingMessage]=useState("")
     useEffect(()=>{
-      //  console.log("balaaac")
-    if(token!==""){
-      // console.log("token found")
-       dispatch(PostBalance())
-    }
-    },[dispatch, token])
-// console.log(token,"tokentokentokentokentokentokentoken")
+      axios.post('http://api.247365.exchange/admin-new-apis/enduser/get-user-message',)
+             .then((response) => {
+      
+              setMovingMessage(response?.data?.message)
+       })
+    },[])
+
+    useEffect(()=>{
+      dispatch(PostBalance())
+
+      if(pathname.includes("m/gamedetail")){
+        const time = setInterval(() => {
+          if(token!==""){
+
+             dispatch(PostBalance())
+          }
+          }, 1000);
+          return () => clearInterval(time);
+      }
+       const time = setInterval(() => {
+          if(token!==""){
+
+             dispatch(PostBalance())
+          }
+          }, 5000);
+          return () => clearInterval(time);
+    },[token,pathname])
+
+
     useEffect(()=>{
       setLeftBar(LeftValue);
       LiftSideBar(LeftValue);
-      
     },[LeftValue, LiftSideBar])
 
-  // console.log(props.LeftValueData)
-  const hanldeinput = (vl) => {
 
+  const hanldeinput = (vl) => {
     if (sideBarOpen === false) {
       setRightBar(true);
       RightSideBar(true);
@@ -75,7 +82,6 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
   };
 
   const handleInputLiftmenu = (vl) => {
-    // console.log("ehsdfksdfsdfsdknjkfbsdjknfk");
     if (leftBar === false) {
       setLeftBar(true);
       LiftSideBar(true);
@@ -88,29 +94,33 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
   const handleCloseMarquee = () => {
     setMarqueeClose(false);
   };
+
+
   const handleInput = () => {
-    // console.log("helloi");
     setLeftBar(false);
     navigate("./home");
   };
+
+
   const handleRules = () => {
     navigate("./rules-casino");
   };
+
+
   const handleback=()=>{
     "history.back()"
     window.history.back()
     console.log("history.back()")
   }
+
+
   return (
     <div>
       <header className="header">
         {MrqueeClose === true ? (
           <div className="news">
             <marquee className="news-line">
-              Greetings, We are happy to announce that we have bring all new
-              security feature for all admin and user panels. We request all to
-              make full use of this feature and avoid any fraudulent
-              transaction.
+            {movingMessage}
             </marquee>
             <i
               className="fas fa-times float-right"

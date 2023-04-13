@@ -2,7 +2,8 @@ import {createSlice} from '@reduxjs/toolkit'
 import {getAllPostsComments ,getActiveSportList,postLogin,PostPwChangeFirstTime,PostPasswordChange,PostGameDetailsBySportsId,PostBalance,
     PostGameDetailsByMI,PostGetStackApi,PostEditStack,PostBetListByMatchId,PostTransferStatement,PostPlaceBet,Postactivematchsport,
     Postunsettleddddd,Postcasino,Postprofitlossmatchwise,postBetMarketAndUser,Postisselfbyappurl,Postdepsositrequestclient,Postpaymnetdetailapp,
-    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient,Postvalidatejwttoken,Postuserselfregister,PostMinMaxGameDetails} from './authActions' 
+    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient,Postvalidatejwttoken,Postuserselfregister,PostMinMaxGameDetails,PostUserOddPnl,PostUserfancypnl,
+    Postuserfancybook,Postloginlogout} from './authActions' 
 
 const INITAL_STATE = {
     
@@ -121,6 +122,23 @@ const INITAL_STATE = {
     PostMinMaxGameDetailsData:null,
     PostMinMaxGameDetailsDataLoading:false,
     PostMinMaxGameDetailsDataError:null,
+
+
+    PostUserOddPnlData:null,
+    PostUserOddPnlDataLoading:false,
+    PostUserOddPnlDataError:null,
+
+    PostUserfancypnlata:null,
+    PostUserfancypnlataLoading:false,
+    PostUserfancypnlataError:null,
+
+    Postuserfancybookdata:null,
+    PostuserfancybookdataLoading:false,
+    PostuserfancybookdataError:null,
+
+    Postloginlogoutdata:null,
+    PostloginlogoutdataLoading:false,
+    PostloginlogoutdataError:null,
 
 }
 
@@ -247,11 +265,11 @@ const authSlice = createSlice({
         })
         .addCase(PostEditStack.pending, (state) => {
             state.PostEditStackData = null;
-            state.PostEditStackDataLoading =true;
+            // state.PostEditStackDataLoading =true;
             state.PostEditStackDataError = null;
         }).addCase(PostEditStack.rejected, (state, action) => {
             state.PostEditStackData = null;
-            state.PostEditStackDataLoading =false;
+            // state.PostEditStackDataLoading =false;
             state.PostEditStackDataError = action.error.message;
         }).addCase(PostEditStack.fulfilled, (state, action) => {
             state.PostEditStackData = action.payload.data;
@@ -481,6 +499,58 @@ const authSlice = createSlice({
             state.PostMinMaxGameDetailsData = action.payload.data;
             state.PostMinMaxGameDetailsDataLoading =false;
             state.PostMinMaxGameDetailsDataError = null;
+        })
+        .addCase(PostUserOddPnl.pending, (state) => {
+            state.PostUserOddPnlData = null;
+            state.PostUserOddPnlDataLoading =true;
+            state.PostUserOddPnlDataError = null;
+        }).addCase(PostUserOddPnl.rejected, (state, action) => {
+            state.PostUserOddPnlData = null;
+            state.PostUserOddPnlDataLoading =false;
+            state.PostUserOddPnlDataError = action.error.message;
+        }).addCase(PostUserOddPnl.fulfilled, (state, action) => {
+            state.PostUserOddPnlData = action.payload.data;
+            state.PostUserOddPnlDataLoading =false;
+            state.PostUserOddPnlDataError = null;
+        })
+        .addCase(PostUserfancypnl.pending, (state) => {
+            state.PostUserfancypnlata = null;
+            state.PostUserfancypnlataLoading =true;
+            state.PostUserfancypnlataError = null;
+        }).addCase(PostUserfancypnl.rejected, (state, action) => {
+            state.PostUserfancypnlata = null;
+            state.PostUserfancypnlataLoading =false;
+            state.PostUserfancypnlataError = action.error.message;
+        }).addCase(PostUserfancypnl.fulfilled, (state, action) => {
+            state.PostUserfancypnlata = action.payload.data;
+            state.PostUserfancypnlataLoading =false;
+            state.PostUserfancypnlataError = null;
+        })
+        .addCase(Postuserfancybook.pending, (state) => {
+            state.Postuserfancybookdata = null;
+            state.PostuserfancybookdataLoading =true;
+            state.PostuserfancybookdataError = null;
+        }).addCase(Postuserfancybook.rejected, (state, action) => {
+            state.Postuserfancybookdata = null;
+            state.PostuserfancybookdataLoading =false;
+            state.PostuserfancybookdataError = action.error.message;
+        }).addCase(Postuserfancybook.fulfilled, (state, action) => {
+            state.Postuserfancybookdata = action.payload.data;
+            state.PostuserfancybookdataLoading =false;
+            state.PostuserfancybookdataError = null;
+        })
+        .addCase(Postloginlogout.pending, (state) => {
+            state.Postloginlogoutdata = null;
+            state.PostloginlogoutdataLoading =true;
+            state.PostloginlogoutdataError = null;
+        }).addCase(Postloginlogout.rejected, (state, action) => {
+            state.Postloginlogoutdata = null;
+            state.PostloginlogoutdataLoading =false;
+            state.PostloginlogoutdataError = action.error.message;
+        }).addCase(Postloginlogout.fulfilled, (state, action) => {
+            state.Postloginlogoutdata = action.payload.data;
+            state.PostloginlogoutdataLoading =false;
+            state.PostloginlogoutdataError = null;
         })
 
     }

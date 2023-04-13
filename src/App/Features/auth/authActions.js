@@ -168,7 +168,7 @@ export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, {
         if (err) {
             throw err
         }
-        return rejectWithValue(err.response.data)
+        return err.response
     }
 });
 
@@ -370,6 +370,59 @@ export const PostMinMaxGameDetails = createAsyncThunk('auth/PostMinMaxGameDetail
         const PostMinMaxGameDetailsDataaa = await axios.get(`http://43.205.50.127:9000/betfair_api/fancy/${data}`
         )
         return PostMinMaxGameDetailsDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+
+export const PostUserOddPnl = createAsyncThunk('auth/PostUserOddPnl', async (data, { rejectWithValue }) => {
+    try {
+        const PostUserOddPnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-odds-pnl`,data
+        )
+        return PostUserOddPnlDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+export const PostUserfancypnl= createAsyncThunk('auth/PostUserfancypnl', async (data, { rejectWithValue }) => {
+    try {
+        const PostUserfancypnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-fancy-pnl`,data
+        )
+        return PostUserfancypnlDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+
+export const Postuserfancybook= createAsyncThunk('auth/Postuserfancybook', async (data, { rejectWithValue }) => {
+    try {
+        const PostuserfancybookDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-fancy-book`,data
+        )
+        return PostuserfancybookDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});
+export const Postloginlogout= createAsyncThunk('auth/Postloginlogout', async (data, { rejectWithValue }) => {
+    try {
+        console.log("loooogogoogogogoog")
+        const PostloginlogoutDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/logout`
+        )
+        return PostloginlogoutDataaa
     } catch (err) {
         if (err) {
             throw err

@@ -92,7 +92,7 @@ const UpdateList=(vl)=>{
                       scope="col"
                       aria-colindex="3"
                       className="text-right">
-                      Data
+                      Date
                     </th>
                     <th
                       role="columnheader"
@@ -131,13 +131,25 @@ const UpdateList=(vl)=>{
                   />
                     </Modal.Body>
                   </Modal>
-                    <td aria-colindex="3" className="text-right text-success">
+                    <td aria-colindex="3" className="">
                    
                       {moment(item?.time).format('MM-DD-YYYY - hh:mm')}
-                    </td>
-                    <td aria-colindex="4" className="text-right text-danger">
-                      {item?.status}
-                    </td>
+                    </td>    
+                    {item.status==="Pending"? 
+                    (<td aria-colindex="4" style={{color: "#ffa726" }}>
+                        {item?.status}
+                      </td> )
+                      :
+                      (item.status==="Rejected"? 
+                      <td aria-colindex="4" style={{color: "#f44336" }}>
+                          {item?.status}
+                        </td> 
+                        :
+                         <td aria-colindex="4" style={{color: "#66bb6a" ,fontSize: "10px"}}>
+                       {item?.status}
+                     </td>)
+                      }
+                   
                   </tr>
                   
                 </tbody>

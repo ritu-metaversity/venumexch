@@ -78,8 +78,8 @@ button.stakeactionminus.btn {
 }
 
 @media screen and (min-width: 500px) {
-    .deposit-table{
-        width: 50%;
+    .deposit-table {
+        width: 85%;
         margin: auto;
     }
     .table th, .table td {

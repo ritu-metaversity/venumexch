@@ -308,9 +308,21 @@ if(PostselfwithdrawappData?.message==="Withdraw Request Submited Successfully"){
                       <td aria-colindex="6" className="text-lift withdraw-data">
                       {item?.remark}
                       </td>
-                      <td aria-colindex="6" className="text-lift withdraw-data">
-                      {item?.status}
-                      </td>
+                      {item.status==="Pending"? 
+                    (<td aria-colindex="4" style={{color: "#ffa726" }}>
+                        {item?.status}
+                      </td> )
+                      :
+                      (item.status==="Rejected"? 
+                      <td aria-colindex="4" style={{color: "#f44336" }}>
+                          {item?.status}
+                        </td> 
+                        :
+                         <td aria-colindex="4" style={{color: "#66bb6a" ,fontSize: "10px"}}>
+                       {item?.status}
+                     </td>)
+                      }
+                    
                     </tr>
                     ))}
                   </tbody>
