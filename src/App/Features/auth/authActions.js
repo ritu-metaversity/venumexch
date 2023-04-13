@@ -404,3 +404,16 @@ export const PostUserfancypnl= createAsyncThunk('auth/PostUserfancypnl', async (
         return rejectWithValue(err.response.data)
     }
 });
+
+export const Postuserfancybook= createAsyncThunk('auth/Postuserfancybook', async (data, { rejectWithValue }) => {
+    try {
+        const PostuserfancybookDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-fancy-book`,data
+        )
+        return PostuserfancybookDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+});

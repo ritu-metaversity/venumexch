@@ -17,19 +17,9 @@ import { useMediaQuery } from "@mui/material";
 import { socket } from "./socket";
 import { createProfits } from "./eventUtils";
 import AlertBtn from "../Alert/AlertBtn";
-
-
-
-
-
-
-
-
-
-
-
-
-
+// import Modal from "antd/es/modal/Modal";
+import PnlModals from "./PnlModals";
+import { Modal, ModalBody, ModalHeader, ModalTitle } from "react-bootstrap";
 
 const GameDetails = () => {
   let { id } = useParams();
@@ -44,20 +34,28 @@ const GameDetails = () => {
   // const [isLoading, setIsloading] = useState(true);
   const [gameIframeId, setGameIframeId] = useState(4);
   const [msg, setMsg] = useState("");
-
+  const [showFancyModals, setShowFancyModals] = useState(false);
+  const [MatchId, setMatchId] = useState();
+  const [FancyID, setFancyID] = useState("");
+console.log(showFancyModals,"FancyIDFancyID")
   const [PostMinMaxGameDetailsData, setPostMinMaxGameDetailsData] = useState(
     {}
   );
-// console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
+  // console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
- const [betDetails,setBetDetails] = useState({})
+  const [betDetails, setBetDetails] = useState({});
   // const [PostBetListByMatchIdData, setPostBetListByMatchIdData] = useState({});
-  const { PostBetingOnGameDetail,PostUserOddPnlData,PostUserfancypnlata,PostBetListByMatchIdData,PostBetingOnGameDetailError,PostBetingOnGameDetailErrorrr } = useSelector(
-    (state) => state.auth
-  );
-console.log(PostBetingOnGameDetailError,"PostBetingOnGameDetailError")
-console.log(PostBetingOnGameDetail,"PostBetingOnGameDetail")
+  const {
+    PostBetingOnGameDetail,
+    PostUserOddPnlData,
+    PostUserfancypnlata,
+    PostBetListByMatchIdData,
+    PostBetingOnGameDetailError,
+    PostBetingOnGameDetailErrorrr,
+  } = useSelector((state) => state.auth);
+  // console.log(PostBetingOnGameDetailError, "PostBetingOnGameDetailError");
+  // console.log(PostBetingOnGameDetail, "PostBetingOnGameDetail");
   useEffect(() => {
     const iddd = localStorage.getItem("SportId");
     setGameIframeId(iddd);
@@ -84,10 +82,11 @@ console.log(PostBetingOnGameDetail,"PostBetingOnGameDetail")
     gamename,
     marketId,
     item1,
-    item,item11,
+    item,
+    item11,
     oddsssss
   ) => {
-    console.log(item11)
+    // console.log(item11);
     if (price > 0) {
       datatata({
         Odds: price,
@@ -97,22 +96,22 @@ console.log(PostBetingOnGameDetail,"PostBetingOnGameDetail")
         marketId: marketId,
         selectionId: item?.selectionId,
         bettingTime: new Date(),
-        marketNameeee:item?.name,
-        "Gamenamemeeee ":"odds ",
-        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker,
-        "matchDetails":item11,
-        "oddsssss":oddsssss,
+        marketNameeee: item?.name,
+        "Gamenamemeeee ": "odds ",
+        AllBookmakerData: gameDetailsData?.data?.Bookmaker,
+        matchDetails: item11,
+        oddsssss: oddsssss,
         profits,
       });
-setBetDetails({
-  isBack: color,
-  odds: price,
-  stake: 0,
-  selectionId: item.selectionId ,
-  marketId: marketId,
-  priceValue: price,
-  isFancy: false,
-})
+      setBetDetails({
+        isBack: color,
+        odds: price,
+        stake: 0,
+        selectionId: item.selectionId,
+        marketId: marketId,
+        priceValue: price,
+        isFancy: false,
+      });
     } else {
       alert("Pleace select other bit");
     }
@@ -132,29 +131,35 @@ setBetDetails({
         selectionId: item1?.sid,
         t: item1?.t,
         bettingTime: new Date(),
-        "Gamenamemeeee ":"Bookmaker ",
-        "AllBookmakerData" :gameDetailsData?.data?.Bookmaker,
-        "matchDetails":gameDetailsData?.data?.Bookmaker,
-        "bookmakerPnl":bookmakerPnl,
+        "Gamenamemeeee ": "Bookmaker ",
+        AllBookmakerData: gameDetailsData?.data?.Bookmaker,
+        matchDetails: gameDetailsData?.data?.Bookmaker,
+        bookmakerPnl: bookmakerPnl,
         profits,
-
       });
       setBetDetails({
         isBack: color,
         odds: price,
         stake: 0,
-        selectionId: item1.sid ,
+        selectionId: item1.sid,
         marketId: item1?.mid,
         priceValue: price,
         isFancy: false,
-      })
+      });
     } else {
       alert("Pleace select other bit");
     }
   };
 
-  const handleBitValueFancy = (price, name, color, trueData, item, keykey,ls1) => {
-    
+  const handleBitValueFancy = (
+    price,
+    name,
+    color,
+    trueData,
+    item,
+    keykey,
+    ls1
+  ) => {
     if (price > 0) {
       datatata({
         Odds: price,
@@ -166,26 +171,25 @@ setBetDetails({
         selectionId: 0,
         t: item?.t,
         bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
-        "Gamenamemeeee ":"Fancy ",
+        "Gamenamemeeee ": "Fancy ",
         profits,
-        "priceValue":ls1
+        priceValue: ls1,
       });
       setBetDetails({
         isBack: color,
         odds: price,
         stake: 0,
-        selectionId: 0 ,
+        selectionId: 0,
         marketId: item?.sid,
         priceValue: price,
         isFancy: false,
-      })
+      });
     } else {
       alert("Pleace select other bit");
     }
   };
 
   useEffect(() => {
-
     if (Object.keys(PostMinMaxGameDetailsData).length) {
       if (gameDetailsData) {
         const oldOdds = { ...gameDetailsData };
@@ -195,14 +199,10 @@ setBetDetails({
       }
       setGameDetailsData({ data: PostMinMaxGameDetailsData });
     }
-    
   }, [PostMinMaxGameDetailsData]);
-
-
 
   const [OddSocketConnected, setOddSocketConnected] = useState({});
 
- 
   const oddFromSocketSlower = (res) => {
     if (res) {
       setPostMinMaxGameDetailsData(res);
@@ -219,7 +219,8 @@ setBetDetails({
   }, []);
 
   useEffect(() => {
-    let timer = setInterval(() =>
+    let timer = setInterval(
+      () =>
         !OddSocketConnected &&
         socket.emit("JoinRoom", {
           eventId: id,
@@ -234,7 +235,7 @@ setBetDetails({
   useEffect(() => {
     OddSocketConnected && setOddSocketConnected(false);
   }, [id]);
-// console.log(OddSocketConnected)
+  // console.log(OddSocketConnected)
   const handlematched = () => {
     if (matchedBets === true) {
       setmatchedBets(false);
@@ -296,7 +297,7 @@ setBetDetails({
     } else {
     }
   }, [gameDetailsData]);
-// ************* PNL DATA ODDS
+  // ************* PNL DATA ODDS
 
   // const { lastMessage: datataatatatta } = useWebSocket(
   //   `${
@@ -305,48 +306,41 @@ setBetDetails({
   //   { shouldReconnect: (event) => true }
   // );
 
+  useEffect(() => {
+    let timer = setInterval(
+      () => dispatch(PostUserOddPnl({ matchId: id })),
 
-useEffect(()=>{
+      5000
+    );
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+  useEffect(() => {
+    let timer = setInterval(
+      () => dispatch(PostUserfancypnl({ matchId: id })),
 
-  let timer = setInterval(() =>
-  dispatch(PostUserOddPnl({"matchId":id})),
+      5000
+    );
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
-2000
-);
-return () => {
-clearInterval(timer);
-};
+  // useEffect(()=>{
 
+  //   let timer = setInterval(() =>
 
-},[])
-useEffect(()=>{
+  // 1000
+  // )
+  // return () => {
+  // clearInterval(timer)
 
-  let timer = setInterval(() =>
-  dispatch(PostUserfancypnl({"matchId":id})),
+  // },[])
 
-2000
-);
-return () => {
-clearInterval(timer);
-};
-
-
-},[])
-
-// useEffect(()=>{
-
-//   let timer = setInterval(() =>
-  
-// 1000
-// )
-// return () => {
-// clearInterval(timer)
-
-// },[])
-
-// console.log(PostUserOddPnlData,"PostUserOddPnlData")
-// console.log(PostUserfancypnlata,"PostUserfancypnlata")
-// console.log(datataatatatta,"datataatatatta")
+  // console.log(PostUserOddPnlData,"PostUserOddPnlData")
+  // console.log(PostUserfancypnlata,"PostUserfancypnlata")
+  // console.log(datataatatatta,"datataatatatta")
   // useEffect(() => {
   //   if (PostUserOddPnlData?.data && JSON.parse(PostUserOddPnlData?.data)?.data) {
   //     setPostBetListByMatchIdData(JSON.parse(PostUserOddPnlData?.data));
@@ -363,26 +357,15 @@ clearInterval(timer);
   //   { shouldReconnect: (event) => true }
   // );
 
-  console.log(PostUserOddPnlData,"PostUserOddPnlData")
+  // console.log(PostUserOddPnlData, "PostUserOddPnlData");
   useEffect(() => {
-
-      if (
-        PostUserOddPnlData?.data !== null
-      ) {
-        setOddsPnl(
-          PostUserOddPnlData?.data 
-        );
-      } 
+    if (PostUserOddPnlData?.data !== null) {
+      setOddsPnl(PostUserOddPnlData?.data);
+    }
   }, [PostUserOddPnlData]);
-
 
   const [oddsssss, setOddsssss] = useState({});
   const [bookmakerPnl, setBookmakerPnl] = useState({});
-
-
-
-
-
 
   // ******* PNL DATA FANCY
 
@@ -395,89 +378,94 @@ clearInterval(timer);
   //   }/enduserfancy/${id}/${localStorage.getItem("TokenId")}`,
   //   { shouldReconnect: (event) => true }
   // );
-// console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data)")
-// console.log(onlyFancyDetails)
-console.log(PostUserfancypnlata,"PostUserfancypnlata")
+  // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data)")
+  // console.log(onlyFancyDetails)
+  // console.log(PostUserfancypnlata, "PostUserfancypnlata");
   useEffect(() => {
-
-    if (PostUserfancypnlata ){
-      if (PostUserfancypnlata ) {
+    if (PostUserfancypnlata) {
+      if (PostUserfancypnlata) {
         // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl")
-        setFacnyPNL(
-          PostUserfancypnlata
-        );
-      }
-       else {
+        setFacnyPNL(PostUserfancypnlata);
+      } else {
         // console.log("FancyPNL")
         setFacnyPNL(null);
-      }}
+      }
+    }
   }, [PostUserfancypnlata]);
-        // console.log(FancyPNL?.data,"FancyPNL")
+  // console.log(FancyPNL?.data,"FancyPNL")
+
+  //   useEffect(() => {
+  //     let fancyyyyyypnl = [
+  //       {
+  //         selection: oddsPnl[0]?.selection1,
+  //         pnl: oddsPnl[0]?.pnl1,
+  //       },
+  //       {
+  //         selection: oddsPnl[0]?.selection2,
+  //         pnl: oddsPnl[0]?.pnl2,
+  //       },
+  //       {
+  //         selection: oddsPnl[0]?.selection3,
+  //         pnl: oddsPnl[0]?.pnl3,
+  //       },
+  //     ];
+
+  // setFacnyPNL(fancyyyyyypnl)
+  //   }, []);
+
+  // console.log(gameDetailsData, "odsds ---------");
+
+  useEffect(() => {
+    console.log(gameDetailsData, "oods22---");
+    createProfits({
+      fancyOdds: gameDetailsData?.data,
+      fancyPnl: setFacnyPNL?.data,
+      betDetails,
+      rechange: true,
+      pnl: oddsPnl,
+      setProfits,
+    });
+  }, [
+    betDetails?.stake,
+    oddsPnl,
+    FancyPNL,
+    gameDetailsData?.data?.Odds && gameDetailsData?.data?.Odds[0]?.marketId,
+    betDetails?.marketId,
+    betDetails?.selectionId,
+  ]);
+
+  // console.log(msg, "sadafgsdfhgdfghgf");
+
+  useEffect(() => {
+    if (PostBetingOnGameDetail?.status === true) {
+      setMsg(PostBetingOnGameDetail?.message);
+      // console.log(PostBetingOnGameDetail, "PostBetingOnGameDetail")
+    }
+  }, [PostBetingOnGameDetail]);
+  // console.log(PostMinMaxGameDetailsData, "PostMinMaxGameDetailsData");
+
+  const handleCloseFancyModal = () => setShowFancyModals(false);
 
 
+  const handleFancyBook = ( sid) => {
+console.log("hekemlldfnsdlnfls")
+    // e.preventDefault();
+    setShowFancyModals(true);
 
+    setFancyID(sid);
 
-//   useEffect(() => {
-//     let fancyyyyyypnl = [
-//       {
-//         selection: oddsPnl[0]?.selection1,
-//         pnl: oddsPnl[0]?.pnl1,
-//       },
-//       {
-//         selection: oddsPnl[0]?.selection2,
-//         pnl: oddsPnl[0]?.pnl2,
-//       },
-//       {
-//         selection: oddsPnl[0]?.selection3,
-//         pnl: oddsPnl[0]?.pnl3,
-//       },
-//     ];
+  };
 
-// setFacnyPNL(fancyyyyyypnl)
-//   }, []);
-
-console.log(gameDetailsData,"odsds ---------")
-
-useEffect(() => {
-  console.log(gameDetailsData,"oods22---")
-  createProfits({
-    fancyOdds:gameDetailsData?.data,
-    fancyPnl: setFacnyPNL?.data,
-    betDetails,
-    rechange: true,
-    pnl: oddsPnl,
-    setProfits,
-  });
-}, [
-  betDetails?.stake,
-  oddsPnl,
-  FancyPNL,
-  gameDetailsData?.data?.Odds && gameDetailsData?.data?.Odds[0]?.marketId,
-  betDetails?.marketId,
-  betDetails?.selectionId,
-]);
-
-
-console.log(msg, "sadafgsdfhgdfghgf")
-
-
-useEffect(()=>{
-  if(  PostBetingOnGameDetail?.status===true){
-    setMsg(PostBetingOnGameDetail?.message);
-    // console.log(PostBetingOnGameDetail, "PostBetingOnGameDetail")
-  }
-},[PostBetingOnGameDetail])
-console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
   return (
     <div>
-      {
-        PostBetingOnGameDetail?.status===true?
-<div className="alertPopup">
-      <AlertBtn  val={msg }/>
-      </div>
-        :""
-      }
-      
+      {PostBetingOnGameDetail?.status === true ? (
+        <div className="alertPopup">
+          <AlertBtn val={msg} />
+        </div>
+      ) : (
+        ""
+      )}
+
       {/* {
         isLoading===true?<div className="mani-loading">
           <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 
@@ -546,7 +534,7 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                       className="collapse"
                       style={{ display: "none" }}
                     ></div>
-                   
+
                     <div id="scoreboard-box">
                       <div className="scorecard scorecard-mobile">
                         <div className="score-inner">
@@ -565,11 +553,9 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                       {gameDetailsData?.data?.Odds?.map((item11, id1) => {
                         return (
                           <div>
-                               <marquee className="news-line">
-                      {
- item11?.display_message
-}
-            </marquee>
+                            <marquee className="news-line">
+                              {item11?.display_message}
+                            </marquee>
                             <div>
                               <div className=" m-b-10 main-market w-100 float-left">
                                 <div className="table-header">
@@ -588,7 +574,7 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                   <div className="box-w1 float-left hidden-portrait ddis-none"></div>
                                 </div>
                                 <div className="matchoddsmax">
-                                  max:
+                                  min:
                                   {PostMinMaxGameDetailsData?.Odds &&
                                     PostMinMaxGameDetailsData?.Odds[id1]
                                       ?.maxBet}
@@ -600,11 +586,10 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                       ?.minBet}
                                 </div>
                                 <div className="matchdelay">
-                                BetDelay:
+                                  BetDelay:
                                   {PostMinMaxGameDetailsData?.Odds &&
                                     PostMinMaxGameDetailsData?.Odds[id1]
-                                      ?.betDelay
-                                    }
+                                      ?.betDelay}
                                 </div>
                                 <div
                                   data-title="OPEN"
@@ -613,9 +598,10 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                 >
                                   {item11?.runners?.map((item1, index) => {
                                     return (
-                                      <>{
-                                        // console.log(item11,"item11item11")
-                                      }
+                                      <>
+                                        {
+                                          // console.log(item11,"item11item11")
+                                        }
                                         <div
                                           data-title="OPEN"
                                           className="table-row"
@@ -629,21 +615,41 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                             <span className="team-name">
                                               <b>{item1?.name}</b>
                                             </span>
-                                            <p className="box-w4">
-
+                                            {console.log(item1,"item1item1item1")}
+                                            <p className="box-w4" 
+                                             >
                                               {/* <span className="float-left ubook" style={{color: "red"}}> */}
-                                                 <span className="float-left ubook" style={{color: (profits.Odds[item11?.marketId]?.find((itemPnl) =>itemPnl.sid == item1.selectionId)?.value)<0 ?"red":"green"}}>
-                                                {(profits.Odds[item11?.marketId]?.find((itemPnl) =>itemPnl.sid == item1.selectionId)?.value)}
-                                                  </span> 
-                                            
-
+                                              <span
+                                                className="float-left ubook"
+                                                style={{
+                                                  color:
+                                                    profits.Odds[
+                                                      item11?.marketId
+                                                    ]?.find(
+                                                      (itemPnl) =>
+                                                        itemPnl.sid ==
+                                                        item1.selectionId
+                                                    )?.value < 0
+                                                      ? "red"
+                                                      : "green",
+                                                }}
+                                              >
+                                                {
+                                                  profits.Odds[
+                                                    item11?.marketId
+                                                  ]?.find(
+                                                    (itemPnl) =>
+                                                      itemPnl.sid ==
+                                                      item1.selectionId
+                                                  )?.value
+                                                }
+                                              </span>
                                             </p>
                                           </div>
 
                                           {item1?.ex?.availableToBack.map(
                                             (item, id) => {
                                               return (
-                                                
                                                 <div
                                                   className={`box-w1 float-left back hidden-portrait  ${
                                                     id === 0 || id === 1
@@ -662,7 +668,7 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                            : " "
                                                        }`}
                                                 >
-{/* {console.log(item1,"item1item1item1")} */}
+                                                  {/* {console.log(item1,"item1item1item1")} */}
                                                   {/* {console.log(item1,"itemitemitem")} */}
                                                   <button
                                                     type="button"
@@ -675,8 +681,9 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                         item11?.Name,
                                                         item11?.marketId,
                                                         item,
-                                                        item1,item11,oddsssss
-
+                                                        item1,
+                                                        item11,
+                                                        oddsssss
                                                       )
                                                     }
                                                   >
@@ -799,22 +806,23 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                               <div className="box-w3 float-left hidden-portrait "></div>
                             </div>
                             <div className="max">
-                              Max:
+                              Max :
                               {PostMinMaxGameDetailsData &&
                                 PostMinMaxGameDetailsData?.Bookmaker &&
                                 PostMinMaxGameDetailsData?.Bookmaker[0]?.maxBet}
                             </div>
                             <div className="min">
-                              MIN:
+                              Min :
                               {PostMinMaxGameDetailsData &&
                                 PostMinMaxGameDetailsData?.Bookmaker &&
                                 PostMinMaxGameDetailsData?.Bookmaker[0]?.minBet}
                             </div>
                             <div className="betDelay">
-                            BetDelay:
+                              BetDelay:
                               {PostMinMaxGameDetailsData &&
                                 PostMinMaxGameDetailsData?.Bookmaker &&
-                                PostMinMaxGameDetailsData?.Bookmaker[0]?.betDelay}
+                                PostMinMaxGameDetailsData?.Bookmaker[0]
+                                  ?.betDelay}
                             </div>
                             {/* {PostMinMaxGameDetailsData&&PostMinMaxGameDetailsData?.Bookmaker[index]
                             .map((item222)=>{ */}
@@ -841,18 +849,37 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                             {/* {console.log(item?.sid,"item")} */}
                                           </span>
                                           <p className="box-w4">
-                                          {
-}
-                                          {profits.Bookmaker?.find(
-(profit) => profit?.sid === item.sid)?.value<0 ?    
-                                                 <span className="float-left ubook" style={{color: "red"}}> {profits.Bookmaker?.find(
-                                                  (profit) => profit?.sid === item.sid)?.value}</span> :
-                                                 <span className="float-left ubook" style={{color: "green"}}> {profits.Bookmaker?.find(
-                                                  (profit) => profit?.sid === item.sid)?.value}</span>}
-                                            
-
-
-                                         
+                                            {}
+                                            {profits.Bookmaker?.find(
+                                              (profit) =>
+                                                profit?.sid === item.sid
+                                            )?.value < 0 ? (
+                                              <span
+                                                className="float-left ubook"
+                                                style={{ color: "red" }}
+                                              >
+                                                {" "}
+                                                {
+                                                  profits.Bookmaker?.find(
+                                                    (profit) =>
+                                                      profit?.sid === item.sid
+                                                  )?.value
+                                                }
+                                              </span>
+                                            ) : (
+                                              <span
+                                                className="float-left ubook"
+                                                style={{ color: "green" }}
+                                              >
+                                                {" "}
+                                                {
+                                                  profits.Bookmaker?.find(
+                                                    (profit) =>
+                                                      profit?.sid === item.sid
+                                                  )?.value
+                                                }
+                                              </span>
+                                            )}
                                           </p>
                                         </div>
                                         <div className="box-w3 float-left back ">
@@ -949,10 +976,9 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                         </div>
                       </div>
                       <marquee className="news-line">
-                      {
-  gameDetailsData?.data&&gameDetailsData?.data?.Bookmaker[0]?.display_message
-}
-            </marquee>
+                        {gameDetailsData?.data &&
+                          gameDetailsData?.data?.Bookmaker[0]?.display_message}
+                      </marquee>
 
                       {/*  */}
                       <div></div>
@@ -969,10 +995,9 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                     {Object.keys(onlyFancyDetails).map(
                                       (key) => (
                                         <>
-                                        {console.log(onlyFancyDetails)}
-                                        {/* {console.log(key)} */}
-                                        {/* {oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl} */}
-                                          {" "}
+                                          {/* {console.log(onlyFancyDetails)} */}
+                                          {/* {console.log(key)} */}
+                                          {/* {oddsssss.find((itemPnl) =>itemPnl.selection == item1.selectionId)?.pnl} */}{" "}
                                           <div
                                             data-v-e03c6f20=""
                                             className="table-header"
@@ -1022,7 +1047,8 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                           ></div>
                                           {onlyFancyDetails[key].map(
                                             (item, index) => (
-                                              <><div
+                                              <>
+                                                <div
                                                   data-v-e03c6f20=""
                                                   className="min-max  text-right"
                                                 >
@@ -1032,9 +1058,12 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                   >
                                                     <span
                                                       data-v-e03c6f20=""
-                                                      className="text-dark" style={{marginRight: "8px"}}
+                                                      className="text-dark"
+                                                      style={{
+                                                        marginRight: "8px",
+                                                      }}
                                                     >
-                                                      Min:{" "}
+                                                      Max :{" "}
                                                       <span data-v-e03c6f20="">
                                                         {onlyFancyMaxMinDetails &&
                                                           onlyFancyMaxMinDetails[
@@ -1044,10 +1073,13 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                     </span>{" "}
                                                     <span
                                                       data-v-e03c6f20=""
-                                                      className="text-dark" style={{marginRight: "7px"}}
+                                                      className="text-dark"
+                                                      style={{
+                                                        marginRight: "7px",
+                                                      }}
                                                     >
-                                                      Max:{" "}
-                                                      <span data-v-e03c6f20="" >
+                                                      Min :{" "}
+                                                      <span data-v-e03c6f20="">
                                                         {onlyFancyMaxMinDetails &&
                                                           onlyFancyMaxMinDetails[
                                                             key
@@ -1081,7 +1113,8 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                       "SUSPENDED"
                                                         ? "suspended"
                                                         : ""
-                                                    }`}>
+                                                    }`}
+                                                  >
                                                     <div
                                                       data-v-e03c6f20=""
                                                       className="float-left box-w4 country-name"
@@ -1099,20 +1132,67 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                           </b>
                                                         </span>
                                                         <p
+                                                        style={{cursor:'pointer'}}
                                                           data-v-e03c6f20=""
                                                           className="m-b-0"
+                                                          onClick={(e) =>
+                                                            handleFancyBook(
+                                                              item.sid
+                                                            )
+                                                          }
                                                         >
                                                           <span
                                                             data-v-e03c6f20=""
-                                                            className="float-left ubook fancy-span"
+                                                            className="float-left ubook fancy-span" 
+                                                          
                                                           >
- 
-
-                                        {FancyPNL?.data? ((FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl)>0 ?    
-                                                 <span className="float-left ubook" style={{color: "red"}}> {FancyPNL?.data?  (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl):0 }</span> :
-                                                 <span className="float-left ubook" style={{color: "green"}}> {FancyPNL?.data?  (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId == item?.sid)?.pnl):0 }</span>)
-                                            :(0) }
-                                                       
+                                                            {FancyPNL?.data ? (
+                                                              FancyPNL?.data.find(
+                                                                (itemPnl) =>
+                                                                  itemPnl?.marketId ==
+                                                                  item?.sid
+                                                              )?.pnl > 0 ? (
+                                                                <span
+                                                                  className="float-left ubook"
+                                                                  style={{
+                                                                    color:
+                                                                      "red",
+                                                                  }}
+                                                                >
+                                                                  {" "}
+                                                                  {FancyPNL?.data
+                                                                    ? FancyPNL?.data.find(
+                                                                        (
+                                                                          itemPnl
+                                                                        ) =>
+                                                                          itemPnl?.marketId ==
+                                                                          item?.sid
+                                                                      )?.pnl
+                                                                    : 0}
+                                                                </span>
+                                                              ) : (
+                                                                <span
+                                                                  className="float-left ubook"
+                                                                  style={{
+                                                                    color:
+                                                                      "green",
+                                                                  }}
+                                                                >
+                                                                  {" "}
+                                                                  {FancyPNL?.data
+                                                                    ? FancyPNL?.data.find(
+                                                                        (
+                                                                          itemPnl
+                                                                        ) =>
+                                                                          itemPnl?.marketId ==
+                                                                          item?.sid
+                                                                      )?.pnl
+                                                                    : 0}
+                                                                </span>
+                                                              )
+                                                            ) : (
+                                                              0
+                                                            )}
                                                           </span>
                                                         </p>
                                                       </div>
@@ -1139,9 +1219,7 @@ console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
                                                       data-v-e03c6f20=""
                                                       className="box-w1 lay float-left text-center"
                                                     >
-                                                      {
-console.log(item)
-                                                    }
+                                                      {/* {console.log(item)} */}
                                                       <button
                                                         data-v-e03c6f20=""
                                                         className="lay"
@@ -1168,9 +1246,6 @@ console.log(item)
                                                         </span>
                                                       </button>
                                                     </div>
-
-
-
 
                                                     <div
                                                       data-v-e03c6f20=""
@@ -1334,7 +1409,8 @@ console.log(item)
                                     >
                                       <u>
                                         {item?.back === true ? "BACK" : "LAY"}{" "}
-                                        {item?.nation} for {item?.amount} @ {item?.rate}{" "}
+                                        {item?.nation} for {item?.amount} @{" "}
+                                        {item?.rate}{" "}
                                       </u>
                                     </Link>
                                   </div>
@@ -1365,6 +1441,36 @@ console.log(item)
       </div>
       {/* )
        } */}
+
+      <Modal
+        show={showFancyModals}
+        className={`sdfghjkl`}
+        onHide={handleCloseFancyModal}
+        style={{
+          marginTop: "12px",
+          marginInline: "2%",
+          width: "95%",
+        }}
+      >
+        <ModalHeader closeButton closeVariant="white">
+<ModalTitle>
+  Run Amount
+
+</ModalTitle>
+        </ModalHeader>
+  
+        <ModalBody style={{
+          height:"calc(100vh - 100px)",
+          overflowY:"scroll",
+          width:"100%"
+
+
+        }}>
+
+          <PnlModals matchId={id} FancyID={FancyID} />
+        </ModalBody>
+       
+      </Modal>
     </div>
   );
 };

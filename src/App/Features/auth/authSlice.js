@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import {getAllPostsComments ,getActiveSportList,postLogin,PostPwChangeFirstTime,PostPasswordChange,PostGameDetailsBySportsId,PostBalance,
     PostGameDetailsByMI,PostGetStackApi,PostEditStack,PostBetListByMatchId,PostTransferStatement,PostPlaceBet,Postactivematchsport,
     Postunsettleddddd,Postcasino,Postprofitlossmatchwise,postBetMarketAndUser,Postisselfbyappurl,Postdepsositrequestclient,Postpaymnetdetailapp,
-    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient,Postvalidatejwttoken,Postuserselfregister,PostMinMaxGameDetails,PostUserOddPnl,PostUserfancypnl} from './authActions' 
+    Postselfdepositapp,Postselfwithdrawapp,Postwithdrawrequestclient,Postvalidatejwttoken,Postuserselfregister,PostMinMaxGameDetails,PostUserOddPnl,PostUserfancypnl,Postuserfancybook} from './authActions' 
 
 const INITAL_STATE = {
     
@@ -130,6 +130,10 @@ const INITAL_STATE = {
     PostUserfancypnlata:null,
     PostUserfancypnlataLoading:false,
     PostUserfancypnlataError:null,
+
+    Postuserfancybookdata:null,
+    PostuserfancybookdataLoading:false,
+    PostuserfancybookdataError:null,
 
 }
 
@@ -516,6 +520,19 @@ const authSlice = createSlice({
             state.PostUserfancypnlata = action.payload.data;
             state.PostUserfancypnlataLoading =false;
             state.PostUserfancypnlataError = null;
+        })
+        .addCase(Postuserfancybook.pending, (state) => {
+            state.Postuserfancybookdata = null;
+            state.PostuserfancybookdataLoading =true;
+            state.PostuserfancybookdataError = null;
+        }).addCase(Postuserfancybook.rejected, (state, action) => {
+            state.Postuserfancybookdata = null;
+            state.PostuserfancybookdataLoading =false;
+            state.PostuserfancybookdataError = action.error.message;
+        }).addCase(Postuserfancybook.fulfilled, (state, action) => {
+            state.Postuserfancybookdata = action.payload.data;
+            state.PostuserfancybookdataLoading =false;
+            state.PostuserfancybookdataError = null;
         })
 
     }
