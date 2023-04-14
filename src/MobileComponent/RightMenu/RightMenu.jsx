@@ -26,7 +26,7 @@ const RightMenu = (props) => {
   const token = localStorage.getItem("TokenId");
 
   useEffect(() => {
-    console.log("balaaac");
+    // console.log("balaaac");
     const time = setInterval(() => {
       if (token !== "") {
 
@@ -69,8 +69,8 @@ const RightMenu = (props) => {
     } else if (vl === "SignOut") {
       
        dispatch(Postloginlogout);
-      //  localStorage.clear();
-      //  navigate("./login");
+       localStorage.clear();
+       navigate("./login");
     } else {
 
     }

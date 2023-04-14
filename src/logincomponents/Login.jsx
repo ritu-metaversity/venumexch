@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import PleaseConfirm from "./PleaseConfirm";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -16,6 +16,7 @@ const Login = () => {
   const [login, setLogin] = useState({});
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const { pathname } = useLocation();
   // const [userName, setUserName] = useState("reshmi8396");
   // const [password, setPassword] = useState("342845"); 
   // const [userName, setUserName] = useState("arya2452");
@@ -52,12 +53,16 @@ const Login = () => {
 
   useEffect(() => {
     if (apiHit === true) {
+      // console.log("login pop")
       if (postLoginData?.data?.message === "Invalid Username or password") {
+        // console.log("not done")
         setShow(false);
         setErrorId(true);
         setErrorPassword(true);
       } else if (postLoginData?.data?.token) {
+        // console.log("doneeee")
         setApiHit(false);
+        // console.log(postLoginData,"postLoginDatapostLoginDatapostLoginData")
         // console.log("login succccss")
         localStorage.setItem("TokenId", postLoginData?.data?.token);
         localStorage.setItem("PassWordType", postLoginData?.data?.passwordtype);
@@ -70,12 +75,25 @@ axios.defaults.headers.common.Authorization= `Bearer ${postLoginData?.data?.toke
           navigate("/m/changepassword");
         } else {
           //  console.log("Home")
+          // console.log("honeE")
           navigate("/m/home");
         }
       }
     }
     setLoginData(postLoginData);
   }, [postLoginData]);
+
+  const token = localStorage.getItem("TokenId");
+// console.log(pathname,token,"pathnamepathname")
+// console.log(token,"pathnamepathname")
+
+useEffect(()=>{
+  const token = localStorage.getItem("TokenId");
+
+  if((token!== null)) {
+    navigate("/m/home");
+  }
+},[])
 
   // console.log(PostuserselfregisterData, "registerData");
   const handleInput = (e) => {
@@ -95,8 +113,9 @@ axios.defaults.headers.common.Authorization= `Bearer ${postLoginData?.data?.toke
         return false;
     }
   };
-console.log(window.location.hostname)
+// console.log(window.location.hostname)
   const handleLogin = (e) => {
+
     setLogin({
       userId: userName,
       password: password,
@@ -113,28 +132,7 @@ console.log(window.location.hostname)
     setApiHit(true);
     //  navigate("/m/home");
   };
-  //   axios
-  //   .post("http://api.a2zscore.com/admin-new-apis/login/client-login", login)
-  //   .then((response) => {
-  //    if(response?.data?.message ==="Invalid Username or password"){
-  //       setShow(false)
-  //       setErrorId(true)
-  //       setErrorPassword(true)
-  //       console.log(response?.data?.message,"ERROR")
-  //    }else{
-  //       console.log(response, "responseresponse");
-  //       navigate("/m/home");
 
-  //       localStorage.setItem("TokenId", response?.data?.token);
-  //    }
-
-  //    })
-  //   .catch((error) => {
-  //     setShow(false)
-  //     setErrorId(true)
-  //     setErrorPassword(true)
-  //     console.log(error?.response?.data,"ERROR")
-  //  });
 
   const handleSignUp = () => {
     navigate("/m/signup");
@@ -299,17 +297,19 @@ console.log(window.location.hostname)
                 Underage gambling is prohibited. Please confirm if you are 18
                 years old and above as of today
               </Modal.Body>
+              <div className="confirm">
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                   Exit
                 </Button>
-                <Button style={{    height: "24px" ,width: "61.5%",fontSize: "13px"}}
+                <Button  className="confirmation"
                   variant="primary"
                   onClick={() => handleLoginConfirm("true")}
                 >
                   Confirm
                 </Button>
               </Modal.Footer>
+              </div>
             </Modal>
           </div>
         </>

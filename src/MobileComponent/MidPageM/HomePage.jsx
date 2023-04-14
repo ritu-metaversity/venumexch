@@ -28,6 +28,7 @@ const HomePage = () => {
   useEffect(() => {
     localStorage.setItem("SportId", id);
   }, [id]);
+  const { PostunsettledData } = useSelector((state) => state.auth);
 
   // useEffect(()=>{
   //   console.log("log")
@@ -49,7 +50,7 @@ const HomePage = () => {
     datatata(data);
     navigate(`/m/gamedetail/${id}`);
   };
-  console.log(gamesData, "gamesData");
+  // console.log(gamesData, "gamesData");
 
   const handleInput = (vl) => {
     // console.log("das")
@@ -60,24 +61,19 @@ const HomePage = () => {
     const activeMatchSportWise = id ? id : "4";
 
     // dispatch(PostGameDetailsBySportsId(activeMatchSportWise))
-    axios.get(" http://43.205.50.127:9000/betfair_api/active_match")
+    axios.get("http://43.205.50.127:9000/betfair_api/active_match")
     .then((res) => {
 setGamesData(res?.data?.data);
-})
-  
-      
-    
-     
-    
-  }, [id, token]);
-  // console.log(gamesData)
+}) }, [id, token])
+
+
+  // console.log(gamesData,"gamesDatagamesData")
 
   //       useEffect(()=>{
   //         let data = {sportId: id?id:"4"}
   // dispatch(Postactivematchsport(data))
   //       },[dispatch, id])
 
-  const { PostunsettledData } = useSelector((state) => state.auth);
 
   // console.log(PostunsettledData?.data?.dataList?.length)
 
@@ -124,8 +120,12 @@ setGamesData(res?.data?.data);
            gamesData&&gamesData?.length > 0
               ? Object.keys(gamesData).map((key) => (
                   <>
+                 
                     {gamesData&&gamesData[key]&&gamesData[key]?.matchList.map((item, index) => (
                       <>
+                       {
+                    console.log(item,"dfsdfksdfsdsdfkjsdfkjsdsj")
+                  }
                         <li
                           className="market-list-item"
                           style={{ padding: "2px", cursor: "pointer" }}

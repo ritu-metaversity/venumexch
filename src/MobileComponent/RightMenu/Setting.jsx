@@ -20,7 +20,7 @@ const Setting = () => {
   // console.log(stakeThree, "stakeThree");
   // console.log(stakeThree, "stakeThree");
   const { PostGetStack,PostEditStackData ,PostEditStackDataError} = useSelector((state) => state.auth);
-  console.log(PostEditStackData,"PostEditStackData");
+  // console.log(PostEditStackData,"PostEditStackData");
   useEffect(() => {
     dispatch(PostGetStackApi());
   }, [dispatch, stakeUpdate, EditStake]);

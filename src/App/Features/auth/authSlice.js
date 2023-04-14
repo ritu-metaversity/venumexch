@@ -461,18 +461,26 @@ const authSlice = createSlice({
             state.PostwithdrawrequestclientDataLoading =false;
             state.PostwithdrawrequestclientDataError = null;
         })
-        .addCase(Postvalidatejwttoken.pending, (state) => {
+        .addCase(Postvalidatejwttoken.pending, (state,item) => {
             state.PostvalidatejwttokenData = null;
             state.PostvalidatejwttokenDataLoading =true;
             state.PostvalidatejwttokenDataError = null;
         }).addCase(Postvalidatejwttoken.rejected, (state, action) => {
             state.PostvalidatejwttokenData = null;
             state.PostvalidatejwttokenDataLoading =false;
-            state.PostvalidatejwttokenDataError = action.error.message;
+            state.PostvalidatejwttokenDataError = action.payload?.message;
         }).addCase(Postvalidatejwttoken.fulfilled, (state, action) => {
-            state.PostvalidatejwttokenData = action.payload.status;
-            state.PostvalidatejwttokenDataLoading =false;
-            state.PostvalidatejwttokenDataError = null;
+            const status = action?.payload?.data?.status;
+
+            // if(!status) {
+            //     console.log(action.payload?.data, 'errror')
+            //     state.PostvalidatejwttokenDataError = action.payload?.data
+            // }else {
+                state.PostvalidatejwttokenData = action.payload.status;
+                state.PostvalidatejwttokenDataLoading =false;
+                state.PostvalidatejwttokenDataError = action.payload?.data;
+            // }
+
         })
         .addCase(Postuserselfregister.pending, (state) => {
             state.PostuserselfregisterData = null;

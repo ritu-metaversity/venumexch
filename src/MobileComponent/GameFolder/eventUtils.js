@@ -6,10 +6,10 @@ export const createProfits = ({
     fancyPnl,
     setProfits,
   }) => {
-    console.log(fancyOdds,"asjdflakdsjflakjsl====")
+    // console.log(fancyOdds,"asjdflakdsjflakjsl====")
     if (!fancyOdds) return;
     if(!pnl?.length){
-        console.log("pnl is not array")
+        // console.log("pnl is not array")
         return;
     }
     const pnlsOdds = pnl?.find(

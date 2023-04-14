@@ -13,8 +13,8 @@ const PnlModals = ({matchId,FancyID}) => {
 dispatch(Postuserfancybook({"matchId":matchId, "fancyId":FancyID}))
   },[matchId,FancyID])
 
-console.log(FancyID,matchId,"kdjashdjhakshdkjas")
-console.log(Postuserfancybookdata,"PostuserfancybookdataPostuserfancybookdata")
+// console.log(FancyID,matchId,"kdjashdjhakshdkjas")
+// console.log(Postuserfancybookdata,"PostuserfancybookdataPostuserfancybookdata")
 
 
 
@@ -47,7 +47,7 @@ console.log(Postuserfancybookdata,"PostuserfancybookdataPostuserfancybookdata")
                 Postuserfancybookdata&&Postuserfancybookdata.data.map((item)=>{
                     return(
                       <tr role="row">
-                                            {  console.log(item,"console.log(item)")}
+                                            {/* {  console.log(item,"console.log(item)")} */}
 
                       <td aria-colindex="1" className="text-left">
                         {item?.odds}

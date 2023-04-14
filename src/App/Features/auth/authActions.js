@@ -340,10 +340,13 @@ export const Postwithdrawrequestclient = createAsyncThunk('auth/Postwithdrawrequ
 export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken', async (data, { rejectWithValue }) => {
     try {
         const PostvalidatejwttokenDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/util/validate-jwt-token`, data
-        );
+        ,{
+            validateStatus: false
+        });
         return PostvalidatejwttokenDataaa
     } catch (err) {
         if (err) {
+            // console.log(err,"PostvalidatejwttokenDataErrorPostvalidatejwttokenDataError")
             throw err
         }
         return rejectWithValue(err.response.data)
@@ -419,7 +422,7 @@ export const Postuserfancybook= createAsyncThunk('auth/Postuserfancybook', async
 });
 export const Postloginlogout= createAsyncThunk('auth/Postloginlogout', async (data, { rejectWithValue }) => {
     try {
-        console.log("loooogogoogogogoog")
+        // console.log("loooogogoogogogoog")
         const PostloginlogoutDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/logout`
         )
         return PostloginlogoutDataaa
@@ -429,4 +432,4 @@ export const Postloginlogout= createAsyncThunk('auth/Postloginlogout', async (da
         }
         return rejectWithValue(err.response.data)
     }
-});
+})

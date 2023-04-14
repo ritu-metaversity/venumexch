@@ -45,7 +45,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
     // console.log(val + updated);
     datatattatattat("true");
   };
-  console.log(userIP,"userIPuserIP");
+  // console.log(userIP,"userIPuserIP");
   // const value = updated;
   // console.log(value);
 

@@ -22,9 +22,9 @@ const Transferstatement = () => {
 
   useEffect(() => {
     if (PostTransferStatementData?.data === "") {
-      console.log("true");
+      // console.log("true");
     } else {
-      console.log("false");
+      // console.log("false");
     }
   }, [PostTransferStatementData?.data]);
 

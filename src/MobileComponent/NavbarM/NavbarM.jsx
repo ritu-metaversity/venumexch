@@ -110,7 +110,7 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
   const handleback=()=>{
     "history.back()"
     window.history.back()
-    console.log("history.back()")
+    // console.log("history.back()")
   }
 
 
