@@ -64,13 +64,13 @@ const PayManually = (props) => {
   };
   return (
     <div>
-       {
+       {/* {
         PostselfdepositappData?.status===true?
 <div className="alertPopup">
 <AlertBtn val={PostselfdepositappData?.message}/>
       </div>
         :""
-      }
+      } */}
       
       <h3 className="enter-amount"> Enter Amount</h3>
       <div className="row row5 main-pricecontainor">

@@ -2,13 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-
-
+import AlertBtn from "../../../MobileComponent/Alert/AlertBtn";
+import { ImCross } from "react-icons/im"
 const token = localStorage.getItem("TokenId");
 
-let REACT_APP_API_URL= "api.247365.exchange"
-axios.defaults.headers.common.Authorization= `Bearer ${token}`
- 
+let REACT_APP_API_URL = "api.247365.exchange"
+axios.defaults.headers.common.Authorization = `Bearer ${token}`
+
 export const getAllPostsComments = createAsyncThunk('auth/getAllPostsComments', async (_, { rejectWithValue }) => {
     try {
         const postsCommentsRespose = await axios.get('https://jsonplaceholder.typicode.com/posts/1/comments');
@@ -23,7 +23,10 @@ export const getAllPostsComments = createAsyncThunk('auth/getAllPostsComments', 
 
 export const postLogin = createAsyncThunk('auth/postLogin', async (login, { rejectWithValue }) => {
     try {
-        const postsLoginRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/client-login`, login);
+        const postsLoginRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/client-login`, login,
+     {
+            validateStatus: false
+        });
         return postsLoginRespose
     } catch (err) {
         if (err) {
@@ -73,7 +76,7 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
 
 export const PostGameDetailsBySportsId = createAsyncThunk('auth/PostGameDetailsBySportsId', async (sportsId, { rejectWithValue }) => {
     try {
-        
+
         const postGameDetailsBySportsIdRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/active-sport-match-wise-open`, sportsId);
         return postGameDetailsBySportsIdRespose
     } catch (err) {
@@ -123,8 +126,28 @@ export const PostGetStackApi = createAsyncThunk('auth/PostGetStackApi', async (i
 export const PostEditStack = createAsyncThunk('auth/PostEditStack', async (data, { rejectWithValue }) => {
     try {
         const PostEditStackData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/set-stake-button`, data);
+        if (
+            PostEditStackData.data.message
+        ) {
+            toast.success(PostEditStackData.data.message || "SUSUSUSUS!!", {
+                style: {
+                    background: "rgb(74,117,67)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
+        }
         return PostEditStackData
     } catch (err) {
+        if (
+            err.response.data.message
+        ) toast.error(err.response.data.message || "Something went Wrong!!", {
+            style: {
+                background: "rgb(156,74,70)", minHeight: 40,
+                padding: 0,
+                color: "white",
+            }
+        });
         if (err) {
             throw err
         }
@@ -164,36 +187,32 @@ export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', 
 export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, { rejectWithValue }) => {
     try {
         const PlaceBet = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/place-bets`, data)
-        console.log(PlaceBet,"PlaceBetPlaceBetPlaceBet")
-        if(
+        console.log(PlaceBet, "PlaceBetPlaceBetPlaceBet")
+        if (
             PlaceBet.data.message
-        )toast.success(PlaceBet.data.message||"SUSUSUSUS!!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            // draggable: true,
-            // progress: undefined,
-            theme: "light",
+        ) {
+            toast.success(PlaceBet.data.message || "SUSUSUSUS!!", {
+                style: {
+                    background: "rgb(74,117,67)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
             });
+        }
         return PlaceBet
 
     } catch (err) {
-        if(
+        if (
             err.response.data.message
-        )toast.error(err.response.data.message||"Something went Wrong!!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            // draggable: true,
-            // progress: undefined,
-            theme: "light",
-            });
+        ) toast.error(err.response.data.message || "Something went Wrong!!", {
+            style: {
+                background: "rgb(156,74,70)", minHeight: 40,
+                padding: 0,
+                color: "white",
+            }
+        });
         if (err) {
-            console.log(err,"errerrerrerrerr")
+            console.log(err, "errerrerrerrerr")
             throw err
         }
         return err.response
@@ -308,8 +327,8 @@ export const Postdepsositrequestclient = createAsyncThunk('auth/Postdepsositrequ
 export const Postpaymnetdetailapp = createAsyncThunk('auth/Postpaymnetdetailapp', async (data, { rejectWithValue }) => {
     try {
         const PostpaymnetdetailappDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/get-paymnet-detail-app-id-wise`, data,
-       
-    );
+
+        );
         return PostpaymnetdetailappDataaa
     } catch (err) {
         if (err) {
@@ -323,10 +342,30 @@ export const Postpaymnetdetailapp = createAsyncThunk('auth/Postpaymnetdetailapp'
 
 export const Postselfdepositapp = createAsyncThunk('auth/Postselfdepositapp', async (data, { rejectWithValue }) => {
     try {
-        const PostselfdepositappDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/self-deposit-app`, data, {headers:{"Content-Type":"multipart/form-data"}
-    });
+        const PostselfdepositappDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/self-deposit-app`, data, {
+            headers: { "Content-Type": "multipart/form-data" }
+        });
+        console.log(PostselfdepositappDataaa, "PostselfdepositappDataaaPostselfdepositappDataaaPostselfdepositappDataaa")
+        if (
+            PostselfdepositappDataaa.data.message
+        ) {
+            toast.success(PostselfdepositappDataaa.data.message || "SUSUSUSUS!!", {
+                style: {
+                    background: "rgb(74,117,67)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
+        }
         return PostselfdepositappDataaa
     } catch (err) {
+        toast.error(err.response.data.message || "Something went Wrong!!", {
+            style: {
+                background: "rgb(156,74,70)", minHeight: 40,
+                padding: 0,
+                color: "white",
+            }
+        });
         if (err) {
             throw err
         }
@@ -341,8 +380,28 @@ export const Postselfwithdrawapp = createAsyncThunk('auth/Postselfwithdrawapp', 
     try {
         const PostselfwithdrawappDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/self-withdraw-app`, data
         );
+        if (
+            PostselfwithdrawappDataaa.data.message
+        ) {
+            toast.success(PostselfwithdrawappDataaa.data.message || "SUSUSUSUS!!", {
+                style: {
+                    background: "rgb(74,117,67)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
+        }
         return PostselfwithdrawappDataaa
     } catch (err) {
+        if(err.response.data.message){
+
+        toast.error(err.response.data.message || "Something went Wrong!!", {
+            style: {
+                background: "rgb(156,74,70)", minHeight: 40,
+                padding: 0,
+                color: "white",
+            }
+        });}
         if (err) {
             throw err
         }
@@ -368,9 +427,11 @@ export const Postwithdrawrequestclient = createAsyncThunk('auth/Postwithdrawrequ
 export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken', async (data, { rejectWithValue }) => {
     try {
         const PostvalidatejwttokenDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/util/validate-jwt-token`, data
-        ,{
-            validateStatus: false
-        });
+       
+            , {
+                validateStatus: false
+            });
+            
         return PostvalidatejwttokenDataaa
     } catch (err) {
         if (err) {
@@ -412,7 +473,7 @@ export const PostMinMaxGameDetails = createAsyncThunk('auth/PostMinMaxGameDetail
 
 export const PostUserOddPnl = createAsyncThunk('auth/PostUserOddPnl', async (data, { rejectWithValue }) => {
     try {
-        const PostUserOddPnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-odds-pnl`,data
+        const PostUserOddPnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-odds-pnl`, data
         )
         return PostUserOddPnlDataaa
     } catch (err) {
@@ -423,9 +484,9 @@ export const PostUserOddPnl = createAsyncThunk('auth/PostUserOddPnl', async (dat
     }
 });
 
-export const PostUserfancypnl= createAsyncThunk('auth/PostUserfancypnl', async (data, { rejectWithValue }) => {
+export const PostUserfancypnl = createAsyncThunk('auth/PostUserfancypnl', async (data, { rejectWithValue }) => {
     try {
-        const PostUserfancypnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-fancy-pnl`,data
+        const PostUserfancypnlDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-fancy-pnl`, data
         )
         return PostUserfancypnlDataaa
     } catch (err) {
@@ -436,9 +497,9 @@ export const PostUserfancypnl= createAsyncThunk('auth/PostUserfancypnl', async (
     }
 });
 
-export const Postuserfancybook= createAsyncThunk('auth/Postuserfancybook', async (data, { rejectWithValue }) => {
+export const Postuserfancybook = createAsyncThunk('auth/Postuserfancybook', async (data, { rejectWithValue }) => {
     try {
-        const PostuserfancybookDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-fancy-book`,data
+        const PostuserfancybookDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-fancy-book`, data
         )
         return PostuserfancybookDataaa
     } catch (err) {
@@ -448,7 +509,7 @@ export const Postuserfancybook= createAsyncThunk('auth/Postuserfancybook', async
         return rejectWithValue(err.response.data)
     }
 });
-export const Postloginlogout= createAsyncThunk('auth/Postloginlogout', async (data, { rejectWithValue }) => {
+export const Postloginlogout = createAsyncThunk('auth/Postloginlogout', async (data, { rejectWithValue }) => {
     try {
         // console.log("loooogogoogogogoog")
         const PostloginlogoutDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/logout`

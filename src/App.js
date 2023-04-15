@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 
 import 'react-toastify/dist/ReactToastify.css';
+import { ImCross } from "react-icons/im";
 
 // import { Provider } from "react-redux";
 // import store from "./Store";
@@ -30,20 +31,26 @@ function App() {
   return (
 
       <div className="App">
+
 <ToastContainer
-position="top-right"
 autoClose={5000}
-hideProgressBar={false}
+hideProgressBar={true}
 newestOnTop={false}
-closeOnClick
+closeOnClick={false}
 rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
+pauseOnFocusLoss={false}
+draggable={false}
+pauseOnHover={false}
 theme="light"
+position= "bottom-left"
+closeButton={<div style={{display:'flex',alignItems:"center",paddingInline:"3px"}}>
+<ImCross/>
+</div>}
+icon={<></>}
+progress= {undefined}
 />
-{/* Same as */}
-<ToastContainer />
+
+
         {/* {mobileRoutes === true ? <RoutesPages /> : */}
          <RouteMobile />
          {/* } */}

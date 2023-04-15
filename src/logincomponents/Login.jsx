@@ -32,10 +32,13 @@ const Login = () => {
   const [signUpClose, setSignUpClose] = useState(false);
   const handleClose = () => setShow(false);
 
-  const { postLoginData, PostuserselfregisterData } = useSelector(
+  const { postLoginData,postLoginDataError, PostuserselfregisterData } = useSelector(
     (state) => state.auth
   );
 
+console.log(postLoginData,postLoginDataError,"postLoginDatapostLoginData")
+
+// postLoginDataError?.data?.message 
   useEffect(() => {
     // if(signUpShow===false){
 

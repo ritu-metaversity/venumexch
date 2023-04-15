@@ -9,22 +9,25 @@ const AlertBtn = ({val}) => {
 
 
 
-  setTimeout(()=>{
-    setAlertTimeOut(false)
-  }, 3000)
-
-
-  
-console.log(val,alertTimeOut,"alertTimeOutalertTimeOutalertTimeOut")
+  // setTimeout(()=>{
+  //   setAlertTimeOut(false)
+  // }, 3000)
+console.log(val,"valvalvalvalvalval")
 
 
   return (
     <div>
       {
         alertTimeOut && (
-          <Alert variant="danger">
-          {val} 
-        </Alert>
+          <div className='AlertBtn'>
+            <div className='gameMessage'>
+
+            {"SDFDFSDFSDFSDFSDSF"} 
+            </div>
+          </div>
+        //   <Alert variant="danger">
+        //   {val} 
+        // </Alert>
         )
       }
         
