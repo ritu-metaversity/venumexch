@@ -215,12 +215,11 @@ const GameDetails = () => {
   const oddFromSocketSlower = (res) => {
     if (res) {
       setPostMinMaxGameDetailsData(res);
-      // console.log(res, "resresresresres");
-      // setMFancyOdds(res);
-      // setMaxBet(res.Bookmaker[0]);
-      //   setMinBet(res);
+  
     }
   };
+
+
   useEffect(() => {
     socket.on("connect",()=>{
       setOddSocketConnected(false)
@@ -245,6 +244,7 @@ const GameDetails = () => {
     };
   }, [OddSocketConnected, id]);
 
+
   useEffect(() => {
     OddSocketConnected && setOddSocketConnected(false);
   }, [id]);
@@ -256,6 +256,8 @@ const GameDetails = () => {
       setmatchedBets(true);
     }
   };
+
+
   const handleBet = (id) => {
     setMarket(true);
     setOpenBet(false);
@@ -413,6 +415,8 @@ setInterval(()=>{
     }
   }, [PostBetingOnGameDetail]);
 
+  console.log(msg, "msg")
+
 
   const handleCloseFancyModal = () => setShowFancyModals(false);
 
@@ -424,17 +428,16 @@ setInterval(()=>{
     setFancyID(sid);
   };
 
+
+  // console.log(PostBetingOnGameDetail, "PostBetingOnGameDetailPostBetingOnGameDetailPostBetingOnGameDetail")
+
   return (
     <div>
-      {PostBetingOnGameDetail?.status === true ? (
+      {/* {PostBetingOnGameDetail?.status === true ? (
         <div className="alertPopup">
           <AlertBtn val={msg} />
         </div>
-      ) : (
-        <div className="alertPopup">
-        <AlertBtn val={PostBetingOnGameDetailError?.message} />
-      </div>
-      )}
+      ) : ""} */}
 
       {/* {isLoading===true?(<div className="mani-loading">
           <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 

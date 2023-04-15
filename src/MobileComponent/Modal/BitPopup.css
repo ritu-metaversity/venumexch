@@ -854,14 +854,13 @@ i.fa.fa-circle-o-notch.fa-spin.loading-bet {
     margin-left: 44%;
     color: #fff;
 }
-
 .mani_loading {
     position: absolute;
     z-index: 999;
     background: #00000075;
-    height: 111%;
-    width: 104%;
+    height: 111.6%;
+    width: 105.2%;
     padding: 0;
-    margin-left: -9px;
+    margin-left: -12px;
     margin-top: -24px;
 }

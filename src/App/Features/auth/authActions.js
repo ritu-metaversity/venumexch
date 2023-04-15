@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 
 const token = localStorage.getItem("TokenId");
@@ -162,13 +163,37 @@ export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', 
 
 export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, { rejectWithValue }) => {
     try {
-        const PlaceBet = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/place-bets`, data
-        ,{
-            validateStatus: false
-        });
+        const PlaceBet = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/place-bets`, data)
+        console.log(PlaceBet,"PlaceBetPlaceBetPlaceBet")
+        if(
+            PlaceBet.data.message
+        )toast.succe(PlaceBet.data.message||"SUSUSUSUS!!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            // draggable: true,
+            // progress: undefined,
+            theme: "light",
+            });
         return PlaceBet
+
     } catch (err) {
+        if(
+            err.response.data.message
+        )toast.error(err.response.data.message||"Something went Wrong!!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            // draggable: true,
+            // progress: undefined,
+            theme: "light",
+            });
         if (err) {
+            console.log(err,"errerrerrerrerr")
             throw err
         }
         return err.response
