@@ -4,6 +4,7 @@ import MidPage from "../MobileComponent/MidPageM/Midpage";
 import MFooter from "../MobileComponent/MMFooter/MFooter";
 // import Footer from "../component/Footer/Footer";
 import Eyeicon from "../MobileComponent/EyeIcon/Eyeicon";
+import { AiOutlineArrowUp } from 'react-icons/ai';
 import LeftMenu from "../MobileComponent/leftMenu/LeftMenu";
 import "./LayoutForMobile.css";
 import RightMenu from "../MobileComponent/RightMenu/RightMenu";
@@ -17,8 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Postvalidatejwttoken } from "../App/Features/auth/authActions";
 
 const LayoutForMobile = () => {
-   let  navigate =useNavigate()
-const dispatch =useDispatch()
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
   const [RightValue, setRightValue] = useState(false);
   const [LeftValue, setLeftValue] = useState(false);
   const [show, setShow] = useState(false);
@@ -28,27 +29,35 @@ const dispatch =useDispatch()
   const [BetType, setBetType] = useState("");
   const [BetTypeFooter, setBetTypeFooter] = useState(false);
 
-const { PostvalidatejwttokenDataError} = useSelector((state) => state.auth);
+  const { PostvalidatejwttokenDataError } = useSelector((state) => state.auth);
 
   const RightSideBarClose = (vl) => {
     setRightValue(false);
   };
 
-useEffect(()=>{
-  const time = setInterval(() => {
-    dispatch(Postvalidatejwttoken())
-    }, 1000);
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    const time = setInterval(() => {
+      dispatch(Postvalidatejwttoken());
+    }, 5000);
     return () => clearInterval(time);
-},[dispatch])
+  }, [dispatch]);
 
-useEffect(()=>{
-if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
-  localStorage.clear();
-  navigate("/m/login")
-}
-},[PostvalidatejwttokenDataError])
 
-// JWT Token Expired
+console.log( PostvalidatejwttokenDataError,"PostvalidatejwttokenDataErrorPostvalidatejwttokenDataError")
+
+  useEffect(() => {
+    if (
+      PostvalidatejwttokenDataError?.status === false
+    ) {
+      localStorage.clear();
+      // navigate("/m/login");
+      window.location.replace("/")
+    }
+  }, [PostvalidatejwttokenDataError]);
+
+  // JWT Token Expired
   const handleClose = () => {
     setShow(false);
   };
@@ -58,12 +67,11 @@ if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
   };
   const LiftSideBar = (vl) => {
     setLeftValue(vl);
-
   };
   const datatata = (vl) => {
     setBitValue(vl);
-    if (vl?.Odds === ""||vl?.Odds === "undefined") {
-      setShow(false );
+    if (vl?.Odds === "" || vl?.Odds === "undefined") {
+      setShow(false);
     } else {
       setShow(true);
       setBetType(vl?.isBack);
@@ -75,10 +83,7 @@ if(PostvalidatejwttokenDataError==="Request failed with status code 401"){
     // console.log(vl);
   };
 
-
-useEffect(()=>{
-
-},[])
+  useEffect(() => {}, []);
 
   const datatattatattat = (vl) => {
     setBetTypeFooter(vl);
@@ -86,12 +91,34 @@ useEffect(()=>{
 
   const cssClasssss = (vl) => {
     // console.log(vl)
-    setCssClassssssssss(vl)
-};
+    setCssClassssssssss(vl);
+  };
   const closePopUp = (vl) => {
-   
-    setShow(false)
-};
+    setShow(false);
+  };
+
+  const [visible, setVisible] = useState(false);
+
+  const toggleVisible = () => {
+    const scrolled = document.documentElement.scrollTop;
+    if (scrolled > 300) {
+      setVisible(true);
+    } else if (scrolled <= 300) {
+      setVisible(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+      /* you can also use 'auto' behaviour
+       in place of 'smooth' */
+    });
+  };
+
+  window.addEventListener("scroll", toggleVisible);
+
   return (
     <>
       <div className="wrapper">
@@ -108,8 +135,12 @@ useEffect(()=>{
           {/* <div className={`main-cointainer ${ LeftValue===true? "left-menu-open" :""}`} >     */}
 
           <div>
-            
-            <NavbarM RightSideBar={RightSideBar} LiftSideBar={LiftSideBar} RightValue={RightValue} LeftValue={LeftValue}/>
+            <NavbarM
+              RightSideBar={RightSideBar}
+              LiftSideBar={LiftSideBar}
+              RightValue={RightValue}
+              LeftValue={LeftValue}
+            />
           </div>
           <Outlet context={datatata} datatata={datatata} />
 
@@ -127,25 +158,43 @@ useEffect(()=>{
         >
           <LeftMenu eftMenuClose={eftMenuClose} />
         </ul>
-        <div className="bottom-icon" >
+
+        <div className="bottom-icon arrowUp">
+         
+            <button
+              className="btnnnnnnnn"
+              onClick={scrollToTop}
+              style={{ display: visible ? "block" : "none" }}
+            >
+             <AiOutlineArrowUp size={25}/>
+            </button>
+         
+        </div>
+
+        <div className="bottom-icon">
           <Eyeicon />
         </div>
+       
       </div>
 
-      <Modal show={show} onHide={handleClose} >
+      <Modal show={show} onHide={handleClose}>
         <div
           className={`eighteen-plus  ${BetType}-border  ${
             BetTypeFooter ? "" : "modal-design"
-          } ${cssClsssssssssssss?cssClsssssssssssss:""}` }
-          
+          } ${cssClsssssssssssss ? cssClsssssssssssss : ""}`}
         >
-          <Modal.Body style={{marginLeft: "-72% !important"}}> 
-            <BitPopup bitValue={bitValue} datatattatattat={datatattatattat} cssClasssss={cssClasssss} closePopUp={closePopUp}/>
+          <Modal.Body style={{ marginLeft: "-72% !important" }}>
+            <BitPopup
+              bitValue={bitValue}
+              datatattatattat={datatattatattat}
+              cssClasssss={cssClasssss}
+              closePopUp={closePopUp}
+            />
           </Modal.Body>
         </div>
       </Modal>
     </>
-  )
-}
+  );
+};
 
 export default LayoutForMobile;

@@ -15,21 +15,17 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
   const [updated, setUpdated] = useState("");
   const [ConfirmBet, setConfirmBet] = useState(false);
   const [userIP, setUserIP] = useState("");
+  
   // const [closePopUp, setClosePopUp] = useState(false);
   // const [cssClsssss, setCssClasssss] = useState("bet-modal");
-  const { PostBetingOnGameDetail, GetGeolocationIP } = useSelector(
+  const { PostBetingOnGameDetail, PostBetingOnGameDetailLoading,GetGeolocationIP } = useSelector(
     (state) => state.auth
   );
   console.log(bitValue?.priceValue,"bitValue?.priceValue")
   let { id } = useParams();
-  // console.log(bitValue?.oddsssss);
-  // console.log(bitValue?.bookmakerPnl);
-  // console.log(bitValue);
-  // console.log(datatattatattat);
-  // console.log(cssClasssss);
-  // console.log(closePopUp);
-  // const [getBetValue, setgetBetValue] = useState();
-  // console.log(bitValue, "bitValuebitValue");
+  
+
+  console.log(PostBetingOnGameDetail,PostBetingOnGameDetailLoading,"PostBetingOnGameDetailLoadingPostBetingOnGameDetailLoading")
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(PostGetStackApi());
@@ -45,15 +41,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
     // console.log(val + updated);
     datatattatattat("true");
   };
-  console.log(userIP,"userIPuserIP");
-  // const value = updated;
-  // console.log(value);
 
-  // const handleClick = (event) => {
-  //   setUpdated(event.target.value);
-  // };
-
-  // console.log(userIP,"GetGeolocationIPGetGeolocationIP")
 
   const increment = () => {
     setBitValue(Bitvalue + 0.05);
@@ -125,30 +113,16 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
   const {marketId,isFancy, profits,Odds:odds,isBack,selectionId } = bitValue
   return (
     <div>
-      {/* <div
-        id="__BVID__31___BV_modal_outer_"
-        style={{ position: "absolute", zINDEX: "1040" }}
-      >
-        <div
-          id="__BVID__31"
-          role="dialog"
-          tabindex="-1"
-          aria-labelledby="__BVID__31___BV_modal_title_"
-          aria-describedby="__BVID__31___BV_modal_body_"
-            className="modal fade show placebet-modal"
-          aria-modal="true"
-          style={{ display: "block" }}
-        >
-          <div   className="modal-dialog modal-md modal-dialog-centered">
-            <div
-              role="document"
-              id="__BVID__31___BV_modal_content_"
-                className="modal-content"
-            > */}
+
       <div id="__BVID__31___BV_modal_body_" className="modal-body p-0">
         <div className="place-bet">
           <div>
             <form data-vv-scope="form-placebet" className="m-b-0">
+              {
+                PostBetingOnGameDetailLoading && (<div className="mani_loading">
+                <i className="fa fa-circle-o-notch fa-spin loading-bet" style={{fontSize:"50px"}}></i> 
+                <p className="loading-text">Loading...</p> </div>)
+              }
               <div className="m-l-5 m-r-5 row d-block">
                 <div className="col-12 p-t-5 p-l-5 p-r-5">
                   <h4 className="m-b-0">
@@ -342,12 +316,10 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
           </div>
         </div>
       </div>
-      {/* </div>
-          </div> */}
-      {/* </div> */}
-      {/* <div tabindex="0"> </div> */}
-      {/* <div id="__BVID__31___BV_modal_backdrop_"   className="modal-backdrop"></div> */}
-      {/* </div> */}
+
+
+
+
     </div>
   );
 };

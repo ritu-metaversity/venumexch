@@ -49,7 +49,7 @@ const Gamepage = () => {
     datatata(data);
     navigate(`/m/gamedetail/${id}`);
   };
-  console.log(gamesData, "gamesData");
+  // console.log(gamesData, "gamesData");
 
   const handleInput = (vl) => {
     // console.log("das")

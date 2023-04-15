@@ -24,7 +24,7 @@ const PayManually = (props) => {
     (state) => state.auth
   );
   // Deposit Request Submitted Successfully
-  console.log(PostselfdepositappData?.message,"PostselfdepositappDataPostselfdepositappData")
+  // console.log(PostselfdepositappData?.message,"PostselfdepositappDataPostselfdepositappData")
   const [Bitvalue, setBitValue] = useState(0);
 
   const [pymentMode, setPymentMode] = useState("UPI");

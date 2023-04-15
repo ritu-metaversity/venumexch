@@ -51,7 +51,7 @@ const LeftMenu = (props) => {
     <>
     {/* <div   className='left-menu'></div> */}
     <li>   
-          <div   className="menu-lvl-1 "  onClick={()=>handleMyMarket() }> 
+          <div   className="menu-lvl-1 "  style={{cursor: "pointer"}}  onClick={()=>handleMyMarket() }> 
              <div   className="item"><i   className="fas fa-eye"></i> <span   className="menu-name">My Markets</span></div>
           </div>
     </li>
@@ -59,7 +59,7 @@ const LeftMenu = (props) => {
                 getActiveSportListData?.data?.data ? (
                   getActiveSportListData?.data?.data.map((item) => (
     <li>
-       <div onClick={()=>handleRoute(item?.sportId,item?.sportName)}    className="favourites-a">
+       <div onClick={()=>handleRoute(item?.sportId,item?.sportName)} style={{cursor: "pointer"}}    className="favourites-a">
           <div   className="menu-lvl-1">
              <div   className="item" ><img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} alt=''   className="game-icon"/> <span   className="menu-name">{item?.sportName}</span></div>
           </div>

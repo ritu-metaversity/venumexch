@@ -220,3 +220,16 @@ footer a {
 .register-head button {
     float: right;
 }
+button.confirmation.btn.btn-primary {
+    padding: 0px 13px !important;
+    height: 26px;
+    font-size: 12px;
+    width: 63%;
+}
+.confirm{
+    margin: auto;
+}
+.modal-header {
+    display: block;
+    margin: auto;
+}
