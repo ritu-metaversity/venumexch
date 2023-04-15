@@ -162,7 +162,10 @@ export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', 
 
 export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, { rejectWithValue }) => {
     try {
-        const PlaceBet = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/place-bets`, data);
+        const PlaceBet = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/place-bets`, data
+        ,{
+            validateStatus: false
+        });
         return PlaceBet
     } catch (err) {
         if (err) {

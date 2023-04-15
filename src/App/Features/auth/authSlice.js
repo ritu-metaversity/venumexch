@@ -309,11 +309,11 @@ const authSlice = createSlice({
         }).addCase(PostPlaceBet.rejected, (state, action) => {
             state.PostBetingOnGameDetail = null;
             state.PostBetingOnGameDetailLoading =false;
-            state.PostBetingOnGameDetailError = action.error.message;
+            state.PostBetingOnGameDetailError = action;
         }).addCase(PostPlaceBet.fulfilled, (state, action) => {
             state.PostBetingOnGameDetail = action.payload.data;
             state.PostBetingOnGameDetailLoading =false;
-            state.PostBetingOnGameDetailError = null;
+            state.PostBetingOnGameDetailError = action.payload.data          ;
         })
         .addCase(Postactivematchsport.pending, (state) => {
             state.Postmatchsport = null;

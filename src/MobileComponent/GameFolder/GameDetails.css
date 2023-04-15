@@ -1166,14 +1166,13 @@ margin-left: 2%;
 }
 .mani-loading {
     background-color: rgb(66 61 61 / 59%);
-    height: 108vh;
     margin-bottom: -5px;
 }
 .loading{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     background: unset;
 }
 .loading-text{

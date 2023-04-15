@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { useOutletContext, useParams } from "react-router";
 import {
   PostBetListByMatchId,
@@ -41,6 +41,9 @@ const GameDetails = () => {
   const [PostMinMaxGameDetailsData, setPostMinMaxGameDetailsData] = useState(
     {}
   );
+  // const { PostBetingOnGameDetail } = useSelector(
+  //   (state) => state.auth
+  // );
   // console.log(
   //   gameDetailsData?.data?.Bookmaker,
   //   "gameDetailsDatagameDetailsDatagameDetailsData"
@@ -57,10 +60,11 @@ const GameDetails = () => {
     PostUserfancypnlata,
     PostBetListByMatchIdData,
     PostBetingOnGameDetailError,
+  
     PostBetingOnGameDetailErrorrr,
   } = useSelector((state) => state.auth);
   // console.log(PostBetingOnGameDetailLoading, "PostBetingOnGameDetailLoading");
-  // console.log(PostBetingOnGameDetail, "PostBetingOnGameDetail");
+  console.log(PostBetingOnGameDetailError,PostBetingOnGameDetail, "PostBetingOnGameDetailErrorPostBetingOnGameDetailError");
   useEffect(() => {
     const iddd = localStorage.getItem("SportId");
     setGameIframeId(iddd);
@@ -218,6 +222,9 @@ const GameDetails = () => {
     }
   };
   useEffect(() => {
+    socket.on("connect",()=>{
+      setOddSocketConnected(false)
+    })
     socket.on("OddsUpdated", oddFromSocketSlower);
     socket.on("JoinedSuccessfully", () => {
       setOddSocketConnected(true);
@@ -242,7 +249,6 @@ const GameDetails = () => {
     OddSocketConnected && setOddSocketConnected(false);
   }, [id]);
 
-  // console.log(OddSocketConnected)
   const handlematched = () => {
     if (matchedBets === true) {
       setmatchedBets(false);
@@ -261,6 +267,16 @@ const GameDetails = () => {
     let data = { matchId: id };
     dispatch(PostBetListByMatchId(data));
   };
+
+
+useEffect(()=>{
+  let data = { matchId: id };
+  dispatch(PostBetListByMatchId(data));
+setInterval(()=>{
+  let data = { matchId: id };
+  dispatch(PostBetListByMatchId(data));
+},5000)
+},[id])
 
   const handleNationName = (name) => {};
 
@@ -343,37 +359,8 @@ const GameDetails = () => {
     };
   }, []);
 
-  // useEffect(()=>{
-
-  //   let timer = setInterval(() =>
-
-  // 1000
-  // )
-  // return () => {
-  // clearInterval(timer)
-
-  // },[])
-
-  // console.log(PostUserOddPnlData,"PostUserOddPnlData")
-  // console.log(PostUserfancypnlata,"PostUserfancypnlata")
-  // console.log(datataatatatta,"datataatatatta")
-  // useEffect(() => {
-  //   if (PostUserOddPnlData?.data && JSON.parse(PostUserOddPnlData?.data)?.data) {
-  //     setPostBetListByMatchIdData(JSON.parse(PostUserOddPnlData?.data));
-
-  //   }
-  // }, [PostUserOddPnlData]);
-
   const [oddsPnl, setOddsPnl] = useState({});
 
-  // const { lastMessage: lastOddsPnl } = useWebSocket(
-  //   `${
-  //     process.env.REACT_APP_ANKIT_SOCKET_BET
-  //   }/enduserodd/${id}/${localStorage.getItem("TokenId")}`,
-  //   { shouldReconnect: (event) => true }
-  // );
-
-  // console.log(PostUserOddPnlData, "PostUserOddPnlData");
   useEffect(() => {
     if (PostUserOddPnlData?.data !== null) {
       setOddsPnl(PostUserOddPnlData?.data);
@@ -385,54 +372,23 @@ const GameDetails = () => {
 
   // ******* PNL DATA FANCY
 
-  // const [oddsPnl, setOddsPnl] = useState({});
   const [FancyPNL, setFacnyPNL] = useState({});
 
-  // const { lastMessage: lastFancyPnl } = useWebSocket(
-  //   `${
-  //     process.env.REACT_APP_ANKIT_SOCKET_BET
-  //   }/enduserfancy/${id}/${localStorage.getItem("TokenId")}`,
-  //   { shouldReconnect: (event) => true }
-  // );
-  // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data)")
-  // console.log(onlyFancyDetails)
-  // console.log(PostUserfancypnlata, "PostUserfancypnlata");
   useEffect(() => {
     if (PostUserfancypnlata) {
       if (PostUserfancypnlata) {
-        // console.log(lastFancyPnl?.data &&JSON.parse(lastFancyPnl && lastFancyPnl?.data),"lastFancyPnl")
+
         setFacnyPNL(PostUserfancypnlata);
       } else {
-        // console.log("FancyPNL")
+
         setFacnyPNL(null);
       }
     }
   }, [PostUserfancypnlata]);
-  // console.log(FancyPNL?.data,"FancyPNL")
 
-  //   useEffect(() => {
-  //     let fancyyyyyypnl = [
-  //       {
-  //         selection: oddsPnl[0]?.selection1,
-  //         pnl: oddsPnl[0]?.pnl1,
-  //       },
-  //       {
-  //         selection: oddsPnl[0]?.selection2,
-  //         pnl: oddsPnl[0]?.pnl2,
-  //       },
-  //       {
-  //         selection: oddsPnl[0]?.selection3,
-  //         pnl: oddsPnl[0]?.pnl3,
-  //       },
-  //     ];
-
-  // setFacnyPNL(fancyyyyyypnl)
-  //   }, []);
-
-  // console.log(gameDetailsData, "odsds ---------");
 
   useEffect(() => {
-    // console.log(gameDetailsData, "oods22---");
+
     createProfits({
       fancyOdds: gameDetailsData?.data,
       fancyPnl: setFacnyPNL?.data,
@@ -450,15 +406,13 @@ const GameDetails = () => {
     betDetails?.selectionId,
   ]);
 
-  // console.log(msg, "sadafgsdfhgdfghgf");
-
   useEffect(() => {
     if (PostBetingOnGameDetail?.status === true) {
       setMsg(PostBetingOnGameDetail?.message);
-      // console.log(PostBetingOnGameDetail, "PostBetingOnGameDetail")
+
     }
   }, [PostBetingOnGameDetail]);
-  // console.log(PostMinMaxGameDetailsData, "PostMinMaxGameDetailsData");
+
 
   const handleCloseFancyModal = () => setShowFancyModals(false);
 
@@ -470,7 +424,6 @@ const GameDetails = () => {
     setFancyID(sid);
   };
 
-
   return (
     <div>
       {PostBetingOnGameDetail?.status === true ? (
@@ -478,7 +431,9 @@ const GameDetails = () => {
           <AlertBtn val={msg} />
         </div>
       ) : (
-        ""
+        <div className="alertPopup">
+        <AlertBtn val={PostBetingOnGameDetailError?.message} />
+      </div>
       )}
 
       {/* {isLoading===true?(<div className="mani-loading">
@@ -529,8 +484,7 @@ const GameDetails = () => {
                   class={`nav-link ${openBet ? "active " : ""}`}
                   onClick={handleOpneBet}
                 >
-                  Open Bets
-                </Link>
+                  Open Bets  { PostBetListByMatchIdData?.data ? "( "+Object.values(PostBetListByMatchIdData?.data)?.reduce((accu,current)=>{accu+=current.length; return accu},0)+" )":""}                 </Link>
               </li>
             </ul>
 
@@ -688,8 +642,13 @@ const GameDetails = () => {
                                                            : " "
                                                        }`}
                                                   >
+                                                    {console.log(
+                                                      item,
+                                                      "itemitem"
+                                                    )}
                                                     {/* {console.log(item1,"item1item1item1")} */}
                                                     {/* {console.log(item1,"itemitemitem")} */}
+
                                                     <button
                                                       type="button"
                                                       className="back"
@@ -1195,34 +1154,61 @@ const GameDetails = () => {
                                                                   }}
                                                                 >
                                                                   {" "}
-                                                                  {FancyPNL?.data
-                                                                    ? FancyPNL?.data.find(
+                                                                  <>{FancyPNL?.data.find(
                                                                         (
                                                                           itemPnl
                                                                         ) =>
                                                                           itemPnl?.marketId ==
                                                                           item?.sid
-                                                                      )?.pnl
-                                                                    : 0}
+                                                                      )?.pnl}
+                                                                         
+                                                                      <div
+                                                                      data-v-e03c6f20=""
+                                                                      className="float-right v-m"
+                                                                    >
+                                                                      <img
+                                                                        alt="Black Ladder"
+                                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder-black.png"
+                                                                        class="float-right ladder-icon"
+                                                                      ></img>
+                                                                    </div>
+                                                                    </>
+                                                                 
                                                                 </span>
                                                               ) : (
-                                                                <span
-                                                                  className="float-left ubook"
-                                                                  style={{
-                                                                    color:
-                                                                      "green",
-                                                                  }}
-                                                                >
+                                                                <span className="float-left ubook"style={{color:"green",}}>
                                                                   {" "}
                                                                   {FancyPNL?.data
-                                                                    ? FancyPNL?.data.find(
+                                                                    ? <>{FancyPNL?.data.find(
                                                                         (
                                                                           itemPnl
                                                                         ) =>
                                                                           itemPnl?.marketId ==
                                                                           item?.sid
-                                                                      )?.pnl
-                                                                    : 0}
+                                                                      )?.pnl}
+                                                                      
+                                                                      <div
+                                                                      data-v-e03c6f20=""
+                                                                      className="float-right v-m"
+                                                                    >
+                                                                      <img
+                                                                        alt="Black Ladder"
+                                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder-black.png"
+                                                                        class="float-right ladder-icon"
+                                                                      ></img>
+                                                                    </div></>
+                                                                      
+                                                                    : ""}
+                                                                    <div
+                                                                      data-v-e03c6f20=""
+                                                                      className="float-right v-m"
+                                                                    >
+                                                                      <img
+                                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder.png"
+                                                                        className="float-right ladder-icon"
+                                                                        alt=""
+                                                                      />
+                                                                    </div> 
                                                                 </span>
                                                               )
                                                             ) : (
@@ -1231,16 +1217,9 @@ const GameDetails = () => {
                                                           </span>
                                                         </p>
                                                       </div>
-                                                      <div
-                                                        data-v-e03c6f20=""
-                                                        className="float-right v-m"
-                                                      >
-                                                        <img
-                                                          src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder.png"
-                                                          className="float-right ladder-icon"
-                                                          alt=""
-                                                        />
-                                                      </div>
+                                            
+
+                                                    
                                                     </div>
                                                     <div
                                                       data-v-e03c6f20=""
@@ -1426,7 +1405,7 @@ const GameDetails = () => {
                   } `}
                 >
                   {/* <div className="message">You have no matched bet</div>  */}
-
+{console.log(PostBetListByMatchIdData?.data,"PostBetListByMatchIdData?.dataPostBetListByMatchIdData?.data")}
                   {PostBetListByMatchIdData?.data &&
                     Object.keys(PostBetListByMatchIdData?.data).map((key) => (
                       <>
@@ -1445,6 +1424,7 @@ const GameDetails = () => {
                                         item?.back === false ? "lay" : "back"
                                       }-bet`}
                                     >
+                                      {console.log(item,"itemitemitemedwefdsf")}
                                       <u>
                                         {item?.back === true ? "BACK" : "LAY"}{" "}
                                         {item?.nation} for {item?.amount} @{" "}
@@ -1506,7 +1486,6 @@ const GameDetails = () => {
           <PnlModals matchId={id} FancyID={FancyID} />
         </ModalBody>
       </Modal>
-      
     </div>
   );
 };
