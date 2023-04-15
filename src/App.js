@@ -6,6 +6,10 @@ import Home from "./component/Home/Home";
 import RoutesPages from "./routePages";
 import RouteMobile from "./RouteMobile.jsx";
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+
+import 'react-toastify/dist/ReactToastify.css';
+
 // import { Provider } from "react-redux";
 // import store from "./Store";
 
@@ -16,26 +20,30 @@ function App() {
   const [mobileRoutes, setMoileRoutes] = useState(true);
 
   const { pathname } = useLocation();
-  // useEffect(() => {
-  //   if (window.innerWidth <= 1024) {
-  //     setMoileRoutes(true);
-  //     if (!pathname.includes("/m/")) {
-  //       navigate("./m/home");
-  //     }
-  //     // console.log("mobile")
-  //   } else {
-  //     setMoileRoutes(false);
-  //     if (pathname.includes("/m/")) {
-  //       navigate("./home");
-  //     }
-  //     // console.log("pc")
-  //   }
-  // }, [navigate]);
+
+  useEffect(()=>{
+
+
+
+  },[])
 
   return (
 
       <div className="App">
-
+<ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+{/* Same as */}
+<ToastContainer />
         {/* {mobileRoutes === true ? <RoutesPages /> : */}
          <RouteMobile />
          {/* } */}
