@@ -167,7 +167,7 @@ export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, {
         console.log(PlaceBet,"PlaceBetPlaceBetPlaceBet")
         if(
             PlaceBet.data.message
-        )toast.succe(PlaceBet.data.message||"SUSUSUSUS!!", {
+        )toast.success(PlaceBet.data.message||"SUSUSUSUS!!", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
