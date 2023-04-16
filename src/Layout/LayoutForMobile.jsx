@@ -45,8 +45,6 @@ const LayoutForMobile = () => {
   }, [dispatch]);
 
 
-console.log( PostvalidatejwttokenDataError,"PostvalidatejwttokenDataaaPostvalidatejwttokenDataaa")
-
   useEffect(() => {
     if (
       PostvalidatejwttokenDataError?.status === false

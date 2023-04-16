@@ -27,19 +27,15 @@ setAvaliablebalance(PostTotalBalance?.data?.data?.balance)
 
 const token = localStorage.getItem("TokenId")
 useEffect(()=>{
-   console.log("balaaac")
+
    const time = setInterval(() => {
       if(token!==""){
-         // console.log("token found")
-      
          dispatch(PostBalance())
-         
       }
       }, 5000);
       return () => clearInterval(time);
-
-
 },[token])
+
 useEffect(()=>{
   
       dispatch(Postisselfbyappurl({"appUrl":appUrll}))
@@ -47,10 +43,6 @@ useEffect(()=>{
 },[appUrll])
 
 
-// console.log(postisselfbyappurlData?.data?.selfAllowed,"postisselfbyappurlData")
-// console.log(appUrll,"appUrll")
-
-// console.log(PostTotalBalance,"PostTotalBalance")
    const handleInput=(vl)=>{
       props.RightSideBarClose(false)
       if(vl==="OpenBets"){
@@ -94,14 +86,11 @@ useEffect(()=>{
         dispatch(Postloginlogout);
          localStorage.clear();
          navigate("./login");
-         // console.log("hello")
       }
       
    }
-   // const token = localStorage.getItem("TokenId")
-   const userId = localStorage.getItem("userId")
-   // console.log(PostTotalBalance,"hello balance ")
 
+   const userId = localStorage.getItem("userId")
  
   return (
     <>

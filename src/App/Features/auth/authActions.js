@@ -27,6 +27,7 @@ export const postLogin = createAsyncThunk('auth/postLogin', async (login, { reje
      {
             validateStatus: false
         });
+        
         return postsLoginRespose
     } catch (err) {
         if (err) {
@@ -447,8 +448,28 @@ export const Postuserselfregister = createAsyncThunk('auth/Postuserselfregister'
     try {
         const PostuserselfregisterDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/user/self-register`, data
         )
+        if (
+            PostuserselfregisterDataaa.data.message
+        ) {
+            toast.success(PostuserselfregisterDataaa.data.message || "SUSUSUSUS!!", {
+                style: {
+                    background: "rgb(74,117,67)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
+        }
         return PostuserselfregisterDataaa
     } catch (err) {
+        if(err.response.data.message){
+
+            toast.error(err.response.data.message || "Something went Wrong!!", {
+                style: {
+                    background: "rgb(156,74,70)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });}
         if (err) {
             throw err
         }
