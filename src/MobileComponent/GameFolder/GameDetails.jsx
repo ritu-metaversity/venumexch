@@ -31,7 +31,7 @@ const GameDetails = () => {
   const [matchedBets, setmatchedBets] = useState(false);
   const [gameDetailsData, setGameDetailsData] = useState();
   const [previousState, setPreviousState] = useState({});
-  const [isLoading, setIsloading] = useState(true);
+
   const [gameIframeId, setGameIframeId] = useState(4);
   const [msg, setMsg] = useState("");
   const [showFancyModals, setShowFancyModals] = useState(false);
@@ -211,10 +211,14 @@ const GameDetails = () => {
   }, [PostMinMaxGameDetailsData]);
 
   const [OddSocketConnected, setOddSocketConnected] = useState({});
+  const [isLoading, setIsloading] = useState(true);
+
 
   const oddFromSocketSlower = (res) => {
     if (res) {
       setPostMinMaxGameDetailsData(res);
+      setIsloading(false)
+      console(res, "dsfdsgdggvd")
   
     }
   };
@@ -439,11 +443,11 @@ setInterval(()=>{
         </div>
       ) : ""} */}
 
-      {/* {isLoading===true?(<div className="mani-loading">
+      {isLoading===true?(<div className=" lodddd">
           <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 
           <p className="loading-text">Loading...</p> </div>)
 :
-         */}
+        
 
       <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
         <div className="home-page home-page-news">
@@ -465,8 +469,9 @@ setInterval(()=>{
                     gameDetailsData?.data?.Odds[0]?.runners[1]?.name}
                 </h4>
               </div>
+              {console.log(gameDetailsData?.data?.Odds[0]?.eventTime,"sdjfsjdfksjdnfksdjkfd")}
               <div className="text-right">
-                <span>20/11/2022 20:30</span>
+                <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
               </div>
             </div>
             <ul className="nav nav-tabs">
@@ -1460,6 +1465,7 @@ setInterval(()=>{
           </div>
         </div>
       </div>
+}
       {/* } */}
 
       <Modal

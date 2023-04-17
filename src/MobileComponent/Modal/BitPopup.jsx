@@ -153,7 +153,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
                     />
                     <button
                       type="button"
-                      className="stakeactionminus btn"
+                      className="stakeactionminus btn incrementBtn"
                       onClick={increment}
                     >
                       <span className="fa fa-plus"></span>

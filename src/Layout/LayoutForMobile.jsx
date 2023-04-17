@@ -119,7 +119,7 @@ const LayoutForMobile = () => {
 
   return (
     <>
-      <div className="wrapper">
+      <div className="wrapper" >
         {/* <div className="main-cointainer right-menu-open" > */}
         <div
           className={`main-cointainer ${
@@ -129,6 +129,7 @@ const LayoutForMobile = () => {
               ? "left-menu-open"
               : ""
           }`}
+          // style
         >
           {/* <div className={`main-cointainer ${ LeftValue===true? "left-menu-open" :""}`} >     */}
 
@@ -144,12 +145,14 @@ const LayoutForMobile = () => {
 
           <MFooter />
         </div>
+
         <div
           className={RightValue === true ? "right-menu" : ""}
           style={{ overflowY: "hidden " }}
         >
           <RightMenu RightSideBarClose={RightSideBarClose} />
         </div>
+        
         <ul
           className={LeftValue === true ? "left-menu" : "d-none"}
           style={{ overflowY: "auto" }}

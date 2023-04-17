@@ -864,3 +864,6 @@ i.fa.fa-circle-o-notch.fa-spin.loading-bet {
     margin-left: -12px;
     margin-top: -24px;
 }
+.incrementBtn{
+    margin-left: 0px !important;
+}
