@@ -38,7 +38,7 @@ console.log()
     useEffect(()=>{
       axios.post('http://api.247365.exchange/admin-new-apis/enduser/get-user-message',)
              .then((response) => {
-      
+      console.log(response,"responseresponse")
               setMovingMessage(response?.data?.message)
        })
     },[])

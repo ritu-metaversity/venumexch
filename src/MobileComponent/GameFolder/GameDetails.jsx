@@ -31,7 +31,10 @@ const GameDetails = () => {
   const [matchedBets, setmatchedBets] = useState(false);
   const [gameDetailsData, setGameDetailsData] = useState();
   const [previousState, setPreviousState] = useState({});
-  const [isLoading, setIsloading] = useState(true);
+
+  //state for fancy for blinker After filter
+  const [previousStateFancyBlinker, setPreviousStateFancyBlinker] = useState({});
+
   const [gameIframeId, setGameIframeId] = useState(4);
   const [msg, setMsg] = useState("");
   const [showFancyModals, setShowFancyModals] = useState(false);
@@ -49,6 +52,7 @@ const GameDetails = () => {
   //   "gameDetailsDatagameDetailsDatagameDetailsData"
   // );
   // console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
+  console.log(previousState,"PostMinMaxGameDetailsData")
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
   const [betDetails, setBetDetails] = useState({});
@@ -64,7 +68,7 @@ const GameDetails = () => {
     PostBetingOnGameDetailErrorrr,
   } = useSelector((state) => state.auth);
   // console.log(PostBetingOnGameDetailLoading, "PostBetingOnGameDetailLoading");
-  console.log(PostBetingOnGameDetailError,PostBetingOnGameDetail, "PostBetingOnGameDetailErrorPostBetingOnGameDetailError");
+  // console.log(PostBetingOnGameDetailError,PostBetingOnGameDetail, "PostBetingOnGameDetailErrorPostBetingOnGameDetailError");
   useEffect(() => {
     const iddd = localStorage.getItem("SportId");
     setGameIframeId(iddd);
@@ -122,7 +126,7 @@ const GameDetails = () => {
         isFancy: false,
       });
     } else {
-      alert("Pleace select other bit");
+      // alert("Pleace select other bit");
     }
     // console.log(item1,"item1")
   };
@@ -194,27 +198,34 @@ const GameDetails = () => {
         isFancy: false,
       });
     } else {
-      alert("Pleace select other bit");
+      // alert("Pleace select other bit");
     }
   };
 
   useEffect(() => {
     if (Object.keys(PostMinMaxGameDetailsData).length) {
-      if (gameDetailsData) {
-        const oldOdds = { ...gameDetailsData };
-        setPreviousState(oldOdds);
-      } else {
-        setPreviousState({ data: PostMinMaxGameDetailsData });
-      }
-      setGameDetailsData({ data: PostMinMaxGameDetailsData });
+      setGameDetailsData((gameDetailsData)=>{
+        if (gameDetailsData) {
+          const oldOdds = { ...gameDetailsData };
+          setPreviousState(oldOdds);
+          
+        } else {
+          setPreviousState({ data: PostMinMaxGameDetailsData });
+        }
+         return ({data: PostMinMaxGameDetailsData });
+    });
     }
   }, [PostMinMaxGameDetailsData]);
 
   const [OddSocketConnected, setOddSocketConnected] = useState({});
+  const [isLoading, setIsloading] = useState(true);
+
 
   const oddFromSocketSlower = (res) => {
     if (res) {
       setPostMinMaxGameDetailsData(res);
+      setIsloading(false)
+      // console(res, "dsfdsgdggvd")
   
     }
   };
@@ -282,6 +293,8 @@ setInterval(()=>{
 
   const handleNationName = (name) => {};
 
+console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
+//  For fancy odds on 
   useEffect(() => {
     if (PostMinMaxGameDetailsData) {
       let arrData = PostMinMaxGameDetailsData;
@@ -302,6 +315,7 @@ setInterval(()=>{
     } else {
     }
   }, [PostMinMaxGameDetailsData]);
+
   useEffect(() => {
     if (gameDetailsData) {
       let arrData = gameDetailsData?.data;
@@ -322,14 +336,58 @@ setInterval(()=>{
     } else {
     }
   }, [gameDetailsData]);
-  // ************* PNL DATA ODDS
 
-  // const { lastMessage: datataatatatta } = useWebSocket(
-  //   `${
-  //     process.env.REACT_APP_ANKIT_SOCKET_BET
-  //   }/chat/${id}/${localStorage.getItem("TokenId")}`,
-  //   { shouldReconnect: (event) => true }
-  // );
+
+  //  Fancy Odd   For blinker 
+
+  useEffect(() => {
+  if (previousState) {
+    let arrData = previousState?.data;
+    let newObject = {};
+    for (let x in arrData) {
+      if (x !== "Odds" && x !== "Bookmaker") {
+        newObject[x] = arrData[x];
+      }
+    }
+    console.log(newObject,"newObject")
+    const newArr = newObject;
+    let FinalData = {};
+    for (let x in newArr) {
+      if (newArr[x].length) {
+        FinalData[x] = newArr[x];
+      }
+    }
+    setOnlyFancyMaxMinDetails(FinalData);
+  } else {
+  }
+}, [previousState]);
+
+
+console.log(gameDetailsData,"PostMinMaxGameDetailsData")
+
+useEffect(() => {
+  if ( previousState) {
+    let arrData =  previousState?.data;
+    let newObject = {};
+    for (let x in arrData) {
+      if (x !== "Odds" && x !== "Bookmaker") {
+        newObject[x] = arrData[x];
+      }
+    }
+    const newArr = newObject;
+    let FinalData = {};
+    for (let x in newArr) {
+      if (newArr[x].length) {
+        FinalData[x] = newArr[x];
+      }
+    }
+    setPreviousStateFancyBlinker(FinalData);
+  } else {
+  }
+}, [ previousState]);
+
+
+  // ************* PNL DATA ODDS
 
   useEffect(() => {
     dispatch(PostUserOddPnl({ matchId: id }));
@@ -341,7 +399,7 @@ setInterval(()=>{
     let timer = setInterval(
       () => {
         dispatch(PostUserOddPnl({ matchId: id }));
-        console.log("345tfdswertgfds");
+        // console.log("345tfdswertgfds");
       },
 
       5000
@@ -375,6 +433,8 @@ setInterval(()=>{
   // ******* PNL DATA FANCY
 
   const [FancyPNL, setFacnyPNL] = useState({});
+
+// console.log(FancyPNL,"FancyPNLFancyPNLFancyPNL")
 
   useEffect(() => {
     if (PostUserfancypnlata) {
@@ -415,7 +475,7 @@ setInterval(()=>{
     }
   }, [PostBetingOnGameDetail]);
 
-  console.log(msg, "msg")
+  // console.log(msg, "msg")
 
 
   const handleCloseFancyModal = () => setShowFancyModals(false);
@@ -423,9 +483,15 @@ setInterval(()=>{
   const handleFancyBook = (sid) => {
     // console.log("hekemlldfnsdlnfls");
     // e.preventDefault();
-    setShowFancyModals(true);
+    if(FancyPNL&&FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ===sid)){
+      setShowFancyModals(true);
+      setFancyID(sid);
+    }else{
+      
+    }
+ 
 
-    setFancyID(sid);
+   
   };
 
 
@@ -439,11 +505,11 @@ setInterval(()=>{
         </div>
       ) : ""} */}
 
-      {/* {isLoading===true?(<div className="mani-loading">
+      {isLoading===true?(<div className=" lodddd">
           <i className="fa fa-circle-o-notch fa-spin loading" style={{fontSize:"50px"}}></i> 
           <p className="loading-text">Loading...</p> </div>)
 :
-         */}
+        
 
       <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
         <div className="home-page home-page-news">
@@ -465,8 +531,9 @@ setInterval(()=>{
                     gameDetailsData?.data?.Odds[0]?.runners[1]?.name}
                 </h4>
               </div>
+              {/* {console.log(gameDetailsData?.data?.Odds[0]?.eventTime,"sdjfsjdfksjdnfksdjkfd")} */}
               <div className="text-right">
-                <span>20/11/2022 20:30</span>
+                <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
               </div>
             </div>
             <ul className="nav nav-tabs">
@@ -569,7 +636,7 @@ setInterval(()=>{
                                     className="table-body"
                                     style={{ marginTop: "7px" }}
                                   >
-                                    {console.log(item11, "item11item11item11")}
+                                    {/* {console.log(item11, "item11item11item11")} */}
                                     {item11?.runners?.map((item1, index) => {
                                       return (
                                         <>
@@ -623,8 +690,7 @@ setInterval(()=>{
                                               </p>
                                             </div>
 
-                                            {[...item1?.ex?.availableToBack]
-                                              .reverse()
+                                            {item1?.ex?.availableToBack
                                               .map((item, id) => {
                                                 return (
                                                   <div
@@ -634,21 +700,18 @@ setInterval(()=>{
                                                         : ""
                                                     }
                                                        ${
-                                                         item?.price !==
-                                                         previousState?.data
-                                                           ?.Odds[id1]?.runners[
-                                                           index
-                                                         ]?.ex?.availableToBack[
+                                                         item?.price !== previousState?.data?.Odds[id1]?.runners[index]?.ex?.availableToBack[
                                                            id
                                                          ]?.price
                                                            ? "blink1"
                                                            : " "
                                                        }`}
                                                   >
-                                                    {console.log(
+                                                    {console.log(item,id,"idfsdsdisvinidv")}
+                                                    {/* {console.log(
                                                       item,
                                                       "itemitem"
-                                                    )}
+                                                    )} */}
                                                     {/* {console.log(item1,"item1item1item1")} */}
                                                     {/* {console.log(item1,"itemitemitem")} */}
 
@@ -680,9 +743,10 @@ setInterval(()=>{
                                                     </button>
                                                   </div>
                                                 );
-                                              })}
-                                            {[...item1?.ex?.availableToLay]
+                                              })
                                               .reverse()
+                                              }
+                                            {item1?.ex?.availableToLay                                          
                                               .map((item, id) => {
                                                 return (
                                                   <div
@@ -698,7 +762,7 @@ setInterval(()=>{
                                                      ]?.runners[index]?.ex
                                                        ?.availableToLay[id]
                                                        ?.price
-                                                       ? " blink1 "
+                                                       ? " blink1"
                                                        : " "
                                                    }`}
                                                   >
@@ -741,7 +805,7 @@ setInterval(()=>{
                                                     </button>
                                                   </div>
                                                 );
-                                              })}
+                                              }).reverse()}
                                             {/* <div className="box-w1 float-left lay hidden-portrait dis-none">
                                   <button type="button" className="lay">
                                     <span  className="odd">555</span>
@@ -830,6 +894,8 @@ setInterval(()=>{
                                             item?.gstatus === "SUSPENDED"
                                             ? "suspended" :item.gstatus === "BALL RUNNING"?"ballrunning": ""
                                           }`}
+
+
                                         >
                                           <div className="float-left box-w6 country-name">
                                             <span className="team-name">
@@ -892,7 +958,16 @@ setInterval(()=>{
                                               </span>
                                             </button>
                                           </div>
-                                          <div className="box-w3 float-left back ">
+                                          {console.log(index)}
+                                          <div className = {`box-w3 float-left lay hidden-portrait ${
+                                                      id === 0 || id === 1
+                                                        ? "dis-none"
+                                                        : ""
+                                                    }${
+                                                      item?.b1!== previousState?.data?.Bookmaker[index]?.b1
+                                                      ? "blink1"
+                                                      : " "
+                                                  }`}>
                                             <button
                                               type="button"
                                               className="back"
@@ -914,7 +989,16 @@ setInterval(()=>{
                                               </span>
                                             </button>
                                           </div>
-                                          <div className="box-w3 float-left lay hidden-portrait">
+                                          {/* <div className= "box-w3 float-left lay hidden-portrait "   > */}
+                                          <div className= {`box-w3 float-left lay hidden-portrait ${
+                                                      id === 0 || id === 1
+                                                        ? "dis-none"
+                                                        : ""
+                                                    }${
+                                                      item?.l1!== previousState?.data?.Bookmaker[index]?.l1
+                                                      ? "blink1"
+                                                      : " "
+                                                  }`} >
                                             <button
                                               type="button"
                                               className="lay"
@@ -1108,18 +1192,39 @@ setInterval(()=>{
                                                       ? "suspended" :item.gstatus === "BALL RUNNING"?"ballrunning": ""
                                                     }`}
                                                   >
+                                                    
                                                     <div
                                                       data-v-e03c6f20=""
                                                       className="float-left box-w4 country-name"
                                                       style={{
                                                         cursor: "pointer",
                                                       }}
+
                                                       onClick={(e) =>
                                                         handleFancyBook(
                                                           item.sid
                                                         )
                                                       }
+// dsadasdasdasd
                                                     >
+
+                                                    {/* <div
+                                                      data-v-e03c6f20=""
+                                                      className="float-left box-w4 country-name"
+                                                      style={{
+                                                        cursor: "pointer",
+                                                      }}
+
+                                                      onClick={(e) =>
+                                                        handleFancyBook(
+                                                          item.sid
+                                                        )
+                                                      }
+// dsadasdasdasd
+                                                    > */}
+                                                      {/* {console.log( item.sid,"FancyPNLFancyPNLFancyPNL")} */}
+                                                      {console.log( FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl,"FancyPNLFancyPNLFancyPNL")}
+
                                                       <div
                                                         data-v-e03c6f20=""
                                                         className="float-left fancy-items"
@@ -1140,32 +1245,13 @@ setInterval(()=>{
                                                             data-v-e03c6f20=""
                                                             className="float-left ubook fancy-span"
                                                           >
-                                                            {FancyPNL?.data ? (
-                                                              FancyPNL?.data.find(
-                                                                (itemPnl) =>
-                                                                  itemPnl?.marketId ==
-                                                                  item?.sid
-                                                              )?.pnl < 0 ? (
-                                                                <span
-                                                                  className="float-left ubook"
-                                                                  style={{
-                                                                    color:
-                                                                      "red",
-                                                                  }}
-                                                                >
-                                                                  {" "}
+                                                            {FancyPNL?.data ? (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl < 0 ? 
+                                                            
+                                                            (
+                                                                <span className="float-left ubook"style={{color:"red",}}>{" "}
                                                                   <>{FancyPNL?.data.find(
-                                                                        (
-                                                                          itemPnl
-                                                                        ) =>
-                                                                          itemPnl?.marketId ==
-                                                                          item?.sid
-                                                                      )?.pnl}
-                                                                         
-                                                                      <div
-                                                                      data-v-e03c6f20=""
-                                                                      className="float-right v-m"
-                                                                    >
+                                                                        (itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl}
+                                                                      <div data-v-e03c6f20=""className="float-right v-m">
                                                                       <img
                                                                         alt="Black Ladder"
                                                                         src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder-black.png"
@@ -1175,18 +1261,14 @@ setInterval(()=>{
                                                                     </>
                                                                  
                                                                 </span>
-                                                              ) : (
+                                                              )
+                                                              
+                                                              :
+                                                              
+                                                              (
                                                                 <span className="float-left ubook"style={{color:"green",}}>
                                                                   {" "}
-                                                                  {FancyPNL?.data
-                                                                    ? <>{FancyPNL?.data.find(
-                                                                        (
-                                                                          itemPnl
-                                                                        ) =>
-                                                                          itemPnl?.marketId ==
-                                                                          item?.sid
-                                                                      )?.pnl}
-                                                                      
+                                                                  {FancyPNL?.data? <>{FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl}
                                                                       <div
                                                                       data-v-e03c6f20=""
                                                                       className="float-right v-m"
@@ -1229,9 +1311,15 @@ setInterval(()=>{
                                                       data-v-e03c6f20=""
                                                       className="box-w1 float-left lay  hidden-portrait dis-none"
                                                     ></div>
+
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      className="box-w1 lay float-left text-center"
+
+                                                      className={`box-w1 lay float-left text-center ${
+                                                        item?.l1 !== previousStateFancyBlinker&&previousStateFancyBlinker[key]?.[index]?.l1
+                                                          ? "blink1"
+                                                          : " "
+                                                      }`}
                                                     >
                                                       {/* {console.log(item)} */}
                                                       <button
@@ -1254,6 +1342,8 @@ setInterval(()=>{
                                                           className="odd d-block"
                                                         >
                                                           {item?.l1}
+                                            {/* {console.log(item,index,"idfsdsdisvinidv")} */}
+
                                                         </span>{" "}
                                                         <span data-v-e03c6f20="">
                                                           {item?.ls1}
@@ -1262,8 +1352,13 @@ setInterval(()=>{
                                                     </div>
 
                                                     <div
+                                                    // previousStateFancyBlinker
                                                       data-v-e03c6f20=""
-                                                      className="box-w1 back float-left text-center"
+                                                      className={`box-w1 back float-left text-center ${
+                                                        item?.b1 !== previousStateFancyBlinker&&previousStateFancyBlinker[key]?.[index]?.bi
+                                                          ? "blink1"
+                                                          : " "
+                                                      }`}
                                                     >
                                                       <button
                                                         data-v-e03c6f20=""
@@ -1405,13 +1500,13 @@ setInterval(()=>{
                   } `}
                 >
                   {/* <div className="message">You have no matched bet</div>  */}
-{console.log(PostBetListByMatchIdData?.data,"PostBetListByMatchIdData?.dataPostBetListByMatchIdData?.data")}
+{/* {console.log(PostBetListByMatchIdData?.data,"PostBetListByMatchIdData?.dataPostBetListByMatchIdData?.data")} */}
                   {PostBetListByMatchIdData?.data &&
                     Object.keys(PostBetListByMatchIdData?.data).map((key) => (
                       <>
                         {PostBetListByMatchIdData?.data[key].map((item) => (
                           <>
-                            {console.log(key, "keykeykey")}
+                            {/* {console.log(key, "keykeykey")} */}
 
                             <div class="events matched-bet collapse show">
                               <ul>
@@ -1424,7 +1519,7 @@ setInterval(()=>{
                                         item?.back === false ? "lay" : "back"
                                       }-bet`}
                                     >
-                                      {console.log(item,"itemitemitemedwefdsf")}
+
                                       <u>
                                         {item?.back === true ? "BACK" : "LAY"}{" "}
                                         {item?.nation} for {item?.amount} @{" "}
@@ -1460,6 +1555,7 @@ setInterval(()=>{
           </div>
         </div>
       </div>
+}
       {/* } */}
 
       <Modal

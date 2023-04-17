@@ -154,6 +154,8 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
     bottom: 95px !important;
     right: 20px;
     z-index: 100;
+    margin-bottom: 15px;
+
 }
 a{
     text-decoration: none !important;

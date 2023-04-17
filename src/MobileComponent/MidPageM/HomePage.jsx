@@ -99,9 +99,9 @@ const HomePage = () => {
                                 className="game-icon"
                               />
                             </div>
-                            <div className="itdasdasdsa">
+                            <div className="itdasdasdsa" style={{paddingLeft: "40px"}}>
                               <span
-                                className="m-l-10 game-name v-m"
+                                className=" game-name v-m"
                                 onClick={() =>
                                   handleGameDetails(item?.matchId, item)
                                 }

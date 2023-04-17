@@ -109,16 +109,16 @@ setGamesData(res?.data?.data);
             )
           </span>
         </Link>
-        <div>
-          <ul className="market-listing m-t-10">
+        <div >
+          <ul className="market-listing">
 
               {gamesData?.length > 0
                 ? gamesData.map((item) => {
                   return (
               <li   className="market-list-item" style={{    padding: "2px" ,cursor: "pointer"}} >
-                  <div   className="item-inner">
+                  <div   className="item-inner" style={{paddingLeft: "12px"}}>
                     
-                    <span   className="m-l-10 game-name v-m"onClick={()=>handleGameDetails(item?.matchId,item)} >
+                    <span   className=" game-name v-m"onClick={()=>handleGameDetails(item?.matchId,item)} >
                      {item?.matchName}
                     </span>
                     <div className='timeeeee'>{item?.openDate}</div>
