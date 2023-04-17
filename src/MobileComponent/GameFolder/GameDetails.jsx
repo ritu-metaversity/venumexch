@@ -32,6 +32,9 @@ const GameDetails = () => {
   const [gameDetailsData, setGameDetailsData] = useState();
   const [previousState, setPreviousState] = useState({});
 
+  //state for fancy for blinker After filter
+  const [previousStateFancyBlinker, setPreviousStateFancyBlinker] = useState({});
+
   const [gameIframeId, setGameIframeId] = useState(4);
   const [msg, setMsg] = useState("");
   const [showFancyModals, setShowFancyModals] = useState(false);
@@ -49,6 +52,7 @@ const GameDetails = () => {
   //   "gameDetailsDatagameDetailsDatagameDetailsData"
   // );
   // console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
+  console.log(previousState,"PostMinMaxGameDetailsData")
   const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
   const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
   const [betDetails, setBetDetails] = useState({});
@@ -122,7 +126,7 @@ const GameDetails = () => {
         isFancy: false,
       });
     } else {
-      alert("Pleace select other bit");
+      // alert("Pleace select other bit");
     }
     // console.log(item1,"item1")
   };
@@ -194,7 +198,7 @@ const GameDetails = () => {
         isFancy: false,
       });
     } else {
-      alert("Pleace select other bit");
+      // alert("Pleace select other bit");
     }
   };
 
@@ -204,6 +208,7 @@ const GameDetails = () => {
         if (gameDetailsData) {
           const oldOdds = { ...gameDetailsData };
           setPreviousState(oldOdds);
+          
         } else {
           setPreviousState({ data: PostMinMaxGameDetailsData });
         }
@@ -288,6 +293,8 @@ setInterval(()=>{
 
   const handleNationName = (name) => {};
 
+console.log(PostMinMaxGameDetailsData,"PostMinMaxGameDetailsData")
+//  For fancy odds on 
   useEffect(() => {
     if (PostMinMaxGameDetailsData) {
       let arrData = PostMinMaxGameDetailsData;
@@ -308,6 +315,7 @@ setInterval(()=>{
     } else {
     }
   }, [PostMinMaxGameDetailsData]);
+
   useEffect(() => {
     if (gameDetailsData) {
       let arrData = gameDetailsData?.data;
@@ -328,14 +336,58 @@ setInterval(()=>{
     } else {
     }
   }, [gameDetailsData]);
-  // ************* PNL DATA ODDS
 
-  // const { lastMessage: datataatatatta } = useWebSocket(
-  //   `${
-  //     process.env.REACT_APP_ANKIT_SOCKET_BET
-  //   }/chat/${id}/${localStorage.getItem("TokenId")}`,
-  //   { shouldReconnect: (event) => true }
-  // );
+
+  //  Fancy Odd   For blinker 
+
+  useEffect(() => {
+  if (previousState) {
+    let arrData = previousState?.data;
+    let newObject = {};
+    for (let x in arrData) {
+      if (x !== "Odds" && x !== "Bookmaker") {
+        newObject[x] = arrData[x];
+      }
+    }
+    console.log(newObject,"newObject")
+    const newArr = newObject;
+    let FinalData = {};
+    for (let x in newArr) {
+      if (newArr[x].length) {
+        FinalData[x] = newArr[x];
+      }
+    }
+    setOnlyFancyMaxMinDetails(FinalData);
+  } else {
+  }
+}, [previousState]);
+
+
+console.log(gameDetailsData,"PostMinMaxGameDetailsData")
+
+useEffect(() => {
+  if ( previousState) {
+    let arrData =  previousState?.data;
+    let newObject = {};
+    for (let x in arrData) {
+      if (x !== "Odds" && x !== "Bookmaker") {
+        newObject[x] = arrData[x];
+      }
+    }
+    const newArr = newObject;
+    let FinalData = {};
+    for (let x in newArr) {
+      if (newArr[x].length) {
+        FinalData[x] = newArr[x];
+      }
+    }
+    setPreviousStateFancyBlinker(FinalData);
+  } else {
+  }
+}, [ previousState]);
+
+
+  // ************* PNL DATA ODDS
 
   useEffect(() => {
     dispatch(PostUserOddPnl({ matchId: id }));
@@ -640,17 +692,14 @@ setInterval(()=>{
                                                         : ""
                                                     }
                                                        ${
-                                                         item?.price !==
-                                                         previousState?.data
-                                                           ?.Odds[id1]?.runners[
-                                                           index
-                                                         ]?.ex?.availableToBack[
+                                                         item?.price !== previousState?.data?.Odds[id1]?.runners[index]?.ex?.availableToBack[
                                                            id
                                                          ]?.price
                                                            ? "blink1"
                                                            : " "
                                                        }`}
                                                   >
+                                                    {console.log(item,id,"idfsdsdisvinidv")}
                                                     {/* {console.log(
                                                       item,
                                                       "itemitem"
@@ -837,6 +886,8 @@ setInterval(()=>{
                                             item?.gstatus === "SUSPENDED"
                                             ? "suspended" :item.gstatus === "BALL RUNNING"?"ballrunning": ""
                                           }`}
+
+
                                         >
                                           <div className="float-left box-w6 country-name">
                                             <span className="team-name">
@@ -899,7 +950,16 @@ setInterval(()=>{
                                               </span>
                                             </button>
                                           </div>
-                                          <div className="box-w3 float-left back ">
+                                          {console.log(index)}
+                                          <div className = {`box-w3 float-left lay hidden-portrait ${
+                                                      id === 0 || id === 1
+                                                        ? "dis-none"
+                                                        : ""
+                                                    }${
+                                                      item?.b1!== previousState?.data?.Bookmaker[index]?.b1
+                                                      ? "blink1"
+                                                      : " "
+                                                  }`}>
                                             <button
                                               type="button"
                                               className="back"
@@ -921,7 +981,16 @@ setInterval(()=>{
                                               </span>
                                             </button>
                                           </div>
-                                          <div className="box-w3 float-left lay hidden-portrait">
+                                          {/* <div className= "box-w3 float-left lay hidden-portrait "   > */}
+                                          <div className= {`box-w3 float-left lay hidden-portrait ${
+                                                      id === 0 || id === 1
+                                                        ? "dis-none"
+                                                        : ""
+                                                    }${
+                                                      item?.l1!== previousState?.data?.Bookmaker[index]?.l1
+                                                      ? "blink1"
+                                                      : " "
+                                                  }`} >
                                             <button
                                               type="button"
                                               className="lay"
@@ -1236,9 +1305,15 @@ setInterval(()=>{
                                                       data-v-e03c6f20=""
                                                       className="box-w1 float-left lay  hidden-portrait dis-none"
                                                     ></div>
+                                                    {console.log(previousStateFancyBlinker&&previousStateFancyBlinker[key]?.[index]?.l1,item?.l1,"previousStateFancyBlinker&&previousStateFancyBlinker[key]?.[index]?.l1")}
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      className="box-w1 lay float-left text-center"
+
+                                                      className={`box-w1 lay float-left text-center ${
+                                                        item?.l1 !== previousStateFancyBlinker&&previousStateFancyBlinker[key]?.[index]?.l1
+                                                          ? "blink1"
+                                                          : " "
+                                                      }`}
                                                     >
                                                       {/* {console.log(item)} */}
                                                       <button
@@ -1261,6 +1336,8 @@ setInterval(()=>{
                                                           className="odd d-block"
                                                         >
                                                           {item?.l1}
+                                            {/* {console.log(item,index,"idfsdsdisvinidv")} */}
+
                                                         </span>{" "}
                                                         <span data-v-e03c6f20="">
                                                           {item?.ls1}
@@ -1269,8 +1346,13 @@ setInterval(()=>{
                                                     </div>
 
                                                     <div
+                                                    // previousStateFancyBlinker
                                                       data-v-e03c6f20=""
-                                                      className="box-w1 back float-left text-center"
+                                                      className={`box-w1 back float-left text-center ${
+                                                        item?.b1 !== previousStateFancyBlinker&&previousStateFancyBlinker[key]?.[index]?.bi
+                                                          ? "blink1"
+                                                          : " "
+                                                      }`}
                                                     >
                                                       <button
                                                         data-v-e03c6f20=""
@@ -1431,7 +1513,7 @@ setInterval(()=>{
                                         item?.back === false ? "lay" : "back"
                                       }-bet`}
                                     >
-                                      {/* {console.log(item,"itemitemitemedwefdsf")} */}
+
                                       <u>
                                         {item?.back === true ? "BACK" : "LAY"}{" "}
                                         {item?.nation} for {item?.amount} @{" "}
