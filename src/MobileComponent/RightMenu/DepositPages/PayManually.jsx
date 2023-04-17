@@ -23,6 +23,7 @@ const PayManually = (props) => {
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
     (state) => state.auth
   );
+  console.log(PostselfdepositappData?.status,"PostselfdepositappDataPostselfdepositappData")
   // Deposit Request Submitted Successfully
   // console.log(PostselfdepositappData?.message,"PostselfdepositappDataPostselfdepositappData")
   const [Bitvalue, setBitValue] = useState(0);
@@ -62,16 +63,18 @@ const PayManually = (props) => {
     dispatch(Postselfdepositapp(data));
     props.UpdateList(true)
   };
+
+useEffect(()=>{
+if(PostselfdepositappData?.status){
+  setBitValue(0)
+  setFiles(null)
+}
+},[PostselfdepositappData?.status])
+
+
   return (
     <div>
-       {
-        PostselfdepositappData?.status===true?
-<div className="alertPopup">
-<AlertBtn val={PostselfdepositappData?.message}/>
-      </div>
-        :""
-      }
-      
+ 
       <h3 className="enter-amount"> Enter Amount</h3>
       <div className="row row5 main-pricecontainor">
         <div className="text-lef col-6 price-input pValue" style={{marginLeft: "-6%"}}>

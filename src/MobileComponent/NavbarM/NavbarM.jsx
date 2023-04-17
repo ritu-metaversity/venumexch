@@ -25,7 +25,7 @@ const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
     },[RightValue])
     const token = localStorage.getItem("TokenId")
     
-
+console.log()
     useEffect(()=>{
       if(token===null){
         navigate("./login")

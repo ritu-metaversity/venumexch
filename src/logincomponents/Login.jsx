@@ -3,7 +3,6 @@ import "./Login.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
-import PleaseConfirm from "./PleaseConfirm";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Footer from "../component/Footer/Footer";
@@ -17,11 +16,7 @@ const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const { pathname } = useLocation();
-  // const [userName, setUserName] = useState("reshmi8396");
-  // const [password, setPassword] = useState("342845"); 
-  // const [userName, setUserName] = useState("arya2452");
-  // const [password, setPassword] = useState("1111111");
-  //   const [confirmLogin, setConfirmLogin] = useState("false");
+
   const [errorId, setErrorId] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
 
@@ -32,50 +27,41 @@ const Login = () => {
   const [signUpClose, setSignUpClose] = useState(false);
   const handleClose = () => setShow(false);
 
-  const { postLoginData, PostuserselfregisterData } = useSelector(
-    (state) => state.auth
-  );
+  const { postLoginData, postLoginDataError, PostuserselfregisterData } =
+    useSelector((state) => state.auth);
+
+  console.log(userName, "userNameuserName");
+  console.log(password, "userNameuserName");
 
   useEffect(() => {
-    // if(signUpShow===false){
-
-    // }
-    if (PostuserselfregisterData?.message === "User Created"&&signUpClose===false) {
-      // console.log("new user")
+    if (
+      PostuserselfregisterData?.message === "User Created" &&
+      signUpClose === false
+    ) {
       setSignUpShow(true);
     }
-    
   }, [PostuserselfregisterData?.message, signUpClose, signUpShow]);
 
   const handleSignUpShow = () => {
-    setSignUpClose(true)
-    setSignUpShow(false)}
+    setSignUpClose(true);
+    setSignUpShow(false);
+  };
 
   useEffect(() => {
     if (apiHit === true) {
-      // console.log("login pop")
-      if (postLoginData?.data?.message === "Invalid Username or password") {
-        // console.log("not done")
-        setShow(false);
-        setErrorId(true);
-        setErrorPassword(true);
-      } else if (postLoginData?.data?.token) {
-        // console.log("doneeee")
+      if (postLoginData?.data?.token) {
         setApiHit(false);
-        // console.log(postLoginData,"postLoginDatapostLoginDatapostLoginData")
-        // console.log("login succccss")
+        setShow(false);
+
         localStorage.setItem("TokenId", postLoginData?.data?.token);
         localStorage.setItem("PassWordType", postLoginData?.data?.passwordtype);
         localStorage.setItem("userId", postLoginData?.data?.userId);
         localStorage.setItem("SportId", 4);
-axios.defaults.headers.common.Authorization= `Bearer ${postLoginData?.data?.token}`
+        axios.defaults.headers.common.Authorization = `Bearer ${postLoginData?.data?.token}`;
 
         if (postLoginData?.data?.passwordtype === "old") {
-          // console.log("ChangePassWord")
           navigate("/m/changepassword");
         } else {
-          //  console.log("Home")
-          // console.log("honeE")
           navigate("/m/home");
         }
       }
@@ -83,19 +69,14 @@ axios.defaults.headers.common.Authorization= `Bearer ${postLoginData?.data?.toke
     setLoginData(postLoginData);
   }, [postLoginData]);
 
-  const token = localStorage.getItem("TokenId");
-// console.log(pathname,token,"pathnamepathname")
-// console.log(token,"pathnamepathname")
+  useEffect(() => {
+    const token = localStorage.getItem("TokenId");
 
-useEffect(()=>{
-  const token = localStorage.getItem("TokenId");
+    if (token !== null) {
+      navigate("/m/home");
+    }
+  }, []);
 
-  if((token!== null)) {
-    navigate("/m/home");
-  }
-},[])
-
-  // console.log(PostuserselfregisterData, "registerData");
   const handleInput = (e) => {
     let inputName = e.target.name;
     let inputValue = e.target.value;
@@ -113,26 +94,34 @@ useEffect(()=>{
         return false;
     }
   };
-// console.log(window.location.hostname)
-  const handleLogin = (e) => {
 
+  const handleLogin = (e) => {
     setLogin({
       userId: userName,
       password: password,
       appUrl: window.location.hostname,
     });
-    // console.log(process.env.REACT_APP_API_URL)
 
     setShow(true);
   };
 
   const handleLoginConfirm = (val) => {
-    dispatch(postLogin(login));
-    setShow(false);
-    setApiHit(true);
-    //  navigate("/m/home");
+    if (userName === "" && password === ""){
+      setErrorPassword(true);
+      setErrorId(true);
+      setShow(false);
+    }else if(userName === "" ){
+      setErrorId(true);
+      setShow(false);
+    }else if(password === ""){
+      setErrorPassword(true);
+      setShow(false);
+    }else {
+      dispatch(postLogin(login));
+      setShow(false);
+      setApiHit(true);
+    }
   };
-
 
   const handleSignUp = () => {
     navigate("/m/signup");
@@ -200,6 +189,15 @@ useEffect(()=>{
                             ""
                           )}
                         </div>
+                        <div>
+                          {postLoginData?.data?.status === false ? (
+                            <span className="text-danger">
+                              {postLoginData?.data?.message}
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
                         <button className="btn btn-login" onClick={handleLogin}>
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
@@ -208,7 +206,7 @@ useEffect(()=>{
                           className="btn btn-login"
                           onClick={handleSignUp}
                         >
-                           Sign Up
+                          Sign Up
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
                         <p className="m-b-0">
@@ -233,49 +231,47 @@ useEffect(()=>{
           </div>
         </div>
         <>
-        <div className="">
-          <Modal
-            className=""
-            show={signUpShow}
-            onHide={handleSignUpShow}
-            backdrop="static"
-            keyboard={false}
-            centered
-          >
-            <Modal.Header className="register-head" closeButton>
-              <Modal.Title className="regTital">Register</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div>
+          <div className="">
+            <Modal
+              className=""
+              show={signUpShow}
+              onHide={handleSignUpShow}
+              backdrop="static"
+              keyboard={false}
+              centered
+            >
+              <Modal.Header className="register-head" closeButton>
+                <Modal.Title className="regTital">Register</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
                 <div>
-                  <div className="">
-                    <div className="user-id user">
-                      <p>User Created</p>
-                      <p>Registration successful </p>
-
-                    </div>
-                    <div className="user-id user">
-                      <p>User Name:</p>
-                      <p>{PostuserselfregisterData?.username}</p>
-                    </div>
-                    <div className="user-id">
-                      <p>Password:</p>
-                      <p>{PostuserselfregisterData?.password}</p>
-
+                  <div>
+                    <div className="">
+                      <div className="user-id user">
+                        <p>User Created</p>
+                        <p>Registration successful </p>
+                      </div>
+                      <div className="user-id user">
+                        <p>User Name:</p>
+                        <p>{PostuserselfregisterData?.username}</p>
+                      </div>
+                      <div className="user-id">
+                        <p>Password:</p>
+                        <p>{PostuserselfregisterData?.password}</p>
+                      </div>
                     </div>
                   </div>
+                  <hr />
+                  <div className="text-danger">
+                    <p>
+                      Please save the details and login with this username and
+                      password{" "}
+                    </p>
+                  </div>
                 </div>
-                <hr />
-                <div className="text-danger">
-                  <p>
-                    Please save the details and login with this username and
-                    password{" "}
-                  </p>
-                </div>
-              </div>
-            </Modal.Body>
-          </Modal>
-        </div>
+              </Modal.Body>
+            </Modal>
+          </div>
         </>
         <>
           {/* <button variant="primary" onClick={handleShow}>
@@ -285,7 +281,7 @@ useEffect(()=>{
             <Modal
               className="login-confirm-modal"
               show={show}
-              style={{marginLeft: "1%"}}
+              style={{ marginLeft: "1%" }}
               onHide={handleClose}
               backdrop="static"
               keyboard={false}
@@ -298,17 +294,18 @@ useEffect(()=>{
                 years old and above as of today
               </Modal.Body>
               <div className="confirm">
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Exit
-                </Button>
-                <Button  className="confirmation"
-                  variant="primary"
-                  onClick={() => handleLoginConfirm("true")}
-                >
-                  Confirm
-                </Button>
-              </Modal.Footer>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Exit
+                  </Button>
+                  <Button
+                    className="confirmation"
+                    variant="primary"
+                    onClick={() => handleLoginConfirm("true")}
+                  >
+                    Confirm
+                  </Button>
+                </Modal.Footer>
               </div>
             </Modal>
           </div>

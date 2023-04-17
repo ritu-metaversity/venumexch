@@ -103,7 +103,7 @@ const Setting = () => {
 {/* {  PostEditStackDataError === "Request failed with status code 400" ? " Enter Stacks more then 100 " : ""}
 {  PostEditStackData?.message === "Stake Button Values Saved" ? "Stake successfully updated" : ""}
   */}
-{PostEditStackDataError === "Request failed with status code 400"  ? (
+{/* {PostEditStackDataError === "Request failed with status code 400"  ? (
         <div className="Request failed with status code 400">
           <AlertBtn val={errrorrmsg} />
         </div>
@@ -116,7 +116,7 @@ const Setting = () => {
         </div>
       ) : (
         ""
-      )}
+      )} */}
 </div>
             <div className="stake-buttons m-t-20" style={{ paddingTop: "0px" }}>
               <h2 className="page-title">Edit Stakes</h2>

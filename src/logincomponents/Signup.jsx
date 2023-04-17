@@ -18,11 +18,11 @@ const Signup = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorMobile, setErrorMobile] = useState(false);
 
-const { PostuserselfregisterData } = useSelector(state => state.auth)
+const { PostuserselfregisterData,PostuserselfregisterDataError } = useSelector(state => state.auth)
 
 const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
 
-// console.log(PostuserselfregisterData,"PostuserselfregisterData User Created")
+console.log(PostuserselfregisterData,PostuserselfregisterDataError,"PostuserselfregisterData")
 const [infoError, setInfoError] = useState(false);
 
 const handleLogin = () => {

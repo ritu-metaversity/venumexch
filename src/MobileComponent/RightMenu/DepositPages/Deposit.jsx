@@ -10,8 +10,9 @@ const Deposit = () => {
 
 
   const dispatch = useDispatch();
-  const { PostdepsositrequestclientData,PostpaymnetdetailappDataData} = useSelector(state => state.auth)
+  const { PostdepsositrequestclientData,PostpaymnetdetailappDataData,PostselfdepositappData} = useSelector(state => state.auth)
   const [Bitvalue, setBitValue] = useState(0);
+  console.log(PostselfdepositappData?.status,"PostselfdepositappDataPostselfdepositappData")
 
   const [trueee, setTrueee] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
@@ -50,6 +51,12 @@ const UpdateList=(vl)=>{
     setTrueee(true)
     // console.log(url)
   }
+
+  useEffect(()=>{
+    if(PostselfdepositappData?.status){
+      dispatch(Postdepsositrequestclient())
+    }
+    },[])
   // console.log(trueee)
   return (
     <>

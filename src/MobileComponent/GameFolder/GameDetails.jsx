@@ -433,7 +433,7 @@ setInterval(()=>{
 
   return (
     <div>
-      {/* {PostBetingOnGameDetail?.status === true ? (
+      {/* {true?.status === true ? (
         <div className="alertPopup">
           <AlertBtn val={msg} />
         </div>
@@ -828,8 +828,7 @@ setInterval(()=>{
                                           data-title="OPEN"
                                           className={`table-row ${
                                             item?.gstatus === "SUSPENDED"
-                                              ? "suspended"
-                                              : ""
+                                            ? "suspended" :item.gstatus === "BALL RUNNING"?"ballrunning": ""
                                           }`}
                                         >
                                           <div className="float-left box-w6 country-name">
@@ -1105,10 +1104,8 @@ setInterval(()=>{
                                                     data-title=""
                                                     // className="table-row"
                                                     className={`table-row ${
-                                                      item?.gstatus ===
-                                                      "SUSPENDED"
-                                                        ? "suspended"
-                                                        : ""
+                                                      item?.gstatus === "SUSPENDED"
+                                                      ? "suspended" :item.gstatus === "BALL RUNNING"?"ballrunning": ""
                                                     }`}
                                                   >
                                                     <div
