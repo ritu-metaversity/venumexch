@@ -1054,7 +1054,7 @@ button.btn.btn-login {
 }
 .fancy-market .back {
     cursor: pointer;
-    background-color: #72BBEF;
+    background-color: #72BBEF !important;
 }
 .table {
     width: 100%;

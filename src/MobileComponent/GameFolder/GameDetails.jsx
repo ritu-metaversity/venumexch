@@ -434,6 +434,8 @@ useEffect(() => {
 
   const [FancyPNL, setFacnyPNL] = useState({});
 
+// console.log(FancyPNL,"FancyPNLFancyPNLFancyPNL")
+
   useEffect(() => {
     if (PostUserfancypnlata) {
       if (PostUserfancypnlata) {
@@ -481,9 +483,15 @@ useEffect(() => {
   const handleFancyBook = (sid) => {
     // console.log("hekemlldfnsdlnfls");
     // e.preventDefault();
-    setShowFancyModals(true);
+    if(FancyPNL&&FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ===sid)){
+      setShowFancyModals(true);
+      setFancyID(sid);
+    }else{
+      
+    }
+ 
 
-    setFancyID(sid);
+   
   };
 
 
@@ -1184,18 +1192,39 @@ useEffect(() => {
                                                       ? "suspended" :item.gstatus === "BALL RUNNING"?"ballrunning": ""
                                                     }`}
                                                   >
+                                                    
                                                     <div
                                                       data-v-e03c6f20=""
                                                       className="float-left box-w4 country-name"
                                                       style={{
                                                         cursor: "pointer",
                                                       }}
+
                                                       onClick={(e) =>
                                                         handleFancyBook(
                                                           item.sid
                                                         )
                                                       }
+// dsadasdasdasd
                                                     >
+
+                                                    {/* <div
+                                                      data-v-e03c6f20=""
+                                                      className="float-left box-w4 country-name"
+                                                      style={{
+                                                        cursor: "pointer",
+                                                      }}
+
+                                                      onClick={(e) =>
+                                                        handleFancyBook(
+                                                          item.sid
+                                                        )
+                                                      }
+// dsadasdasdasd
+                                                    > */}
+                                                      {/* {console.log( item.sid,"FancyPNLFancyPNLFancyPNL")} */}
+                                                      {console.log( FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl,"FancyPNLFancyPNLFancyPNL")}
+
                                                       <div
                                                         data-v-e03c6f20=""
                                                         className="float-left fancy-items"
@@ -1216,32 +1245,13 @@ useEffect(() => {
                                                             data-v-e03c6f20=""
                                                             className="float-left ubook fancy-span"
                                                           >
-                                                            {FancyPNL?.data ? (
-                                                              FancyPNL?.data.find(
-                                                                (itemPnl) =>
-                                                                  itemPnl?.marketId ==
-                                                                  item?.sid
-                                                              )?.pnl < 0 ? (
-                                                                <span
-                                                                  className="float-left ubook"
-                                                                  style={{
-                                                                    color:
-                                                                      "red",
-                                                                  }}
-                                                                >
-                                                                  {" "}
+                                                            {FancyPNL?.data ? (FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl < 0 ? 
+                                                            
+                                                            (
+                                                                <span className="float-left ubook"style={{color:"red",}}>{" "}
                                                                   <>{FancyPNL?.data.find(
-                                                                        (
-                                                                          itemPnl
-                                                                        ) =>
-                                                                          itemPnl?.marketId ==
-                                                                          item?.sid
-                                                                      )?.pnl}
-                                                                         
-                                                                      <div
-                                                                      data-v-e03c6f20=""
-                                                                      className="float-right v-m"
-                                                                    >
+                                                                        (itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl}
+                                                                      <div data-v-e03c6f20=""className="float-right v-m">
                                                                       <img
                                                                         alt="Black Ladder"
                                                                         src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder-black.png"
@@ -1251,18 +1261,14 @@ useEffect(() => {
                                                                     </>
                                                                  
                                                                 </span>
-                                                              ) : (
+                                                              )
+                                                              
+                                                              :
+                                                              
+                                                              (
                                                                 <span className="float-left ubook"style={{color:"green",}}>
                                                                   {" "}
-                                                                  {FancyPNL?.data
-                                                                    ? <>{FancyPNL?.data.find(
-                                                                        (
-                                                                          itemPnl
-                                                                        ) =>
-                                                                          itemPnl?.marketId ==
-                                                                          item?.sid
-                                                                      )?.pnl}
-                                                                      
+                                                                  {FancyPNL?.data? <>{FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl}
                                                                       <div
                                                                       data-v-e03c6f20=""
                                                                       className="float-right v-m"
@@ -1305,7 +1311,7 @@ useEffect(() => {
                                                       data-v-e03c6f20=""
                                                       className="box-w1 float-left lay  hidden-portrait dis-none"
                                                     ></div>
-                                                    {console.log(previousStateFancyBlinker&&previousStateFancyBlinker[key]?.[index]?.l1,item?.l1,"previousStateFancyBlinker&&previousStateFancyBlinker[key]?.[index]?.l1")}
+
                                                     <div
                                                       data-v-e03c6f20=""
 
