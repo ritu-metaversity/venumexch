@@ -1062,9 +1062,40 @@ button.btn.btn-login {
     color: #212529;
     margin-top: 20px;
 }
+
+.blink1 {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+}
+
+
+.blink1::before {
+    content: "";
+    background: #ffc01a;
+    transform: scale(0,0);
+    animation: oddsup 0.5s ease-out;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px
+}
+
+@keyframes oddsup {
+    from {
+        transform: scale(1)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
 .blink1{
     /* background-color: #FDCF13 !important; */
-animation: blinking 100ms !important;
+/* animation: blinking 100ms !important; */
 /* background-color: #ffc01a !important; */
 }
 

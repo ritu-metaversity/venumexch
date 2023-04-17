@@ -64,7 +64,7 @@ const GameDetails = () => {
     PostBetingOnGameDetailErrorrr,
   } = useSelector((state) => state.auth);
   // console.log(PostBetingOnGameDetailLoading, "PostBetingOnGameDetailLoading");
-  console.log(PostBetingOnGameDetailError,PostBetingOnGameDetail, "PostBetingOnGameDetailErrorPostBetingOnGameDetailError");
+  // console.log(PostBetingOnGameDetailError,PostBetingOnGameDetail, "PostBetingOnGameDetailErrorPostBetingOnGameDetailError");
   useEffect(() => {
     const iddd = localStorage.getItem("SportId");
     setGameIframeId(iddd);
@@ -200,13 +200,15 @@ const GameDetails = () => {
 
   useEffect(() => {
     if (Object.keys(PostMinMaxGameDetailsData).length) {
-      if (gameDetailsData) {
-        const oldOdds = { ...gameDetailsData };
-        setPreviousState(oldOdds);
-      } else {
-        setPreviousState({ data: PostMinMaxGameDetailsData });
-      }
-      setGameDetailsData({ data: PostMinMaxGameDetailsData });
+      setGameDetailsData((gameDetailsData)=>{
+        if (gameDetailsData) {
+          const oldOdds = { ...gameDetailsData };
+          setPreviousState(oldOdds);
+        } else {
+          setPreviousState({ data: PostMinMaxGameDetailsData });
+        }
+         return ({data: PostMinMaxGameDetailsData });
+    });
     }
   }, [PostMinMaxGameDetailsData]);
 
@@ -218,7 +220,7 @@ const GameDetails = () => {
     if (res) {
       setPostMinMaxGameDetailsData(res);
       setIsloading(false)
-      console(res, "dsfdsgdggvd")
+      // console(res, "dsfdsgdggvd")
   
     }
   };
@@ -345,7 +347,7 @@ setInterval(()=>{
     let timer = setInterval(
       () => {
         dispatch(PostUserOddPnl({ matchId: id }));
-        console.log("345tfdswertgfds");
+        // console.log("345tfdswertgfds");
       },
 
       5000
@@ -419,7 +421,7 @@ setInterval(()=>{
     }
   }, [PostBetingOnGameDetail]);
 
-  console.log(msg, "msg")
+  // console.log(msg, "msg")
 
 
   const handleCloseFancyModal = () => setShowFancyModals(false);
@@ -469,7 +471,7 @@ setInterval(()=>{
                     gameDetailsData?.data?.Odds[0]?.runners[1]?.name}
                 </h4>
               </div>
-              {console.log(gameDetailsData?.data?.Odds[0]?.eventTime,"sdjfsjdfksjdnfksdjkfd")}
+              {/* {console.log(gameDetailsData?.data?.Odds[0]?.eventTime,"sdjfsjdfksjdnfksdjkfd")} */}
               <div className="text-right">
                 <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
               </div>
@@ -574,7 +576,7 @@ setInterval(()=>{
                                     className="table-body"
                                     style={{ marginTop: "7px" }}
                                   >
-                                    {console.log(item11, "item11item11item11")}
+                                    {/* {console.log(item11, "item11item11item11")} */}
                                     {item11?.runners?.map((item1, index) => {
                                       return (
                                         <>
@@ -628,8 +630,7 @@ setInterval(()=>{
                                               </p>
                                             </div>
 
-                                            {[...item1?.ex?.availableToBack]
-                                              .reverse()
+                                            {item1?.ex?.availableToBack
                                               .map((item, id) => {
                                                 return (
                                                   <div
@@ -650,10 +651,10 @@ setInterval(()=>{
                                                            : " "
                                                        }`}
                                                   >
-                                                    {console.log(
+                                                    {/* {console.log(
                                                       item,
                                                       "itemitem"
-                                                    )}
+                                                    )} */}
                                                     {/* {console.log(item1,"item1item1item1")} */}
                                                     {/* {console.log(item1,"itemitemitem")} */}
 
@@ -685,9 +686,10 @@ setInterval(()=>{
                                                     </button>
                                                   </div>
                                                 );
-                                              })}
-                                            {[...item1?.ex?.availableToLay]
+                                              })
                                               .reverse()
+                                              }
+                                            {item1?.ex?.availableToLay                                          
                                               .map((item, id) => {
                                                 return (
                                                   <div
@@ -703,7 +705,7 @@ setInterval(()=>{
                                                      ]?.runners[index]?.ex
                                                        ?.availableToLay[id]
                                                        ?.price
-                                                       ? " blink1 "
+                                                       ? " blink1"
                                                        : " "
                                                    }`}
                                                   >
@@ -746,7 +748,7 @@ setInterval(()=>{
                                                     </button>
                                                   </div>
                                                 );
-                                              })}
+                                              }).reverse()}
                                             {/* <div className="box-w1 float-left lay hidden-portrait dis-none">
                                   <button type="button" className="lay">
                                     <span  className="odd">555</span>
@@ -1410,13 +1412,13 @@ setInterval(()=>{
                   } `}
                 >
                   {/* <div className="message">You have no matched bet</div>  */}
-{console.log(PostBetListByMatchIdData?.data,"PostBetListByMatchIdData?.dataPostBetListByMatchIdData?.data")}
+{/* {console.log(PostBetListByMatchIdData?.data,"PostBetListByMatchIdData?.dataPostBetListByMatchIdData?.data")} */}
                   {PostBetListByMatchIdData?.data &&
                     Object.keys(PostBetListByMatchIdData?.data).map((key) => (
                       <>
                         {PostBetListByMatchIdData?.data[key].map((item) => (
                           <>
-                            {console.log(key, "keykeykey")}
+                            {/* {console.log(key, "keykeykey")} */}
 
                             <div class="events matched-bet collapse show">
                               <ul>
@@ -1429,7 +1431,7 @@ setInterval(()=>{
                                         item?.back === false ? "lay" : "back"
                                       }-bet`}
                                     >
-                                      {console.log(item,"itemitemitemedwefdsf")}
+                                      {/* {console.log(item,"itemitemitemedwefdsf")} */}
                                       <u>
                                         {item?.back === true ? "BACK" : "LAY"}{" "}
                                         {item?.nation} for {item?.amount} @{" "}
