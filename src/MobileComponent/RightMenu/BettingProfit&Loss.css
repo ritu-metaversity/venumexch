@@ -60,7 +60,7 @@ h2 {
 .float-right {
     float: right !important;
 }
-.betting-pnl .wrapper {
+/* .betting-pnl .wrapper {
     padding: 11px 11px 15px 12px;
     margin: 2px 0 0;
     background: #fff;
@@ -68,9 +68,9 @@ h2 {
     font-size: 10px;
     float: left;
     width: 100%;
-}
+} */
 
-.betting-pnl .wrapper .info .game-name {
+.betting-pnl .dsfsfdfsd .info .game-name {
     font-size: 12px;
     white-space: nowrap;
     overflow: hidden;
@@ -144,7 +144,7 @@ b, strong {
 .float-right {
     float: right !important;
 }
-.betting-pnl .wrapper {
+.betting-pnl .dsfsfdfsd {
     padding: 2px 11px 15px 12px;
     margin: 2px 0 0;
     background: #fff;
@@ -152,9 +152,10 @@ b, strong {
     font-size: 10px;
     float: left;
     width: 95%;
+    height: 64px;
     margin-top: 17px;
 }
-.betting-pnl .wrapper .info {
+.betting-pnl .dsfsfdfsd .info {
     float: left;
     width: 70%;
 }

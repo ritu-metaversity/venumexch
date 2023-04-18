@@ -160,17 +160,17 @@ const LayoutForMobile = () => {
           <LeftMenu eftMenuClose={eftMenuClose} />
         </ul>
 
-        <div className="bottom-icon arrowUp">
+        {/* <div className="bottom-icon arrowUp"> */}
          
             <button
               className="btnnnnnnnn"
               onClick={scrollToTop}
-              style={{ display: visible ? "block" : "none" }}
+              style={{ display: visible ? "block" : "none" ,zIndex: "2",marginBottom: "13px"}}
             >
              <AiOutlineArrowUp size={25}/>
             </button>
          
-        </div>
+        {/* </div> */}
 
         <div className="bottom-icon">
           <Eyeicon />

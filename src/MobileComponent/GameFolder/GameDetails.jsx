@@ -31,6 +31,7 @@ const GameDetails = () => {
   const [matchedBets, setmatchedBets] = useState(false);
   const [gameDetailsData, setGameDetailsData] = useState();
   const [previousState, setPreviousState] = useState({});
+  const [TvShow, setTvShow] = useState(false);
 
   //state for fancy for blinker After filter
   const [previousStateFancyBlinker, setPreviousStateFancyBlinker] = useState({});
@@ -494,6 +495,14 @@ useEffect(() => {
    
   };
 
+  const handleTvShow = ()=>{
+    if(TvShow === false){
+      setTvShow(true);
+    }else{
+      setTvShow(false)
+    }
+  }
+
 
   // console.log(PostBetingOnGameDetail, "PostBetingOnGameDetailPostBetingOnGameDetailPostBetingOnGameDetail")
 
@@ -536,6 +545,7 @@ useEffect(() => {
                 <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
               </div>
             </div>
+            <div class="tv-icon" onClick={handleTvShow}><p class="mb-0"><i class="fa fa-tv"></i></p></div>
             <ul className="nav nav-tabs">
               <li className="nav-item">
                 <Link
@@ -573,8 +583,8 @@ useEffect(() => {
                       className="collapse"
                       style={{ display: "none" }}
                     ></div>
-
-                    <div id="scoreboard-box">
+                    {
+                      TvShow?(<div id="scoreboard-box">
                       <div className="scorecard scorecard-mobile">
                         <div className="score-inner">
                           <iframe
@@ -587,7 +597,9 @@ useEffect(() => {
                           ></iframe>
                         </div>
                       </div>
-                    </div>
+                    </div>):""
+                    }
+                    
                     <div className="m-b-10 main-market w-100 float-left">
                       {gameDetailsData?.data &&
                         gameDetailsData?.data?.Odds?.map((item11, id1) => {
@@ -1205,25 +1217,7 @@ useEffect(() => {
                                                           item.sid
                                                         )
                                                       }
-// dsadasdasdasd
                                                     >
-
-                                                    {/* <div
-                                                      data-v-e03c6f20=""
-                                                      className="float-left box-w4 country-name"
-                                                      style={{
-                                                        cursor: "pointer",
-                                                      }}
-
-                                                      onClick={(e) =>
-                                                        handleFancyBook(
-                                                          item.sid
-                                                        )
-                                                      }
-// dsadasdasdasd
-                                                    > */}
-                                                      {/* {console.log( item.sid,"FancyPNLFancyPNLFancyPNL")} */}
-                                                      {console.log( FancyPNL?.data.find((itemPnl) =>itemPnl?.marketId ==item?.sid)?.pnl,"FancyPNLFancyPNLFancyPNL")}
 
                                                       <div
                                                         data-v-e03c6f20=""
