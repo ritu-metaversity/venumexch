@@ -384,7 +384,7 @@ const BettingProfitLoss = () => {
               {PostprofitlossmatchwiseDatatata?.data&&PostprofitlossmatchwiseDatatata?.data?.market &&
               PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
                 PostprofitlossmatchwiseDatatata?.data?.market.map((el) => (
-                  <div class="wrapper">
+                  <div class="dsfsfdfsd">
                     <div class="info">
                       <p class="m-b-0  game-name">
                         <a href="" class="betting-back">

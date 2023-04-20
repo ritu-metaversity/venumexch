@@ -31,11 +31,9 @@
 }
 
 .modal.fade .modal-dialog {
-    transition: -webkit-transform 0.3s ease-out;
     transition: transform 0.3s ease-out;
-    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
-    -webkit-transform: translate(0, -50px);
     transform: translate(0, -50px);
+    margin: auto;
 }
 .placebet-modal .modal-dialog-centered {
     align-items: flex-end !important;
@@ -790,7 +788,7 @@ h4.m-b-0 {
     border-radius: 0.3rem;
     margin: auto;
     /* margin-left: 100% !important; */
-    left: 307px;
+    /* left: 307px; */
 }
  @media screen and (max-width: 900px) {
     .modal-content {

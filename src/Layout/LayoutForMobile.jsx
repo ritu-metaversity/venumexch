@@ -117,6 +117,13 @@ const LayoutForMobile = () => {
 
   window.addEventListener("scroll", toggleVisible);
 
+  const handleMenuClose =()=>{
+    setRightValue(false);
+    setLeftValue(false)
+
+
+  }
+
   return (
     <>
       <div className="wrapper" >
@@ -145,11 +152,15 @@ const LayoutForMobile = () => {
 
           <MFooter />
         </div>
-
+        {
+          RightValue === true || LeftValue === true ?<div className="overlay-rignt-menu" onClick={handleMenuClose}></div>:""
+        }
+        
         <div
           className={RightValue === true ? "right-menu" : ""}
           style={{ overflowY: "hidden " }}
         >
+          
           <RightMenu RightSideBarClose={RightSideBarClose} />
         </div>
         
@@ -160,17 +171,17 @@ const LayoutForMobile = () => {
           <LeftMenu eftMenuClose={eftMenuClose} />
         </ul>
 
-        <div className="bottom-icon arrowUp">
+        {/* <div className="bottom-icon arrowUp"> */}
          
             <button
               className="btnnnnnnnn"
               onClick={scrollToTop}
-              style={{ display: visible ? "block" : "none" }}
+              style={{ display: visible ? "block" : "none" ,zIndex: "2",marginBottom: "13px"}}
             >
              <AiOutlineArrowUp size={25}/>
             </button>
          
-        </div>
+        {/* </div> */}
 
         <div className="bottom-icon">
           <Eyeicon />

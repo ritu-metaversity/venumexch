@@ -1165,12 +1165,16 @@ margin-left: 2%;
     margin-left: 74%;
     margin-top: -16px;
     font-size: 10px;
-    font-weight: 800;
+    font-weight: 600;
+    margin-bottom: -2px;
 }
 .max {
-    margin-left: 58%;
+    /* margin-left: 58%; */
     font-size: 10px;
-    font-weight: 800;
+    font-weight: 600;
+    text-align: right;
+    margin-right: 9px;
+
 }
 .betDelay {
     margin-left: 88%;
@@ -1185,9 +1189,11 @@ margin-left: 2%;
     font-weight: 800;
 }
 .matchoddsmax {
-    margin-left: 1%;
     font-size: 10px;
-    font-weight: 800;
+    font-weight: 600;
+    text-align: right;
+    margin-right: 9px;
+    margin-bottom: -9px;
 }
 .matchdelay {
     margin-left: 31%;
@@ -1206,14 +1212,11 @@ margin-left: 2%;
     /* height: 100vh; */
     background: unset;
 }
-.loading-text{
-    position:absolute;
-    top: 62%;
+.loading-text {
+    position: absolute;
+    top: 48%;
     font-size: 18px;
 }
-
-
-
 
 @media screen and (min-width: 768px) and (max-width: 3000px) {
     button.btn.btn-secondary.btn-block.mb-2 {
@@ -1264,3 +1267,22 @@ margin-left: 2%;
     height: 100vh;
 }
 
+.event-title {
+    position: relative;
+}
+.tv-icon {
+    position: absolute;
+    right: 10px;
+    top: 86px;
+    cursor: pointer;
+}
+.tv-icon  i{
+    color: #fff;
+    font-size: 14px;
+}
+.ms{
+    margin-left: 6px;
+}
+.ml{
+    margin-left: -4px;
+}
