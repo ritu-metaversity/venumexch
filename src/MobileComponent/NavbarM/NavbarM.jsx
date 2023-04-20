@@ -6,70 +6,68 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PostBalance } from "../../App/Features/auth/authActions";
 
 import "./NavbarM.css";
-                         
-const NavbarM = ({RightSideBar,LiftSideBar,RightValue,LeftValue}) => {
+
+const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
- 
 
-  const { PostTotalBalance } = useSelector(state => state.auth)
+  const { PostTotalBalance } = useSelector((state) => state.auth);
   const [sideBarOpen, setRightBar] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
   const [MrqueeClose, setMarqueeClose] = useState(true);
 
+  useEffect(() => {
+    setRightBar(RightValue);
+  }, [RightValue]);
+  const token = localStorage.getItem("TokenId");
 
+  console.log();
+  useEffect(() => {
+    if (token === null) {
+      navigate("./login");
+      // console.log("dushyantdlaflkjsdjd")
+    }
+  }, [token]);
 
-    useEffect(()=>{
-      setRightBar(RightValue)
-    },[RightValue])
-    const token = localStorage.getItem("TokenId")
-    
-console.log()
-    useEffect(()=>{
-      if(token===null){
-        navigate("./login")
-        // console.log("dushyantdlaflkjsdjd")
-      }
-    },[token])
-   
+  const [movingMessage, setMovingMessage] = useState("");
+  useEffect(() => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/enduser/get-user-message"
+      )
+      .then((response) => {
+        console.log(response, "responseresponse");
+        setMovingMessage(response?.data?.message);
+      });
+  }, []);
 
-    const [movingMessage ,setMovingMessage]=useState("")
-    useEffect(()=>{
-      axios.post('http://api.247365.exchange/admin-new-apis/enduser/get-user-message',)
-             .then((response) => {
-      console.log(response,"responseresponse")
-              setMovingMessage(response?.data?.message)
-       })
-    },[])
+  useEffect(() => {
+    if (localStorage.getItem("PassWordType") === "old") {
+    } else {
+      dispatch(PostBalance());
 
-    useEffect(()=>{
-      dispatch(PostBalance())
-
-      if(pathname.includes("m/gamedetail")){
+      if (pathname.includes("m/gamedetail")) {
         const time = setInterval(() => {
-          if(token!==""){
-
-             dispatch(PostBalance())
+          if (token !== "") {
+            dispatch(PostBalance());
           }
-          }, 1000);
-          return () => clearInterval(time);
+        }, 1000);
+        return () => clearInterval(time);
       }
-       const time = setInterval(() => {
-          if(token!==""){
+      const time = setInterval(() => {
+        if (token !== "") {
+          dispatch(PostBalance());
+        }
+      }, 5000);
+      return () => clearInterval(time);
+    }
+  }, [token, pathname]);
 
-             dispatch(PostBalance())
-          }
-          }, 5000);
-          return () => clearInterval(time);
-    },[token,pathname])
-
-
-    useEffect(()=>{
-      setLeftBar(LeftValue);
-      LiftSideBar(LeftValue);
-    },[LeftValue, LiftSideBar])
-
+  useEffect(() => {
+    setLeftBar(LeftValue);
+    LiftSideBar(LeftValue);
+  }, [LeftValue, LiftSideBar]);
 
   const hanldeinput = (vl) => {
     if (sideBarOpen === false) {
@@ -95,33 +93,27 @@ console.log()
     setMarqueeClose(false);
   };
 
-
   const handleInput = () => {
     setLeftBar(false);
     navigate("./home");
   };
 
-
   const handleRules = () => {
     navigate("./rules-casino");
   };
 
-
-  const handleback=()=>{
-    "history.back()"
-    window.history.back()
+  const handleback = () => {
+    "history.back()";
+    window.history.back();
     // console.log("history.back()")
-  }
-
+  };
 
   return (
     <div>
       <header className="header">
         {MrqueeClose === true ? (
           <div className="news">
-            <marquee className="news-line">
-            {movingMessage}
-            </marquee>
+            <marquee className="news-line">{movingMessage}</marquee>
             <i
               className="fas fa-times float-right"
               onClick={handleCloseMarquee}
@@ -132,8 +124,8 @@ console.log()
         )}
 
         <nav>
-            {/* {window.location} */}
-            {pathname==="/m/home" ?
+          {/* {window.location} */}
+          {pathname === "/m/home" ? (
             <button
               type="button"
               data-toggle="collapse"
@@ -142,23 +134,24 @@ console.log()
               className="navbar-toggler"
             >
               <span className="fas fa-bars"></span>
-            </button>:
-
-
-<span  className="navbar-toggler"><i  onClick={handleback} className="fas fa-arrow-left m-r-10 m-t-5"></i></span>
-            
-
-            }
+            </button>
+          ) : (
+            <span className="navbar-toggler">
+              <i
+                onClick={handleback}
+                className="fas fa-arrow-left m-r-10 m-t-5"
+              ></i>
+            </span>
+          )}
           <div className="without-search">
-            
-
             {/* ARROW */}
-
 
             {/* ARROW */}
             <div className="logo" onClick={handleInput}>
               {/* <Link href="/home"   className="router-link-exact-active router-link-active"> */}
-              <img alt=""src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/mobile/logo.png"
+              <img
+                alt=""
+                src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/mobile/logo.png"
                 className="img-fluid"
                 style={{ height: "40px" }}
               />
@@ -172,15 +165,14 @@ console.log()
                 <i className="fas fa-ruler-vertical m-r-5"></i>
                 <span>Rules</span>
               </a>{" "}
-
               <button className="balance-button" onClick={hanldeinput}>
-
                 <i className="fas fa-user d-block"></i>{" "}
-                <span className="balance">{PostTotalBalance?.data?.data?.balance?PostTotalBalance?.data?.data?.balance:"0.00"}</span>
-
-                
+                <span className="balance">
+                  {PostTotalBalance?.data?.data?.balance
+                    ? PostTotalBalance?.data?.data?.balance
+                    : "0.00"}
+                </span>
               </button>
-
             </div>
           </div>
         </nav>
