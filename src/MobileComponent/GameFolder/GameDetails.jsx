@@ -866,7 +866,14 @@ const GameDetails = () => {
                                             "item?.gstatus"
                                           )}
                                           <div
-                                            data-title="OPEN"
+                                            data-title={`${
+                                              item?.gstatus === "SUSPENDED"
+                                                ? "SUSPENDED"
+                                                : item.gstatus ===
+                                                  "BALL RUNNING"
+                                                ? "Ball Running"
+                                                : ""
+                                            }`}
                                             className={`table-row ${
                                               item?.gstatus === "SUSPENDED"
                                                 ? "suspended"
@@ -1169,7 +1176,15 @@ const GameDetails = () => {
                                                   >
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      data-title=""
+                                                      data-title={` ${
+                                                        item?.gstatus ===
+                                                        "SUSPENDED"
+                                                          ? "suspended"
+                                                          : item.gstatus ===
+                                                            "BALL RUNNING"
+                                                          ? "ballrunning"
+                                                          : ""
+                                                      }`}
                                                       // className="table-row"
                                                       className={`table-row ${
                                                         item?.gstatus ===

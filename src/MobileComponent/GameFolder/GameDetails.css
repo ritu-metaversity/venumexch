@@ -1104,8 +1104,7 @@ strong {
 
 .suspended::after {
     position: absolute;
-    /* content: attr(data-title); */
-    content: "SUSPENDED";
+    content: attr(data-title);
     top: 0;
     right: -13px;
     font-weight: bold;
@@ -1116,28 +1115,14 @@ strong {
     cursor: not-allowed;
     align-items: center;
     display: flex;
-    display: -ms-flex;
-    display: -webkit-flex;
     justify-content: center;
 }
 
-.ballrunning::after {
-    position: absolute;
-    /* content: attr(data-title); */
-    content: "ball running";
-    top: 0;
-    right: -13px;
-    font-weight: bold;
+.fancy-tripple .suspended[data-v-e03c6f20]::after {
+    content: attr(data-title) !important;
     width: 63%;
-    height: 100%;
-    font-size: 1rem;
-    text-transform: uppercase;
-    cursor: not-allowed;
-    align-items: center;
-    display: flex;
-    display: -ms-flex;
-    display: -webkit-flex;
-    justify-content: center;
+    font-family: unset !important;
+    font-weight: unset !important;
 }
 
 .fancy-market-container .fancy-tripple {
@@ -1607,3 +1592,66 @@ strong {
 .ml {
     margin-left: -4px;
 }
+
+/* 
+<style>
+.fancy-tripple .suspended[data-v-e03c6f20]::after {
+    content: attr(data-title) !important;
+    font-family: unset !important;
+    font-weight: unset !important;
+}
+.main-market .suspended::after, .fancy-market .suspended::after {
+    width: 40%; */
+/* .fancy-tripple .suspended[data-v-e03c6f20]::after {
+        content: attr(data-title) !important;
+        font-family: unset !important;
+        font-weight: unset !important;
+    }
+    
+    .main-market .suspended::after, .fancy-market .suspended::after {
+        width: 40%;
+    }
+    .teenpatti-suspended::after, .suspended-tr::after, .suspended::after, .sudpended-patern::after {
+        content: "\f023" !important;
+        font-family: "Font Awesome 5 Free" !important;
+        font-weight: 900 !important;
+        color: #1f5058 !important;
+        background: rgba(217, 220, 223) !important;
+    }
+    .suspended::after {
+        position: absolute;
+        color: #1e3f5a;
+        background: rgba(217, 220, 223);
+        height: 100%;
+        width: 100%;
+        content: "suspended";
+        text-transform: uppercase;
+        right: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .fancy-market-container .table-row {
+        border-bottom: 0;
+    }
+    
+    .suspended {
+        position: relative;
+        width: 100%;
+    }
+    .table-row {
+        background-color: #fff;
+        border-bottom: 1px solid #f2f2f2;
+    }
+    data-v-e03c6f20
+    data-title="SUSPENDED"
+    class="table-row suspended"
+
+    data-v-e03c6f20
+    data-title="Ball Running"
+    table-row suspended */
+
+/* Starting soon. */
