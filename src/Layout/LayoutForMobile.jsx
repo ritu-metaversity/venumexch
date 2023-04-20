@@ -117,6 +117,13 @@ const LayoutForMobile = () => {
 
   window.addEventListener("scroll", toggleVisible);
 
+  const handleMenuClose =()=>{
+    setRightValue(false);
+    setLeftValue(false)
+
+
+  }
+
   return (
     <>
       <div className="wrapper" >
@@ -145,11 +152,15 @@ const LayoutForMobile = () => {
 
           <MFooter />
         </div>
-
+        {
+          RightValue === true || LeftValue === true ?<div className="overlay-rignt-menu" onClick={handleMenuClose}></div>:""
+        }
+        
         <div
           className={RightValue === true ? "right-menu" : ""}
           style={{ overflowY: "hidden " }}
         >
+          
           <RightMenu RightSideBarClose={RightSideBarClose} />
         </div>
         

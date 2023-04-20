@@ -1165,12 +1165,16 @@ margin-left: 2%;
     margin-left: 74%;
     margin-top: -16px;
     font-size: 10px;
-    font-weight: 800;
+    font-weight: 600;
+    margin-bottom: -2px;
 }
 .max {
-    margin-left: 58%;
+    /* margin-left: 58%; */
     font-size: 10px;
-    font-weight: 800;
+    font-weight: 600;
+    text-align: right;
+    margin-right: 9px;
+
 }
 .betDelay {
     margin-left: 88%;
@@ -1185,9 +1189,11 @@ margin-left: 2%;
     font-weight: 800;
 }
 .matchoddsmax {
-    margin-left: 1%;
     font-size: 10px;
-    font-weight: 800;
+    font-weight: 600;
+    text-align: right;
+    margin-right: 9px;
+    margin-bottom: -9px;
 }
 .matchdelay {
     margin-left: 31%;
@@ -1273,4 +1279,10 @@ margin-left: 2%;
 .tv-icon  i{
     color: #fff;
     font-size: 14px;
+}
+.ms{
+    margin-left: 6px;
+}
+.ml{
+    margin-left: -4px;
 }
