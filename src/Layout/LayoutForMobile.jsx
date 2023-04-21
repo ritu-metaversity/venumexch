@@ -4,7 +4,7 @@ import MidPage from "../MobileComponent/MidPageM/Midpage";
 import MFooter from "../MobileComponent/MMFooter/MFooter";
 // import Footer from "../component/Footer/Footer";
 import Eyeicon from "../MobileComponent/EyeIcon/Eyeicon";
-import { AiOutlineArrowUp } from 'react-icons/ai';
+import { AiOutlineArrowUp } from "react-icons/ai";
 import LeftMenu from "../MobileComponent/leftMenu/LeftMenu";
 import "./LayoutForMobile.css";
 import RightMenu from "../MobileComponent/RightMenu/RightMenu";
@@ -37,21 +37,26 @@ const LayoutForMobile = () => {
 
   useEffect(() => {}, []);
 
+  // passwordtype
+  // :
+  // "old"
+  // const PassWordType = localStorage.getItem("PassWordType");
+
   useEffect(() => {
-    const time = setInterval(() => {
-      dispatch(Postvalidatejwttoken());
-    }, 5000);
-    return () => clearInterval(time);
+    if (localStorage.getItem("PassWordType") === "old") {
+    } else {
+      const time = setInterval(() => {
+        dispatch(Postvalidatejwttoken());
+      }, 5000);
+      return () => clearInterval(time);
+    }
   }, [dispatch]);
 
-
   useEffect(() => {
-    if (
-      PostvalidatejwttokenDataError?.status === false
-    ) {
+    if (PostvalidatejwttokenDataError?.status === false) {
       localStorage.clear();
       // navigate("/m/login");
-      window.location.replace("/")
+      window.location.replace("/");
     }
   }, [PostvalidatejwttokenDataError]);
 
@@ -117,16 +122,14 @@ const LayoutForMobile = () => {
 
   window.addEventListener("scroll", toggleVisible);
 
-  const handleMenuClose =()=>{
+  const handleMenuClose = () => {
     setRightValue(false);
-    setLeftValue(false)
-
-
-  }
+    setLeftValue(false);
+  };
 
   return (
     <>
-      <div className="wrapper" >
+      <div className="wrapper">
         {/* <div className="main-cointainer right-menu-open" > */}
         <div
           className={`main-cointainer ${
@@ -152,18 +155,19 @@ const LayoutForMobile = () => {
 
           <MFooter />
         </div>
-        {
-          RightValue === true || LeftValue === true ?<div className="overlay-rignt-menu" onClick={handleMenuClose}></div>:""
-        }
-        
+        {RightValue === true || LeftValue === true ? (
+          <div className="overlay-rignt-menu" onClick={handleMenuClose}></div>
+        ) : (
+          ""
+        )}
+
         <div
           className={RightValue === true ? "right-menu" : ""}
           style={{ overflowY: "hidden " }}
         >
-          
           <RightMenu RightSideBarClose={RightSideBarClose} />
         </div>
-        
+
         <ul
           className={LeftValue === true ? "left-menu" : "d-none"}
           style={{ overflowY: "auto" }}
@@ -172,21 +176,24 @@ const LayoutForMobile = () => {
         </ul>
 
         {/* <div className="bottom-icon arrowUp"> */}
-         
-            <button
-              className="btnnnnnnnn"
-              onClick={scrollToTop}
-              style={{ display: visible ? "block" : "none" ,zIndex: "2",marginBottom: "13px"}}
-            >
-             <AiOutlineArrowUp size={25}/>
-            </button>
-         
+
+        <button
+          className="btnnnnnnnn"
+          onClick={scrollToTop}
+          style={{
+            display: visible ? "block" : "none",
+            zIndex: "2",
+            marginBottom: "13px",
+          }}
+        >
+          <AiOutlineArrowUp size={25} />
+        </button>
+
         {/* </div> */}
 
         <div className="bottom-icon">
           <Eyeicon />
         </div>
-       
       </div>
 
       <Modal show={show} onHide={handleClose}>

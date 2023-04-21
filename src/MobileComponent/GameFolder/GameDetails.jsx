@@ -260,12 +260,15 @@ const GameDetails = () => {
   };
 
   useEffect(() => {
-    let data = { matchId: id };
-    dispatch(PostBetListByMatchId(data));
-    setInterval(() => {
+    if (localStorage.getItem("PassWordType") === "old") {
+    } else {
       let data = { matchId: id };
       dispatch(PostBetListByMatchId(data));
-    }, 5000);
+      setInterval(() => {
+        let data = { matchId: id };
+        dispatch(PostBetListByMatchId(data));
+      }, 5000);
+    }
   }, [id]);
 
   const handleNationName = (name) => {};
@@ -597,25 +600,23 @@ const GameDetails = () => {
                                     </div>
                                     <div className="matchoddsmax">
                                       <span className="ml">
-                                      Min:{" "}
-                                      {PostMinMaxGameDetailsData?.Odds &&
-                                        PostMinMaxGameDetailsData?.Odds[id1]
-                                          ?.maxBet}
-                                          </span>
-                                          <span className="ms">
-                                          Max:{" "}
-                                      {PostMinMaxGameDetailsData?.Odds &&
-                                        PostMinMaxGameDetailsData?.Odds[id1]
-                                          ?.minBet}
-
-                                          </span>
-                                          <span className="ms">
-                                          BetDelay:{" "}
-                                      {PostMinMaxGameDetailsData?.Odds &&
-                                        PostMinMaxGameDetailsData?.Odds[id1]
-                                          ?.betDelay}
-                                          </span>
-                                        
+                                        Min:{" "}
+                                        {PostMinMaxGameDetailsData?.Odds &&
+                                          PostMinMaxGameDetailsData?.Odds[id1]
+                                            ?.maxBet}
+                                      </span>
+                                      <span className="ms">
+                                        Max:{" "}
+                                        {PostMinMaxGameDetailsData?.Odds &&
+                                          PostMinMaxGameDetailsData?.Odds[id1]
+                                            ?.minBet}
+                                      </span>
+                                      <span className="ms">
+                                        BetDelay:{" "}
+                                        {PostMinMaxGameDetailsData?.Odds &&
+                                          PostMinMaxGameDetailsData?.Odds[id1]
+                                            ?.betDelay}
+                                      </span>
                                     </div>{" "}
                                     {/* <div className="matchoddsmin">
                                       max:
@@ -823,27 +824,27 @@ const GameDetails = () => {
                                 </div>
                                 <div className="max">
                                   <span>
-                                  Min :{" "}
-                                  {PostMinMaxGameDetailsData &&
-                                    PostMinMaxGameDetailsData?.Bookmaker &&
-                                    PostMinMaxGameDetailsData?.Bookmaker[0]
-                                      ?.minBet}
+                                    Min :{" "}
+                                    {PostMinMaxGameDetailsData &&
+                                      PostMinMaxGameDetailsData?.Bookmaker &&
+                                      PostMinMaxGameDetailsData?.Bookmaker[0]
+                                        ?.minBet}
                                   </span>
-                                  
-                                      <span className="ms">
-                                      Max :{" "}
-                                  {PostMinMaxGameDetailsData &&
-                                    PostMinMaxGameDetailsData?.Bookmaker &&
-                                    PostMinMaxGameDetailsData?.Bookmaker[0]
-                                      ?.maxBet}
-                                      </span>
-                                      <span className="ms">
-                                      BetDelay:{" "}
-                                  {PostMinMaxGameDetailsData &&
-                                    PostMinMaxGameDetailsData?.Bookmaker &&
-                                    PostMinMaxGameDetailsData?.Bookmaker[0]
-                                      ?.betDelay}
-                                      </span>
+
+                                  <span className="ms">
+                                    Max :{" "}
+                                    {PostMinMaxGameDetailsData &&
+                                      PostMinMaxGameDetailsData?.Bookmaker &&
+                                      PostMinMaxGameDetailsData?.Bookmaker[0]
+                                        ?.maxBet}
+                                  </span>
+                                  <span className="ms">
+                                    BetDelay:{" "}
+                                    {PostMinMaxGameDetailsData &&
+                                      PostMinMaxGameDetailsData?.Bookmaker &&
+                                      PostMinMaxGameDetailsData?.Bookmaker[0]
+                                        ?.betDelay}
+                                  </span>
                                 </div>
                                 {/* <div className="min">
                                   
@@ -860,11 +861,22 @@ const GameDetails = () => {
                                           data-title="OPEN"
                                           className="table-body"
                                         >
+                                          {console.log(
+                                            item?.gstatus,
+                                            "item?.gstatus"
+                                          )}
                                           <div
-                                            data-title="OPEN"
+                                            data-title={`${
+                                              item?.gstatus === "SUSPENDED"
+                                                ? "SUSPENDED"
+                                                : item.gstatus ===
+                                                  "BALL RUNNING"
+                                                ? "Ball Running"
+                                                : ""
+                                            }`}
                                             className={`table-row ${
                                               item?.gstatus === "SUSPENDED"
-                                                ? "suspended"
+                                                ? "suspend"
                                                 : item.gstatus ===
                                                   "BALL RUNNING"
                                                 ? "ballrunning"
@@ -1164,15 +1176,15 @@ const GameDetails = () => {
                                                   >
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      data-title=""
+                                                      data-title={item?.gstatus}
                                                       // className="table-row"
                                                       className={`table-row ${
                                                         item?.gstatus ===
                                                         "SUSPENDED"
-                                                          ? "suspended"
+                                                          ? "suspend"
                                                           : item.gstatus ===
                                                             "BALL RUNNING"
-                                                          ? "ballrunning"
+                                                          ? "suspend"
                                                           : ""
                                                       }`}
                                                     >

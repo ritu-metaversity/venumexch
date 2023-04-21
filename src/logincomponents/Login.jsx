@@ -23,29 +23,26 @@ const Login = () => {
   const [loginData, setLoginData] = useState("");
   const [apiHit, setApiHit] = useState(false);
   const [show, setShow] = useState(false);
-  const [signUpShow, setSignUpShow] = useState(false);
-  const [signUpClose, setSignUpClose] = useState(false);
+  // const [signUpShow, setSignUpShow] = useState(false);
+  // const [signUpClose, setSignUpClose] = useState(false);
   const handleClose = () => setShow(false);
 
   const { postLoginData, postLoginDataError, PostuserselfregisterData } =
     useSelector((state) => state.auth);
 
-  console.log(userName, "userNameuserName");
-  console.log(password, "userNameuserName");
+  console.log(PostuserselfregisterData, "userNameuserName");
+  // console.log(signUpShow, "userNameuserName");
 
-  useEffect(() => {
-    if (
-      PostuserselfregisterData?.message === "User Created" &&
-      signUpClose === false
-    ) {
-      setSignUpShow(true);
-    }
-  }, [PostuserselfregisterData?.message, signUpClose, signUpShow]);
+  // useEffect(() => {
+  //   if (PostuserselfregisterData?.data?.message === "User Created") {
+  //     setSignUpShow(true);
+  //   }
+  // }, [PostuserselfregisterData]);
 
-  const handleSignUpShow = () => {
-    setSignUpClose(true);
-    setSignUpShow(false);
-  };
+  // const handleSignUpShow = () => {
+  //   setSignUpClose(true);
+  //   setSignUpShow(false);
+  // };
 
   useEffect(() => {
     if (apiHit === true) {
@@ -106,17 +103,17 @@ const Login = () => {
   };
 
   const handleLoginConfirm = (val) => {
-    if (userName === "" && password === ""){
+    if (userName === "" && password === "") {
       setErrorPassword(true);
       setErrorId(true);
       setShow(false);
-    }else if(userName === "" ){
+    } else if (userName === "") {
       setErrorId(true);
       setShow(false);
-    }else if(password === ""){
+    } else if (password === "") {
       setErrorPassword(true);
       setShow(false);
-    }else {
+    } else {
       dispatch(postLogin(login));
       setShow(false);
       setApiHit(true);
@@ -230,86 +227,43 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <>
-          <div className="">
-            <Modal
-              className=""
-              show={signUpShow}
-              onHide={handleSignUpShow}
-              backdrop="static"
-              keyboard={false}
-              centered
-            >
-              <Modal.Header className="register-head" closeButton>
-                <Modal.Title className="regTital">Register</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div>
-                  <div>
-                    <div className="">
-                      <div className="user-id user">
-                        <p>User Created</p>
-                        <p>Registration successful </p>
-                      </div>
-                      <div className="user-id user">
-                        <p>User Name:</p>
-                        <p>{PostuserselfregisterData?.username}</p>
-                      </div>
-                      <div className="user-id">
-                        <p>Password:</p>
-                        <p>{PostuserselfregisterData?.password}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="text-danger">
-                    <p>
-                      Please save the details and login with this username and
-                      password{" "}
-                    </p>
-                  </div>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
-        </>
-        <>
-          {/* <button variant="primary" onClick={handleShow}>
+
+        {/* <button variant="primary" onClick={handleShow}>
         Launch demo modal
       </button> */}
-          <div className="login-modal">
-            <Modal
-              className="login-confirm-modal"
-              show={show}
-              style={{ marginLeft: "1%" }}
-              onHide={handleClose}
-              backdrop="static"
-              keyboard={false}
-            >
-              <Modal.Header>
-                <Modal.Title>Please Confirm</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                Underage gambling is prohibited. Please confirm if you are 18
-                years old and above as of today
-              </Modal.Body>
-              <div className="confirm">
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Exit
-                  </Button>
-                  <Button
-                    className="confirmation"
-                    variant="primary"
-                    onClick={() => handleLoginConfirm("true")}
-                  >
-                    Confirm
-                  </Button>
-                </Modal.Footer>
-              </div>
-            </Modal>
-          </div>
-        </>
+        <div className="login-modal">
+          <Modal
+            className="login-confirm-modal"
+            show={show}
+            style={{ marginLeft: "1%" }}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header>
+              <Modal.Title>Please Confirm</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Underage gambling is prohibited. Please confirm if you are 18
+              years old and above as of today
+            </Modal.Body>
+            <div className="confirm">
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Exit
+                </Button>
+                <Button
+                  className="confirmation"
+                  variant="primary"
+                  onClick={() => handleLoginConfirm("true")}
+                >
+                  Confirm
+                </Button>
+              </Modal.Footer>
+            </div>
+          </Modal>
+        </div>
+        {/* </> */}
       </div>
       <Footer />
     </div>

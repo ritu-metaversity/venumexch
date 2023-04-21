@@ -33,12 +33,15 @@ const RightMenu = (props) => {
 
   const token = localStorage.getItem("TokenId");
   useEffect(() => {
-    const time = setInterval(() => {
-      if (token !== "") {
-        dispatch(PostBalance());
-      }
-    }, 5000);
-    return () => clearInterval(time);
+    if (localStorage.getItem("PassWordType") === "old") {
+    } else {
+      const time = setInterval(() => {
+        if (token !== "") {
+          dispatch(PostBalance());
+        }
+      }, 5000);
+      return () => clearInterval(time);
+    }
   }, [token]);
 
   useEffect(() => {
@@ -183,10 +186,14 @@ const RightMenu = (props) => {
                   onClick={() => handleInput("withDraw")}
                 >
                   <div className="item">
-                    <img src={withdraw} style={{
+                    <img
+                      src={withdraw}
+                      style={{
                         width: "22px",
                         marginLeft: "0%",
-                      }} alt="" />{" "}
+                      }}
+                      alt=""
+                    />{" "}
                     <span className="menu-name">WithDraw</span>
                   </div>
                 </div>

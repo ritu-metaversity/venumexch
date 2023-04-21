@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { PostPasswordChange, PostPwChangeFirstTime } from "../../App/Features/auth/authActions";
+import {
+  PostPasswordChange,
+  PostPwChangeFirstTime,
+} from "../../App/Features/auth/authActions";
 import ValidationFile from "../../Validation/ValidationFile";
 import "./ChangePassword.css";
 
@@ -10,7 +13,7 @@ const ChangePassword = () => {
   const [passwordTypeOld, setPasswordTypeOld] = useState({
     currentPassword: "12345678",
     newPassword: "111111",
-  })
+  });
   let navigate = useNavigate();
 
   const [currentPassword, setCurrentPassWord] = useState("");
@@ -28,9 +31,9 @@ const ChangePassword = () => {
   let dispatch = useDispatch();
 
   const { postPasswordChange } = useSelector((state) => state.auth);
-useEffect(()=>{
-  setInvalidPassword(postPasswordChange?.data?.message)
-},[postPasswordChange?.data?.message])
+  useEffect(() => {
+    setInvalidPassword(postPasswordChange?.data?.message);
+  }, [postPasswordChange?.data?.message]);
   let id = useParams();
 
   let PasswordStatus = localStorage.getItem("PassWordType");
@@ -46,17 +49,23 @@ useEffect(()=>{
     switch (inputName) {
       case "CurrentPassword":
         // console.log("hello")
-        
+
         setCurrentPassWord(ValidationFile.spaceNotAccept(inputValue));
-        setemptyCurrent(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
+        setemptyCurrent(
+          ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
+        );
         break;
       case "NewPassword":
         setNewPassWord(ValidationFile.spaceNotAccept(inputValue));
-        setemptyPassWord(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
+        setemptyPassWord(
+          ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
+        );
         break;
       case "ConfirmNewPassword":
         setConfirmPassword(ValidationFile.spaceNotAccept(inputValue));
-        setemptyConfirm(ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue)));
+        setemptyConfirm(
+          ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
+        );
         break;
       default:
         return false;
@@ -64,89 +73,92 @@ useEffect(()=>{
   };
 
   const handleSavePassWordFirstTime = () => {
-    if(currentPassword?.length <= 7) {
+    if (currentPassword?.length <= 7) {
       // console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
-      setemptyCurrentLength(true)
-    }if(currentPassword?.length >= 10) {
+      setemptyCurrentLength(true);
+    }
+    if (currentPassword?.length >= 10) {
       // console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
-      setemptyCurrentLength(true)
-    }else{
-      setemptyCurrentLength(false)
+      setemptyCurrentLength(true);
+    } else {
+      setemptyCurrentLength(false);
     }
     setInfoError(true);
-    let passwordData ={
-      newPassword:newPassword,
+    let passwordData = {
+      newPassword: newPassword,
       currentPassword: currentPassword,
       confirmPassword: confirmPassword,
       userid: userId,
       token: TokeN,
-      oldPassword:currentPassword
+      oldPassword: currentPassword,
+    };
+    if (ValidationFile.isEmpty(currentPassword)) {
+      setemptyCurrent(true);
     }
-  if (ValidationFile.isEmpty(currentPassword)) {
-    setemptyCurrent(true);
-  }
-  if (ValidationFile.isEmpty(newPassword)) {
-    setemptyPassWord(true);
-  }
-  if (ValidationFile.isEmpty(confirmPassword)) {
-    setemptyConfirm(true);
-  }if (
-    !ValidationFile.isEmpty(currentPassword) &&
-    !ValidationFile.isEmpty(newPassword) &&
-    !ValidationFile.isEmpty(confirmPassword)
-  ) {
-    dispatch(PostPwChangeFirstTime(passwordData))
-    navigate("/m/login");
-}}
+    if (ValidationFile.isEmpty(newPassword)) {
+      setemptyPassWord(true);
+    }
+    if (ValidationFile.isEmpty(confirmPassword)) {
+      setemptyConfirm(true);
+    }
+    if (
+      !ValidationFile.isEmpty(currentPassword) &&
+      !ValidationFile.isEmpty(newPassword) &&
+      !ValidationFile.isEmpty(confirmPassword)
+    ) {
+      dispatch(PostPwChangeFirstTime(passwordData));
+      localStorage.clear();
+      navigate("./login");
+      // window.location.replace("/");
+    }
+  };
 
-
-
-const handleSavePassWord=()=>{
-  setInfoError(true);
-let passwordData ={
-  newPassword:newPassword,
-  currentPassword: currentPassword,
-  confirmPassword: confirmPassword,
-  userid: userId,
-  token: TokeN,
-  oldPassword:currentPassword
-}
-if (ValidationFile.isEmpty(currentPassword)) {
-setemptyCurrent(true);
-}
-if (ValidationFile.isEmpty(newPassword)) {
-setemptyPassWord(true);
-}
-if (ValidationFile.isEmpty(confirmPassword)) {
-setemptyConfirm(true);
-}if (
-!ValidationFile.isEmpty(currentPassword) &&
-!ValidationFile.isEmpty(newPassword) &&
-!ValidationFile.isEmpty(confirmPassword)
-) {
-  dispatch(PostPasswordChange(passwordData))
-  navigate("/m/login");
-
-}}
+  const handleSavePassWord = () => {
+    setInfoError(true);
+    let passwordData = {
+      newPassword: newPassword,
+      currentPassword: currentPassword,
+      confirmPassword: confirmPassword,
+      userid: userId,
+      token: TokeN,
+      oldPassword: currentPassword,
+    };
+    if (ValidationFile.isEmpty(currentPassword)) {
+      setemptyCurrent(true);
+    }
+    if (ValidationFile.isEmpty(newPassword)) {
+      setemptyPassWord(true);
+    }
+    if (ValidationFile.isEmpty(confirmPassword)) {
+      setemptyConfirm(true);
+    }
+    if (
+      !ValidationFile.isEmpty(currentPassword) &&
+      !ValidationFile.isEmpty(newPassword) &&
+      !ValidationFile.isEmpty(confirmPassword)
+    ) {
+      dispatch(PostPasswordChange(passwordData));
+      localStorage.clear();
+      navigate("./login");
+      // window.location.replace("/");
+    }
+  };
 
   return (
     <>
-    
       <div
         className="home-page home-page-news hjhjjh"
         style={{ height: "100vh !importent" }}
       >
-        {invalidPassword ==="Invalid Current Password" ?
-      "Invalid Current Password"
-      :
-      ""
-      }
-      {/* {emptyCurrentLength?"error":""} */}
+        {invalidPassword === "Invalid Current Password"
+          ? "Invalid Current Password"
+          : ""}
+        {/* {emptyCurrentLength?"error":""} */}
         <div className="home-page">
           <section className="change-password">
             <h2
               className="page-title m-t-20 p-l-15"
-              style={{ paddingTop: "18px", marginBottom:"11px" }}
+              style={{ paddingTop: "18px", marginBottom: "11px" }}
             >
               Change Password
             </h2>
@@ -160,14 +172,18 @@ setemptyConfirm(true);
                 type="text"
                 placeholder="Current Password"
                 className="form-control"
-               
                 onChange={handleInput}
               />
-             { emptyCurrent&&infoError   ? <><span className="text-danger">
-                {" "}
-                The Current Password is required.
-              </span> {" "} </>:""}
-           
+              {emptyCurrent && infoError ? (
+                <>
+                  <span className="text-danger">
+                    {" "}
+                    The Current Password is required.
+                  </span>{" "}
+                </>
+              ) : (
+                ""
+              )}
             </div>
             <div className="form-group m-b-10">
               <input
@@ -177,10 +193,16 @@ setemptyConfirm(true);
                 className="form-control"
                 onChange={handleInput}
               />
-              { emptyNewPassWord &&infoError  ? <><span className="text-danger">
-                {" "}
-                The New Password is required.
-              </span> {" "} </>:""}
+              {emptyNewPassWord && infoError ? (
+                <>
+                  <span className="text-danger">
+                    {" "}
+                    The New Password is required.
+                  </span>{" "}
+                </>
+              ) : (
+                ""
+              )}
               {/* {passWordSame ? (
                 <>
                   <span className="text-danger">
@@ -204,13 +226,17 @@ setemptyConfirm(true);
                 placeholder="Confirm New Password"
                 className="form-control"
                 onChange={handleInput}
-              />
-
-              {" "}
-              { emptyConfirm &&infoError  ? <><span className="text-danger">
-                {" "}
-                The Confirm New Password is required.
-              </span> {" "} </>:""}
+              />{" "}
+              {emptyConfirm && infoError ? (
+                <>
+                  <span className="text-danger">
+                    {" "}
+                    The Confirm New Password is required.
+                  </span>{" "}
+                </>
+              ) : (
+                ""
+              )}
               {/* {passWordSame&&infoError ? (
                 <>
                   <span className="text-danger">
@@ -227,28 +253,25 @@ setemptyConfirm(true);
               </span> */}
             </div>
             <div>
-              {PasswordStatus==="old" ? 
-              
-              <button
-              type="submit"
-              className="btn btn-login"
-              onClick={handleSavePassWordFirstTime}
-              style={{    marginRight: "4%"}}
-            >
-            Save 
-            </button>:
-            <button
-                type="submit"
-                className="btn btn-login"
-                onClick={handleSavePassWord}
-                style={{    marginRight: "4%"}}
-              >
-                Save
-              </button>
-
-            }
-             
-              
+              {PasswordStatus === "old" ? (
+                <button
+                  type="submit"
+                  className="btn btn-login"
+                  onClick={handleSavePassWordFirstTime}
+                  style={{ marginRight: "4%" }}
+                >
+                  Save
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="btn btn-login"
+                  onClick={handleSavePassWord}
+                  style={{ marginRight: "4%" }}
+                >
+                  Save
+                </button>
+              )}
             </div>
             {/* </form> */}
           </section>
