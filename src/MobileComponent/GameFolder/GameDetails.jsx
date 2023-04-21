@@ -876,7 +876,7 @@ const GameDetails = () => {
                                             }`}
                                             className={`table-row ${
                                               item?.gstatus === "SUSPENDED"
-                                                ? "suspended"
+                                                ? "suspend"
                                                 : item.gstatus ===
                                                   "BALL RUNNING"
                                                 ? "ballrunning"
@@ -1176,23 +1176,15 @@ const GameDetails = () => {
                                                   >
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      data-title={` ${
-                                                        item?.gstatus ===
-                                                        "SUSPENDED"
-                                                          ? "suspended"
-                                                          : item.gstatus ===
-                                                            "BALL RUNNING"
-                                                          ? "ballrunning"
-                                                          : ""
-                                                      }`}
+                                                      data-title={item?.gstatus}
                                                       // className="table-row"
                                                       className={`table-row ${
                                                         item?.gstatus ===
                                                         "SUSPENDED"
-                                                          ? "suspended"
+                                                          ? "suspend"
                                                           : item.gstatus ===
                                                             "BALL RUNNING"
-                                                          ? "ballrunning"
+                                                          ? "suspend"
                                                           : ""
                                                       }`}
                                                     >

@@ -1102,9 +1102,9 @@ strong {
     float: left !important;
 }
 
-.suspended::after {
+.suspend::after {
     position: absolute;
-    content: attr(data-title);
+    content: "suspended";
     top: 0;
     right: -13px;
     font-weight: bold;
@@ -1116,11 +1116,28 @@ strong {
     align-items: center;
     display: flex;
     justify-content: center;
+    background: #ddd;
+}
+.ballrunning::after {
+    position: absolute;
+    content: "BALL RUNNING";
+    top: 0;
+    right: -13px;
+    font-weight: bold;
+    width: 63%;
+    height: 100%;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: not-allowed;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background: #ddd;
 }
 
-.fancy-tripple .suspended[data-v-e03c6f20]::after {
+.fancy-tripple .suspend[data-v-e03c6f20]::after {
     content: attr(data-title) !important;
-    width: 63%;
+    width: 42%;
     font-family: unset !important;
     font-weight: unset !important;
 }
@@ -1137,7 +1154,11 @@ strong {
     border-bottom: 0;
 }
 
-.suspended {
+.ballrunning {
+    position: relative;
+    width: 100%;
+}
+.suspend {
     position: relative;
     width: 100%;
 }
@@ -1301,7 +1322,11 @@ button.btn.btn-login {
     border-bottom: 0;
 }
 
-.suspended {
+.suspend {
+    position: relative;
+    width: 100%;
+}
+.ballrunning {
     position: relative;
     width: 100%;
 }
