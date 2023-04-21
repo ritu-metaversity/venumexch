@@ -91,6 +91,9 @@ const HomePage = () => {
                           <li
                             className="market-list-item"
                             style={{ padding: "2px", cursor: "pointer" }}
+                            onClick={() =>
+                              handleGameDetails(item?.matchId, item)
+                            }
                           >
                             <div className="homeimgGame">
                               <img
@@ -99,13 +102,11 @@ const HomePage = () => {
                                 className="game-icon"
                               />
                             </div>
-                            <div className="itdasdasdsa" style={{paddingLeft: "40px"}}>
-                              <span
-                                className=" game-name v-m"
-                                onClick={() =>
-                                  handleGameDetails(item?.matchId, item)
-                                }
-                              >
+                            <div
+                              className="itdasdasdsa"
+                              style={{ paddingLeft: "40px" }}
+                            >
+                              <span className=" game-name v-m">
                                 {item?.matchName}
                               </span>
                               <div className="timeeeeeee">{item?.openDate}</div>
