@@ -59,15 +59,14 @@ const Gamepage = () => {
   useEffect(() => {
     const activeMatchSportWise = id ? id : "4";
 
- 
-    axios.get(` http://43.205.50.127:9000/betfair_api/active_match/${activeMatchSportWise}`)
-    .then((res) => {
-setGamesData(res?.data?.data);
-
-})
-
+    axios
+      .get(
+        ` http://43.205.50.127:9000/betfair_api/active_match/${activeMatchSportWise}`
+      )
+      .then((res) => {
+        setGamesData(res?.data?.data);
+      });
   }, [id, token]);
-
 
   const { PostunsettledData } = useSelector((state) => state.auth);
 
@@ -100,7 +99,7 @@ setGamesData(res?.data?.data);
           {""}
           <span className="label">In Play</span> 
         </div>*/}
-        <Link to="/m/mybets" className="" style={{marginLeft: "82%"}}>
+        <Link to="/m/mybets" className="" style={{ marginLeft: "82%" }}>
           <span className="open-bets-link">
             Open Bets {""}(
             {PostunsettledData?.data &&
@@ -109,30 +108,36 @@ setGamesData(res?.data?.data);
             )
           </span>
         </Link>
-        <div >
+        <div>
           <ul className="market-listing">
-
-              {gamesData?.length > 0
-                ? gamesData.map((item) => {
+            {gamesData?.length > 0
+              ? gamesData.map((item) => {
                   return (
-              <li   className="market-list-item" style={{    padding: "2px" ,cursor: "pointer"}} >
-                  <div   className="item-inner" style={{paddingLeft: "12px"}}>
-                    
-                    <span   className=" game-name v-m"onClick={()=>handleGameDetails(item?.matchId,item)} >
-                     {item?.matchName}
-                    </span>
-                    <div className='timeeeee'>{item?.openDate}</div>
-                    <div   className="events-icons float-right">
-                      {item?.inPlay===true ?<i   className="fas fa-play-circle m-l-5"></i>
-                      :""
-                    }
-                      
-                    </div>
-                  </div>
-              </li>)})
-              :""}
-      
-
+                    <li
+                      className="market-list-item"
+                      style={{ padding: "2px", cursor: "pointer" }}
+                      onClick={() => handleGameDetails(item?.matchId, item)}
+                    >
+                      <div
+                        className="item-inner"
+                        style={{ paddingLeft: "12px" }}
+                      >
+                        <span className=" game-name v-m">
+                          {item?.matchName}
+                        </span>
+                        <div className="timeeeee">{item?.openDate}</div>
+                        <div className="events-icons float-right">
+                          {item?.inPlay === true ? (
+                            <i className="fas fa-play-circle m-l-5"></i>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })
+              : ""}
           </ul>
         </div>
       </section>
