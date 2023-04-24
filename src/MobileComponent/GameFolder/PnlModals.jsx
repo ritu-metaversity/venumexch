@@ -2,21 +2,17 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Postuserfancybook } from "../../App/Features/auth/authActions";
 
-const PnlModals = ({matchId,FancyID}) => {
-
+const PnlModals = ({ matchId, FancyID }) => {
   const dispatch = useDispatch();
 
-  const {Postuserfancybookdata} = useSelector((state) => state.auth);
+  const { Postuserfancybookdata } = useSelector((state) => state.auth);
 
+  useEffect(() => {
+    dispatch(Postuserfancybook({ matchId: matchId, fancyId: FancyID }));
+  }, [matchId, FancyID]);
 
-  useEffect(()=>{
-dispatch(Postuserfancybook({"matchId":matchId, "fancyId":FancyID}))
-  },[matchId,FancyID])
-
-// console.log(FancyID,matchId,"kdjashdjhakshdkjas")
-// console.log(Postuserfancybookdata,"PostuserfancybookdataPostuserfancybookdata")
-
-
+  // console.log(FancyID,matchId,"kdjashdjhakshdkjas")
+  // console.log(Postuserfancybookdata,"PostuserfancybookdataPostuserfancybookdata")
 
   return (
     <div>
@@ -30,7 +26,7 @@ dispatch(Postuserfancybook({"matchId":matchId, "fancyId":FancyID}))
               className="table b-table table-bordered deposit-table"
               id="__BVID__104"
             >
-              <thead>
+              {/* <thead>
                 <tr className="previous-deposite">
                   <th>Run</th>
                   <th
@@ -39,38 +35,35 @@ dispatch(Postuserfancybook({"matchId":matchId, "fancyId":FancyID}))
                     Amount
                   </th>
                     </tr>
-              </thead>
+              </thead> */}
 
               <tbody>
-
-                {
-                Postuserfancybookdata&&Postuserfancybookdata.data.map((item)=>{
-                    return(
+                {Postuserfancybookdata &&
+                  Postuserfancybookdata.data.map((item) => {
+                    return (
                       <tr role="row">
-                                            {/* {  console.log(item,"console.log(item)")} */}
+                        {/* {  console.log(item,"console.log(item)")} */}
 
-                      <td aria-colindex="1" className="text-left">
-                        {item?.odds}
-                      </td>
+                        <td aria-colindex="1" className="text-left">
+                          {item?.odds}
+                        </td>
 
-                      {item?.pnl < 0?  <td aria-colindex="4" style={{ color: "#f44336" }}>
-                      
-                      {item?.pnl}
-                    </td>
-                  : <td aria-colindex="4" style={{ color: "green" }}>
-                      
-                  {item?.pnl}
-                </td>  
-                  }
-                      {/* <td aria-colindex="4" style={{ color: "#f44336" }}>
+                        {item?.pnl < 0 ? (
+                          <td aria-colindex="4" style={{ color: "#f44336" }}>
+                            {item?.pnl}
+                          </td>
+                        ) : (
+                          <td aria-colindex="4" style={{ color: "green" }}>
+                            {item?.pnl}
+                          </td>
+                        )}
+                        {/* <td aria-colindex="4" style={{ color: "#f44336" }}>
                       
                         {item?.pnl}
                       </td> */}
-                    </tr>
-                    )
-                  })
-                }
-               
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>

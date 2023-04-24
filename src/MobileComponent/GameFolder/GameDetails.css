@@ -1108,7 +1108,7 @@ strong {
     top: 0;
     right: -13px;
     font-weight: bold;
-    width: 63%;
+    width: 60.7%;
     height: 100%;
     font-size: 1rem;
     text-transform: uppercase;
@@ -1118,13 +1118,14 @@ strong {
     justify-content: center;
     background: #ddd;
 }
+
 .ballrunning::after {
     position: absolute;
     content: "BALL RUNNING";
     top: 0;
     right: -13px;
     font-weight: bold;
-    width: 63%;
+    width: 61.2%;
     height: 100%;
     font-size: 1rem;
     text-transform: uppercase;
@@ -1158,6 +1159,7 @@ strong {
     position: relative;
     width: 100%;
 }
+
 .suspend {
     position: relative;
     width: 100%;
@@ -1246,6 +1248,8 @@ img.float-right.ladder-icon {
 
 button.btn.btn-login {
     background: #2c4f58;
+    color: #fff;
+
     font-size: 14px;
 }
 
@@ -1303,8 +1307,57 @@ button.btn.btn-login {
         margin-inline: 1%;
         width: 97% !important;
     }
+
+    .suspend::after {
+        position: absolute;
+        content: "suspended";
+        top: 0;
+        right: -13px;
+        font-weight: bold;
+        width: 63.5%;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        background: #ddd;
+    }
 }
 
+
+@media screen and (max-width: 300px) and (max-width: 375px ) {
+    .suspend::after {
+      
+        width: 63.4%;
+        
+    }
+
+}
+
+@media screen and (min-width: 376px)  and (max-width: 450px){
+    .suspend::after {
+      
+        width: 62.4%;
+        
+    }
+}
+
+@media screen and (min-width: 450px)  and (max-width: 800px){
+    .suspend::after {
+      
+        width: 61.4%;
+        
+    }
+}
+@media screen and (min-width: 801px)  and (max-width: 1024px){
+    .suspend::after {
+      
+        width: 61.1%;
+        
+    }
+}
 
 .box-w3 {
     width: 10% !important;
@@ -1326,6 +1379,7 @@ button.btn.btn-login {
     position: relative;
     width: 100%;
 }
+
 .ballrunning {
     position: relative;
     width: 100%;
@@ -1680,3 +1734,15 @@ strong {
     table-row suspended */
 
 /* Starting soon. */
+
+.light-bg {
+    background-color: #fdeef2;
+}
+button.closebtnonpnl {
+    position: absolute;
+    top: 48px;
+    right: 0px;
+    background: none;
+    border: unset;
+    outline: unset !important;
+}

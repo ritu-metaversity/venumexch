@@ -643,6 +643,7 @@ ul {
     .table-row>div button .odd {
         font-weight: bold;
         font-size: 12px;
+        color: #000;
     }
     .table-row>div button span {
         display: block;
@@ -658,6 +659,7 @@ ul {
         display: block;
         font-size: 10px;
         line-height: 12px;
+        color: #000;
     }
     .back {
         background-color: #72BBEF;
@@ -763,4 +765,18 @@ ul {
     }
     li.market-list-item {
         position: relative;
+    }
+
+    .box-w1.float-left.lay.light-bg.hidden-portrait {
+        background-color: #fdeef2 !important;
+    }
+    .box-w1.float-left.back.light-bg {
+        background-color: #e3f3fe !important;
+    }
+    button.lay.light-bg {
+        background-color: #fdeef2 !important;
+    }
+    .box-w1.lay.float-left.dis-none.light-bg {
+        background-color: #fdeef2 !important;
+
     }

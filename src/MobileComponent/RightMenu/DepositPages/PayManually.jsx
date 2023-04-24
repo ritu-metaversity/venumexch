@@ -5,8 +5,8 @@ import Col from "react-bootstrap/Col";
 import Image from "./Image";
 import { useDispatch, useSelector } from "react-redux";
 import "./PayManually.css";
-import Modal from 'react-bootstrap/Modal';
-import AlertBtn from '../../Alert/AlertBtn';
+import Modal from "react-bootstrap/Modal";
+import AlertBtn from "../../Alert/AlertBtn";
 
 import {
   Postpaymnetdetailapp,
@@ -23,9 +23,7 @@ const PayManually = (props) => {
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
     (state) => state.auth
   );
-  console.log(PostselfdepositappData?.status,"PostselfdepositappDataPostselfdepositappData")
-  // Deposit Request Submitted Successfully
-  // console.log(PostselfdepositappData?.message,"PostselfdepositappDataPostselfdepositappData")
+
   const [Bitvalue, setBitValue] = useState(0);
 
   const [pymentMode, setPymentMode] = useState("UPI");
@@ -34,7 +32,7 @@ const PayManually = (props) => {
 
   const handlePaymentName = (VL, id) => {
     setPymentMode(VL);
-    setActive(id)
+    setActive(id);
   };
 
   const increment = () => {
@@ -48,6 +46,7 @@ const PayManually = (props) => {
     setBitValue(Bitvalue + vl);
   };
 
+  console.log(Bitvalue, "BitvalueBitvalue");
   useEffect(() => {
     if (token) {
       dispatch(Postpaymnetdetailapp());
@@ -61,23 +60,24 @@ const PayManually = (props) => {
     data.append("image", files || "");
 
     dispatch(Postselfdepositapp(data));
-    props.UpdateList(true)
+    props.UpdateList(true);
   };
 
-useEffect(()=>{
-if(PostselfdepositappData?.status){
-  setBitValue(0)
-  setFiles(null)
-}
-},[PostselfdepositappData?.status])
-
+  useEffect(() => {
+    if (PostselfdepositappData?.status) {
+      setBitValue(0);
+      setFiles(null);
+    }
+  }, [PostselfdepositappData?.status]);
 
   return (
     <div>
- 
       <h3 className="enter-amount"> Enter Amount</h3>
       <div className="row row5 main-pricecontainor">
-        <div className="text-lef col-6 price-input pValue" style={{marginLeft: "-6%"}}>
+        <div
+          className="text-lef col-6 price-input pValue"
+          style={{ marginLeft: "-6%" }}
+        >
           <div className="d-flex inputfield">
             <button
               className="stakeactionminus priceminus btn"
@@ -94,7 +94,7 @@ if(PostselfdepositappData?.status){
               placeholder="Enter Amount"
               className="priceinput"
               value={Bitvalue}
-              onChange={(e)=>setBitValue(e.target.value)}
+              onChange={(e) => setBitValue(e.target.value)}
             />
             <button
               className="stakeactionminus priceminus btn"
@@ -160,8 +160,17 @@ if(PostselfdepositappData?.status){
               {PostpaymnetdetailappDataData?.data?.paymentMethods.map(
                 (item, id) => (
                   <Col onClick={() => handlePaymentName(item.methodName, id)}>
-                    <div className={`css-1502y4u ${active===id?"active3":""}`}>
-                      <img src={item.logo} className="css-37vfbv" alt="Bank"  style={{width:"100%"}}/>
+                    <div
+                      className={`css-1502y4u ${
+                        active === id ? "active3" : ""
+                      }`}
+                    >
+                      <img
+                        src={item.logo}
+                        className="css-37vfbv"
+                        alt="Bank"
+                        style={{ width: "100%" }}
+                      />
                       <p className="Typography-root ">{item.methodName}</p>
                     </div>
                   </Col>
@@ -210,17 +219,17 @@ if(PostselfdepositappData?.status){
                 <Col className="name-d">
                   <div className="">
                     <p className="Typography-root ">
-                      {
-                        PostpaymnetdetailappDataData?.data?.upiDetail
-                          ?.upiName
-                      }
+                      {PostpaymnetdetailappDataData?.data?.upiDetail?.upiName}
                     </p>
                   </div>
                 </Col>
                 <Col className="name-d">
                   <div className="">
                     <p className="Typography-root ">
-                      {PostpaymnetdetailappDataData?.data?.upiDetail?.displayName}
+                      {
+                        PostpaymnetdetailappDataData?.data?.upiDetail
+                          ?.displayName
+                      }
                     </p>
                   </div>
                 </Col>
@@ -248,7 +257,12 @@ if(PostselfdepositappData?.status){
               </Col>
               <Col>
                 <div className="">
-                  <p className="Typography-root text-right">{PostpaymnetdetailappDataData&&PostpaymnetdetailappDataData?.data&&PostpaymnetdetailappDataData?.data?.bankDetail&&PostpaymnetdetailappDataData?.data?.bankDetail?.bankName}</p>
+                  <p className="Typography-root text-right">
+                    {PostpaymnetdetailappDataData &&
+                      PostpaymnetdetailappDataData?.data &&
+                      PostpaymnetdetailappDataData?.data?.bankDetail &&
+                      PostpaymnetdetailappDataData?.data?.bankDetail?.bankName}
+                  </p>
                 </div>
               </Col>
             </Row>
@@ -260,7 +274,13 @@ if(PostselfdepositappData?.status){
               </Col>
               <Col>
                 <div className="">
-                  <p className="Typography-root text-right">{PostpaymnetdetailappDataData&&PostpaymnetdetailappDataData?.data&&PostpaymnetdetailappDataData?.data?.bankDetail&&PostpaymnetdetailappDataData?.data?.bankDetail?.accountNumber}</p>
+                  <p className="Typography-root text-right">
+                    {PostpaymnetdetailappDataData &&
+                      PostpaymnetdetailappDataData?.data &&
+                      PostpaymnetdetailappDataData?.data?.bankDetail &&
+                      PostpaymnetdetailappDataData?.data?.bankDetail
+                        ?.accountNumber}
+                  </p>
                 </div>
               </Col>
             </Row>
@@ -272,7 +292,12 @@ if(PostselfdepositappData?.status){
               </Col>
               <Col>
                 <div className="">
-                  <p className="Typography-root text-right">{PostpaymnetdetailappDataData&&PostpaymnetdetailappDataData?.data&&PostpaymnetdetailappDataData?.data?.bankDetail&&PostpaymnetdetailappDataData?.data?.bankDetail?.ifscCode}</p>
+                  <p className="Typography-root text-right">
+                    {PostpaymnetdetailappDataData &&
+                      PostpaymnetdetailappDataData?.data &&
+                      PostpaymnetdetailappDataData?.data?.bankDetail &&
+                      PostpaymnetdetailappDataData?.data?.bankDetail?.ifscCode}
+                  </p>
                 </div>
               </Col>
             </Row>
@@ -284,7 +309,13 @@ if(PostselfdepositappData?.status){
               </Col>
               <Col>
                 <div className="">
-                  <p className="Typography-root text-right">{PostpaymnetdetailappDataData&&PostpaymnetdetailappDataData?.data&&PostpaymnetdetailappDataData?.data?.bankDetail&&PostpaymnetdetailappDataData?.data?.bankDetail?.accountHolderName}</p>
+                  <p className="Typography-root text-right">
+                    {PostpaymnetdetailappDataData &&
+                      PostpaymnetdetailappDataData?.data &&
+                      PostpaymnetdetailappDataData?.data?.bankDetail &&
+                      PostpaymnetdetailappDataData?.data?.bankDetail
+                        ?.accountHolderName}
+                  </p>
                 </div>
               </Col>
             </Row>
@@ -299,36 +330,53 @@ if(PostselfdepositappData?.status){
                 <div className="qr-image">
                   <p>QR Code For Payment</p>
                   <img
-                    src={PostpaymnetdetailappDataData&&PostpaymnetdetailappDataData?.data&&PostpaymnetdetailappDataData?.data?.qrCode&&PostpaymnetdetailappDataData?.data?.qrCode?.qrCodeImage}
+                    src={
+                      PostpaymnetdetailappDataData &&
+                      PostpaymnetdetailappDataData?.data &&
+                      PostpaymnetdetailappDataData?.data?.qrCode &&
+                      PostpaymnetdetailappDataData?.data?.qrCode?.qrCodeImage
+                    }
                     style={{ width: "150px" }}
                     alt=""
                     onClick={() => setTrueee(true)}
                   />
                 </div>
                 <Modal
-                    show={trueee}
-                    onHide={() => setTrueee(false)}
-                    size="lg"
-                    centered
-                  >
-                    <Modal.Body>
+                  show={trueee}
+                  onHide={() => setTrueee(false)}
+                  size="lg"
+                  centered
+                >
+                  <Modal.Body>
                     <img
-                    src={PostpaymnetdetailappDataData&&PostpaymnetdetailappDataData?.data&&PostpaymnetdetailappDataData?.data?.qrCode&&PostpaymnetdetailappDataData?.data?.qrCode?.qrCodeImage}
-                    alt=""
-                    className="imgggggggg"
-                  />
-                    </Modal.Body>
-                  </Modal>
+                      src={
+                        PostpaymnetdetailappDataData &&
+                        PostpaymnetdetailappDataData?.data &&
+                        PostpaymnetdetailappDataData?.data?.qrCode &&
+                        PostpaymnetdetailappDataData?.data?.qrCode?.qrCodeImage
+                      }
+                      alt=""
+                      className="imgggggggg"
+                    />
+                  </Modal.Body>
+                </Modal>
               </Col>
               <Col className="qr-payment">
                 <Row>
                   <Col>
                     <div className="">
                       <p>Display Name</p>
-                      <input 
-                      value={PostpaymnetdetailappDataData&&PostpaymnetdetailappDataData?.data&&PostpaymnetdetailappDataData?.data?.qrCode&&PostpaymnetdetailappDataData?.data?.qrCode?.displayName} 
-                      type="text" 
-                      disabled/>
+                      <input
+                        value={
+                          PostpaymnetdetailappDataData &&
+                          PostpaymnetdetailappDataData?.data &&
+                          PostpaymnetdetailappDataData?.data?.qrCode &&
+                          PostpaymnetdetailappDataData?.data?.qrCode
+                            ?.displayName
+                        }
+                        type="text"
+                        disabled
+                      />
                     </div>
                   </Col>
                 </Row>
@@ -368,11 +416,9 @@ if(PostselfdepositappData?.status){
                       style={{ maxWidth: "90%", margin: "auto" }}
                       src={URL.createObjectURL(files)}
                       alt="uploaded_img"
-                      
                     />
                   )}
 
-           
                   <input
                     onChange={(e) =>
                       e.target.files && setFiles(e.target.files[0])
@@ -382,12 +428,16 @@ if(PostselfdepositappData?.status){
                     style={{ display: "none" }}
                   />
                 </label>
-                {files!==null && Bitvalue!==0 ? 
-                <button className="submit-deposit bbbbbbbb" onClick={handleSubmit}>
-                Submit
-              </button>:""
-                }
-                
+                {files !== null && Bitvalue !== 0 ? (
+                  <button
+                    className="submit-deposit bbbbbbbb"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
           </div>

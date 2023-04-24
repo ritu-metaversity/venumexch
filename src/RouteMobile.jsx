@@ -21,7 +21,7 @@ import Rulesregulations from "./MobileComponent/RightMenu/Rulesregulations";
 import TimeSetting from "./MobileComponent/RightMenu/TimeSetting";
 import Rules from "./MobileComponent/NavbarM/Rules";
 import GameDetails from "./MobileComponent/GameFolder/GameDetails";
-import Login from "./logincomponents/Login"
+import Login from "./logincomponents/Login";
 import LoginForMobile from "./LoginForMobile/LoginForMobile";
 import MarketPage from "./MobileComponent/EyeIcon/MarketPage";
 import { useState } from "react";
@@ -31,10 +31,10 @@ import Deposit from "./MobileComponent/RightMenu/DepositPages/Deposit";
 import WithDraw from "./MobileComponent/RightMenu/WithDrawPage/WithDraw";
 import Signup from "./logincomponents/Signup";
 import Gamepage from "./MobileComponent/MidPageM/Gamepage";
+import SingupBanner from "./MobileComponent/LandingForSignup/SingupBanner";
 // const Login = lazy(() => import('./logincomponents/Login'))
 const RouteMobile = () => {
   const { pathname } = useLocation();
-
 
   return (
     <div>
@@ -46,7 +46,10 @@ const RouteMobile = () => {
           <Route path="home" element={<Midpage />} />
           <Route path="mybets" element={<Mybets />} />
           <Route path="profitloss" element={<BettingProfitLoss />} />
-          <Route  path="/m/responsibleGambling" element={<ResponsibleGambling />} />
+          <Route
+            path="/m/responsibleGambling"
+            element={<ResponsibleGambling />}
+          />
           <Route path="changepassword" element={<ChangePassword />} />
           <Route path="secureauth" element={<Secureauth />} />
           <Route path="transferstatement" element={<Transferstatement />} />
@@ -63,12 +66,25 @@ const RouteMobile = () => {
           <Route path="/m/gamedetail/:id" element={<GameDetails />} />
           <Route path="casino-list" element={<Casinolist />} />
           <Route path="/m/casino/:id" element={<Casino />} />
+          <Route path="/m/Singup1" element={<SingupBanner />} />
           {/* <Route path="/m/login" element={<Login />} /> */}
-
         </Route>
-        <Route path="/m/login" element={<><Login /></>}/>
-        <Route path="/m/signup" element={<><Signup /></>}/>
-
+        <Route
+          path="/m/login"
+          element={
+            <>
+              <Login />
+            </>
+          }
+        />
+        <Route
+          path="/m/signup"
+          element={
+            <>
+              <Signup />
+            </>
+          }
+        />
 
         <Route path="*" element={<Navigate to="m/home" />} />
 
