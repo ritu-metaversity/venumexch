@@ -16,11 +16,17 @@ const Deposit = () => {
     PostselfdepositappData,
   } = useSelector((state) => state.auth);
   const [Bitvalue, setBitValue] = useState(0);
-  console.log(
-    PostselfdepositappData?.status,
-    "PostselfdepositappDataPostselfdepositappData"
-  );
 
+  // console.log(
+  //   PostselfdepositappData?.status,
+  //   "PostselfdepositappDataPostselfdepositappData"
+  // );
+
+  //   useEffect(()=>{
+  // if(PostselfdepositappData?.status===true){
+
+  // }
+  //   },[])
   const [trueee, setTrueee] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
 
@@ -61,7 +67,7 @@ const Deposit = () => {
     if (PostselfdepositappData?.status) {
       dispatch(Postdepsositrequestclient());
     }
-  }, []);
+  }, [PostselfdepositappData?.status]);
   // console.log(trueee)
   return (
     <>
@@ -143,7 +149,7 @@ const Deposit = () => {
                           centered
                         >
                           <Modal.Body>
-                            {console.log("nsjdsjdnjnf")}
+                            {/* {console.log("nsjdsjdnjnf")} */}
                             <img src={imgUrl} alt="" className="imgggggggg" />
                           </Modal.Body>
                         </Modal>

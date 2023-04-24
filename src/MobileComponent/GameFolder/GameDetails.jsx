@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { useOutletContext, useParams } from "react-router";
+import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
 import {
   PostBetListByMatchId,
   PostGameDetailsByMI,
@@ -17,6 +18,7 @@ import { socket } from "./socket";
 import { createProfits } from "./eventUtils";
 
 import PnlModals from "./PnlModals";
+import Button from "react-bootstrap/Button";
 import { Modal, ModalBody, ModalHeader, ModalTitle } from "react-bootstrap";
 
 const GameDetails = () => {
@@ -587,16 +589,16 @@ const GameDetails = () => {
                                       <div className="float-left box-w4 country-name">
                                         <b>{item11?.Name}</b>
                                       </div>
-                                      {/* <div className="box-w1 float-left hidden-portrait dis-none"></div>
-                                  <div className="box-w1 float-left hidden-portrait dis-none"></div> */}
+                                      <div className="box-w1 float-left hidden-portrait dis-none"></div>
+                                      <div className="box-w1 float-left hidden-portrait dis-none"></div>
                                       <div className=" box-w1 float-left text-uppercase">
                                         Back
                                       </div>
                                       <div className=" box-w1 float-left text-uppercase">
                                         lay
                                       </div>
-                                      {/* <div className="box-w1 float-left hidden-portrait dis-none"></div>
-                                  <div className="box-w1 float-left hidden-portrait ddis-none"></div> */}
+                                      <div className="box-w1 float-left hidden-portrait dis-none"></div>
+                                      <div className="box-w1 float-left hidden-portrait ddis-none"></div>
                                     </div>
                                     <div className="matchoddsmax">
                                       <span className="ml">
@@ -683,8 +685,8 @@ const GameDetails = () => {
                                                   return (
                                                     <div
                                                       className={`box-w1 float-left back hidden-portrait  ${
-                                                        id === 0 || id === 1
-                                                          ? "dis-none"
+                                                        id === 1 || id === 2
+                                                          ? "dis-none light-bg"
                                                           : ""
                                                       }
                                                        ${
@@ -729,13 +731,13 @@ const GameDetails = () => {
                                                   );
                                                 })
                                                 .reverse()}
-                                              {item1?.ex?.availableToLay
-                                                .map((item, id) => {
+                                              {item1?.ex?.availableToLay.map(
+                                                (item, id) => {
                                                   return (
                                                     <div
                                                       className={`box-w1 lay float-left ${
                                                         id === 1 || id === 2
-                                                          ? "dis-none"
+                                                          ? "dis-none light-bg"
                                                           : ""
                                                       }
                                                    ${
@@ -788,8 +790,8 @@ const GameDetails = () => {
                                                       </button>
                                                     </div>
                                                   );
-                                                })
-                                                .reverse()}
+                                                }
+                                              )}
                                             </div>
                                           </>
                                         );
@@ -883,6 +885,10 @@ const GameDetails = () => {
                                                 : ""
                                             }`}
                                           >
+                                            {console.log(
+                                              item.gstatus,
+                                              "item.gstatus"
+                                            )}
                                             <div className="float-left box-w6 country-name">
                                               <span className="team-name">
                                                 <b> {item?.nation}</b>
@@ -926,7 +932,7 @@ const GameDetails = () => {
                                             <div className="box-w3 float-left back ">
                                               <button
                                                 type="button"
-                                                className="back"
+                                                className="back light-bg"
                                               >
                                                 <span className="odd">0</span>
                                                 <span>
@@ -937,7 +943,7 @@ const GameDetails = () => {
                                             <div className="box-w3 float-left back ">
                                               <button
                                                 type="button"
-                                                className="back"
+                                                className="back light-bg"
                                               >
                                                 <span className="odd">0</span>
                                                 <span>
@@ -946,7 +952,7 @@ const GameDetails = () => {
                                               </button>
                                             </div>
                                             <div
-                                              className={`box-w3 float-left lay hidden-portrait ${
+                                              className={`box-w3 float-left back hidden-portrait ${
                                                 id === 0 || id === 1
                                                   ? "dis-none"
                                                   : ""
@@ -984,7 +990,7 @@ const GameDetails = () => {
                                             <div
                                               className={`box-w3 float-left lay hidden-portrait ${
                                                 id === 0 || id === 1
-                                                  ? "dis-none"
+                                                  ? "dis-none light-bg"
                                                   : ""
                                               }${
                                                 item?.l1 !==
@@ -1015,10 +1021,10 @@ const GameDetails = () => {
                                                 </span>
                                               </button>
                                             </div>
-                                            <div className="box-w3 lay float-left ">
+                                            <div className="box-w3 la light-bg float-left ">
                                               <button
                                                 type="button"
-                                                className=" lay"
+                                                className=" lay light-bg"
                                               >
                                                 <span className="odd">0</span>
                                                 <span>
@@ -1029,7 +1035,7 @@ const GameDetails = () => {
                                             <div className="box-w3 lay float-left ">
                                               <button
                                                 type="button"
-                                                className="lay"
+                                                className="lay light-bg"
                                               >
                                                 <span className="odd">0</span>{" "}
                                                 <span>
@@ -1174,16 +1180,20 @@ const GameDetails = () => {
                                                     data-v-e03c6f20=""
                                                     className="fancy-tripple "
                                                   >
+                                                    {console.log(
+                                                      item.gstatus,
+                                                      "item.gstatus"
+                                                    )}
                                                     <div
                                                       data-v-e03c6f20=""
                                                       data-title={item?.gstatus}
                                                       // className="table-row"
                                                       className={`table-row ${
-                                                        item?.gstatus ===
-                                                        "SUSPENDED"
+                                                        item?.gstatus?.toLowerCase() ===
+                                                        "suspended"
                                                           ? "suspend"
-                                                          : item.gstatus ===
-                                                            "BALL RUNNING"
+                                                          : item.gstatus?.toLowerCase() ===
+                                                            "ball running"
                                                           ? "suspend"
                                                           : ""
                                                       }`}
@@ -1311,11 +1321,11 @@ const GameDetails = () => {
                                                       </div>
                                                       <div
                                                         data-v-e03c6f20=""
-                                                        className="box-w1 float-left  lay hidden-portrait dis-none"
+                                                        className="box-w1 float-left back  light-bg  hidden-portrait dis-none"
                                                       ></div>
                                                       <div
                                                         data-v-e03c6f20=""
-                                                        className="box-w1 float-left lay  hidden-portrait dis-none"
+                                                        className="box-w1 float-left back  light-bg hidden-portrait dis-none"
                                                       ></div>
 
                                                       <div
@@ -1347,7 +1357,7 @@ const GameDetails = () => {
                                                         >
                                                           <span
                                                             data-v-e03c6f20=""
-                                                            className="odd d-block"
+                                                            className="odd d-block "
                                                           >
                                                             {item?.l1}
                                                           </span>{" "}
@@ -1398,11 +1408,11 @@ const GameDetails = () => {
                                                       </div>
                                                       <div
                                                         data-v-e03c6f20=""
-                                                        className="box-w1 float-left back   hidden-portrait dis-none"
+                                                        className="box-w1 float-left  lay  light-bg hidden-portrait dis-none"
                                                       ></div>
                                                       <div
                                                         data-v-e03c6f20=""
-                                                        className="box-w1 float-left back  hidden-portrait dis-none"
+                                                        className="box-w1 float-left lay light-bg  hidden-portrait dis-none"
                                                       ></div>
                                                     </div>
 
@@ -1574,10 +1584,21 @@ const GameDetails = () => {
           width: "95%",
         }}
       >
-        <ModalHeader closeButton closeVariant="white">
+        <ModalHeader
+          closeButton
+          closeVariant="white"
+          style={{ marginTop: "49px", padding: "7px", height: "29px" }}
+        >
           <ModalTitle>Run Amount</ModalTitle>
         </ModalHeader>
-
+        <button
+          onClick={handleCloseFancyModal}
+          className="closebtnonpnl"
+          
+        >
+          <IoCloseCircleOutline size={25} color={"black"} />
+        </button>
+        {}
         <ModalBody
           style={{
             height: "calc(100vh - 100px)",

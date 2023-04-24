@@ -169,7 +169,7 @@ const ChangePassword = () => {
             <div className="form-group m-b-10">
               <input
                 name="CurrentPassword"
-                type="text"
+                type="password"
                 placeholder="Current Password"
                 className="form-control"
                 onChange={handleInput}
@@ -188,7 +188,7 @@ const ChangePassword = () => {
             <div className="form-group m-b-10">
               <input
                 name="NewPassword"
-                type="text"
+                type="password"
                 placeholder="New Password"
                 className="form-control"
                 onChange={handleInput}
@@ -203,26 +203,12 @@ const ChangePassword = () => {
               ) : (
                 ""
               )}
-              {/* {passWordSame ? (
-                <>
-                  <span className="text-danger">
-                    {" "}
-                    The NewPassword confirmation does not match.
-                  </span>{" "}
-                </>
-              ) : (
-                ""
-              )}
-              <span class="text-danger">
-                The password must contain at least: 1 uppercase letter, 1
-                lowercase letter, 1 number and 8 to 15 characters needed !
-              </span> */}
             </div>
             <div className="form-group m-b-10">
               <input
                 name="ConfirmNewPassword"
                 data-vv-as="NewPassword"
-                type="text"
+                type="password"
                 placeholder="Confirm New Password"
                 className="form-control"
                 onChange={handleInput}

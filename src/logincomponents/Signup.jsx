@@ -77,14 +77,14 @@ const Signup = () => {
   };
 
   // password
-// : 
-// "2222222"
-// status
-// : 
-// true
-// username
-// : 
-// "anish2512"
+  // :
+  // "2222222"
+  // status
+  // :
+  // true
+  // username
+  // :
+  // "anish2512"
   const handleSignup = (e) => {
     setInfoError(true);
 
@@ -146,7 +146,7 @@ const Signup = () => {
                       <div className="form-group">
                         <input
                           name="Username"
-                          type="text"
+                          type="password"
                           placeholder="Username"
                           className="form-control"
                           onChange={handleInput}

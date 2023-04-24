@@ -8,31 +8,36 @@ import {
 } from "../../App/Features/auth/authActions";
 import "./BitPopup.css";
 
-const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
+const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
   // console.log(bitValue,"llllll")
-  const { PostGetStack, } = useSelector((state) => state.auth);
+  const { PostGetStack } = useSelector((state) => state.auth);
   const [Bitvalue, setBitValue] = useState(bitValue?.Odds);
   const [updated, setUpdated] = useState("");
   const [ConfirmBet, setConfirmBet] = useState(false);
   const [userIP, setUserIP] = useState("");
-  
+
   // const [closePopUp, setClosePopUp] = useState(false);
   // const [cssClsssss, setCssClasssss] = useState("bet-modal");
-  const { PostBetingOnGameDetail, PostBetingOnGameDetailLoading,GetGeolocationIP } = useSelector(
-    (state) => state.auth
-  );
-  console.log(bitValue?.priceValue,"bitValue?.priceValue")
+  const {
+    PostBetingOnGameDetail,
+    PostBetingOnGameDetailLoading,
+    GetGeolocationIP,
+  } = useSelector((state) => state.auth);
+  console.log(bitValue?.priceValue, "bitValue?.priceValue");
   let { id } = useParams();
-  
 
-  console.log(PostBetingOnGameDetail,PostBetingOnGameDetailLoading,"PostBetingOnGameDetailLoadingPostBetingOnGameDetailLoading")
+  console.log(
+    PostBetingOnGameDetail,
+    PostBetingOnGameDetailLoading,
+    "PostBetingOnGameDetailLoadingPostBetingOnGameDetailLoading"
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(PostGetStackApi());
   }, [dispatch]);
   const handleInput = (val) => {
     // console.log(val);
-    setUpdated(val);
+    setUpdated((o) => Number(o) + Number(val));
     if (bitValue?.Gamenamemeeee !== "Fancy ") {
       setConfirmBet(true);
     }
@@ -41,7 +46,6 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
     // console.log(val + updated);
     datatattatattat("true");
   };
-
 
   const increment = () => {
     setBitValue(Bitvalue + 0.05);
@@ -72,13 +76,13 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
       name: bitValue?.cname,
       marketName: bitValue?.vl2,
       selectionId: bitValue?.selectionId,
-      priceValue:bitValue?.isFancy=== true ?bitValue?.priceValue:  updated,
+      priceValue: bitValue?.isFancy === true ? bitValue?.priceValue : updated,
       // "marketName":bitValue?.marketNameeee,
       placeTime: bitValue?.bettingTime,
       marketId: bitValue?.marketId,
       matchId: id,
       t: "",
-      "marketName":"",
+      marketName: "",
       deviceInfo: {
         userAgent:
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
@@ -101,28 +105,37 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
     // alert(userAgent)
   };
 
-
-  useEffect(()=>{
-    if( updated !== "" &&PostBetingOnGameDetail?.status===true){
+  useEffect(() => {
+    if (updated !== "" && PostBetingOnGameDetail?.status === true) {
       closePopUp("false");
     }
-  },[PostBetingOnGameDetail])
+  }, [PostBetingOnGameDetail]);
   const handleCloseButton = () => {
     closePopUp("false");
   };
-  const {marketId,isFancy, profits,Odds:odds,isBack,selectionId } = bitValue
+  const {
+    marketId,
+    isFancy,
+    profits,
+    Odds: odds,
+    isBack,
+    selectionId,
+  } = bitValue;
   return (
     <div>
-
       <div id="__BVID__31___BV_modal_body_" className="modal-body p-0">
         <div className="place-bet">
           <div>
             <form data-vv-scope="form-placebet" className="m-b-0">
-              {
-                PostBetingOnGameDetailLoading && (<div className="mani_loading">
-                <i className="fa fa-circle-o-notch fa-spin loading-bet" style={{fontSize:"50px"}}></i> 
-                <p className="loading-text">Loading...</p> </div>)
-              }
+              {PostBetingOnGameDetailLoading && (
+                <div className="mani_loading">
+                  <i
+                    className="fa fa-circle-o-notch fa-spin loading-bet"
+                    style={{ fontSize: "50px" }}
+                  ></i>
+                  <p className="loading-text">Loading...</p>{" "}
+                </div>
+              )}
               <div className="m-l-5 m-r-5 row d-block">
                 <div className="col-12 p-t-5 p-l-5 p-r-5">
                   <h4 className="m-b-0">
@@ -149,6 +162,9 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
                       step="0.01"
                       value={Bitvalue}
                       // value={Bitvalue.toFixed(2)}
+                      // onChange={(e) =>
+                      //   setBitValue({ ...Bitvalue(e.target.value) })
+                      // }
                       className="stakeinput stakeinputbuuton"
                     />
                     <button
@@ -165,9 +181,14 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
                     name="Amount"
                     type="text"
                     maxlength="10"
+                    step={1}
                     className="stakeinput stakefullinput"
                     aria-required="true"
                     aria-invalid="true"
+                    onChange={(e) =>
+                      !isNaN(Number(e.target.value)) &&
+                      setUpdated(Number(e.target.value))
+                    }
                     value={updated === "" ? 0 : updated}
                   />
                   <span className="text-danger"></span>
@@ -199,6 +220,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
                     type="button"
                     className="btn btn-cancel"
                     onClick={handleCloseButton}
+                    style={{ borderColor: "black", color: "black" }}
                   >
                     Cancel
                   </button>
@@ -212,20 +234,17 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
                   >
                     Submit
                     <span className="d-block">
-
                       Profit:
-                      
                       {bitValue?.isBack === "back"
-                ? bitValue.isFancy
-                  ? (updated * bitValue.priceValue) / 100
-                  :(marketId?.includes("BM") ||
-                  marketId?.includes("bm") ||
-                  marketId?.includes("Bm")
-                      ? (bitValue.Odds * updated) / 100
-                      : (bitValue.Odds - 1) * updated
-                    ).toFixed(2)
-                : updated}
-                      
+                        ? bitValue.isFancy
+                          ? (updated * bitValue.priceValue) / 100
+                          : (marketId?.includes("BM") ||
+                            marketId?.includes("bm") ||
+                            marketId?.includes("Bm")
+                              ? (bitValue.Odds * updated) / 100
+                              : (bitValue.Odds - 1) * updated
+                            ).toFixed(2)
+                        : updated}
                     </span>
                   </button>
                 </div>
@@ -240,86 +259,118 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp,  }) => {
                 </div>
               </div>*/}
 
-<div className={`${
-                        isFancy === true ? "fancy-none" : ""
-                      }`}>
-              {marketId.includes("BM") ||
-              marketId.includes("bm") ||
-              marketId.includes("Bm")
-                ? profits.Bookmaker?.filter(
-                    (item) => item?.mid === marketId
-                  ).map((profit) => {
-                    const newval=profit.sid == selectionId
-                    ? (profit?.value || 0) +
-                      (((isBack === "back" ? true : false) ? 1 : -1) * odds * updated) /
-                        100
-                    : (profit?.value || 0) +
-                      ((isBack === "back" ? true : false) ? -1 : 1) * updated
-                      
-                    return (<div
-                    key={profit.value}
-                      className={`row row5 mt-2 ${
-                        isFancy === true ? "fancy-none" : ""
-                      }`}
-                      // key={e.selectionId}
-                    >
-                      <div className="col-4">
-                        <span>{profit.title}</span>
-                      </div>
-                      <div className="col-4 text-center">
-                        <b>
-                          <span style={{ color: "black" }} className={`${profit?.value>0? "text-success":"text-danger"}`}>{profit.value}</span>
-                        </b>
-                      </div>
-                      <div className={`col-4 text-right ${newval>0?"text-success":newval < 0?"text-danger":""}`}>
-                        {newval
-                            }
-                      </div>
-                    </div>)}
-                )
-                : Number(marketId) ?
-                  profits.Odds[marketId]?.map((profit) => {
-                    const newVal=profit.sid === selectionId
-                    ? profit.value +
-                      ((isBack === "back" ? true : false) ? 1 : -1) *
-                        (odds - 1) *
-                        updated
-                    : profit.value +
-                      ((isBack === "back" ? true : false) ? -1 : 1) * updated
-                    return(<div
-                      className={`row row5 mt-2 ${
-                        isFancy === true ? "fancy-none" : ""
-                      }`}
-                      key={profits.sid}>
-                      <div className="col-4">
-                        <span>{profit.title}</span>
-                      </div>
-                      <div className="col-4 text-center text-success">
-                        <b>
-                          <span style={{ color: "black" }} className={`${profit?.value>0? "text-success":"text-danger"}`}>{profit.value}</span>
-                        </b>
-                      </div>
-                      <div
-                        className={`col-4 text-right ${newVal>0?"text-success":newVal < 0?"text-danger":""}`}>
-                        {newVal
-                            }
-                      </div>
-                    </div>
-                  )
-                        }
-                        )
-                      :""}
-                  </div>
-                   
-              
+              <div className={`${isFancy === true ? "fancy-none" : ""}`}>
+                {marketId.includes("BM") ||
+                marketId.includes("bm") ||
+                marketId.includes("Bm")
+                  ? profits.Bookmaker?.filter(
+                      (item) => item?.mid === marketId
+                    ).map((profit) => {
+                      const newval =
+                        profit.sid == selectionId
+                          ? (profit?.value || 0) +
+                            (((isBack === "back" ? true : false) ? 1 : -1) *
+                              odds *
+                              updated) /
+                              100
+                          : (profit?.value || 0) +
+                            ((isBack === "back" ? true : false) ? -1 : 1) *
+                              updated;
+
+                      return (
+                        <div
+                          key={profit.value}
+                          className={`row row5 mt-2 ${
+                            isFancy === true ? "fancy-none" : ""
+                          }`}
+                          // key={e.selectionId}
+                        >
+                          <div className="col-4">
+                            <span>{profit.title}</span>
+                          </div>
+                          <div className="col-4 text-center">
+                            <b>
+                              <span
+                                style={{ color: "black" }}
+                                className={`${
+                                  profit?.value > 0
+                                    ? "text-success"
+                                    : "text-danger"
+                                }`}
+                              >
+                                {profit.value}
+                              </span>
+                            </b>
+                          </div>
+                          <div
+                            className={`col-4 text-right ${
+                              newval > 0
+                                ? "text-success"
+                                : newval < 0
+                                ? "text-danger"
+                                : ""
+                            }`}
+                          >
+                            {newval}
+                          </div>
+                        </div>
+                      );
+                    })
+                  : Number(marketId)
+                  ? profits.Odds[marketId]?.map((profit) => {
+                      const newVal =
+                        profit.sid === selectionId
+                          ? profit.value +
+                            ((isBack === "back" ? true : false) ? 1 : -1) *
+                              (odds - 1) *
+                              updated
+                          : profit.value +
+                            ((isBack === "back" ? true : false) ? -1 : 1) *
+                              updated;
+                      return (
+                        <div
+                          className={`row row5 mt-2 ${
+                            isFancy === true ? "fancy-none" : ""
+                          }`}
+                          key={profits.sid}
+                        >
+                          <div className="col-4">
+                            <span>{profit.title}</span>
+                          </div>
+                          <div className="col-4 text-center text-success">
+                            <b>
+                              <span
+                                style={{ color: "black" }}
+                                className={`${
+                                  profit?.value > 0
+                                    ? "text-success"
+                                    : "text-danger"
+                                }`}
+                              >
+                                {profit.value}
+                              </span>
+                            </b>
+                          </div>
+                          <div
+                            className={`col-4 text-right ${
+                              newVal > 0
+                                ? "text-success"
+                                : newVal < 0
+                                ? "text-danger"
+                                : ""
+                            }`}
+                          >
+                            {newVal}
+                          </div>
+                        </div>
+                      );
+                    })
+                  : ""}
+              </div>
             </form>
           </div>
         </div>
       </div>
-
-
-
-
     </div>
   );
 };
