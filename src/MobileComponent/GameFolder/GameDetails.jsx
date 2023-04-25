@@ -484,7 +484,7 @@ const GameDetails = () => {
                 <div className="flash__wrapper"></div>
               </div>
               <div className="event-title">
-                <div>
+                <div style={{ marginTop: "10px" }}>
                   <img
                     alt=""
                     src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
@@ -647,7 +647,10 @@ const GameDetails = () => {
                                                   item1?.name
                                                 )}
                                               >
-                                                <span className="team-name">
+                                                <span
+                                                  className="team-name"
+                                                  style={{ fontSize: "14px" }}
+                                                >
                                                   <b>{item1?.name}</b>
                                                 </span>
 
@@ -890,7 +893,10 @@ const GameDetails = () => {
                                               "item.gstatus"
                                             )}
                                             <div className="float-left box-w6 country-name">
-                                              <span className="team-name">
+                                              <span
+                                                className="team-name"
+                                                style={{ fontSize: "14px" }}
+                                              >
                                                 <b> {item?.nation}</b>
                                               </span>
                                               <p className="box-w4">
@@ -1217,6 +1223,9 @@ const GameDetails = () => {
                                                           <span
                                                             data-v-e03c6f20=""
                                                             className="team-name"
+                                                            style={{
+                                                              fontSize: "11px",
+                                                            }}
                                                           >
                                                             <b data-v-e03c6f20="">
                                                               {item?.nation}
@@ -1591,11 +1600,7 @@ const GameDetails = () => {
         >
           <ModalTitle>Run Amount</ModalTitle>
         </ModalHeader>
-        <button
-          onClick={handleCloseFancyModal}
-          className="closebtnonpnl"
-          
-        >
+        <button onClick={handleCloseFancyModal} className="closebtnonpnl">
           <IoCloseCircleOutline size={25} color={"black"} />
         </button>
         {}

@@ -199,7 +199,7 @@ div {
 .event-title {
     padding: 5px;
     font-weight: bold;
-    margin-top: 0px;
+    margin-top: -4px;
 }
 
 .nav-tabs {
@@ -1327,35 +1327,36 @@ button.btn.btn-login {
 }
 
 
-@media screen and (max-width: 300px) and (max-width: 375px ) {
+@media screen and (max-width: 300px) and (max-width: 375px) {
     .suspend::after {
-      
+
         width: 63.4%;
-        
+
     }
 
 }
 
-@media screen and (min-width: 376px)  and (max-width: 450px){
+@media screen and (min-width: 376px) and (max-width: 450px) {
     .suspend::after {
-      
+
         width: 62.4%;
-        
+
     }
 }
 
-@media screen and (min-width: 450px)  and (max-width: 800px){
+@media screen and (min-width: 450px) and (max-width: 800px) {
     .suspend::after {
-      
+
         width: 61.4%;
-        
+
     }
 }
-@media screen and (min-width: 801px)  and (max-width: 1024px){
+
+@media screen and (min-width: 801px) and (max-width: 1024px) {
     .suspend::after {
-      
+
         width: 61.1%;
-        
+
     }
 }
 
@@ -1655,7 +1656,7 @@ strong {
 .tv-icon {
     position: absolute;
     right: 10px;
-    top: 86px;
+    top: 91px;
     cursor: pointer;
 }
 
@@ -1738,6 +1739,7 @@ strong {
 .light-bg {
     background-color: #fdeef2;
 }
+
 button.closebtnonpnl {
     position: absolute;
     top: 48px;
