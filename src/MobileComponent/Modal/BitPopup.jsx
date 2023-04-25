@@ -47,12 +47,12 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
     datatattatattat("true");
   };
 
-  const increment = () => {
-    setBitValue(Bitvalue + 0.05);
-  };
-  const decrement = () => {
-    setBitValue(Bitvalue - 0.05);
-  };
+  // const increment = () => {
+  //   setBitValue(Bitvalue + 0.05);
+  // };
+  // const decrement = () => {
+  //   setBitValue(Bitvalue - 0.05);
+  // };
   // const { PostGetStack } = useSelector((state) => state.auth);
   // console.log(token);
 
@@ -153,7 +153,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                     <button
                       type="button"
                       className="stakeactionminus btn"
-                      onClick={decrement}
+                      // onClick={decrement}
                     >
                       <span className="fa fa-minus"></span>
                     </button>{" "}
@@ -170,7 +170,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                     <button
                       type="button"
                       className="stakeactionminus btn incrementBtn"
-                      onClick={increment}
+                      // onClick={increment}
                     >
                       <span className="fa fa-plus"></span>
                     </button>

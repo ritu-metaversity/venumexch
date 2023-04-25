@@ -37,7 +37,7 @@ const Transferstatement = () => {
     d.setDate(d.getDate() - 14);
     let data = {
       noOfRecords: 100,
-      index: pageNumber,
+      index: 0,
       fromDate: moment(d).format("YYYY-MM-DD"),
       toDate: moment(new Date()).format("YYYY-MM-DD"),
       type: 1,
@@ -45,7 +45,7 @@ const Transferstatement = () => {
     // console.log("apiiiiiii");
     dispatch(PostTransferStatement(data));
     // console.log();
-  }, [pageNumber]);
+  }, []);
 
   const handleDetailsStatement = (item1, item2) => {
     setMatchId({ matchid: item1, remark: item2 });
@@ -78,7 +78,7 @@ const Transferstatement = () => {
                     <th>Date</th>
                     <th>Credit</th>
                     <th>Debit</th>
-                    <th className="text-right">Balance</th>
+                    <th className="Balance">Balance</th>
                     <th>Remark</th>
                   </tr>
                 </thead>
@@ -100,7 +100,7 @@ const Transferstatement = () => {
                           </b>
                         </td>
                       </tr> */}
-                      <tr>
+                      <tr className="accountStatment">
                         <td> {moment(el?.date).format("h:mm")}</td>
                         <td style={{ color: "green" }}> {el?.credit}</td>
                         <td style={{ color: "red" }}>{el?.debit}</td>

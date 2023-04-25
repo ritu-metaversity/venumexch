@@ -1185,6 +1185,7 @@ const GameDetails = () => {
                                                   <div
                                                     data-v-e03c6f20=""
                                                     className="fancy-tripple "
+                                                    style={{ height: "37px" }}
                                                   >
                                                     {console.log(
                                                       item.gstatus,
