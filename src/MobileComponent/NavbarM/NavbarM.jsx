@@ -169,7 +169,8 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                 <i className="fas fa-user d-block"></i>{" "}
                 <span className="balance">
                   {PostTotalBalance?.data?.data?.balance
-                    ? PostTotalBalance?.data?.data?.balance
+                    ? PostTotalBalance?.data?.data?.balance -
+                      PostTotalBalance?.data?.data?.libality
                     : "0.00"}
                 </span>
               </button>

@@ -6,6 +6,8 @@ import {
   postBetMarketAndUser,
   PostTransferStatement,
 } from "../../App/Features/auth/authActions";
+import dayjs from "dayjs";
+
 import "./Transferstatement.css";
 import Modal from "react-bootstrap/Modal";
 import TransferstatementModal from "./TransferstatementModal";
@@ -13,6 +15,9 @@ import { AiOutlineDoubleLeft } from "@react-icons/all-files/ai/AiOutlineDoubleLe
 import { AiOutlineLeft } from "@react-icons/all-files/ai/AiOutlineLeft";
 import { AiOutlineRight } from "@react-icons/all-files/ai/AiOutlineRight";
 import { AiOutlineDoubleRight } from "@react-icons/all-files/ai/AiOutlineDoubleRight";
+import { DatePicker } from "antd";
+
+const dateFormat = "YYYY-MM-DD";
 
 const Transferstatement = () => {
   const { PostTransferStatementData } = useSelector((state) => state.auth);
@@ -20,7 +25,13 @@ const Transferstatement = () => {
   const dispatch = useDispatch();
   const [trueee, setTrueee] = useState(false);
   const [matchId, setMatchId] = useState("");
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
+  var curr = new Date();
+  const timeBefore = moment(curr).subtract(14, "days").format("YYYY-MM-DD");
+  const time = moment(curr).format("YYYY-MM-DD");
+  const [startDate, setStartDate] = useState(timeBefore);
+  const [endDate, setEndDate] = useState(time);
+  const [gameNameForType, setGameNameForType] = useState(1);
 
   useEffect(() => {
     if (PostTransferStatementData?.data === "") {
@@ -32,20 +43,27 @@ const Transferstatement = () => {
 
   // console.log(PostTransferStatementData?.data?.totalPages, "hello");
 
+  const StartDateValue = (date, dateString) => {
+    setStartDate(dateString);
+  };
+  const EndDateValue = (date, dateString) => {
+    setEndDate(dateString);
+  };
+
   useEffect(() => {
-    let d = new Date();
-    d.setDate(d.getDate() - 14);
+    // let d = new Date();
+    // d.setDate(d.getDate() - 14);
     let data = {
       noOfRecords: 100,
-      index: 0,
-      fromDate: moment(d).format("YYYY-MM-DD"),
-      toDate: moment(new Date()).format("YYYY-MM-DD"),
-      type: 1,
+      index: pageNumber,
+      fromDate: startDate,
+      toDate: endDate,
+      type: gameNameForType,
     };
     // console.log("apiiiiiii");
     dispatch(PostTransferStatement(data));
     // console.log();
-  }, []);
+  }, [endDate, pageNumber, startDate, gameNameForType]);
 
   const handleDetailsStatement = (item1, item2) => {
     setMatchId({ matchid: item1, remark: item2 });
@@ -54,7 +72,7 @@ const Transferstatement = () => {
 
   const handleDoubleLeft = (vl) => {
     if (vl === "doubleleft") {
-      setPageNumber(1);
+      setPageNumber(0);
     } else if (vl === "sigleleft") {
       setPageNumber(pageNumber - 1);
     } else if (vl === "singleright") {
@@ -65,12 +83,57 @@ const Transferstatement = () => {
   };
   console.log(pageNumber, "hello");
 
+  //filter
+
+  console.log(startDate, "endDate");
+  console.log(endDate, "endDate");
+  const handleSelectGame = (e) => {
+    let inputValue = e.target.value;
+    console.log(inputValue, "dasjdhadhas");
+    setGameNameForType(inputValue);
+  };
+
   return (
     <>
       <div className="home-page home-page-news">
         <div className="container-inner">
           <section className="m-t-10 transfer">
             <h2 className="page-title p-l-15">Account Statement</h2>
+
+            <div style={{ marginTop: "19px" }}>
+              <DatePicker
+                className="startDate"
+                defaultValue={dayjs(startDate)}
+                format={dateFormat}
+                onChange={StartDateValue}
+                disabledDate={(d) =>
+                  !d ||
+                  d.isBefore(dayjs().subtract(2, "month")) ||
+                  d.isAfter(dayjs())
+                }
+              />
+              <DatePicker
+                className="endDate"
+                defaultValue={dayjs}
+                format={dateFormat}
+                onChange={EndDateValue}
+                disabledDate={(d) =>
+                  !d ||
+                  d.isBefore(dayjs().subtract(2, "month")) ||
+                  d.isAfter(dayjs())
+                }
+              />
+              <select
+                className="selectionndsfsdfnn"
+                // name="cars"
+                // id="cars"
+                onChange={handleSelectGame}
+              >
+                <option value={1}> All</option>
+                <option value={2}> Deposite/Withdraw Report</option>
+                <option value={3}> Game Report</option>
+              </select>
+            </div>
             <div className="table-responsive">
               <table className="table" style={{ width: "98%" }}>
                 <thead>
@@ -90,18 +153,11 @@ const Transferstatement = () => {
                         handleDetailsStatement(el?.marketid, el?.remark)
                       }
                     >
-                      {/* <tr>
-                        <td colspan="3" class="">
-                          <b>
-                           
-                            <span>
-                              {moment(el?.date).format(" Do MMMM YYYY")}
-                            </span>
-                          </b>
-                        </td>
-                      </tr> */}
                       <tr className="accountStatment">
-                        <td> {moment(el?.date).format("h:mm")}</td>
+                        <td>
+                          {" "}
+                          {moment(el?.date).format("YYYY-MM-DD  - h:mm")}
+                        </td>
                         <td style={{ color: "green" }}> {el?.credit}</td>
                         <td style={{ color: "red" }}>{el?.debit}</td>
                         <td>{el?.pts}</td>
@@ -123,14 +179,14 @@ const Transferstatement = () => {
           </section>
           <div className="pagination">
             <button
-              disabled={pageNumber === 1 ? true : false}
+              disabled={pageNumber === 0 ? true : false}
               className="paginationBtn"
               onClick={() => handleDoubleLeft("doubleleft")}
             >
               <AiOutlineDoubleLeft className="arrowDoubleLeft" />
             </button>
             <button
-              disabled={pageNumber === 1 ? true : false}
+              disabled={pageNumber === 0 ? true : false}
               className="paginationBtn"
               style={{ marginLeft: "-9px" }}
               onClick={() => handleDoubleLeft("sigleleft")}
@@ -139,13 +195,13 @@ const Transferstatement = () => {
             </button>
             <div className="paginationno">
               <div style={{ marginTop: "7px", marginLeft: "11px" }}>
-                {pageNumber}
+                {pageNumber + 1}
               </div>
             </div>
 
             <button
               disabled={
-                PostTransferStatementData?.data?.totalPages === pageNumber
+                PostTransferStatementData?.data?.totalPages === pageNumber + 1
                   ? true
                   : false
               }
@@ -157,7 +213,7 @@ const Transferstatement = () => {
             </button>
             <button
               disabled={
-                PostTransferStatementData?.data?.totalPages === pageNumber
+                PostTransferStatementData?.data?.totalPages === pageNumber + 1
                   ? true
                   : false
               }

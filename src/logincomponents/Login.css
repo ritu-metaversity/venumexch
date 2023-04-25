@@ -31,8 +31,8 @@ html {
     position: relative;
     display: flex;
     flex-direction: column;
-    left:0;
- margin-top: 77%;
+    left: 0;
+    margin-top: 77%;
     height: 161px !important;
     /* margin-left: 92%; */
     pointer-events: auto;
@@ -97,8 +97,9 @@ html {
     font-size: 9px;
     font-weight: bold;
 }
-@media only screen and (min-width:800px) and (max-width: 2000px){
-    .login-modal>.login-confirm-modal{
+
+@media only screen and (min-width:800px) and (max-width: 2000px) {
+    .login-modal>.login-confirm-modal {
         position: absolute;
         color: #000;
         background: #fff;
@@ -107,34 +108,41 @@ html {
         left: 40%;
     }
 }
+
 footer a {
     color: #fff !important;
 }
+
 .recaptchaTerms a {
     color: #4cb4f9 !important;
 }
+
 .login-form .login-panel {
     width: unset;
     margin: 0 auto;
     text-align: center;
     /* margin-inline: 3px; */
 }
+
 .login {
     background: url(https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/login-bg.jpg) center center !important;
     background-size: unset !important;
     overflow-y: auto;
     height: calc(100vh - 98px) !important;
-   
+
 }
+
 .form-group {
     margin-left: 7px;
     margin-right: 15px;
 }
+
 .login-form .login-panel .panel-body .btn-login {
     margin-top: 15px;
     width: 95%;
     margin-right: 9px;
 }
+
 @media screen and (max-width: 500px) {
     .footer {
         text-align: center;
@@ -143,6 +151,7 @@ footer a {
         background: #2c4f58 !important;
         margin-top: 0;
     }
+
     .m-b-0.text-center.d-inline-block {
         background: #222;
         width: 116%;
@@ -150,39 +159,47 @@ footer a {
         padding: 4px;
         margin-top: -18pxpx;
     }
+
     footer.footer {
         /* height: 108px; */
         overflow: hidden;
     }
+
     .login-form .login-panel {
         width: 99%;
         margin: 0 auto;
         text-align: center;
         /* margin-inline: 3%; */
     }
+
     .login-form .login-panel .panel-heading .logo img {
         height: 61px;
     }
-    
+
 }
+
 .user-id {
     display: flex;
     justify-content: space-between;
 }
-.user{
+
+.user {
     margin-bottom: 15px;
 }
-.user-id p{
+
+.user-id p {
     font-size: 14px;
 }
-.register-head{
+
+.register-head {
     display: block !important;
     text-align: center;
     background: #16272c;
     width: 100%;
     color: #fff;
 }
-.rotate-btn{
+
+.rotate-btn {
     rotate: 180deg;
     margin-right: 5px;
 }
@@ -196,6 +213,7 @@ footer a {
         background: #2c4f58 !important;
         margin-top: 0;
     }
+
     .m-b-0.text-center.d-inline-block {
         background: #000 !important;
         width: 116%;
@@ -203,10 +221,12 @@ footer a {
         padding: 4px;
         margin-top: 12px;
     }
+
     footer.footer {
         height: 120px;
         overflow: hidden;
     }
+
     .login-form .login-panel {
         width: 100%;
         margin: 0 auto;
@@ -214,21 +234,26 @@ footer a {
         /* margin-inline: 3px; */
     }
 }
-.regTital{
+
+.regTital {
     float: left;
 }
+
 .register-head button {
     float: right;
 }
+
 button.confirmation.btn.btn-primary {
     padding: 0px 13px !important;
     height: 26px;
     font-size: 12px;
-    width: 63%;
+    width: 63% !important;
 }
-.confirm{
+
+.confirm {
     margin: auto;
 }
+
 .modal-header {
     display: block;
     margin: auto;

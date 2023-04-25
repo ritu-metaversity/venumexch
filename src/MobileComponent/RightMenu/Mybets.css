@@ -424,3 +424,7 @@ section {
     margin-right: 9%;
     font-size: 19px;
 }
+.lodding {
+    background-color: #00000063;
+    height: 63vh;
+}

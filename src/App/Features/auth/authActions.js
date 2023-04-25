@@ -24,10 +24,10 @@ export const getAllPostsComments = createAsyncThunk('auth/getAllPostsComments', 
 export const postLogin = createAsyncThunk('auth/postLogin', async (login, { rejectWithValue }) => {
     try {
         const postsLoginRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/client-login`, login,
-     {
-            validateStatus: false
-        });
-        
+            {
+                validateStatus: false
+            });
+
         return postsLoginRespose
     } catch (err) {
         if (err) {
@@ -52,8 +52,28 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postOldPassRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/user/first-login-cp`, OldPassWordData);
+        if (
+            postOldPassRespose.data.message
+        ) {
+            toast.success(postOldPassRespose.data.message || "SUSUSUSUS!!", {
+                style: {
+                    background: "rgb(74,117,67)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
+        }
         return postOldPassRespose
     } catch (err) {
+        if (
+            err.response.data.message
+        ) toast.error(err.response.data.message || "Something went Wrong!!", {
+            style: {
+                background: "rgb(156,74,70)", minHeight: 40,
+                padding: 0,
+                color: "white",
+            }
+        });
         if (err) {
             throw err
         }
@@ -66,8 +86,29 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postPasswordChangeRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/change-password`, passwordChanege);
+        if (
+            postPasswordChangeRespose.data.message
+        ) {
+            toast.success(postPasswordChangeRespose.data.message || "SUSUSUSUS!!", {
+                style: {
+                    background: "rgb(74,117,67)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
+        }
         return postPasswordChangeRespose
+
     } catch (err) {
+        if (
+            err.response.data.message
+        ) toast.error(err.response.data.message || "Something went Wrong!!", {
+            style: {
+                background: "rgb(156,74,70)", minHeight: 40,
+                padding: 0,
+                color: "white",
+            }
+        });
         if (err) {
             throw err
         }
@@ -394,15 +435,16 @@ export const Postselfwithdrawapp = createAsyncThunk('auth/Postselfwithdrawapp', 
         }
         return PostselfwithdrawappDataaa
     } catch (err) {
-        if(err.response.data.message){
+        if (err.response.data.message) {
 
-        toast.error(err.response.data.message || "Something went Wrong!!", {
-            style: {
-                background: "rgb(156,74,70)", minHeight: 40,
-                padding: 0,
-                color: "white",
-            }
-        });}
+            toast.error(err.response.data.message || "Something went Wrong!!", {
+                style: {
+                    background: "rgb(156,74,70)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
+        }
         if (err) {
             throw err
         }
@@ -428,11 +470,11 @@ export const Postwithdrawrequestclient = createAsyncThunk('auth/Postwithdrawrequ
 export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken', async (data, { rejectWithValue }) => {
     try {
         const PostvalidatejwttokenDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/util/validate-jwt-token`, data
-       
+
             , {
                 validateStatus: false
             });
-            
+
         return PostvalidatejwttokenDataaa
     } catch (err) {
         if (err) {
@@ -461,7 +503,7 @@ export const Postuserselfregister = createAsyncThunk('auth/Postuserselfregister'
         }
         return PostuserselfregisterDataaa
     } catch (err) {
-        if(err.response.data.message){
+        if (err.response.data.message) {
 
             toast.error(err.response.data.message || "Something went Wrong!!", {
                 style: {
@@ -469,7 +511,8 @@ export const Postuserselfregister = createAsyncThunk('auth/Postuserselfregister'
                     padding: 0,
                     color: "white",
                 }
-            });}
+            });
+        }
         if (err) {
             throw err
         }

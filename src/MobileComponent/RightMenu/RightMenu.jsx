@@ -102,7 +102,10 @@ const RightMenu = (props) => {
                 <div>Available Credit:</div>
                 <span>
                   <strong>
-                    {avaliablebalance ? avaliablebalance : "0:00"}
+                    {PostTotalBalance?.data?.data?.balance
+                      ? PostTotalBalance?.data?.data?.balance -
+                        PostTotalBalance?.data?.data?.libality
+                      : "0:00"}
                   </strong>
                 </span>
               </div>

@@ -1561,11 +1561,8 @@ const GameDetails = () => {
                                         <b>{item?.marketName}</b>
                                       </div>
                                       <div>
-                                        <b>
-                                          Placed: ----------------------------
-                                          Remark{" "}
-                                        </b>{" "}
-                                        <span>14/03/2023 13:26</span>
+                                        <b>Placed:</b>{" "}
+                                        <span>{item?.betTime}</span>
                                       </div>
                                     </div>
                                   </li>
