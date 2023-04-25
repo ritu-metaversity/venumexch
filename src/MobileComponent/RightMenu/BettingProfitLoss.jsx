@@ -15,6 +15,11 @@ import { useParams } from "react-router";
 import { DatePicker } from "antd";
 
 import dayjs from "dayjs";
+import { AiOutlineDoubleLeft } from "@react-icons/all-files/ai/AiOutlineDoubleLeft";
+import { AiOutlineLeft } from "@react-icons/all-files/ai/AiOutlineLeft";
+import { AiOutlineRight } from "@react-icons/all-files/ai/AiOutlineRight";
+import { AiOutlineDoubleRight } from "@react-icons/all-files/ai/AiOutlineDoubleRight";
+import { Link } from "react-router-dom";
 
 const dateFormat = "YYYY-MM-DD";
 
@@ -35,18 +40,24 @@ const BettingProfitLoss = () => {
   const token = localStorage.getItem("TokenId");
   const dispatch = useDispatch();
   const [sportidddd, setSportsiddd] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const [pageSports, setPageSports] = useState("");
+  const [pageSportsName, setPageSportsName] = useState(false);
+  const [casionMatch, setCasionMatch] = useState("");
+  const [sportsMatchId, setSportsMatchId] = useState("");
+
   const { PostprofitlossmatchwiseDatatata, PostcasinoData } = useSelector(
     (state) => state.auth
   );
   const handleActive = (val1, val2) => {
     setActive(val1);
-    //  console.log(val2);
+    setPageSports(val2);
   };
 
   useEffect(() => {
     if (Active === 1) {
       dispatch(getActiveSportList());
-      // console.log("eewheinfewfnwnffjnjdjifnjwdfnjj");
     }
   }, [Active, dispatch]);
 
@@ -56,12 +67,10 @@ const BettingProfitLoss = () => {
   const handleEndDate = (vl) => {
     setEndDate(new Date(vl));
   };
-  // console.log(startDate,"startDatestartDate")
-  // console.log(endDate,"endDateendDate")
 
   const handleSelectGame = (e) => {
     let inputValue = e.target.value;
-    //  console.log(inputValue);
+    setPageSportsName(true);
     setSportsiddd(inputValue);
     const activeMatchSportWise = { sportId: inputValue };
     axios
@@ -70,20 +79,19 @@ const BettingProfitLoss = () => {
         activeMatchSportWise
       )
       .then((res) => {
-          // console.log(res, "adsdassdsadasd");
         setGamesData(res?.data?.data);
       });
     let d = new Date();
     d.setDate(d.getDate() - 14);
-  
+
     let ProfitLossPayload = {
       sportId: inputValue,
       matchId: "",
-      fromDate:startDate,
+      fromDate: startDate,
       toDate: endDate,
       userId: "",
-      index: "",
-      noOfRecords: "",
+      index: pageNumber,
+      noOfRecords: 100,
       totalPages: "",
     };
     dispatch(Postprofitlossmatchwise(ProfitLossPayload));
@@ -91,59 +99,58 @@ const BettingProfitLoss = () => {
 
   const handleGameName = (e) => {
     let inputValue = e.target.value;
-    // console.log(inputValue);
     let d = new Date();
+    setSportsMatchId(inputValue);
     d.setDate(d.getDate() - 14);
     let ProfitLossPayload = {
       sportId: sportidddd,
       matchId: inputValue,
-      fromDate:startDate,
+      fromDate: startDate,
       toDate: endDate,
       userId: "",
-      index: "",
-      noOfRecords: "",
+      index: pageNumber,
+      noOfRecords: 100,
       totalPages: "",
     };
     dispatch(Postprofitlossmatchwise(ProfitLossPayload));
   };
 
   useEffect(() => {
-
-    if(startDate!==""&&endDate!==""){
-    if (Active === 1) {
-      let d = new Date();
-      d.setDate(d.getDate() - 14);
-      let ProfitLossPayload = {
-        sportId: "4",
-        matchId: "",
-        fromDate:startDate,
-        toDate: endDate,
-        userId: "",
-        index: "",
-        noOfRecords: "",
-        totalPages: "",
-      };
-      dispatch(Postprofitlossmatchwise(ProfitLossPayload));
-    } else {
-      let d = new Date();
-      d.setDate(d.getDate() - 14);
-      let ProfitLossPayload = {
-        sportId: "323334",
-        matchId: "",
-        fromDate:startDate,
-        toDate: endDate,
-        userId: "",
-        index: "",
-        noOfRecords: "",
-        totalPages: "",
-      };
-      dispatch(Postprofitlossmatchwise(ProfitLossPayload));
-    }}
-  }, [startDate, endDate, Active]);
+    if (startDate !== "" && endDate !== "") {
+      if (Active === 1) {
+        let d = new Date();
+        d.setDate(d.getDate() - 14);
+        let ProfitLossPayload = {
+          sportId: "4",
+          matchId: "",
+          fromDate: startDate,
+          toDate: endDate,
+          userId: "",
+          index: pageNumber,
+          noOfRecords: 100,
+          totalPages: "",
+        };
+        dispatch(Postprofitlossmatchwise(ProfitLossPayload));
+      } else {
+        let d = new Date();
+        d.setDate(d.getDate() - 14);
+        let ProfitLossPayload = {
+          sportId: "323334",
+          matchId: "",
+          fromDate: startDate,
+          toDate: endDate,
+          userId: "",
+          index: pageNumber,
+          noOfRecords: 100,
+          totalPages: "",
+        };
+        dispatch(Postprofitlossmatchwise(ProfitLossPayload));
+      }
+    }
+  }, [startDate, endDate, Active, pageNumber]);
 
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
-    // console.log(dateString);
   };
   const EndDateValue = (date, dateString) => {
     setEndDate(dateString);
@@ -152,11 +159,10 @@ const BettingProfitLoss = () => {
   useEffect(() => {
     // if (Active === 2) {
     dispatch(Postcasino());
-  }, [])
-
+  }, []);
 
   useEffect(() => {
- const id = {
+    const id = {
       id: "323334",
     };
     setCasinoId("323334");
@@ -169,24 +175,22 @@ const BettingProfitLoss = () => {
       .then((res) => {
         setCasinoList(res.data.data);
       });
-  }, [Active])
+  }, [Active]);
 
   useEffect(() => {
-   const activeMatchSportWise = { sportId: "4" };
+    const activeMatchSportWise = { sportId: "4" };
     axios
       .post(
         "http://api.a2zscore.com/admin-new-apis/enduser/active-match-sport-wise-open",
         activeMatchSportWise
       )
       .then((res) => {
-          // console.log(res, "adsdassdsadasd");
         setGamesData(res?.data?.data);
       });
-  }, [Active])
+  }, [Active]);
 
   const handleCasino = (e) => {
     let inputValue = e.target.value;
-    // console.log(inputValue, "inputValue");
     setCasinoId(inputValue);
     const id = {
       id: inputValue,
@@ -205,8 +209,8 @@ const BettingProfitLoss = () => {
       fromDate: startDate,
       toDate: endDate,
       userId: "",
-      index: "",
-      noOfRecords: "",
+      index: pageNumber,
+      noOfRecords: 100,
       totalPages: "",
     };
     dispatch(Postprofitlossmatchwise(ProfitLossPayload));
@@ -214,63 +218,115 @@ const BettingProfitLoss = () => {
 
   const handleCasinoMatch = (e) => {
     let inputValue = e.target.value;
+    setCasionMatch(inputValue);
     // console.log(inputValue, "inputValue");
     let ProfitLossPayload = {
       sportId: casinoId,
       matchId: inputValue,
       fromDate: startDate,
-      toDate:endDate ,
+      toDate: endDate,
       userId: "",
-      index: "",
-      noOfRecords: "",
+      index: pageNumber,
+      noOfRecords: 100,
       totalPages: "",
     };
     dispatch(Postprofitlossmatchwise(ProfitLossPayload));
-    // const id = {
-    //    id: inputValue
-    //  }
-    //  axios.post("http://api.a2zscore.com/admin-new-apis/casino/casino-tables-by-types", id).then((res)=>{
-    //    setCasinoList(res.data.data)
-    //  })
   };
-  // console.log(casinoList, "casinoListcasinoList");
+
+  //pagination
+  const handleDoubleLeft = (vl) => {
+    if (vl === "doubleleft") {
+      setPageNumber(1);
+    } else if (vl === "sigleleft") {
+      setPageNumber(pageNumber - 1);
+    } else if (vl === "singleright") {
+      setPageNumber(1 + pageNumber);
+    } else {
+      setPageNumber(PostprofitlossmatchwiseDatatata?.data?.totalRecord);
+    }
+  };
+
+  // console.log(casionMatch, "casionMatch");
+  // console.log(
+  //   PostprofitlossmatchwiseDatatata,
+  //   "PostprofitlossmatchwiseDatatata"
+  // );
+  // console.log(sportidddd, "sportidddd");
+  // console.log(pageNumber, "pageNumber");
+  // console.log(endDate, "endDate");
+  // console.log(startDate, "startDate");
+  console.log(casinoId, "casinoId");
+  // console.log(casinoList, "casinoList");
+  // console.log(gamesData, "gamesData");
+  // console.log(Active, "Active");
+
+  useEffect(() => {
+    // console.log(pageSports, "pageSportspageSports");
+    if (pageSports === "Sports") {
+      let ProfitLossPayload = {
+        sportId: sportidddd ? sportidddd : 4,
+        matchId: sportsMatchId,
+        fromDate: startDate,
+        toDate: endDate,
+        userId: "",
+        index: pageNumber,
+        noOfRecords: 100,
+        totalPages: "",
+      };
+      console.log(ProfitLossPayload, "pageSportspageSports");
+
+      dispatch(Postprofitlossmatchwise(ProfitLossPayload));
+    } else {
+      if (pageSports === "casino") {
+        let ProfitLossPayload = {
+          sportId: casinoId,
+          matchId: casionMatch,
+          fromDate: startDate,
+          toDate: endDate,
+          userId: "",
+          index: pageNumber,
+          noOfRecords: 100,
+          totalPages: "",
+        };
+        console.log(ProfitLossPayload, "pageSportspageSports");
+
+        dispatch(Postprofitlossmatchwise(ProfitLossPayload));
+      }
+    }
+  }, [pageSports]);
 
   return (
     <>
       <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
         <div className="home-page home-page-news">
           <div className="container-inner">
-            {/* <section   className="m-t-10 betting-pnl">
-             <h2   className="page-title p-l-15">Betting Profit &amp; Loss</h2>
-
-             
-          </section> */}
-            {/* <button className='btnnnn'>Sports id</button>
-<button className='btnnnn'>Casino</button> */}
-
             <div>
-              <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+              <ToggleButtonGroup
+                type="radio"
+                name="options"
+                className="row"
+                defaultValue={1}
+              >
                 <ToggleButton
                   id="tbg-radio-2"
                   className={`${Active === 1 ? "active1" : ""}`}
                   value={1}
-                  style={{marginRight: "18px"}}
+                  style={{ marginRight: "18px" }}
                   onClick={() => handleActive(1, "Sports")}
                 >
-                  Sports id
+                  Sport
                 </ToggleButton>
                 <ToggleButton
                   id="tbg-radio-3"
                   className={`${Active === 2 ? "active1" : ""}`}
                   value={2}
-                  style={{width: "15%"}}
+                  style={{ width: "15%" }}
                   onClick={() => handleActive(2, "casino")}
                 >
                   casino
                 </ToggleButton>
               </ToggleButtonGroup>
             </div>
-          
 
             {Active === 1 ? (
               <div className="sport-data-list">
@@ -298,7 +354,6 @@ const BettingProfitLoss = () => {
 
                 <select
                   className="selectionnnn"
-                  style={{marginLeft:"21px"}}
                   name="cars"
                   id="cars"
                   onChange={handleGameName}
@@ -336,10 +391,10 @@ const BettingProfitLoss = () => {
                   className="selectionnnn"
                   name="cars"
                   id="cars"
-                  style={{marginLeft:"14px"}}
+                  style={{ marginLeft: "14px" }}
                   onChange={handleCasinoMatch}
                 >
-                  <option value="">Select  Match</option>
+                  <option value="">Select Match</option>
 
                   {casinoList?.length &&
                     casinoList.map((item) => {
@@ -351,7 +406,7 @@ const BettingProfitLoss = () => {
               </div>
             )}
             <DatePicker
-              style={{ width: "45%", height: "41px", marginLeft: "12px"}}
+              className="startDate"
               defaultValue={dayjs(startDate)}
               format={dateFormat}
               onChange={StartDateValue}
@@ -362,7 +417,7 @@ const BettingProfitLoss = () => {
               }
             />
             <DatePicker
-              style={{ width: "45%", height: "41px" ,marginLeft: "12px" }}
+              className="endDate"
               defaultValue={dayjs}
               format={dateFormat}
               onChange={EndDateValue}
@@ -381,15 +436,20 @@ const BettingProfitLoss = () => {
 
               {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
 
-              {PostprofitlossmatchwiseDatatata?.data&&PostprofitlossmatchwiseDatatata?.data?.market &&
+              {PostprofitlossmatchwiseDatatata?.data &&
+              PostprofitlossmatchwiseDatatata?.data?.market &&
               PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
                 PostprofitlossmatchwiseDatatata?.data?.market.map((el) => (
                   <div class="dsfsfdfsd">
                     <div class="info">
                       <p class="m-b-0  game-name">
-                        <a href="" class="betting-back">
+                        {console.log(el, "el?.matchId}")}
+                        <Link
+                          to={`/m/gamedetail/${el?.matchId}`}
+                          class="betting-back"
+                        >
                           <b>{el?.matchName}</b>
-                        </a>
+                        </Link>
                       </p>
                       <p class="m-b-0">
                         <span>
@@ -405,18 +465,15 @@ const BettingProfitLoss = () => {
                       </p>
                     </div>
                     <div class="pnl-numbers">
-                      {
-                        el?.pnl<0 ?
-<p class="m-b-0 negative">
-                        <b>{el?.pnl}</b>
-                      </p>
-                        :
-<p style={{color:"green"}}>
-                        <b>{el?.pnl}</b>
-                      </p>
-
-                      }
-                      
+                      {el?.pnl < 0 ? (
+                        <p class="m-b-0 negative">
+                          <b>{el?.pnl}</b>
+                        </p>
+                      ) : (
+                        <p style={{ color: "green" }}>
+                          <b>{el?.pnl}</b>
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))
@@ -426,6 +483,64 @@ const BettingProfitLoss = () => {
             </section>
           </div>
         </div>
+      </div>
+      <div className="pagination">
+        <button
+          disabled={pageNumber === 1 ? true : false}
+          className="paginationBtn"
+          onClick={() => handleDoubleLeft("doubleleft")}
+        >
+          <AiOutlineDoubleLeft className="arrowDoubleLeft" />
+        </button>
+        <button
+          disabled={pageNumber === 1 ? true : false}
+          className="paginationBtn"
+          style={{ marginLeft: "-9px" }}
+          onClick={() => handleDoubleLeft("sigleleft")}
+        >
+          <AiOutlineLeft className="arrowSingleLeft" />
+        </button>
+        <div className="paginationno">
+          <div style={{ marginTop: "7px", marginLeft: "11px" }}>
+            {pageNumber}
+          </div>
+        </div>
+
+        <button
+          disabled={
+            PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
+            null
+              ? true
+              : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
+                pageNumber
+              ? true
+              : false
+          }
+          className="paginationBtn"
+          style={{ marginLeft: "-10px" }}
+          onClick={() => handleDoubleLeft("singleright")}
+        >
+          <AiOutlineRight className="arrowSingleRight" />
+        </button>
+        <button
+          disabled={
+            PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
+            null
+              ? true
+              : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
+                pageNumber
+              ? true
+              : false
+          }
+          className="paginationBtn"
+          onClick={() => handleDoubleLeft("doubleright")}
+        >
+          <AiOutlineDoubleRight className="arrowDoubleRight" />
+        </button>
+        {console.log(
+          PostprofitlossmatchwiseDatatata?.data?.totalRecord,
+          "PostprofitlossmatchwiseDatatata?.data?.totalRecord"
+        )}
       </div>
     </>
   );

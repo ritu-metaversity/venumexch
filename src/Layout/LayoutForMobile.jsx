@@ -183,7 +183,7 @@ const LayoutForMobile = () => {
           style={{
             display: visible ? "block" : "none",
             zIndex: "2",
-            marginBottom: "13px",
+            marginBottom: "29px",
           }}
         >
           <AiOutlineArrowUp size={25} />

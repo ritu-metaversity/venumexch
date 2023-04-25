@@ -263,11 +263,81 @@ label.active1.btn.btn-primary {
 }
 .sport-data-list {
     display: flex;
-    justify-content: space-between;
-    width: 93%;
-    margin-left: 3%;
+    justify-content: space-evenly;
+    margin-inline: 3%;
 }
 .casino-section{
     display: flex;
     justify-content: space-around;
+}
+/* .pagination {
+    font-size: 31px;
+    margin-left: 18%;
+    margin-top: 132px;
+    position: fixed;
+
+} */
+
+.arrowDoubleLeft {
+    margin-right: 5%;
+}
+
+.arrowSingleLeft {
+    margin-right: 10%;
+}
+
+.arrowSingleRight {
+    margin-right: 10%;
+}
+
+.arrowDoubleRight {
+    margin-right: 5%;
+}
+
+.paginationno {
+    margin-right: 9%;
+    font-size: 19px;
+}
+.btn.btn-primary {
+    background: #2c4f58 !important;
+    font-size: 18px;
+    width: 20% !important;
+    margin-right: unset !important;
+    height: 45px;
+    border-color: unset !important;
+    margin-left: unset !important;
+} 
+.startDate{
+    width: 46% !important;
+    height: 41px;
+    margin-left: 24px
+}
+.endDate{
+    width: 47% !important;
+    height: 41px;
+    margin-left: 6px
+}
+
+@media screen and (min-width: 300px) and (max-width: 450px) {
+    .startDate {
+        width: 43% !important;
+        height: 41px;
+        margin-left: 11px;
+    }
+    
+}
+
+@media screen and (min-width: 1024px) and (max-width: 3000px) {
+    .startDate {
+        width: 46.7% !important;
+        height: 41px;
+        margin-left: 50px;
+    
+    }
+    .endDate {
+        width: 46.6% !important;
+        height: 41px;
+        margin-left: 5px;
+    }
+    
 }

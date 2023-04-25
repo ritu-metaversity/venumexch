@@ -74,56 +74,60 @@ const HomePage = () => {
           <span className="open-bets-link" style={{ marginLeft: "7%" }}>
             Open Bets {""}(
             {PostunsettledData?.data &&
-              PostunsettledData?.data?.dataList &&
-              PostunsettledData?.data?.dataList?.length}
+            PostunsettledData?.data?.dataList &&
+            PostunsettledData?.data?.dataList?.length
+              ? PostunsettledData?.data &&
+                PostunsettledData?.data?.dataList &&
+                PostunsettledData?.data?.dataList?.length
+              : "0"}
             )
           </span>
         </Link>
         <div>
           <ul className="market-listing m-t-10">
-            {gamesData && gamesData?.length > 0
-              ? Object.keys(gamesData).map((key) => (
-                  <>
-                    {gamesData &&
-                      gamesData[key] &&
-                      gamesData[key]?.matchList.map((item, index) => (
-                        <>
-                          <li
-                            className="market-list-item"
-                            style={{ padding: "2px", cursor: "pointer" }}
-                            onClick={() =>
-                              handleGameDetails(item?.matchId, item)
-                            }
+            {gamesData && gamesData?.length > 0 ? (
+              Object.keys(gamesData).map((key) => (
+                <>
+                  {gamesData &&
+                    gamesData[key] &&
+                    gamesData[key]?.matchList.map((item, index) => (
+                      <>
+                        <li
+                          className="market-list-item"
+                          style={{ padding: "2px", cursor: "pointer" }}
+                          onClick={() => handleGameDetails(item?.matchId, item)}
+                        >
+                          <div className="homeimgGame">
+                            <img
+                              src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${gamesData[key]?.sportid}.png`}
+                              alt=""
+                              className="game-icon"
+                            />
+                          </div>
+                          <div
+                            className="itdasdasdsa"
+                            style={{ paddingLeft: "40px" }}
                           >
-                            <div className="homeimgGame">
-                              <img
-                                src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${gamesData[key]?.sportid}.png`}
-                                alt=""
-                                className="game-icon"
-                              />
+                            <span className=" game-name v-m">
+                              {item?.matchName}
+                            </span>
+                            <div className="timeeeeeee">{item?.openDate}</div>
+                            <div className="events-icons float-right">
+                              {item?.inPlay === true ? (
+                                <i className="fas fa-play-circle m-l-5"></i>
+                              ) : (
+                                ""
+                              )}
                             </div>
-                            <div
-                              className="itdasdasdsa"
-                              style={{ paddingLeft: "40px" }}
-                            >
-                              <span className=" game-name v-m">
-                                {item?.matchName}
-                              </span>
-                              <div className="timeeeeeee">{item?.openDate}</div>
-                              <div className="events-icons float-right">
-                                {item?.inPlay === true ? (
-                                  <i className="fas fa-play-circle m-l-5"></i>
-                                ) : (
-                                  ""
-                                )}
-                              </div>
-                            </div>
-                          </li>
-                        </>
-                      ))}
-                  </>
-                ))
-              : ""}
+                          </div>
+                        </li>
+                      </>
+                    ))}
+                </>
+              ))
+            ) : (
+              <div className="noLiveMatch">No live match now</div>
+            )}
           </ul>
         </div>
       </section>

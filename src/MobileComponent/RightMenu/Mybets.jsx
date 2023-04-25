@@ -2,12 +2,20 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PostBetListByMatchId, Postunsettleddddd } from "../../App/Features/auth/authActions";
+import {
+  PostBetListByMatchId,
+  Postunsettleddddd,
+} from "../../App/Features/auth/authActions";
 import "./Mybets.css";
+import { AiOutlineDoubleLeft } from "@react-icons/all-files/ai/AiOutlineDoubleLeft";
+import { AiOutlineLeft } from "@react-icons/all-files/ai/AiOutlineLeft";
+import { AiOutlineRight } from "@react-icons/all-files/ai/AiOutlineRight";
+import { AiOutlineDoubleRight } from "@react-icons/all-files/ai/AiOutlineDoubleRight";
 
 const Mybets = () => {
   const [unmatchedBets, setUnmatchedBets] = useState(false);
   const [matchedBets, setmatchedBets] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
@@ -26,29 +34,43 @@ const Mybets = () => {
     // console.log("ssjjk");
   };
 
+  const { PostunsettledData } = useSelector((state) => state.auth);
 
-  const { PostunsettledData } = useSelector(state => state.auth)
-
-  // console.log(PostunsettledData?.data?.dataList)
+  // console.log(PostunsettledData?.data, "hello");
 
   const dispatch = useDispatch();
-// console.log(PostBetListByMatchIdData ,"dushyant")
+  // console.log(PostBetListByMatchIdData ,"dushyant")
 
-useEffect(()=>{
-  let data ={betType:1,
-    index:0,
-    noOfRecords:5,
-    sportType:1}
+  useEffect(() => {
+    let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1 };
 
-  dispatch(Postunsettleddddd(data))
-},[dispatch])
+    dispatch(Postunsettleddddd(data));
+  }, [pageNumber]);
 
-console.log(PostunsettledData,"PostunsettledData")
+  const handleDoubleLeft = (vl) => {
+    if (vl === "doubleleft") {
+      setPageNumber(1);
+    } else if (vl === "sigleleft") {
+      setPageNumber(pageNumber - 1);
+    } else if (vl === "singleright") {
+      setPageNumber(1 + pageNumber);
+    } else {
+      setPageNumber(PostunsettledData?.data?.totalPages);
+    }
+  };
+  console.log(pageNumber, "hello");
+
+  console.log(PostunsettledData, "PostunsettledData");
   return (
     <>
       <section className="my-bets-container  manit">
-        <h2 className="page-title m-t-20 p-l-15 " style={{marginBottom: "4px"}}>Open Bets</h2>
-      
+        <h2
+          className="page-title m-t-20 p-l-15 "
+          style={{ marginBottom: "4px" }}
+        >
+          Open Bets
+        </h2>
+
         <div
           data-toggle="collapse"
           data-target=".matched-bet"
@@ -69,45 +91,94 @@ console.log(PostunsettledData,"PostunsettledData")
             matchedBets === true ? "collapse " : "collapse show"
           } `}
         >
-          {PostunsettledData?.data &&
-                PostunsettledData?.data?.dataList ? (
-                  PostunsettledData?.data?.dataList.map((el) => (
-
-                         <div class="events matched-bet collapse show">
-   <ul>
-    {console.log(el,"elelelel")}
-      <li>
-         <div><a href="/m/gamedetail/32181223" class={`${el?.isback===false? "lay" :"back"}-bet`}><u>{el?.isback===false? "lay" :"Back"} {el?.nation}for {el?.price} @ {el?.rate} </u></a></div>
-         <div class="bet-details">
-            <div><b>{el?.eventName}</b></div>
-            <div><b>{el?.marketname}</b></div>
-            <div><b>Placed: </b> <span>
-              {moment(el?.time).format(" D/mm/YYYY h:mm")}</span></div>
-         </div>
-      </li>
-   </ul>
-</div> 
-               
-                  ))
-                ) : (
-                  <tbody>
-                    <tr>
-                      <td colspan="3" className="text-center">
-                        There Have Been No Transfers In The Last 14 Days.
-                      </td>
-                    </tr>
-                  </tbody>
-                )}
-
-
-
-    
+          {PostunsettledData?.data && PostunsettledData?.data?.dataList ? (
+            PostunsettledData?.data?.dataList.map((el) => (
+              <div class="events matched-bet collapse show">
+                <ul>
+                  {console.log(el, "elelelel")}
+                  <li>
+                    <div>
+                      <a
+                        href="/m/gamedetail/32181223"
+                        class={`${el?.isback === false ? "lay" : "back"}-bet`}
+                      >
+                        <u>
+                          {el?.isback === false ? "lay" : "Back"} {el?.nation}
+                          for {el?.price} @ {el?.rate}{" "}
+                        </u>
+                      </a>
+                    </div>
+                    <div class="bet-details">
+                      <div>
+                        <b>{el?.eventName}</b>
+                      </div>
+                      <div>
+                        <b>{el?.marketname}</b>
+                      </div>
+                      <div>
+                        <b>Placed: </b>{" "}
+                        <span>
+                          {moment(el?.time).format(" D/mm/YYYY h:mm")}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            ))
+          ) : (
+            <tbody>
+              <tr>
+                <td colspan="3" className="text-center">
+                  There Have Been No Transfers In The Last 14 Days.
+                </td>
+              </tr>
+            </tbody>
+          )}
+        </div>
+      </section>
+      <div className="pagination">
+        <button
+          disabled={pageNumber === 1 ? true : false}
+          className="paginationBtn"
+          onClick={() => handleDoubleLeft("doubleleft")}
+        >
+          <AiOutlineDoubleLeft className="arrowDoubleLeft" />
+        </button>
+        <button
+          disabled={pageNumber === 1 ? true : false}
+          className="paginationBtn"
+          style={{ marginLeft: "-9px" }}
+          onClick={() => handleDoubleLeft("sigleleft")}
+        >
+          <AiOutlineLeft className="arrowSingleLeft" />
+        </button>
+        <div className="paginationno">
+          <div style={{ marginTop: "7px", marginLeft: "11px" }}>
+            {pageNumber}
+          </div>
         </div>
 
-
-  
-
-      </section>
+        <button
+          disabled={
+            PostunsettledData?.data?.totalPages === pageNumber ? true : false
+          }
+          className="paginationBtn"
+          style={{ marginLeft: "-10px" }}
+          onClick={() => handleDoubleLeft("singleright")}
+        >
+          <AiOutlineRight className="arrowSingleRight" />
+        </button>
+        <button
+          disabled={
+            PostunsettledData?.data?.totalPages === pageNumber ? true : false
+          }
+          className="paginationBtn"
+          onClick={() => handleDoubleLeft("doubleright")}
+        >
+          <AiOutlineDoubleRight className="arrowDoubleRight" />
+        </button>
+      </div>
     </>
   );
 };

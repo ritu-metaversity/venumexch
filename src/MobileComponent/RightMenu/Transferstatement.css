@@ -2,6 +2,7 @@
     float: left;
     width: 100%;
 }
+
 /* .m-t-10 {
     margin-top: 10px !important;
 } */
@@ -9,14 +10,17 @@
     font-size: 18px;
     font-weight: bold;
 }
+
 .p-l-15 {
     padding-left: 15px !important;
 }
+
 .table-responsive {
     display: block;
     width: 100%;
     overflow-x: auto;
 }
+
 table {
     width: 100%;
     margin-bottom: 1rem;
@@ -27,7 +31,100 @@ table {
     background-color: #0f2327;
     color: #fff;
 }
-.back1{
+
+.back1 {
     background-color: #0f2327;
     color: #fff;
+}
+
+
+.pagination {
+    font-size: 31px;
+    position: fixed;
+    left: 36%;
+    bottom: 11%;
+}
+
+.arrowDoubleLeft {
+    margin-right: 5%;
+}
+
+.arrowSingleLeft {
+    margin-right: 10%;
+}
+
+.arrowSingleRight {
+    margin-right: 10%;
+}
+
+.arrowDoubleRight {
+    margin-right: 5%;
+}
+
+.paginationno {
+    font-size: 16px;
+    background: black;
+    color: white;
+    width: 48px;
+    height: 32px;
+    border-radius: 23px;
+    /* margin-left: 11px; */
+    margin-top: 7px;
+}
+
+.rightDiv {}
+
+/* [aria-disabled=true] {
+    background-color: #e0e0e0;
+    opacity: 0.5;
+
+
+} */
+
+.paginationBtn {
+    background-color: unset;
+    color: #000 !important;
+    border: unset;
+    outline: unset !important;
+    font-size: 20px;
+}
+
+button:disabled {
+    background-color: unset;
+    color: #999999 !important;
+    border-color: unset;
+    box-shadow: none;
+}
+
+
+
+@media screen and (min-width: 300px) and (max-width: 450px) {
+    .pagination {
+        font-size: 31px;
+        position: fixed;
+        left: 31%;
+        bottom: 13%;
+    }
+
+}
+
+@media screen and (min-width: 451px) and (max-width: 1024px) {
+    .pagination {
+        font-size: 31px;
+        position: fixed;
+        left: 40%;
+        bottom: 13%;
+    }
+
+}
+
+
+@media screen and (min-width: 1024px) and (max-width: 3000px) {
+    .pagination {
+        font-size: 31px;
+        position: fixed;
+        left: 45%;
+        bottom: 12%;
+    }
+
 }
