@@ -47,12 +47,12 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
     datatattatattat("true");
   };
 
-  const increment = () => {
-    setBitValue(Bitvalue + 0.05);
-  };
-  const decrement = () => {
-    setBitValue(Bitvalue - 0.05);
-  };
+  // const increment = () => {
+  //   setBitValue(Bitvalue + 0.05);
+  // };
+  // const decrement = () => {
+  //   setBitValue(Bitvalue - 0.05);
+  // };
   // const { PostGetStack } = useSelector((state) => state.auth);
   // console.log(token);
 
@@ -73,16 +73,17 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
       isBack: bitValue?.isBack === "back" ? true : false,
       odds: bitValue?.Odds,
       stake: updated,
-      name: bitValue?.cname,
-      marketName: bitValue?.vl2,
+      name: bitValue?.cname ? bitValue?.cname : bitValue?.marketNameeee,
+      // marketName: bitValue?.vl2?,
       selectionId: bitValue?.selectionId,
-      priceValue: bitValue?.isFancy === true ? bitValue?.priceValue : updated,
-      // "marketName":bitValue?.marketNameeee,
+      priceValue:
+        bitValue?.isFancy === true ? bitValue?.priceValue : bitValue?.Odds,
+      marketName: bitValue?.gameName,
       placeTime: bitValue?.bettingTime,
       marketId: bitValue?.marketId,
       matchId: id,
+
       t: "",
-      marketName: "",
       deviceInfo: {
         userAgent:
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
@@ -153,7 +154,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                     <button
                       type="button"
                       className="stakeactionminus btn"
-                      onClick={decrement}
+                      // onClick={decrement}
                     >
                       <span className="fa fa-minus"></span>
                     </button>{" "}
@@ -170,7 +171,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                     <button
                       type="button"
                       className="stakeactionminus btn incrementBtn"
-                      onClick={increment}
+                      // onClick={increment}
                     >
                       <span className="fa fa-plus"></span>
                     </button>

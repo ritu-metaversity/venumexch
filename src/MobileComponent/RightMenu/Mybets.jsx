@@ -15,7 +15,7 @@ import { AiOutlineDoubleRight } from "@react-icons/all-files/ai/AiOutlineDoubleR
 const Mybets = () => {
   const [unmatchedBets, setUnmatchedBets] = useState(false);
   const [matchedBets, setmatchedBets] = useState(false);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
 
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
@@ -34,9 +34,11 @@ const Mybets = () => {
     // console.log("ssjjk");
   };
 
-  const { PostunsettledData } = useSelector((state) => state.auth);
+  const { PostunsettledData, PostunsettledDataLoading } = useSelector(
+    (state) => state.auth
+  );
 
-  // console.log(PostunsettledData?.data, "hello");
+  console.log(PostunsettledDataLoading, "PostunsettledDataLoading");
 
   const dispatch = useDispatch();
   // console.log(PostBetListByMatchIdData ,"dushyant")
@@ -49,7 +51,7 @@ const Mybets = () => {
 
   const handleDoubleLeft = (vl) => {
     if (vl === "doubleleft") {
-      setPageNumber(1);
+      setPageNumber(0);
     } else if (vl === "sigleleft") {
       setPageNumber(pageNumber - 1);
     } else if (vl === "singleright") {
@@ -86,67 +88,84 @@ const Mybets = () => {
             onClick={handlematched}
           ></i>
         </div>
-        <div
-          className={`events matched-bet ${
-            matchedBets === true ? "collapse " : "collapse show"
-          } `}
-        >
-          {PostunsettledData?.data && PostunsettledData?.data?.dataList ? (
-            PostunsettledData?.data?.dataList.map((el) => (
-              <div class="events matched-bet collapse show">
-                <ul>
-                  {console.log(el, "elelelel")}
-                  <li>
-                    <div>
-                      <a
-                        href="/m/gamedetail/32181223"
-                        class={`${el?.isback === false ? "lay" : "back"}-bet`}
-                      >
-                        <u>
-                          {el?.isback === false ? "lay" : "Back"} {el?.nation}
-                          for {el?.price} @ {el?.rate}{" "}
-                        </u>
-                      </a>
-                    </div>
-                    <div class="bet-details">
-                      <div>
-                        <b>{el?.eventName}</b>
-                      </div>
-                      <div>
-                        <b>{el?.marketname}</b>
-                      </div>
-                      <div>
-                        <b>Placed: </b>{" "}
-                        <span>
-                          {moment(el?.time).format(" D/mm/YYYY h:mm")}
-                        </span>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            ))
+        <div>
+          {PostunsettledDataLoading === true ? (
+            <div className=" lodding">
+              <i
+                className="fa fa-circle-o-notch fa-spin loading"
+                style={{ fontSize: "50px" }}
+              ></i>
+              <p className="loading-text">Loading...</p>{" "}
+            </div>
           ) : (
-            <tbody>
-              <tr>
-                <td colspan="3" className="text-center">
-                  There Have Been No Transfers In The Last 14 Days.
-                </td>
-              </tr>
-            </tbody>
+            <div
+              className={`events matched-bet ${
+                matchedBets === true ? "collapse " : "collapse show"
+              } `}
+            >
+              {PostunsettledData?.data &&
+              PostunsettledData?.data?.dataList?.length > 0 ? (
+                PostunsettledData?.data?.dataList.map((el) => (
+                  <div class="events matched-bet collapse show">
+                    <ul>
+                      {console.log(el, "elelelel")}
+                      <li>
+                        <div>
+                          <a
+                            href={`/m/gamedetail/${el?.matchId}`}
+                            class={`${
+                              el?.isback === false ? "lay" : "back"
+                            }-bet`}
+                          >
+                            <u>
+                              {el?.isback === false ? "lay" : "Back"}{" "}
+                              {el?.nation}
+                              for {el?.price} @ {el?.rate}{" "}
+                            </u>
+                          </a>
+                        </div>
+                        <div class="bet-details">
+                          <div>
+                            <b>{el?.eventName}</b>
+                          </div>
+                          <div>
+                            <b>{el?.marketname}</b>
+                          </div>
+                          <div>
+                            <b>Placed: </b>{" "}
+                            <span>
+                              {moment(el?.time).format(" D/mm/YYYY h:mm")}
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                ))
+              ) : (
+                <tbody>
+                  <tr>
+                    {console.log("asdkjasdlkajsdkjasldkajslakjdas")}
+                    <td colspan="3" className="text-center">
+                      There Have Been No Transfers.
+                    </td>
+                  </tr>
+                </tbody>
+              )}
+            </div>
           )}
         </div>
       </section>
       <div className="pagination">
         <button
-          disabled={pageNumber === 1 ? true : false}
+          disabled={pageNumber === 0 ? true : false}
           className="paginationBtn"
           onClick={() => handleDoubleLeft("doubleleft")}
         >
           <AiOutlineDoubleLeft className="arrowDoubleLeft" />
         </button>
         <button
-          disabled={pageNumber === 1 ? true : false}
+          disabled={pageNumber === 0 ? true : false}
           className="paginationBtn"
           style={{ marginLeft: "-9px" }}
           onClick={() => handleDoubleLeft("sigleleft")}
@@ -155,7 +174,7 @@ const Mybets = () => {
         </button>
         <div className="paginationno">
           <div style={{ marginTop: "7px", marginLeft: "11px" }}>
-            {pageNumber}
+            {pageNumber + 1}
           </div>
         </div>
 
