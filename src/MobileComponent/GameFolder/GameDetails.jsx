@@ -1182,12 +1182,20 @@ const GameDetails = () => {
                                                                   (itemPnl) =>
                                                                     itemPnl?.marketId ==
                                                                     item?.sid
-                                                                )?.pnl ===
-                                                                  undefined
-                                                                  ? "20px"
-                                                                  : "",
+                                                                )?.pnl
+                                                                  ? ""
+                                                                  : "40px",
                                                             }}
                                                           >
+                                                            {console.log(
+                                                              FancyPNL?.data &&
+                                                                FancyPNL?.data.find(
+                                                                  (itemPnl) =>
+                                                                    itemPnl?.marketId ==
+                                                                    item?.sid
+                                                                )?.pnl,
+                                                              "dafdsfsd"
+                                                            )}
                                                             <span
                                                               data-v-e03c6f20=""
                                                               className="team-name"
