@@ -16,23 +16,45 @@ div {
 .m-t-10 {
     margin-top: 10px !important;
 }
+
 .page-title {
     font-size: 18px;
     font-weight: bold;
     margin-top: 17px;
 }
+
 .p-l-15 {
     padding-left: 15px !important;
 }
-h2, .h2 {
+
+h2,
+.h2 {
     font-size: 2rem;
 }
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
     margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-top: 0;
     margin-bottom: 0.5rem;
 }
@@ -46,6 +68,7 @@ h2 {
     margin-inline-end: 0px;
     font-weight: bold;
 }
+
 .game-date {
     background-color: #0f2327;
     color: #fff;
@@ -57,9 +80,11 @@ h2 {
     float: left;
     width: 100%;
 }
+
 .float-right {
     float: right !important;
 }
+
 /* .betting-pnl .wrapper {
     padding: 11px 11px 15px 12px;
     margin: 2px 0 0;
@@ -81,26 +106,34 @@ h2 {
 .game-name {
     font-size: 16px;
 }
+
 .m-b-0 {
     margin-bottom: 0 !important;
 }
+
 p {
     margin-top: 0;
     margin-bottom: 1rem;
 }
+
 .betting-pnl .betting-back {
     color: #2587d0;
 }
 
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
+
 .m-b-0 {
     margin-bottom: 0 !important;
 }
@@ -109,20 +142,28 @@ p {
     margin-top: 0;
     margin-bottom: 1rem;
 }
-b, strong {
+
+b,
+strong {
     font-weight: bolder;
 }
-.betting-pnl .pnl-titles, .betting-pnl .pnl-numbers {
+
+.betting-pnl .pnl-titles,
+.betting-pnl .pnl-numbers {
     text-align: right;
     width: 15%;
     float: left;
 }
+
 .m-b-0 {
     margin-bottom: 0 !important;
 }
-b, strong {
+
+b,
+strong {
     font-weight: bolder;
 }
+
 .negative {
     color: red;
 }
@@ -130,6 +171,7 @@ b, strong {
 .m-b-0 {
     margin-bottom: 0 !important;
 }
+
 .game-date {
     background-color: #0f2327;
     color: #fff;
@@ -141,9 +183,11 @@ b, strong {
     float: left;
     width: 100%;
 }
+
 .float-right {
     float: right !important;
 }
+
 .betting-pnl .dsfsfdfsd {
     padding: 2px 11px 15px 12px;
     margin: 2px 0 0;
@@ -155,24 +199,31 @@ b, strong {
     height: 64px;
     margin-top: 17px;
 }
+
 .betting-pnl .dsfsfdfsd .info {
     float: left;
     width: 70%;
 }
+
 .betting-pnl .betting-back {
     color: #2587d0;
 }
 
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-.btnnnn{
+
+.btnnnn {
     color: #ffffff;
     background-color: #2c4f58;
     border: #000;
@@ -183,42 +234,53 @@ a {
     margin: 4px;
 }
 
-.casinooooo{
+.casinooooo {
     width: 86px;
     /* margin-right: 8px; */
 }
-.buttttt{
+
+.buttttt {
     margin-top: 93px;
 }
-.CasinolButton{
+
+.CasinolButton {
     padding: 20px;
 }
+
 .casino-body-images {
     width: 75%;
 }
+
 input#tbg-radio-3 {
     display: none;
 }
+
 input#tbg-radio-2 {
     display: none;
 }
-.active1{
+
+.active1 {
     background-color: #007bff !important;
 }
+
 label.active1.btn.btn-primary {
     background: #317383 !important;
     font-size: 18px;
 }
+
 .btn.btn-primary {
     background: #2c4f58 !important;
     font-size: 18px;
     border-color: unset !important;
 }
+
 .btn-primary:hover {
     color: unset !important;
     border-color: unset !important;
 }
-.btn-group, .btn-group-vertical {
+
+.btn-group,
+.btn-group-vertical {
     position: relative;
     display: inline-flex;
     vertical-align: middle;
@@ -226,20 +288,24 @@ label.active1.btn.btn-primary {
     margin-left: 3%;
 
 }
-.selectionnnn{
+
+.selectionnnn {
     width: 150px;
     height: 34px;
     font-size: 15px;
     margin-left: 16px;
     margin: 7px;
 }
-.dsdsdsdsd{
+
+.dsdsdsdsd {
     width: 10px;
 }
-.dateee{
+
+.dateee {
     width: 100px;
     height: 41px;
 }
+
 .nodataforund {
     margin-top: 29px;
     margin-left: 31px;
@@ -248,6 +314,7 @@ label.active1.btn.btn-primary {
     font-size: 15px;
     color: red;
 }
+
 .selectionnnn {
     width: 50%;
     height: 34px;
@@ -261,15 +328,18 @@ label.active1.btn.btn-primary {
     margin: 8px;
     margin-left: 1px;
 }
+
 .sport-data-list {
     display: flex;
     justify-content: space-evenly;
     margin-inline: 3%;
 }
-.casino-section{
+
+.casino-section {
     display: flex;
     justify-content: space-around;
 }
+
 /* .pagination {
     font-size: 31px;
     margin-left: 18%;
@@ -298,6 +368,7 @@ label.active1.btn.btn-primary {
     margin-right: 9%;
     font-size: 19px;
 }
+
 .btn.btn-primary {
     background: #2c4f58 !important;
     font-size: 18px;
@@ -306,13 +377,15 @@ label.active1.btn.btn-primary {
     height: 45px;
     border-color: unset !important;
     margin-left: unset !important;
-} 
-.startDate{
+}
+
+.startDate {
     width: 46% !important;
     height: 41px;
     margin-left: 24px
 }
-.endDate{
+
+.endDate {
     width: 47% !important;
     height: 41px;
     margin-left: 6px
@@ -324,7 +397,7 @@ label.active1.btn.btn-primary {
         height: 41px;
         margin-left: 11px;
     }
-    
+
 }
 
 @media screen and (min-width: 1024px) and (max-width: 3000px) {
@@ -332,12 +405,29 @@ label.active1.btn.btn-primary {
         width: 46.7% !important;
         height: 41px;
         margin-left: 50px;
-    
+
     }
+
     .endDate {
         width: 46.6% !important;
         height: 41px;
         margin-left: 5px;
     }
-    
+
+}
+
+.customclass {
+    position: fixed;
+    bottom: 11% !important;
+    left: 3% !important;
+}
+
+.mainDivFor {
+    margin-top: 23px;
+    height: 505px !important;
+    overflow: scroll;
+}
+
+.mainDivFor::-webkit-scrollbar {
+    display: none;
 }

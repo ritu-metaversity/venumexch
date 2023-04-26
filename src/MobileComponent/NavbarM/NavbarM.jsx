@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setMrqueeClose as setMarqueeClose } from "../../App/Features/auth/authSlice";
 import { PostBalance } from "../../App/Features/auth/authActions";
 
 import "./NavbarM.css";
@@ -15,8 +16,8 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   const { PostTotalBalance } = useSelector((state) => state.auth);
   const [sideBarOpen, setRightBar] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
-  const [MrqueeClose, setMarqueeClose] = useState(true);
-
+  const MrqueeClose = useSelector((state) => state.auth.MrqueeClose);
+  console.log(MrqueeClose);
   useEffect(() => {
     setRightBar(RightValue);
   }, [RightValue]);
@@ -90,7 +91,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   };
 
   const handleCloseMarquee = () => {
-    setMarqueeClose(false);
+    dispatch(setMarqueeClose(false));
   };
 
   const handleInput = () => {

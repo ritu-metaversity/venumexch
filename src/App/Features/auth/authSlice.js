@@ -8,6 +8,7 @@ import {
 } from './authActions'
 
 const INITAL_STATE = {
+    MrqueeClose: true,
 
     auth: '',
     authLoading: false,
@@ -147,6 +148,11 @@ const INITAL_STATE = {
 const authSlice = createSlice({
     name: "auth",
     initialState: INITAL_STATE,
+    reducers: {
+        setMrqueeClose: (state, action) => {
+            state.MrqueeClose = action.payload;
+        }
+    },
     extraReducers: bulder => {
         bulder.addCase(getAllPostsComments.pending, (state) => {
             state.data = null;
@@ -566,4 +572,5 @@ const authSlice = createSlice({
     }
 });
 
+export const { setMrqueeClose } = authSlice.actions;
 export default authSlice.reducer

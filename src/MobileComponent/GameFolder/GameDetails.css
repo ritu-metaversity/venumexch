@@ -1304,8 +1304,8 @@ button.btn.btn-login {
     }
 
     .m-b-10.main-market.w-100.float-left {
-        margin-inline: 1%;
-        width: 97% !important;
+        /* margin-inline: 1%; */
+        width: 99% !important;
     }
 
     .suspend::after {
@@ -1324,14 +1324,18 @@ button.btn.btn-login {
         justify-content: center;
         background: #ddd;
     }
+
     .fancy-tripple .suspend[data-v-e03c6f20]::after {
         content: attr(data-title) !important;
-        width: 43%;
+        width: 44%;
         font-family: unset !important;
         font-weight: unset !important;
     }
 }
 
+.fade:not(.show) {
+    display: none !important;
+}
 
 @media screen and (max-width: 300px) and (max-width: 375px) {
     .suspend::after {
@@ -1754,12 +1758,14 @@ button.closebtnonpnl {
     border: unset;
     outline: unset !important;
 }
+
 /* .table-header {
     margin-top: 17px;
     margin-bottom: -17px;
 } */
 
 p.minMax {
-    margin-bottom: -2px;
+    margin-bottom: 4px;
     margin-top: 0px;
+    margin-right: -12px;
 }

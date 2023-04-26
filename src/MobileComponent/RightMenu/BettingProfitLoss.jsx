@@ -435,6 +435,8 @@ const BettingProfitLoss = () => {
               <h2 class="page-title p-l-15">Betting Profit &amp; Loss</h2>
 
               {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
+<div className="mainDivFor">
+
 
               {PostprofitlossmatchwiseDatatata?.data &&
               PostprofitlossmatchwiseDatatata?.data?.market &&
@@ -480,11 +482,13 @@ const BettingProfitLoss = () => {
               ) : (
                 <div className="nodataforund">NO DATA FOUND</div>
               )}
+              
+              </div>
             </section>
           </div>
         </div>
       </div>
-      <div className="pagination">
+      <div className="pagination customclass" >
         <button
           disabled={pageNumber === 1 ? true : false}
           className="paginationBtn"

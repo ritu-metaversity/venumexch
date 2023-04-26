@@ -88,7 +88,7 @@ const Mybets = () => {
             onClick={handlematched}
           ></i>
         </div>
-        <div>
+        <div className="main-matchBet">
           {PostunsettledDataLoading === true ? (
             <div className=" lodding">
               <i
@@ -156,17 +156,17 @@ const Mybets = () => {
           )}
         </div>
       </section>
-      <div className="pagination">
+      <div className="pagination myBetpagination">
         <button
           disabled={pageNumber === 0 ? true : false}
-          className="paginationBtn"
+          className="paginationBtn "
           onClick={() => handleDoubleLeft("doubleleft")}
         >
           <AiOutlineDoubleLeft className="arrowDoubleLeft" />
         </button>
         <button
           disabled={pageNumber === 0 ? true : false}
-          className="paginationBtn"
+          className="paginationBtn "
           style={{ marginLeft: "-9px" }}
           onClick={() => handleDoubleLeft("sigleleft")}
         >
