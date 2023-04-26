@@ -811,13 +811,15 @@ const GameDetails = () => {
                             <div className="bm1">
                               <div className=" m-b-10 main-market w-100 float-left">
                                 <div className="table-header">
+                                
                                   <div
                                     className="float-left box-w4 country-name"
                                     style={{ marginBottom: "4px" }}
                                   >
                                     <b>BOOKMAKER</b>
                                   </div>
-
+                                  <div className="box-w3 float-left hidden-portrait dis-none"></div>
+                                  <div className="box-w3 float-left hidden-portrait dis-none"></div>
                                   <div className=" box-w3 float-left text-uppercase">
                                     Back
                                   </div>
@@ -1100,7 +1102,18 @@ const GameDetails = () => {
                                                   </span>
                                                 </b>
                                               </div>
-
+                                              <div
+                                                data-v-e03c6f20=""
+                                                className=" box-w1 float-left text-uppercase dis-none"
+                                              >
+                                                
+                                              </div>
+                                              <div
+                                                data-v-e03c6f20=""
+                                                className=" box-w1 float-left text-uppercase dis-none"
+                                              >
+                                                
+                                              </div>
                                               <div
                                                 data-v-e03c6f20=""
                                                 className=" box-w1 float-left text-uppercase"
@@ -1135,7 +1148,7 @@ const GameDetails = () => {
                                                   >
                                                     <p
                                                       data-v-e03c6f20=""
-                                                      className="m-b-0"
+                                                      className="minMax"
                                                     >
                                                       <span
                                                         data-v-e03c6f20=""
@@ -1185,7 +1198,6 @@ const GameDetails = () => {
                                                   <div
                                                     data-v-e03c6f20=""
                                                     className="fancy-tripple "
-                                                    style={{ height: "37px" }}
                                                   >
                                                     {console.log(
                                                       item.gstatus,

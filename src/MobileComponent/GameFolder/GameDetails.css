@@ -1324,6 +1324,12 @@ button.btn.btn-login {
         justify-content: center;
         background: #ddd;
     }
+    .fancy-tripple .suspend[data-v-e03c6f20]::after {
+        content: attr(data-title) !important;
+        width: 43%;
+        font-family: unset !important;
+        font-weight: unset !important;
+    }
 }
 
 
@@ -1747,4 +1753,13 @@ button.closebtnonpnl {
     background: none;
     border: unset;
     outline: unset !important;
+}
+/* .table-header {
+    margin-top: 17px;
+    margin-bottom: -17px;
+} */
+
+p.minMax {
+    margin-bottom: -2px;
+    margin-top: 0px;
 }
