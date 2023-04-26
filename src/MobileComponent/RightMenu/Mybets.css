@@ -428,3 +428,15 @@ section {
     background-color: #00000063;
     height: 63vh;
 }
+.pagination.myBetpagination {
+    position: fixed;
+    left: 2%;
+    bottom: 106px;
+}
+.main-matchBet {
+    height: 609px;
+    overflow: scroll;
+}
+.main-matchBet::-webkit-scrollbar{
+    display: none;
+}

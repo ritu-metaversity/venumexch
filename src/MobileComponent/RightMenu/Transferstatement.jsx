@@ -95,7 +95,7 @@ const Transferstatement = () => {
 
   return (
     <>
-      <div className="home-page home-page-news">
+      <div className="home-page">
         <div className="container-inner">
           <section className="m-t-10 transfer">
             <h2 className="page-title p-l-15">Account Statement</h2>
@@ -127,6 +127,7 @@ const Transferstatement = () => {
                 className="selectionndsfsdfnn"
                 // name="cars"
                 // id="cars"
+
                 onChange={handleSelectGame}
               >
                 <option value={1}> All</option>
@@ -136,44 +137,50 @@ const Transferstatement = () => {
             </div>
             <div className="table-responsive">
               <table className="table" style={{ width: "98%" }}>
-                <thead>
+                <thead className="tbodybody">
                   <tr>
                     <th>Date</th>
-                    <th>Credit</th>
-                    <th>Debit</th>
+                    <th style={{width: "15%"}}>Credit</th>
+                    <th style={{width: "13%"}}>Debit</th>
                     <th className="Balance">Balance</th>
                     <th>Remark</th>
                   </tr>
                 </thead>
-                {PostTransferStatementData?.data &&
-                PostTransferStatementData?.data?.dataList ? (
-                  PostTransferStatementData?.data?.dataList.map((el) => (
-                    <tbody
-                      onClick={() =>
-                        handleDetailsStatement(el?.marketid, el?.remark)
-                      }
-                    >
-                      <tr className="accountStatment">
+                <tbody
+                  className="tbodybody"
+                  style={{
+                    height: "calc(100vh - 330px)",
+                    display: "block",
+                    overflow: "scroll",
+                  }}
+                >
+                  {PostTransferStatementData?.data &&
+                  PostTransferStatementData?.data?.dataList ? (
+                    PostTransferStatementData?.data?.dataList.map((el) => (
+                      <tr
+                        className="accountStatment"
+                        onClick={() =>
+                          handleDetailsStatement(el?.marketid, el?.remark)
+                        }
+                      >
                         <td>
                           {" "}
                           {moment(el?.date).format("YYYY-MM-DD  - h:mm")}
                         </td>
-                        <td style={{ color: "green" }}> {el?.credit}</td>
-                        <td style={{ color: "red" }}>{el?.debit}</td>
-                        <td>{el?.pts}</td>
-                        <td>{el?.remark}</td>
+                        <td style={{ color: "green",  width: "10%" }}> {el?.credit}</td>
+                        <td style={{ color: "red", width: "15%" }}>{el?.debit}</td>
+                        <td style={{ width: "15%" }}>{el?.pts}</td>
+                        <td style={{ width: "30%" }}>{el?.remark}</td>
                       </tr>
-                    </tbody>
-                  ))
-                ) : (
-                  <tbody>
+                    ))
+                  ) : (
                     <tr>
                       <td colspan="3" className="text-center">
                         There Have Been No Transfers In The Last 14 Days.
                       </td>
                     </tr>
-                  </tbody>
-                )}
+                  )}
+                </tbody>
               </table>
             </div>
           </section>

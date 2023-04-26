@@ -126,6 +126,7 @@ const LayoutForMobile = () => {
     setRightValue(false);
     setLeftValue(false);
   };
+  const MrqueeClose = useSelector((state) => state.auth.MrqueeClose);
 
   return (
     <>
@@ -151,7 +152,9 @@ const LayoutForMobile = () => {
               LeftValue={LeftValue}
             />
           </div>
-          <Outlet context={datatata} datatata={datatata} />
+          <div style={{ marginTop: MrqueeClose ? "" : "-25px" }}>
+            <Outlet context={datatata} datatata={datatata} />
+          </div>
 
           <MFooter />
         </div>
@@ -194,7 +197,7 @@ const LayoutForMobile = () => {
         {/* </div> */}
 
         <div className="bottom-icon" style={{ width: "40px", height: "42px" }}>
-          <Eyeicon  style={{fontSize:"22px"}}/>
+          <Eyeicon style={{ fontSize: "22px" }} />
         </div>
       </div>
 
