@@ -150,7 +150,10 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
               </div>
               <div className="row m-l-5 m-r-5 m-t-10">
                 <div className="col-6 p-l-5 p-r-5">
-                  <div className="float-right d-flex">
+                  <div
+                    className="float-right d-flex"
+                    style={{ marginLeft: "-19%" }}
+                  >
                     <button
                       type="button"
                       className="stakeactionminus btn"

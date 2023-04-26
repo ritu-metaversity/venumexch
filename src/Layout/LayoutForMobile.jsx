@@ -181,6 +181,8 @@ const LayoutForMobile = () => {
           className="btnnnnnnnn"
           onClick={scrollToTop}
           style={{
+            width: "40px",
+            height: "42px",
             display: visible ? "block" : "none",
             zIndex: "2",
             marginBottom: "29px",
@@ -191,8 +193,8 @@ const LayoutForMobile = () => {
 
         {/* </div> */}
 
-        <div className="bottom-icon">
-          <Eyeicon />
+        <div className="bottom-icon" style={{ width: "40px", height: "42px" }}>
+          <Eyeicon  style={{fontSize:"22px"}}/>
         </div>
       </div>
 
