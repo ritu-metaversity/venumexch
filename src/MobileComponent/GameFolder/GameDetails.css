@@ -1108,7 +1108,7 @@ strong {
     top: 0;
     right: -13px;
     font-weight: bold;
-    width: 60.7%;
+    width: 61%;
     height: 100%;
     font-size: 1rem;
     text-transform: uppercase;
@@ -1138,7 +1138,7 @@ strong {
 
 .fancy-tripple .suspend[data-v-e03c6f20]::after {
     content: attr(data-title) !important;
-    width: 42%;
+    width: 61%;
     font-family: unset !important;
     font-weight: unset !important;
 }
