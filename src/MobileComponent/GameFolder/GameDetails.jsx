@@ -376,7 +376,7 @@ const GameDetails = () => {
         dispatch(PostUserOddPnl({ matchId: id }));
       },
 
-      5000
+      3000
     );
     return () => {
       clearInterval(timer);
@@ -386,7 +386,7 @@ const GameDetails = () => {
     let timer = setInterval(
       () => dispatch(PostUserfancypnl({ matchId: id })),
 
-      5000
+      3000
     );
     return () => {
       clearInterval(timer);
@@ -484,7 +484,7 @@ const GameDetails = () => {
                 <div className="flash__wrapper"></div>
               </div>
               <div className="event-title">
-                <div style={{ marginTop: "10px" }}>
+                <div style={{ marginTop: "10px", width: "86%" }}>
                   <img
                     alt=""
                     src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
@@ -499,14 +499,15 @@ const GameDetails = () => {
                 </div>
 
                 <div className="text-right">
+                  <div className="tv-icon" onClick={handleTvShow}>
+                    <p className="fjsdlkfjld">
+                      <i className="fa fa-tv"></i>
+                    </p>
+                  </div>
                   <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
                 </div>
               </div>
-              <div class="tv-icon" onClick={handleTvShow}>
-                <p class="mb-0">
-                  <i class="fa fa-tv"></i>
-                </p>
-              </div>
+
               <ul className="nav nav-tabs">
                 <li className="nav-item">
                   <Link
@@ -1035,34 +1036,36 @@ const GameDetails = () => {
                                 )}
                               </div>
                             </div>
+                            <div className="max">
+                              <span>
+                                Min :{" "}
+                                {PostMinMaxGameDetailsData &&
+                                  PostMinMaxGameDetailsData?.Bookmaker &&
+                                  PostMinMaxGameDetailsData?.Bookmaker[0]
+                                    ?.minBet}
+                              </span>
+
+                              <span className="ms">
+                                Max :{" "}
+                                {PostMinMaxGameDetailsData &&
+                                  PostMinMaxGameDetailsData?.Bookmaker &&
+                                  PostMinMaxGameDetailsData?.Bookmaker[0]
+                                    ?.maxBet}
+                              </span>
+                            </div>
+
+                            <marquee className="news-line">
+                              {gameDetailsData?.data &&
+                                gameDetailsData?.data?.Bookmaker[0]
+                                  ?.display_message}
+                            </marquee>
                           </div>
                         ) : (
                           ""
                         )}
-                        <div className="max">
-                          <span>
-                            Min :{" "}
-                            {PostMinMaxGameDetailsData &&
-                              PostMinMaxGameDetailsData?.Bookmaker &&
-                              PostMinMaxGameDetailsData?.Bookmaker[0]?.minBet}
-                          </span>
-
-                          <span className="ms">
-                            Max :{" "}
-                            {PostMinMaxGameDetailsData &&
-                              PostMinMaxGameDetailsData?.Bookmaker &&
-                              PostMinMaxGameDetailsData?.Bookmaker[0]?.maxBet}
-                          </span>
-                        </div>
-
-                        <marquee className="news-line">
-                          {gameDetailsData?.data &&
-                            gameDetailsData?.data?.Bookmaker[0]
-                              ?.display_message}
-                        </marquee>
 
                         {/*  */}
-                        <div></div>
+
                         <div className="fancy-market-container w-100 float-left">
                           <div className="fancy-market">
                             <div>
@@ -1126,114 +1129,105 @@ const GameDetails = () => {
                                               data-v-e03c6f20=""
                                               className="table-body"
                                             ></div>
-                                            {onlyFancyDetails[key].map(
-                                              (item, index) => (
-                                                <>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="fancy-tripple "
-                                                  >
-                                                    {console.log(
-                                                      item.gstatus,
-                                                      "item.gstatus"
-                                                    )}
+                                            {onlyFancyDetails &&
+                                              onlyFancyDetails[key].map(
+                                                (item, index) => (
+                                                  <>
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      data-title={item?.gstatus}
-                                                      // className="table-row"
-                                                      className={`table-row ${
-                                                        item?.gstatus?.toLowerCase() ===
-                                                        "suspended"
-                                                          ? "suspend"
-                                                          : item.gstatus?.toLowerCase() ===
-                                                            "ball running"
-                                                          ? "suspend"
-                                                          : ""
-                                                      }`}
+                                                      className="fancy-tripple "
                                                     >
+                                                      {console.log(
+                                                        item.gstatus,
+                                                        "item.gstatus"
+                                                      )}
                                                       <div
                                                         data-v-e03c6f20=""
-                                                        className="float-left box-w4 country-name"
-                                                        style={{
-                                                          cursor: "pointer",
-                                                        }}
-                                                        onClick={(e) =>
-                                                          handleFancyBook(
-                                                            item.sid
-                                                          )
+                                                        data-title={
+                                                          item?.gstatus
                                                         }
+                                                        // className="table-row"
+                                                        className={`table-row ${
+                                                          item?.gstatus?.toLowerCase() ===
+                                                          "suspended"
+                                                            ? "suspend"
+                                                            : item.gstatus?.toLowerCase() ===
+                                                              "ball running"
+                                                            ? "suspend"
+                                                            : ""
+                                                        }`}
+                                                        // style={{ height: "37px" }}
                                                       >
                                                         <div
                                                           data-v-e03c6f20=""
-                                                          className="float-left fancy-items"
+                                                          className="float-left box-w4 country-name"
+                                                          style={{
+                                                            cursor: "pointer",
+                                                          }}
+                                                          onClick={(e) =>
+                                                            handleFancyBook(
+                                                              item.sid
+                                                            )
+                                                          }
                                                         >
-                                                          <span
+                                                          <div
                                                             data-v-e03c6f20=""
-                                                            className="team-name"
+                                                            className="float-left fancy-items"
                                                             style={{
-                                                              fontSize: "11px",
-                                                              marginLeft:
-                                                                "-9px",
-                                                            }}
-                                                          >
-                                                            <b data-v-e03c6f20="">
-                                                              {item?.nation}
-                                                            </b>
-                                                          </span>
-                                                          <p
-                                                            data-v-e03c6f20=""
-                                                            className="m-b-0"
-                                                          >
-                                                            <span
-                                                              data-v-e03c6f20=""
-                                                              className="float-left ubook fancy-span"
-                                                            >
-                                                              {FancyPNL?.data ? (
+                                                              width: "91%",
+
+                                                              height:
+                                                                FancyPNL?.data &&
                                                                 FancyPNL?.data.find(
                                                                   (itemPnl) =>
                                                                     itemPnl?.marketId ==
                                                                     item?.sid
-                                                                )?.pnl < 0 ? (
-                                                                  <span
-                                                                    className="float-left ubook"
-                                                                    style={{
-                                                                      color:
-                                                                        "red",
-                                                                    }}
-                                                                  >
-                                                                    {" "}
-                                                                    <>
-                                                                      {
-                                                                        FancyPNL?.data.find(
-                                                                          (
-                                                                            itemPnl
-                                                                          ) =>
-                                                                            itemPnl?.marketId ==
-                                                                            item?.sid
-                                                                        )?.pnl
-                                                                      }
-                                                                      <div
-                                                                        data-v-e03c6f20=""
-                                                                        className="float-right v-m"
-                                                                      >
-                                                                        <img
-                                                                          alt="Black Ladder"
-                                                                          src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder-black.png"
-                                                                          class="float-right ladder-icon"
-                                                                        ></img>
-                                                                      </div>
-                                                                    </>
-                                                                  </span>
-                                                                ) : (
-                                                                  <span
-                                                                    className="float-left ubook"
-                                                                    style={{
-                                                                      color:
-                                                                        "green",
-                                                                    }}
-                                                                  >
-                                                                    {" "}
-                                                                    {FancyPNL?.data ? (
+                                                                )?.pnl ===
+                                                                  undefined
+                                                                  ? "20px"
+                                                                  : "",
+                                                            }}
+                                                          >
+                                                            <span
+                                                              data-v-e03c6f20=""
+                                                              className="team-name"
+                                                              style={{
+                                                                fontSize:
+                                                                  "11px",
+                                                                marginLeft:
+                                                                  "-9px",
+                                                              }}
+                                                            >
+                                                              <b data-v-e03c6f20="">
+                                                                {item?.nation}
+                                                              </b>
+                                                            </span>
+                                                            <p
+                                                              data-v-e03c6f20=""
+                                                              className="m-b-0"
+                                                            >
+                                                              <span
+                                                                data-v-e03c6f20=""
+                                                                className="float-left ubook fancy-span"
+                                                                style={{
+                                                                  height:
+                                                                    "14px",
+                                                                }}
+                                                              >
+                                                                {FancyPNL?.data ? (
+                                                                  FancyPNL?.data.find(
+                                                                    (itemPnl) =>
+                                                                      itemPnl?.marketId ==
+                                                                      item?.sid
+                                                                  )?.pnl < 0 ? (
+                                                                    <span
+                                                                      className="float-left ubook"
+                                                                      style={{
+                                                                        color:
+                                                                          "red",
+                                                                      }}
+                                                                    >
+                                                                      {" "}
                                                                       <>
                                                                         {
                                                                           FancyPNL?.data.find(
@@ -1255,170 +1249,205 @@ const GameDetails = () => {
                                                                           ></img>
                                                                         </div>
                                                                       </>
-                                                                    ) : (
-                                                                      ""
-                                                                    )}
-                                                                    <div
-                                                                      data-v-e03c6f20=""
-                                                                      className="float-right v-m"
+                                                                    </span>
+                                                                  ) : (
+                                                                    <span
+                                                                      className="float-left ubook"
+                                                                      style={{
+                                                                        color:
+                                                                          "green",
+                                                                      }}
                                                                     >
-                                                                      <img
-                                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder.png"
-                                                                        className="float-right ladder-icon"
-                                                                        alt=""
-                                                                      />
-                                                                    </div>
-                                                                  </span>
-                                                                )
-                                                              ) : (
-                                                                ""
-                                                              )}
-                                                            </span>
-                                                          </p>
+                                                                      {" "}
+                                                                      {FancyPNL?.data ? (
+                                                                        <>
+                                                                          {
+                                                                            FancyPNL?.data.find(
+                                                                              (
+                                                                                itemPnl
+                                                                              ) =>
+                                                                                itemPnl?.marketId ==
+                                                                                item?.sid
+                                                                            )
+                                                                              ?.pnl
+                                                                          }
+                                                                          <div
+                                                                            data-v-e03c6f20=""
+                                                                            className="float-right v-m"
+                                                                          >
+                                                                            <img
+                                                                              alt="Black Ladder"
+                                                                              src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder-black.png"
+                                                                              class="float-right ladder-icon"
+                                                                            ></img>
+                                                                          </div>
+                                                                        </>
+                                                                      ) : (
+                                                                        ""
+                                                                      )}
+                                                                      <div
+                                                                        data-v-e03c6f20=""
+                                                                        className="float-right v-m"
+                                                                      >
+                                                                        <img
+                                                                          src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder.png"
+                                                                          className="float-right ladder-icon"
+                                                                          alt=""
+                                                                        />
+                                                                      </div>
+                                                                    </span>
+                                                                  )
+                                                                ) : (
+                                                                  ""
+                                                                )}
+                                                              </span>
+                                                            </p>
+                                                          </div>
                                                         </div>
+                                                        <div
+                                                          data-v-e03c6f20=""
+                                                          className="box-w1 float-left back  light-bg  hidden-portrait dis-none"
+                                                        ></div>
+                                                        <div
+                                                          data-v-e03c6f20=""
+                                                          className="box-w1 float-left back  light-bg hidden-portrait dis-none"
+                                                        ></div>
+
+                                                        <div
+                                                          data-v-e03c6f20=""
+                                                          className={`box-w1 lay float-left text-center ${
+                                                            item?.l1 !==
+                                                              previousStateFancyBlinker &&
+                                                            previousStateFancyBlinker[
+                                                              key
+                                                            ]?.[index]?.l1
+                                                              ? "blink1"
+                                                              : " "
+                                                          }`}
+                                                        >
+                                                          <button
+                                                            data-v-e03c6f20=""
+                                                            className="lay"
+                                                            onClick={() =>
+                                                              handleBitValueFancy(
+                                                                item?.l1,
+                                                                item.nation,
+                                                                "lay",
+                                                                true,
+                                                                item,
+                                                                key,
+                                                                item?.ls1
+                                                              )
+                                                            }
+                                                          >
+                                                            <span
+                                                              data-v-e03c6f20=""
+                                                              className="odd d-block "
+                                                            >
+                                                              {item?.l1}
+                                                            </span>{" "}
+                                                            <span data-v-e03c6f20="">
+                                                              {item?.ls1}
+                                                            </span>
+                                                          </button>
+                                                        </div>
+
+                                                        <div
+                                                          // previousStateFancyBlinker
+                                                          data-v-e03c6f20=""
+                                                          className={`box-w1 back float-left text-center ${
+                                                            item?.b1 !==
+                                                              previousStateFancyBlinker &&
+                                                            previousStateFancyBlinker[
+                                                              key
+                                                            ]?.[index]?.bi
+                                                              ? "blink1"
+                                                              : " "
+                                                          }`}
+                                                        >
+                                                          <button
+                                                            data-v-e03c6f20=""
+                                                            className="back"
+                                                            onClick={() =>
+                                                              handleBitValueFancy(
+                                                                item?.b1,
+                                                                item.nation,
+                                                                "back",
+                                                                true,
+                                                                item,
+                                                                key,
+                                                                item?.bs1
+                                                              )
+                                                            }
+                                                          >
+                                                            <span
+                                                              data-v-e03c6f20=""
+                                                              className="odd d-block"
+                                                            >
+                                                              {item?.b1}
+                                                            </span>{" "}
+                                                            <span data-v-e03c6f20="">
+                                                              {item?.bs1}
+                                                            </span>
+                                                          </button>
+                                                        </div>
+                                                        <div
+                                                          data-v-e03c6f20=""
+                                                          className="box-w1 float-left  lay  light-bg hidden-portrait dis-none"
+                                                        ></div>
+                                                        <div
+                                                          data-v-e03c6f20=""
+                                                          className="box-w1 float-left lay light-bg  hidden-portrait dis-none"
+                                                        ></div>
                                                       </div>
-                                                      <div
-                                                        data-v-e03c6f20=""
-                                                        className="box-w1 float-left back  light-bg  hidden-portrait dis-none"
-                                                      ></div>
-                                                      <div
-                                                        data-v-e03c6f20=""
-                                                        className="box-w1 float-left back  light-bg hidden-portrait dis-none"
-                                                      ></div>
 
                                                       <div
                                                         data-v-e03c6f20=""
-                                                        className={`box-w1 lay float-left text-center ${
-                                                          item?.l1 !==
-                                                            previousStateFancyBlinker &&
-                                                          previousStateFancyBlinker[
-                                                            key
-                                                          ]?.[index]?.l1
-                                                            ? "blink1"
-                                                            : " "
-                                                        }`}
-                                                      >
-                                                        <button
-                                                          data-v-e03c6f20=""
-                                                          className="lay"
-                                                          onClick={() =>
-                                                            handleBitValueFancy(
-                                                              item?.l1,
-                                                              item.nation,
-                                                              "lay",
-                                                              true,
-                                                              item,
-                                                              key,
-                                                              item?.ls1
-                                                            )
-                                                          }
-                                                        >
-                                                          <span
-                                                            data-v-e03c6f20=""
-                                                            className="odd d-block "
-                                                          >
-                                                            {item?.l1}
-                                                          </span>{" "}
-                                                          <span data-v-e03c6f20="">
-                                                            {item?.ls1}
-                                                          </span>
-                                                        </button>
-                                                      </div>
-
-                                                      <div
-                                                        // previousStateFancyBlinker
-                                                        data-v-e03c6f20=""
-                                                        className={`box-w1 back float-left text-center ${
-                                                          item?.b1 !==
-                                                            previousStateFancyBlinker &&
-                                                          previousStateFancyBlinker[
-                                                            key
-                                                          ]?.[index]?.bi
-                                                            ? "blink1"
-                                                            : " "
-                                                        }`}
-                                                      >
-                                                        <button
-                                                          data-v-e03c6f20=""
-                                                          className="back"
-                                                          onClick={() =>
-                                                            handleBitValueFancy(
-                                                              item?.b1,
-                                                              item.nation,
-                                                              "back",
-                                                              true,
-                                                              item,
-                                                              key,
-                                                              item?.bs1
-                                                            )
-                                                          }
-                                                        >
-                                                          <span
-                                                            data-v-e03c6f20=""
-                                                            className="odd d-block"
-                                                          >
-                                                            {item?.b1}
-                                                          </span>{" "}
-                                                          <span data-v-e03c6f20="">
-                                                            {item?.bs1}
-                                                          </span>
-                                                        </button>
-                                                      </div>
-                                                      <div
-                                                        data-v-e03c6f20=""
-                                                        className="box-w1 float-left  lay  light-bg hidden-portrait dis-none"
-                                                      ></div>
-                                                      <div
-                                                        data-v-e03c6f20=""
-                                                        className="box-w1 float-left lay light-bg  hidden-portrait dis-none"
+                                                        className="fancy-tripple"
                                                       ></div>
                                                     </div>
-
                                                     <div
                                                       data-v-e03c6f20=""
-                                                      className="fancy-tripple"
-                                                    ></div>
-                                                  </div>
-                                                  <div
-                                                    data-v-e03c6f20=""
-                                                    className="min-max  text-right"
-                                                  >
-                                                    <p
-                                                      data-v-e03c6f20=""
-                                                      className="minMax"
+                                                      className="min-max  text-right"
                                                     >
-                                                      <span
+                                                      <p
                                                         data-v-e03c6f20=""
-                                                        className="text-dark"
+                                                        className="minMax"
                                                       >
-                                                        Max :{" "}
-                                                        <span data-v-e03c6f20="">
-                                                          {onlyFancyMaxMinDetails &&
-                                                            onlyFancyMaxMinDetails[
-                                                              key
-                                                            ]?.[index]?.maxBet}
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="text-dark"
+                                                        >
+                                                          Max :{" "}
+                                                          <span data-v-e03c6f20="">
+                                                            {onlyFancyMaxMinDetails &&
+                                                              onlyFancyMaxMinDetails[
+                                                                key
+                                                              ]?.[index]
+                                                                ?.maxBet}
+                                                          </span>
+                                                        </span>{" "}
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="text-dark"
+                                                          style={{
+                                                            marginRight: "7px",
+                                                          }}
+                                                        >
+                                                          Min :{" "}
+                                                          <span data-v-e03c6f20="">
+                                                            {onlyFancyMaxMinDetails &&
+                                                              onlyFancyMaxMinDetails[
+                                                                key
+                                                              ]?.[index]
+                                                                ?.minBet}
+                                                          </span>
                                                         </span>
-                                                      </span>{" "}
-                                                      <span
-                                                        data-v-e03c6f20=""
-                                                        className="text-dark"
-                                                        style={{
-                                                          marginRight: "7px",
-                                                        }}
-                                                      >
-                                                        Min :{" "}
-                                                        <span data-v-e03c6f20="">
-                                                          {onlyFancyMaxMinDetails &&
-                                                            onlyFancyMaxMinDetails[
-                                                              key
-                                                            ]?.[index]?.minBet}
-                                                        </span>
-                                                      </span>
-                                                    </p>
-                                                  </div>
-                                                </>
-                                              )
-                                            )}
+                                                      </p>
+                                                    </div>
+                                                  </>
+                                                )
+                                              )}
                                           </>
                                         )
                                       )}
@@ -1443,30 +1472,7 @@ const GameDetails = () => {
                   openBet ? "active show " : ""
                 } opennnnn`}
               >
-                {/* m-t-10 */}
                 <section className="my-bets-container">
-                  {/* <div
-                  data-toggle="collapse"
-                  data-target=".unmatched-bet"
-                  class={`toggleable-list-title ${
-                    unmatchedBets === true ? "" : "collapsed"
-                  }`}
-                >
-                  <span>Unmatched Bets</span>
-                  <i
-                    className="fas fa-angle-down toggle-icon float-right m-r-10"
-                    onClick={handleUnmatched}
-                  ></i>
-                </div>
-
-                <div
-                  className={`events unmatched-bet ${
-                    unmatchedBets === true ? "collapse " : "collapse show"
-                  } `}
-                >
-                  <div className="message">You have no unmatched bets</div>
-                </div> */}
-
                   <div
                     data-toggle="collapse"
                     data-target=".matched-bet"

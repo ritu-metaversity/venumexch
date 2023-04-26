@@ -106,7 +106,7 @@ const HomePage = () => {
                           </div>
                           <div
                             className="itdasdasdsa"
-                            style={{ paddingLeft: "40px" }}
+                            style={{ paddingLeft: "40px", width: "91%" }}
                           >
                             <span className=" game-name v-m">
                               {item?.matchName}
