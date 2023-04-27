@@ -417,7 +417,7 @@ label.active1.btn.btn-primary {
 }
 
 .customclass {
-    position: fixed;
+    /* position: fixed; */
     bottom: 11% !important;
     left: 3% !important;
 }

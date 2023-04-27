@@ -107,13 +107,13 @@ a:-webkit-any-link {
     text-rendering: auto;
     line-height: 1;
 }
-* {
+/* * {
     outline: 0 !important;
 }
 *, *::before, *::after {
     box-sizing: border-box;
-}
-user agent stylesheet
+} */
+/* user agent stylesheet */
 i {
     font-style: italic;
 }
@@ -136,13 +136,13 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
     text-rendering: auto;
     line-height: 1;
 }
-* {
+/* * {
     outline: 0 !important;
 }
 *, *::before, *::after {
     box-sizing: border-box;
 }
-user agent stylesheet
+user agent stylesheet */
 i {
     font-style: italic;
 }

@@ -164,13 +164,13 @@ table {
     vertical-align: top;
     border-top: 1px solid #dee2e6;
 }
-* {
+/* * {
     outline: 0 !important;
 }
 *, *::before, *::after {
     box-sizing: border-box;
 }
-user agent stylesheet
+user agent stylesheet */
 td {
     display: table-cell;
     vertical-align: inherit;
