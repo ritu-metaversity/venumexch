@@ -7,7 +7,10 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Footer from "../component/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { postLogin } from "../App/Features/auth/authActions";
+import {
+  Postisselfbyappurl,
+  postLogin,
+} from "../App/Features/auth/authActions";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -27,8 +30,12 @@ const Login = () => {
   // const [signUpClose, setSignUpClose] = useState(false);
   const handleClose = () => setShow(false);
 
-  const { postLoginData, postLoginDataError, PostuserselfregisterData } =
-    useSelector((state) => state.auth);
+  const {
+    postLoginData,
+    postLoginDataError,
+    PostuserselfregisterData,
+    postisselfbyappurlData,
+  } = useSelector((state) => state.auth);
 
   console.log(PostuserselfregisterData, "userNameuserName");
   // console.log(signUpShow, "userNameuserName");
@@ -124,6 +131,11 @@ const Login = () => {
     navigate("/m/signup");
   };
 
+  let appUrll = window.location.hostname;
+  useEffect(() => {
+    dispatch(Postisselfbyappurl({ appUrl: appUrll }));
+  }, [appUrll]);
+
   return (
     <div id="app">
       <div>
@@ -199,13 +211,17 @@ const Login = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        <button
-                          className="btn btn-login"
-                          onClick={handleSignUp}
-                        >
-                          Sign Up
-                          <i className="ml-2 fas fa-sign-in-alt"></i>
-                        </button>
+                        {postisselfbyappurlData?.data?.selfAllowed === true ? (
+                          <button
+                            className="btn btn-login"
+                            onClick={handleSignUp}
+                          >
+                            Sign Up
+                            <i className="ml-2 fas fa-sign-in-alt"></i>
+                          </button>
+                        ) : (
+                          ""
+                        )}
                         <p className="m-b-0">
                           <small className="recaptchaTerms">
                             This site is protected by reCAPTCHA and the Google
