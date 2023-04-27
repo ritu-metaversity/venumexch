@@ -66,7 +66,6 @@ const RouteMobile = () => {
           <Route path="/m/gamedetail/:id" element={<GameDetails />} />
           <Route path="casino-list" element={<Casinolist />} />
           <Route path="/m/casino/:id" element={<Casino />} />
-          <Route path="/m/Singup1" element={<SingupBanner />} />
           {/* <Route path="/m/login" element={<Login />} /> */}
         </Route>
         <Route
@@ -77,6 +76,8 @@ const RouteMobile = () => {
             </>
           }
         />
+        <Route path="/m/Singup1" element={<SingupBanner />} />
+
         <Route
           path="/m/signup"
           element={

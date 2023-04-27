@@ -576,7 +576,10 @@ const GameDetails = () => {
                         ""
                       )}
 
-                      <div className="m-b-10 main-market w-100 float-left">
+                      <div
+                        className=" main-market w-100 float-left "
+                        style={{ marginBottom: "45px" }}
+                      >
                         {gameDetailsData?.data &&
                           gameDetailsData?.data?.Odds?.map((item11, id1) => {
                             return (
@@ -1085,6 +1088,7 @@ const GameDetails = () => {
                                             <div
                                               data-v-e03c6f20=""
                                               className="table-header"
+                                              style={{ marginBottom: "3px" }}
                                             >
                                               <div
                                                 data-v-e03c6f20=""

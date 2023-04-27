@@ -136,12 +136,12 @@ const Transferstatement = () => {
               </select>
             </div>
             <div className="table-responsive">
-              <table className="table" style={{ width: "98%" }}>
+              <table className="table" style={{ width: "100vh" }}>
                 <thead className="tbodybody">
                   <tr>
                     <th>Date</th>
-                    <th style={{width: "15%"}}>Credit</th>
-                    <th style={{width: "13%"}}>Debit</th>
+                    <th style={{ width: "15%" }}>Credit</th>
+                    <th style={{ width: "13%" }}>Debit</th>
                     <th className="Balance">Balance</th>
                     <th>Remark</th>
                   </tr>
@@ -167,8 +167,13 @@ const Transferstatement = () => {
                           {" "}
                           {moment(el?.date).format("YYYY-MM-DD  - h:mm")}
                         </td>
-                        <td style={{ color: "green",  width: "10%" }}> {el?.credit}</td>
-                        <td style={{ color: "red", width: "15%" }}>{el?.debit}</td>
+                        <td style={{ color: "green", width: "10%" }}>
+                          {" "}
+                          {el?.credit}
+                        </td>
+                        <td style={{ color: "red", width: "15%" }}>
+                          {el?.debit}
+                        </td>
                         <td style={{ width: "15%" }}>{el?.pts}</td>
                         <td style={{ width: "30%" }}>{el?.remark}</td>
                       </tr>
@@ -240,7 +245,12 @@ const Transferstatement = () => {
         centered
       >
         <Modal.Header closeButton style={{ width: "100%" }} className="back1">
-          <Modal.Title id="contained-modal-title-vcenter">Result</Modal.Title>
+          <Modal.Title
+            id="contained-modal-title-vcenter"
+            style={{ marginBottom: "-30px" }}
+          >
+            Result
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ width: "100%" }}>
           <div>

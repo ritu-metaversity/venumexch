@@ -9,21 +9,37 @@ const TransferstatementModal = ({ matchId }) => {
   const dispatch = useDispatch();
   // console.log(matchId);
   const userId = localStorage.getItem("userId");
+
   const { postBetMarketAndUserData } = useSelector((state) => state.auth);
+
+  const [selectBet, setSelectBet] = useState("1");
+  const handleSelectType = (vl) => {
+    setSelectBet(vl);
+    console.log(vl, "dfshfsdhfk");
+  };
+
   useEffect(() => {
     let data = {
       marketId: matchId?.matchid,
       userId: userId,
-      betType: betValue,
+      betType: selectBet,
     };
     dispatch(postBetMarketAndUser(data));
-  }, [dispatch, betValue, userId, matchId]);
+  }, [userId, matchId, selectBet]);
   // console.log(
   //   postBetMarketAndUserData?.data,
   //   "postBetMarketAndUserDatapostBetMarketAndUserData"
   // );
   // betList
 
+  console.log(
+    postBetMarketAndUserData?.data?.totalBets,
+    "postBetMarketAndUserData"
+  );
+  console.log(
+    postBetMarketAndUserData?.data?.totalStake,
+    "postBetMarketAndUserData"
+  );
   return (
     <div>
       <div id="__BVID__287___BV_modal_body_">
@@ -36,23 +52,23 @@ const TransferstatementModal = ({ matchId }) => {
                   <div className="col-6">
                     <div
                       className="form-group mb-0"
-                      style={{ marginTop: "12px", marginLeft: "27px"}}
+                      style={{ marginTop: "12px", marginLeft: "27px" }}
                     >
                       <div
                         id="match_unmatched_delete"
                         role="radiogroup"
                         tabIndex="-1"
                       >
-                        <div className="col-4 custom-control custom-control-inline custom-radio p-l">
+                        <div
+                          className="col-4 custom-control custom-control-inline custom-radio p-l"
+                          // onChange={() => handleSelectType("all")}
+                        >
                           <input
                             id="all"
                             type="radio"
-                            name="match"
-                            autoComplete="off"
                             className="custom-control-input"
-                            onChange={(e) => setBetValue(e.target.value)}
-                            value="1"
-                            defaultChecked
+                            checked={selectBet === "1" ? true : false}
+                            onChange={() => handleSelectType("1")}
                           />
                           <label
                             htmlFor="all"
@@ -65,11 +81,9 @@ const TransferstatementModal = ({ matchId }) => {
                           <input
                             id="Back"
                             type="radio"
-                            name="match"
-                            autoComplete="off"
+                            checked={selectBet === "2" ? true : false}
                             className="custom-control-input"
-                            onChange={(e) => setBetValue(e.target.value)}
-                            value="2"
+                            onChange={() => handleSelectType("2")}
                           />
                           <label
                             htmlFor="Back"
@@ -82,11 +96,9 @@ const TransferstatementModal = ({ matchId }) => {
                           <input
                             id="Lay"
                             type="radio"
-                            name="match"
-                            autoComplete="off"
+                            checked={selectBet === "3" ? true : false}
                             className="custom-control-input"
-                            onChange={(e) => setBetValue(e.target.value)}
-                            value="3"
+                            onChange={() => handleSelectType("3")}
                           />
                           {/* <input type="radio"/> */}
                           <label
@@ -100,24 +112,24 @@ const TransferstatementModal = ({ matchId }) => {
                     </div>
                   </div>
                   <div className="col-6">
-                     <div className="stack-value">
-                        <div className="col-6">
-                           <p>
-                            Total Stake:{" "}
-                            <span className="cback">
-                              {betListData?.totalStake}
-                            </span>
-                          </p>
-                        </div>
-                        <div className="col-6">
-                          <p>
-                            Total Bets:{" "}
-                            <span className="cback">
-                              {betListData?.totalBets}
-                            </span>
-                          </p>
-                        </div>
+                    <div className="stack-value">
+                      <div className="col-6">
+                        <p>
+                          Total Stake:{" "}
+                          <span className="cback">
+                            {postBetMarketAndUserData?.data?.totalStake}
+                          </span>
+                        </p>
                       </div>
+                      <div className="col-6">
+                        <p>
+                          Total Bets:{" "}
+                          <span className="cback">
+                            {postBetMarketAndUserData?.data?.totalBets}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="row row5 mt-2">
@@ -196,216 +208,68 @@ const TransferstatementModal = ({ matchId }) => {
                               </tr>
                             );
                           })} */}
-                          <tr role="row" className="s-table">
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="2"
-                              className="text-left"
-                            >
-                              Nation
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Rate
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Amount
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Win
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Date
-                            </td>
-                          </tr>
-                          <tr role="row" className="s-table">
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="2"
-                              className="text-left"
-                            >
-                              Nation
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Rate
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Amount
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Win
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Date
-                            </td>
-                          </tr>
-                          <tr role="row" className="s-table">
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="2"
-                              className="text-left"
-                            >
-                              Nation
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Rate
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Amount
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Win
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Date
-                            </td>
-                          </tr>
-                          <tr role="row" className="s-table">
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="2"
-                              className="text-left"
-                            >
-                              Nation
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Rate
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Amount
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Win
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Date
-                            </td>
-                          </tr>
-                          <tr role="row" className="s-table">
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="2"
-                              className="text-left"
-                            >
-                              Nation
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Rate
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Amount
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Win
-                            </td>
-                            <td
-                              role="columnheader"
-                              scope="col"
-                              aria-colindex="1"
-                              className="text-left"
-                            >
-                              Date
-                            </td>
-                          </tr>
+
+                          {postBetMarketAndUserData?.data?.betList.length ? (
+                            postBetMarketAndUserData?.data?.betList.map(
+                              (item) => {
+                                return (
+                                  <tr
+                                    role="row"
+                                    className="s-table"
+                                    style={{
+                                      color:
+                                        item?.isback === true
+                                          ? "#2587d0"
+                                          : "#ff6699",
+                                    }}
+                                  >
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="2"
+                                      className="text-left"
+                                    >
+                                      {item?.marketname}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="1"
+                                      className="text-left"
+                                    >
+                                      {item?.odds}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="1"
+                                      className="text-left"
+                                    >
+                                      {item?.stack}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="1"
+                                      className="text-left"
+                                    >
+                                      {item?.netpnl}
+                                    </td>
+                                    <td
+                                      role="columnheader"
+                                      scope="col"
+                                      aria-colindex="1"
+                                      className="text-left"
+                                    >
+                                      {item?.matchedtime}
+                                    </td>
+                                  </tr>
+                                );
+                              }
+                            )
+                          ) : (
+                            <p style={{ color: "red" }}>No Data Found</p>
+                          )}
                         </tbody>
                       </table>
                     </div>
