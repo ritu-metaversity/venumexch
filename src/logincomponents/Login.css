@@ -34,14 +34,23 @@ html {
     left: 0;
     margin-top: 77%;
     height: 161px !important;
+    width: 300px;
     /* margin-left: 92%; */
     pointer-events: auto;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .2);
-    border-radius: 0.9rem;
+    border-radius: 0.3rem;
     /* margin-left: 23% !important; */
     outline: 0;
+}
+
+@media screen and (min-width: 300px) and (max-width: 768px) {
+    .login-confirm-modal .modal-content {
+        width: unset;
+        margin-top: 123%;
+
+    }
 }
 
 
@@ -247,14 +256,21 @@ button.confirmation.btn.btn-primary {
     padding: 0px 13px !important;
     height: 26px;
     font-size: 12px;
-    width: 63% !important;
+    width: 25% !important;
 }
 
 .confirm {
     margin: auto;
+    width: 100%;
 }
 
 .modal-header {
     display: block;
     margin: auto;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8;
 }

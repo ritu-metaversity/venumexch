@@ -7,7 +7,10 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Footer from "../component/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { postLogin } from "../App/Features/auth/authActions";
+import {
+  Postisselfbyappurl,
+  postLogin,
+} from "../App/Features/auth/authActions";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -27,8 +30,12 @@ const Login = () => {
   // const [signUpClose, setSignUpClose] = useState(false);
   const handleClose = () => setShow(false);
 
-  const { postLoginData, postLoginDataError, PostuserselfregisterData } =
-    useSelector((state) => state.auth);
+  const {
+    postLoginData,
+    postLoginDataError,
+    PostuserselfregisterData,
+    postisselfbyappurlData,
+  } = useSelector((state) => state.auth);
 
   console.log(PostuserselfregisterData, "userNameuserName");
   // console.log(signUpShow, "userNameuserName");
@@ -123,7 +130,26 @@ const Login = () => {
   const handleSignUp = () => {
     navigate("/m/signup");
   };
+  let appUrll = window.location.hostname;
 
+  const [selfAllowedd, SetselfAllowedd] = useState("");
+  useEffect(() => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        SetselfAllowedd(res?.data?.data?.selfAllowed);
+      });
+  }, [appUrll]);
+
+  // http://${REACT_APP_API_URL}/admin-new-apis/login/is-self-by-app-url
+
+  // useEffect(() => {
+  //   dispatch(Postisselfbyappurl({ appUrl: appUrll }));
+  // }, [appUrll]);
+  console.log(selfAllowedd, "selfAllowedd");
   return (
     <div id="app">
       <div>
@@ -199,13 +225,17 @@ const Login = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        <button
-                          className="btn btn-login"
-                          onClick={handleSignUp}
-                        >
-                          Sign Up
-                          <i className="ml-2 fas fa-sign-in-alt"></i>
-                        </button>
+                        {selfAllowedd === true ? (
+                          <button
+                            className="btn btn-login"
+                            onClick={handleSignUp}
+                          >
+                            Sign Up
+                            <i className="ml-2 fas fa-sign-in-alt"></i>
+                          </button>
+                        ) : (
+                          ""
+                        )}
                         <p className="m-b-0">
                           <small className="recaptchaTerms">
                             This site is protected by reCAPTCHA and the Google
@@ -240,7 +270,7 @@ const Login = () => {
             backdrop="static"
             keyboard={false}
           >
-            <Modal.Header>
+            <Modal.Header style={{ width: "100%", textAlign: "center" }}>
               <Modal.Title>Please Confirm</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -253,8 +283,8 @@ const Login = () => {
                   Exit
                 </Button>
                 <Button
-                  className="confirmation"
-                  variant="primary"
+                  className="confirmation btn-info"
+                  variant=""
                   onClick={() => handleLoginConfirm("true")}
                 >
                   Confirm

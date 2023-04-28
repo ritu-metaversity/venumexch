@@ -200,8 +200,7 @@ const Setting = () => {
                   </button>
                 ) : (
                   <button
-                    className="btn btn-lg float-right btn-primary m-t-20"
-                    style={{ paddingTop: "7px", fontSize: "14px" }}
+                    className="btn float-right m-t-20 stackBtnEdit"
                     onClick={handleEditStakes}
                   >
                     Edit

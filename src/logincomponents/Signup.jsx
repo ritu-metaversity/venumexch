@@ -93,6 +93,7 @@ const Signup = () => {
       password: password,
       appUrl: window.location.hostname,
       mobile: mobileNumber,
+      userId: userName,
     };
     if (ValidationFile.isEmpty(userName)) {
       setErrorId(true);

@@ -9,7 +9,7 @@ import {
 import "./BitPopup.css";
 
 const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
-  // console.log(bitValue,"llllll")
+  console.log(bitValue, "llllll");
   const { PostGetStack } = useSelector((state) => state.auth);
   const [Bitvalue, setBitValue] = useState(bitValue?.Odds);
   const [updated, setUpdated] = useState("");
@@ -141,10 +141,11 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                 <div className="col-12 p-t-5 p-l-5 p-r-5">
                   <h4 className="m-b-0">
                     <b>
-                      {bitValue?.bitValue?.Odds === ""
-                        ? "Game"
-                        : bitValue?.cname}
+                      {bitValue?.marketNameeee
+                        ? bitValue?.marketNameeee
+                        : bitValue?.gameName}
                     </b>
+                    {/* <b>{bitValue?.gameName}</b> */}
                   </h4>
                 </div>
               </div>
@@ -156,8 +157,9 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                   >
                     <button
                       type="button"
-                      className="stakeactionminus btn"
+                      className="stakeactionminus"
                       // onClick={decrement}
+                      style={{ marginLeft: "31px", width: "32%" }}
                     >
                       <span className="fa fa-minus"></span>
                     </button>{" "}
@@ -173,7 +175,8 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                     />
                     <button
                       type="button"
-                      className="stakeactionminus btn incrementBtn"
+                      style={{ marginLeft: "31px", width: "32%" }}
+                      className="stakeactionminus incrementBtn"
                       // onClick={increment}
                     >
                       <span className="fa fa-plus"></span>

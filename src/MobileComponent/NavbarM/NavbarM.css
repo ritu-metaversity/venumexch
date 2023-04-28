@@ -1,7 +1,7 @@
-
 .news {
     background-color: #2c4f58;
 }
+
 .news {
     padding: 4px 10px;
     color: #fff;
@@ -9,26 +9,28 @@
     width: 100%;
 }
 
-* {
+/* * {
     outline: 0 !important;
 }
 *, *::before, *::after {
     box-sizing: border-box;
 }
-user agent stylesheet
+user agent stylesheet */
 div {
     display: block;
 }
+
 .news .news-line {
     float: left;
     width: calc(100% - 30px);
 }
-* {
+
+/* * {
     outline: 0 !important;
 }
 *, *::before, *::after {
     box-sizing: border-box;
-}
+} */
 
 :host {
     display: inline-block;
@@ -36,17 +38,20 @@ div {
     text-align: initial;
     white-space: nowrap;
 }
-user agent stylesheet
+
+/* user agent stylesheet */
 marquee {
     display: inline-block;
     width: -webkit-fill-available;
 }
+
 .news {
     padding: 4px 10px;
     color: #fff;
     float: left;
     width: 100%;
 }
+
 .fas {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -56,16 +61,19 @@ marquee {
     text-rendering: auto;
     line-height: 1;
 }
+
 .fas {
     font-weight: 900;
 }
+
 .fa-times:before {
     content: "\f00d";
 }
 
+/* 
 *, *::before, *::after {
     box-sizing: border-box;
-}
+} */
 .news .fa-times {
     color: #fff;
     margin-right: 5px;
@@ -76,25 +84,38 @@ marquee {
 .header nav {
     background-color: #0f2327;
 }
+
 .header nav {
     height: 60px;
     padding: 10px;
     float: left;
     width: 100%;
 }
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
     display: block;
 }
-* {
+
+/* * {
     outline: 0 !important;
 }
 *, *::before, *::after {
     box-sizing: border-box;
 }
-user agent stylesheet
+user agent stylesheet */
 nav {
     display: block;
 }
+
 .header .navbar-toggler {
     border: 0;
     float: left;
@@ -102,9 +123,13 @@ nav {
     outline: 0 !important;
 }
 
-button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled) {
+button:not(:disabled),
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled) {
     cursor: pointer;
 }
+
 .navbar-toggler {
     padding: 0.25rem 0.75rem;
     font-size: 1.25rem;
@@ -113,24 +138,39 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
     border: 1px solid transparent;
     border-radius: 0.25rem;
 }
-button, [type=button], [type=reset], [type=submit] {
+
+button,
+[type=button],
+[type=reset],
+[type=submit] {
     -webkit-appearance: button;
 }
-button, select {
+
+button,
+select {
     text-transform: none;
 }
-button, input {
+
+button,
+input {
     overflow: visible;
 }
-input, button, select, optgroup, textarea {
+
+input,
+button,
+select,
+optgroup,
+textarea {
     margin: 0;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
 }
+
 button {
     border-radius: 0;
 }
+
 button {
     appearance: auto;
     writing-mode: horizontal-tb !important;
@@ -156,23 +196,35 @@ button {
     border-color: buttonborder;
     border-image: initial;
 }
+
 .fa-bars:before {
     content: "\f0c9";
 }
-*, *::before, *::after {
+
+/* *, *::before, *::after {
     box-sizing: border-box;
-}
+} */
 .header .fa-bars {
     color: #fff;
     font-size: 22px;
 }
-.fa, .fas {
+
+.fa,
+.fas {
     font-weight: 900;
 }
-.fa, .far, .fas {
+
+.fa,
+.far,
+.fas {
     font-family: "Font Awesome 5 Free";
 }
-.fa, .fab, .fal, .far, .fas {
+
+.fa,
+.fab,
+.fal,
+.far,
+.fas {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     display: inline-block;
@@ -181,51 +233,68 @@ button {
     text-rendering: auto;
     line-height: 1;
 }
-button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled) {
+
+button:not(:disabled),
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled) {
     cursor: pointer;
 }
+
 .float-right {
     float: right !important;
     margin-top: -40px;
 }
-* {
+
+/* * {
     outline: 0 !important;
 }
 *, *::before, *::after {
     box-sizing: border-box;
 }
-user agent stylesheet
+user agent stylesheet */
 div {
     display: block;
 }
+
 .rules-link {
     color: #fff;
     margin-right: 5px;
     float: left;
     margin-top: 10px;
 }
-a, a:hover, a:focus, a:active {
+
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-* {
+
+/* * {
     outline: 0 !important;
 }
 *, *::before, *::after {
     box-sizing: border-box;
 }
-user agent stylesheet
+user agent stylesheet */
 a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
     text-decoration: underline;
 }
-button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled) {
+
+button:not(:disabled),
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled) {
     cursor: pointer;
 }
 
@@ -233,6 +302,7 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
     background-color: #2c4f58;
     color: #fff;
 }
+
 .balance-button {
     font-size: 14px;
     border-radius: 2px;
@@ -244,51 +314,78 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
     border: 0;
     outline: 0 !important;
 }
-button, [type=button], [type=reset], [type=submit] {
+
+button,
+[type=button],
+[type=reset],
+[type=submit] {
     -webkit-appearance: button;
 }
-button, select {
+
+button,
+select {
     text-transform: none;
 }
-button, input {
+
+button,
+input {
     overflow: visible;
 }
-input, button, select, optgroup, textarea {
+
+input,
+button,
+select,
+optgroup,
+textarea {
     margin: 0;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
 }
+
 button {
     border-radius: 0;
 }
-* {
+
+/* * {
     outline: 0 !important;
 }
 *, *::before, *::after {
     box-sizing: border-box;
-}
+} */
 .fa-search:before {
     content: "\f002";
 }
-*, *::before, *::after {
+
+/* *, *::before, *::after {
     box-sizing: border-box;
-}
+} */
 .header .fa-search {
     cursor: pointer;
 }
+
 .header .fa-search {
     color: #fff;
     font-size: 16px;
     margin-top: 10px;
 }
-.fa, .fas {
+
+.fa,
+.fas {
     font-weight: 900;
 }
-.fa, .far, .fas {
+
+.fa,
+.far,
+.fas {
     font-family: "Font Awesome 5 Free";
 }
-.fa, .fab, .fal, .far, .fas {
+
+.fa,
+.fab,
+.fal,
+.far,
+.fas {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     display: inline-block;
@@ -297,33 +394,40 @@ button {
     text-rendering: auto;
     line-height: 1;
 }
-* {
-    outline: 0 !important;
-}
 
+/* * {
+    outline: 0 !important;
+} */
+/* 
 *, *::before, *::after {
     box-sizing: border-box;
-}
+} */
 .rules-link {
     color: #fff;
     margin-right: 5px;
     float: left;
     margin-top: 10px;
 }
-a, a:hover, a:focus, a:active {
+
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-user agent stylesheet
-a:-webkit-any-link {
+
+user agent stylesheet a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
 }
+
 header.header {
     margin: auto auto 0;
     width: 100%;
@@ -331,6 +435,7 @@ header.header {
     position: fixed;
     z-index: 99;
 }
+
 .header-b-menu {
     height: 30px;
     font-size: 13px;
@@ -345,9 +450,11 @@ header.header {
     margin-right: -15px;
     margin-left: -15px;
 }
+
 .header-b-menu .election {
     background: #bb1919;
-    padding: 7px;;
+    padding: 7px;
+    ;
 }
 
 .col {
@@ -355,15 +462,20 @@ header.header {
     flex-grow: 1;
     max-width: 100%;
 }
+
 .header-b-menu a {
     color: #fff;
     font-weight: bold;
 }
 
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
@@ -375,9 +487,11 @@ a:-webkit-any-link {
     cursor: pointer;
     text-decoration: underline;
 }
+
 header.header a {
     color: #f8f9fa !important;
 }
+
 .header .fa-arrow-left {
     font-size: 20px;
     color: #fff;
@@ -387,16 +501,23 @@ header.header a {
 .m-r-10 {
     margin-right: 10px !important;
 }
+
 .m-t-5 {
     margin-top: 5px !important;
 }
-.fa, .fas {
+
+.fa,
+.fas {
     font-weight: 900;
 }
-.fa, .far, .fas {
+
+.fa,
+.far,
+.fas {
     font-family: "Font Awesome 5 Free";
 }
- .fas {
+
+.fas {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     display: inline-block;

@@ -1666,13 +1666,18 @@ strong {
 .tv-icon {
     position: absolute;
     right: 10px;
-    top: 91px;
+    top: 15px;
     cursor: pointer;
 }
 
 .tv-icon i {
     color: #fff;
     font-size: 14px;
+}
+
+.fjsdlkfjld {
+    margin-top: -5%;
+    margin-right: 5%;
 }
 
 .ms {
