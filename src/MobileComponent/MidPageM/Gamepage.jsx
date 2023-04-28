@@ -99,7 +99,7 @@ const Gamepage = () => {
           {""}
           <span className="label">In Play</span> 
         </div>*/}
-        <Link to="/m/mybets" className="" style={{ marginLeft: "82%" }}>
+        <Link to="/m/mybets" className="openbetsssss">
           <span className="open-bets-link">
             Open Bets {""}(
             {PostunsettledData?.data &&

@@ -85,13 +85,17 @@ const Casinolist = () => {
                             <div data-v-6a7f44cc="" className="d-inline-block ">
                               <div className="row">
                                 {/* {console.log(item)} */}
-                                <Link data-v-6a7f44cc="" className="">
+                                <Link data-v-6a7f44cc="" className="buttonsize">
                                   <img
                                     alt=""
                                     data-v-6a7f44cc=""
                                     src={item.imageUrl}
-                                    className="img-fluid casino-body-images"
+                                    className="img-fluid casino-body-images "
                                   />
+                                  <button className="buttnnnname">
+                                    {" "}
+                                    {item?.gameName}
+                                  </button>
                                 </Link>
                               </div>
                             </div>

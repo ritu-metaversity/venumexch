@@ -132,16 +132,38 @@ img {
 .casino-page .page-title {
     border-bottom: 3px solid #31424a;
 } */
-.buttttt{
+.buttttt {
     margin-top: 93px;
 }
-.CasinolButton{
+
+.CasinolButton {
     padding: 20px;
 }
+
 .casino-body-images {
     width: 75%;
 }
-.casino-images{
+
+.casino-images {
     width: 39px;
     margin-right: 8px;
 }
+
+.buttnnnname {
+    width: 75%;
+
+    background-color: #183f45 !important;
+    /* border-radius: 0px 0px 6px 6px; */
+    border: none;
+    background: none;
+}
+
+/* @media only screen and (min-width:800px) and (max-width: 2000px) {
+    .buttonsize {
+        width: 59%;
+    }
+} */
+
+/* .buttonsize {
+    width: 59%;
+} */

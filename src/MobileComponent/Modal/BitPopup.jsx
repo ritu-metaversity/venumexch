@@ -204,22 +204,24 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
               <div className="row m-t-10 m-l-5 m-r-5">
                 {/* {JSON.stringify(PostGetStack)} */}
                 {PostGetStack?.data &&
-                  Object.values(PostGetStack?.data).map((key, value) => {
-                    return (
-                      <div className="col-4 p-l-5 p-r-5">
-                        <div
-                          className="btnVal"
-                          onClick={() => handleInput(key)}
-                        >
-                          {/* <button
+                  Object.values(PostGetStack?.data)
+                    .slice(0, 6)
+                    .map((key, value) => {
+                      return (
+                        <div className="col-4 p-l-5 p-r-5">
+                          <div
+                            className="btnVal"
+                            onClick={() => handleInput(key)}
+                          >
+                            {/* <button
                             type="button"
                             className="btn btn-bet m-b-10  col-3" */}
-                          {/* // > */}+{key}
-                          {/* </button> */}
+                            {/* // > */}+{key}
+                            {/* </button> */}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
               </div>
               <div className="row m-t-10 m-l-5 m-r-5 p-b-20">
                 <div className="col-6 p-l-5 p-r-5">
@@ -354,7 +356,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                                     : "text-danger"
                                 }`}
                               >
-                                {profit.value}
+                                {profit.value.toFixed(2)}
                               </span>
                             </b>
                           </div>
@@ -367,7 +369,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                                 : ""
                             }`}
                           >
-                            {newVal}
+                            {newVal.toFixed(2)}
                           </div>
                         </div>
                       );
