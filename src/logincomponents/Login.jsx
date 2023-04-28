@@ -130,12 +130,26 @@ const Login = () => {
   const handleSignUp = () => {
     navigate("/m/signup");
   };
-
   let appUrll = window.location.hostname;
+
+  const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
-    dispatch(Postisselfbyappurl({ appUrl: appUrll }));
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        SetselfAllowedd(res?.data?.data?.selfAllowed);
+      });
   }, [appUrll]);
 
+  // http://${REACT_APP_API_URL}/admin-new-apis/login/is-self-by-app-url
+
+  // useEffect(() => {
+  //   dispatch(Postisselfbyappurl({ appUrl: appUrll }));
+  // }, [appUrll]);
+  console.log(selfAllowedd, "selfAllowedd");
   return (
     <div id="app">
       <div>
@@ -211,7 +225,7 @@ const Login = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        {postisselfbyappurlData?.data?.selfAllowed === true ? (
+                        {selfAllowedd === true ? (
                           <button
                             className="btn btn-login"
                             onClick={handleSignUp}
@@ -256,7 +270,7 @@ const Login = () => {
             backdrop="static"
             keyboard={false}
           >
-            <Modal.Header style={{width: "100%", textAlign:"center"}}>
+            <Modal.Header style={{ width: "100%", textAlign: "center" }}>
               <Modal.Title>Please Confirm</Modal.Title>
             </Modal.Header>
             <Modal.Body>
