@@ -31,7 +31,11 @@ import Deposit from "./MobileComponent/RightMenu/DepositPages/Deposit";
 import WithDraw from "./MobileComponent/RightMenu/WithDrawPage/WithDraw";
 import Signup from "./logincomponents/Signup";
 import Gamepage from "./MobileComponent/MidPageM/Gamepage";
-import SingupBanner from "./MobileComponent/LandingForSignup/SingupBanner";
+import SingupBanner1 from "./MobileComponent/LandingForSignup/SingupBanner1";
+import SingupBanner2 from "./MobileComponent/LandingForSignup/SingupBanner2";
+import SingupBanner3 from "./MobileComponent/LandingForSignup/SingupBanner3";
+import SingupBanner4 from "./MobileComponent/LandingForSignup/SingupBanner4";
+import SingupBanner5 from "./MobileComponent/LandingForSignup/SingupBanner5";
 // const Login = lazy(() => import('./logincomponents/Login'))
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -76,7 +80,11 @@ const RouteMobile = () => {
             </>
           }
         />
-        <Route path="/m/Singup1" element={<SingupBanner />} />
+        <Route path="/m/Singup1" element={<SingupBanner1 />} />
+        <Route path="/m/Singup2" element={<SingupBanner2 />} />
+        <Route path="/m/Singup3" element={<SingupBanner3 />} />
+        <Route path="/m/Singup4" element={<SingupBanner4 />} />
+        <Route path="/m/Singup5" element={<SingupBanner5 />} />
 
         <Route
           path="/m/signup"

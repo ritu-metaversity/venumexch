@@ -577,6 +577,7 @@ const GameDetails = () => {
                       )}
 
                       <div
+                        // TNL201706678 vc
                         className=" main-market w-100 float-left "
                         style={{ marginBottom: "45px" }}
                       >

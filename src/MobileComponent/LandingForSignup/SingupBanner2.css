@@ -1,6 +1,6 @@
 .backgroundImg {
     padding: 5%;
-    background-image: url("/public/maggibook5_1.jpg");
+    background-image: url("lords 2_1.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -273,7 +273,7 @@
 
     .backgroundImg {
         padding: 5%;
-        background-image: url("/public/Artboard2-2.png");
+        background-image: url("lords 2_2.png");
         background-position: unset;
         background-repeat: no-repeat;
         background-size: cover;
@@ -342,7 +342,7 @@
 
     .backgroundImg {
         padding: 5%;
-        background-image: url("/public/Artboard2-2.png");
+        background-image: url("lords 2_2.png");
         background-position: unset;
         background-repeat: no-repeat;
         background-size: cover;

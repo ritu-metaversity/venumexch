@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import "./SingupBanner.css";
+import React, { useState } from 'react'
+import "./SingupBanner3.css";
 
 import * as yup from "yup";
 
-const SingupBanner = () => {
+const SingupBanner3 = () => {
   const [passwordShow, setPasswordShow] = useState(false);
   const [CpasswordShow, setCPasswordShow] = useState(false);
   const [input, setInput] = useState({
@@ -145,4 +145,4 @@ const SingupBanner = () => {
     </>
   );
 };
-export default SingupBanner;
+export default SingupBanner3

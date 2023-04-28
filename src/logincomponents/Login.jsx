@@ -256,7 +256,7 @@ const Login = () => {
             backdrop="static"
             keyboard={false}
           >
-            <Modal.Header>
+            <Modal.Header style={{width: "100%", textAlign:"center"}}>
               <Modal.Title>Please Confirm</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -269,8 +269,8 @@ const Login = () => {
                   Exit
                 </Button>
                 <Button
-                  className="confirmation"
-                  variant="primary"
+                  className="confirmation btn-info"
+                  variant=""
                   onClick={() => handleLoginConfirm("true")}
                 >
                   Confirm
