@@ -74,7 +74,7 @@ const Casinolist = () => {
                     return (
                       <div
                         data-v-6a7f44cc=""
-                        className="col-4 m-b-10"
+                        className="colllcsss m-b-10"
                         onClick={() => handleChangeaa(item.gameId)}
                       >
                         <div data-v-6a7f44cc="" className="events ">
@@ -83,7 +83,7 @@ const Casinolist = () => {
                             className="events-row text-center"
                           >
                             <div data-v-6a7f44cc="" className="d-inline-block ">
-                              <div className="row">
+                              <div className="row iconshadow">
                                 {/* {console.log(item)} */}
                                 <Link data-v-6a7f44cc="" className="buttonsize">
                                   <img

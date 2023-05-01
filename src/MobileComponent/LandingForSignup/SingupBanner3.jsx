@@ -50,7 +50,7 @@ const SingupBanner3 = () => {
   };
   return (
     <>
-      <div className="backgroundImg">
+      <div className="backgroundImglords3">
         <div className="">
           <div className="row px-lg-0 px-sm-5">
             {/* <div className="col-md-12 col-lg-6">
