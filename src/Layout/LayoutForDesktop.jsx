@@ -6,6 +6,7 @@ import Footer from "../component/Footer/Footer";
 import NavBar from "../component/navBar/NavBar";
 import NavBarWithOutLogin from "../component/navBar/NavBarWithOutLogin";
 import Home from "../component/Home/Home";
+import './LayoutForDesktop.css';
 
 const LayoutForDesktop = () => {
   const [footerCondition, setFooterCondion] = useState(false);
@@ -23,7 +24,9 @@ const LayoutForDesktop = () => {
       {footerCondition ? <NavBarWithOutLogin /> : <NavBar />}
 
       <Outlet />
+      <div className="footer-desk">
       <Footer />
+      </div>
     </div>
   );
 };

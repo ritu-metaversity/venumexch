@@ -22,40 +22,53 @@ function App() {
 
   const { pathname } = useLocation();
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setMoileRoutes(true);
+      if (!pathname.includes("/m/")) {
+        navigate("./m/home");
+      }
+      // console.log("mobile")
+    } else {
+      setMoileRoutes(false);
+      if (pathname.includes("/m/")) {
+        navigate("./home");
+      }
+      // console.log("pc")
+    }
+  }, []);
 
 
 
-  },[])
-
+  // console.log(mobileRoutes, "fsdfsd")
   return (
 
-      <div className="App">
+    <div className="App">
 
-<ToastContainer
-autoClose={5000}
-hideProgressBar={true}
-newestOnTop={false}
-closeOnClick={false}
-rtl={false}
-pauseOnFocusLoss={false}
-draggable={false}
-pauseOnHover={false}
-theme="light"
-position= "bottom-left"
-closeButton={<div style={{display:'flex',alignItems:"center",paddingInline:"3px"}}>
-<ImCross/>
-</div>}
-icon={<></>}
-progress= {undefined}
-/>
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+        position="bottom-left"
+        closeButton={<div style={{ display: 'flex', alignItems: "center", paddingInline: "3px" }}>
+          <ImCross />
+        </div>}
+        icon={<></>}
+        progress={undefined}
+      />
 
 
-        {/* {mobileRoutes === true ? <RoutesPages /> : */}
-         <RouteMobile />
-         {/* } */}
+      {mobileRoutes === true ? <RoutesPages /> :
+        <RouteMobile />
+      }
 
-      </div>
+    </div>
 
 
   );
