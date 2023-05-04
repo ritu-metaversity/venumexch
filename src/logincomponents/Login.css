@@ -48,7 +48,7 @@ html {
 @media screen and (min-width: 300px) and (max-width: 768px) {
     .login-confirm-modal .modal-content {
         width: unset;
-        margin-top: 123%;
+        margin-top: 76%;
 
     }
 }
@@ -274,3 +274,17 @@ button.confirmation.btn.btn-primary {
     background-color: #17a2b8 !important;
     border-color: #17a2b8;
 }
+
+.modaltitleeee {
+    margin-left: -63%;
+}
+
+@media only screen and (min-height:680px) and (max-height: 1000px) {
+    .login-confirm-modal .modal-content {
+        /* width: unset; */
+        margin-top: 84%;
+
+    }
+}
+
+/* width: 44%; */

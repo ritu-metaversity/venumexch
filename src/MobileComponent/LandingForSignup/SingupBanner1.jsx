@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./SingupBanner1.css";
-
 import * as yup from "yup";
-
 const SingupBanner1 = () => {
   const [passwordShow, setPasswordShow] = useState(false);
   const [CpasswordShow, setCPasswordShow] = useState(false);
@@ -13,7 +11,7 @@ const SingupBanner1 = () => {
     mobile: "",
     sms: "",
   });
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(true)
   const handlePasswordShow = () => {
     if (passwordShow === true) {
       setPasswordShow(false);
@@ -42,25 +40,19 @@ const SingupBanner1 = () => {
   let schema = yup.object().shape({
     username: yup.string().required("Email is Required").email(),
     password: yup.string().required("Password is required").min(4).max(10),
-    sms: yup.number().required().integer,
+    sms: yup.number().required().integer
   });
-  const validation = async () => {
+const validation = async()=>{
     const isValid = await schema.isValid(input);
-    // console.log(isValid);
-  };
+}
   return (
     <>
-      <div className="backgroundImg">
+      <div className="backgroundImglords1">
         <div className="">
           <div className="row px-lg-0 px-sm-5">
-            {/* <div className="col-md-12 col-lg-6">
-              <div className="videoholder">
-                <!-- video here -->
-                </div>
-            </div> */}
             <div className="">
               <div className="formholder">
-                <h4 className="heading">GET ₹1K RISK FREE PREDICTION</h4>
+                <h4 className="heading">Deposit ₹500, Get ₹2500</h4>
                 <form id="form" className="mainform">
                   <div className="username">
                     <input
@@ -88,8 +80,7 @@ const SingupBanner1 = () => {
                     <p className="eye">
                       <i
                         className="fa fa-eye-slash"
-                        onClick={handlePasswordShow}
-                      ></i>
+                        onClick={handlePasswordShow}></i>
                     </p>
                   </div>
                   <div className="password">
@@ -105,8 +96,7 @@ const SingupBanner1 = () => {
                     <p className="eye">
                       <i
                         className="fa fa-eye-slash"
-                        onClick={handleConfirmPassword}
-                      ></i>
+                        onClick={handleConfirmPassword}></i>
                     </p>
                   </div>
                   <div className="mobilecode">
@@ -122,11 +112,7 @@ const SingupBanner1 = () => {
                     />
                   </div>
                   <div className="signupbuttonholder">
-                    <button
-                      disabled={disabled}
-                      className="custom-btn btn-7"
-                      id="_signup"
-                    >
+                    <button disabled={disabled} className="custom-btn btn-7" id="_signup">
                       <span>Sign Up</span>
                     </button>
                   </div>

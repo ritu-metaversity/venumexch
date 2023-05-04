@@ -562,7 +562,8 @@ const GameDetails = () => {
                           <div className="scorecard scorecard-mobile">
                             <div className="score-inner">
                               <iframe
-                                src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                               src={`http://15.207.182.173:3050/event/${id}`}
+                                // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                 width="100%"
                                 height="290px"
                                 className="score-card"

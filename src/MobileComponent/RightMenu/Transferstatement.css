@@ -112,7 +112,7 @@ button:disabled {
     .pagination {
         font-size: 31px;
         margin-left: 30%;
-        margin-top: -29px;
+        margin-top: 0px;
         /* position: fixed; */
         left: 31%;
         bottom: 16%;

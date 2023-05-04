@@ -298,7 +298,7 @@ const BettingProfitLoss = () => {
   return (
     <>
       <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
-        <div className="home-page home-page-news">
+        <div className="home-page">
           <div className="container-inner">
             <div>
               <ToggleButtonGroup
@@ -435,60 +435,57 @@ const BettingProfitLoss = () => {
               <h2 class="page-title p-l-15">Betting Profit &amp; Loss</h2>
 
               {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
-<div className="mainDivFor">
-
-
-              {PostprofitlossmatchwiseDatatata?.data &&
-              PostprofitlossmatchwiseDatatata?.data?.market &&
-              PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
-                PostprofitlossmatchwiseDatatata?.data?.market.map((el) => (
-                  <div class="dsfsfdfsd">
-                    <div class="info">
-                      <p class="m-b-0  game-name">
-                        {console.log(el, "el?.matchId}")}
-                        <Link
-                          to={`/m/gamedetail/${el?.matchId}`}
-                          class="betting-back"
-                        >
-                          <b>{el?.matchName}</b>
-                        </Link>
-                      </p>
-                      <p class="m-b-0">
-                        <span>
-                          <b>commssionMila : </b>{" "}
-                          <span>{el?.commssionMila}</span>
-                        </span>
-                      </p>
-                      {/* <p class="m-b-0"><span><b>Settled Time:</b> <span>15/03/2023 23:02</span></span></p> */}
-                    </div>
-                    <div class="pnl-titles">
-                      <p class="m-b-0">
-                        <b>Net Win:</b>
-                      </p>
-                    </div>
-                    <div class="pnl-numbers">
-                      {el?.pnl < 0 ? (
-                        <p class="m-b-0 negative">
-                          <b>{el?.pnl}</b>
+              <div className="mainDivFor">
+                {PostprofitlossmatchwiseDatatata?.data &&
+                PostprofitlossmatchwiseDatatata?.data?.market &&
+                PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
+                  PostprofitlossmatchwiseDatatata?.data?.market.map((el) => (
+                    <div class="dsfsfdfsd">
+                      <div class="info">
+                        <p class="m-b-0  game-name">
+                          {console.log(el, "el?.matchId}")}
+                          <Link
+                            to={`/m/gamedetail/${el?.matchId}`}
+                            class="betting-back"
+                          >
+                            <b>{el?.matchName}</b>
+                          </Link>
                         </p>
-                      ) : (
-                        <p style={{ color: "green" }}>
-                          <b>{el?.pnl}</b>
+                        <p class="m-b-0">
+                          <span>
+                            <b>commssionMila : </b>{" "}
+                            <span>{el?.commssionMila}</span>
+                          </span>
                         </p>
-                      )}
+                        {/* <p class="m-b-0"><span><b>Settled Time:</b> <span>15/03/2023 23:02</span></span></p> */}
+                      </div>
+                      <div class="pnl-titles">
+                        <p class="m-b-0">
+                          <b>Net Win:</b>
+                        </p>
+                      </div>
+                      <div class="pnl-numbers">
+                        {el?.pnl < 0 ? (
+                          <p class="m-b-0 negative">
+                            <b>{el?.pnl}</b>
+                          </p>
+                        ) : (
+                          <p style={{ color: "green" }}>
+                            <b>{el?.pnl}</b>
+                          </p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))
-              ) : (
-                <div className="nodataforund">NO DATA FOUND</div>
-              )}
-              
+                  ))
+                ) : (
+                  <div className="nodataforund">NO DATA FOUND</div>
+                )}
               </div>
             </section>
           </div>
         </div>
       </div>
-      <div className="pagination customclass" >
+      <div className="pagination customclass" style={{ marginTop: "556px" }}>
         <button
           disabled={pageNumber === 1 ? true : false}
           className="paginationBtn"

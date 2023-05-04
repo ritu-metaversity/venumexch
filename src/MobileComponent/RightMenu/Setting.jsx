@@ -123,17 +123,19 @@ const Setting = () => {
                 <div className="stake-group">
                   {EditStake === true ? (
                     PostGetStack?.data ? (
-                      Object.keys(PostGetStack?.data).map((key, index) => {
-                        return (
-                          <input
-                            name={key}
-                            text="number"
-                            value={stakeState[key]}
-                            onChange={handleInput}
-                            className="stake readonly"
-                          />
-                        );
-                      })
+                      Object.keys(PostGetStack?.data)
+                        .slice(0, 6)
+                        .map((key, index) => {
+                          return (
+                            <input
+                              name={key}
+                              text="number"
+                              value={stakeState[key]}
+                              onChange={handleInput}
+                              className="stake readonly"
+                            />
+                          );
+                        })
                     ) : (
                       ""
                     )
@@ -169,8 +171,9 @@ const Setting = () => {
 
                     <>
                       {PostGetStack?.data
-                        ? Object.values(PostGetStack?.data).map(
-                            (key, value) => {
+                        ? Object.values(PostGetStack?.data)
+                            .slice(0, 6)
+                            .map((key, value) => {
                               return (
                                 <div
                                   name="stackOne"
@@ -182,8 +185,7 @@ const Setting = () => {
                                   {/* {item} */}
                                 </div>
                               );
-                            }
-                          )
+                            })
                         : ""}
                     </>
                   )}

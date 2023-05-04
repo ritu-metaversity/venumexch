@@ -1,4 +1,4 @@
-.backgroundImg {
+.backgroundImglords2 {
     padding: 5%;
     background-image: url("lords 2_1.png");
     background-position: center;
@@ -6,7 +6,6 @@
     background-size: cover;
     height: 100vh;
 }
-
 .formholder {
     text-align: center;
     padding: 3%;
@@ -14,13 +13,19 @@
     background-color: #fff;
     margin-top: 5%;
     z-index: 99;
-    position: relative;
+    position: absolute;
     isolation: isolate;
     overflow: hidden;
     width: 39%;
     float: right;
+    right: 30px;
 }
-
+.heading {
+    font-size: 26px;
+color: rgb(14 78 143);
+font-weight: 800;
+letter-spacing: 2px;
+}
 .formholder::before {
     animation: translate 3000ms infinite reverse;
     position: absolute;
@@ -30,9 +35,8 @@
     left: -20%;
     bottom: -10%;
     width: 200px;
-    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(209 99 164) 100%);
+    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(13 37 57) 100%);
 }
-
 .formholder::after {
     animation: translate 3000ms infinite reverse;
     position: absolute;
@@ -42,9 +46,8 @@
     right: -20%;
     top: -10%;
     width: 200px;
-    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(209 99 164) 100%);
+    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(13 37 57) 100%);
 }
-
 .username,
 .password,
 .mobilecode,
@@ -59,47 +62,39 @@
     -moz-box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
     box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
 }
-
 .password {
     width: 100%;
     display: flex;
     align-items: center;
 }
-
 .mainform {
     margin: 20px auto;
     z-index: 99;
     isolation: isolate;
 }
-
 .mainform input {
     width: 100%;
     border: none;
     padding: 10px;
 }
-
 .mainform input:focus {
     outline: none;
     border: none;
 }
-
 .eye {
     text-decoration: none;
     color: rgba(251, 75, 2, 1);
     margin-right: 20px;
 }
-
 .eye:hover {
     color: #000;
 }
-
 .mobilecode {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
 }
-
 ._btn {
     outline: none;
     display: block;
@@ -114,7 +109,6 @@
     font-size: 12px;
     width: 25%;
 }
-
 .signupbuttonholder .signupbtn {
     font-size: 22px;
     letter-spacing: .5px;
@@ -130,23 +124,19 @@
     -moz-box-shadow: 0px 2px 6px 0px rgba(196, 196, 196);
     box-shadow: 0px 2px 6px 0px rgb(196 196 196);
 }
-
 .rocketimg {
     transition: all .3s linear;
     width: 40px;
     height: 40px;
 }
-
 .alreadyaccount {
     margin: 30px auto;
     text-align: center;
 }
-
 .signin {
     text-decoration: none;
     color: rgba(251, 75, 2, 1);
 }
-
 /* 7 */
 .custom-btn {
     width: 130px;
@@ -166,21 +156,18 @@
         4px 4px 5px 0px rgba(0, 0, 0, .1);
     outline: none;
 }
-
 .btn-7 {
-    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(209 99 164) 100%);
+    background: linear-gradient(0deg, rgb(51 130 248) 0%, rgb(13 37 57) 100%);
     line-height: 42px;
     padding: 0;
     border: none;
 }
-
 .btn-7 span {
     position: relative;
     display: block;
     width: 100%;
     height: 100%;
 }
-
 .btn-7::before,
 .btn-7::after {
     position: absolute;
@@ -195,30 +182,24 @@
         4px 4px 5px 0px rgba(0, 0, 0, .3);
     transition: all 0.3s ease;
 }
-
 .btn-7:before {
     height: 0%;
     width: 2px;
 }
-
 .btn-7:after {
     width: 0%;
     height: 2px;
 }
-
 .btn-7:hover {
     color: rgba(251, 75, 2, 1);
     background: transparent;
 }
-
 .btn-7:hover:before {
     height: 100%;
 }
-
 .btn-7:hover:after {
     width: 100%;
 }
-
 .btn-7 span:before,
 .btn-7 span:after {
     position: absolute;
@@ -233,94 +214,78 @@
         4px 4px 5px 0px rgba(0, 0, 0, .3);
     transition: all 0.3s ease;
 }
-
 .btn-7 span:before {
     width: 2px;
     height: 0%;
 }
-
 .btn-7 span:after {
     height: 2px;
     width: 0%;
 }
-
 .btn-7 span:hover:before {
     height: 100%;
 }
-
 .btn-7 span:hover:after {
     width: 100%;
 }
-
 @keyframes translate {
     0% {
         transform: translateX(0%);
     }
-
     50% {
         transform: translate(10%);
     }
-
     100% {
         transform: translate(0%);
     }
 }
-
-@media screen and (min-width: 300px) and (max-width: 425px) {
-    .backgroundImg {
-        background-position: center !important;
-    }
-
-    .backgroundImg {
+@media screen and (min-width: 300px) and (max-width: 800px) {
+    .backgroundImglords2 {
         padding: 5%;
         background-image: url("lords 2_2.png");
-        background-position: unset;
+        background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
         height: 100vh;
     }
-
+    .alreadyaccount {
+        margin: 11px auto;
+        text-align: center;
+    }
     .formholder {
         text-align: center;
-        border-radius: 20px;
-        background-color: #fff;
-        margin-top: 5%;
-        z-index: 99;
-        position: relative;
-        isolation: isolate;
-        position: absolute;
-        overflow: hidden;
-        bottom: 0px;
-        left: 0%;
-        width: 98%;
-        margin-inline: 1%;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 5%;
+    z-index: 99;
+    position: relative;
+    isolation: isolate;
+    position: absolute;
+    overflow: hidden;
+    bottom: 0px;
+    left: 0%;
+    width: 98%;
+    margin-inline: 1%;
+    padding: 4%;
     }
-
-    .formholder {
-        padding: 4%;
-    }
-
     .heading {
-        font-size: 14px;
-        color: rgb(192 104 175);
-        font-weight: 800;
-        letter-spacing: 2px;
+        font-size: 19px;
+    color: rgb(14 78 143);
+    font-weight: 800;
+    letter-spacing: 2px;
     }
-
     .formholder::after {
         height: 120px;
         width: 120px;
         top: -5%;
         right: -25%;
     }
-
     .formholder::before {
         height: 120px;
         width: 120px;
         bottom: -5%;
         left: -25%;
     }
-
     .username,
     .password,
     .mobilecode,
@@ -334,63 +299,54 @@
         box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
     }
 }
-
-@media screen and (min-width: 425px) and (max-width: 800px) {
+/* @media screen and (min-width: 426px) and (max-width: 800px) {
     .backgroundImg {
         height: 115vh !important;
     }
-
     .backgroundImg {
         padding: 5%;
-        background-image: url("lords 2_2.png");
-        background-position: unset;
+        background-image: url("/public/images/diamondexch1.png");
+        background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
         height: 100vh;
     }
-
     .formholder {
         text-align: center;
-        /* padding: 8%; */
+        padding: 8%;
         border-radius: 20px;
         background-color: #fff;
-        margin-top: 5%;
         z-index: 99;
         position: relative;
         isolation: isolate;
         position: absolute;
         overflow: hidden;
-        bottom: -68px;
+        bottom: -131px;
         left: 0%;
         width: 98%;
         margin-inline: 1%;
     }
-
     .formholder {
         padding: 4%;
     }
-
     .heading {
-        font-size: 14px;
-        color: rgb(192 104 175);
+        font-size: 26px;
+        color: rgb(5 101 183);
         font-weight: 800;
         letter-spacing: 2px;
     }
-
     .formholder::after {
         height: 120px;
         width: 120px;
         top: -5%;
         right: -25%;
     }
-
     .formholder::before {
         height: 120px;
         width: 120px;
         bottom: -5%;
         left: -25%;
     }
-
     .username,
     .password,
     .mobilecode,
@@ -403,4 +359,4 @@
         margin: 14px auto;
         box-shadow: 10px 10px 6px 0px rgba(240, 240, 240, 1);
     }
-}
+} */

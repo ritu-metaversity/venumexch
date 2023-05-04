@@ -271,7 +271,9 @@ const Login = () => {
             keyboard={false}
           >
             <Modal.Header style={{ width: "100%", textAlign: "center" }}>
-              <Modal.Title>Please Confirm</Modal.Title>
+              <Modal.Title className="modaltitleeee">
+                Please Confirm
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               Underage gambling is prohibited. Please confirm if you are 18

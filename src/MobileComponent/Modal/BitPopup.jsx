@@ -59,10 +59,11 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    fetch("https://geolocation-db.com/json/")
+    fetch("http://15.207.182.173:3333/")
       .then((res) => res.json())
       .then((res) => {
-        setUserIP(res?.IPv4);
+        console.log(res?.ip, "djfsodfjskdjm")
+        setUserIP(res?.ip);
       });
   }, []);
 
@@ -177,7 +178,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                       type="button"
                       style={{ marginLeft: "31px", width: "32%" }}
                       className="stakeactionminus incrementBtn"
-                      // onClick={increment}
+                    // onClick={increment}
                     >
                       <span className="fa fa-plus"></span>
                     </button>
@@ -204,22 +205,24 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
               <div className="row m-t-10 m-l-5 m-r-5">
                 {/* {JSON.stringify(PostGetStack)} */}
                 {PostGetStack?.data &&
-                  Object.values(PostGetStack?.data).map((key, value) => {
-                    return (
-                      <div className="col-4 p-l-5 p-r-5">
-                        <div
-                          className="btnVal"
-                          onClick={() => handleInput(key)}
-                        >
-                          {/* <button
+                  Object.values(PostGetStack?.data)
+                    .slice(0, 6)
+                    .map((key, value) => {
+                      return (
+                        <div className="col-4 p-l-5 p-r-5">
+                          <div
+                            className="btnVal"
+                            onClick={() => handleInput(key)}
+                          >
+                            {/* <button
                             type="button"
                             className="btn btn-bet m-b-10  col-3" */}
-                          {/* // > */}+{key}
-                          {/* </button> */}
+                            {/* // > */}+{key}
+                            {/* </button> */}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
               </div>
               <div className="row m-t-10 m-l-5 m-r-5 p-b-20">
                 <div className="col-6 p-l-5 p-r-5">
@@ -248,9 +251,9 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                           : (marketId?.includes("BM") ||
                             marketId?.includes("bm") ||
                             marketId?.includes("Bm")
-                              ? (bitValue.Odds * updated) / 100
-                              : (bitValue.Odds - 1) * updated
-                            ).toFixed(2)
+                            ? (bitValue.Odds * updated) / 100
+                            : (bitValue.Odds - 1) * updated
+                          ).toFixed(2)
                         : updated}
                     </span>
                   </button>
@@ -268,77 +271,73 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
 
               <div className={`${isFancy === true ? "fancy-none" : ""}`}>
                 {marketId.includes("BM") ||
-                marketId.includes("bm") ||
-                marketId.includes("Bm")
+                  marketId.includes("bm") ||
+                  marketId.includes("Bm")
                   ? profits.Bookmaker?.filter(
-                      (item) => item?.mid === marketId
-                    ).map((profit) => {
-                      const newval =
-                        profit.sid == selectionId
-                          ? (profit?.value || 0) +
-                            (((isBack === "back" ? true : false) ? 1 : -1) *
-                              odds *
-                              updated) /
-                              100
-                          : (profit?.value || 0) +
-                            ((isBack === "back" ? true : false) ? -1 : 1) *
-                              updated;
+                    (item) => item?.mid === marketId
+                  ).map((profit) => {
+                    const newval =
+                      profit.sid == selectionId
+                        ? (profit?.value || 0) +
+                        (((isBack === "back" ? true : false) ? 1 : -1) *
+                          odds *
+                          updated) /
+                        100
+                        : (profit?.value || 0) +
+                        ((isBack === "back" ? true : false) ? -1 : 1) *
+                        updated;
 
-                      return (
-                        <div
-                          key={profit.value}
-                          className={`row row5 mt-2 ${
-                            isFancy === true ? "fancy-none" : ""
+                    return (
+                      <div
+                        key={profit.value}
+                        className={`row row5 mt-2 ${isFancy === true ? "fancy-none" : ""
                           }`}
-                          // key={e.selectionId}
-                        >
-                          <div className="col-4">
-                            <span>{profit.title}</span>
-                          </div>
-                          <div className="col-4 text-center">
-                            <b>
-                              <span
-                                style={{ color: "black" }}
-                                className={`${
-                                  profit?.value > 0
-                                    ? "text-success"
-                                    : "text-danger"
-                                }`}
-                              >
-                                {profit.value}
-                              </span>
-                            </b>
-                          </div>
-                          <div
-                            className={`col-4 text-right ${
-                              newval > 0
-                                ? "text-success"
-                                : newval < 0
-                                ? "text-danger"
-                                : ""
-                            }`}
-                          >
-                            {newval}
-                          </div>
+                      // key={e.selectionId}
+                      >
+                        <div className="col-4">
+                          <span>{profit.title}</span>
                         </div>
-                      );
-                    })
+                        <div className="col-4 text-center">
+                          <b>
+                            <span
+                              style={{ color: "black" }}
+                              className={`${profit?.value > 0
+                                ? "text-success"
+                                : "text-danger"
+                                }`}
+                            >
+                              {profit.value}
+                            </span>
+                          </b>
+                        </div>
+                        <div
+                          className={`col-4 text-right ${newval > 0
+                            ? "text-success"
+                            : newval < 0
+                              ? "text-danger"
+                              : ""
+                            }`}
+                        >
+                          {newval}
+                        </div>
+                      </div>
+                    );
+                  })
                   : Number(marketId)
-                  ? profits.Odds[marketId]?.map((profit) => {
+                    ? profits.Odds[marketId]?.map((profit) => {
                       const newVal =
                         profit.sid === selectionId
                           ? profit.value +
-                            ((isBack === "back" ? true : false) ? 1 : -1) *
-                              (odds - 1) *
-                              updated
+                          ((isBack === "back" ? true : false) ? 1 : -1) *
+                          (odds - 1) *
+                          updated
                           : profit.value +
-                            ((isBack === "back" ? true : false) ? -1 : 1) *
-                              updated;
+                          ((isBack === "back" ? true : false) ? -1 : 1) *
+                          updated;
                       return (
                         <div
-                          className={`row row5 mt-2 ${
-                            isFancy === true ? "fancy-none" : ""
-                          }`}
+                          className={`row row5 mt-2 ${isFancy === true ? "fancy-none" : ""
+                            }`}
                           key={profits.sid}
                         >
                           <div className="col-4">
@@ -348,31 +347,29 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                             <b>
                               <span
                                 style={{ color: "black" }}
-                                className={`${
-                                  profit?.value > 0
-                                    ? "text-success"
-                                    : "text-danger"
-                                }`}
+                                className={`${profit?.value > 0
+                                  ? "text-success"
+                                  : "text-danger"
+                                  }`}
                               >
-                                {profit.value}
+                                {profit.value.toFixed(2)}
                               </span>
                             </b>
                           </div>
                           <div
-                            className={`col-4 text-right ${
-                              newVal > 0
-                                ? "text-success"
-                                : newVal < 0
+                            className={`col-4 text-right ${newVal > 0
+                              ? "text-success"
+                              : newVal < 0
                                 ? "text-danger"
                                 : ""
-                            }`}
+                              }`}
                           >
-                            {newVal}
+                            {newVal.toFixed(2)}
                           </div>
                         </div>
                       );
                     })
-                  : ""}
+                    : ""}
               </div>
             </form>
           </div>

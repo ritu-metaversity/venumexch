@@ -1,0 +1,11 @@
+.openbetsssss {
+    margin-left: 75%;
+    color: black !important;
+}
+
+@media only screen and (min-width:800px) and (max-width: 2000px) {
+    .openbetsssss {
+        margin-left: 93%;
+        color: black !important;
+    }
+}
