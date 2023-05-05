@@ -43,6 +43,7 @@ const GameDetails = () => {
   const [showFancyModals, setShowFancyModals] = useState(false);
   const [MatchId, setMatchId] = useState();
   const [FancyID, setFancyID] = useState("");
+  const [hovweEffect, setHoverEffect] = useState(false);
 
   const [PostMinMaxGameDetailsData, setPostMinMaxGameDetailsData] = useState(
     {}
@@ -252,11 +253,13 @@ const GameDetails = () => {
   const handleBet = (id) => {
     setMarket(true);
     setOpenBet(false);
+    setHoverEffect(true)
   };
 
   const handleOpneBet = () => {
     setOpenBet(true);
     setMarket(false);
+    setHoverEffect(true)
     let data = { matchId: id };
     dispatch(PostBetListByMatchId(data));
   };
@@ -611,13 +614,13 @@ const GameDetails = () => {
                                         Min:{" "}
                                         {PostMinMaxGameDetailsData?.Odds &&
                                           PostMinMaxGameDetailsData?.Odds[id1]
-                                            ?.maxBet}
+                                            ?.minBet}
                                       </span>
                                       <span className="ms">
                                         Max:{" "}
                                         {PostMinMaxGameDetailsData?.Odds &&
                                           PostMinMaxGameDetailsData?.Odds[id1]
-                                            ?.minBet}
+                                            ?.maxBet}
                                       </span>
                                       {/* <span className="ms">
                                         BetDelay:{" "}
@@ -835,12 +838,23 @@ const GameDetails = () => {
                                   <div className="box-w3 float-left hidden-portrait "></div>
                                 </div>
 
-                                {/* <div className="min">
-                                  
-                                </div>
-                                <div className="betDelay">
-                                  
-                                </div> */}
+                                <div className="max">
+                              <span>
+                                Min :{" "}
+                                {PostMinMaxGameDetailsData &&
+                                  PostMinMaxGameDetailsData?.Bookmaker &&
+                                  PostMinMaxGameDetailsData?.Bookmaker[0]
+                                    ?.minBet}
+                              </span>
+
+                              <span className="ms">
+                                Max :{" "}
+                                {PostMinMaxGameDetailsData &&
+                                  PostMinMaxGameDetailsData?.Bookmaker &&
+                                  PostMinMaxGameDetailsData?.Bookmaker[0]
+                                    ?.maxBet}
+                              </span>
+                            </div>
 
                                 {gameDetailsData?.data?.Bookmaker?.map(
                                   (item, index) => {
@@ -1041,23 +1055,7 @@ const GameDetails = () => {
                                 )}
                               </div>
                             </div>
-                            <div className="max">
-                              <span>
-                                Min :{" "}
-                                {PostMinMaxGameDetailsData &&
-                                  PostMinMaxGameDetailsData?.Bookmaker &&
-                                  PostMinMaxGameDetailsData?.Bookmaker[0]
-                                    ?.minBet}
-                              </span>
-
-                              <span className="ms">
-                                Max :{" "}
-                                {PostMinMaxGameDetailsData &&
-                                  PostMinMaxGameDetailsData?.Bookmaker &&
-                                  PostMinMaxGameDetailsData?.Bookmaker[0]
-                                    ?.maxBet}
-                              </span>
-                            </div>
+                            
 
                             <marquee className="news-line">
                               {gameDetailsData?.data &&
@@ -1139,6 +1137,45 @@ const GameDetails = () => {
                                               onlyFancyDetails[key].map(
                                                 (item, index) => (
                                                   <>
+                                                  <div
+                                                      data-v-e03c6f20=""
+                                                      className="min-max  text-right"
+                                                    >
+                                                      <p
+                                                        data-v-e03c6f20=""
+                                                        className="minMax"
+                                                      >
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="text-dark"
+                                                        >
+                                                          Min :{" "}
+                                                          <span data-v-e03c6f20="">
+                                                            {onlyFancyMaxMinDetails &&
+                                                              onlyFancyMaxMinDetails[
+                                                                key
+                                                              ]?.[index]
+                                                                ?.minBet}
+                                                          </span>
+                                                        </span>{" "}
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="text-dark"
+                                                          style={{
+                                                            marginRight: "7px",
+                                                          }}
+                                                        >
+                                                          Max :{" "}
+                                                          <span data-v-e03c6f20="">
+                                                            {onlyFancyMaxMinDetails &&
+                                                              onlyFancyMaxMinDetails[
+                                                                key
+                                                              ]?.[index]
+                                                                ?.maxBet}
+                                                          </span>
+                                                        </span>
+                                                      </p>
+                                                    </div>
                                                     <div
                                                       data-v-e03c6f20=""
                                                       className="fancy-tripple "
@@ -1420,45 +1457,7 @@ const GameDetails = () => {
                                                         className="fancy-tripple"
                                                       ></div>
                                                     </div>
-                                                    <div
-                                                      data-v-e03c6f20=""
-                                                      className="min-max  text-right"
-                                                    >
-                                                      <p
-                                                        data-v-e03c6f20=""
-                                                        className="minMax"
-                                                      >
-                                                        <span
-                                                          data-v-e03c6f20=""
-                                                          className="text-dark"
-                                                        >
-                                                          Max :{" "}
-                                                          <span data-v-e03c6f20="">
-                                                            {onlyFancyMaxMinDetails &&
-                                                              onlyFancyMaxMinDetails[
-                                                                key
-                                                              ]?.[index]
-                                                                ?.maxBet}
-                                                          </span>
-                                                        </span>{" "}
-                                                        <span
-                                                          data-v-e03c6f20=""
-                                                          className="text-dark"
-                                                          style={{
-                                                            marginRight: "7px",
-                                                          }}
-                                                        >
-                                                          Min :{" "}
-                                                          <span data-v-e03c6f20="">
-                                                            {onlyFancyMaxMinDetails &&
-                                                              onlyFancyMaxMinDetails[
-                                                                key
-                                                              ]?.[index]
-                                                                ?.minBet}
-                                                          </span>
-                                                        </span>
-                                                      </p>
-                                                    </div>
+                                                    
                                                   </>
                                                 )
                                               )}

@@ -26,18 +26,31 @@ const Casinolist = () => {
   };
 
   useEffect(() => {
-    const id = {
+    // const id = {
+    //   id: sportId,
+    //   appUrl: window.location.hostname,
+    // };
+    // axios
+    //   .post(
+    //     "http://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types",
+    //     id
+    //   )
+    //   .then((res) => {
+      // setCasinoList(res.data.data);
+    //     console.log(res?.data,"dsfsfsdfsd")
+    //   });
+
+
+    const idd = {
       id: sportId,
       appUrl: window.location.hostname,
     };
-    axios
-      .post(
-        "http://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types",
-        id
-      )
+    fetch("https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/lords.json").then(res=>res.json())
       .then((res) => {
-        setCasinoList(res.data.data);
-      });
+      setCasinoList(res.data);
+
+        console.log(res?.data,"dsfsfsdfsd")
+      })
   }, [sportId]);
 
   const handleChangeaa = (val) => {

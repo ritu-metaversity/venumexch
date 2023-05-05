@@ -162,7 +162,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
               <span>
                 <i className="fas fa-search v-t"></i>
               </span>
-              <a className="rules-link" onClick={handleRules}>
+              <a className="rules-link cPointer" onClick={handleRules}>
                 <i className="fas fa-ruler-vertical m-r-5"></i>
                 <span>Rules</span>
               </a>{" "}

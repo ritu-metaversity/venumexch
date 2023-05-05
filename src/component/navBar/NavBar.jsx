@@ -123,8 +123,8 @@ const hanldletimeZone=(vl)=>{
                   </p>
                 </li>
                 <li>
-                  <Link to="home">
-                    <i   className="fas fa-ruler-vertical m-r-5"></i>{" "}
+                  <Link to="home cPointer">
+                    <i   className="fas fa-ruler-vertical m-r-5 "></i>{" "}
                     <span onClick={handleModal}>Rules</span>
                   
                   </Link>
