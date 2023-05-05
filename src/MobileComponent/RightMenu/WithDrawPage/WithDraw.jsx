@@ -226,10 +226,10 @@ const WithDraw = () => {
                 <option value="Current">Current</option>
               </select>
             </div>
-            <div className="mx-input-wrapper account-field">
+            <div className="mx-input-wrapper account-field withdrawBtn">
               <button
-                className="btn btn-primary btn-block btn-sm"
-                style={{ marginTop: "20px" }}
+                className="btn btn-primary btn-block btn-sm wsubmit"
+                style={{ marginTop: "20px"}}
                 onClick={handleClick}
               >
                 Submit

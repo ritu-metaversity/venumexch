@@ -8,6 +8,7 @@ import { Postuserselfregister } from "../App/Features/auth/authActions";
 import ValidationFile from "../Validation/ValidationFile";
 import { Modal } from "react-bootstrap";
 
+export let setShowRegisterModalRef
 const Signup = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -25,14 +26,15 @@ const Signup = () => {
   const { PostuserselfregisterData, PostuserselfregisterDataError } =
     useSelector((state) => state.auth);
 
+  setShowRegisterModalRef = setSignUpShow;
   const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
 
   const [infoError, setInfoError] = useState(false);
-  useEffect(() => {
-    if (PostuserselfregisterData?.status === 200 && signUpShow === false) {
-      setSignUpShow(true);
-    }
-  }, [PostuserselfregisterData]);
+  // useEffect(() => {
+  //   if (PostuserselfregisterData?.status === 200 && signUpShow === false) {
+  //     setSignUpShow(true);
+  //   }
+  // }, [PostuserselfregisterData])
 
   const handleLogin = () => {
     navigate("/m/login");
@@ -147,7 +149,7 @@ const Signup = () => {
                       <div className="form-group">
                         <input
                           name="Username"
-                          type="password"
+                          type="text"
                           placeholder="Username"
                           className="form-control"
                           onChange={handleInput}
@@ -201,7 +203,7 @@ const Signup = () => {
                           ""
                         )}
                         {PostuserselfregisterData?.message ===
-                        "Mobile Number Already Registered" ? (
+                          "Mobile Number Already Registered" ? (
                           <span className="text-danger">
                             Mobile Number Already Registered
                           </span>
@@ -209,7 +211,7 @@ const Signup = () => {
                           ""
                         )}
                         {PostuserselfregisterData?.message ===
-                        "mobile: must be greater than or equal to 1111111111" ? (
+                          "mobile: must be greater than or equal to 1111111111" ? (
                           <span className="text-danger">
                             Mobile Number must be between 9-10
                           </span>
@@ -217,7 +219,7 @@ const Signup = () => {
                           ""
                         )}
                         {PostuserselfregisterData?.message ===
-                        "mobile: must be less than or equal to 9999999999" ? (
+                          "mobile: must be less than or equal to 9999999999" ? (
                           <span className="text-danger">
                             Mobile Number must be between 9-10
                           </span>
