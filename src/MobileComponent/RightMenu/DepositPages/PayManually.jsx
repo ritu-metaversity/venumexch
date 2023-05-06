@@ -161,9 +161,8 @@ const PayManually = (props) => {
                 (item, id) => (
                   <Col onClick={() => handlePaymentName(item.methodName, id)}>
                     <div
-                      className={`css-1502y4u ${
-                        active === id ? "active3" : ""
-                      }`}
+                      className={`css-1502y4u ${active === id ? "active3" : ""
+                        }`}
                     >
                       <img
                         src={item.logo}

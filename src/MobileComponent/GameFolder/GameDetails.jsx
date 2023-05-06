@@ -38,6 +38,14 @@ const GameDetails = () => {
     {}
   );
 
+  //   useEffect(() => {
+  //   if (PostvalidatejwttokenDataError?.status === false) {
+  //     localStorage.clear();
+  //     navigate("/m/home");
+  // window.location.replace("/");
+  //   }
+  // }, [PostvalidatejwttokenDataError]);
+
   const [gameIframeId, setGameIframeId] = useState(4);
   const [msg, setMsg] = useState("");
   const [showFancyModals, setShowFancyModals] = useState(false);

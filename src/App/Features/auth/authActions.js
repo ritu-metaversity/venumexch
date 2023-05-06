@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import AlertBtn from "../../../MobileComponent/Alert/AlertBtn";
 import { ImCross } from "react-icons/im"
 import { setShowRegisterModalRef } from "../../../logincomponents/Signup";
+
 const token = localStorage.getItem("TokenId");
 
 let REACT_APP_API_URL = "api.247365.exchange"

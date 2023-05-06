@@ -9,6 +9,8 @@ import {
   Postunsettleddddd,
 } from "../../App/Features/auth/authActions";
 import "./Gamepage.css";
+import moment from "moment"
+
 
 const Gamepage = () => {
   const datatata = useOutletContext();
@@ -40,14 +42,21 @@ const Gamepage = () => {
   const handleGameDetails = (id, item) => {
     // console.log("home page load ")
     // console.log(item?.openDate)
-    let data = {
-      matchName: item?.matchName,
-      openDate: item?.openDate,
-      Odds: "",
-    };
+    if (token) {
 
-    datatata(data);
-    navigate(`/m/gamedetail/${id}`);
+
+      let data = {
+        matchName: item?.matchName,
+        openDate: item?.openDate,
+        Odds: "",
+      };
+
+      datatata(data);
+      navigate(`/m/gamedetail/${id}`)
+    } else {
+      navigate(`/m/home`)
+
+    }
   };
   // console.log(gamesData, "gamesData");
 
@@ -112,31 +121,126 @@ const Gamepage = () => {
           <ul className="market-listing">
             {gamesData?.length > 0
               ? gamesData.map((item) => {
-                  return (
-                    <li
-                      className="market-list-item"
-                      style={{ padding: "2px", cursor: "pointer" }}
-                      onClick={() => handleGameDetails(item?.matchId, item)}
+                return (
+                  <div
+                    data-title="OPEN"
+                    className="table-body"
+                    onClick={() => handleGameDetails(item?.matchId, item)}
+
+                  >
+
+                    <div
+
+                      className="table-row"
                     >
-                      <div
-                        className="item-inner"
-                        style={{ paddingLeft: "12px" }}
-                      >
-                        <span className=" game-name v-m">
-                          {item?.matchName}
-                        </span>
-                        <div className="timeeeee">{item?.openDate}</div>
-                        <div className="events-icons float-right">
+
+                      <div className="odds-name">
+
+
+                        <div className="gameName">
+                          <span
+                            className="team-name"
+                            style={{ fontSize: "14px" }}
+                          >
+                            {item?.matchName}
+                          </span>
+                          <span
+                            className="game-time"
+                          >
+                            {moment(item?.openDate).format('D-MM-YYYY h:mm')}
+
+                          </span>
+                        </div>
+                        <div className="inplayyyy">
                           {item?.inPlay === true ? (
-                            <i className="fas fa-play-circle m-l-5"></i>
+                            <i className="fas fa-play-circle "></i>
                           ) : (
                             ""
                           )}
                         </div>
+
                       </div>
-                    </li>
-                  );
-                })
+                      <div className="box-w3 float-left back ">
+                        <button
+                          type="button"
+                          className="back light-bg"
+                        >
+                          <span className="odd">0</span>
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+                      <div className="box-w3 float-left back ">
+                        <button
+                          type="button"
+                          className="back light-bg"
+                        >
+                          <span className="odd">0</span>
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        className="box-w3 float-left back hidden-portrait"
+                      >
+                        <button
+                          type="button"
+                          className="back"
+
+                        >
+                          <span className="odd">
+                            {item?.team1Back}
+                          </span>
+                          <span>
+                            <span>  {item?.team2Back}</span>
+                          </span>
+                        </button>
+                      </div>
+
+                      <div
+                        className="box-w3 float-left lay hidden-portrait "
+                      >
+                        <button
+                          type="button"
+                          className="lay"
+
+                        >
+                          <span className="odd">
+                            {item?.team1Lay}
+                          </span>
+                          <span>
+                            <span>{item?.team2Lay}</span>
+                          </span>
+                        </button>
+                      </div>
+                      <div className="box-w3 la light-bg float-left ">
+                        <button
+                          type="button"
+                          className=" lay light-bg"
+                        >
+                          <span className="odd">0</span>
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+                      <div className="box-w3 lay float-left ">
+                        <button
+                          type="button"
+                          className="lay light-bg"
+                        >
+                          <span className="odd">0</span>{" "}
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
               : ""}
           </ul>
         </div>
