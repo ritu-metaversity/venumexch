@@ -98,13 +98,30 @@ const HomePage = () => {
             {gamesData && gamesData?.length > 0 ? (
               Object.keys(gamesData).map((key, item) => (
                 <>
-                  <div>
+                  <div className="row">
+                    <div className="col-md-12" style={{marginBottom: "-12px"}}>
+                      <div className=" odds-name fl">
+                        {gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ?
+                          <span className="sports-name">
+                            {gamesData[key]?.name}
+                          </span>
+                          : ""}
+                      </div>
+                      {
+                        gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ?(
+                          <div className=" numberval">
+                        <div className="value-num">
+                          <div>1</div>
+                          <div>X</div>
+                          <div>2</div>
+                        </div>
+                      </div>
+                        ):""
+                      }
+                      
+                    </div>
 
-                    {gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ?
-                      <span className="sports-name">
-                        {gamesData[key]?.name}
-                      </span>
-                      : ""}
+
 
 
                   </div>
@@ -112,27 +129,14 @@ const HomePage = () => {
                   {gamesData &&
                     gamesData[key] &&
                     gamesData[key]?.matchList.map((item, index) => (
-
                       <div
                         data-title="OPEN"
                         className="table-body"
-                        onClick={() => handleGameDetails(item?.matchId, item)}
-
-                      >
-
-                        <div
-
-                          className="table-row"
-                        >
-
+                        onClick={() => handleGameDetails(item?.matchId, item)}>
+                        <div className="table-row">
                           <div className="odds-name">
-
-
                             <div className="gameName">
-                              <span
-                                className="team-name"
-                                style={{ fontSize: "14px" }}
-                              >
+                              <span className="team-name" style={{ fontSize: "14px" }}>
                                 {item?.matchName}
                               </span>
                               <span
@@ -151,23 +155,21 @@ const HomePage = () => {
                             </div>
 
                           </div>
-                          <div className="box-w3 float-left back ">
-                            <button
-                              type="button"
-                              className="back light-bg"
-                            >
-                              <span className="odd">0</span>
+
+                          <div className="box-w3 float-left back hidden-portrait">
+                            <button type="button" className="back " >
+                              <span className="odd">{item?.team1Back}</span>
                               <span>
                                 <span>0</span>
                               </span>
                             </button>
                           </div>
-                          <div className="box-w3 float-left back ">
+                          <div className="box-w3 float-left lay ">
                             <button
                               type="button"
-                              className="back light-bg"
+                              className="lay"
                             >
-                              <span className="odd">0</span>
+                              <span className="odd">{item?.team1Lay}</span>
                               <span>
                                 <span>0</span>
                               </span>
@@ -182,10 +184,10 @@ const HomePage = () => {
 
                             >
                               <span className="odd">
-                                {item?.team1Back}
+                                0
                               </span>
                               <span>
-                                <span>  {item?.team2Back}</span>
+                                <span>0</span>
                               </span>
                             </button>
                           </div>
@@ -198,20 +200,19 @@ const HomePage = () => {
                               className="lay"
 
                             >
-                              <span className="odd">
-                                {item?.team1Lay}
+                              <span className="odd">0
                               </span>
                               <span>
-                                <span>{item?.team2Lay}</span>
+                                <span>0</span>
                               </span>
                             </button>
                           </div>
-                          <div className="box-w3 la light-bg float-left ">
+                          <div className="box-w3 back float-left ">
                             <button
                               type="button"
-                              className=" lay light-bg"
+                              className=" back"
                             >
-                              <span className="odd">0</span>
+                              <span className="odd">{item?.team2Back}</span>
                               <span>
                                 <span>0</span>
                               </span>
@@ -220,9 +221,9 @@ const HomePage = () => {
                           <div className="box-w3 lay float-left ">
                             <button
                               type="button"
-                              className="lay light-bg"
+                              className="lay"
                             >
-                              <span className="odd">0</span>{" "}
+                              <span className="odd">{item?.team2Lay}</span>{" "}
                               <span>
                                 <span>0</span>
                               </span>

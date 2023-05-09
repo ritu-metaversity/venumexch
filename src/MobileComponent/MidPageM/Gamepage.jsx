@@ -97,9 +97,8 @@ const Gamepage = () => {
         <div className="flash__wrapper"></div>
       </div>
       <section style={{ marginTop: "91px" }}>
-        <h2 class="page-title p-l-15" style={{ marginTop: "10px" }}>
-          {GameName}
-        </h2>
+
+
         {/* <div
           className="in-play page-title m-t-20 m-l-15"
           style={{ paddingTop: "0px" }}
@@ -116,32 +115,32 @@ const Gamepage = () => {
               PostunsettledData?.data?.dataList?.length}
             )
           </span>
+          <div>
+            <h2 class="page-title p-l-15 odds-name fl gam-name" >
+              {GameName}
+            </h2>
+            <div className=" numberval">
+              <div className="value-num val-num">
+                <div>1</div>
+                <div>X</div>
+                <div>2</div>
+              </div>
+            </div>
+          </div>
         </Link>
         <div>
-          <ul className="market-listing">
+          <ul className="market-listing" style={{ marginTop: "12px" }}>
             {gamesData?.length > 0
               ? gamesData.map((item) => {
                 return (
                   <div
                     data-title="OPEN"
                     className="table-body"
-                    onClick={() => handleGameDetails(item?.matchId, item)}
-
-                  >
-
-                    <div
-
-                      className="table-row"
-                    >
-
+                    onClick={() => handleGameDetails(item?.matchId, item)}>
+                    <div className="table-row">
                       <div className="odds-name">
-
-
                         <div className="gameName">
-                          <span
-                            className="team-name"
-                            style={{ fontSize: "14px" }}
-                          >
+                          <span className="team-name" style={{ fontSize: "14px" }}>
                             {item?.matchName}
                           </span>
                           <span
@@ -160,23 +159,21 @@ const Gamepage = () => {
                         </div>
 
                       </div>
-                      <div className="box-w3 float-left back ">
-                        <button
-                          type="button"
-                          className="back light-bg"
-                        >
-                          <span className="odd">0</span>
+
+                      <div className="box-w3 float-left back hidden-portrait">
+                        <button type="button" className="back " >
+                          <span className="odd">{item?.team1Back}</span>
                           <span>
                             <span>0</span>
                           </span>
                         </button>
                       </div>
-                      <div className="box-w3 float-left back ">
+                      <div className="box-w3 float-left lay ">
                         <button
                           type="button"
-                          className="back light-bg"
+                          className="lay"
                         >
-                          <span className="odd">0</span>
+                          <span className="odd">{item?.team1Lay}</span>
                           <span>
                             <span>0</span>
                           </span>
@@ -191,10 +188,10 @@ const Gamepage = () => {
 
                         >
                           <span className="odd">
-                            {item?.team1Back}
+                            0
                           </span>
                           <span>
-                            <span>  {item?.team2Back}</span>
+                            <span>0</span>
                           </span>
                         </button>
                       </div>
@@ -207,20 +204,19 @@ const Gamepage = () => {
                           className="lay"
 
                         >
-                          <span className="odd">
-                            {item?.team1Lay}
+                          <span className="odd">0
                           </span>
                           <span>
-                            <span>{item?.team2Lay}</span>
+                            <span>0</span>
                           </span>
                         </button>
                       </div>
-                      <div className="box-w3 la light-bg float-left ">
+                      <div className="box-w3 back float-left ">
                         <button
                           type="button"
-                          className=" lay light-bg"
+                          className=" back"
                         >
-                          <span className="odd">0</span>
+                          <span className="odd">{item?.team2Back}</span>
                           <span>
                             <span>0</span>
                           </span>
@@ -229,9 +225,9 @@ const Gamepage = () => {
                       <div className="box-w3 lay float-left ">
                         <button
                           type="button"
-                          className="lay light-bg"
+                          className="lay"
                         >
-                          <span className="odd">0</span>{" "}
+                          <span className="odd">{item?.team2Lay}</span>{" "}
                           <span>
                             <span>0</span>
                           </span>

@@ -530,6 +530,7 @@ header.header a {
 .login-signup {
     display: flex;
     gap: 24px;
+    justify-content: end !important;
     width: 19%;
 }
 
@@ -547,7 +548,8 @@ header.header a {
 @media screen and (min-width: 250px) and (max-width: 550px) {
     .login-signup {
         display: flex;
-        /* gap: 24px; */
+      
+        justify-content: end !important;
         width: 41%;
     }
 
