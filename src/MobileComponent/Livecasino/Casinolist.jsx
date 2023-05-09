@@ -19,6 +19,7 @@ const Casinolist = () => {
   useEffect(() => {
     dispatch(Postcasino());
   }, [dispatch]);
+  const token = localStorage.getItem("TokenId");
 
   const handleButton = (item) => {
     // console.log(item)
@@ -36,7 +37,7 @@ const Casinolist = () => {
     //     id
     //   )
     //   .then((res) => {
-      // setCasinoList(res.data.data);
+    // setCasinoList(res.data.data);
     //     console.log(res?.data,"dsfsfsdfsd")
     //   });
 
@@ -45,18 +46,26 @@ const Casinolist = () => {
       id: sportId,
       appUrl: window.location.hostname,
     };
-    fetch("https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/lords.json").then(res=>res.json())
+    fetch("https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/lords.json").then(res => res.json())
       .then((res) => {
-      setCasinoList(res.data);
+        setCasinoList(res.data);
 
-        console.log(res?.data,"dsfsfsdfsd")
+        console.log(res?.data, "dsfsfsdfsd")
       })
   }, [sportId]);
 
   const handleChangeaa = (val) => {
     // console.log(val)
     // /m/casino/:id
-    navigate(`/m/casino/${val}`);
+    if (
+      token
+    ) {
+
+      navigate(`/m/casino/${val}`);
+    } else {
+      navigate("/m/login");
+
+    }
   };
 
   return (

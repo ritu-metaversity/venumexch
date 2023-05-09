@@ -284,7 +284,7 @@ const GameDetails = () => {
     }
   }, [id]);
 
-  const handleNationName = (name) => {};
+  const handleNationName = (name) => { };
 
   //  For fancy odds on
   useEffect(() => {
@@ -540,14 +540,14 @@ const GameDetails = () => {
                     Open Bets{" "}
                     {PostBetListByMatchIdData?.data
                       ? "( " +
-                        Object.values(PostBetListByMatchIdData?.data)?.reduce(
-                          (accu, current) => {
-                            accu += current.length;
-                            return accu;
-                          },
-                          0
-                        ) +
-                        " )"
+                      Object.values(PostBetListByMatchIdData?.data)?.reduce(
+                        (accu, current) => {
+                          accu += current.length;
+                          return accu;
+                        },
+                        0
+                      ) +
+                      " )"
                       : ""}{" "}
                   </Link>
                 </li>
@@ -573,7 +573,7 @@ const GameDetails = () => {
                           <div className="scorecard scorecard-mobile">
                             <div className="score-inner">
                               <iframe
-                               src={`http://15.207.182.173:3050/event/${id}`}
+                                src={`http://15.207.182.173:3050/event/${id}`}
                                 // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                 width="100%"
                                 height="290px"
@@ -655,9 +655,22 @@ const GameDetails = () => {
                                         return (
                                           <>
                                             <div
-                                              data-title="OPEN"
-                                              className="table-row"
+                                              data-title={`${item11?.runners?.status === "SUSPENDED"
+                                                ? "SUSPENDED"
+                                                : item11?.runners.status ===
+                                                  "BALL RUNNING"
+                                                  ? "Ball Running"
+                                                  : ""
+                                                }`}
+                                              className={`table-row ${item11?.runners?.status === "SUSPENDED"
+                                                ? "suspend"
+                                                : item11?.runners.status ===
+                                                  "BALL RUNNING"
+                                                  ? "ballrunning"
+                                                  : ""
+                                                }`}
                                             >
+
                                               <div
                                                 className="float-left box-w4 country-name"
                                                 onClick={handleNationName(
@@ -704,22 +717,20 @@ const GameDetails = () => {
                                                 .map((item, id) => {
                                                   return (
                                                     <div
-                                                      className={`box-w1 float-left back hidden-portrait  ${
-                                                        id === 1 || id === 2
-                                                          ? "dis-none light-bg"
-                                                          : ""
-                                                      }
-                                                       ${
-                                                         item?.price !==
-                                                         previousState?.data
-                                                           ?.Odds[id1]?.runners[
-                                                           index
-                                                         ]?.ex?.availableToBack[
-                                                           id
-                                                         ]?.price
-                                                           ? "blink1"
-                                                           : " "
-                                                       }`}
+                                                      className={`box-w1 float-left back hidden-portrait  ${id === 1 || id === 2
+                                                        ? "dis-none light-bg"
+                                                        : ""
+                                                        }
+                                                       ${item?.price !==
+                                                          previousState?.data
+                                                            ?.Odds[id1]?.runners[
+                                                            index
+                                                          ]?.ex?.availableToBack[
+                                                            id
+                                                          ]?.price
+                                                          ? "blink1"
+                                                          : " "
+                                                        }`}
                                                     >
                                                       <button
                                                         type="button"
@@ -755,21 +766,19 @@ const GameDetails = () => {
                                                 (item, id) => {
                                                   return (
                                                     <div
-                                                      className={`box-w1 lay float-left ${
-                                                        id === 1 || id === 2
-                                                          ? "dis-none light-bg"
-                                                          : ""
-                                                      }
-                                                   ${
-                                                     item?.price !==
-                                                     previousState?.data?.Odds[
-                                                       id1
-                                                     ]?.runners[index]?.ex
-                                                       ?.availableToLay[id]
-                                                       ?.price
-                                                       ? " blink1"
-                                                       : " "
-                                                   }`}
+                                                      className={`box-w1 lay float-left ${id === 1 || id === 2
+                                                        ? "dis-none light-bg"
+                                                        : ""
+                                                        }
+                                                   ${item?.price !==
+                                                          previousState?.data?.Odds[
+                                                            id1
+                                                          ]?.runners[index]?.ex
+                                                            ?.availableToLay[id]
+                                                            ?.price
+                                                          ? " blink1"
+                                                          : " "
+                                                        }`}
                                                     >
                                                       <button
                                                         type="button"
@@ -847,22 +856,22 @@ const GameDetails = () => {
                                 </div>
 
                                 <div className="max">
-                              <span>
-                                Min :{" "}
-                                {PostMinMaxGameDetailsData &&
-                                  PostMinMaxGameDetailsData?.Bookmaker &&
-                                  PostMinMaxGameDetailsData?.Bookmaker[0]
-                                    ?.minBet}
-                              </span>
+                                  <span>
+                                    Min :{" "}
+                                    {PostMinMaxGameDetailsData &&
+                                      PostMinMaxGameDetailsData?.Bookmaker &&
+                                      PostMinMaxGameDetailsData?.Bookmaker[0]
+                                        ?.minBet}
+                                  </span>
 
-                              <span className="ms">
-                                Max :{" "}
-                                {PostMinMaxGameDetailsData &&
-                                  PostMinMaxGameDetailsData?.Bookmaker &&
-                                  PostMinMaxGameDetailsData?.Bookmaker[0]
-                                    ?.maxBet}
-                              </span>
-                            </div>
+                                  <span className="ms">
+                                    Max :{" "}
+                                    {PostMinMaxGameDetailsData &&
+                                      PostMinMaxGameDetailsData?.Bookmaker &&
+                                      PostMinMaxGameDetailsData?.Bookmaker[0]
+                                        ?.maxBet}
+                                  </span>
+                                </div>
 
                                 {gameDetailsData?.data?.Bookmaker?.map(
                                   (item, index) => {
@@ -877,22 +886,20 @@ const GameDetails = () => {
                                             "item?.gstatus"
                                           )}
                                           <div
-                                            data-title={`${
-                                              item?.gstatus === "SUSPENDED"
-                                                ? "SUSPENDED"
-                                                : item.gstatus ===
-                                                  "BALL RUNNING"
+                                            data-title={`${item?.gstatus === "SUSPENDED"
+                                              ? "SUSPENDED"
+                                              : item.gstatus ===
+                                                "BALL RUNNING"
                                                 ? "Ball Running"
                                                 : ""
-                                            }`}
-                                            className={`table-row ${
-                                              item?.gstatus === "SUSPENDED"
-                                                ? "suspend"
-                                                : item.gstatus ===
-                                                  "BALL RUNNING"
+                                              }`}
+                                            className={`table-row ${item?.gstatus === "SUSPENDED"
+                                              ? "suspend"
+                                              : item.gstatus ===
+                                                "BALL RUNNING"
                                                 ? "ballrunning"
                                                 : ""
-                                            }`}
+                                              }`}
                                           >
                                             {console.log(
                                               item.gstatus,
@@ -906,7 +913,7 @@ const GameDetails = () => {
                                                 <b> {item?.nation}</b>
                                               </span>
                                               <p className="box-w4">
-                                                {}
+                                                { }
                                                 {profits.Bookmaker?.find(
                                                   (profit) =>
                                                     profit?.sid === item.sid
@@ -964,18 +971,16 @@ const GameDetails = () => {
                                               </button>
                                             </div>
                                             <div
-                                              className={`box-w3 float-left back hidden-portrait ${
-                                                id === 0 || id === 1
-                                                  ? "dis-none"
-                                                  : ""
-                                              }${
-                                                item?.b1 !==
-                                                previousState?.data?.Bookmaker[
-                                                  index
-                                                ]?.b1
+                                              className={`box-w3 float-left back hidden-portrait ${id === 0 || id === 1
+                                                ? "dis-none"
+                                                : ""
+                                                }${item?.b1 !==
+                                                  previousState?.data?.Bookmaker[
+                                                    index
+                                                  ]?.b1
                                                   ? "blink1"
                                                   : " "
-                                              }`}
+                                                }`}
                                             >
                                               <button
                                                 type="button"
@@ -1000,18 +1005,16 @@ const GameDetails = () => {
                                             </div>
 
                                             <div
-                                              className={`box-w3 float-left lay hidden-portrait ${
-                                                id === 0 || id === 1
-                                                  ? "dis-none light-bg"
-                                                  : ""
-                                              }${
-                                                item?.l1 !==
-                                                previousState?.data?.Bookmaker[
-                                                  index
-                                                ]?.l1
+                                              className={`box-w3 float-left lay hidden-portrait ${id === 0 || id === 1
+                                                ? "dis-none light-bg"
+                                                : ""
+                                                }${item?.l1 !==
+                                                  previousState?.data?.Bookmaker[
+                                                    index
+                                                  ]?.l1
                                                   ? "blink1"
                                                   : " "
-                                              }`}
+                                                }`}
                                             >
                                               <button
                                                 type="button"
@@ -1063,7 +1066,7 @@ const GameDetails = () => {
                                 )}
                               </div>
                             </div>
-                            
+
 
                             <marquee className="news-line">
                               {gameDetailsData?.data &&
@@ -1145,7 +1148,7 @@ const GameDetails = () => {
                                               onlyFancyDetails[key].map(
                                                 (item, index) => (
                                                   <>
-                                                  <div
+                                                    <div
                                                       data-v-e03c6f20=""
                                                       className="min-max  text-right"
                                                     >
@@ -1198,16 +1201,15 @@ const GameDetails = () => {
                                                           item?.gstatus
                                                         }
                                                         // className="table-row"
-                                                        className={`table-row ${
-                                                          item?.gstatus?.toLowerCase() ===
+                                                        className={`table-row ${item?.gstatus?.toLowerCase() ===
                                                           "suspended"
-                                                            ? "suspend"
-                                                            : item.gstatus?.toLowerCase() ===
-                                                              "ball running"
+                                                          ? "suspend"
+                                                          : item.gstatus?.toLowerCase() ===
+                                                            "ball running"
                                                             ? "suspend"
                                                             : ""
-                                                        }`}
-                                                        // style={{ height: "37px" }}
+                                                          }`}
+                                                      // style={{ height: "37px" }}
                                                       >
                                                         <div
                                                           data-v-e03c6f20=""
@@ -1229,22 +1231,22 @@ const GameDetails = () => {
 
                                                               height:
                                                                 FancyPNL?.data &&
-                                                                FancyPNL?.data.find(
-                                                                  (itemPnl) =>
-                                                                    itemPnl?.marketId ==
-                                                                    item?.sid
-                                                                )?.pnl
+                                                                  FancyPNL?.data.find(
+                                                                    (itemPnl) =>
+                                                                      itemPnl?.marketId ==
+                                                                      item?.sid
+                                                                  )?.pnl
                                                                   ? ""
                                                                   : "40px",
                                                             }}
                                                           >
                                                             {console.log(
                                                               FancyPNL?.data &&
-                                                                FancyPNL?.data.find(
-                                                                  (itemPnl) =>
-                                                                    itemPnl?.marketId ==
-                                                                    item?.sid
-                                                                )?.pnl,
+                                                              FancyPNL?.data.find(
+                                                                (itemPnl) =>
+                                                                  itemPnl?.marketId ==
+                                                                  item?.sid
+                                                              )?.pnl,
                                                               "dafdsfsd"
                                                             )}
                                                             <span
@@ -1374,15 +1376,14 @@ const GameDetails = () => {
 
                                                         <div
                                                           data-v-e03c6f20=""
-                                                          className={`box-w1 lay float-left text-center ${
-                                                            item?.l1 !==
-                                                              previousStateFancyBlinker &&
+                                                          className={`box-w1 lay float-left text-center ${item?.l1 !==
+                                                            previousStateFancyBlinker &&
                                                             previousStateFancyBlinker[
                                                               key
                                                             ]?.[index]?.l1
-                                                              ? "blink1"
-                                                              : " "
-                                                          }`}
+                                                            ? "blink1"
+                                                            : " "
+                                                            }`}
                                                         >
                                                           <button
                                                             data-v-e03c6f20=""
@@ -1414,15 +1415,14 @@ const GameDetails = () => {
                                                         <div
                                                           // previousStateFancyBlinker
                                                           data-v-e03c6f20=""
-                                                          className={`box-w1 back float-left text-center ${
-                                                            item?.b1 !==
-                                                              previousStateFancyBlinker &&
+                                                          className={`box-w1 back float-left text-center ${item?.b1 !==
+                                                            previousStateFancyBlinker &&
                                                             previousStateFancyBlinker[
                                                               key
                                                             ]?.[index]?.bi
-                                                              ? "blink1"
-                                                              : " "
-                                                          }`}
+                                                            ? "blink1"
+                                                            : " "
+                                                            }`}
                                                         >
                                                           <button
                                                             data-v-e03c6f20=""
@@ -1465,7 +1465,7 @@ const GameDetails = () => {
                                                         className="fancy-tripple"
                                                       ></div>
                                                     </div>
-                                                    
+
                                                   </>
                                                 )
                                               )}
@@ -1489,17 +1489,15 @@ const GameDetails = () => {
               </div>
               <div
                 id="open-bets"
-                class={`tab-pane fade ${
-                  openBet ? "active show " : ""
-                } opennnnn`}
+                class={`tab-pane fade ${openBet ? "active show " : ""
+                  } opennnnn`}
               >
                 <section className="my-bets-container">
                   <div
                     data-toggle="collapse"
                     data-target=".matched-bet"
-                    class={`toggleable-list-title m-t-10 ${
-                      matchedBets === true ? "" : "collapsed"
-                    }`}
+                    class={`toggleable-list-title m-t-10 ${matchedBets === true ? "" : "collapsed"
+                      }`}
                   >
                     <span>Matched Bets</span>{" "}
                     <i
@@ -1508,9 +1506,8 @@ const GameDetails = () => {
                     ></i>
                   </div>
                   <div
-                    class={`events matched-bet ${
-                      matchedBets === true ? "collapse " : "collapse show"
-                    } `}
+                    class={`events matched-bet ${matchedBets === true ? "collapse " : "collapse show"
+                      } `}
                   >
                     {PostBetListByMatchIdData?.data &&
                       Object.keys(PostBetListByMatchIdData?.data).map((key) => (
@@ -1523,9 +1520,8 @@ const GameDetails = () => {
                                     <div>
                                       <Link
                                         to={`/m/gamedetail/${id}`}
-                                        className={`${
-                                          item?.back === false ? "lay" : "back"
-                                        }-bet`}
+                                        className={`${item?.back === false ? "lay" : "back"
+                                          }-bet`}
                                       >
                                         <u>
                                           {item?.back === true ? "BACK" : "LAY"}{" "}
@@ -1582,7 +1578,7 @@ const GameDetails = () => {
         <button onClick={handleCloseFancyModal} className="closebtnonpnl">
           <IoCloseCircleOutline size={25} color={"black"} />
         </button>
-        {}
+        { }
         <ModalBody
           style={{
             height: "calc(100vh - 100px)",

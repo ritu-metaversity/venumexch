@@ -56,26 +56,30 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
 
   useEffect(() => {
 
+    if (token) {
 
-    if (localStorage.getItem("PassWordType") === "old") {
-    } else {
-      dispatch(PostBalance());
+      if (localStorage.getItem("PassWordType") === "old") {
+      } else {
 
-      if (pathname.includes("m/gamedetail")) {
+        dispatch(PostBalance());
+
+        if (pathname.includes("m/gamedetail")) {
+          const time = setInterval(() => {
+            if (token !== "") {
+              dispatch(PostBalance());
+            }
+          }, 1000);
+          return () => clearInterval(time);
+        }
         const time = setInterval(() => {
           if (token !== "") {
             dispatch(PostBalance());
           }
-        }, 1000);
+        }, 5000);
         return () => clearInterval(time);
       }
-      const time = setInterval(() => {
-        if (token !== "") {
-          dispatch(PostBalance());
-        }
-      }, 5000);
-      return () => clearInterval(time);
     }
+
   }, [token, pathname]);
 
   useEffect(() => {

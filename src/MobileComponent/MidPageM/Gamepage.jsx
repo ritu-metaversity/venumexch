@@ -54,7 +54,7 @@ const Gamepage = () => {
       datatata(data);
       navigate(`/m/gamedetail/${id}`)
     } else {
-      navigate(`/m/home`)
+      navigate(`/m/login`)
 
     }
   };
@@ -85,10 +85,13 @@ const Gamepage = () => {
   // console.log(PostBetListByMatchIdData ,"dushyant")
 
   useEffect(() => {
-    let data = { betType: 1, index: 0, noOfRecords: 5, sportType: 1 };
+    if (token) {
 
-    dispatch(Postunsettleddddd(data));
-  }, [dispatch]);
+      let data = { betType: 1, index: 0, noOfRecords: 5, sportType: 1 };
+
+      dispatch(Postunsettleddddd(data));
+    }
+  }, [token]);
 
   return (
     <>

@@ -171,7 +171,7 @@ const Login = () => {
                       />
                     </div>
                   </div>
-                  <div className="panel-body">
+                  <div className="panel-body panel">
                     <form
                       data-vv-scope="form-login"
                       onSubmit={(e) => e.preventDefault()}

@@ -57,10 +57,13 @@ const HomePage = () => {
   }, [id, token]);
 
   useEffect(() => {
-    let data = { betType: 1, index: 0, noOfRecords: 5, sportType: 1 };
+    if (token) {
 
-    dispatch(Postunsettleddddd(data));
-  }, [dispatch]);
+      let data = { betType: 1, index: 0, noOfRecords: 5, sportType: 1 };
+
+      dispatch(Postunsettleddddd(data));
+    }
+  }, [token]);
 
   return (
     <>
@@ -99,7 +102,7 @@ const HomePage = () => {
               Object.keys(gamesData).map((key, item) => (
                 <>
                   <div className="row">
-                    <div className="col-md-12" style={{marginBottom: "-12px"}}>
+                    <div className="col-md-12" style={{ marginBottom: "-12px" }}>
                       <div className=" odds-name fl">
                         {gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ?
                           <span className="sports-name">
@@ -108,17 +111,17 @@ const HomePage = () => {
                           : ""}
                       </div>
                       {
-                        gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ?(
+                        gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ? (
                           <div className=" numberval">
-                        <div className="value-num">
-                          <div>1</div>
-                          <div>X</div>
-                          <div>2</div>
-                        </div>
-                      </div>
-                        ):""
+                            <div className="value-num">
+                              <div>1</div>
+                              <div>X</div>
+                              <div>2</div>
+                            </div>
+                          </div>
+                        ) : ""
                       }
-                      
+
                     </div>
 
 
@@ -184,7 +187,7 @@ const HomePage = () => {
 
                             >
                               <span className="odd">
-                                0
+                                {item?.drawBack}
                               </span>
                               <span>
                                 <span>0</span>
@@ -200,7 +203,9 @@ const HomePage = () => {
                               className="lay"
 
                             >
-                              <span className="odd">0
+                              <span className="odd">
+                                {item?.drawLay}
+
                               </span>
                               <span>
                                 <span>0</span>
