@@ -73,13 +73,13 @@ const Login = () => {
     setLoginData(postLoginData);
   }, [postLoginData]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("TokenId");
+  // useEffect(() => {
+  //   const token = localStorage.getItem("TokenId");
 
-    if (token !== null) {
-      navigate("/m/home");
-    }
-  }, []);
+  //   if (token !== null) {
+  //     navigate("/m/home");
+  //   }
+  // }, []);
 
   const handleInput = (e) => {
     let inputName = e.target.name;
@@ -107,6 +107,10 @@ const Login = () => {
     });
 
     setShow(true);
+  };
+  const handleHome = () => {
+    navigate("/m/home");
+
   };
 
   const handleLoginConfirm = (val) => {
@@ -167,7 +171,7 @@ const Login = () => {
                       />
                     </div>
                   </div>
-                  <div className="panel-body">
+                  <div className="panel-body panel">
                     <form
                       data-vv-scope="form-login"
                       onSubmit={(e) => e.preventDefault()}
@@ -236,6 +240,10 @@ const Login = () => {
                         ) : (
                           ""
                         )}
+                        <button className="btn btn-login" onClick={handleHome}>
+                          Back
+
+                        </button>
                         <p className="m-b-0">
                           <small className="recaptchaTerms">
                             This site is protected by reCAPTCHA and the Google

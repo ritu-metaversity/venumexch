@@ -73,12 +73,12 @@ const RightMenu = (props) => {
     } else if (vl === "Settings") {
       navigate("./Settings");
     } else if (vl === "SignOut") {
-      navigate("./login");
+      navigate("./home");
       localStorage.clear();
     } else {
       dispatch(Postloginlogout);
       localStorage.clear();
-      navigate("./login");
+      navigate("./home");
     }
   };
 
@@ -104,7 +104,7 @@ const RightMenu = (props) => {
                   <strong>
                     {PostTotalBalance?.data?.data?.balance
                       ? PostTotalBalance?.data?.data?.balance -
-                        PostTotalBalance?.data?.data?.libality
+                      PostTotalBalance?.data?.data?.libality
                       : "0:00"}
                   </strong>
                 </span>

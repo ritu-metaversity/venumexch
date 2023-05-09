@@ -35,7 +35,7 @@ const LayoutForMobile = () => {
     setRightValue(false);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   // passwordtype
   // :
@@ -51,14 +51,18 @@ const LayoutForMobile = () => {
       return () => clearInterval(time);
     }
   }, [dispatch]);
-
+  console.log(window.location.pathname, "window.location.pathname")
+  // /m/game/
+  // /m/casino-list
   useEffect(() => {
-    if (PostvalidatejwttokenDataError?.status === false) {
+    if (PostvalidatejwttokenDataError?.status === false && (window.location.pathname === "/m/home" || window.location.pathname.includes === "/m/game/||  window.location.pathname.includes===/m/casino-list")) {
       localStorage.clear();
-      // navigate("/m/login");
-      window.location.replace("/");
+      navigate("/m/home");
+      console.log("dsjdsjdjss")
+      // window.location.replace("/");
     }
   }, [PostvalidatejwttokenDataError]);
+  // console.log("dsjdsjdjss")
 
   // JWT Token Expired
   const handleClose = () => {
@@ -86,7 +90,7 @@ const LayoutForMobile = () => {
     // console.log(vl);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const datatattatattat = (vl) => {
     setBetTypeFooter(vl);
@@ -133,14 +137,13 @@ const LayoutForMobile = () => {
       <div className="wrapper">
         {/* <div className="main-cointainer right-menu-open" > */}
         <div
-          className={`main-cointainer ${
-            RightValue === true
-              ? " right-menu-open"
-              : LeftValue === true
+          className={`main-cointainer ${RightValue === true
+            ? " right-menu-open"
+            : LeftValue === true
               ? "left-menu-open"
               : ""
-          }`}
-          // style
+            }`}
+        // style
         >
           {/* <div className={`main-cointainer ${ LeftValue===true? "left-menu-open" :""}`} >     */}
 
@@ -203,9 +206,8 @@ const LayoutForMobile = () => {
 
       <Modal show={show} onHide={handleClose}>
         <div
-          className={`eighteen-plus  ${BetType}-border  ${
-            BetTypeFooter ? "" : "modal-design"
-          } ${cssClsssssssssssss ? cssClsssssssssssss : ""}`}
+          className={`eighteen-plus  ${BetType}-border  ${BetTypeFooter ? "" : "modal-design"
+            } ${cssClsssssssssssss ? cssClsssssssssssss : ""}`}
         >
           <Modal.Body style={{ marginLeft: "-72% !important" }}>
             <BitPopup

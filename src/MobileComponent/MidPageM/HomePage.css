@@ -23,15 +23,18 @@
     margin-top: 52%;
 }
 
-/* .itdasdasdsa{
-    margin-left: 6%;
-    margin-top: -5%;
-} */
+.itdasdasdsa {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
 
-.homeimgGame {
+/* .homeimgGame {
     float: left;
     margin-left: 6px;
-}
+} */
 
 .timeeeeeee {
     width: 100%;
@@ -40,9 +43,91 @@
     margin-top: 4px;
 }
 
+.fsfsdf {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    gap: 4px;
+}
+
 .noLiveMatch {
     font-size: 15px;
     color: black;
     margin-left: 6%;
 
+}
+
+.odds-name {
+    width: 40%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.gamelogogo {
+    width: 10%;
+}
+
+.gamelogogo img {
+    width: 60%;
+}
+
+.inplayyyy {
+    width: 10%;
+    color: green;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.gameName {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.game-time {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.formobileview {
+    display: none;
+}
+
+.sports-name {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 2rem;
+}
+.numberval{
+    width: 60%;
+    float: right;
+}
+.fl{
+    float: left;
+}
+.value-num {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3%;
+}
+.gam-name{
+    margin-top: 12px;
+}
+@media screen and (min-width: 300px) and (max-width: 500px) {
+    .value-num {
+        margin-left: -4%;
+        margin-top: 12%;
+    }
+    .val-num{
+    margin-top: 4% !important;
+    }
+    .gam-name{
+        margin-top: 3px !important;
+    }
 }

@@ -9,6 +9,8 @@ import {
   Postunsettleddddd,
 } from "../../App/Features/auth/authActions";
 import "./Gamepage.css";
+import moment from "moment"
+
 
 const Gamepage = () => {
   const datatata = useOutletContext();
@@ -40,14 +42,21 @@ const Gamepage = () => {
   const handleGameDetails = (id, item) => {
     // console.log("home page load ")
     // console.log(item?.openDate)
-    let data = {
-      matchName: item?.matchName,
-      openDate: item?.openDate,
-      Odds: "",
-    };
+    if (token) {
 
-    datatata(data);
-    navigate(`/m/gamedetail/${id}`);
+
+      let data = {
+        matchName: item?.matchName,
+        openDate: item?.openDate,
+        Odds: "",
+      };
+
+      datatata(data);
+      navigate(`/m/gamedetail/${id}`)
+    } else {
+      navigate(`/m/login`)
+
+    }
   };
   // console.log(gamesData, "gamesData");
 
@@ -76,10 +85,13 @@ const Gamepage = () => {
   // console.log(PostBetListByMatchIdData ,"dushyant")
 
   useEffect(() => {
-    let data = { betType: 1, index: 0, noOfRecords: 5, sportType: 1 };
+    if (token) {
 
-    dispatch(Postunsettleddddd(data));
-  }, [dispatch]);
+      let data = { betType: 1, index: 0, noOfRecords: 5, sportType: 1 };
+
+      dispatch(Postunsettleddddd(data));
+    }
+  }, [token]);
 
   return (
     <>
@@ -88,9 +100,8 @@ const Gamepage = () => {
         <div className="flash__wrapper"></div>
       </div>
       <section style={{ marginTop: "91px" }}>
-        <h2 class="page-title p-l-15" style={{ marginTop: "10px" }}>
-          {GameName}
-        </h2>
+
+
         {/* <div
           className="in-play page-title m-t-20 m-l-15"
           style={{ paddingTop: "0px" }}
@@ -107,36 +118,128 @@ const Gamepage = () => {
               PostunsettledData?.data?.dataList?.length}
             )
           </span>
+          <div>
+            <h2 class="page-title p-l-15 odds-name fl gam-name" >
+              {GameName}
+            </h2>
+            <div className=" numberval">
+              <div className="value-num val-num">
+                <div>1</div>
+                <div>X</div>
+                <div>2</div>
+              </div>
+            </div>
+          </div>
         </Link>
         <div>
-          <ul className="market-listing">
+          <ul className="market-listing" style={{ marginTop: "12px" }}>
             {gamesData?.length > 0
               ? gamesData.map((item) => {
-                  return (
-                    <li
-                      className="market-list-item"
-                      style={{ padding: "2px", cursor: "pointer" }}
-                      onClick={() => handleGameDetails(item?.matchId, item)}
-                    >
-                      <div
-                        className="item-inner"
-                        style={{ paddingLeft: "12px" }}
-                      >
-                        <span className=" game-name v-m">
-                          {item?.matchName}
-                        </span>
-                        <div className="timeeeee">{item?.openDate}</div>
-                        <div className="events-icons float-right">
+                return (
+                  <div
+                    data-title="OPEN"
+                    className="table-body"
+                    onClick={() => handleGameDetails(item?.matchId, item)}>
+                    <div className="table-row">
+                      <div className="odds-name">
+                        <div className="gameName">
+                          <span className="team-name" style={{ fontSize: "14px" }}>
+                            {item?.matchName}
+                          </span>
+                          <span
+                            className="game-time"
+                          >
+                            {moment(item?.openDate).format('D-MM-YYYY h:mm')}
+
+                          </span>
+                        </div>
+                        <div className="inplayyyy">
                           {item?.inPlay === true ? (
-                            <i className="fas fa-play-circle m-l-5"></i>
+                            <i className="fas fa-play-circle "></i>
                           ) : (
                             ""
                           )}
                         </div>
+
                       </div>
-                    </li>
-                  );
-                })
+
+                      <div className="box-w3 float-left back hidden-portrait">
+                        <button type="button" className="back " >
+                          <span className="odd">{item?.team1Back}</span>
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+                      <div className="box-w3 float-left lay ">
+                        <button
+                          type="button"
+                          className="lay"
+                        >
+                          <span className="odd">{item?.team1Lay}</span>
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        className="box-w3 float-left back hidden-portrait"
+                      >
+                        <button
+                          type="button"
+                          className="back"
+
+                        >
+                          <span className="odd">
+                            0
+                          </span>
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+
+                      <div
+                        className="box-w3 float-left lay hidden-portrait "
+                      >
+                        <button
+                          type="button"
+                          className="lay"
+
+                        >
+                          <span className="odd">0
+                          </span>
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+                      <div className="box-w3 back float-left ">
+                        <button
+                          type="button"
+                          className=" back"
+                        >
+                          <span className="odd">{item?.team2Back}</span>
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+                      <div className="box-w3 lay float-left ">
+                        <button
+                          type="button"
+                          className="lay"
+                        >
+                          <span className="odd">{item?.team2Lay}</span>{" "}
+                          <span>
+                            <span>0</span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
               : ""}
           </ul>
         </div>
