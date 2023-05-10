@@ -27,20 +27,6 @@ const Casinolist = () => {
   };
 
   useEffect(() => {
-    // const id = {
-    //   id: sportId,
-    //   appUrl: window.location.hostname,
-    // };
-    // axios
-    //   .post(
-    //     "http://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types",
-    //     id
-    //   )
-    //   .then((res) => {
-    // setCasinoList(res.data.data);
-    //     console.log(res?.data,"dsfsfsdfsd")
-    //   });
-
 
     const idd = {
       id: sportId,

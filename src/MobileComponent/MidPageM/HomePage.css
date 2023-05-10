@@ -23,6 +23,10 @@
     margin-top: 52%;
 }
 
+.isRight {
+    transform: translateX(-360);
+}
+
 .itdasdasdsa {
     width: 80%;
     display: flex;
@@ -58,7 +62,7 @@
 }
 
 .odds-name {
-    width: 40%;
+    width: 60%;
     display: flex;
     flex-wrap: nowrap;
     align-items: flex-start;
@@ -102,32 +106,52 @@
 .sports-name {
     font-size: 20px;
     font-weight: 600;
-    padding: 2rem;
+    padding: 13px 0px;
 }
-.numberval{
-    width: 60%;
+
+.numberval {
+    width: 40%;
     float: right;
 }
-.fl{
+
+.fl {
     float: left;
 }
+
 .value-num {
     display: flex;
     justify-content: space-around;
-    margin-top: 3%;
+    margin-top: -3%;
 }
-.gam-name{
+
+.gam-name {
     margin-top: 12px;
 }
+
 @media screen and (min-width: 300px) and (max-width: 500px) {
     .value-num {
-        margin-left: -4%;
-        margin-top: 12%;
+        margin-left: 3%;
     }
-    .val-num{
-    margin-top: 4% !important;
+
+    .val-num {
+        margin-top: 4% !important;
     }
-    .gam-name{
+
+    .gam-name {
         margin-top: 3px !important;
     }
 }
+
+.homerow {
+    margin-bottom: -2px !important;
+}
+
+.wh {
+    background-color: #fff;
+    width: 100%;
+    margin-bottom: -3px !important;
+}
+ul.market-listing.m-t-10.fsfsdf.mt-23 {
+    margin-top: -23px !important;
+}
+
