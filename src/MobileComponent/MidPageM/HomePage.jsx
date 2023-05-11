@@ -10,12 +10,14 @@ import {
 } from "../../App/Features/auth/authActions";
 import "./HomePage.css";
 import moment from "moment"
+import Casinolist from "../Livecasino/Casinolist";
 
 
 const HomePage = () => {
   const datatata = useOutletContext();
   const { state } = useLocation();
   const { pathname } = useLocation();
+  const [isLoading, setIsloading] = useState(true)
 
 
   console.log(window.location.pathname, "window.location.pathname")
@@ -53,6 +55,7 @@ const HomePage = () => {
       .get("http://43.205.50.127:9000/betfair_api/active_match")
       .then((res) => {
         setGamesData(res?.data?.data);
+        setIsloading(false)
       });
   }, [id, token]);
 
@@ -65,90 +68,113 @@ const HomePage = () => {
     }
   }, [token]);
 
+  const [isRight, setIsRight] = useState(false)
+
+  useEffect(() => {
+    const get = document.getElementsByClassName("inplay-item__back")
+    // console.log(get)
+    for (let i = 0; i < get.length; i++) {
+      if (isRight) {
+
+        get[i].scrollTo({ left: 480, behavior: "smooth" })
+      } else {
+        get[i].scrollTo({ left: 0, behavior: "smooth" })
+      }
+    }
+    return () => {
+    }
+  }, [isRight])
+
   return (
     <>
       {" "}
       <div className="master-flash-message">
         <div className="flash__wrapper"></div>
       </div>
-      <section style={{ marginTop: "-14px" }}>
-        <h2 class="page-title p-l-15" style={{ marginTop: "10px" }}>
-          {GameName}
-        </h2>
-        <div
-          className="in-play page-title m-t-20 m-l-15"
-          style={{ paddingTop: "0px" }}
-        >
-          <i className="fas fa-play-circle"></i>
-          {""}
-          <span className="label">In Play</span>
-        </div>
-        <Link to="/m/mybets" className="">
-          <span className="open-bets-link" style={{ marginLeft: "7%" }}>
-            Open Bets {""}(
-            {PostunsettledData?.data &&
-              PostunsettledData?.data?.dataList &&
-              PostunsettledData?.data?.dataList?.length
-              ? PostunsettledData?.data &&
-              PostunsettledData?.data?.dataList &&
-              PostunsettledData?.data?.dataList?.length
-              : "0"}
-            )
-          </span>
-        </Link>
-        <div>
-          <ul className="market-listing m-t-10 fsfsdf">
-            {gamesData && gamesData?.length > 0 ? (
-              Object.keys(gamesData).map((key, item) => (
-                <>
-                  <div className="row">
-                    <div className="col-md-12" style={{ marginBottom: "-12px" }}>
-                      <div className=" odds-name fl">
-                        {gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ?
-                          <span className="sports-name">
-                            {gamesData[key]?.name}
-                          </span>
-                          : ""}
-                      </div>
-                      {
-                        gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ? (
-                          <div className=" numberval">
-                            <div className="value-num">
-                              <div>1</div>
-                              <div>X</div>
-                              <div>2</div>
+      {isLoading ?
+        <div className=" lodddd">
+          <i
+            className="fa fa-circle-o-notch fa-spin loading"
+            style={{ fontSize: "50px" }}
+          ></i>
+          <p className="loading-text">Loading...</p>{" "}
+        </div> :
+
+
+        <section style={{ marginTop: "-14px" }}>
+          <h2 class="page-title p-l-15" style={{ marginTop: "10px" }}>
+            {GameName}
+          </h2>
+          <div
+            className="in-play page-title m-t-20 m-l-15"
+            style={{ paddingTop: "0px" }}
+          >
+            <i className="fas fa-play-circle"></i>
+            {""}
+            <span className="label">In Play</span>
+          </div>
+          {
+            token ?
+              <Link to="/m/mybets" className="">
+                <span className="open-bets-link" style={{ marginLeft: "7%" }}>
+                  Open Bets {""}(
+                  {PostunsettledData?.data &&
+                    PostunsettledData?.data?.dataList &&
+                    PostunsettledData?.data?.dataList?.length
+                    ? PostunsettledData?.data &&
+                    PostunsettledData?.data?.dataList &&
+                    PostunsettledData?.data?.dataList?.length
+                    : "0"}
+                  )
+                </span>
+              </Link> : ""
+          }
+
+          <div>
+            <ul className="market-listing m-t-10 fsfsdf mt-23">
+              {gamesData && gamesData?.length > 0 ? (
+                Object.keys(gamesData).map((key, item) => (
+                  <>
+
+                    <div className={`row ${gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ? "" : "d-none"}`}>
+                      <div className="col-md-12 wh" >
+                        <div className=" odds-name fl">
+                          {gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ?
+                            <span className="sports-name" >
+                              {console.log()}
+                              {gamesData[key]?.name}
+                            </span>
+                            : ""}
+                        </div>
+                        {
+                          gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ? (
+                            <div className=" numberval" style={{ marginTop: "20px" }} >
+                              <div className="value-num">
+                                <div>1</div>
+                                <div>X</div>
+                                <div>2</div>
+                              </div>
                             </div>
-                          </div>
-                        ) : ""
-                      }
+                          ) : ""
+                        }
+
+                      </div>
+
+
+
 
                     </div>
 
-
-
-
-                  </div>
-
-                  {gamesData &&
-                    gamesData[key] &&
-                    gamesData[key]?.matchList.map((item, index) => (
-                      <div
-                        data-title="OPEN"
-                        className="table-body"
-                        onClick={() => handleGameDetails(item?.matchId, item)}>
-                        <div className="table-row">
-                          <div className="odds-name">
-                            <div className="gameName">
-                              <span className="team-name" style={{ fontSize: "14px" }}>
-                                {item?.matchName}
-                              </span>
-                              <span
-                                className="game-time"
-                              >
-                                {moment(item?.openDate).format('D-MM-YYYY h:mm')}
-
-                              </span>
+                    {gamesData &&
+                      gamesData[key] &&
+                      gamesData[key]?.matchList.map((item, index) => (
+                        <div class="inplay-item__row homerow" >
+                          <div class="inplay-item__score">
+                            <div class="score-content empty" onClick={() => handleGameDetails(item?.matchId, item)}>
+                              <div class="date-content"><span class="inPlayDate-content__date" style={{ color: "#247b23" }}> {moment(item?.openDate).format('D-MM-YYYY h:mm')}</span></div>
                             </div>
+                          </div>
+                          <div class="inplay-item__players box-w2" onClick={() => handleGameDetails(item?.matchId, item)}><p class="inplay-item__player"> {item?.matchName}</p>
                             <div className="inplayyyy">
                               {item?.inPlay === true ? (
                                 <i className="fas fa-play-circle "></i>
@@ -156,95 +182,64 @@ const HomePage = () => {
                                 ""
                               )}
                             </div>
-
                           </div>
+                          <div onClick={() => setIsRight(o => !o)} class={"inplay-item__back" + (isRight ? " isRight" : "")}>
+                            <div class="inplay-item__back-inner">
+                              <div class="inplay-item__back-inner inplay-item__back-inner-left">
+                                <span class="odd-button back     ">
+                                  <span class="odd-button__inner odd-button__inner--centered ">
+                                    <div class="odd-button__price text-center">{item?.team1Back}</div>
+                                    <div class="odd-button__volume text-center">0</div>
+                                  </span>
+                                </span>
+                                <span class="odd-button back not-active    ">
+                                  <span class="odd-button__inner odd-button__inner--centered ">
+                                    <div class="odd-button__price text-center">{item?.team2Back}</div>
+                                    <div class="odd-button__volume text-center">0</div>
+                                  </span>
+                                </span>
+                                <span class="odd-button back     ">
+                                  <span class="odd-button__inner odd-button__inner--centered ">
+                                    <div class="odd-button__price text-center">{item?.drawBack}</div>
+                                    <div class="odd-button__volume text-center">0</div>
+                                  </span>
+                                </span>
+                                <span class="odd-button lay     ">
+                                  <span class="odd-button__inner odd-button__inner--centered ">
+                                    <div class="odd-button__price text-center">{item?.drawLay}</div>
+                                    <div class="odd-button__volume text-center">0</div>
+                                  </span>
+                                </span>
+                                <span class="odd-button lay     ">
+                                  <span class="odd-button__inner odd-button__inner--centered ">
+                                    <div class="odd-button__price text-center">{item?.team1Lay}</div>
+                                    <div class="odd-button__volume text-center">0</div>
+                                  </span>
+                                </span>
+                                <span class="odd-button lay not-active    ">
+                                  <span class="odd-button__inner odd-button__inner--centered ">
+                                    <div class="odd-button__price text-center">{item?.team2Lay}</div>
+                                    <div class="odd-button__volume text-center">0</div>
 
-                          <div className="box-w3 float-left back hidden-portrait">
-                            <button type="button" className="back " >
-                              <span className="odd">{item?.team1Back}</span>
-                              <span>
-                                <span>0</span>
-                              </span>
-                            </button>
-                          </div>
-                          <div className="box-w3 float-left lay ">
-                            <button
-                              type="button"
-                              className="lay"
-                            >
-                              <span className="odd">{item?.team1Lay}</span>
-                              <span>
-                                <span>0</span>
-                              </span>
-                            </button>
-                          </div>
-                          <div
-                            className="box-w3 float-left back hidden-portrait"
-                          >
-                            <button
-                              type="button"
-                              className="back"
+                                  </span>
+                                </span>
 
-                            >
-                              <span className="odd">
-                                {item?.drawBack}
-                              </span>
-                              <span>
-                                <span>0</span>
-                              </span>
-                            </button>
-                          </div>
-
-                          <div
-                            className="box-w3 float-left lay hidden-portrait "
-                          >
-                            <button
-                              type="button"
-                              className="lay"
-
-                            >
-                              <span className="odd">
-                                {item?.drawLay}
-
-                              </span>
-                              <span>
-                                <span>0</span>
-                              </span>
-                            </button>
-                          </div>
-                          <div className="box-w3 back float-left ">
-                            <button
-                              type="button"
-                              className=" back"
-                            >
-                              <span className="odd">{item?.team2Back}</span>
-                              <span>
-                                <span>0</span>
-                              </span>
-                            </button>
-                          </div>
-                          <div className="box-w3 lay float-left ">
-                            <button
-                              type="button"
-                              className="lay"
-                            >
-                              <span className="odd">{item?.team2Lay}</span>{" "}
-                              <span>
-                                <span>0</span>
-                              </span>
-                            </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                </>
-              ))
-            ) : (
-              <div className="noLiveMatch">No live match now</div>
-            )}
-          </ul>
-        </div>
-      </section>
+                      ))}
+                  </>
+                ))
+              ) : (
+                <div className="noLiveMatch">No live match now</div>
+              )}
+            </ul>
+            <Casinolist />
+          </div>
+
+        </section>
+      }
     </>
   );
 };
