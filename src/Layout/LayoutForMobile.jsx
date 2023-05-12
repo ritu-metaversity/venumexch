@@ -59,7 +59,7 @@ const LayoutForMobile = () => {
       localStorage.clear();
       navigate("/m/home");
       console.log("dsjdsjdjss")
-      // window.location.replace("/");
+      window.location.replace("/");
     }
   }, [PostvalidatejwttokenDataError]);
   // console.log("dsjdsjdjss")
