@@ -53,7 +53,7 @@ const Betslip = (props) => {
           <li>
             <button
               type="button"
-              className="btn btn-primary m-r-5"
+              className="btn editBtn m-r-5"
               onClick={handleEditStakes}
             >
               Edit Stakes
@@ -101,7 +101,7 @@ const Betslip = (props) => {
                     </label>
                   </div>
                   <div className="matched-bets">
-                    <div className="toggleable-list-title">
+                    <div className="toggleable-list-title change-bg text-center mt-0">
                       <span>Unmatched Bets</span>{" "}
                       <i className="fas fa-angle-down m-l-5 toggle-icon"></i>
                     </div>
@@ -111,12 +111,12 @@ const Betslip = (props) => {
                   </div>
 
                   <div className="matched-bets">
-                    <div className="toggleable-list-title">
+                    <div className="toggleable-list-title change-bg text-center">
                       <span>Matched Bets</span>{" "}
                       <i className="fas fa-angle-down m-l-5 toggle-icon"></i>
                     </div>
                     <div className="filter">
-                      <div id="radios2" role="group" tabindex="-1" className="">
+                      <div id="radios2" role="group" tabindex="-1" className="d-flex">
                         <div className="custom-control custom-control-inline custom-checkbox">
                           <input
                             type="checkbox"
@@ -127,7 +127,7 @@ const Betslip = (props) => {
                             id="__BVID__72"
                           />
                           <label
-                            className="custom-control-label"
+                            className="matchBetData custom-control-label"
                             for="__BVID__72"
                           >
                             Consolidate
@@ -144,7 +144,7 @@ const Betslip = (props) => {
                             id="__BVID__73"
                           />
                           <label
-                            className="custom-control-label"
+                            className="matchBetData custom-control-label"
                             for="__BVID__73"
                           >
                             Average Odd
@@ -161,7 +161,7 @@ const Betslip = (props) => {
                             id="__BVID__74"
                           />
                           <label
-                            className="custom-control-label"
+                            className="matchBetData custom-control-label"
                             for="__BVID__74"
                           >
                             Order By Date

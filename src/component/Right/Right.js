@@ -53,7 +53,7 @@ const Right = () => {
                <div
                   data-toggle="collapse"
                   data-target=".credit-box"
-                    className="toggleable-list-title"
+                    className="toggleable-list-title text-center change-bg"
                >
                   <span>
                      <strong>Available Credit: </strong>{" "}
@@ -86,8 +86,8 @@ const Right = () => {
                   <label   className="float-left m-l-10 m-t-5" >1 Click Betting</label>{" "}
 
                   {oneClickBetting ? <>
-                     {editSingleBet ? <button   className="btn btn-primary float-right m-b-5 m-r-5" onClick={handleEditSingleBet}>Save</button> :
-                        <button   className="btn btn-primary float-right m-b-5 m-r-5" onClick={handleEditSingleBet}>Edit</button>
+                     {editSingleBet ? <button   className="btn editBtn float-right m-b-5 m-r-5" onClick={handleEditSingleBet}>Save</button> :
+                        <button   className="btn editBtn float-right m-b-5 m-r-5" onClick={handleEditSingleBet}>Edit</button>
                      }
 
                      <div   className="one-click-bet float-left w-100 m-b-5">
@@ -99,9 +99,9 @@ const Right = () => {
 
                            :
                            <>
-                              <button   className="btn btn-primary m-b-5 m-b-5 selected">1111</button>
-                              <button   className="btn btn-primary m-b-5 m-b-5">5000</button>
-                              <button   className="btn btn-primary m-b-5 m-b-5">7000</button>
+                              <button   className="btn btnStack m-b-5 m-b-5 ">1111</button>
+                              <button   className="btn btnStack m-b-5 m-b-5 selected">5000</button>
+                              <button   className="btn btnStack m-b-5 m-b-5">7000</button>
                            </>
 
                         }

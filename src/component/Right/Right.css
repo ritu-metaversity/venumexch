@@ -34,3 +34,67 @@ ul {
     margin-inline-end: 0px;
     padding-inline-start: 40px;
 }
+
+.change-bg{
+
+    background: #1f5058 !important;
+    text-align: center !important;
+    padding: 5px 12px !important;
+}
+.change-bg span{
+    font-size: 12px !important;
+}
+
+.one-click-bet .btn {
+    text-align: center !important;
+    width: 54px !important;
+    line-height: 22px !important;
+    min-height: 22px !important;
+    margin-right: 5px !important;
+    padding: 0 10px !important;
+}
+
+.btnStack.selected {
+    background: #051316 !important;
+    color: #fff;
+}
+
+.btnStack{
+    background: transparent !important;
+}
+.editBtn{
+    margin-top: 0px !important;
+    background-color: #5c996f !important;
+    color: #FFFFFF !important;
+    border-bottom-color: #497958 !important;
+    border-right-color: #497958 !important;
+    border-left-color: unset !important;
+    border-top-color: unset !important;
+    border-radius: 2px !important;
+}
+button.btn.editBtn.float-right.m-r-5 {
+    border-radius: 4px !important;
+    padding: 4px 9px !important;
+}
+
+button.btn.editBtn.m-r-5 {
+    border-radius: 4px !important;
+    padding: 5px 8px !important;
+}
+.mt-0{
+    margin-top: 0 !important;
+}
+.matchBetData::after{
+
+}
+.matchBetData:checked, .matchBetData::before{
+    color: #000;
+    border-color: #000;
+    background-color: transparent;
+    border: 4px solid #ddd;
+    border-radius: 0% !important;
+    padding: 6px;
+    margin-top: -4px;
+    margin-left: -4px;
+    
+}

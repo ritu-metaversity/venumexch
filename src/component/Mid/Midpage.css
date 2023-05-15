@@ -35,6 +35,7 @@ h1.event-heading {
     width: 312px;
     max-width: 312px;
     min-width: 312px;
+    margin-top: -29px;
 }
 .menu-column {
     float: left !important;
@@ -54,3 +55,19 @@ ul.menu-column.menu-lvl-0 li {
     /* height: 100vh; */
 }
 
+.date-inplay{
+    margin-top: 2px !important;
+}
+
+
+a.event-name {
+    font-size: 12px;
+}
+.eventName{
+    width: 63%;
+    float: left;
+}
+.eventIcon{
+    float: left;
+    margin-right: 3px;
+}
