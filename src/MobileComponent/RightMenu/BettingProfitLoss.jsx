@@ -156,11 +156,16 @@ const BettingProfitLoss = () => {
     setEndDate(dateString);
   };
 
-  useEffect(() => {
-    // if (Active === 2) {
-    dispatch(Postcasino());
-  }, []);
+  // const token = localStorage.getItem("TokenId");
 
+  useEffect(() => {
+  const token = localStorage.getItem("TokenId");
+
+    if (token) {
+
+      dispatch(Postcasino());
+    }
+  }, [token]);
   useEffect(() => {
     const id = {
       id: "323334",
@@ -338,17 +343,17 @@ const BettingProfitLoss = () => {
                 >
                   {/* <option value="">Select Sports</option> */}
                   {getActiveSportListData?.data?.data &&
-                  getActiveSportListData?.data?.data
+                    getActiveSportListData?.data?.data
                     ? getActiveSportListData?.data?.data.map((item) => (
-                        <option value={item?.sportId}>
-                          <img
-                            src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`}
-                            alt=""
-                            className="img"
-                          />
-                          {item?.sportName}
-                        </option>
-                      ))
+                      <option value={item?.sportId}>
+                        <img
+                          src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`}
+                          alt=""
+                          className="img"
+                        />
+                        {item?.sportName}
+                      </option>
+                    ))
                     : ""}{" "}
                 </select>
 
@@ -362,12 +367,12 @@ const BettingProfitLoss = () => {
 
                   {gamesData?.length > 0
                     ? gamesData.map((item) => {
-                        return (
-                          <option value={item?.matchId}>
-                            {item?.matchName}
-                          </option>
-                        );
-                      })
+                      return (
+                        <option value={item?.matchId}>
+                          {item?.matchName}
+                        </option>
+                      );
+                    })
                     : ""}
                 </select>
               </div>
@@ -383,8 +388,8 @@ const BettingProfitLoss = () => {
 
                   {PostcasinoData?.data && PostcasinoData?.data
                     ? PostcasinoData?.data.map((el) => (
-                        <option value={el?.id}>{el?.name}</option>
-                      ))
+                      <option value={el?.id}>{el?.name}</option>
+                    ))
                     : ""}
                 </select>
                 <select
@@ -437,8 +442,8 @@ const BettingProfitLoss = () => {
               {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
               <div className="mainDivFor">
                 {PostprofitlossmatchwiseDatatata?.data &&
-                PostprofitlossmatchwiseDatatata?.data?.market &&
-                PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
+                  PostprofitlossmatchwiseDatatata?.data?.market &&
+                  PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
                   PostprofitlossmatchwiseDatatata?.data?.market.map((el) => (
                     <div class="dsfsfdfsd">
                       <div class="info">
@@ -510,12 +515,12 @@ const BettingProfitLoss = () => {
         <button
           disabled={
             PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
-            null
+              null
               ? true
               : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
                 pageNumber
-              ? true
-              : false
+                ? true
+                : false
           }
           className="paginationBtn"
           style={{ marginLeft: "-10px" }}
@@ -526,12 +531,12 @@ const BettingProfitLoss = () => {
         <button
           disabled={
             PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
-            null
+              null
               ? true
               : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
                 pageNumber
-              ? true
-              : false
+                ? true
+                : false
           }
           className="paginationBtn"
           onClick={() => handleDoubleLeft("doubleright")}

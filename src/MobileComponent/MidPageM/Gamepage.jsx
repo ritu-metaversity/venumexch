@@ -28,6 +28,8 @@ const Gamepage = () => {
   // const { PostGamesById } = useSelector(state => state.auth)
   // console.log(PostGamesById,"Dushyant")
   const { Postmatchsport } = useSelector((state) => state.auth);
+
+  // console.log(alert(id))
   useEffect(() => {
     localStorage.setItem("SportId", id);
   }, [id]);
@@ -43,6 +45,8 @@ const Gamepage = () => {
   const handleGameDetails = (id, item) => {
     // console.log("home page load ")
     // console.log(item?.openDate)
+  const token = localStorage.getItem("TokenId");
+
     if (token) {
 
 

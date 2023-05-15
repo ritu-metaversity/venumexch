@@ -124,6 +124,13 @@
     margin-top: -3%;
 }
 
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
 .gam-name {
     margin-top: 12px;
 }
@@ -151,7 +158,7 @@
     width: 100%;
     margin-bottom: -3px !important;
 }
+
 ul.market-listing.m-t-10.fsfsdf.mt-23 {
     margin-top: -23px !important;
 }
-
