@@ -131,8 +131,8 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   };
 
 
-  // let appUrll = window.location.hostname;
-  let appUrll = "localhost";
+  let appUrll = window.location.hostname;
+  // let appUrll = "localhost";
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
