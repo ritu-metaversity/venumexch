@@ -58,35 +58,38 @@ const MidPage = () => {
                                        return (
                                           <tr>
                                              <td>
-                                             <div className="eventIcon">
-                                             <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_vir.png" alt="" class="icon-vir" />
-                                             <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/game-icon.svg" alt="" class="icon-vir" />
-                                             </div>
-                                             <div className="eventName"> 
-                                                <Link
-                                                   to="/gamedetail/1702080831"
-                                                   className="event-name"
-                                                >
-                                                   {item?.matchName}
-                                                </Link>
+                                                <div className="maindiv">
+                                                   <div className="eventIcon">
+                                                      <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_vir.png" alt="" class="icon-vir" />
+                                                      {/* <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/game-icon.svg" alt="" class="icon-vir" />*/}
+                                                   </div>
+                                                   <div className="eventName">
+                                                      <Link
+                                                         to="/gamedetail/1702080831"
+                                                         className="event-name"
+                                                      >
+                                                         {item?.matchName}
+                                                      </Link>
+                                                   </div>
+                                                   <div>
+                                                      <small>
+                                                         <span className="event-inplay float-right date-inplay">
+                                                            {item?.inPlay === true ? (
+                                                               <>
+                                                                  <img
+                                                                     src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/inplay.png"
+                                                                     alt=""
+                                                                  />
+                                                                  "In-Play"
+                                                               </>
+                                                            ) : (
+                                                               item?.openDate
+                                                            )}
+                                                         </span>
+                                                      </small>
+                                                   </div>
                                                 </div>
-                                                <div>
-                                                <small>
-                                                   <span className="event-inplay float-right date-inplay">
-                                                      {item?.inPlay === true ? (
-                                                         <>
-                                                            <img
-                                                               src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/inplay.png"
-                                                               alt=""
-                                                            />
-                                                            "In-Play"
-                                                         </>
-                                                      ) : (
-                                                         item?.openDate
-                                                      )}
-                                                   </span>
-                                                </small>
-                                                </div>
+
                                              </td>
                                              <td className="back">
                                                 <strong className="odds">

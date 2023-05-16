@@ -5,10 +5,10 @@ const AccountStatement = () => {
   return (
     <div   className="content boxed-layout-wrapper" >
       
-      <SideBar/>
-      <div>
+  
+      <div className='wid-100 mt-66'>
    <h1>Account Statement</h1>
-   <div   className="column m-r-40">
+   <div   className="column m-r-40 ">
       <form data-vv-scope="accountStatement">
          <div   className="form-group v-t m-r-20 d-inline-block">
             <label>From:</label> 

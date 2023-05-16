@@ -36,9 +36,11 @@ const Home = () => {
   return (
     <>
       {/* <div   className="content boxed-layout-wrapper" > */}
-      <div className='d-flex main-desk-view' style={{ marginTop: "116px" }} >
+      <div className='d-flex main-desk-view mt-56'>
 
-        <SideBar />
+
+
+
 
         <MidPage />
         <div>

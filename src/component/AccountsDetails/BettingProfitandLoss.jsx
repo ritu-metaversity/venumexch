@@ -5,8 +5,8 @@ const BettingProfitandLoss = () => {
   return (
     <div   className="content boxed-layout-wrapper" >
       
-    <SideBar/>
-    <div>
+
+    <div className='wid-100 mt-66'>
    <h1>Betting Profit and Loss</h1>
    <div   className="column">
       <form data-vv-scope="profitlossrep">

@@ -4,10 +4,7 @@ import SideBar from '../SideBar/SideBar'
 const TransferStatement = () => {
   return (
     <div   className="content boxed-layout-wrapper" >
-      
-    <SideBar/>
-    
-    <div>
+    <div className='wid-100 mt-66'>
    <h1>Transfer Statement</h1>
    <div   className="table-responsive">
       <table   className="table profit-loss-table">

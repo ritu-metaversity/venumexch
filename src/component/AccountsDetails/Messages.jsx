@@ -6,8 +6,8 @@ const Messages = () => {
   return (
     <div   className="content boxed-layout-wrapper" >
       
-    <SideBar/>
-    <div>
+
+    <div className='wid-100 mt-66'>
    <h1>Messages</h1>
    <div   className="column m-r-40">
       <form data-vv-scope="accountStatement">
