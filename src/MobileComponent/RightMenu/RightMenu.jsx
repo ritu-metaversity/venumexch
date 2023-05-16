@@ -23,8 +23,8 @@ const RightMenu = (props) => {
   );
   const [avaliablebalance, setAvaliablebalance] = useState("");
 
-  // let appUrll = window.location.hostname;
-  let appUrll = "localhost";
+  let appUrll = window.location.hostname;
+  // let appUrll = "localhost";
 
   useEffect(() => {
     setAvaliablebalance(PostTotalBalance?.data?.data?.balance);
