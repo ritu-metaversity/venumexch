@@ -48,6 +48,8 @@ const PayManually = (props) => {
 
   console.log(Bitvalue, "BitvalueBitvalue");
   useEffect(() => {
+    const token = localStorage.getItem("TokenId");
+
     if (token) {
       dispatch(Postpaymnetdetailapp());
     }

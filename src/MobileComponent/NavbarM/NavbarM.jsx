@@ -55,13 +55,16 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   }, []);
 
   useEffect(() => {
+    const token = localStorage.getItem("TokenId");
 
     if (token) {
 
       if (localStorage.getItem("PassWordType") === "old") {
       } else {
 
+
         dispatch(PostBalance());
+
 
         if (pathname.includes("m/gamedetail")) {
           const time = setInterval(() => {
@@ -71,6 +74,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
           }, 1000);
           return () => clearInterval(time);
         }
+
         const time = setInterval(() => {
           if (token !== "") {
             dispatch(PostBalance());
@@ -127,7 +131,8 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   };
 
 
-  let appUrll = window.location.hostname;
+  // let appUrll = window.location.hostname;
+  let appUrll = "localhost";
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {

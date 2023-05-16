@@ -11,6 +11,7 @@ const NavBar = () => {
   const [show, setShow] = useState(false);
   const [showTimes, setShowTimes] = useState("none");
   const [showZone, setShowZone] = useState("+05:30");
+  const token = localStorage.getItem("TokenId");
 
       const handleAccount=(e)=>{
         // console.log("accounts")
@@ -25,6 +26,7 @@ const NavBar = () => {
       }
   
   const liveTime =()=>{
+    
      let time =new Date();
      setDateState(time)
   }

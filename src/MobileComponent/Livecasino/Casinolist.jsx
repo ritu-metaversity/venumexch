@@ -15,11 +15,14 @@ const Casinolist = () => {
 
   const dispatch = useDispatch();
   // console.log(PostcasinoData, "dushyant");
+  const token = localStorage.getItem("TokenId");
 
   useEffect(() => {
-    dispatch(Postcasino());
-  }, [dispatch]);
-  const token = localStorage.getItem("TokenId");
+    if (token) {
+
+      dispatch(Postcasino());
+    }
+  }, [token]);
 
   const handleButton = (item) => {
     // console.log(item)

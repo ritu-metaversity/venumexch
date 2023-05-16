@@ -33,7 +33,9 @@ const HomePage = () => {
   }, [id]);
   const { PostunsettledData } = useSelector((state) => state.auth);
 
-  const handleGameDetails = (id, item) => {
+  const handleGameDetails = (id, item, sportId) => {
+  const token = localStorage.getItem("TokenId");
+
     if (token) {
 
       let data = {
@@ -48,7 +50,13 @@ const HomePage = () => {
       navigate(`/m/login`)
 
     }
+    // console.log(sportId, "sportIdsportIdsportId")
+    localStorage.setItem("SportId", sportId);
+
   };
+  // useEffect(() => {
+  //   localStorage.setItem("SportId", id);
+  // }, [id]);
 
   useEffect(() => {
     axios
@@ -169,12 +177,13 @@ const HomePage = () => {
                       gamesData[key] &&
                       gamesData[key]?.matchList.map((item, index) => (
                         <div class="inplay-item__row homerow" >
+                          {console.log(gamesData[key]?.sportid, "fsdsdfsdfsdfsdf")}
                           <div class="inplay-item__score">
-                            <div class="score-content empty" onClick={() => handleGameDetails(item?.matchId, item)}>
+                            <div class="score-content empty" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
                               <div class="date-content"><span class="inPlayDate-content__date" style={{ color: "#247b23" }}> {moment(item?.openDate).format('D-MM-YYYY h:mm')}</span></div>
                             </div>
                           </div>
-                          <div class="inplay-item__players box-w2" onClick={() => handleGameDetails(item?.matchId, item)}><p class="inplay-item__player"> {item?.matchName}</p>
+                          <div class="inplay-item__players box-w2" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}><p class="inplay-item__player"> {item?.matchName}</p>
                             <div className="inplayyyy">
                               {item?.inPlay === true ? (
                                 <i className="fas fa-play-circle "></i>

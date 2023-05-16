@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import AlertBtn from "../../../MobileComponent/Alert/AlertBtn";
 import { ImCross } from "react-icons/im"
 import { setShowRegisterModalRef } from "../../../logincomponents/Signup";
-
+import { navRef } from "../../../Layout/LayoutForMobile"
 const token = localStorage.getItem("TokenId");
 
 let REACT_APP_API_URL = "api.247365.exchange"
@@ -476,9 +476,16 @@ export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken'
             , {
                 validateStatus: false
             });
-
+        if (PostvalidatejwttokenDataaa.data.status === false) {
+            console.log("dfghjkldfghjklfghjklfghjklsdfghjk")
+            localStorage.clear()
+            if (navRef) {
+                navRef("/m/home")
+            }
+        }
         return PostvalidatejwttokenDataaa
     } catch (err) {
+
         if (err) {
             // console.log(err,"PostvalidatejwttokenDataErrorPostvalidatejwttokenDataError")
             throw err
@@ -582,6 +589,22 @@ export const Postloginlogout = createAsyncThunk('auth/Postloginlogout', async (d
         const PostloginlogoutDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/logout`
         )
         return PostloginlogoutDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+
+export const postpendingapppii = createAsyncThunk('auth/Postloginlogout', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const Postpendingdtaatata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/cancel-withdraw-request-eu`
+        )
+        return Postpendingdtaatata
     } catch (err) {
         if (err) {
             throw err

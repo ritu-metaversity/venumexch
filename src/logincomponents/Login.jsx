@@ -103,7 +103,8 @@ const Login = () => {
     setLogin({
       userId: userName,
       password: password,
-      appUrl: window.location.hostname,
+      // appUrl: window.location.hostname,
+      appUrl:"localhost"
     });
 
     setShow(true);
@@ -134,7 +135,8 @@ const Login = () => {
   const handleSignUp = () => {
     navigate("/m/signup");
   };
-  let appUrll = window.location.hostname;
+  // let appUrll = window.location.hostname;
+  let appUrll = "localhost";
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {

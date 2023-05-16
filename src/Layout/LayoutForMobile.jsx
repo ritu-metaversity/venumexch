@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Postvalidatejwttoken } from "../App/Features/auth/authActions";
 
+export let navRef;
 const LayoutForMobile = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,7 +31,11 @@ const LayoutForMobile = () => {
   const [BetTypeFooter, setBetTypeFooter] = useState(false);
 
   const { PostvalidatejwttokenDataError } = useSelector((state) => state.auth);
+  const token = localStorage.getItem("TokenId");
 
+  //donot touch 
+  navRef = navigate
+  //donot touch 
   const RightSideBarClose = (vl) => {
     setRightValue(false);
   };
@@ -46,23 +51,27 @@ const LayoutForMobile = () => {
     if (localStorage.getItem("PassWordType") === "old") {
     } else {
       const time = setInterval(() => {
-        dispatch(Postvalidatejwttoken());
+        if (token) {
+
+          dispatch(Postvalidatejwttoken());
+        }
       }, 5000);
       return () => clearInterval(time);
     }
-  }, [dispatch]);
+  }, [token]);
   console.log(window.location.pathname, "window.location.pathname")
   // /m/game/
   // /m/casino-list
-  useEffect(() => {
-    if (PostvalidatejwttokenDataError?.status === false && (window.location.pathname === "/m/home" || window.location.pathname.includes === "/m/game/||  window.location.pathname.includes===/m/casino-list")) {
-      localStorage.clear();
-      navigate("/m/home");
-      console.log("dsjdsjdjss")
-      // window.location.replace("/");
-    }
-  }, [PostvalidatejwttokenDataError]);
-  // console.log("dsjdsjdjss")
+
+  // useEffect(() => {
+
+  //   if (PostvalidatejwttokenDataError?.status === false) {
+  //     localStorage.clear();
+  //     navigate("/m/home");
+
+  //     // navigate("/");
+  //   }
+  // }, [PostvalidatejwttokenDataError]);
 
   // JWT Token Expired
   const handleClose = () => {

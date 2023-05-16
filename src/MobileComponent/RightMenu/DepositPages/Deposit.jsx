@@ -50,6 +50,8 @@ const Deposit = () => {
     }
   };
   useEffect(() => {
+  const token = localStorage.getItem("TokenId");
+
     if (token) {
       dispatch(Postdepsositrequestclient());
       dispatch(Postpaymnetdetailapp());

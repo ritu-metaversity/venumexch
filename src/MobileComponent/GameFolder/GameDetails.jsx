@@ -31,7 +31,6 @@ const GameDetails = () => {
   const [matchedBets, setmatchedBets] = useState(false);
   const [gameDetailsData, setGameDetailsData] = useState();
   const [previousState, setPreviousState] = useState({});
-  const [TvShow, setTvShow] = useState(false);
 
   //state for fancy for blinker After filter
   const [previousStateFancyBlinker, setPreviousStateFancyBlinker] = useState(
@@ -71,17 +70,18 @@ const GameDetails = () => {
 
     PostBetingOnGameDetailErrorrr,
   } = useSelector((state) => state.auth);
+  const iddd = localStorage.getItem("SportId");
 
   useEffect(() => {
-    const iddd = localStorage.getItem("SportId");
     setGameIframeId(iddd);
-  }, [localStorage]);
+  }, [iddd]);
 
   const [profits, setProfits] = useState({
     Odds: {},
     Bookmaker: [],
     Fancy: [],
   });
+
 
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
@@ -231,20 +231,24 @@ const GameDetails = () => {
       setOddSocketConnected(true);
     });
   }, []);
+  const token = localStorage.getItem("TokenId");
 
   useEffect(() => {
-    let timer = setInterval(
-      () =>
-        !OddSocketConnected &&
-        socket.emit("JoinRoom", {
-          eventId: id,
-        }),
-      1000
-    );
-    return () => {
-      clearInterval(timer);
-    };
-  }, [OddSocketConnected, id]);
+    if (token) {
+
+      let timer = setInterval(
+        () =>
+          !OddSocketConnected &&
+          socket.emit("JoinRoom", {
+            eventId: id,
+          }),
+        1000
+      );
+      return () => {
+        clearInterval(timer);
+      };
+    }
+  }, [token, OddSocketConnected, id]);
 
   useEffect(() => {
     OddSocketConnected && setOddSocketConnected(false);
@@ -273,16 +277,20 @@ const GameDetails = () => {
   };
 
   useEffect(() => {
+
     if (localStorage.getItem("PassWordType") === "old") {
     } else {
-      let data = { matchId: id };
-      dispatch(PostBetListByMatchId(data));
-      setInterval(() => {
+      if (token) {
+
         let data = { matchId: id };
         dispatch(PostBetListByMatchId(data));
-      }, 5000);
+        setInterval(() => {
+          let data = { matchId: id };
+          dispatch(PostBetListByMatchId(data));
+        }, 5000);
+      }
     }
-  }, [id]);
+  }, [id, token]);
 
   const handleNationName = (name) => { };
 
@@ -382,26 +390,35 @@ const GameDetails = () => {
   }, []);
 
   useEffect(() => {
-    let timer = setInterval(
-      () => {
-        dispatch(PostUserOddPnl({ matchId: id }));
-      },
+    if (
+      token
+    ) {
 
-      3000
-    );
-    return () => {
-      clearInterval(timer);
-    };
+      let timer = setInterval(
+        () => {
+
+          dispatch(PostUserOddPnl({ matchId: id }));
+        },
+
+        3000
+      );
+      return () => {
+        clearInterval(timer);
+      };
+    }
   }, []);
   useEffect(() => {
-    let timer = setInterval(
-      () => dispatch(PostUserfancypnl({ matchId: id })),
+    if (token) {
 
-      3000
-    );
-    return () => {
-      clearInterval(timer);
-    };
+      let timer = setInterval(
+        () => dispatch(PostUserfancypnl({ matchId: id })),
+
+        3000
+      );
+      return () => {
+        clearInterval(timer);
+      };
+    }
   }, []);
 
   const [oddsPnl, setOddsPnl] = useState({});
@@ -465,12 +482,46 @@ const GameDetails = () => {
     } else {
     }
   };
+  const [TvShow, setTvShow] = useState(false)
+  const [toggleBtn1, settoggleBtn1] = useState(false)
+  const [toggleBtn2, settoggleBtn2] = useState(true)
 
   const handleTvShow = () => {
     if (TvShow === false) {
       setTvShow(true);
+      settoggleBtn1(false)
+      settoggleBtn2(false)
     } else {
       setTvShow(false);
+    }
+  };
+
+
+  const handleOne = (e) => {
+    e.preventDefault();
+    if (toggleBtn1 === false) {
+      settoggleBtn1(true)
+      setTvShow(false);
+      settoggleBtn2(false)
+
+    } else {
+      settoggleBtn1(false)
+
+    }
+  };
+
+  const handleTwo = (e) => {
+    e.preventDefault();
+
+    if (toggleBtn2 === false) {
+      settoggleBtn1(false)
+
+      settoggleBtn2(true)
+      setTvShow(false);
+
+    } else {
+
+      settoggleBtn2(false)
     }
   };
 
@@ -495,7 +546,47 @@ const GameDetails = () => {
                 <div className="flash__wrapper"></div>
               </div>
               <div className="event-title">
+                <div className="tvdatatatat">
+                  <div className="tv-icon" onClick={handleTvShow}>
+                    <p className="fjsdlkfjld">
+                      <i className="fa fa-tv"></i>
+                    </p>
+                  </div>
+                  <div className="scoreCard-icon">
+                    <svg
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ScoreboardIcon">
+                      <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
+                    </svg>
+                    <div>
+                      <label
+                        class={`onoffbtn ${toggleBtn1 ? "active" : ""}`}
+                        onClick={handleOne}>
+                        <input type="checkbox" />
+                      </label>
+                    </div>
+                    <svg
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ScoreboardIcon">
+                      <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
+                    </svg>
+                    <div>
+                      <label
+                        class={`onoffbtn ${toggleBtn2 ? "active" : ""}`}
+                        onClick={handleTwo}>
+                        <input type="checkbox" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 <div style={{ marginTop: "10px", width: "86%" }}>
+
                   <img
                     alt=""
                     src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
@@ -510,11 +601,7 @@ const GameDetails = () => {
                 </div>
 
                 <div className="text-right">
-                  <div className="tv-icon" onClick={handleTvShow}>
-                    <p className="fjsdlkfjld">
-                      <i className="fa fa-tv"></i>
-                    </p>
-                  </div>
+
                   <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
                 </div>
               </div>
@@ -573,7 +660,7 @@ const GameDetails = () => {
                           <div className="scorecard scorecard-mobile">
                             <div className="score-inner">
                               <iframe
-                                src={`http://15.207.182.173:3050/event/${id}`}
+                                src="https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true"
                                 // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                 width="100%"
                                 height="290px"
@@ -584,10 +671,41 @@ const GameDetails = () => {
                             </div>
                           </div>
                         </div>
-                      ) : (
-                        ""
-                      )}
+                      ) : ""}
+                      {toggleBtn1 === true ? <div id="scoreboard-box">
+                        <div className="scorecard scorecard-mobile">
+                          <div className="score-inner">
+                            <iframe
+                              src={`http://15.207.182.173:3050/event/${id}`}
 
+                              // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                              width="100%"
+                              height="290px"
+                              className="score-card"
+                              title="scorecord"
+                              allowFullScreen={true}
+                            ></iframe>
+                          </div>
+                        </div>
+                      </div> : ""}
+                      {
+                        toggleBtn2 === true ? <div id="scoreboard-box">
+                          <div className="scorecard scorecard-mobile">
+                            <div className="score-inner">
+                              <iframe
+                                //  src={`http://15.207.182.173:3050/event/${id}`}
+
+                                src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                                width="100%"
+                                height="290px"
+                                className="score-card"
+                                title="scorecord"
+                                allowFullScreen={true}
+                              ></iframe>
+                            </div>
+                          </div>
+                        </div> : ""
+                      }
                       <div
                         // TNL201706678 vc
                         className=" main-market w-100 float-left "
@@ -651,20 +769,22 @@ const GameDetails = () => {
                                       className="table-body"
                                       style={{ marginTop: "7px" }}
                                     >
+
                                       {item11?.runners?.map((item1, index) => {
                                         return (
                                           <>
+                                            {console.log(item11?.status, "item11?.runners.status")}
                                             <div
-                                              data-title={`${item11?.runners?.status === "SUSPENDED"
+                                              data-title={`${item11?.status === "SUSPENDED"
                                                 ? "SUSPENDED"
-                                                : item11?.runners.status ===
+                                                : item11.status ===
                                                   "BALL RUNNING"
                                                   ? "Ball Running"
                                                   : ""
                                                 }`}
-                                              className={`table-row ${item11?.runners?.status === "SUSPENDED"
+                                              className={`table-row ${item11?.status === "SUSPENDED"
                                                 ? "suspend"
-                                                : item11?.runners.status ===
+                                                : item11.status ===
                                                   "BALL RUNNING"
                                                   ? "ballrunning"
                                                   : ""
