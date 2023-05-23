@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useLocation, useParams } from 'react-router'
+import DestGamePage from '../DesktopGamePage/DestGamePage'
 import MidPage from '../Mid/MidPage'
 import Right from '../Right/Right'
 import SideBar from '../SideBar/SideBar'
@@ -33,18 +34,19 @@ const Home = () => {
   //   }else{setSideBarData(false)}
   //     },[window.location.href])
 
+  const { pathname } = useLocation();
+
   return (
+    
+    
+
     <>
       {/* <div   className="content boxed-layout-wrapper" > */}
       <div className='d-flex main-desk-view mt-56'>
-
-
-
-
-
-        <MidPage />
+      {
+        pathname.includes("/gamedetails/")?<DestGamePage/>:<MidPage /> 
+      }
         <div>
-
           <Right />
         </div>
       </div>

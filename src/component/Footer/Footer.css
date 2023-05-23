@@ -4,6 +4,7 @@ p {
     font-size: 11px;
     font-weight: 600;
 }
+
 p {
     margin-top: 0;
     margin-bottom: 1rem;
@@ -13,91 +14,107 @@ p {
     scrollbar-width: thin;
     scrollbar-color: #444 #aaa;
 }
-*, :after, :before {
+
+*,
+:after,
+:before {
     box-sizing: border-box;
 }
-user agent stylesheet
-p {
+
+user agent stylesheet p {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
+
 .modal-content {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
     pointer-events: auto;
-    }
-    .modal-header .close {
-        padding: 1rem;
-        margin: -1rem -1rem -1rem auto;
-    }
-    
-    [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
-        cursor: pointer;
-    }
-    button.close {
-        padding: 0;
-        background-color: transparent;
-        border: 0;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }
-    .close {
-        float: right;
-        font-size: 1.5rem;
-        font-weight: 700;
-        line-height: 1;
+}
+
+.modal-header .close {
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+}
+
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled),
+button:not(:disabled) {
+    cursor: pointer;
+}
+
+button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+
+
+.eighteen-plus {
+    position: absolute;
+    color: #000;
+    background: #fff;
+    top: 30vh;
+}
+
+
+
+@media screen and (max-width: 900px) {
+    .eighteen-plus {
+        position: absolute;
         color: #000;
-        text-shadow: 0 1px 0 #fff;
-        opacity: .5;
+        background: #fff;
+        top: 62vh !important;
+        margin-left: -8px;
     }
 
+    .place-bet.back {
+        background: unset;
+    }
 
+    button.btn.btn-cancel {
+        background: #fff;
+        color: #000;
+        border: 1px solid #222;
+        padding: 12px 67px;
+        margin-top: 1px;
+    }
+
+}
+
+@media only screen and (min-width: 800px) and (max-width:2000px) {
     .eighteen-plus {
         position: absolute;
         color: #000;
         background: #fff;
         top: 30vh;
+        width: 100%;
+        /* left: 75%; */
     }
 
+}
 
-
-    @media screen and (max-width: 900px) {
-        .eighteen-plus {
-            position: absolute;
-            color: #000;
-            background: #fff;
-            top: 62vh !important;
-            margin-left: -8px;
-        }
-        .place-bet.back {
-            background: unset;
-        }
-        button.btn.btn-cancel {
-            background: #fff;
-            color: #000;
-            border: 1px solid #222;
-            padding: 12px 67px;
-            margin-top: 1px;
-        }
-        
-    }
-
-    @media only screen and (min-width: 800px) and (max-width:2000px) {
-        .eighteen-plus {
-            position: absolute;
-            color: #000;
-            background: #fff;
-            top: 30vh;
-            width: 100%;
-            /* left: 75%; */
-        }
-        
-    }
-
-   
+.dsdsdsdsds {
+    width: 100%;
+    z-index: 999 !important;
+    position: relative;
+}

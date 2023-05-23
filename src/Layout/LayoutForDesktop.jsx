@@ -25,8 +25,9 @@ const LayoutForDesktop = () => {
 
       {footerCondition ? <NavBarWithOutLogin /> : <NavBar />}
 
-      <div className="maincontainer"> <SideBar />
-        <div>
+      <div className="maincontainer boxed-layout-wrapper-new">
+        <SideBar />
+        <div className="content " >
           <Outlet />
         </div>
       </div>

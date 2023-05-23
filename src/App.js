@@ -23,17 +23,21 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (window.innerWidth > 1024) {
+    if (window.innerWidth > 750) {
       setMoileRoutes(true);
-      if (!pathname.includes("/m/")) {
-        navigate("./m/home");
+      // navigate("./home");
+
+      if (pathname.includes("/m/")) {
+        navigate("/home");
       }
       // console.log("mobile")
     } else {
       setMoileRoutes(false);
-      if (pathname.includes("/m/")) {
-        navigate("./home");
-      }
+      // navigate("./m/home");
+
+      // if (pathname.includes("/m/")) {
+      //   navigate("./home");
+      // }
       // console.log("pc")
     }
   }, []);

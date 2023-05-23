@@ -73,11 +73,10 @@ ul.menu-column.menu-lvl-0 li {
 .mid-pane {
     padding: 0 0 20px 20px;
     height: 100%;
+    
 }
 
-.left-pane {
-    /* height: 100vh; */
-}
+
 
 .date-inplay {
     margin-top: 2px !important;
@@ -105,6 +104,14 @@ a.event-name {
     align-items: center;
     justify-content: center;
     gap: 4px;
+}
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    z-index: 99;
 }
 
 /* .{    width: 100%;} */

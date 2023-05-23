@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "../SideBar/SideBar";
 import "./Mybets.css";
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
 
+const dateFormat = "YYYY-MM-DD";
 const Mybets = () => {
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+
+  const StartDateValue = (date, dateString) => {
+    setStartDate(dateString);
+  };
+  const EndDateValue = (date, dateString) => {
+    setEndDate(dateString);
+  };
   return (
-    <div className="content boxed-layout-wrapper _flex mt-66 wid-100">
+    <div className="content boxed-layout-wrapper _flex wid-100">
 
       <div className="_parent">
         <div className="mid-pane">
-          <h1>My Bets</h1>
+          <h1 className="betHeading">My Bets</h1>
           <div className="column m-r-40 d-inline-block">
             <div className="selection">
               <div className="item selected">Current</div>
@@ -22,56 +34,24 @@ const Mybets = () => {
           </div>
           <div className="column v-t m-r-40 d-inline-block">
             <form data-vv-scope="mybets">
-              <div className="form-group v-t m-r-20 d-inline-block">
-                <label>From:</label>
+              <div className="v-t d-inline-block">
+                <label className="mb-0">From:</label>
                 <div
                   className="mx-datepicker vuedatepicker"
                   name="FromDate"
-                  not-before="Tue Dec 13 2022 05:30:00 GMT+0530 (India Standard Time)"
-                  not-after="Mon Feb 13 2023 05:30:00 GMT+0530 (India Standard Time)"
                 >
                   <div className="mx-input-wrapper">
-                    <input
-                      name="date"
-                      type="text"
-                      autocomplete="off"
-                      placeholder="Select Date"
-                      className="mx-input"
-                    />{" "}
-                    <span className="mx-input-append mx-clear-wrapper">
-                      <i className="mx-input-icon mx-clear-icon"></i>
-                    </span>
-                    <span className="mx-input-append">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        version="1.1"
-                        viewBox="0 0 200 200"
-                        className="mx-calendar-icon"
-                      >
-                        <rect
-                          x="13"
-                          y="29"
-                          rx="14"
-                          ry="14"
-                          width="174"
-                          height="158"
-                          fill="transparent"
-                        ></rect>
-                        <line x1="46" x2="46" y1="8" y2="50"></line>
-                        <line x1="154" x2="154" y1="8" y2="50"></line>
-                        <line x1="13" x2="187" y1="70" y2="70"></line>
-                        <text
-                          x="50%"
-                          y="135"
-                          font-size="90"
-                          stroke-width="1"
-                          text-anchor="middle"
-                          dominant-baseline="middle"
-                        >
-                          13
-                        </text>
-                      </svg>
-                    </span>
+                    <DatePicker
+                      className=" startDateNew"
+                      defaultValue={dayjs(startDate)}
+                      format={dateFormat}
+                      onChange={StartDateValue}
+                      disabledDate={(d) =>
+                        !d ||
+                        d.isBefore(dayjs().subtract(2, "month")) ||
+                        d.isAfter(dayjs())
+                      }
+                    />
                   </div>
                   <div
                     className="mx-datepicker-popup"
@@ -164,120 +144,37 @@ const Mybets = () => {
                 </div>
                 <span className="text-danger error-report m-l-10"></span>
               </div>
-              <div className="form-group v-t m-r-20 d-inline-block">
-                <label>To:</label>
+              <div className=" v-t d-inline-block" style={{ marginLeft: "-18px" }}>
+                <label className="mb-0">To:</label>
                 <div
                   className="mx-datepicker vuedatepicker"
                   name="ToDate"
-                  not-before="Tue Dec 13 2022 05:30:00 GMT+0530 (India Standard Time)"
-                  not-after="Mon Feb 13 2023 05:30:00 GMT+0530 (India Standard Time)"
                 >
                   <div className="mx-input-wrapper">
-                    <input
-                      name="date"
-                      type="text"
-                      autocomplete="off"
-                      placeholder="Select Date"
-                      className="mx-input"
-                    />{" "}
-                    <span className="mx-input-append mx-clear-wrapper">
-                      <i className="mx-input-icon mx-clear-icon"></i>
-                    </span>
-                    <span className="mx-input-append">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        version="1.1"
-                        viewBox="0 0 200 200"
-                        className="mx-calendar-icon"
-                      >
-                        <rect
-                          x="13"
-                          y="29"
-                          rx="14"
-                          ry="14"
-                          width="174"
-                          height="158"
-                          fill="transparent"
-                        ></rect>
-                        <line x1="46" x2="46" y1="8" y2="50"></line>
-                        <line x1="154" x2="154" y1="8" y2="50"></line>
-                        <line x1="13" x2="187" y1="70" y2="70"></line>
-                        <text
-                          x="50%"
-                          y="135"
-                          font-size="90"
-                          stroke-width="1"
-                          text-anchor="middle"
-                          dominant-baseline="middle"
-                        >
-                          13
-                        </text>
-                      </svg>
-                    </span>
-                  </div>
-                  <div
-                    className="mx-datepicker-popup"
-                    style={{ display: "none" }}
-                  >
-                    <div
-                      className="mx-calendar mx-calendar-panel-none"
-                      name="ToDate"
-                    >
-                      <div className="mx-calendar-header">
-                        <Link className="mx-icon-last-year">«</Link>{" "}
-                        <Link
-                          className="mx-icon-last-month"
-                          style={{ display: "none" }}
-                        >
-                          ‹
-                        </Link>{" "}
-                        <Link className="mx-icon-next-year">»</Link>{" "}
-                        <Link
-                          className="mx-icon-next-month"
-                          style={{ display: "none" }}
-                        >
-                          ›
-                        </Link>{" "}
-                        <Link
-                          className="mx-current-month"
-                          style={{ display: "none" }}
-                        >
-                          Feb
-                        </Link>{" "}
-                        <Link
-                          className="mx-current-year"
-                          style={{ display: "none" }}
-                        >
-                          2023
-                        </Link>{" "}
-                        <Link
-                          className="mx-current-year"
-                          style={{ display: "none" }}
-                        >
-                          2020 ~ 2029
-                        </Link>{" "}
-                        <Link
-                          className="mx-time-header"
-                          style={{ display: "none" }}
-                        >
-                          2023-02-13
-                        </Link>
-                      </div>
-                      <div className="mx-calendar-content"></div>
-                    </div>
+                    <DatePicker
+                      className=" startDateNew"
+                      defaultValue={dayjs(startDate)}
+                      format={dateFormat}
+                      onChange={StartDateValue}
+                      disabledDate={(d) =>
+                        !d ||
+                        d.isBefore(dayjs().subtract(2, "month")) ||
+                        d.isAfter(dayjs())
+                      }
+                    />
                   </div>
                 </div>
                 <span className="text-danger error-report "></span>
               </div>
               <div className="form-group m-r-20 d-inline-block">
-                <label className="d-block">&nbsp;</label>{" "}
-                <button className="btn btn-primary" style={{ height: "35px" }}>
+
+                <button className="btn-primary searchBtnNew">
                   <i className="fa fa-search m-r-5"></i>Search
                 </button>
               </div>
             </form>
           </div>
-          <div className="table-responsive">
+          <div >
             <table className="table profit-loss-table">
               <thead>
                 <tr>
@@ -300,6 +197,17 @@ const Mybets = () => {
                 <tr>
                   <td colspan="7" className="text-center">
                     There are no record to display
+                  </td>
+                </tr>
+
+                <tr className="odd oddNew">
+                  <td className="text-left"><span className="d-block">23/05/2023</span> <span className="d-block">12:02:57</span></td>
+                  <td className="text-left"><span className="d-block"><Link to=''>Indian Premier League</Link></span> <span className="d-inline-block">Gujarat Titans</span> <span className="d-block">Matched: <span>23/05/2023 12:02:57</span></span></td>
+                  <td className="text-left">BACK</td>
+                  <td className="text-right">160.00</td>
+                  <td className="text-right">50.00</td>
+                  <td className="text-right">80.00</td>
+                  <td className="text-right">
                   </td>
                 </tr>
               </tbody>

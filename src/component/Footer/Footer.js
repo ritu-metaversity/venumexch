@@ -24,7 +24,7 @@ const Footer = () => {
   return (
     <div>
     {/* <div style={{marginTop: "43px"}}> */}
-      <footer data-v-2b4e1d6e=""   className="footer" style={{ width: "100%" }}>
+      <footer data-v-2b4e1d6e=""   className="footer dsdsdsdsds" style={{ width: "100%" }}>
         <p data-v-2b4e1d6e=""   className="m-b-0 text-center p-t-10 upper-footer">
           <Link data-v-2b4e1d6e="" to="/ResponsibleGambling"   className="theme1font">
           Responsible Gambling

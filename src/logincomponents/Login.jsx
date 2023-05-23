@@ -73,13 +73,13 @@ const Login = () => {
     setLoginData(postLoginData);
   }, [postLoginData]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("TokenId");
+  // useEffect(() => {
+  //   const token = localStorage.getItem("TokenId");
 
-    if (token !== null) {
-      navigate("/m/home");
-    }
-  }, []);
+  //   if (token !== null) {
+  //     navigate("/m/home");
+  //   }
+  // }, []);
 
   const handleInput = (e) => {
     let inputName = e.target.name;
@@ -104,9 +104,14 @@ const Login = () => {
       userId: userName,
       password: password,
       appUrl: window.location.hostname,
+      // appUrl:"localhost"
     });
 
     setShow(true);
+  };
+  const handleHome = () => {
+    navigate("/m/home");
+
   };
 
   const handleLoginConfirm = (val) => {
@@ -131,17 +136,13 @@ const Login = () => {
     navigate("/m/signup");
   };
   let appUrll = window.location.hostname;
+  // let appUrll = "localhost";
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
-    axios
-      .post(
-        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
-        { appUrl: appUrll }
-      )
-      .then((res) => {
-        SetselfAllowedd(res?.data?.data?.selfAllowed);
-      });
+    axios.post("http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+{ appUrl: appUrll })
+      .then((res) => {SetselfAllowedd(res?.data?.data?.selfAllowed)});
   }, [appUrll]);
 
   // http://${REACT_APP_API_URL}/admin-new-apis/login/is-self-by-app-url
@@ -167,7 +168,7 @@ const Login = () => {
                       />
                     </div>
                   </div>
-                  <div className="panel-body">
+                  <div className="panel-body panel">
                     <form
                       data-vv-scope="form-login"
                       onSubmit={(e) => e.preventDefault()}
@@ -236,6 +237,10 @@ const Login = () => {
                         ) : (
                           ""
                         )}
+                        <button className="btn btn-login" onClick={handleHome}>
+                          Back
+
+                        </button>
                         <p className="m-b-0">
                           <small className="recaptchaTerms">
                             This site is protected by reCAPTCHA and the Google

@@ -22,6 +22,7 @@ const SideBar = () => {
 
     dispatch(getActiveSportList())
 
+
   }, [dispatch])
 
   const handleRoute = (id, id2) => {
@@ -48,7 +49,7 @@ const SideBar = () => {
 
   return (
     <>
-      <div data-v-4732acba="" className="left-pane">
+      <div data-v-4732acba="" className="left-pane fdsfsdffs">
         {valueForGame === true ?
 
           <SubSideBar valueForGame={valueForGame} gameiD={gameiD} gameName={gameName} sendData={sendData} />

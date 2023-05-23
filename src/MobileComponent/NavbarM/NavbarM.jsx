@@ -46,8 +46,9 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   useEffect(() => {
     if (localStorage.getItem("PassWordType") === "old") {
     } else {
-      dispatch(PostBalance());
-
+      if (token !== "") {
+        dispatch(PostBalance());
+      }
       if (pathname.includes("m/gamedetail")) {
         const time = setInterval(() => {
           if (token !== "") {
@@ -171,7 +172,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                 <span className="balance">
                   {PostTotalBalance?.data?.data?.balance
                     ? PostTotalBalance?.data?.data?.balance -
-                      PostTotalBalance?.data?.data?.libality
+                    PostTotalBalance?.data?.data?.libality
                     : "0.00"}
                 </span>
               </button>

@@ -15,6 +15,7 @@ import TransferStatement from "./component/AccountsDetails/TransferStatement";
 import Footer from "./component/Footer/Footer";
 import LayoutForMobile from "./Layout/LayoutForMobile";
 import LayoutForDesktop from "./Layout/LayoutForDesktop";
+import DestGamePage from "./component/DesktopGamePage/DestGamePage";
 // import Login from './logincomponents/Login';
 
 const Layout = lazy(() => import("./Layout/LayoutForDesktop"));
@@ -26,6 +27,15 @@ const RoutesPages = () => {
       {/* <BrowserRouter>
         <Suspense > */}
       <Routes>
+        <Route
+          path="login"
+          element={
+            <>
+              <Login />
+              {/* <Footer/> */}
+            </>
+          }
+        />
         <Route exact path="/" element={<LayoutForDesktop />}>
           <Route path="home" element={<Home />} />
           <Route
@@ -35,30 +45,21 @@ const RoutesPages = () => {
           <Route path="/mybets" element={<Mybets />} />
           <Route path="/accountstatement" element={<AccountStatement />} />
           <Route path="/profitloss" element={<BettingProfitandLoss />} />
-          <Route path="/changepassword/:id" element={<ChangePassword />} />
+          <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/secureauth" element={<SecureAuthVarification />} />
           <Route path="/transferstatement" element={<TransferStatement />} />
           <Route path="/message" element={<Messages />} />
+          <Route path="/gamedetails/:id" element={<Home />} />
 
           <Route path="/game/:id" element={<Home />} />
+
+
         </Route>
 
-        <Route
-          exact
-          path="/login"
-          element={
-            <>
-              <Login />
-              {/* <Footer/> */}
-            </>
-          }
-        />
 
-        <Route path="*" element={<Navigate to="/home" />} />
+
       </Routes>
-      {/* </Suspense> */}
-      {/* <Footer/> */}
-      {/* </BrowserRouter> */}
+
     </div>
   );
 };

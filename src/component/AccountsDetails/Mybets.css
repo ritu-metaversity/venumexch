@@ -50,3 +50,63 @@ h1, h2, h3, h4, h5, h6 {
 .wid-100{
     width: 1088px !important;
 }
+.startDateNew {
+    width: 228px !important;
+    height: 37px;
+    margin-left: -16px;
+    border-radius: unset !important;
+}
+
+button.btn-primary.searchBtnNew {
+    margin-top: 26px;
+    height: 34px;
+    background: #5c996f !important;
+    margin-left: -5px;
+    border-radius: 3px !important;
+    padding-top: 10px;
+}   
+.betHeading {
+    font-size: 18px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 6px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.oddNew td{
+    font-weight: 500 !important;
+    /* text-align: left !important; */
+}
+
+.oddNew a{
+    text-decoration: none !important;
+    color: #000 !important;
+}
+form.pnl {
+    margin-left: 31px;
+    margin-bottom: 0;
+}
+.pnlHeading {
+    margin-left: 28px;
+}
+table.table.profit-loss-table {
+    margin-top: 0 !important;
+}
+button.mt-0.w-0.btn-primary.searchBtnNew {
+    width: 50px;
+    margin-left: 3px !important;
+}
+.m-t-2{
+    margin-top: 12px !important;
+}
+.wid-50 {
+    /* width: 42%!important; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.secAndAuth{
+    padding: 5px 13px !important;
+    font-size: 10px !important;
+}

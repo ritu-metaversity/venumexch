@@ -1,11 +1,13 @@
-.footer-desk footer {
-    position: unset;
+.footer-desk {
+    /* position: sticky;
+    bottom: 0; */
+    height: 110px;
 }
 
 .maincontainer {
     display: flex;
+    min-height: calc(100vh - 230px);
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: center;
 
 }
