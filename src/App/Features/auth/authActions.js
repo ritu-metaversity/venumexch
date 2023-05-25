@@ -612,3 +612,58 @@ export const postpendingapppii = createAsyncThunk('auth/Postloginlogout', async 
         return rejectWithValue(err.response.data)
     }
 })
+
+export const postUserBannerList = createAsyncThunk('auth/postUserBannerList', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const postUserBannerListData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-banner-list`, data
+        )
+        return postUserBannerListData
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+export const getAboutUs = createAsyncThunk('auth/getAboutUs', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const getAboutUsDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getAboutUs`, data
+        )
+        return getAboutUsDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+export const getTermAndCondition = createAsyncThunk('auth/getTermAndCondition', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const getTermAndConditionDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getTermAndCondition`, data
+        )
+        return getTermAndConditionDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+export const getResponsibleGaming = createAsyncThunk('auth/getResponsibleGaming', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const getResponsibleGamingDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getResponsibleGaming`, data
+        )
+        return getResponsibleGamingDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
