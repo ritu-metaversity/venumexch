@@ -7,19 +7,29 @@ const TermsandConditions = () => {
 
 
   const { getTermAndConditionData } = useSelector((state) => state.auth);
-  let appUrll = window.location.hostname;
+  let appUrl = window.location.hostname;
 
   useEffect(() => {
-    dispatch(getTermAndCondition({ appUrll }))
+    dispatch(getTermAndCondition({ appUrl }))
   }, [])
-
+  // const data = getTermAndConditionData?.data?.termandcondition
 
   console.log(getTermAndConditionData, "getTermAndConditionData")
   return (
-    <div className="home-page home-page-news">
+    <div className="home-page  home-page-news" style={{
+      marginTop: "102px",
+      marginLeft: "18px"
+    }}
+      dangerouslySetInnerHTML={{ __html: getTermAndConditionData?.data?.termandcondition }}
 
-      TermsandConditions
-    </div>
+    />
+
+
+
+
+
+
+
   )
 }
 
