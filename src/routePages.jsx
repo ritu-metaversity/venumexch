@@ -16,10 +16,11 @@ import Footer from "./component/Footer/Footer";
 import LayoutForMobile from "./Layout/LayoutForMobile";
 import LayoutForDesktop from "./Layout/LayoutForDesktop";
 import DestGamePage from "./component/DesktopGamePage/DestGamePage";
-// import Login from './logincomponents/Login';
+import LoginForMobile from "./LoginForDesktop/LoginForDesktop";
+
 
 const Layout = lazy(() => import("./Layout/LayoutForDesktop"));
-const Login = lazy(() => import("./logincomponents/Login"));
+
 
 const RoutesPages = () => {
   return (
@@ -27,15 +28,7 @@ const RoutesPages = () => {
       {/* <BrowserRouter>
         <Suspense > */}
       <Routes>
-        <Route
-          path="login"
-          element={
-            <>
-              <Login />
-              {/* <Footer/> */}
-            </>
-          }
-        />
+        <Route path="login" element={<LoginForMobile />} />
         <Route exact path="/" element={<LayoutForDesktop />}>
           <Route path="home" element={<Home />} />
           <Route

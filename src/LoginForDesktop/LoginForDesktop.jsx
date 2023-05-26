@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./LoginForMobile.css";
+import "./LoginForDesktop.css";
 import axios from "axios";
 import { useEffect } from "react";
 // import { useHistory } from 'react-router-dom';
@@ -11,93 +11,11 @@ import MFooter from "../MobileComponent/MMFooter/MFooter";
 
 const LoginForMobile = () => {
   let navigate = useNavigate();
-  // const [login ,setLogin ] = useState("")
-  // const [userName ,setUserName ] = useState("eff8caa0a3")
-  // const [password ,setPassword ] = useState("1111111")
-
-  // const [confirmLogin,setConfirmLogin] = useState("false")
-
-  // const [errorId,setErrorId] = useState(false)
-  // const [errorPassword,setErrorPassword] = useState(false)
-  // console.log(userName)
-  // // console.log(confirmLogin)
-  // console.log(password)
-
-  // // modal code start
-
-  // const [show, setShow] = useState(false);
-
-  // const handleClose = () => setShow(false);
-  // // const handleShow = () => setShow(true);
-
-  // // end
-
-  // const handleInput = (e) => {
-  //    let inputName = e.target.name;
-  //    let inputValue = e.target.value;
-
-  //    switch (inputName) {
-  //      case "Username":
-  //       setUserName(inputValue);
-  //       setErrorId(false)
-  //        break;
-  //      case "Password":
-  //       setPassword(inputValue);
-  //       setErrorPassword(false)
-
-  //        break;
-  //      default:
-  //        return false;
-  //    }
-  //  };
-
-  // useEffect(()=>{
-  //   if(localStorage.getItem("TokenId") ){
-  //       navigate("/home")
-  //    }
-  // },[navigate])
-
-  //    const handleLogin =(e)=>{
-  //       // e.preventdefault()
-  //       // setShow(true)
-  //       // console.log("hellllllllo")
-  //    }
 
   const handleLoginConfirm = (val) => {
     navigate("/home");
-
-    // let data = {
-    //    userId: userName,
-    //    password: password
-    // }
-    //         axios.post('http://api.247365.exchange/admin-new-apis/enduser/get-user-message', data)
-    //        .then((response) => {
-
-    //          if(window.innerWidth < 461){
-    //          if(response.status===200){
-    //          // navigate("/mobileHome")
-    //          console.log("homeeeeeeeeeee")
-    //        }
-    //        localStorage.setItem("TokenId", response?.data?.token);
-    //       }  else{
-    //          if(response.status===200){
-    //             // navigate("/mobileHome")
-    //             console.log("mobileeeeeeeeee")
-    //           }
-    //        }
-    //       }
-    //        )
-    //        .catch((error) => {
-    //          setShow(false)
-    //          setErrorId(true)
-    //          setErrorPassword(true)
-    //          console.log(error?.response?.data,"ERROR")
-    //       });
   };
 
-  //    const hanndsnd=()=>{
-  //       console.log(window.innerWidth)
-  //    }
 
   return (
     <div id="app">
@@ -132,7 +50,7 @@ const LoginForMobile = () => {
                             type="text"
                             placeholder="Username"
                             className="form-control"
-                            //  onChange={handleInput}
+                          //  onChange={handleInput}
                           />
                           {/* {
                                     errorId ?
@@ -146,7 +64,7 @@ const LoginForMobile = () => {
                             type="password"
                             placeholder="Password"
                             className="form-control"
-                            //   onChange={handleInput}
+                          //   onChange={handleInput}
                           />
 
                           {/* {errorPassword ?
@@ -189,35 +107,35 @@ const LoginForMobile = () => {
           {/* <button variant="primary" onClick={handleShow}>
         Launch demo modal
       </button> */}
-      <div className="confirmation" style={{width: "300px"}}>
+          <div className="confirmation" style={{ width: "300px" }}>
 
-          <Modal
-            className="login-confirm-modal"
-            // show={show}
-            //   onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
-            style={{ backgroundColor: "black", width: "300px" }}
-          >
-            <Modal.Header>
-              <Modal.Title>Modal title</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              Underage gambling is prohibited. Please confirm if you are 18
-              years old and above as of today
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={"handleClose"}>
-                Exit
-              </Button>
-              <Button
-                variant="primary"
-                onClick={() => "handleLoginConfirm"("true")}
-              >
-                Confirm
-              </Button>
-            </Modal.Footer>
-          </Modal>
+            <Modal
+              className="login-confirm-modal"
+              // show={show}
+              //   onHide={handleClose}
+              backdrop="static"
+              keyboard={false}
+              style={{ backgroundColor: "black", width: "300px" }}
+            >
+              <Modal.Header>
+                <Modal.Title>Modal title</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                Underage gambling is prohibited. Please confirm if you are 18
+                years old and above as of today
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={"handleClose"}>
+                  Exit
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={() => "handleLoginConfirm"("true")}
+                >
+                  Confirm
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </div>
         </>
       </div>

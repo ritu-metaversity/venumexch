@@ -53,7 +53,7 @@ const NavBar = () => {
     localStorage.removeItem("TokenId");
     setAccount(false);
 
-    // navigate("./login")
+    navigate("./login")
   };
   const handleClose = () => {
     setShow(false);
