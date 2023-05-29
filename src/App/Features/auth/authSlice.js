@@ -4,7 +4,7 @@ import {
     PostGameDetailsByMI, PostGetStackApi, PostEditStack, PostBetListByMatchId, PostTransferStatement, PostPlaceBet, Postactivematchsport,
     Postunsettleddddd, Postcasino, Postprofitlossmatchwise, postBetMarketAndUser, Postisselfbyappurl, Postdepsositrequestclient, Postpaymnetdetailapp,
     Postselfdepositapp, Postselfwithdrawapp, Postwithdrawrequestclient, Postvalidatejwttoken, Postuserselfregister, PostMinMaxGameDetails, PostUserOddPnl, PostUserfancypnl,
-    Postuserfancybook, Postloginlogout
+    Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition,getResponsibleGaming
 } from './authActions'
 
 const INITAL_STATE = {
@@ -142,6 +142,23 @@ const INITAL_STATE = {
     Postloginlogoutdata: null,
     PostloginlogoutdataLoading: false,
     PostloginlogoutdataError: null,
+
+    postUserBannerListData: null,
+    postUserBannerListDataLoading: false,
+    postUserBannerListDataError: null,
+
+
+    getAboutUsData: null,
+    getAboutUsLoading: false,
+    getAboutUsError: null,
+
+    getTermAndConditionData: null,
+    getTermAndConditionDataLoading: false,
+    getTermAndConditionDataError: null,
+
+    getResponsibleGamingData: null,
+    getResponsibleGamingDataLoading: false,
+    getResponsibleGamingDataError: null,
 
 }
 
@@ -567,6 +584,59 @@ const authSlice = createSlice({
                 state.Postloginlogoutdata = action.payload.data;
                 state.PostloginlogoutdataLoading = false;
                 state.PostloginlogoutdataError = null;
+            })
+            .addCase(postUserBannerList.pending, (state) => {
+                state.postUserBannerListData = null;
+                state.postUserBannerListDataLoading = true;
+                state.postUserBannerListDataError = null;
+            }).addCase(postUserBannerList.rejected, (state, action) => {
+                state.postUserBannerListData = null;
+                state.postUserBannerListDataLoading = false;
+                state.postUserBannerListDataError = action.error.message;
+            }).addCase(postUserBannerList.fulfilled, (state, action) => {
+                state.postUserBannerListData = action.payload.data;
+                state.postUserBannerListDataLoading = false;
+                state.postUserBannerListDataError = null;
+            })
+            .addCase(getAboutUs.pending, (state) => {
+                state.getAboutUsData = null;
+                state.getAboutUsLoading = true;
+                state.getAboutUsError = null;
+            }).addCase(getAboutUs.rejected, (state, action) => {
+                state.getAboutUsData = null;
+                state.getAboutUsLoading = false;
+                state.getAboutUsError = action.error.message;
+            }).addCase(getAboutUs.fulfilled, (state, action) => {
+                state.getAboutUsData = action.payload.data;
+                state.getAboutUsLoading = false;
+                state.getAboutUsError = null;
+            })
+            .addCase(getTermAndCondition.pending, (state) => {
+                state.getTermAndConditionData = null;
+                state.getTermAndConditionDataLoading = true;
+                state.getTermAndConditionDataError = null;
+            }).addCase(getTermAndCondition.rejected, (state, action) => {
+                state.getTermAndConditionData = null;
+                state.getTermAndConditionDataLoading = false;
+                state.getTermAndConditionDataError = action.error.message;
+            }).addCase(getTermAndCondition.fulfilled, (state, action) => {
+                state.getTermAndConditionData = action.payload.data;
+                state.getTermAndConditionDataLoading = false;
+                state.getTermAndConditionDataError = null;
+            })
+
+            .addCase(getResponsibleGaming.pending, (state) => {
+                state.getResponsibleGamingData = null;
+                state.getResponsibleGamingDataLoading = true;
+                state.getResponsibleGamingDataError = null;
+            }).addCase(getResponsibleGaming.rejected, (state, action) => {
+                state.getResponsibleGamingData = null;
+                state.getResponsibleGamingDataLoading = false;
+                state.getResponsibleGamingDataError = action.error.message;
+            }).addCase(getResponsibleGaming.fulfilled, (state, action) => {
+                state.getResponsibleGamingData = action.payload.data;
+                state.getResponsibleGamingDataLoading = false;
+                state.getResponsibleGamingDataError = null;
             })
 
     }
