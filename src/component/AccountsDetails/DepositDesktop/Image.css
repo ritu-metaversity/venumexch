@@ -1,0 +1,90 @@
+.page {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #form-file-upload {
+    height: 16rem;
+    width: 28rem;
+    max-width: 100%;
+    text-align: center;
+    position: relative;
+  }
+  #input-file-upload {
+    display: none;
+  }
+  #label-file-upload {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 2px;
+    border-radius: 1rem;
+    border-style: dashed;
+    border-color: #CBD5E1;
+    background-color: #F8FAFC;
+  }
+  #label-file-upload.drag-active {
+    background-color: #FFFFFF;
+  }
+  .upload-button {
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 1rem;
+    border: none;
+    font-family: 'Oswald', sans-serif;
+    background-color: transparent;
+  }
+  .upload-button:hover {
+    text-decoration-line: underline;
+  }
+  #drag-file-element {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }
+  .ant-upload.ant-upload-select {
+    width: 100% !important;
+}
+  .ant-upload.ant-upload-select {
+    width: 100% !important;
+    height: 200px;
+}
+.ant-upload-list-item-container {
+    width: 100% !important;
+}
+a.ant-upload-list-item-thumbnail {
+    object-fit: cover !important;
+}
+:where(.css-dev-only-do-not-override-1km3mtt).ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload.ant-upload-select >.ant-upload, :where(.css-dev-only-do-not-override-1km3mtt).ant-upload-wrapper.ant-upload-picture-circle-wrapper .ant-upload.ant-upload-select >.ant-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-radius: 9px;
+    border: 1px solid #000;
+    backdrop-filter: blur(2px);
+    text-align: center;
+}
+
+
+:where(.css-dev-only-do-not-override-1km3mtt).ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload-list.ant-upload-list-picture-card .ant-upload-list-item, :where(.css-dev-only-do-not-override-1km3mtt).ant-upload-wrapper.ant-upload-picture-circle-wrapper .ant-upload-list.ant-upload-list-picture-card .ant-upload-list-item, :where(.css-dev-only-do-not-override-1km3mtt).ant-upload-wrapper.ant-upload-picture-card-wrapper .ant-upload-list.ant-upload-list-picture-circle .ant-upload-list-item, :where(.css-dev-only-do-not-override-1km3mtt).ant-upload-wrapper.ant-upload-picture-circle-wrapper .ant-upload-list.ant-upload-list-picture-circle .ant-upload-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-radius: 9px;
+  border: 1px solid #000;
+  backdrop-filter: blur(2px);
+  text-align: center;
+}
+.clearfix {
+    margin-bottom: 20px;
+}

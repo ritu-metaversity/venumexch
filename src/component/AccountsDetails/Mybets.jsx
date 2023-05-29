@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "../SideBar/SideBar";
 import "./Mybets.css";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
+import { useDispatch, useSelector } from "react-redux";
+import { Postunsettleddddd } from "../../App/Features/auth/authActions";
+import moment from "moment";
 
 const dateFormat = "YYYY-MM-DD";
 const Mybets = () => {
+
+
+
+
+
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
 
@@ -16,13 +24,65 @@ const Mybets = () => {
   const EndDateValue = (date, dateString) => {
     setEndDate(dateString);
   };
+
+
+
+  const [unmatchedBets, setUnmatchedBets] = useState(false);
+  const [matchedBets, setmatchedBets] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const handleUnmatched = () => {
+    if (unmatchedBets === true) {
+      setUnmatchedBets(false);
+    } else {
+      setUnmatchedBets(true);
+    }
+    // console.log("ssjjk");
+  };
+  const handlematched = () => {
+    if (matchedBets === true) {
+      setmatchedBets(false);
+    } else {
+      setmatchedBets(true);
+    }
+    // console.log("ssjjk");
+  };
+
+  const { PostunsettledData, PostunsettledDataLoading } = useSelector(
+    (state) => state.auth
+  );
+
+  console.log(PostunsettledDataLoading, "PostunsettledDataLoading");
+
+  const dispatch = useDispatch();
+  // console.log(PostBetListByMatchIdData ,"dushyant")
+
+  useEffect(() => {
+    let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1 };
+
+    dispatch(Postunsettleddddd(data));
+
+  }, [pageNumber]);
+
+  const handleDoubleLeft = (vl) => {
+    if (vl === "doubleleft") {
+      setPageNumber(0);
+    } else if (vl === "sigleleft") {
+      setPageNumber(pageNumber - 1);
+    } else if (vl === "singleright") {
+      setPageNumber(1 + pageNumber);
+    } else {
+      setPageNumber(PostunsettledData?.data?.totalPages);
+    }
+  };
+
   return (
     <div className="content boxed-layout-wrapper _flex wid-100">
 
       <div className="_parent">
         <div className="mid-pane">
           <h1 className="betHeading">My Bets</h1>
-          <div className="column m-r-40 d-inline-block">
+          {/* <div className="column m-r-40 d-inline-block">
             <div className="selection">
               <div className="item selected">Current</div>
               <div className="item">Past</div>
@@ -31,7 +91,7 @@ const Mybets = () => {
               <div className="item selected">Matched</div>
               <div className="item">Unmatched</div>
             </div>
-          </div>
+  </div>
           <div className="column v-t m-r-40 d-inline-block">
             <form data-vv-scope="mybets">
               <div className="v-t d-inline-block">
@@ -174,6 +234,7 @@ const Mybets = () => {
               </div>
             </form>
           </div>
+          */}
           <div >
             <table className="table profit-loss-table">
               <thead>
@@ -185,31 +246,34 @@ const Mybets = () => {
                   <th>Type</th>
                   <th className="text-right">Odds</th>
                   <th className="text-right">Stake</th>
-                  <th className="text-right">
-                    <span>Liability</span>
-                  </th>
-                  <th>
-                    <span>Potential Profit</span>
-                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td colspan="7" className="text-center">
-                    There are no record to display
-                  </td>
-                </tr>
 
-                <tr className="odd oddNew">
-                  <td className="text-left"><span className="d-block">23/05/2023</span> <span className="d-block">12:02:57</span></td>
-                  <td className="text-left"><span className="d-block"><Link to=''>Indian Premier League</Link></span> <span className="d-inline-block">Gujarat Titans</span> <span className="d-block">Matched: <span>23/05/2023 12:02:57</span></span></td>
-                  <td className="text-left">BACK</td>
-                  <td className="text-right">160.00</td>
-                  <td className="text-right">50.00</td>
-                  <td className="text-right">80.00</td>
-                  <td className="text-right">
-                  </td>
-                </tr>
+                {PostunsettledData?.data &&
+                  PostunsettledData?.data?.dataList?.length > 0 ? (
+                  PostunsettledData?.data?.dataList.map((el) => (
+                    <tr className="odd oddNew">
+                      <td className="text-left"><span className="d-block"> {moment(el?.time).format(" D/mm/YYYY h:mm")}</span>
+                      </td>
+                      <td className="text-left"><span className="d-block" >
+                        <Link to={`/gamedetail/${el?.matchId}`}>{el?.eventName}</Link>
+                      </span>
+
+                      </td>
+                      <td className="text-left" style={{
+                        color: `${el?.isback === false ? "#f69" : "#2587d0"
+                          }`
+                      }}>{el?.isback === false ? "LAY" : "BACK"}</td>
+                      <td className="text-right">{el?.price}</td>
+                      <td className="text-right">{el?.amount}</td>
+
+                    </tr>))) : (<tr>
+                      <td colspan="7" className="text-center">
+                        There are no record to display
+                      </td>
+                    </tr>)
+                }
               </tbody>
             </table>
           </div>

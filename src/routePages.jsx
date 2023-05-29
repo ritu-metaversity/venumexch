@@ -17,6 +17,11 @@ import LayoutForMobile from "./Layout/LayoutForMobile";
 import LayoutForDesktop from "./Layout/LayoutForDesktop";
 import DestGamePage from "./component/DesktopGamePage/DestGamePage";
 import LoginForMobile from "./LoginForDesktop/LoginForDesktop";
+import Deposit from "./MobileComponent/RightMenu/DepositPages/Deposit";
+import WithDraw from "./MobileComponent/RightMenu/WithDrawPage/WithDraw";
+import WithdrawForDesktop from "./component/AccountsDetails/WithDrawDesktop/WithdrawForDesktop";
+import DepositForDesktop from "./component/AccountsDetails/DepositDesktop/DepositForDesktop";
+
 
 
 const Layout = lazy(() => import("./Layout/LayoutForDesktop"));
@@ -42,6 +47,8 @@ const RoutesPages = () => {
           <Route path="/secureauth" element={<SecureAuthVarification />} />
           <Route path="/transferstatement" element={<TransferStatement />} />
           <Route path="/message" element={<Messages />} />
+          <Route path="/deposit" element={<DepositForDesktop />} />
+          <Route path="/withDraw" element={<WithdrawForDesktop />} />
           <Route path="/gamedetails/:id" element={<Home />} />
 
           <Route path="/game/:id" element={<Home />} />

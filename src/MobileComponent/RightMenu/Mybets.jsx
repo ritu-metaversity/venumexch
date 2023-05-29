@@ -115,7 +115,7 @@ const Mybets = () => {
                           <a
                             href={`/m/gamedetail/${el?.matchId}`}
                             class={`${
-                              el?.isback === false ? "lay" : "back"
+                              el?.isback === false ? "lay" : "#2587d0"
                             }-bet`}
                           >
                             <u>

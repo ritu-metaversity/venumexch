@@ -6,7 +6,7 @@ import Image from "./Image";
 import { useDispatch, useSelector } from "react-redux";
 import "./PayManually.css";
 import Modal from "react-bootstrap/Modal";
-import AlertBtn from "../../Alert/AlertBtn";
+// import AlertBtn from "../../Alert/AlertBtn";
 
 import {
   Postpaymnetdetailapp,

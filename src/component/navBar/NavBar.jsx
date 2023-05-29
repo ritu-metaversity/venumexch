@@ -5,6 +5,8 @@ import moment from "moment";
 import Modal from "react-bootstrap/Modal";
 import Rules from "./Rules";
 import axios from "axios";
+import { Postloginlogout } from "../../App/Features/auth/authActions";
+import { useDispatch } from "react-redux";
 const NavBar = () => {
   let navigate = useNavigate();
   const [account, setAccount] = useState(false);
@@ -13,6 +15,7 @@ const NavBar = () => {
   const [showTimes, setShowTimes] = useState("none");
   const [showZone, setShowZone] = useState("+05:30");
   const [movingMessage, setMovingMessage] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -24,6 +27,15 @@ const NavBar = () => {
         setMovingMessage(response?.data?.message);
       });
   }, []);
+  const token = localStorage.getItem("TokenId");
+
+  // console.log();
+  useEffect(() => {
+    if (token === null) {
+      navigate("./login");
+      // console.log("dushyantdlaflkjsdjd")
+    }
+  }, [token]);
 
   const handleAccount = (e) => {
     // console.log("accounts")
@@ -52,6 +64,8 @@ const NavBar = () => {
     //  console.log("hello local   ")
     localStorage.removeItem("TokenId");
     setAccount(false);
+    dispatch(Postloginlogout);
+    localStorage.clear();
 
     navigate("./login")
   };
@@ -220,13 +234,13 @@ const NavBar = () => {
                   >
                     Account Statement
                   </Link>{" "}
-                  <Link
+                  {/* <Link
                     to="/transferstatement"
                     className="dropdown-item"
                     onClick={() => setAccount(false)}
                   >
                     Transfer Statement
-                  </Link>{" "}
+                    </Link>{" "}*/}
                   <Link
                     to="/changepassword"
                     className="dropdown-item"
@@ -234,19 +248,33 @@ const NavBar = () => {
                   >
                     Change Password
                   </Link>{" "}
-                  <Link
+                  {/*  <Link
                     to="/secureauth"
                     className="dropdown-item"
                     onClick={() => setAccount(false)}
                   >
                     Secure Auth
-                  </Link>
-                  <Link
+                  </Link>*/}
+                  {/* <Link
                     to="/message"
                     className="dropdown-item"
                     onClick={() => setAccount(false)}
                   >
                     Message
+                  </Link>*/}
+                  <Link
+                    to="/deposit"
+                    className="dropdown-item"
+                    onClick={() => setAccount(false)}
+                  >
+                    Deposit
+                  </Link>
+                  <Link
+                    to="/withDraw"
+                    className="dropdown-item"
+                    onClick={() => setAccount(false)}
+                  >
+                    Withdraw
                   </Link>
                 </div>
               </li>
