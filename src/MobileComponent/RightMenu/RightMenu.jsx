@@ -33,6 +33,7 @@ const RightMenu = (props) => {
   // console.log(PostTotalBalance)
 
   const token = localStorage.getItem("TokenId");
+  const username = localStorage.getItem("username");
   useEffect(() => {
     const token = localStorage.getItem("TokenId");
     if (token) {
@@ -163,8 +164,11 @@ const RightMenu = (props) => {
             </div>
             {/* </Link> */}
           </li>
+
           {postisselfbyappurlData?.data?.selfAllowed === true ? (
+           
             <>
+           ( username==="Demo" ? "":
               <li>
                 {/* <Link href="/m/mybets"   className=""> */}
                 <div
@@ -205,8 +209,9 @@ const RightMenu = (props) => {
                   </div>
                 </div>
                 {/* </Link> */}
-              </li>
-            </>
+              </li>)
+             </>
+          
           ) : (
             ""
           )}

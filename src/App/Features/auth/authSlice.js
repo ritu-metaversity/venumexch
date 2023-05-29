@@ -4,7 +4,7 @@ import {
     PostGameDetailsByMI, PostGetStackApi, PostEditStack, PostBetListByMatchId, PostTransferStatement, PostPlaceBet, Postactivematchsport,
     Postunsettleddddd, Postcasino, Postprofitlossmatchwise, postBetMarketAndUser, Postisselfbyappurl, Postdepsositrequestclient, Postpaymnetdetailapp,
     Postselfdepositapp, Postselfwithdrawapp, Postwithdrawrequestclient, Postvalidatejwttoken, Postuserselfregister, PostMinMaxGameDetails, PostUserOddPnl, PostUserfancypnl,
-    Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition,getResponsibleGaming
+    Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition, getResponsibleGaming, postLoginDemoUser
 } from './authActions'
 
 const INITAL_STATE = {
@@ -159,6 +159,8 @@ const INITAL_STATE = {
     getResponsibleGamingData: null,
     getResponsibleGamingDataLoading: false,
     getResponsibleGamingDataError: null,
+
+
 
 }
 
