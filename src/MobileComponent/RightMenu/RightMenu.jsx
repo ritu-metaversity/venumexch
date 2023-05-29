@@ -164,57 +164,57 @@ const RightMenu = (props) => {
             </div>
             {/* </Link> */}
           </li>
+          {
+            username === "Demo" ?
+              "" : (postisselfbyappurlData?.data?.selfAllowed === true ? (
+                <>
+                  <li>
+                    {/* <Link href="/m/mybets"   className=""> */}
+                    <div
+                      className="menu-lvl-1"
+                      onClick={() => handleInput("Deposit")}
+                    >
+                      <div className="item">
+                        <img
+                          src={deposit}
+                          alt=""
+                          style={{
+                            width: "22px",
+                            marginLeft: "0%",
+                          }}
+                          className="deposit-image"
+                        />
+                        <span className="menu-name">Deposit</span>
+                      </div>
+                    </div>
+                    {/* </Link> */}
+                  </li>
+                  <li>
+                    {/* <Link href="/m/mybets"   className=""> */}
+                    <div
+                      className="menu-lvl-1"
+                      onClick={() => handleInput("withDraw")}
+                    >
+                      <div className="item">
+                        <img
+                          src={withdraw}
+                          style={{
+                            width: "22px",
+                            marginLeft: "0%",
+                          }}
+                          alt=""
+                        />{" "}
+                        <span className="menu-name">WithDraw</span>
+                      </div>
+                    </div>
+                    {/* </Link> */}
+                  </li>
+                </>
+              ) : (
+                ""
+              ))
+          }
 
-          {postisselfbyappurlData?.data?.selfAllowed === true ? (
-           
-            <>
-           ( username==="Demo" ? "":
-              <li>
-                {/* <Link href="/m/mybets"   className=""> */}
-                <div
-                  className="menu-lvl-1"
-                  onClick={() => handleInput("Deposit")}
-                >
-                  <div className="item">
-                    <img
-                      src={deposit}
-                      alt=""
-                      style={{
-                        width: "22px",
-                        marginLeft: "0%",
-                      }}
-                      className="deposit-image"
-                    />
-                    <span className="menu-name">Deposit</span>
-                  </div>
-                </div>
-                {/* </Link> */}
-              </li>
-              <li>
-                {/* <Link href="/m/mybets"   className=""> */}
-                <div
-                  className="menu-lvl-1"
-                  onClick={() => handleInput("withDraw")}
-                >
-                  <div className="item">
-                    <img
-                      src={withdraw}
-                      style={{
-                        width: "22px",
-                        marginLeft: "0%",
-                      }}
-                      alt=""
-                    />{" "}
-                    <span className="menu-name">WithDraw</span>
-                  </div>
-                </div>
-                {/* </Link> */}
-              </li>)
-             </>
-          
-          ) : (
-            ""
-          )}
           <li>
             <div className="menu-lvl-1" onClick={() => handleInput("Betting")}>
               <div className="item">
