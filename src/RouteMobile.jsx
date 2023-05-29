@@ -36,6 +36,8 @@ import SingupBanner2 from "./MobileComponent/LandingForSignup/SingupBanner2";
 import SingupBanner3 from "./MobileComponent/LandingForSignup/SingupBanner3";
 import SingupBanner4 from "./MobileComponent/LandingForSignup/SingupBanner4";
 import SingupBanner5 from "./MobileComponent/LandingForSignup/SingupBanner5";
+import AboutUs from "./MobileComponent/MMFooter/AboutUs";
+import TermsandConditions from "./MobileComponent/MMFooter/TermsandConditions";
 // const Login = lazy(() => import('./logincomponents/Login'))
 const RouteMobile = () => {
   const { pathname } = useLocation();
@@ -65,6 +67,8 @@ const RouteMobile = () => {
           <Route path="mymarkets" element={<MarketPage />} />
           <Route path="deposit" element={<Deposit />} />
           <Route path="withDraw" element={<WithDraw />} />
+          <Route path="AboutUs" element={<AboutUs />} />
+          <Route path="Terms-and-Conditions" element={<TermsandConditions />} />
 
           <Route path="/m/game/:id" element={<Gamepage />} />
           <Route path="/m/gamedetail/:id" element={<GameDetails />} />

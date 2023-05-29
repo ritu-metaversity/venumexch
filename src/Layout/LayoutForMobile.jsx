@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Postvalidatejwttoken } from "../App/Features/auth/authActions";
 
+export let navRef;
 const LayoutForMobile = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,12 +31,16 @@ const LayoutForMobile = () => {
   const [BetTypeFooter, setBetTypeFooter] = useState(false);
 
   const { PostvalidatejwttokenDataError } = useSelector((state) => state.auth);
+  const token = localStorage.getItem("TokenId");
 
+  //donot touch 
+  navRef = navigate
+  //donot touch 
   const RightSideBarClose = (vl) => {
     setRightValue(false);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   // passwordtype
   // :
@@ -46,19 +51,27 @@ const LayoutForMobile = () => {
     if (localStorage.getItem("PassWordType") === "old") {
     } else {
       const time = setInterval(() => {
-        dispatch(Postvalidatejwttoken());
+        if (token) {
+
+          dispatch(Postvalidatejwttoken());
+        }
       }, 5000);
       return () => clearInterval(time);
     }
-  }, [dispatch]);
+  }, [token]);
+  console.log(window.location.pathname, "window.location.pathname")
+  // /m/game/
+  // /m/casino-list
 
-  useEffect(() => {
-    if (PostvalidatejwttokenDataError?.status === false) {
-      localStorage.clear();
-      // navigate("/m/login");
-      window.location.replace("/");
-    }
-  }, [PostvalidatejwttokenDataError]);
+  // useEffect(() => {
+
+  //   if (PostvalidatejwttokenDataError?.status === false) {
+  //     localStorage.clear();
+  //     navigate("/m/home");
+
+  //     // navigate("/");
+  //   }
+  // }, [PostvalidatejwttokenDataError]);
 
   // JWT Token Expired
   const handleClose = () => {
@@ -86,7 +99,7 @@ const LayoutForMobile = () => {
     // console.log(vl);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const datatattatattat = (vl) => {
     setBetTypeFooter(vl);
@@ -133,14 +146,13 @@ const LayoutForMobile = () => {
       <div className="wrapper">
         {/* <div className="main-cointainer right-menu-open" > */}
         <div
-          className={`main-cointainer ${
-            RightValue === true
-              ? " right-menu-open"
-              : LeftValue === true
+          className={`main-cointainer ${RightValue === true
+            ? " right-menu-open"
+            : LeftValue === true
               ? "left-menu-open"
               : ""
-          }`}
-          // style
+            }`}
+        // style
         >
           {/* <div className={`main-cointainer ${ LeftValue===true? "left-menu-open" :""}`} >     */}
 
@@ -203,9 +215,8 @@ const LayoutForMobile = () => {
 
       <Modal show={show} onHide={handleClose}>
         <div
-          className={`eighteen-plus  ${BetType}-border  ${
-            BetTypeFooter ? "" : "modal-design"
-          } ${cssClsssssssssssss ? cssClsssssssssssss : ""}`}
+          className={`eighteen-plus  ${BetType}-border  ${BetTypeFooter ? "" : "modal-design"
+            } ${cssClsssssssssssss ? cssClsssssssssssss : ""}`}
         >
           <Modal.Body style={{ marginLeft: "-72% !important" }}>
             <BitPopup

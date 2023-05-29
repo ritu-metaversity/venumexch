@@ -576,3 +576,6 @@ header.header .dropdown .dropdown-menu {
     height: 80vh;
     overflow: scroll;
 }
+.cPointer{
+    cursor: pointer !important;
+}

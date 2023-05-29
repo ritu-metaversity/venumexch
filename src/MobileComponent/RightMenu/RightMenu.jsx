@@ -24,6 +24,7 @@ const RightMenu = (props) => {
   const [avaliablebalance, setAvaliablebalance] = useState("");
 
   let appUrll = window.location.hostname;
+  // let appUrll = "localhost";
 
   useEffect(() => {
     setAvaliablebalance(PostTotalBalance?.data?.data?.balance);
@@ -33,15 +34,18 @@ const RightMenu = (props) => {
 
   const token = localStorage.getItem("TokenId");
   useEffect(() => {
-    if (localStorage.getItem("PassWordType") === "old") {
-    } else {
-      const time = setInterval(() => {
-        if (token !== "") {
+    const token = localStorage.getItem("TokenId");
+    if (token) {
+
+      if (localStorage.getItem("PassWordType") === "old") {
+      } else {
+        const time = setInterval(() => {
           dispatch(PostBalance());
-        }
-      }, 5000);
-      return () => clearInterval(time);
+        }, 5000);
+        return () => clearInterval(time);
+      }
     }
+
   }, [token]);
 
   useEffect(() => {
@@ -73,12 +77,12 @@ const RightMenu = (props) => {
     } else if (vl === "Settings") {
       navigate("./Settings");
     } else if (vl === "SignOut") {
-      navigate("./login");
+      navigate("./home");
       localStorage.clear();
     } else {
       dispatch(Postloginlogout);
       localStorage.clear();
-      navigate("./login");
+      navigate("./home");
     }
   };
 
@@ -104,7 +108,7 @@ const RightMenu = (props) => {
                   <strong>
                     {PostTotalBalance?.data?.data?.balance
                       ? PostTotalBalance?.data?.data?.balance -
-                        PostTotalBalance?.data?.data?.libality
+                      PostTotalBalance?.data?.data?.libality
                       : "0:00"}
                   </strong>
                 </span>
@@ -291,7 +295,7 @@ const RightMenu = (props) => {
               className="menu-lvl-1 settings"
               onClick={() => handleInput("Settings")}
             >
-              <div className="item">
+              <div className="item ">
                 <img
                   alt=""
                   src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/setting.png"
@@ -299,25 +303,26 @@ const RightMenu = (props) => {
                 <span className="menu-name">Settings</span>
               </div>
             </div>
+          </li>
+          <li>
+            {/* <Link href="javascript:void(0)"> */}
+            <div
+              className="menu-lvl-1 sign-out"
+              onClick={() => handleInput("SignOut")}
+            >
+              <div className="item signItem">
+                <i className="fas fa-running m-r-20"></i>{" "}
+                <span className="menu-name">Sign Out</span>
+              </div>
+            </div>
             {/* </Link> */}
           </li>
         </ul>
+        <ul className="logout-button">
+
+        </ul>
       </div>
-      <ul className="logout-button">
-        <li>
-          {/* <Link href="javascript:void(0)"> */}
-          <div
-            className="menu-lvl-1 sign-out"
-            onClick={() => handleInput("SignOut")}
-          >
-            <div className="item">
-              <i className="fas fa-running m-r-20"></i>{" "}
-              <span className="menu-name">Sign Out</span>
-            </div>
-          </div>
-          {/* </Link> */}
-        </li>
-      </ul>
+
     </>
   );
 };

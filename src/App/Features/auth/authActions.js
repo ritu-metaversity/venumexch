@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import AlertBtn from "../../../MobileComponent/Alert/AlertBtn";
 import { ImCross } from "react-icons/im"
+import { setShowRegisterModalRef } from "../../../logincomponents/Signup";
+import { navRef } from "../../../Layout/LayoutForMobile"
 const token = localStorage.getItem("TokenId");
 
 let REACT_APP_API_URL = "api.247365.exchange"
@@ -474,9 +476,16 @@ export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken'
             , {
                 validateStatus: false
             });
-
+        if (PostvalidatejwttokenDataaa.data.status === false) {
+            console.log("dfghjkldfghjklfghjklfghjklsdfghjk")
+            localStorage.clear()
+            if (navRef) {
+                navRef("/m/home")
+            }
+        }
         return PostvalidatejwttokenDataaa
     } catch (err) {
+
         if (err) {
             // console.log(err,"PostvalidatejwttokenDataErrorPostvalidatejwttokenDataError")
             throw err
@@ -500,6 +509,7 @@ export const Postuserselfregister = createAsyncThunk('auth/Postuserselfregister'
                     color: "white",
                 }
             });
+            setShowRegisterModalRef && setShowRegisterModalRef(true)
         }
         return PostuserselfregisterDataaa
     } catch (err) {
@@ -579,6 +589,77 @@ export const Postloginlogout = createAsyncThunk('auth/Postloginlogout', async (d
         const PostloginlogoutDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/logout`
         )
         return PostloginlogoutDataaa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+
+export const postpendingapppii = createAsyncThunk('auth/Postloginlogout', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const Postpendingdtaatata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/cancel-withdraw-request-eu`
+        )
+        return Postpendingdtaatata
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+export const postUserBannerList = createAsyncThunk('auth/postUserBannerList', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const postUserBannerListData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-banner-list`, data
+        )
+        return postUserBannerListData
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+export const getAboutUs = createAsyncThunk('auth/getAboutUs', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const getAboutUsDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getAboutUs`, data
+        )
+        return getAboutUsDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+export const getTermAndCondition = createAsyncThunk('auth/getTermAndCondition', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const getTermAndConditionDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getTermAndCondition`, data
+        )
+        return getTermAndConditionDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+export const getResponsibleGaming = createAsyncThunk('auth/getResponsibleGaming', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const getResponsibleGamingDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getResponsibleGaming`, data
+        )
+        return getResponsibleGamingDataa
     } catch (err) {
         if (err) {
             throw err

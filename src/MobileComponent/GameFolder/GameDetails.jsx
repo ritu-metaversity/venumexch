@@ -31,18 +31,26 @@ const GameDetails = () => {
   const [matchedBets, setmatchedBets] = useState(false);
   const [gameDetailsData, setGameDetailsData] = useState();
   const [previousState, setPreviousState] = useState({});
-  const [TvShow, setTvShow] = useState(false);
 
   //state for fancy for blinker After filter
   const [previousStateFancyBlinker, setPreviousStateFancyBlinker] = useState(
     {}
   );
 
+  //   useEffect(() => {
+  //   if (PostvalidatejwttokenDataError?.status === false) {
+  //     localStorage.clear();
+  //     navigate("/m/home");
+  // window.location.replace("/");
+  //   }
+  // }, [PostvalidatejwttokenDataError]);
+
   const [gameIframeId, setGameIframeId] = useState(4);
   const [msg, setMsg] = useState("");
   const [showFancyModals, setShowFancyModals] = useState(false);
   const [MatchId, setMatchId] = useState();
   const [FancyID, setFancyID] = useState("");
+  const [hovweEffect, setHoverEffect] = useState(false);
 
   const [PostMinMaxGameDetailsData, setPostMinMaxGameDetailsData] = useState(
     {}
@@ -62,17 +70,18 @@ const GameDetails = () => {
 
     PostBetingOnGameDetailErrorrr,
   } = useSelector((state) => state.auth);
+  const iddd = localStorage.getItem("SportId");
 
   useEffect(() => {
-    const iddd = localStorage.getItem("SportId");
     setGameIframeId(iddd);
-  }, [localStorage]);
+  }, [iddd]);
 
   const [profits, setProfits] = useState({
     Odds: {},
     Bookmaker: [],
     Fancy: [],
   });
+
 
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
@@ -222,20 +231,24 @@ const GameDetails = () => {
       setOddSocketConnected(true);
     });
   }, []);
+  const token = localStorage.getItem("TokenId");
 
   useEffect(() => {
-    let timer = setInterval(
-      () =>
-        !OddSocketConnected &&
-        socket.emit("JoinRoom", {
-          eventId: id,
-        }),
-      1000
-    );
-    return () => {
-      clearInterval(timer);
-    };
-  }, [OddSocketConnected, id]);
+    if (token) {
+
+      let timer = setInterval(
+        () =>
+          !OddSocketConnected &&
+          socket.emit("JoinRoom", {
+            eventId: id,
+          }),
+        1000
+      );
+      return () => {
+        clearInterval(timer);
+      };
+    }
+  }, [token, OddSocketConnected, id]);
 
   useEffect(() => {
     OddSocketConnected && setOddSocketConnected(false);
@@ -252,28 +265,34 @@ const GameDetails = () => {
   const handleBet = (id) => {
     setMarket(true);
     setOpenBet(false);
+    setHoverEffect(true)
   };
 
   const handleOpneBet = () => {
     setOpenBet(true);
     setMarket(false);
+    setHoverEffect(true)
     let data = { matchId: id };
     dispatch(PostBetListByMatchId(data));
   };
 
   useEffect(() => {
+
     if (localStorage.getItem("PassWordType") === "old") {
     } else {
-      let data = { matchId: id };
-      dispatch(PostBetListByMatchId(data));
-      setInterval(() => {
+      if (token) {
+
         let data = { matchId: id };
         dispatch(PostBetListByMatchId(data));
-      }, 5000);
+        setInterval(() => {
+          let data = { matchId: id };
+          dispatch(PostBetListByMatchId(data));
+        }, 5000);
+      }
     }
-  }, [id]);
+  }, [id, token]);
 
-  const handleNationName = (name) => {};
+  const handleNationName = (name) => { };
 
   //  For fancy odds on
   useEffect(() => {
@@ -371,26 +390,35 @@ const GameDetails = () => {
   }, []);
 
   useEffect(() => {
-    let timer = setInterval(
-      () => {
-        dispatch(PostUserOddPnl({ matchId: id }));
-      },
+    if (
+      token
+    ) {
 
-      3000
-    );
-    return () => {
-      clearInterval(timer);
-    };
+      let timer = setInterval(
+        () => {
+
+          dispatch(PostUserOddPnl({ matchId: id }));
+        },
+
+        3000
+      );
+      return () => {
+        clearInterval(timer);
+      };
+    }
   }, []);
   useEffect(() => {
-    let timer = setInterval(
-      () => dispatch(PostUserfancypnl({ matchId: id })),
+    if (token) {
 
-      3000
-    );
-    return () => {
-      clearInterval(timer);
-    };
+      let timer = setInterval(
+        () => dispatch(PostUserfancypnl({ matchId: id })),
+
+        3000
+      );
+      return () => {
+        clearInterval(timer);
+      };
+    }
   }, []);
 
   const [oddsPnl, setOddsPnl] = useState({});
@@ -454,12 +482,46 @@ const GameDetails = () => {
     } else {
     }
   };
+  const [TvShow, setTvShow] = useState(false)
+  const [toggleBtn1, settoggleBtn1] = useState(false)
+  const [toggleBtn2, settoggleBtn2] = useState(true)
 
   const handleTvShow = () => {
     if (TvShow === false) {
       setTvShow(true);
+      settoggleBtn1(false)
+      settoggleBtn2(false)
     } else {
       setTvShow(false);
+    }
+  };
+
+
+  const handleOne = (e) => {
+    e.preventDefault();
+    if (toggleBtn1 === false) {
+      settoggleBtn1(true)
+      setTvShow(false);
+      settoggleBtn2(false)
+
+    } else {
+      settoggleBtn1(false)
+
+    }
+  };
+
+  const handleTwo = (e) => {
+    e.preventDefault();
+
+    if (toggleBtn2 === false) {
+      settoggleBtn1(false)
+
+      settoggleBtn2(true)
+      setTvShow(false);
+
+    } else {
+
+      settoggleBtn2(false)
     }
   };
 
@@ -484,7 +546,47 @@ const GameDetails = () => {
                 <div className="flash__wrapper"></div>
               </div>
               <div className="event-title">
+                <div className="tvdatatatat">
+                  <div className="tv-icon" onClick={handleTvShow}>
+                    <p className="fjsdlkfjld">
+                      <i className="fa fa-tv"></i>
+                    </p>
+                  </div>
+                  <div className="scoreCard-icon">
+                    <svg
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ScoreboardIcon">
+                      <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
+                    </svg>
+                    <div>
+                      <label
+                        class={`onoffbtn ${toggleBtn1 ? "active" : ""}`}
+                        onClick={handleOne}>
+                        <input type="checkbox" />
+                      </label>
+                    </div>
+                    <svg
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="ScoreboardIcon">
+                      <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
+                    </svg>
+                    <div>
+                      <label
+                        class={`onoffbtn ${toggleBtn2 ? "active" : ""}`}
+                        onClick={handleTwo}>
+                        <input type="checkbox" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 <div style={{ marginTop: "10px", width: "86%" }}>
+
                   <img
                     alt=""
                     src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
@@ -499,11 +601,7 @@ const GameDetails = () => {
                 </div>
 
                 <div className="text-right">
-                  <div className="tv-icon" onClick={handleTvShow}>
-                    <p className="fjsdlkfjld">
-                      <i className="fa fa-tv"></i>
-                    </p>
-                  </div>
+
                   <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
                 </div>
               </div>
@@ -529,14 +627,14 @@ const GameDetails = () => {
                     Open Bets{" "}
                     {PostBetListByMatchIdData?.data
                       ? "( " +
-                        Object.values(PostBetListByMatchIdData?.data)?.reduce(
-                          (accu, current) => {
-                            accu += current.length;
-                            return accu;
-                          },
-                          0
-                        ) +
-                        " )"
+                      Object.values(PostBetListByMatchIdData?.data)?.reduce(
+                        (accu, current) => {
+                          accu += current.length;
+                          return accu;
+                        },
+                        0
+                      ) +
+                      " )"
                       : ""}{" "}
                   </Link>
                 </li>
@@ -562,7 +660,8 @@ const GameDetails = () => {
                           <div className="scorecard scorecard-mobile">
                             <div className="score-inner">
                               <iframe
-                                src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                                src="https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true"
+                                // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                 width="100%"
                                 height="290px"
                                 className="score-card"
@@ -572,10 +671,41 @@ const GameDetails = () => {
                             </div>
                           </div>
                         </div>
-                      ) : (
-                        ""
-                      )}
+                      ) : ""}
+                      {toggleBtn1 === true ? <div id="scoreboard-box">
+                        <div className="scorecard scorecard-mobile">
+                          <div className="score-inner">
+                            <iframe
+                              src={`http://15.207.182.173:3050/event/${id}`}
 
+                              // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                              width="100%"
+                              height="290px"
+                              className="score-card"
+                              title="scorecord"
+                              allowFullScreen={true}
+                            ></iframe>
+                          </div>
+                        </div>
+                      </div> : ""}
+                      {
+                        toggleBtn2 === true ? <div id="scoreboard-box">
+                          <div className="scorecard scorecard-mobile">
+                            <div className="score-inner">
+                              <iframe
+                                //  src={`http://15.207.182.173:3050/event/${id}`}
+
+                                src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                                width="100%"
+                                height="290px"
+                                className="score-card"
+                                title="scorecord"
+                                allowFullScreen={true}
+                              ></iframe>
+                            </div>
+                          </div>
+                        </div> : ""
+                      }
                       <div
                         // TNL201706678 vc
                         className=" main-market w-100 float-left "
@@ -610,13 +740,13 @@ const GameDetails = () => {
                                         Min:{" "}
                                         {PostMinMaxGameDetailsData?.Odds &&
                                           PostMinMaxGameDetailsData?.Odds[id1]
-                                            ?.maxBet}
+                                            ?.minBet}
                                       </span>
                                       <span className="ms">
                                         Max:{" "}
                                         {PostMinMaxGameDetailsData?.Odds &&
                                           PostMinMaxGameDetailsData?.Odds[id1]
-                                            ?.minBet}
+                                            ?.maxBet}
                                       </span>
                                       {/* <span className="ms">
                                         BetDelay:{" "}
@@ -639,13 +769,28 @@ const GameDetails = () => {
                                       className="table-body"
                                       style={{ marginTop: "7px" }}
                                     >
+
                                       {item11?.runners?.map((item1, index) => {
                                         return (
                                           <>
+                                            {console.log(item11?.status, "item11?.runners.status")}
                                             <div
-                                              data-title="OPEN"
-                                              className="table-row"
+                                              data-title={`${item11?.status === "SUSPENDED"
+                                                ? "SUSPENDED"
+                                                : item11.status ===
+                                                  "BALL RUNNING"
+                                                  ? "Ball Running"
+                                                  : ""
+                                                }`}
+                                              className={`table-row ${item11?.status === "SUSPENDED"
+                                                ? "suspend"
+                                                : item11.status ===
+                                                  "BALL RUNNING"
+                                                  ? "ballrunning"
+                                                  : ""
+                                                }`}
                                             >
+
                                               <div
                                                 className="float-left box-w4 country-name"
                                                 onClick={handleNationName(
@@ -692,22 +837,20 @@ const GameDetails = () => {
                                                 .map((item, id) => {
                                                   return (
                                                     <div
-                                                      className={`box-w1 float-left back hidden-portrait  ${
-                                                        id === 1 || id === 2
-                                                          ? "dis-none light-bg"
-                                                          : ""
-                                                      }
-                                                       ${
-                                                         item?.price !==
-                                                         previousState?.data
-                                                           ?.Odds[id1]?.runners[
-                                                           index
-                                                         ]?.ex?.availableToBack[
-                                                           id
-                                                         ]?.price
-                                                           ? "blink1"
-                                                           : " "
-                                                       }`}
+                                                      className={`box-w1 float-left back hidden-portrait  ${id === 1 || id === 2
+                                                        ? "dis-none light-bg"
+                                                        : ""
+                                                        }
+                                                       ${item?.price !==
+                                                          previousState?.data
+                                                            ?.Odds[id1]?.runners[
+                                                            index
+                                                          ]?.ex?.availableToBack[
+                                                            id
+                                                          ]?.price
+                                                          ? "blink1"
+                                                          : " "
+                                                        }`}
                                                     >
                                                       <button
                                                         type="button"
@@ -743,21 +886,19 @@ const GameDetails = () => {
                                                 (item, id) => {
                                                   return (
                                                     <div
-                                                      className={`box-w1 lay float-left ${
-                                                        id === 1 || id === 2
-                                                          ? "dis-none light-bg"
-                                                          : ""
-                                                      }
-                                                   ${
-                                                     item?.price !==
-                                                     previousState?.data?.Odds[
-                                                       id1
-                                                     ]?.runners[index]?.ex
-                                                       ?.availableToLay[id]
-                                                       ?.price
-                                                       ? " blink1"
-                                                       : " "
-                                                   }`}
+                                                      className={`box-w1 lay float-left ${id === 1 || id === 2
+                                                        ? "dis-none light-bg"
+                                                        : ""
+                                                        }
+                                                   ${item?.price !==
+                                                          previousState?.data?.Odds[
+                                                            id1
+                                                          ]?.runners[index]?.ex
+                                                            ?.availableToLay[id]
+                                                            ?.price
+                                                          ? " blink1"
+                                                          : " "
+                                                        }`}
                                                     >
                                                       <button
                                                         type="button"
@@ -834,12 +975,23 @@ const GameDetails = () => {
                                   <div className="box-w3 float-left hidden-portrait "></div>
                                 </div>
 
-                                {/* <div className="min">
-                                  
+                                <div className="max">
+                                  <span>
+                                    Min :{" "}
+                                    {PostMinMaxGameDetailsData &&
+                                      PostMinMaxGameDetailsData?.Bookmaker &&
+                                      PostMinMaxGameDetailsData?.Bookmaker[0]
+                                        ?.minBet}
+                                  </span>
+
+                                  <span className="ms">
+                                    Max :{" "}
+                                    {PostMinMaxGameDetailsData &&
+                                      PostMinMaxGameDetailsData?.Bookmaker &&
+                                      PostMinMaxGameDetailsData?.Bookmaker[0]
+                                        ?.maxBet}
+                                  </span>
                                 </div>
-                                <div className="betDelay">
-                                  
-                                </div> */}
 
                                 {gameDetailsData?.data?.Bookmaker?.map(
                                   (item, index) => {
@@ -854,22 +1006,20 @@ const GameDetails = () => {
                                             "item?.gstatus"
                                           )}
                                           <div
-                                            data-title={`${
-                                              item?.gstatus === "SUSPENDED"
-                                                ? "SUSPENDED"
-                                                : item.gstatus ===
-                                                  "BALL RUNNING"
+                                            data-title={`${item?.gstatus === "SUSPENDED"
+                                              ? "SUSPENDED"
+                                              : item.gstatus ===
+                                                "BALL RUNNING"
                                                 ? "Ball Running"
                                                 : ""
-                                            }`}
-                                            className={`table-row ${
-                                              item?.gstatus === "SUSPENDED"
-                                                ? "suspend"
-                                                : item.gstatus ===
-                                                  "BALL RUNNING"
+                                              }`}
+                                            className={`table-row ${item?.gstatus === "SUSPENDED"
+                                              ? "suspend"
+                                              : item.gstatus ===
+                                                "BALL RUNNING"
                                                 ? "ballrunning"
                                                 : ""
-                                            }`}
+                                              }`}
                                           >
                                             {console.log(
                                               item.gstatus,
@@ -883,7 +1033,7 @@ const GameDetails = () => {
                                                 <b> {item?.nation}</b>
                                               </span>
                                               <p className="box-w4">
-                                                {}
+                                                { }
                                                 {profits.Bookmaker?.find(
                                                   (profit) =>
                                                     profit?.sid === item.sid
@@ -941,18 +1091,16 @@ const GameDetails = () => {
                                               </button>
                                             </div>
                                             <div
-                                              className={`box-w3 float-left back hidden-portrait ${
-                                                id === 0 || id === 1
-                                                  ? "dis-none"
-                                                  : ""
-                                              }${
-                                                item?.b1 !==
-                                                previousState?.data?.Bookmaker[
-                                                  index
-                                                ]?.b1
+                                              className={`box-w3 float-left back hidden-portrait ${id === 0 || id === 1
+                                                ? "dis-none"
+                                                : ""
+                                                }${item?.b1 !==
+                                                  previousState?.data?.Bookmaker[
+                                                    index
+                                                  ]?.b1
                                                   ? "blink1"
                                                   : " "
-                                              }`}
+                                                }`}
                                             >
                                               <button
                                                 type="button"
@@ -977,18 +1125,16 @@ const GameDetails = () => {
                                             </div>
 
                                             <div
-                                              className={`box-w3 float-left lay hidden-portrait ${
-                                                id === 0 || id === 1
-                                                  ? "dis-none light-bg"
-                                                  : ""
-                                              }${
-                                                item?.l1 !==
-                                                previousState?.data?.Bookmaker[
-                                                  index
-                                                ]?.l1
+                                              className={`box-w3 float-left lay hidden-portrait ${id === 0 || id === 1
+                                                ? "dis-none light-bg"
+                                                : ""
+                                                }${item?.l1 !==
+                                                  previousState?.data?.Bookmaker[
+                                                    index
+                                                  ]?.l1
                                                   ? "blink1"
                                                   : " "
-                                              }`}
+                                                }`}
                                             >
                                               <button
                                                 type="button"
@@ -1040,23 +1186,7 @@ const GameDetails = () => {
                                 )}
                               </div>
                             </div>
-                            <div className="max">
-                              <span>
-                                Min :{" "}
-                                {PostMinMaxGameDetailsData &&
-                                  PostMinMaxGameDetailsData?.Bookmaker &&
-                                  PostMinMaxGameDetailsData?.Bookmaker[0]
-                                    ?.minBet}
-                              </span>
 
-                              <span className="ms">
-                                Max :{" "}
-                                {PostMinMaxGameDetailsData &&
-                                  PostMinMaxGameDetailsData?.Bookmaker &&
-                                  PostMinMaxGameDetailsData?.Bookmaker[0]
-                                    ?.maxBet}
-                              </span>
-                            </div>
 
                             <marquee className="news-line">
                               {gameDetailsData?.data &&
@@ -1140,6 +1270,45 @@ const GameDetails = () => {
                                                   <>
                                                     <div
                                                       data-v-e03c6f20=""
+                                                      className="min-max  text-right"
+                                                    >
+                                                      <p
+                                                        data-v-e03c6f20=""
+                                                        className="minMax"
+                                                      >
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="text-dark"
+                                                        >
+                                                          Min :{" "}
+                                                          <span data-v-e03c6f20="">
+                                                            {onlyFancyMaxMinDetails &&
+                                                              onlyFancyMaxMinDetails[
+                                                                key
+                                                              ]?.[index]
+                                                                ?.minBet}
+                                                          </span>
+                                                        </span>{" "}
+                                                        <span
+                                                          data-v-e03c6f20=""
+                                                          className="text-dark"
+                                                          style={{
+                                                            marginRight: "7px",
+                                                          }}
+                                                        >
+                                                          Max :{" "}
+                                                          <span data-v-e03c6f20="">
+                                                            {onlyFancyMaxMinDetails &&
+                                                              onlyFancyMaxMinDetails[
+                                                                key
+                                                              ]?.[index]
+                                                                ?.maxBet}
+                                                          </span>
+                                                        </span>
+                                                      </p>
+                                                    </div>
+                                                    <div
+                                                      data-v-e03c6f20=""
                                                       className="fancy-tripple "
                                                     >
                                                       {console.log(
@@ -1152,16 +1321,15 @@ const GameDetails = () => {
                                                           item?.gstatus
                                                         }
                                                         // className="table-row"
-                                                        className={`table-row ${
-                                                          item?.gstatus?.toLowerCase() ===
+                                                        className={`table-row ${item?.gstatus?.toLowerCase() ===
                                                           "suspended"
-                                                            ? "suspend"
-                                                            : item.gstatus?.toLowerCase() ===
-                                                              "ball running"
+                                                          ? "suspend"
+                                                          : item.gstatus?.toLowerCase() ===
+                                                            "ball running"
                                                             ? "suspend"
                                                             : ""
-                                                        }`}
-                                                        // style={{ height: "37px" }}
+                                                          }`}
+                                                      // style={{ height: "37px" }}
                                                       >
                                                         <div
                                                           data-v-e03c6f20=""
@@ -1183,22 +1351,22 @@ const GameDetails = () => {
 
                                                               height:
                                                                 FancyPNL?.data &&
-                                                                FancyPNL?.data.find(
-                                                                  (itemPnl) =>
-                                                                    itemPnl?.marketId ==
-                                                                    item?.sid
-                                                                )?.pnl
+                                                                  FancyPNL?.data.find(
+                                                                    (itemPnl) =>
+                                                                      itemPnl?.marketId ==
+                                                                      item?.sid
+                                                                  )?.pnl
                                                                   ? ""
                                                                   : "40px",
                                                             }}
                                                           >
                                                             {console.log(
                                                               FancyPNL?.data &&
-                                                                FancyPNL?.data.find(
-                                                                  (itemPnl) =>
-                                                                    itemPnl?.marketId ==
-                                                                    item?.sid
-                                                                )?.pnl,
+                                                              FancyPNL?.data.find(
+                                                                (itemPnl) =>
+                                                                  itemPnl?.marketId ==
+                                                                  item?.sid
+                                                              )?.pnl,
                                                               "dafdsfsd"
                                                             )}
                                                             <span
@@ -1328,15 +1496,14 @@ const GameDetails = () => {
 
                                                         <div
                                                           data-v-e03c6f20=""
-                                                          className={`box-w1 lay float-left text-center ${
-                                                            item?.l1 !==
-                                                              previousStateFancyBlinker &&
+                                                          className={`box-w1 lay float-left text-center ${item?.l1 !==
+                                                            previousStateFancyBlinker &&
                                                             previousStateFancyBlinker[
                                                               key
                                                             ]?.[index]?.l1
-                                                              ? "blink1"
-                                                              : " "
-                                                          }`}
+                                                            ? "blink1"
+                                                            : " "
+                                                            }`}
                                                         >
                                                           <button
                                                             data-v-e03c6f20=""
@@ -1368,15 +1535,14 @@ const GameDetails = () => {
                                                         <div
                                                           // previousStateFancyBlinker
                                                           data-v-e03c6f20=""
-                                                          className={`box-w1 back float-left text-center ${
-                                                            item?.b1 !==
-                                                              previousStateFancyBlinker &&
+                                                          className={`box-w1 back float-left text-center ${item?.b1 !==
+                                                            previousStateFancyBlinker &&
                                                             previousStateFancyBlinker[
                                                               key
                                                             ]?.[index]?.bi
-                                                              ? "blink1"
-                                                              : " "
-                                                          }`}
+                                                            ? "blink1"
+                                                            : " "
+                                                            }`}
                                                         >
                                                           <button
                                                             data-v-e03c6f20=""
@@ -1419,45 +1585,7 @@ const GameDetails = () => {
                                                         className="fancy-tripple"
                                                       ></div>
                                                     </div>
-                                                    <div
-                                                      data-v-e03c6f20=""
-                                                      className="min-max  text-right"
-                                                    >
-                                                      <p
-                                                        data-v-e03c6f20=""
-                                                        className="minMax"
-                                                      >
-                                                        <span
-                                                          data-v-e03c6f20=""
-                                                          className="text-dark"
-                                                        >
-                                                          Max :{" "}
-                                                          <span data-v-e03c6f20="">
-                                                            {onlyFancyMaxMinDetails &&
-                                                              onlyFancyMaxMinDetails[
-                                                                key
-                                                              ]?.[index]
-                                                                ?.maxBet}
-                                                          </span>
-                                                        </span>{" "}
-                                                        <span
-                                                          data-v-e03c6f20=""
-                                                          className="text-dark"
-                                                          style={{
-                                                            marginRight: "7px",
-                                                          }}
-                                                        >
-                                                          Min :{" "}
-                                                          <span data-v-e03c6f20="">
-                                                            {onlyFancyMaxMinDetails &&
-                                                              onlyFancyMaxMinDetails[
-                                                                key
-                                                              ]?.[index]
-                                                                ?.minBet}
-                                                          </span>
-                                                        </span>
-                                                      </p>
-                                                    </div>
+
                                                   </>
                                                 )
                                               )}
@@ -1481,17 +1609,15 @@ const GameDetails = () => {
               </div>
               <div
                 id="open-bets"
-                class={`tab-pane fade ${
-                  openBet ? "active show " : ""
-                } opennnnn`}
+                class={`tab-pane fade ${openBet ? "active show " : ""
+                  } opennnnn`}
               >
                 <section className="my-bets-container">
                   <div
                     data-toggle="collapse"
                     data-target=".matched-bet"
-                    class={`toggleable-list-title m-t-10 ${
-                      matchedBets === true ? "" : "collapsed"
-                    }`}
+                    class={`toggleable-list-title m-t-10 ${matchedBets === true ? "" : "collapsed"
+                      }`}
                   >
                     <span>Matched Bets</span>{" "}
                     <i
@@ -1500,9 +1626,8 @@ const GameDetails = () => {
                     ></i>
                   </div>
                   <div
-                    class={`events matched-bet ${
-                      matchedBets === true ? "collapse " : "collapse show"
-                    } `}
+                    class={`events matched-bet ${matchedBets === true ? "collapse " : "collapse show"
+                      } `}
                   >
                     {PostBetListByMatchIdData?.data &&
                       Object.keys(PostBetListByMatchIdData?.data).map((key) => (
@@ -1515,9 +1640,8 @@ const GameDetails = () => {
                                     <div>
                                       <Link
                                         to={`/m/gamedetail/${id}`}
-                                        className={`${
-                                          item?.back === false ? "lay" : "back"
-                                        }-bet`}
+                                        className={`${item?.back === false ? "lay" : "back"
+                                          }-bet`}
                                       >
                                         <u>
                                           {item?.back === true ? "BACK" : "LAY"}{" "}
@@ -1574,7 +1698,7 @@ const GameDetails = () => {
         <button onClick={handleCloseFancyModal} className="closebtnonpnl">
           <IoCloseCircleOutline size={25} color={"black"} />
         </button>
-        {}
+        { }
         <ModalBody
           style={{
             height: "calc(100vh - 100px)",

@@ -22,14 +22,25 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
     setRightBar(RightValue);
   }, [RightValue]);
   const token = localStorage.getItem("TokenId");
+  console.log(token, "tokentoken")
+  console.log();
+  // useEffect(() => {
+  //   if (token === null) {
+  //     navigate("./login");
+  // console.log("dushyantdlaflkjsdjd")
+  //   }
+  // }, [token]);
 
-  // console.log();
-  useEffect(() => {
-    if (token === null) {
-      navigate("./login");
-      // console.log("dushyantdlaflkjsdjd")
+  const handlelogin = (vl) => {
+    if (vl === "login") {
+
+      navigate("/m/login");
+    } else {
+      navigate("/m/signup");
+
     }
-  }, [token]);
+  }
+
 
   const [movingMessage, setMovingMessage] = useState("");
   useEffect(() => {
@@ -44,26 +55,35 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem("PassWordType") === "old") {
-    } else {
-      if (token !== "") {
+    const token = localStorage.getItem("TokenId");
+
+    if (token) {
+
+      if (localStorage.getItem("PassWordType") === "old") {
+      } else {
+
+
         dispatch(PostBalance());
-      }
-      if (pathname.includes("m/gamedetail")) {
+
+
+        if (pathname.includes("m/gamedetail")) {
+          const time = setInterval(() => {
+            if (token !== "") {
+              dispatch(PostBalance());
+            }
+          }, 1000);
+          return () => clearInterval(time);
+        }
+
         const time = setInterval(() => {
           if (token !== "") {
             dispatch(PostBalance());
           }
-        }, 1000);
+        }, 5000);
         return () => clearInterval(time);
       }
-      const time = setInterval(() => {
-        if (token !== "") {
-          dispatch(PostBalance());
-        }
-      }, 5000);
-      return () => clearInterval(time);
     }
+
   }, [token, pathname]);
 
   useEffect(() => {
@@ -109,6 +129,22 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
     window.history.back();
     // console.log("history.back()")
   };
+
+
+  let appUrll = window.location.hostname;
+  // let appUrll = "localhost";
+
+  const [selfAllowedd, SetselfAllowedd] = useState("");
+  useEffect(() => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        SetselfAllowedd(res?.data?.data?.selfAllowed);
+      });
+  }, [appUrll]);
 
   return (
     <div>
@@ -159,11 +195,11 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
               />
               {/* </Link> */}
             </div>
-            <div className="float-right">
+            {token ? <div className="float-right">
               <span>
                 <i className="fas fa-search v-t"></i>
               </span>
-              <a className="rules-link" onClick={handleRules}>
+              <a className="rules-link cPointer" onClick={handleRules}>
                 <i className="fas fa-ruler-vertical m-r-5"></i>
                 <span>Rules</span>
               </a>{" "}
@@ -176,16 +212,24 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                     : "0.00"}
                 </span>
               </button>
-            </div>
+            </div> : <div className="float-right login-signup">
+
+              {selfAllowedd === true ? (
+                <button className="_button_nav" onClick={handlelogin}>SignUp</button>
+              ) : (
+                ""
+              )}
+
+              <button className="_button_nav" onClick={() => handlelogin("login")}>Login</button>
+            </div>}
+
+
+
+
+
+
           </div>
         </nav>
-        {/* <div class="row header-b-menu">
-          <div class="col election">
-            <a href="/m/gamedetail/1702261800" class="text-link">
-              Election 2023
-            </a>
-          </div>
-        </div> */}
       </header>
     </div>
   );

@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  postpendingapppii,
   Postselfwithdrawapp,
   Postwithdrawrequestclient,
 } from "../../../App/Features/auth/authActions";
 import ValidationFile from "../../../Validation/ValidationFile";
 import "./WithDraw.css";
+import Modal from 'react-bootstrap/Modal';
+import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
 
 const WithDraw = () => {
   const dispatch = useDispatch();
@@ -131,7 +134,23 @@ const WithDraw = () => {
 
   // console.log(PostselfwithdrawappData,"post datatata")
   // console.log(PostwithdrawrequestclientData,"gett  dataatatatat ")
+  // {“id”:3}
+  // const [showFancyModals, setShowFancyModals] = useState(false);
 
+  const handleCloseFancyModal = () => setpendingmodal(false);
+  const handlepennding = () => setpendingmodal(true);
+
+  const [pendingmodal, setpendingmodal] = useState(false)
+  const handlependingg = () => {
+    setpendingmodal(true)
+  }
+
+  const handlependingsucesss = (ddd) => {
+    let data = { id: ddd }
+
+    dispatch(postpendingapppii(data))
+
+  }
   return (
     <>
       <div className="wrapper">
@@ -226,9 +245,9 @@ const WithDraw = () => {
                 <option value="Current">Current</option>
               </select>
             </div>
-            <div className="mx-input-wrapper account-field">
+            <div className="mx-input-wrapper account-field withdrawBtn">
               <button
-                className="btn btn-primary btn-block btn-sm"
+                className="btn btn-primary btn-block btn-sm wsubmit"
                 style={{ marginTop: "20px" }}
                 onClick={handleClick}
               >
@@ -366,6 +385,7 @@ const WithDraw = () => {
                           <td aria-colindex="6" className="text-lift">
                             {moment(item?.time).format("MM DD YYYY - HH MM ")}
                           </td>
+                          {console.log(item, "dfsfsfsdfs")}
                           <td
                             aria-colindex="6"
                             className="text-lift withdraw-data"
@@ -374,7 +394,44 @@ const WithDraw = () => {
                           </td>
                           {item.status === "Pending" ? (
                             <td aria-colindex="4" style={{ color: "#ffa726" }}>
-                              {item?.status}
+                              <div className="pendinggggg">
+                                <div >
+
+                                  {item?.status}
+                                </div>
+                                <div onClick={handlependingg}>
+                                  {item?.status === "Pending" ? <button onClick={handlepennding} className="handlepennfoifjfi" >
+                                    <IoCloseCircleOutline size={25} color={"black"} />
+                                  </button> : ""}
+                                </div>
+                              </div>
+                              <Modal
+                                show={pendingmodal}
+                                onHide={() => setpendingmodal(false)}
+                                size="lg"
+                                aria-labelledby="contained-modal-title-vcenter"
+                                centered
+                              >
+                                <Modal.Header closeButton style={{ height: "39px" }}>
+                                  <Modal.Title id="contained-modal-title-vcenter">
+                                    Cancel Request
+                                    <button onClick={handleCloseFancyModal} className="closebtnonpnl" style={{ top: "6px" }}>
+                                      <IoCloseCircleOutline size={25} color={"black"} />
+                                    </button>
+                                  </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                  <div className="modalldatata">
+                                    <div>
+                                      Are you sure want to cancel this request ?
+                                    </div>
+                                    <div className="butonnnn">
+                                      <button className="bynnnn" onClick={() => setpendingmodal(false)}>Close</button>
+                                      <button className="bynnnn" onClick={() => handlependingsucesss(item.id)}>Submit</button>
+                                    </div>
+                                  </div>
+                                </Modal.Body>
+                              </Modal>
                             </td>
                           ) : item.status === "Rejected" ? (
                             <td aria-colindex="4" style={{ color: "#f44336" }}>

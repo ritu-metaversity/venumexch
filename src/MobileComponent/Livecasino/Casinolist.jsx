@@ -15,10 +15,14 @@ const Casinolist = () => {
 
   const dispatch = useDispatch();
   // console.log(PostcasinoData, "dushyant");
+  const token = localStorage.getItem("TokenId");
 
   useEffect(() => {
-    dispatch(Postcasino());
-  }, [dispatch]);
+    if (token) {
+
+      dispatch(Postcasino());
+    }
+  }, [token]);
 
   const handleButton = (item) => {
     // console.log(item)
@@ -26,24 +30,31 @@ const Casinolist = () => {
   };
 
   useEffect(() => {
-    const id = {
+
+    const idd = {
       id: sportId,
       appUrl: window.location.hostname,
     };
-    axios
-      .post(
-        "http://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types",
-        id
-      )
+    fetch("https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/lords.json").then(res => res.json())
       .then((res) => {
-        setCasinoList(res.data.data);
-      });
+        setCasinoList(res.data);
+
+        console.log(res?.data, "dsfsfsdfsd")
+      })
   }, [sportId]);
 
   const handleChangeaa = (val) => {
     // console.log(val)
     // /m/casino/:id
-    navigate(`/m/casino/${val}`);
+    if (
+      token
+    ) {
+
+      navigate(`/m/casino/${val}`);
+    } else {
+      navigate("/m/login");
+
+    }
   };
 
   return (

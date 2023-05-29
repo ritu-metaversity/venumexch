@@ -23,15 +23,22 @@
     margin-top: 52%;
 }
 
-/* .itdasdasdsa{
-    margin-left: 6%;
-    margin-top: -5%;
-} */
+.isRight {
+    transform: translateX(-360);
+}
 
-.homeimgGame {
+.itdasdasdsa {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* .homeimgGame {
     float: left;
     margin-left: 6px;
-}
+} */
 
 .timeeeeeee {
     width: 100%;
@@ -40,9 +47,118 @@
     margin-top: 4px;
 }
 
+.fsfsdf {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    gap: 4px;
+}
+
 .noLiveMatch {
     font-size: 15px;
     color: black;
     margin-left: 6%;
 
+}
+
+.odds-name {
+    width: 60%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.gamelogogo {
+    width: 10%;
+}
+
+.gamelogogo img {
+    width: 60%;
+}
+
+.inplayyyy {
+    width: 10%;
+    color: green;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.gameName {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.game-time {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.formobileview {
+    display: none;
+}
+
+.sports-name {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 13px 0px;
+}
+
+.numberval {
+    width: 40%;
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.value-num {
+    display: flex;
+    justify-content: space-around;
+    margin-top: -3%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.gam-name {
+    margin-top: 12px;
+}
+
+@media screen and (min-width: 300px) and (max-width: 500px) {
+    .value-num {
+        margin-left: 3%;
+    }
+
+    .val-num {
+        margin-top: 4% !important;
+    }
+
+    .gam-name {
+        margin-top: 3px !important;
+    }
+}
+
+.homerow {
+    margin-bottom: -2px !important;
+}
+
+.wh {
+    background-color: #fff;
+    width: 100%;
+    margin-bottom: -3px !important;
+}
+
+ul.market-listing.m-t-10.fsfsdf.mt-23 {
+    margin-top: -47px !important;
 }
