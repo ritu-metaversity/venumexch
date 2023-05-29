@@ -21,6 +21,9 @@ import Deposit from "./MobileComponent/RightMenu/DepositPages/Deposit";
 import WithDraw from "./MobileComponent/RightMenu/WithDrawPage/WithDraw";
 import WithdrawForDesktop from "./component/AccountsDetails/WithDrawDesktop/WithdrawForDesktop";
 import DepositForDesktop from "./component/AccountsDetails/DepositDesktop/DepositForDesktop";
+import Game from "./component/Mid/Game";
+import Casinolist from "./component/SideBar/Casinolist";
+import Casino from "./component/SideBar/Casino";
 
 
 
@@ -49,11 +52,10 @@ const RoutesPages = () => {
           <Route path="/message" element={<Messages />} />
           <Route path="/deposit" element={<DepositForDesktop />} />
           <Route path="/withDraw" element={<WithdrawForDesktop />} />
+          <Route path="/Casino" element={<Casinolist />} />
+          <Route path="/casino/:id" element={<Casino />} />
+          <Route path="/game/:id" element={<Game />} />
           <Route path="/gamedetails/:id" element={<Home />} />
-
-          <Route path="/game/:id" element={<Home />} />
-
-
         </Route>
 
 

@@ -67,11 +67,15 @@ const SideBar = () => {
 
                       <li data-v-4732acba="">
                         {console.log(item, "fdfdfgdfg")}
-                        <a data-v-4732acba="" className="favourites-link" onClick={() => handleRoute("4", "Cricket")}>
+                        <Link data-v-4732acba="" className="favourites-link" onClick={() => handleRoute(item?.sportId, "Cricket")}>
                           <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} className="game-icon" />
-                          <span data-v-4732acba="" className="link-name">{item?.sportName}</span></a>
+                          <span data-v-4732acba="" className="link-name">{item?.sportName}</span></Link>
                       </li>))) : ""}
 
+                  <Link data-v-91c481c8="" to="/Casino" class="favourites-link download-apk">
+                    <img data-v-91c481c8="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_live_casino.png" class="game-icon" />
+                    <span data-v-91c481c8=""
+                      class="link-name">Live Casino</span></Link>
                 </ul>
 
               </div>

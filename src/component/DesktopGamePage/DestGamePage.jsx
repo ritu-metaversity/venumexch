@@ -1,16 +1,528 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useOutletContext, useParams } from 'react-router';
+import { PostBetListByMatchId, PostUserfancypnl, PostUserOddPnl } from '../../App/Features/auth/authActions';
 import Betslip from '../Right/Betslip'
 import "./DestGamePage.css"
+import { createProfits } from './eventUtils';
+import { socket } from './socket';
 
 const DestGamePage = () => {
+
+
+    let { id } = useParams();
+    const dispatch = useDispatch();
+
+    const [market, setMarket] = useState(true);
+    const [openBet, setOpenBet] = useState(false);
+    const [unmatchedBets, setUnmatchedBets] = useState(false);
+    const [matchedBets, setmatchedBets] = useState(false);
+    const [gameDetailsData, setGameDetailsData] = useState();
+    const [previousState, setPreviousState] = useState({});
+
+    //state for fancy for blinker After filter
+    const [previousStateFancyBlinker, setPreviousStateFancyBlinker] = useState(
+        {}
+    );
+    console.log(gameDetailsData, "gameDetailsDatagameDetailsData")
+    //   useEffect(() => {
+    //   if (PostvalidatejwttokenDataError?.status === false) {
+    //     localStorage.clear();
+    //     navigate("/m/home");
+    // window.location.replace("/");
+    //   }
+    // }, [PostvalidatejwttokenDataError]);
+
+    const [gameIframeId, setGameIframeId] = useState(4);
+    const [msg, setMsg] = useState("");
+    const [showFancyModals, setShowFancyModals] = useState(false);
+    const [MatchId, setMatchId] = useState();
+    const [FancyID, setFancyID] = useState("");
+    const [hovweEffect, setHoverEffect] = useState(false);
+
+    const [PostMinMaxGameDetailsData, setPostMinMaxGameDetailsData] = useState(
+        {}
+    );
+
+    const [onlyFancyDetails, setOnlyFancyDetails] = useState("");
+    const [onlyFancyMaxMinDetails, setOnlyFancyMaxMinDetails] = useState("");
+    const [betDetails, setBetDetails] = useState({});
+
+    const {
+        PostBetingOnGameDetail,
+        PostBetingOnGameDetailLoading,
+        PostUserOddPnlData,
+        PostUserfancypnlata,
+        PostBetListByMatchIdData,
+        PostBetingOnGameDetailError,
+
+        PostBetingOnGameDetailErrorrr,
+    } = useSelector((state) => state.auth);
+    const iddd = localStorage.getItem("SportId");
+
+    useEffect(() => {
+        setGameIframeId(iddd);
+    }, [iddd]);
+
+    const [profits, setProfits] = useState({
+        Odds: {},
+        Bookmaker: [],
+        Fancy: [],
+    });
+
+
+    const handleUnmatched = () => {
+        if (unmatchedBets === true) {
+            setUnmatchedBets(false);
+        } else {
+            setUnmatchedBets(true);
+        }
+    };
+
+    const handleBitValue = (
+        price,
+        name,
+        color,
+        gamename,
+        marketId,
+        item1,
+        item,
+        item11,
+        oddsssss
+    ) => {
+        //   if (price > 0) {
+        //     datatata({
+        //       Odds: price,
+        //       matchname: name,
+        //       isBack: color,
+        //       gameName: gamename,
+        //       marketId: marketId,
+        //       selectionId: item?.selectionId,
+        //       bettingTime: new Date(),
+        //       marketNameeee: item?.name,
+        //       "Gamenamemeeee ": "odds ",
+        //       AllBookmakerData: gameDetailsData?.data?.Bookmaker,
+        //       matchDetails: item11,
+        //       oddsssss: oddsssss,
+        //       profits,
+        //     });
+        //     setBetDetails({
+        //       isBack: color,
+        //       odds: price,
+        //       stake: 0,
+        //       selectionId: item.selectionId,
+        //       marketId: marketId,
+        //       priceValue: price,
+        //       isFancy: false,
+        //     });
+        //   } else {
+        //   }
+    };
+
+    const handleBitValueBookmaker = (price, name, color, item1) => {
+        //   if (price > 0) {
+        //     datatata({
+        //       Odds: price,
+        //       matchname: name,
+        //       isBack: color,
+        //       gameName: item1?.nation,
+        //       marketId: item1?.mid,
+        //       selectionId: item1?.sid,
+        //       t: item1?.t,
+        //       bettingTime: new Date(),
+        //       "Gamenamemeeee ": "Bookmaker ",
+        //       AllBookmakerData: gameDetailsData?.data?.Bookmaker,
+        //       matchDetails: gameDetailsData?.data?.Bookmaker,
+        //       bookmakerPnl: bookmakerPnl,
+        //       profits,
+        //     });
+        //     setBetDetails({
+        //       isBack: color,
+        //       odds: price,
+        //       stake: 0,
+        //       selectionId: item1.sid,
+        //       marketId: item1?.mid,
+        //       priceValue: price,
+        //       isFancy: false,
+        //     });
+        //   } else {
+        //   }
+    };
+
+    const handleBitValueFancy = (
+        price,
+        name,
+        color,
+        trueData,
+        item,
+        keykey,
+        ls1
+    ) => {
+        //   if (price > 0) {
+        //     datatata({
+        //       Odds: price,
+        //       matchname: keykey,
+        //       isBack: color,
+        //       isFancy: trueData,
+        //       gameName: item?.nation,
+        //       marketId: item?.sid,
+        //       selectionId: 0,
+        //       t: item?.t,
+        //       bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
+        //       "Gamenamemeeee ": "Fancy ",
+        //       profits,
+        //       priceValue: ls1,
+        //     });
+        //     setBetDetails({
+        //       isBack: color,
+        //       odds: price,
+        //       stake: 0,
+        //       selectionId: 0,
+        //       marketId: item?.sid,
+        //       priceValue: price,
+        //       isFancy: false,
+        //     });
+        //   } else {
+        //   }
+    };
+
+    useEffect(() => {
+        if (Object.keys(PostMinMaxGameDetailsData).length) {
+            setGameDetailsData((gameDetailsData) => {
+                if (gameDetailsData) {
+                    const oldOdds = { ...gameDetailsData };
+                    setPreviousState(oldOdds);
+                } else {
+                    setPreviousState({ data: PostMinMaxGameDetailsData });
+                }
+                return { data: PostMinMaxGameDetailsData };
+            });
+        }
+    }, [PostMinMaxGameDetailsData]);
+
+    const [OddSocketConnected, setOddSocketConnected] = useState({});
+    const [isLoading, setIsloading] = useState(true);
+
+    const oddFromSocketSlower = (res) => {
+        if (res) {
+            setPostMinMaxGameDetailsData(res);
+            setIsloading(false);
+        }
+    };
+
+    useEffect(() => {
+        socket.on("connect", () => {
+            setOddSocketConnected(false);
+        });
+        socket.on("OddsUpdated", oddFromSocketSlower);
+        socket.on("JoinedSuccessfully", () => {
+            setOddSocketConnected(true);
+        });
+    }, []);
+    const token = localStorage.getItem("TokenId");
+
+    useEffect(() => {
+        if (token) {
+
+            let timer = setInterval(
+                () =>
+                    !OddSocketConnected &&
+                    socket.emit("JoinRoom", {
+                        eventId: id,
+                    }),
+                1000
+            );
+            return () => {
+                clearInterval(timer);
+            };
+        }
+    }, [token, OddSocketConnected, id]);
+
+    useEffect(() => {
+        OddSocketConnected && setOddSocketConnected(false);
+    }, [id]);
+
+    const handlematched = () => {
+        if (matchedBets === true) {
+            setmatchedBets(false);
+        } else {
+            setmatchedBets(true);
+        }
+    };
+
+    const handleBet = (id) => {
+        setMarket(true);
+        setOpenBet(false);
+        setHoverEffect(true)
+    };
+
+    const handleOpneBet = () => {
+        setOpenBet(true);
+        setMarket(false);
+        setHoverEffect(true)
+        let data = { matchId: id };
+        dispatch(PostBetListByMatchId(data));
+    };
+
+    useEffect(() => {
+
+        if (localStorage.getItem("PassWordType") === "old") {
+        } else {
+            if (token) {
+
+                let data = { matchId: id };
+                dispatch(PostBetListByMatchId(data));
+                setInterval(() => {
+                    let data = { matchId: id };
+                    dispatch(PostBetListByMatchId(data));
+                }, 5000);
+            }
+        }
+    }, [id, token]);
+
+    const handleNationName = (name) => { };
+
+    //  For fancy odds on
+    useEffect(() => {
+        if (PostMinMaxGameDetailsData) {
+            let arrData = PostMinMaxGameDetailsData;
+            let newObject = {};
+            for (let x in arrData) {
+                if (x !== "Odds" && x !== "Bookmaker") {
+                    newObject[x] = arrData[x];
+                }
+            }
+            const newArr = newObject;
+            let FinalData = {};
+            for (let x in newArr) {
+                if (newArr[x].length) {
+                    FinalData[x] = newArr[x];
+                }
+            }
+            setOnlyFancyMaxMinDetails(FinalData);
+        } else {
+        }
+    }, [PostMinMaxGameDetailsData]);
+
+    useEffect(() => {
+        if (gameDetailsData) {
+            let arrData = gameDetailsData?.data;
+            let newObject = {};
+            for (let x in arrData) {
+                if (x !== "Odds" && x !== "Bookmaker") {
+                    newObject[x] = arrData[x];
+                }
+            }
+            const newArr = newObject;
+            let FinalData = {};
+            for (let x in newArr) {
+                if (newArr[x].length) {
+                    FinalData[x] = newArr[x];
+                }
+            }
+            setOnlyFancyDetails(FinalData);
+        } else {
+        }
+    }, [gameDetailsData]);
+
+    //  Fancy Odd   For blinker
+
+    useEffect(() => {
+        if (previousState) {
+            let arrData = previousState?.data;
+            let newObject = {};
+            for (let x in arrData) {
+                if (x !== "Odds" && x !== "Bookmaker") {
+                    newObject[x] = arrData[x];
+                }
+            }
+
+            const newArr = newObject;
+            let FinalData = {};
+            for (let x in newArr) {
+                if (newArr[x].length) {
+                    FinalData[x] = newArr[x];
+                }
+            }
+            setOnlyFancyMaxMinDetails(FinalData);
+        } else {
+        }
+    }, [previousState]);
+
+    useEffect(() => {
+        if (previousState) {
+            let arrData = previousState?.data;
+            let newObject = {};
+            for (let x in arrData) {
+                if (x !== "Odds" && x !== "Bookmaker") {
+                    newObject[x] = arrData[x];
+                }
+            }
+            const newArr = newObject;
+            let FinalData = {};
+            for (let x in newArr) {
+                if (newArr[x].length) {
+                    FinalData[x] = newArr[x];
+                }
+            }
+            setPreviousStateFancyBlinker(FinalData);
+        } else {
+        }
+    }, [previousState]);
+
+    // ************* PNL DATA ODDS
+
+    useEffect(() => {
+        dispatch(PostUserOddPnl({ matchId: id }));
+        dispatch(PostUserfancypnl({ matchId: id }));
+    }, []);
+
+    useEffect(() => {
+        if (
+            token
+        ) {
+
+            let timer = setInterval(
+                () => {
+
+                    dispatch(PostUserOddPnl({ matchId: id }));
+                },
+
+                3000
+            );
+            return () => {
+                clearInterval(timer);
+            };
+        }
+    }, []);
+    useEffect(() => {
+        if (token) {
+
+            let timer = setInterval(
+                () => dispatch(PostUserfancypnl({ matchId: id })),
+
+                3000
+            );
+            return () => {
+                clearInterval(timer);
+            };
+        }
+    }, []);
+
+    const [oddsPnl, setOddsPnl] = useState({});
+
+    useEffect(() => {
+        if (PostUserOddPnlData?.data !== null) {
+            setOddsPnl(PostUserOddPnlData?.data);
+        }
+    }, [PostUserOddPnlData]);
+
+    const [oddsssss, setOddsssss] = useState({});
+    const [bookmakerPnl, setBookmakerPnl] = useState({});
+
+    // ******* PNL DATA FANCY
+
+    const [FancyPNL, setFacnyPNL] = useState({});
+
+    useEffect(() => {
+        if (PostUserfancypnlata) {
+            if (PostUserfancypnlata) {
+                setFacnyPNL(PostUserfancypnlata);
+            } else {
+                setFacnyPNL(null);
+            }
+        }
+    }, [PostUserfancypnlata]);
+
+    useEffect(() => {
+        createProfits({
+            fancyOdds: gameDetailsData?.data,
+            fancyPnl: setFacnyPNL?.data,
+            betDetails,
+            rechange: true,
+            pnl: oddsPnl,
+            setProfits,
+        });
+    }, [
+        betDetails?.stake,
+        oddsPnl,
+        FancyPNL,
+        gameDetailsData?.data?.Odds && gameDetailsData?.data?.Odds[0]?.marketId,
+        betDetails?.marketId,
+        betDetails?.selectionId,
+    ]);
+
+    useEffect(() => {
+        if (PostBetingOnGameDetail?.status === true) {
+            setMsg(PostBetingOnGameDetail?.message);
+        }
+    }, [PostBetingOnGameDetail]);
+
+    const handleCloseFancyModal = () => setShowFancyModals(false);
+
+    const handleFancyBook = (sid) => {
+        if (
+            FancyPNL &&
+            FancyPNL?.data.find((itemPnl) => itemPnl?.marketId === sid)
+        ) {
+            setShowFancyModals(true);
+            setFancyID(sid);
+        } else {
+        }
+    };
+    const [TvShow, setTvShow] = useState(false)
+    const [toggleBtn1, settoggleBtn1] = useState(false)
+    const [toggleBtn2, settoggleBtn2] = useState(true)
+
+    const handleTvShow = () => {
+        if (TvShow === false) {
+            setTvShow(true);
+            settoggleBtn1(false)
+            settoggleBtn2(false)
+        } else {
+            setTvShow(false);
+        }
+    };
+
+
+    const handleOne = (e) => {
+        e.preventDefault();
+        if (toggleBtn1 === false) {
+            settoggleBtn1(true)
+            setTvShow(false);
+            settoggleBtn2(false)
+
+        } else {
+            settoggleBtn1(false)
+
+        }
+    };
+
+    const handleTwo = (e) => {
+        e.preventDefault();
+
+        if (toggleBtn2 === false) {
+            settoggleBtn1(false)
+
+            settoggleBtn2(true)
+            setTvShow(false);
+
+        } else {
+
+            settoggleBtn2(false)
+        }
+    };
     return (
         <>
-            <div className="sports-wrapper" style={{marginLeft: "21px"}}>
+            <div className="sports-wrapper" style={{ marginLeft: "21px" }}>
                 <div className="markets">
 
                     <div className="header">
                         <h1 className='sportName'>
-                            Zimbabwe A v Pakistan A<span>19/05/2023 12:45:00</span>
+                            {gameDetailsData?.data?.Odds &&
+                                gameDetailsData?.data?.Odds[0]?.runners[0]?.name}{" "} "v"
+                            {gameDetailsData?.data?.Odds &&
+                                gameDetailsData?.data?.Odds[0]?.runners[1]?.name} <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
                         </h1>
                     </div>
                     <div data-v-22b1a176="">
@@ -31,110 +543,64 @@ const DestGamePage = () => {
                                 </tr>
                             </thead>
                             <tbody data-v-22b1a176="" data-title="OPEN" className="">
-                                <tr data-v-22b1a176="" data-title="OPEN" className="">
-                                    <td data-v-22b1a176="">
-                                        <div
-                                            data-v-22b1a176=""
-                                            className="event-name"
-                                            style={{ color: "rgb(15, 35, 39)" }}
-                                        >
-                                            Zimbabwe A
-                                        </div>
-                                        <p data-v-22b1a176="" className="m-b-0">
-                                            <span data-v-22b1a176="" style={{ color: "black" }}>
-                                                0
-                                            </span>
-                                            <span
-                                                data-v-22b1a176=""
-                                                style={{ display: "none", color: "black" }}
-                                            >
+                                {gameDetailsData?.data &&
+                                    gameDetailsData?.data?.Odds?.map((item11, id1) => {
+                                        return (
+                                            <tr data-v-22b1a176="" data-title="OPEN" className="">
+                                                <td data-v-22b1a176="">
+                                                    <div
+                                                        data-v-22b1a176=""
+                                                        className="event-name"
+                                                        style={{ color: "rgb(15, 35, 39)" }}
+                                                    >
+                                                        {item11?.Name}
+                                                    </div>
+                                                    <p data-v-22b1a176="" className="m-b-0">
+                                                        <span data-v-22b1a176="" style={{ color: "black" }}>
+                                                            0
+                                                        </span>
+                                                        <span
+                                                            data-v-22b1a176=""
+                                                            style={{ display: "none", color: "black" }}
+                                                        >
 
-                                                &gt;&gt; 0
-                                            </span>
-                                        </p>
-                                    </td>
-                                    <td
-                                        data-v-22b1a176=""
-                                        className="back unhighlighted betting-disabled"
-                                    >
-                                    0
-                                    </td>
-                                    <td
-                                        data-v-22b1a176=""
-                                        className="back unhighlighted betting-disabled"
-                                    >
-                                        0
-                                    </td>
-                                    <td data-v-22b1a176="" className="back betting-disabled">
-                                        0
-                                    </td>
-                                    <td data-v-22b1a176="" className="lay betting-disabled">
-                                        0
-                                    </td>
-                                    <td
-                                        data-v-22b1a176=""
-                                        className="lay unhighlighted betting-disabled"
-                                    >
-                                        0
-                                    </td>
-                                    <td
-                                        data-v-22b1a176=""
-                                        className="lay unhighlighted betting-disabled"
-                                    >
-                                        0
-                                    </td>
-                                </tr>
-                                <tr data-v-22b1a176="" data-title="OPEN" className="">
-                                    <td data-v-22b1a176="">
-                                        <div
-                                            data-v-22b1a176=""
-                                            className="event-name"
-                                            style={{ color: "rgb(15, 35, 39)" }}
-                                        >
-                                            Pakistan A
-                                        </div>
-                                        <p data-v-22b1a176="" className="m-b-0">
-                                            <span data-v-22b1a176="" style={{ color: "black" }}>
-                                                0
-                                            </span>
-                                            <span
-                                                data-v-22b1a176=""
-                                                style={{ display: "none", color: "black" }}
-                                            >0
-                                            </span>
-                                        </p>
-                                    </td>
-                                    <td
-                                        data-v-22b1a176=""
-                                        className="back unhighlighted betting-disabled"
-                                    >
-                                        0
-                                    </td>
-                                    <td
-                                        data-v-22b1a176=""
-                                        className="back unhighlighted betting-disabled"
-                                    >0
-
-                                    </td>
-                                    <td data-v-22b1a176="" className="back betting-disabled">
-                                    0
-                                    </td>
-                                    <td data-v-22b1a176="" className="lay betting-disabled">
-                                    0
-                                    </td>
-                                    <td
-                                        data-v-22b1a176=""
-                                        className="lay unhighlighted betting-disabled"
-                                    >0
-
-                                    </td>
-                                    <td
-                                        data-v-22b1a176=""
-                                        className="lay unhighlighted betting-disabled"
-                                    >0
-
-                                    </td>
-                                </tr>
+                                                            &gt;&gt; 0
+                                                        </span>
+                                                    </p>
+                                                </td>
+                                                <td
+                                                    data-v-22b1a176=""
+                                                    className="back unhighlighted betting-disabled"
+                                                >
+                                                    0
+                                                </td>
+                                                <td
+                                                    data-v-22b1a176=""
+                                                    className="back unhighlighted betting-disabled"
+                                                >
+                                                    0
+                                                </td>
+                                                <td data-v-22b1a176="" className="back betting-disabled">
+                                                    0
+                                                </td>
+                                                <td data-v-22b1a176="" className="lay betting-disabled">
+                                                    0
+                                                </td>
+                                                <td
+                                                    data-v-22b1a176=""
+                                                    className="lay unhighlighted betting-disabled"
+                                                >
+                                                    0
+                                                </td>
+                                                <td
+                                                    data-v-22b1a176=""
+                                                    className="lay unhighlighted betting-disabled"
+                                                >
+                                                    0
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
                             </tbody>
                         </table>
                     </div>
@@ -211,59 +677,7 @@ const DestGamePage = () => {
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr data-title="ACTIVE" className="">
-                                            <td>
-                                                <div
-                                                    className="event-name"
-                                                    style={{ color: "rgb(15, 35, 39)" }}
-                                                >
-                                                    Pakistan A
-                                                </div>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                    <span style={{ display: "none", color: "black" }}>
 
-                                                        &gt;&gt; 0
-                                                    </span>
-                                                </p>
-                                            </td>
-                                            <td className="back unhighlighted betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                            <td className="back unhighlighted betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                            <td className="back">
-                                                <strong className="odds">88</strong>
-                                                <div className="size">
-                                                    <span>100K</span>
-                                                </div>
-                                            </td>
-                                            <td className="lay">
-                                                <strong className="odds">95</strong>
-                                                <div className="size">
-                                                    <span>100K</span>
-                                                </div>
-                                            </td>
-                                            <td className="lay unhighlighted betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                            <td className="lay unhighlighted betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                                 <div className="min-max text-right mt-1" style={{ borderBottom: 0 }}>
@@ -304,157 +718,7 @@ const DestGamePage = () => {
                                 </div>
                                 <div className="table-body">
 
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="" className="table-row">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>15 over run PAK A</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center">
-                                                <span className="odd d-block">56</span> <span>100</span>
-                                            </div>
-                                            <div className="box-w1 back float-left text-center">
-                                                <span className="odd d-block">58</span> <span>100</span>
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>50K</span>
-                                                </span>
-                                            </div>
-                                        </div>
 
-                                    </div>
-
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="" className="table-row">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>11.3 over run PAK A</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center">
-                                                <span className="odd d-block">45</span> <span>400</span>
-                                            </div>
-                                            <div className="box-w1 back float-left text-center">
-                                                <span className="odd d-block">45</span> <span>300</span>
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>50K</span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="" className="table-row">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>12 over run PAK A</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center">
-                                                <span className="odd d-block">45</span> <span>100</span>
-                                            </div>
-                                            <div className="box-w1 back float-left text-center">
-                                                <span className="odd d-block">46</span> <span>100</span>
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>50K</span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="" className="table-row">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>14 over run PAK A</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center">
-                                                <span className="odd d-block">53</span> <span>100</span>
-                                            </div>
-                                            <div className="box-w1 back float-left text-center">
-                                                <span className="odd d-block">54</span> <span>100</span>
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>50K</span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
 
                                     <div className="fancy-tripple fancy-tripple1">
                                         <div data-title="SUSPENDED" className="table-row suspended-fancy">
@@ -532,220 +796,18 @@ const DestGamePage = () => {
 
                                     </div>
 
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="" className="table-row">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>H Talat run</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center">
-                                                <span className="odd d-block">23</span> <span>110</span>
-                                            </div>
-                                            <div className="box-w1 back float-left text-center">
-                                                <span className="odd d-block">23</span> <span>90</span>
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>50K</span>
-                                                </span>
-                                            </div>
-                                        </div>
 
-                                    </div>
-
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="SUSPENDED" className="table-row suspended-fancy">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>4th wkt pship boundaries PAK A</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center betting-disabled">
-
-                                            </div>
-                                            <div className="box-w1 back float-left text-center betting-disabled">
-
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>5K</span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="" className="table-row">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>I Butt boundaries</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center">
-                                                <span className="odd d-block">4</span> <span>100</span>
-                                            </div>
-                                            <div className="box-w1 back float-left text-center">
-                                                <span className="odd d-block">5</span> <span>100</span>
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>5K</span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="SUSPENDED" className="table-row suspended-fancy">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>H Talat boundaries</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center betting-disabled">
-
-                                            </div>
-                                            <div className="box-w1 back float-left text-center betting-disabled">
-
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>5K</span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
 
                                 </div>
                             </div>
                         </div>
-                        <div className="row m-b-20">
-                            <div className="col-md-12">
-                                <div className="game-title m-t-5">
-                                    <h5 className=" d-inline-block m-b-0">
-                                        <span>Over by Over Session Market</span>
-                                    </h5>
-                                </div>
-                                <div className="table-header">
-                                    <div className="float-left country-name" />
-                                    <div className="box-w1 float-left ">No</div>
-                                    <div className=" box-w1 float-left ">Yes</div>
-                                    <div className="box-w2 float-left" />
-                                </div>
-                                <div className="table-body">
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="" className="table-row">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>Only 13 over run PAK A</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center">
-                                                <span className="odd d-block">4</span> <span>115</span>
-                                            </div>
-                                            <div className="box-w1 back float-left text-center">
-                                                <span className="odd d-block">4</span> <span>85</span>
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>12.5K</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
-                    
+
                 </div>
-               
+
             </div>
-            
+
         </>
 
     )

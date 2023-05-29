@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { Postactivematchsport } from "../../App/Features/auth/authActions";
 import "./Midpage.css";
 import { useNavigate } from "react-router-dom";
+import UpperBanner from "../../MobileComponent/MidPageM/UpperBanner";
+import Casinolist from "../../component/SideBar/Casinolist";
 
 const MidPage = () => {
    const { id } = useParams();
@@ -12,6 +14,7 @@ const MidPage = () => {
    const [gamesData, setGamesData] = useState("");
    const token = localStorage.getItem("TokenId");
 
+   console.log(window.location.pathname, "window.location.pathname")
 
    const handleEnterMatch = (item) => {
       navigator(`/gamedetails/${item}`)
@@ -32,7 +35,12 @@ const MidPage = () => {
       <div>
          <div className="mid-pane">
             <div>
-               <div className="sports-wrapper">
+               {/*{
+                  localStorage.getItem("TokenId") !== null ? "" : <UpperBanner />
+               }*/}
+               <div className="sports-wrapper" >
+                  <UpperBanner />
+
                   {gamesData?.length > 0 ? (
                      <div className="events">
                         <h1 className="event-heading">
@@ -136,6 +144,7 @@ const MidPage = () => {
                   ) : (
                      ""
                   )}
+                  <Casinolist />
                </div>
             </div>
          </div>

@@ -16,6 +16,7 @@ const NavBar = () => {
   const [showZone, setShowZone] = useState("+05:30");
   const [movingMessage, setMovingMessage] = useState("");
   const dispatch = useDispatch();
+  let userId = localStorage.getItem("userId");
 
   useEffect(() => {
     axios
@@ -23,19 +24,19 @@ const NavBar = () => {
         "http://api.247365.exchange/admin-new-apis/enduser/get-user-message"
       )
       .then((response) => {
-        // console.log(response, "responseresponse");
+        console.log(response, "responseresponse");
         setMovingMessage(response?.data?.message);
       });
   }, []);
-  const token = localStorage.getItem("TokenId");
+  // const token = localStorage.getItem("TokenId");
 
-  // console.log();
-  useEffect(() => {
-    if (token === null) {
-      navigate("./login");
-      // console.log("dushyantdlaflkjsdjd")
-    }
-  }, [token]);
+  // // console.log();
+  // useEffect(() => {
+  //   if (token === null) {
+  //     navigate("./login");
+  //     // console.log("dushyantdlaflkjsdjd")
+  //   }
+  // }, [token]);
 
   const handleAccount = (e) => {
     // console.log("accounts")
@@ -164,7 +165,7 @@ const NavBar = () => {
                 </div>
               </li>
               <li>
-                <p>Logged in as Sarmaji/INR</p>
+                <p>Logged in as {userId}/INR</p>
                 <p className="last-login">
                   Last logged in: <span>08/02/2023 10:33:03</span>
                 </p>
