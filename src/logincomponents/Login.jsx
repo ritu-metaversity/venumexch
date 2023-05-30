@@ -9,9 +9,10 @@ import Footer from "../component/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Postisselfbyappurl,
-  postLogin,
+  postLogin, postLoginDemoUser
 } from "../App/Features/auth/authActions";
 
+export let navRefLogin;
 const Login = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -26,6 +27,7 @@ const Login = () => {
   const [loginData, setLoginData] = useState("");
   const [apiHit, setApiHit] = useState(false);
   const [show, setShow] = useState(false);
+  const [demo, setDemo] = useState(false);
   // const [signUpShow, setSignUpShow] = useState(false);
   // const [signUpClose, setSignUpClose] = useState(false);
   const handleClose = () => setShow(false);
@@ -34,10 +36,9 @@ const Login = () => {
     postLoginData,
     postLoginDataError,
     PostuserselfregisterData,
-    postisselfbyappurlData,
+    postisselfbyappurlData
   } = useSelector((state) => state.auth);
 
-  console.log(PostuserselfregisterData, "userNameuserName");
   // console.log(signUpShow, "userNameuserName");
 
   // useEffect(() => {
@@ -50,7 +51,8 @@ const Login = () => {
   //   setSignUpClose(true);
   //   setSignUpShow(false);
   // };
-
+  const nav = useNavigate()
+  navRefLogin = nav
   useEffect(() => {
     if (apiHit === true) {
       if (postLoginData?.data?.token) {
@@ -74,12 +76,13 @@ const Login = () => {
   }, [postLoginData]);
 
   // useEffect(() => {
-  //   const token = localStorage.getItem("TokenId");
-
-  //   if (token !== null) {
+  //   console.log(postLoginDemoUserData?.token, "asdfghjkl")
+  //   if (postLoginDemoUserData?.token) {
   //     navigate("/m/home");
+  //     localStorage.setItem("TokenId", postLoginData?.token);
+  //     localStorage.setItem("username", postLoginData?.username);
   //   }
-  // }, []);
+  // }, [postLoginDemoUserData]);
 
   const handleInput = (e) => {
     let inputName = e.target.name;
@@ -99,20 +102,28 @@ const Login = () => {
     }
   };
 
-  const handleLogin = (e) => {
-    setLogin({
-      userId: userName,
-      password: password,
-      appUrl: window.location.hostname,
-      // appUrl:"localhost"
-    });
+  const handleLogin = (vl) => {
+    if (vl === "demoUser") {
+      dispatch(postLoginDemoUser({ "appUrl": window.location.hostname }));
 
-    setShow(true);
+    } else {
+      setLogin({
+        userId: userName,
+        password: password,
+        appUrl: window.location.hostname,
+        // appUrl:"localhost"
+      });
+
+      setShow(true);
+    }
+
   };
   const handleHome = () => {
     navigate("/m/home");
 
   };
+  
+ 
 
   const handleLoginConfirm = (val) => {
     if (userName === "" && password === "") {
@@ -126,9 +137,12 @@ const Login = () => {
       setErrorPassword(true);
       setShow(false);
     } else {
+
+
       dispatch(postLogin(login));
       setShow(false);
       setApiHit(true);
+
     }
   };
 
@@ -136,6 +150,7 @@ const Login = () => {
     navigate("/m/signup");
   };
   let appUrll = window.location.hostname;
+  // let appUrll = "localhost";
   // let appUrll = "localhost";
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
@@ -226,6 +241,10 @@ const Login = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
+                        <button className="btn btn-login" onClick={() => handleLogin("demoUser")}>
+                          Login With Demo Account
+                          <i className="ml-2 fas fa-sign-in-alt"></i>
+                        </button>
                         {selfAllowedd === true ? (
                           <button
                             className="btn btn-login"
@@ -286,7 +305,7 @@ const Login = () => {
             </Modal.Body>
             <div className="confirm">
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" style={{ backgroundColor: "#dc3545" }} onClick={handleClose}>
                   Exit
                 </Button>
                 <Button

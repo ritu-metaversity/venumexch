@@ -1603,7 +1603,7 @@ strong {
 }
 
 .loading-text {
-    position: absolute;
+    position: fixed;
     top: 48%;
     font-size: 18px;
 }

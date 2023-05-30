@@ -150,7 +150,7 @@ button:disabled {
 }
 
 .selectionndsfsdfnn {
-    width: 46%;
+    width: 45%;
     height: 34px;
     font-size: 15px;
     margin-left: 8px !important;
@@ -165,7 +165,7 @@ button:disabled {
 
 @media screen and (min-width: 451px) {
     .selectionndsfsdfnn {
-        width: 46%;
+        width: 45%;
         height: 34px;
         font-size: 15px;
         margin-left: 60px !important;
@@ -180,6 +180,11 @@ button:disabled {
 
 }
 
+
 .tbodybody::-webkit-scrollbar {
     display: none;
+}
+
+.AccountBtnsubmit {
+    width: 97%;
 }
