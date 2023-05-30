@@ -142,9 +142,10 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
         { appUrl: appUrll }
       )
       .then((res) => {
-        SetselfAllowedd(res?.data?.data?.selfAllowed);
+        SetselfAllowedd(res?.data?.data);
       });
   }, [appUrll]);
+  console.log(selfAllowedd)
 
   return (
     <div>
@@ -189,7 +190,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
               {/* <Link href="/home"   className="router-link-exact-active router-link-active"> */}
               <img
                 alt=""
-                src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/mobile/logo.png"
+                src={selfAllowedd?.logo}
                 className="img-fluid"
                 style={{ height: "40px" }}
               />
@@ -214,7 +215,8 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
               </button>
             </div> : <div className="float-right login-signup">
 
-              {selfAllowedd === true ? (
+              {selfAllowedd?.selfAllowed
+                === true ? (
                 <button className="_button_nav" onClick={handlelogin}>SignUp</button>
               ) : (
                 ""

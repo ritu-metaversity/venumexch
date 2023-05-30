@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   postpendingapppii,
-  postpendingapppii,
   Postselfwithdrawapp,
   Postwithdrawrequestclient,
 } from "../../../App/Features/auth/authActions";
@@ -12,8 +11,8 @@ import ValidationFile from "../../../Validation/ValidationFile";
 import "./WithDraw.css";
 import Modal from 'react-bootstrap/Modal';
 import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
-import Modal from 'react-bootstrap/Modal';
-import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
+// import Modal from 'react-bootstrap/Modal';
+// import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
 
 const WithDraw = () => {
   const dispatch = useDispatch();

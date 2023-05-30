@@ -53,6 +53,7 @@ const Login = () => {
   // };
   const nav = useNavigate()
   navRefLogin = nav
+
   useEffect(() => {
     if (apiHit === true) {
       if (postLoginData?.data?.token) {
@@ -122,8 +123,8 @@ const Login = () => {
     navigate("/m/home");
 
   };
-  
- 
+
+
 
   const handleLoginConfirm = (val) => {
     if (userName === "" && password === "") {
@@ -156,8 +157,10 @@ const Login = () => {
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
     axios.post("http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
-{ appUrl: appUrll })
-      .then((res) => {SetselfAllowedd(res?.data?.data?.selfAllowed)});
+      { appUrl: appUrll })
+      .then((res) => { SetselfAllowedd(res?.data?.data) }
+
+      );
   }, [appUrll]);
 
   // http://${REACT_APP_API_URL}/admin-new-apis/login/is-self-by-app-url
@@ -178,7 +181,7 @@ const Login = () => {
                     <div className="logo">
                       <img
                         alt=""
-                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/front/logo-login.png"
+                        src={selfAllowedd?.logo}
                         className="logo"
                       />
                     </div>
@@ -245,7 +248,7 @@ const Login = () => {
                           Login With Demo Account
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        {selfAllowedd === true ? (
+                        {selfAllowedd?.selfAllowed === true ? (
                           <button
                             className="btn btn-login"
                             onClick={handleSignUp}
