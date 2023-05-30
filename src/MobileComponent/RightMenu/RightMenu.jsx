@@ -25,7 +25,7 @@ const RightMenu = (props) => {
 
   let appUrll = window.location.hostname;
   // let appUrll = "localhost";
-
+console.log(postisselfbyappurlData?.data?.logo,"postisselfbyappurlDatapostisselfbyappurlData")
   useEffect(() => {
     setAvaliablebalance(PostTotalBalance?.data?.data?.balance);
   }, [PostTotalBalance]);
@@ -33,6 +33,7 @@ const RightMenu = (props) => {
   // console.log(PostTotalBalance)
 
   const token = localStorage.getItem("TokenId");
+  const userTypeInfo = localStorage.getItem("userTypeInfo");
   useEffect(() => {
     const token = localStorage.getItem("TokenId");
     if (token) {
@@ -163,53 +164,57 @@ const RightMenu = (props) => {
             </div>
             {/* </Link> */}
           </li>
-          {postisselfbyappurlData?.data?.selfAllowed === true ? (
-            <>
-              <li>
-                {/* <Link href="/m/mybets"   className=""> */}
-                <div
-                  className="menu-lvl-1"
-                  onClick={() => handleInput("Deposit")}
-                >
-                  <div className="item">
-                    <img
-                      src={deposit}
-                      alt=""
-                      style={{
-                        width: "22px",
-                        marginLeft: "0%",
-                      }}
-                      className="deposit-image"
-                    />
-                    <span className="menu-name">Deposit</span>
-                  </div>
-                </div>
-                {/* </Link> */}
-              </li>
-              <li>
-                {/* <Link href="/m/mybets"   className=""> */}
-                <div
-                  className="menu-lvl-1"
-                  onClick={() => handleInput("withDraw")}
-                >
-                  <div className="item">
-                    <img
-                      src={withdraw}
-                      style={{
-                        width: "22px",
-                        marginLeft: "0%",
-                      }}
-                      alt=""
-                    />{" "}
-                    <span className="menu-name">WithDraw</span>
-                  </div>
-                </div>
-                {/* </Link> */}
-              </li>
-            </>
-          ) : (
-            ""
-          )}
+          {
+            userTypeInfo === "2" ?
+              "" : (postisselfbyappurlData?.data?.selfAllowed === true ? (
+                <>
+                  <li>
+                    {/* <Link href="/m/mybets"   className=""> */}
+                    <div
+                      className="menu-lvl-1"
+                      onClick={() => handleInput("Deposit")}
+                    >
+                      <div className="item">
+                        <img
+                          src={deposit}
+                          alt=""
+                          style={{
+                            width: "22px",
+                            marginLeft: "0%",
+                          }}
+                          className="deposit-image"
+                        />
+                        <span className="menu-name">Deposit</span>
+                      </div>
+                    </div>
+                    {/* </Link> */}
+                  </li>
+                  <li>
+                    {/* <Link href="/m/mybets"   className=""> */}
+                    <div
+                      className="menu-lvl-1"
+                      onClick={() => handleInput("withDraw")}
+                    >
+                      <div className="item">
+                        <img
+                          src={withdraw}
+                          style={{
+                            width: "22px",
+                            marginLeft: "0%",
+                          }}
+                          alt=""
+                        />{" "}
+                        <span className="menu-name">WithDraw</span>
+                      </div>
+                    </div>
+                    {/* </Link> */}
+                  </li>
+                </>
+              ) : (
+                ""
+              ))
+          }
+
           <li>
             <div className="menu-lvl-1" onClick={() => handleInput("Betting")}>
               <div className="item">

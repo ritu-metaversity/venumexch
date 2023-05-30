@@ -6,6 +6,8 @@ import AlertBtn from "../../../MobileComponent/Alert/AlertBtn";
 import { ImCross } from "react-icons/im"
 import { setShowRegisterModalRef } from "../../../logincomponents/Signup";
 import { navRef } from "../../../Layout/LayoutForMobile"
+import { navRefLogin } from "../../../logincomponents/Login";
+
 const token = localStorage.getItem("TokenId");
 
 let REACT_APP_API_URL = "api.247365.exchange"
@@ -38,6 +40,31 @@ export const postLogin = createAsyncThunk('auth/postLogin', async (login, { reje
         return rejectWithValue(err.response.data)
     }
 })
+export const postLoginDemoUser = createAsyncThunk('auth/postLogin', async (login, { rejectWithValue }) => {
+    try {
+        const postLoginDemoUserdata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/demo-user-creation-login`, login,
+
+            {
+                validateStatus: false
+            });
+        console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
+        if (postLoginDemoUserdata?.data?.token) {
+            console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
+            navRefLogin("/m/home");
+            axios.defaults.headers.common.Authorization = `Bearer ${postLoginDemoUserdata?.data?.token}`
+            console.log(postLoginDemoUserdata, "postLoginDemoUserdata")
+            localStorage.setItem("TokenId", postLoginDemoUserdata?.data?.token);
+            localStorage.setItem("userTypeInfo", postLoginDemoUserdata?.data?.userTypeInfo);
+        }
+        return postLoginDemoUserdata
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
 export const getActiveSportList = createAsyncThunk('auth/getActiveSportList', async (login, { rejectWithValue }) => {
     try {
         const getActiveSportListtt = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/active-sport-list`, login);
@@ -54,6 +81,11 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postOldPassRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/user/first-login-cp`, OldPassWordData);
+        console.log(postOldPassRespose, "postOldPassRespose")
+        if (postOldPassRespose?.data?.status === true) {
+            navRef("./login");
+            localStorage.clear();
+        }
         if (
             postOldPassRespose.data.message
         ) {
@@ -88,6 +120,11 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postPasswordChangeRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/change-password`, passwordChanege);
+        console.log(postPasswordChangeRespose, "postPasswordChangeResposepostPasswordChangeRespose")
+        if (postPasswordChangeRespose?.data?.status === true) {
+            navRef("./login");
+            localStorage.clear();
+        }
         if (
             postPasswordChangeRespose.data.message
         ) {
@@ -605,6 +642,61 @@ export const postpendingapppii = createAsyncThunk('auth/Postloginlogout', async 
         const Postpendingdtaatata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/cancel-withdraw-request-eu`
         )
         return Postpendingdtaatata
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+export const postUserBannerList = createAsyncThunk('auth/postUserBannerList', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const postUserBannerListData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/user-banner-list`, data
+        )
+        return postUserBannerListData
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+export const getAboutUs = createAsyncThunk('auth/getAboutUs', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const getAboutUsDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getAboutUs`, data
+        )
+        return getAboutUsDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+export const getTermAndCondition = createAsyncThunk('auth/getTermAndCondition', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const getTermAndConditionDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getTermAndCondition`, data
+        )
+        return getTermAndConditionDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+export const getResponsibleGaming = createAsyncThunk('auth/getResponsibleGaming', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const getResponsibleGamingDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getResponsibleGaming`, data
+        )
+        return getResponsibleGamingDataa
     } catch (err) {
         if (err) {
             throw err

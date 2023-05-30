@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
   <head>
-    <meta charset="utf-8" />
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="csrf-token" content="hgZM1IqjoWtQ9sq7IYgqAilnu3zblQUSNf0VNteM">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
-      <title>LordsExch App </title>
-      <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-      <link rel="icon" type="image/png" href="https://d1arlbwbznybm5.clou dfront.net/v1/static/front/images/favicon.png?id=43274832745">
-      <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/app.css?id=43274832745">
-      <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/style.css?id=43274832745">
-      <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/custom.css?id=43274832745">
-      <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&amp;display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/front/theme.css?id=43274832745">
-      <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/owl/owl.carousel.min.css?id=43274832745">
-      <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/owl/owl.theme.default.min.css?id=43274832745">
-      <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/flipclock.css?id=43274832745">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-      <style type="text/css">
-      
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="hgZM1IqjoWtQ9sq7IYgqAilnu3zblQUSNf0VNteM">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
+    <title>LordsExch App </title>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="icon" type="image/png"
+      href="https://d1arlbwbznybm5.clou dfront.net/v1/static/front/images/favicon.png?id=43274832745">
+    <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/app.css?id=43274832745">
+    <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/style.css?id=43274832745">
+    <link rel="stylesheet" href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/custom.css?id=43274832745">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+      href="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/front/theme.css?id=43274832745">
+    <link rel="stylesheet"
+      href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/owl/owl.carousel.min.css?id=43274832745">
+    <link rel="stylesheet"
+      href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/owl/owl.theme.default.min.css?id=43274832745">
+    <link rel="stylesheet"
+      href="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/css/flipclock.css?id=43274832745">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" charset="UTF-8"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+    <link rel="stylesheet" type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <style type="text/css">
       /*
       
        * Container style
@@ -33,6 +43,7 @@
         touch-action: auto;
         -ms-touch-action: auto;
       }
+
       /*
        * Scrollbar rail styles
        */
@@ -47,6 +58,7 @@
         /* please don't change 'position' */
         position: absolute;
       }
+
       .ps__rail-y {
         display: none;
         opacity: 0;
@@ -58,19 +70,22 @@
         /* please don't change 'position' */
         position: absolute;
       }
-      .ps--active-x > .ps__rail-x,
-      .ps--active-y > .ps__rail-y {
+
+      .ps--active-x>.ps__rail-x,
+      .ps--active-y>.ps__rail-y {
         display: block;
         background-color: transparent;
       }
-      .ps:hover > .ps__rail-x,
-      .ps:hover > .ps__rail-y,
-      .ps--focus > .ps__rail-x,
-      .ps--focus > .ps__rail-y,
-      .ps--scrolling-x > .ps__rail-x,
-      .ps--scrolling-y > .ps__rail-y {
+
+      .ps:hover>.ps__rail-x,
+      .ps:hover>.ps__rail-y,
+      .ps--focus>.ps__rail-x,
+      .ps--focus>.ps__rail-y,
+      .ps--scrolling-x>.ps__rail-x,
+      .ps--scrolling-y>.ps__rail-y {
         opacity: 0.6;
       }
+
       .ps .ps__rail-x:hover,
       .ps .ps__rail-y:hover,
       .ps .ps__rail-x:focus,
@@ -80,6 +95,7 @@
         background-color: #eee;
         opacity: 0.9;
       }
+
       /*
        * Scrollbar thumb styles
        */
@@ -94,6 +110,7 @@
         /* please don't change 'position' */
         position: absolute;
       }
+
       .ps__thumb-y {
         background-color: #aaa;
         border-radius: 6px;
@@ -105,115 +122,143 @@
         /* please don't change 'position' */
         position: absolute;
       }
-      .ps__rail-x:hover > .ps__thumb-x,
-      .ps__rail-x:focus > .ps__thumb-x,
+
+      .ps__rail-x:hover>.ps__thumb-x,
+      .ps__rail-x:focus>.ps__thumb-x,
       .ps__rail-x.ps--clicking .ps__thumb-x {
         background-color: #999;
         height: 11px;
       }
-      .ps__rail-y:hover > .ps__thumb-y,
-      .ps__rail-y:focus > .ps__thumb-y,
+
+      .ps__rail-y:hover>.ps__thumb-y,
+      .ps__rail-y:focus>.ps__thumb-y,
       .ps__rail-y.ps--clicking .ps__thumb-y {
         background-color: #999;
         width: 11px;
       }
+
       /* MS supports */
       @supports (-ms-overflow-style: none) {
         .ps {
           overflow: auto !important;
         }
       }
-      @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+
+      @media screen and (-ms-high-contrast: active),
+      (-ms-high-contrast: none) {
         .ps {
           overflow: auto !important;
         }
       }
+
       .ps {
-          position: relative;
-      }</style><style type="text/css">
-      .modal-xl{
-          max-width: 90%;
+        position: relative;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
+      .modal-xl {
+        max-width: 90%;
+      }
+    </style>
+    <style type="text/css">
       .slide-leave-active[data-v-4732acba],
       .slide-enter-active[data-v-4732acba] {
-      transition: 0.3s;
+        transition: 0.3s;
       }
+
       .slide-enter[data-v-4732acba] {
-      transform: translate(100%, 0);
+        transform: translate(100%, 0);
       }
+
       .slide-leave-to[data-v-4732acba] {
-      transform: translate(-100%, 0);
+        transform: translate(-100%, 0);
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .bahar-bg {
-          background: #90ee90;
+        background: #90ee90;
       }
+
       .andar-bg {
-          background: #ffa07a;
+        background: #ffa07a;
       }
-      .hide{
-          display:none
+
+      .hide {
+        display: none
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .bahar-bg {
-          background: #90ee90;
+        background: #90ee90;
       }
+
       .andar-bg {
-          background: #ffa07a;
+        background: #ffa07a;
       }
-      .hide{
-          display:none
+
+      .hide {
+        display: none
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .one-click-bet input {
-          padding: 5px;
-          border-radius: 3px;
-          border: 2px solid #DDDDDD;
-          width: 18%;
-          margin: 3px;
+        padding: 5px;
+        border-radius: 3px;
+        border: 2px solid #DDDDDD;
+        width: 18%;
+        margin: 3px;
       }
+
       .tv-toggle {
-          background: #1f5058;
-          padding: 2px 4px;
-          margin: 1px 6px 0 0;
-          float: right;
-          color: #fff;
-          font-size: 12px;
+        background: #1f5058;
+        padding: 2px 4px;
+        margin: 1px 6px 0 0;
+        float: right;
+        color: #fff;
+        font-size: 12px;
       }
+
       .unmatch-nation-name {
-          padding: 4px !important;
+        padding: 4px !important;
       }
+
       .slide-leave-active,
       .slide-enter-active {
-          transition: 0.3s;
+        transition: 0.3s;
       }
+
       .slide-enter {
-          transform: translate(100%, 0);
+        transform: translate(100%, 0);
       }
+
       .slide-leave-to {
-          transform: translate(-100%, 0);
+        transform: translate(-100%, 0);
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       footer .upper-footer .gamecare[data-v-2b4e1d6e] {
-              width: 80px;
-              filter: brightness(0) invert(1);
+        width: 80px;
+        filter: brightness(0) invert(1);
       }
+
       footer .upper-footer .plus18[data-v-2b4e1d6e] {
-              width: 28px;
+        width: 28px;
       }
+
       footer .upper-footer .begambleaware[data-v-2b4e1d6e] {
-              width: 115px;
-              filter: brightness(0) invert(1);
+        width: 115px;
+        filter: brightness(0) invert(1);
       }
+
       footer .upper-footer .gamstop[data-v-2b4e1d6e] {
-              width: 90px;
+        width: 90px;
       }
+
       footer .upper-footer a[data-v-2b4e1d6e] {
-              font-weight: 600;
+        font-weight: 600;
       }
-      
-          /* footer .upper-footer img {
+
+      /* footer .upper-footer img {
         -webkit-filter: grayscale(100%);
         filter: grayscale(100%);
       }
@@ -221,7 +266,8 @@
         -webkit-filter: grayscale(0%); 
         filter: grayscale(0%);
       } */
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .test {
         display: flex;
         justify-content: center;
@@ -229,7 +275,8 @@
         height: 100vh;
         width: 100%;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .test {
         display: flex;
         justify-content: center;
@@ -237,16 +284,17 @@
         height: 100vh;
         width: 100%;
       }
-      </style><style type="text/css">
-      .bet-fair .suspended[data-v-22b1a176]::after{
-          width: 379px !important;
-          content: attr(data-title) !important;
-          font-family: unset !important;
-          font-weight: unset !important;
+    </style>
+    <style type="text/css">
+      .bet-fair .suspended[data-v-22b1a176]::after {
+        width: 379px !important;
+        content: attr(data-title) !important;
+        font-family: unset !important;
+        font-weight: unset !important;
       }
-      </style><style type="text/css">
-  
-        /* .bm1.col-xl-12 .suspended:after {
+    </style>
+    <style type="text/css">
+      /* .bm1.col-xl-12 .suspended:after {
           width: 380px;
       }
       .bm1 .event-name {
@@ -265,68 +313,82 @@
           width: 75px;
           white-space: nowrap;
       } */
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .recaptchaTerms {
-          color: #fff;
-          font-size: .75rem;
+        color: #fff;
+        font-size: .75rem;
       }
+
       .recaptchaTerms a {
-          color: #4cb4f9;
+        color: #4cb4f9;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .recaptchaTerms {
-          color: #fff;
-          font-size: .75rem;
+        color: #fff;
+        font-size: .75rem;
       }
+
       .recaptchaTerms a {
-          color: #4cb4f9;
+        color: #4cb4f9;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .error-page {
-          min-height: 100vh;
-          text-align: center;
-          padding: 10% 0 0 0;
+        min-height: 100vh;
+        text-align: center;
+        padding: 10% 0 0 0;
       }
-      </style><style type="text/css">
-      .btn-race[data-v-70403e38]{
-          border-radius: 0;
-          color: #fff !important;
-          margin-right: 5px;
+    </style>
+    <style type="text/css">
+      .btn-race[data-v-70403e38] {
+        border-radius: 0;
+        color: #fff !important;
+        margin-right: 5px;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .btn-race[data-v-496a6e71] {
-          border-radius: 0;
-          color: #fff !important;
-          margin-right: 5px;
+        border-radius: 0;
+        color: #fff !important;
+        margin-right: 5px;
       }
-      .race .nav-link[data-v-496a6e71]{
-          border-radius: 0 !important;
+
+      .race .nav-link[data-v-496a6e71] {
+        border-radius: 0 !important;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .res-gamb ul[data-v-593e5158] {
-          list-style: disc;
-          margin-left: 40px;
+        list-style: disc;
+        margin-left: 40px;
       }
+
       .res-gamb a[data-v-593e5158],
       .res-gamb a[data-v-593e5158]:hover,
       .res-gamb a[data-v-593e5158]:focus {
-          color: unset;
-          text-decoration: underline;
-          cursor: pointer;
+        color: unset;
+        text-decoration: underline;
+        cursor: pointer;
       }
-      .res-gamb .main[data-v-593e5158]{
-          min-height: calc(100vh - 98px);
+
+      .res-gamb .main[data-v-593e5158] {
+        min-height: calc(100vh - 98px);
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .open-win-font {
         font-size: 18px;
         margin-top: 10px;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .modal-lg {
-          max-width: 85% !important;
+        max-width: 85% !important;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .video-overlay {
         background: rgba(0, 0, 0, 0.4);
         color: #fff;
@@ -335,6 +397,7 @@
         z-index: 10;
         padding: 6px;
       }
+
       .video-overlay h3 {
         font-size: 9px;
         line-height: 9px;
@@ -344,55 +407,68 @@
         text-transform: uppercase;
         width: 200px;
       }
+
       .video-overlay .card-inner {
         margin-bottom: 3px;
       }
+
       .video-overlay img {
         border-radius: 4px;
         width: 30px !important;
         height: auto;
         margin-right: 3px;
       }
+
       .video-overlay .ab-rtlslider {
         margin: 0 15px;
         width: 200px;
       }
+
       .video-overlay .ab-rtlslider .owl-next {
         position: absolute;
         top: 0;
         left: -15px;
       }
+
       .video-overlay .ab-rtlslider .owl-prev {
         position: absolute;
         top: 0;
         right: -15px;
       }
+
       .video-overlay .ab-rtlslider .owl-next span,
       .video-overlay .ab-rtlslider .owl-prev span {
         font-size: 26px;
         line-height: 1;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .tcj .andarbahartd {
         vertical-align: top !important;
         height: unset;
       }
+
       .tcj .andarbahartd span {
         margin: 5px;
       }
+
       .tcj .andarbahartd span img {
         border-radius: 5px;
       }
+
       .selected {
         border: 3px solid green !important;
       }
+
       .andar-bahar-image {
         border: 3px solid white;
       }
+
       .suspendedtcard {
         position: relative;
         cursor: not-allowed !important;
       }
+
       .suspendedtcard:after {
         color: #1e3f5a;
         background: rgba(217, 220, 223);
@@ -415,20 +491,24 @@
         display: -webkit-flex;
         justify-content: center;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .thirtytwo-cards .card32A .suspended::after {
         width: 60% !important;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .thirtytwo-cards .card-number {
         font-family: Casino;
         font-size: 3rem;
         height: 40px;
         line-height: 40px;
       }
+
       .thirtytwo-cards .w-20 {
         width: 20% !important;
       }
+
       .thirtytwo-cards .suspended::after {
         content: "\F023";
         font-family: "Font Awesome 5 Free";
@@ -436,6 +516,7 @@
         color: #fff;
         width: 100%;
       }
+
       .thirtytwo-cards .suspended-tr::after {
         width: 40%;
         content: "\F023";
@@ -456,7 +537,8 @@
         justify-content: center;
         background: rgba(217, 220, 223);
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .clock3digit {
         max-width: 300px;
         bottom: -30px;
@@ -465,63 +547,68 @@
         width: auto !important;
         transform: scale(0.5);
       }
-      .worli-matka .selected {
-        background: green;
-        color: #fff;
-        border: unset !important;
-      }
-      .suspended::after {
-        position: absolute;
-        /* content: attr(data-title); */
-        content: "SUSPENDED";
-        top: 0;
-        right: 0;
-        font-weight: bold;
-        width: 100%;
-        height: 100%;
-        font-size: 1rem;
-        text-transform: uppercase;
-        cursor: not-allowed;
-        align-items: center;
-        display: flex;
-        display: -ms-flex;
-        display: -webkit-flex;
-        justify-content: center;
-      }
-      </style><style type="text/css">
-      .clock3digit {
-        max-width: 300px;
-        bottom: -30px;
-        position: absolute !important;
-        right: -55px;
-        width: auto !important;
-        transform: scale(0.5);
-      }
-      .worli-matka .selected {
-        background: green;
-        color: #fff;
-        border: unset !important;
-      }
-      .suspended::after {
-        position: absolute;
-        /* content: attr(data-title); */
-        content: "SUSPENDED";
-        top: 0;
-        right: 0;
-        font-weight: bold;
-        width: 100%;
-        height: 100%;
-        font-size: 1rem;
-        text-transform: uppercase;
-        cursor: not-allowed;
-        align-items: center;
-        display: flex;
-        display: -ms-flex;
-        display: -webkit-flex;
-        justify-content: center;
-      }
-      </style><style type="text/css">
 
+      .worli-matka .selected {
+        background: green;
+        color: #fff;
+        border: unset !important;
+      }
+
+      .suspended::after {
+        position: absolute;
+        /* content: attr(data-title); */
+        content: "SUSPENDED";
+        top: 0;
+        right: 0;
+        font-weight: bold;
+        width: 100%;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        display: -ms-flex;
+        display: -webkit-flex;
+        justify-content: center;
+      }
+    </style>
+    <style type="text/css">
+      .clock3digit {
+        max-width: 300px;
+        bottom: -30px;
+        position: absolute !important;
+        right: -55px;
+        width: auto !important;
+        transform: scale(0.5);
+      }
+
+      .worli-matka .selected {
+        background: green;
+        color: #fff;
+        border: unset !important;
+      }
+
+      .suspended::after {
+        position: absolute;
+        /* content: attr(data-title); */
+        content: "SUSPENDED";
+        top: 0;
+        right: 0;
+        font-weight: bold;
+        width: 100%;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        display: -ms-flex;
+        display: -webkit-flex;
+        justify-content: center;
+      }
+    </style>
+    <style type="text/css">
       /* .videoCardsRight{
               left: auto;
               right: 0;
@@ -529,12 +616,14 @@
       .low-high-btn {
         font-size: 18px;
       }
+
       .dt-container .suspended::after {
         content: "\F023";
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
         color: #fff;
       }
+
       .dt-container .suspended-tr::after {
         width: 60%;
         content: "\F023";
@@ -555,123 +644,18 @@
         justify-content: center;
         background: rgba(217, 220, 223);
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .videoCardsRight {
         left: auto;
         right: 0;
       }
-      .low-high-btn {
-        font-size: 18px;
-      }
-      </style><style type="text/css">
-      /* .videoCardsRight{
-              left: auto;
-              right: 0;
-          } */
-      .low-high-btn {
-        font-size: 18px;
-      }
-      .dt-container .suspended::after {
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-      }
-      .dt-container .suspended-tr::after {
-        width: 60%;
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        font-size: 1rem;
-        text-transform: uppercase;
-        cursor: not-allowed;
-        align-items: center;
-        display: flex;
-        display: -ms-flex;
-        display: -webkit-flex;
-        justify-content: center;
-        background: rgba(217, 220, 223);
-      }
-      </style><style type="text/css">
-  
-      /* .videoCardsRight{
-              left: auto;
-              right: 0;
-          } */
-      .low-high-btn {
-        font-size: 18px;
-      }
-      .dt-container .suspended::after {
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-      }
-      .dt-container .suspended-tr::after {
-        width: 60%;
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        font-size: 1rem;
-        text-transform: uppercase;
-        cursor: not-allowed;
-        align-items: center;
-        display: flex;
-        display: -ms-flex;
-        display: -webkit-flex;
-        justify-content: center;
-        background: rgba(217, 220, 223);
-      }
-      </style><style type="text/css">
-      .result-image img{
-          max-width:50px;
-      }
-      </style><style type="text/css">
-      /* .videoCardsRight{
-              left: auto;
-              right: 0;
-          } */
-      .low-high-btn {
-        font-size: 18px;
-      }
-      .dt-container .suspended::after {
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-      }
-      .dt-container .suspended-tr::after {
-        width: 60%;
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        font-size: 1rem;
-        text-transform: uppercase;
-        cursor: not-allowed;
-        align-items: center;
-        display: flex;
-        display: -ms-flex;
-        display: -webkit-flex;
-        justify-content: center;
-        background: rgba(217, 220, 223);
-      }
-      </style><style type="text/css">
 
+      .low-high-btn {
+        font-size: 18px;
+      }
+    </style>
+    <style type="text/css">
       /* .videoCardsRight{
               left: auto;
               right: 0;
@@ -679,82 +663,14 @@
       .low-high-btn {
         font-size: 18px;
       }
-      .dt-container .suspended::after {
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-      }
-      .dt-container .suspended-tr::after {
-        width: 60%;
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        font-size: 1rem;
-        text-transform: uppercase;
-        cursor: not-allowed;
-        align-items: center;
-        display: flex;
-        display: -ms-flex;
-        display: -webkit-flex;
-        justify-content: center;
-        background: rgba(217, 220, 223);
-      }
-      </style><style type="text/css">
 
-      /* .videoCardsRight{
-              left: auto;
-              right: 0;
-          } */
-      .low-high-btn {
-        font-size: 18px;
-      }
       .dt-container .suspended::after {
         content: "\F023";
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
         color: #fff;
       }
-      .dt-container .suspended-tr::after {
-        width: 60%;
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        font-size: 1rem;
-        text-transform: uppercase;
-        cursor: not-allowed;
-        align-items: center;
-        display: flex;
-        display: -ms-flex;
-        display: -webkit-flex;
-        justify-content: center;
-        background: rgba(217, 220, 223);
-      }
-      </style><style type="text/css">
 
-      /* .videoCardsRight{
-              left: auto;
-              right: 0;
-          } */
-      .low-high-btn {
-        font-size: 18px;
-      }
-      .dt-container .suspended::after {
-        content: "\F023";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #fff;
-      }
       .dt-container .suspended-tr::after {
         width: 60%;
         content: "\F023";
@@ -775,7 +691,8 @@
         justify-content: center;
         background: rgba(217, 220, 223);
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       /* .videoCardsRight{
               left: auto;
               right: 0;
@@ -783,12 +700,14 @@
       .low-high-btn {
         font-size: 18px;
       }
+
       .dt-container .suspended::after {
         content: "\F023";
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
         color: #fff;
       }
+
       .dt-container .suspended-tr::after {
         width: 60%;
         content: "\F023";
@@ -809,136 +728,354 @@
         justify-content: center;
         background: rgba(217, 220, 223);
       }
-      </style><style type="text/css">
- 
+    </style>
+    <style type="text/css">
+      .result-image img {
+        max-width: 50px;
+      }
+    </style>
+    <style type="text/css">
+      /* .videoCardsRight{
+              left: auto;
+              right: 0;
+          } */
+      .low-high-btn {
+        font-size: 18px;
+      }
+
+      .dt-container .suspended::after {
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+      }
+
+      .dt-container .suspended-tr::after {
+        width: 60%;
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        display: -ms-flex;
+        display: -webkit-flex;
+        justify-content: center;
+        background: rgba(217, 220, 223);
+      }
+    </style>
+    <style type="text/css">
+      /* .videoCardsRight{
+              left: auto;
+              right: 0;
+          } */
+      .low-high-btn {
+        font-size: 18px;
+      }
+
+      .dt-container .suspended::after {
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+      }
+
+      .dt-container .suspended-tr::after {
+        width: 60%;
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        display: -ms-flex;
+        display: -webkit-flex;
+        justify-content: center;
+        background: rgba(217, 220, 223);
+      }
+    </style>
+    <style type="text/css">
+      /* .videoCardsRight{
+              left: auto;
+              right: 0;
+          } */
+      .low-high-btn {
+        font-size: 18px;
+      }
+
+      .dt-container .suspended::after {
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+      }
+
+      .dt-container .suspended-tr::after {
+        width: 60%;
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        display: -ms-flex;
+        display: -webkit-flex;
+        justify-content: center;
+        background: rgba(217, 220, 223);
+      }
+    </style>
+    <style type="text/css">
+      /* .videoCardsRight{
+              left: auto;
+              right: 0;
+          } */
+      .low-high-btn {
+        font-size: 18px;
+      }
+
+      .dt-container .suspended::after {
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+      }
+
+      .dt-container .suspended-tr::after {
+        width: 60%;
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        display: -ms-flex;
+        display: -webkit-flex;
+        justify-content: center;
+        background: rgba(217, 220, 223);
+      }
+    </style>
+    <style type="text/css">
+      /* .videoCardsRight{
+              left: auto;
+              right: 0;
+          } */
+      .low-high-btn {
+        font-size: 18px;
+      }
+
+      .dt-container .suspended::after {
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+      }
+
+      .dt-container .suspended-tr::after {
+        width: 60%;
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        display: -ms-flex;
+        display: -webkit-flex;
+        justify-content: center;
+        background: rgba(217, 220, 223);
+      }
+    </style>
+    <style type="text/css">
       /* .videoCardsRight{
           left: auto;
           right: 0;
       } */
       .low-high-btn {
-          font-size: 18px;
+        font-size: 18px;
       }
+
       .dt-container .suspended::after {
-          content: "\F023";
-          font-family: "Font Awesome 5 Free";
-          font-weight: 900;
-          color: #fff;
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
       }
+
       .dt-container .suspended-tr::after {
-          width: 60%;
-          content: "\F023";
-          font-family: "Font Awesome 5 Free";
-          font-weight: 900;
-          color: #fff;
-          position: absolute;
-          top: 0;
-          right: 0;
-          height: 100%;
-          font-size: 1rem;
-          text-transform: uppercase;
-          cursor: not-allowed;
-          align-items: center;
-          display: flex;
-          display: -ms-flex;
-          display: -webkit-flex;
-          justify-content: center;
-          background: rgba(217, 220, 223);
+        width: 60%;
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        display: -ms-flex;
+        display: -webkit-flex;
+        justify-content: center;
+        background: rgba(217, 220, 223);
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       /* .videoCardsRight{
           left: auto;
           right: 0;
       } */
       .low-high-btn {
-          font-size: 18px;
+        font-size: 18px;
       }
+
       .dt-container .suspended::after {
-          content: "\F023";
-          font-family: "Font Awesome 5 Free";
-          font-weight: 900;
-          color: #fff;
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
       }
+
       .dt-container .suspended-tr::after {
-          width: 60%;
-          content: "\F023";
-          font-family: "Font Awesome 5 Free";
-          font-weight: 900;
-          color: #fff;
-          position: absolute;
-          top: 0;
-          right: 0;
-          height: 100%;
-          font-size: 1rem;
-          text-transform: uppercase;
-          cursor: not-allowed;
-          align-items: center;
-          display: flex;
-          display: -ms-flex;
-          display: -webkit-flex;
-          justify-content: center;
-          background: rgba(217, 220, 223);
+        width: 60%;
+        content: "\F023";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        font-size: 1rem;
+        text-transform: uppercase;
+        cursor: not-allowed;
+        align-items: center;
+        display: flex;
+        display: -ms-flex;
+        display: -webkit-flex;
+        justify-content: center;
+        background: rgba(217, 220, 223);
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .bm1.col-xl-12 .suspended:after {
         width: 380px;
       }
-      .bm1.col-xl-12 .event-name, .bm2.col-xl-12 .event-name {
+
+      .bm1.col-xl-12 .event-name,
+      .bm2.col-xl-12 .event-name {
         width: 300px;
       }
+
       .bm1 .event-name {
         text-overflow: ellipsis;
         overflow: hidden;
         width: 75px;
         white-space: nowrap;
       }
+
       .bm1.col-xl-8 .suspended:after {
         width: 380px;
       }
+
       .bm2 .event-name {
         text-overflow: ellipsis;
         overflow: hidden;
         width: 75px;
         white-space: nowrap;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .bm1.col-xl-12 .suspended:after {
         width: 380px;
       }
-      .bm1.col-xl-12 .event-name, .bm2.col-xl-12 .event-name {
+
+      .bm1.col-xl-12 .event-name,
+      .bm2.col-xl-12 .event-name {
         width: 300px;
       }
+
       .bm1 .event-name {
         text-overflow: ellipsis;
         overflow: hidden;
         width: 75px;
         white-space: nowrap;
       }
+
       .bm1.col-xl-8 .suspended:after {
         width: 380px;
       }
+
       .bm2 .event-name {
         text-overflow: ellipsis;
         overflow: hidden;
         width: 75px;
         white-space: nowrap;
       }
-      /* </style><style type="text/css">@charset "UTF-8"; */
-      .mx-datepicker {
+
+      /* 
+    </style>
+    <style type="text/css">
+      @charset "UTF-8";
+
+      */ .mx-datepicker {
         position: relative;
         display: inline-block;
         width: 210px;
         color: #73879c;
-        font: 14px/1.5 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', sans-serif; }
-        .mx-datepicker * {
-          -webkit-box-sizing: border-box;
-                  box-sizing: border-box; }
-        .mx-datepicker.disabled {
-          opacity: 0.7;
-          cursor: not-allowed; }
-      
+        font: 14px/1.5 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', sans-serif;
+      }
+
+      .mx-datepicker * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      .mx-datepicker.disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
       .mx-datepicker-range {
-        width: 320px; }
-      
+        width: 320px;
+      }
+
       .mx-datepicker-popup {
         position: absolute;
         margin-top: 1px;
@@ -946,18 +1083,26 @@
         border: 1px solid #d9d9d9;
         background-color: #fff;
         -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-        z-index: 1000; }
-      
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        z-index: 1000;
+      }
+
       .mx-input-wrapper {
-        position: relative; }
-        .mx-input-wrapper .mx-clear-wrapper {
-          display: none; }
-        .mx-input-wrapper:hover .mx-clear-wrapper {
-          display: block; }
-        .mx-input-wrapper:hover .mx-clear-wrapper + .mx-input-append {
-          display: none; }
-      
+        position: relative;
+      }
+
+      .mx-input-wrapper .mx-clear-wrapper {
+        display: none;
+      }
+
+      .mx-input-wrapper:hover .mx-clear-wrapper {
+        display: block;
+      }
+
+      .mx-input-wrapper:hover .mx-clear-wrapper+.mx-input-append {
+        display: none;
+      }
+
       .mx-input {
         display: inline-block;
         width: 100%;
@@ -971,23 +1116,32 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
-        .mx-input:disabled, .mx-input.disabled {
-          opacity: 0.7;
-          cursor: not-allowed; }
-        .mx-input:focus {
-          outline: none; }
-        .mx-input::-ms-clear {
-          display: none; }
-      
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      }
+
+      .mx-input:disabled,
+      .mx-input.disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      .mx-input:focus {
+        outline: none;
+      }
+
+      .mx-input::-ms-clear {
+        display: none;
+      }
+
       .mx-input-append {
         position: absolute;
         top: 0;
         right: 0;
         width: 30px;
         height: 100%;
-        padding: 6px; }
-      
+        padding: 6px;
+      }
+
       .mx-input-icon {
         display: inline-block;
         width: 100%;
@@ -995,61 +1149,76 @@
         font-style: normal;
         color: #555;
         text-align: center;
-        cursor: pointer; }
-      
+        cursor: pointer;
+      }
+
       .mx-calendar-icon {
         width: 100%;
         height: 100%;
         color: #555;
         stroke-width: 8px;
         stroke: currentColor;
-        fill: currentColor; }
-      
+        fill: currentColor;
+      }
+
       .mx-clear-icon::before {
         display: inline-block;
         content: '\2716';
-        vertical-align: middle; }
-      
+        vertical-align: middle;
+      }
+
       .mx-clear-icon::after {
         content: '';
         display: inline-block;
         width: 0;
         height: 100%;
-        vertical-align: middle; }
-      
+        vertical-align: middle;
+      }
+
       .mx-range-wrapper {
         width: 496px;
-        overflow: hidden; }
-      
+        overflow: hidden;
+      }
+
       .mx-shortcuts-wrapper {
         text-align: left;
         padding: 0 12px;
         line-height: 34px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
-        .mx-shortcuts-wrapper .mx-shortcuts {
-          background: none;
-          outline: none;
-          border: 0;
-          color: #48576a;
-          margin: 0;
-          padding: 0;
-          white-space: nowrap;
-          cursor: pointer; }
-          .mx-shortcuts-wrapper .mx-shortcuts:hover {
-            color: #419dec; }
-          .mx-shortcuts-wrapper .mx-shortcuts:after {
-            content: '|';
-            margin: 0 10px;
-            color: #48576a; }
-          .mx-shortcuts-wrapper .mx-shortcuts:last-child::after {
-            display: none; }
-      
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .mx-shortcuts-wrapper .mx-shortcuts {
+        background: none;
+        outline: none;
+        border: 0;
+        color: #48576a;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      .mx-shortcuts-wrapper .mx-shortcuts:hover {
+        color: #419dec;
+      }
+
+      .mx-shortcuts-wrapper .mx-shortcuts:after {
+        content: '|';
+        margin: 0 10px;
+        color: #48576a;
+      }
+
+      .mx-shortcuts-wrapper .mx-shortcuts:last-child::after {
+        display: none;
+      }
+
       .mx-datepicker-footer {
         padding: 4px;
         clear: both;
         text-align: right;
-        border-top: 1px solid rgba(0, 0, 0, 0.05); }
-      
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
       .mx-datepicker-btn {
         font-size: 12px;
         line-height: 1;
@@ -1059,109 +1228,152 @@
         background-color: transparent;
         outline: none;
         border: none;
-        border-radius: 3px; }
-      
+        border-radius: 3px;
+      }
+
       .mx-datepicker-btn-confirm {
         border: 1px solid rgba(0, 0, 0, 0.1);
-        color: #73879c; }
-        .mx-datepicker-btn-confirm:hover {
-          color: #1284e7;
-          border-color: #1284e7; }
-      
+        color: #73879c;
+      }
+
+      .mx-datepicker-btn-confirm:hover {
+        color: #1284e7;
+        border-color: #1284e7;
+      }
+
       /* 日历组件 */
       .mx-calendar {
         float: left;
         color: #73879c;
         padding: 6px 12px;
-        font: 14px/1.5 Helvetica Neue, Helvetica, Arial, Microsoft Yahei, sans-serif; }
-        .mx-calendar * {
-          -webkit-box-sizing: border-box;
-                  box-sizing: border-box; }
-      
+        font: 14px/1.5 Helvetica Neue, Helvetica, Arial, Microsoft Yahei, sans-serif;
+      }
+
+      .mx-calendar * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
       .mx-calendar-header {
         padding: 0 4px;
         height: 34px;
         line-height: 34px;
         text-align: center;
         position: fixed;
-        overflow: hidden; }
-        .mx-calendar-header > a {
-          color: inherit;
-          text-decoration: none;
-          cursor: pointer; }
-          .mx-calendar-header > a:hover {
-            color: #419dec; }
-        .mx-icon-last-month, .mx-icon-last-year,
-        .mx-icon-next-month,
-        .mx-icon-next-year {
-          padding: 0 6px;
-          font-size: 20px;
-          line-height: 30px;
-          -webkit-user-select: none;
-             -moz-user-select: none;
-              -ms-user-select: none;
-                  user-select: none; }
-        .mx-icon-last-month, .mx-icon-last-year {
-          float: left; }
-        
-        .mx-icon-next-month,
-        .mx-icon-next-year {
-          float: right; }
-      
+        overflow: hidden;
+      }
+
+      .mx-calendar-header>a {
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .mx-calendar-header>a:hover {
+        color: #419dec;
+      }
+
+      .mx-icon-last-month,
+      .mx-icon-last-year,
+      .mx-icon-next-month,
+      .mx-icon-next-year {
+        padding: 0 6px;
+        font-size: 20px;
+        line-height: 30px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      .mx-icon-last-month,
+      .mx-icon-last-year {
+        float: left;
+      }
+
+      .mx-icon-next-month,
+      .mx-icon-next-year {
+        float: right;
+      }
+
       .mx-calendar-content {
         width: 224px;
-        height: 224px; }
-        .mx-calendar-content .cell {
-          vertical-align: middle;
-          cursor: pointer; }
-          .mx-calendar-content .cell:hover {
-            background-color: #eaf8fe; }
-          .mx-calendar-content .cell.actived {
-            color: #fff;
-            background-color: #1284e7; }
-          .mx-calendar-content .cell.inrange {
-            background-color: #eaf8fe; }
-          .mx-calendar-content .cell.disabled {
-            cursor: not-allowed;
-            color: #ccc;
-            background-color: #f3f3f3; }
-      
+        height: 224px;
+      }
+
+      .mx-calendar-content .cell {
+        vertical-align: middle;
+        cursor: pointer;
+      }
+
+      .mx-calendar-content .cell:hover {
+        background-color: #eaf8fe;
+      }
+
+      .mx-calendar-content .cell.actived {
+        color: #fff;
+        background-color: #1284e7;
+      }
+
+      .mx-calendar-content .cell.inrange {
+        background-color: #eaf8fe;
+      }
+
+      .mx-calendar-content .cell.disabled {
+        cursor: not-allowed;
+        color: #ccc;
+        background-color: #f3f3f3;
+      }
+
       .mx-panel {
         width: 100%;
         height: 100%;
-        text-align: center; }
-      
+        text-align: center;
+      }
+
       .mx-panel-date {
         table-layout: fixed;
         border-collapse: collapse;
-        border-spacing: 0; }
-        .mx-panel-date td,
-        .mx-panel-date th {
-          font-size: 12px;
-          width: 32px;
-          height: 32px;
-          padding: 0;
-          overflow: hidden;
-          text-align: center; }
-        .mx-panel-date td.today {
-          color: #2a90e9; }
-        .mx-panel-date td.last-month, .mx-panel-date td.next-month {
-          color: #ddd; }
-      
+        border-spacing: 0;
+      }
+
+      .mx-panel-date td,
+      .mx-panel-date th {
+        font-size: 12px;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .mx-panel-date td.today {
+        color: #2a90e9;
+      }
+
+      .mx-panel-date td.last-month,
+      .mx-panel-date td.next-month {
+        color: #ddd;
+      }
+
       .mx-panel-year {
-        padding: 7px 0; }
-        .mx-panel-year .cell {
-          display: inline-block;
-          width: 40%;
-          margin: 1px 5%;
-          line-height: 40px; }
-      
+        padding: 7px 0;
+      }
+
+      .mx-panel-year .cell {
+        display: inline-block;
+        width: 40%;
+        margin: 1px 5%;
+        line-height: 40px;
+      }
+
       .mx-panel-month .cell {
         display: inline-block;
         width: 30%;
         line-height: 40px;
-        margin: 8px 1.5%; }
-      
+        margin: 8px 1.5%;
+      }
+
       .mx-time-list {
         position: relative;
         float: left;
@@ -1173,115 +1385,150 @@
         border-top: 1px solid rgba(0, 0, 0, 0.05);
         border-left: 1px solid rgba(0, 0, 0, 0.05);
         overflow-y: auto;
-        /* 滚动条滑块 */ }
-        .mx-time-list .mx-time-picker-item {
-          display: block;
-          text-align: left;
-          padding-left: 10px; }
-        .mx-time-list:first-child {
-          border-left: 0; }
-        .mx-time-list .cell {
-          width: 100%;
-          font-size: 12px;
-          height: 30px;
-          line-height: 30px; }
-        .mx-time-list::-webkit-scrollbar {
-          width: 8px;
-          height: 8px; }
-        .mx-time-list::-webkit-scrollbar-thumb {
-          background-color: rgba(0, 0, 0, 0.05);
-          border-radius: 10px;
-          -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
-                  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1); }
-        .mx-time-list:hover::-webkit-scrollbar-thumb {
-          background-color: rgba(0, 0, 0, 0.2); }
-      </style><style type="text/css">
-      .vuedatepicker .mx-input{
-          border-radius: 0;
-          height: 35px !important;
+        /* 滚动条滑块 */
       }
-      .mx-datepicker{
-          width: 100% !important;
+
+      .mx-time-list .mx-time-picker-item {
+        display: block;
+        text-align: left;
+        padding-left: 10px;
       }
-      .mx-input-append{
-          display: none;
+
+      .mx-time-list:first-child {
+        border-left: 0;
       }
-      </style><style type="text/css">
-      .vuedatepicker .mx-input{
-          border-radius: 0;
-          height: 35px !important;
+
+      .mx-time-list .cell {
+        width: 100%;
+        font-size: 12px;
+        height: 30px;
+        line-height: 30px;
       }
-      .mx-datepicker{
-          width: 100% !important;
+
+      .mx-time-list::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
       }
-      .mx-input-append{
-          display: none;
+
+      .mx-time-list::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
       }
-      </style><style type="text/css">
-      .vuedatepicker .mx-input{
-          border-radius: 0;
-          height: 35px !important;
+
+      .mx-time-list:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
       }
-      .mx-datepicker{
-          width: 100% !important;
-      }
-      .mx-input-append{
-          display: none;
-      }
-      </style><style type="text/css">
-      .vuedatepicker .mx-input{
-          border-radius: 0;
-          height: 35px !important;
-      }
-      .mx-datepicker{
-          width: 100% !important;
-      }
-      .mx-input-append{
-          display: none;
-      }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .vuedatepicker .mx-input {
-          border-radius: 0;
-          height: 35px !important;
+        border-radius: 0;
+        height: 35px !important;
       }
+
       .mx-datepicker {
-          width: 100% !important;
+        width: 100% !important;
       }
+
       .mx-input-append {
-          display: none;
+        display: none;
       }
-      </style><style type="text/css">
+    </style>
+    <style type="text/css">
       .vuedatepicker .mx-input {
-          border-radius: 0;
-          height: 35px !important;
+        border-radius: 0;
+        height: 35px !important;
       }
+
       .mx-datepicker {
-          width: 100% !important;
+        width: 100% !important;
       }
+
       .mx-input-append {
-          display: none !important;
+        display: none;
       }
+    </style>
+    <style type="text/css">
+      .vuedatepicker .mx-input {
+        border-radius: 0;
+        height: 35px !important;
+      }
+
+      .mx-datepicker {
+        width: 100% !important;
+      }
+
+      .mx-input-append {
+        display: none;
+      }
+    </style>
+    <style type="text/css">
+      .vuedatepicker .mx-input {
+        border-radius: 0;
+        height: 35px !important;
+      }
+
+      .mx-datepicker {
+        width: 100% !important;
+      }
+
+      .mx-input-append {
+        display: none;
+      }
+    </style>
+    <style type="text/css">
+      .vuedatepicker .mx-input {
+        border-radius: 0;
+        height: 35px !important;
+      }
+
+      .mx-datepicker {
+        width: 100% !important;
+      }
+
+      .mx-input-append {
+        display: none;
+      }
+    </style>
+    <style type="text/css">
+      .vuedatepicker .mx-input {
+        border-radius: 0;
+        height: 35px !important;
+      }
+
+      .mx-datepicker {
+        width: 100% !important;
+      }
+
+      .mx-input-append {
+        display: none !important;
+      }
+
       .winner-label {
-          background-color: #081215 !important;
-          color: #fff !important;
-          padding: 6px !important;
-          text-align: center !important;
+        background-color: #081215 !important;
+        color: #fff !important;
+        padding: 6px !important;
+        text-align: center !important;
       }
-      </style><script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/gEr-ODersURoIfof1hiDm7R5/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-f5rsghIKIoFDd0xw6HJj4oKQoSzVdRiYK+15dpe5h8V1H0AARXFAnn2XapdIDGt1"></script><script recaptcha-v3-script="" src="https://www.google.com/recaptcha/api.js?render=6LdB8XoUAAAAAPOghU04UiV1_cBhaebOFq81_rxP"></script></head>
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="./logo192.png" />
-    <!--
+    </style>
+    <script type="text/javascript" async=""
+      src="https://www.gstatic.com/recaptcha/releases/gEr-ODersURoIfof1hiDm7R5/recaptcha__en.js" crossorigin="anonymous"
+      integrity="sha384-f5rsghIKIoFDd0xw6HJj4oKQoSzVdRiYK+15dpe5h8V1H0AARXFAnn2XapdIDGt1"></script>
+    <script recaptcha-v3-script=""
+      src="https://www.google.com/recaptcha/api.js?render=6LdB8XoUAAAAAPOghU04UiV1_cBhaebOFq81_rxP"></script>
+  </head>
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="./logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="./manifest.json" />
-    <!--
+  <link rel="manifest" href="./manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -1290,12 +1537,13 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>LORDSEXCH</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <title>LORDSEXCH</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -1305,58 +1553,59 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script>
-      // if('serviceWorker' in navigator) {
-      //   window.addEventListener('load', () => {
-      //     console.log("pwa")
-      //     navigator.serviceWorker.register('./serviceWorker.js').then((reg) => {
-      //       console.log('Worker Registered')
-      //     }).catch((err) => {
-      //       console.log('Error in service worker registration.')
-      //     })
-      //   })
-      // }
-      if ("serviceWorker" in navigator) {
-  // Register a service worker hosted at the root of the
-  // site using the default scope.
-  navigator.serviceWorker
-    .register("/serviceWorker.js")
-    .then((registration) => {
-      // console.log("Service worker registration succeeded:", registration);
+  <script>
+    // if('serviceWorker' in navigator) {
+    //   window.addEventListener('load', () => {
+    //     console.log("pwa")
+    //     navigator.serviceWorker.register('./serviceWorker.js').then((reg) => {
+    //       console.log('Worker Registered')
+    //     }).catch((err) => {
+    //       console.log('Error in service worker registration.')
+    //     })
+    //   })
+    // }
+    if ("serviceWorker" in navigator) {
+      // Register a service worker hosted at the root of the
+      // site using the default scope.
+      navigator.serviceWorker
+        .register("/serviceWorker.js")
+        .then((registration) => {
+          // console.log("Service worker registration succeeded:", registration);
 
-      // At this point, you can optionally do something
-      // with registration. See https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration
-    })
-    .catch((error) => {
-      console.error(`Service worker registration failed: ${error}`);
-    });
+          // At this point, you can optionally do something
+          // with registration. See https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration
+        })
+        .catch((error) => {
+          console.error(`Service worker registration failed: ${error}`);
+        });
 
-  // Independent of the registration, let's also display
-  // information about whether the current page is controlled
-  // by an existing service worker, and when that
-  // controller changes.
+      // Independent of the registration, let's also display
+      // information about whether the current page is controlled
+      // by an existing service worker, and when that
+      // controller changes.
 
-  // First, do a one-off check if there's currently a
-  // service worker in control.
-  if (navigator.serviceWorker.controller) {
-    // console.log(
-    //   "This page is currently controlled by:",
-    //   navigator.serviceWorker.controller
-    // );
-  }
+      // First, do a one-off check if there's currently a
+      // service worker in control.
+      if (navigator.serviceWorker.controller) {
+        // console.log(
+        //   "This page is currently controlled by:",
+        //   navigator.serviceWorker.controller
+        // );
+      }
 
-  // Then, register a handler to detect when a new or
-  // updated service worker takes control.
-  navigator.serviceWorker.oncontrollerchange = () => {
-    // console.log(
-    //   "This page is now controlled by",
-    //   navigator.serviceWorker.controller
-    // );
-  };
-} else {
-  // console.log("Service workers are not supported.");
-}
+      // Then, register a handler to detect when a new or
+      // updated service worker takes control.
+      navigator.serviceWorker.oncontrollerchange = () => {
+        // console.log(
+        //   "This page is now controlled by",
+        //   navigator.serviceWorker.controller
+        // );
+      };
+    } else {
+      // console.log("Service workers are not supported.");
+    }
 
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

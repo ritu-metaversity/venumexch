@@ -548,7 +548,7 @@ header.header a {
 @media screen and (min-width: 250px) and (max-width: 550px) {
     .login-signup {
         display: flex;
-      
+
         justify-content: end !important;
         width: 41%;
     }
@@ -563,4 +563,12 @@ header.header a {
         font-weight: 500;
     }
 
+}
+
+@media screen and (min-width: 550px) and (max-width: 870px) {
+    .login-signup {
+        display: flex;
+        justify-content: end !important;
+        width: 41%;
+    }
 }

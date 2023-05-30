@@ -115,6 +115,7 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
+                style={{ backgroundColor: "#183f45" }}
                 value="100"
                 onClick={() => handleStaticAmount(1000)}
               >
@@ -124,15 +125,17 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
+                style={{ backgroundColor: "#183f45" }}
                 value="2000"
                 onClick={() => handleStaticAmount(5000)}
               >
                 +5000
               </button>
             </div>
-            <div className="col-3 price-data">
+            <div className="col-3 price-data" >
               <button
                 className="btn btn-secondary btn-block mb-2"
+                style={{ backgroundColor: "#183f45" }}
                 value="300"
                 onClick={() => handleStaticAmount(10000)}
               >
@@ -142,6 +145,7 @@ const PayManually = (props) => {
             <div className="col-3 price-data">
               <button
                 className="btn btn-secondary btn-block mb-2"
+                style={{ backgroundColor: "#183f45" }}
                 value="300"
                 onClick={() => handleStaticAmount(50000)}
               >

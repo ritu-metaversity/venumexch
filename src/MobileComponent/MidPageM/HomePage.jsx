@@ -7,10 +7,12 @@ import {
   Postactivematchsport,
   PostGameDetailsBySportsId,
   Postunsettleddddd,
+  postUserBannerList,
 } from "../../App/Features/auth/authActions";
 import "./HomePage.css";
 import moment from "moment"
 import Casinolist from "../Livecasino/Casinolist";
+import UpperBanner from "./UpperBanner";
 
 
 const HomePage = () => {
@@ -23,7 +25,7 @@ const HomePage = () => {
   console.log(window.location.pathname, "window.location.pathname")
   let navigate = useNavigate();
   const { id } = useParams();
-  let GameName = state?.id2;
+  // let GameName = state?.id2;
   const dispatch = useDispatch();
   const [gamesData, setGamesData] = useState("");
   const token = localStorage.getItem("TokenId");
@@ -31,10 +33,10 @@ const HomePage = () => {
   useEffect(() => {
     localStorage.setItem("SportId", id);
   }, [id]);
-  const { PostunsettledData } = useSelector((state) => state.auth);
+  const { PostunsettledData, postUserBannerListData } = useSelector((state) => state.auth);
 
   const handleGameDetails = (id, item, sportId) => {
-  const token = localStorage.getItem("TokenId");
+    const token = localStorage.getItem("TokenId");
 
     if (token) {
 
@@ -57,6 +59,12 @@ const HomePage = () => {
   // useEffect(() => {
   //   localStorage.setItem("SportId", id);
   // }, [id]);
+  useEffect(() => {
+    let datata = { "type": 1 }
+    dispatch(postUserBannerList(datata))
+  }, [])
+
+  console.log(postUserBannerListData, "postUserBannerListDatapostUserBannerListData")
 
   useEffect(() => {
     axios
@@ -109,19 +117,24 @@ const HomePage = () => {
         </div> :
 
 
-        <section style={{ marginTop: "-14px" }}>
-          <h2 class="page-title p-l-15" style={{ marginTop: "10px" }}>
-            {GameName}
-          </h2>
+        <section style={{ marginTop: "0px" }}>
+        {
+          localStorage.getItem("TokenId") !==null ?"":<UpperBanner />
+        }
+        
+
           <div
             className="in-play page-title m-t-20 m-l-15"
             style={{ paddingTop: "0px" }}
           >
             <i className="fas fa-play-circle"></i>
             {""}
+           
             <span className="label">In Play</span>
           </div>
-          {
+          
+          <>
+            {
             token ?
               <Link to="/m/mybets" className="">
                 <span className="open-bets-link" style={{ marginLeft: "7%" }}>
@@ -136,7 +149,9 @@ const HomePage = () => {
                   )
                 </span>
               </Link> : ""
-          }
+            }
+              </>
+          
 
           <div>
             <ul className="market-listing m-t-10 fsfsdf mt-23">
