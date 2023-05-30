@@ -128,3 +128,8 @@ button.btn.btn-primary.btn-block.btn-sm.wsubmit {
     border-color: #00808000;
     background-color: transparent;
 }
+
+.PostselfwithdrawappDataLoadinglodding {
+    background-color: #0000002b;
+    height: 100vh;
+}

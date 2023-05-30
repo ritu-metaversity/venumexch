@@ -57,6 +57,7 @@
     height: 43px;
     display: flex;
     margin-bottom: 2px;
+    cursor: pointer;
 }
 
 .inplay-item__players,

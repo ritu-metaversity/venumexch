@@ -47,7 +47,7 @@ const BettingProfitLoss = () => {
   const [casionMatch, setCasionMatch] = useState("");
   const [sportsMatchId, setSportsMatchId] = useState("");
 
-  const { PostprofitlossmatchwiseDatatata, PostcasinoData } = useSelector(
+  const { PostprofitlossmatchwiseDatatata, PostcasinoData, PostprofitlossmatchwiseDatatataLoading } = useSelector(
     (state) => state.auth
   );
   const handleActive = (val1, val2) => {
@@ -55,6 +55,8 @@ const BettingProfitLoss = () => {
     setPageSports(val2);
   };
 
+
+  console.log(PostprofitlossmatchwiseDatatataLoading, "PostprofitlossmatchwiseDatatataLoadingPostprofitlossmatchwiseDatatataLoading")
   useEffect(() => {
     if (Active === 1) {
       dispatch(getActiveSportList());
@@ -72,11 +74,11 @@ const BettingProfitLoss = () => {
     let inputValue = e.target.value;
     setPageSportsName(true);
     setSportsiddd(inputValue);
-    const activeMatchSportWise = { sportId: inputValue };
+
     axios
       .post(
-        "http://api.a2zscore.com/admin-new-apis/enduser/active-match-sport-wise-open",
-        activeMatchSportWise
+        "http://api.247365.exchange/admin-new-apis/enduser/active-match-sport-wise-open",
+        { sportId: inputValue }
       )
       .then((res) => {
         setGamesData(res?.data?.data);
@@ -159,7 +161,7 @@ const BettingProfitLoss = () => {
   // const token = localStorage.getItem("TokenId");
 
   useEffect(() => {
-  const token = localStorage.getItem("TokenId");
+    const token = localStorage.getItem("TokenId");
 
     if (token) {
 
@@ -169,6 +171,7 @@ const BettingProfitLoss = () => {
   useEffect(() => {
     const id = {
       id: "323334",
+      appUrl: window.location.hostname,
     };
     setCasinoId("323334");
 
@@ -183,16 +186,15 @@ const BettingProfitLoss = () => {
   }, [Active]);
 
   useEffect(() => {
-    const activeMatchSportWise = { sportId: "4" };
     axios
       .post(
-        "http://api.a2zscore.com/admin-new-apis/enduser/active-match-sport-wise-open",
-        activeMatchSportWise
+        "http://api.247365.exchange/admin-new-apis/enduser/active-match-sport-wise-open",
+        { sportId: "4" }
       )
       .then((res) => {
         setGamesData(res?.data?.data);
       });
-  }, [Active]);
+  }, []);
 
   const handleCasino = (e) => {
     let inputValue = e.target.value;
@@ -301,253 +303,259 @@ const BettingProfitLoss = () => {
   }, [pageSports]);
 
   return (
-    <>
-      <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
-        <div className="home-page">
-          <div className="container-inner">
-            <div>
-              <ToggleButtonGroup
-                type="radio"
-                name="options"
-                className="row"
-                defaultValue={1}
-              >
-                <ToggleButton
-                  id="tbg-radio-2"
-                  className={`${Active === 1 ? "active1" : ""}`}
-                  value={1}
-                  style={{ marginRight: "18px" }}
-                  onClick={() => handleActive(1, "Sports")}
+    <>{PostprofitlossmatchwiseDatatataLoading === true ?
+      <div className=" PostselfwithdrawappDataLoadinglodding">
+        <i
+          className="fa fa-circle-o-notch fa-spin loading"
+          style={{ fontSize: "50px" }}
+        ></i>
+        <p className="loading-text">Loading...</p>{" "}
+      </div>
+      :
+      <>
+        <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
+          <div className="home-page">
+            <div className="container-inner">
+              <div>
+                <ToggleButtonGroup
+                  type="radio"
+                  name="options"
+                  className="row"
+                  defaultValue={1}
                 >
-                  Sport
-                </ToggleButton>
-                <ToggleButton
-                  id="tbg-radio-3"
-                  className={`${Active === 2 ? "active1" : ""}`}
-                  value={2}
-                  style={{ width: "15%" }}
-                  onClick={() => handleActive(2, "casino")}
-                >
-                  casino
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </div>
+                  <ToggleButton
+                    id="tbg-radio-2"
+                    className={`${Active === 1 ? "active1" : ""}`}
+                    value={1}
+                    style={{ marginRight: "18px" }}
+                    onClick={() => handleActive(1, "Sports")}
+                  >
+                    Sport
+                  </ToggleButton>
+                  <ToggleButton
+                    id="tbg-radio-3"
+                    className={`${Active === 2 ? "active1" : ""}`}
+                    value={2}
+                    style={{ width: "15%" }}
+                    onClick={() => handleActive(2, "casino")}
+                  >
+                    casino
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </div>
 
-            {Active === 1 ? (
-              <div className="sport-data-list">
-                <select
-                  className="selectionnnn"
-                  // name="cars"
-                  // id="cars"
-                  onChange={handleSelectGame}
-                >
-                  {/* <option value="">Select Sports</option> */}
-                  {getActiveSportListData?.data?.data &&
-                    getActiveSportListData?.data?.data
-                    ? getActiveSportListData?.data?.data.map((item) => (
-                      <option value={item?.sportId}>
-                        <img
-                          src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`}
-                          alt=""
-                          className="img"
-                        />
-                        {item?.sportName}
-                      </option>
-                    ))
-                    : ""}{" "}
-                </select>
+              {Active === 1 ? (
+                <div className="sport-data-list">
+                  <select
+                    className="selectionnnn"
+                    // name="cars"
+                    // id="cars"
+                    onChange={handleSelectGame}
+                  >
+                    {/* <option value="">Select Sports</option> */}
+                    {getActiveSportListData?.data?.data &&
+                      getActiveSportListData?.data?.data
+                      ? getActiveSportListData?.data?.data.map((item) => (
+                        <option value={item?.sportId}>
 
-                <select
-                  className="selectionnnn"
-                  name="cars"
-                  id="cars"
-                  onChange={handleGameName}
-                >
-                  <option value="">Select Match</option>
-
-                  {gamesData?.length > 0
-                    ? gamesData.map((item) => {
-                      return (
-                        <option value={item?.matchId}>
-                          {item?.matchName}
+                          {item?.sportName}
                         </option>
-                      );
-                    })
-                    : ""}
-                </select>
-              </div>
-            ) : (
-              <div className="casino-section">
-                <select
-                  className="selectionnnn"
-                  name="cars"
-                  id="cars"
-                  onChange={handleCasino}
-                >
-                  {/* <option value="">Select Casino</option> */}
+                      ))
+                      : ""}{" "}
+                  </select>
 
-                  {PostcasinoData?.data && PostcasinoData?.data
-                    ? PostcasinoData?.data.map((el) => (
-                      <option value={el?.id}>{el?.name}</option>
-                    ))
-                    : ""}
-                </select>
-                <select
-                  className="selectionnnn"
-                  name="cars"
-                  id="cars"
-                  style={{ marginLeft: "14px" }}
-                  onChange={handleCasinoMatch}
-                >
-                  <option value="">Select Match</option>
+                  <select
+                    className="selectionnnn"
+                    name="cars"
+                    id="cars"
+                    onChange={handleGameName}
+                  >
+                    <option value="">Select Match</option>
 
-                  {casinoList?.length &&
-                    casinoList.map((item) => {
-                      return (
-                        <option value={item.gameId}>{item?.gameName}</option>
-                      );
-                    })}
-                </select>
-              </div>
-            )}
-            <DatePicker
-              className="startDate"
-              defaultValue={dayjs(startDate)}
-              format={dateFormat}
-              onChange={StartDateValue}
-              disabledDate={(d) =>
-                !d ||
-                d.isBefore(dayjs().subtract(2, "month")) ||
-                d.isAfter(dayjs())
-              }
-            />
-            <DatePicker
-              className="endDate"
-              defaultValue={dayjs}
-              format={dateFormat}
-              onChange={EndDateValue}
-              disabledDate={(d) =>
-                !d ||
-                d.isBefore(dayjs().subtract(2, "month")) ||
-                d.isAfter(dayjs())
-              }
-            />
-            {/* 
+                    {gamesData?.length > 0
+                      ? gamesData.map((item) => {
+                        return (
+                          <option value={item?.matchId}>
+                            {item?.matchName}
+                          </option>
+                        );
+                      })
+                      : ""}
+                  </select>
+                </div>
+              ) : (
+                <div className="casino-section">
+                  <select
+                    className="selectionnnn"
+                    name="cars"
+                    id="cars"
+                    onChange={handleCasino}
+                  >
+                    {/* <option value="">Select Casino</option> */}
+
+                    {PostcasinoData?.data && PostcasinoData?.data
+                      ? PostcasinoData?.data.map((el) => (
+                        <option value={el?.id}>{el?.name}</option>
+                      ))
+                      : ""}
+                  </select>
+                  <select
+                    className="selectionnnn"
+                    name="cars"
+                    id="cars"
+                    style={{ marginLeft: "14px" }}
+                    onChange={handleCasinoMatch}
+                  >
+                    <option value="">Select Match</option>
+
+                    {casinoList?.length &&
+                      casinoList.map((item) => {
+                        return (
+                          <option value={item.gameId}>{item?.gameName}</option>
+                        );
+                      })}
+                  </select>
+                </div>
+              )}
+              <DatePicker
+                className="startDate"
+                defaultValue={dayjs(startDate)}
+                format={dateFormat}
+                onChange={StartDateValue}
+                disabledDate={(d) =>
+                  !d ||
+                  d.isBefore(dayjs().subtract(2, "month")) ||
+                  d.isAfter(dayjs())
+                }
+              />
+              <DatePicker
+                className="endDate"
+                defaultValue={dayjs}
+                format={dateFormat}
+                onChange={EndDateValue}
+                disabledDate={(d) =>
+                  !d ||
+                  d.isBefore(dayjs().subtract(2, "month")) ||
+                  d.isAfter(dayjs())
+                }
+              />
+              {/* 
 <DatePicker style={{width: "50%", height: "41px"}} onChange={handleStartDate}  />
 <DatePicker style={{width: "50%", height: "41px"}} onChange={handleEndDate} /> */}
 
-            <section class="m-t-10 betting-pnl">
-              <h2 class="page-title p-l-15">Betting Profit &amp; Loss</h2>
+              <section class="m-t-10 betting-pnl">
+                <h2 class="page-title p-l-15">Betting Profit &amp; Loss</h2>
 
-              {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
-              <div className="mainDivFor">
-                {PostprofitlossmatchwiseDatatata?.data &&
-                  PostprofitlossmatchwiseDatatata?.data?.market &&
-                  PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
-                  PostprofitlossmatchwiseDatatata?.data?.market.map((el) => (
-                    <div class="dsfsfdfsd">
-                      <div class="info">
-                        <p class="m-b-0  game-name">
-                          {console.log(el, "el?.matchId}")}
-                          <Link
-                            to={`/m/gamedetail/${el?.matchId}`}
-                            class="betting-back"
-                          >
-                            <b>{el?.matchName}</b>
-                          </Link>
-                        </p>
-                        <p class="m-b-0">
-                          <span>
-                            <b>commssionMila : </b>{" "}
-                            <span>{el?.commssionMila}</span>
-                          </span>
-                        </p>
-                        {/* <p class="m-b-0"><span><b>Settled Time:</b> <span>15/03/2023 23:02</span></span></p> */}
-                      </div>
-                      <div class="pnl-titles">
-                        <p class="m-b-0">
-                          <b>Net Win:</b>
-                        </p>
-                      </div>
-                      <div class="pnl-numbers">
-                        {el?.pnl < 0 ? (
-                          <p class="m-b-0 negative">
-                            <b>{el?.pnl}</b>
+                {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
+                <div className="mainDivFor">
+                  {PostprofitlossmatchwiseDatatata?.data &&
+                    PostprofitlossmatchwiseDatatata?.data?.market &&
+                    PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
+                    PostprofitlossmatchwiseDatatata?.data?.market.map((el) => (
+                      <div class="dsfsfdfsd">
+                        <div class="info">
+                          <p class="m-b-0  game-name">
+                            {console.log(el, "el?.matchId}")}
+                            <Link
+                              to={`/m/gamedetail/${el?.matchId}`}
+                              class="betting-back"
+                            >
+                              <b>{el?.matchName}</b>
+                            </Link>
                           </p>
-                        ) : (
-                          <p style={{ color: "green" }}>
-                            <b>{el?.pnl}</b>
+                          <p class="m-b-0">
+                            <span>
+                              <b>commssionMila : </b>{" "}
+                              <span>{el?.commssionMila}</span>
+                            </span>
                           </p>
-                        )}
+                          {/* <p class="m-b-0"><span><b>Settled Time:</b> <span>15/03/2023 23:02</span></span></p> */}
+                        </div>
+                        <div class="pnl-titles">
+                          <p class="m-b-0">
+                            <b>Net Win:</b>
+                          </p>
+                        </div>
+                        <div class="pnl-numbers">
+                          {el?.pnl < 0 ? (
+                            <p class="m-b-0 negative">
+                              <b>{el?.pnl}</b>
+                            </p>
+                          ) : (
+                            <p style={{ color: "green" }}>
+                              <b>{el?.pnl}</b>
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="nodataforund">NO DATA FOUND</div>
-                )}
-              </div>
-            </section>
+                    ))
+                  ) : (
+                    <div className="nodataforund">NO DATA FOUND</div>
+                  )}
+                </div>
+              </section>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="pagination customclass" style={{ marginTop: "556px" }}>
-        <button
-          disabled={pageNumber === 1 ? true : false}
-          className="paginationBtn"
-          onClick={() => handleDoubleLeft("doubleleft")}
-        >
-          <AiOutlineDoubleLeft className="arrowDoubleLeft" />
-        </button>
-        <button
-          disabled={pageNumber === 1 ? true : false}
-          className="paginationBtn"
-          style={{ marginLeft: "-9px" }}
-          onClick={() => handleDoubleLeft("sigleleft")}
-        >
-          <AiOutlineLeft className="arrowSingleLeft" />
-        </button>
-        <div className="paginationno">
-          <div style={{ marginTop: "7px", marginLeft: "11px" }}>
-            {pageNumber}
+        <div className="pagination customclass" style={{ marginTop: "556px" }}>
+          <button
+            disabled={pageNumber === 1 ? true : false}
+            className="paginationBtn"
+            onClick={() => handleDoubleLeft("doubleleft")}
+          >
+            <AiOutlineDoubleLeft className="arrowDoubleLeft" />
+          </button>
+          <button
+            disabled={pageNumber === 1 ? true : false}
+            className="paginationBtn"
+            style={{ marginLeft: "-9px" }}
+            onClick={() => handleDoubleLeft("sigleleft")}
+          >
+            <AiOutlineLeft className="arrowSingleLeft" />
+          </button>
+          <div className="paginationno">
+            <div style={{ marginTop: "7px", marginLeft: "11px" }}>
+              {pageNumber}
+            </div>
           </div>
-        </div>
 
-        <button
-          disabled={
-            PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
-              null
-              ? true
-              : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
-                pageNumber
+          <button
+            disabled={
+              PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
+                null
                 ? true
-                : false
-          }
-          className="paginationBtn"
-          style={{ marginLeft: "-10px" }}
-          onClick={() => handleDoubleLeft("singleright")}
-        >
-          <AiOutlineRight className="arrowSingleRight" />
-        </button>
-        <button
-          disabled={
-            PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
-              null
-              ? true
-              : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
-                pageNumber
+                : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
+                  pageNumber
+                  ? true
+                  : false
+            }
+            className="paginationBtn"
+            style={{ marginLeft: "-10px" }}
+            onClick={() => handleDoubleLeft("singleright")}
+          >
+            <AiOutlineRight className="arrowSingleRight" />
+          </button>
+          <button
+            disabled={
+              PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
+                null
                 ? true
-                : false
-          }
-          className="paginationBtn"
-          onClick={() => handleDoubleLeft("doubleright")}
-        >
-          <AiOutlineDoubleRight className="arrowDoubleRight" />
-        </button>
-        {console.log(
-          PostprofitlossmatchwiseDatatata?.data?.totalRecord,
-          "PostprofitlossmatchwiseDatatata?.data?.totalRecord"
-        )}
-      </div>
+                : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
+                  pageNumber
+                  ? true
+                  : false
+            }
+            className="paginationBtn"
+            onClick={() => handleDoubleLeft("doubleright")}
+          >
+            <AiOutlineDoubleRight className="arrowDoubleRight" />
+          </button>
+          {console.log(
+            PostprofitlossmatchwiseDatatata?.data?.totalRecord,
+            "PostprofitlossmatchwiseDatatata?.data?.totalRecord"
+          )}
+        </div></>
+    }
     </>
   );
 };

@@ -307,7 +307,7 @@ const Login = () => {
             </Modal.Body>
             <div className="confirm">
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" style={{ backgroundColor: "#dc3545" }} onClick={handleClose}>
                   Exit
                 </Button>
                 <Button

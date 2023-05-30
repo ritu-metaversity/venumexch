@@ -25,7 +25,7 @@ const RightMenu = (props) => {
 
   let appUrll = window.location.hostname;
   // let appUrll = "localhost";
-
+console.log(postisselfbyappurlData?.data?.logo,"postisselfbyappurlDatapostisselfbyappurlData")
   useEffect(() => {
     setAvaliablebalance(PostTotalBalance?.data?.data?.balance);
   }, [PostTotalBalance]);
@@ -33,7 +33,7 @@ const RightMenu = (props) => {
   // console.log(PostTotalBalance)
 
   const token = localStorage.getItem("TokenId");
-  const username = localStorage.getItem("username");
+  const userTypeInfo = localStorage.getItem("userTypeInfo");
   useEffect(() => {
     const token = localStorage.getItem("TokenId");
     if (token) {
@@ -165,7 +165,7 @@ const RightMenu = (props) => {
             {/* </Link> */}
           </li>
           {
-            username === "Demo" ?
+            userTypeInfo === "2" ?
               "" : (postisselfbyappurlData?.data?.selfAllowed === true ? (
                 <>
                   <li>

@@ -108,7 +108,7 @@ const ChangePassword = () => {
     ) {
       dispatch(PostPwChangeFirstTime(passwordData));
       localStorage.clear();
-      navigate("./login");
+      // navigate("./login");
       // window.location.replace("/");
     }
   };
@@ -138,8 +138,8 @@ const ChangePassword = () => {
       !ValidationFile.isEmpty(confirmPassword)
     ) {
       dispatch(PostPasswordChange(passwordData));
-      localStorage.clear();
-      navigate("./login");
+
+
       // window.location.replace("/");
     }
   };
@@ -150,10 +150,7 @@ const ChangePassword = () => {
         className="home-page home-page-news hjhjjh"
         style={{ height: "100vh !importent" }}
       >
-        {invalidPassword === "Invalid Current Password"
-          ? "Invalid Current Password"
-          : ""}
-        {/* {emptyCurrentLength?"error":""} */}
+
         <div className="home-page">
           <section className="change-password">
             <h2

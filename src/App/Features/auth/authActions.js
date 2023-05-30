@@ -52,9 +52,9 @@ export const postLoginDemoUser = createAsyncThunk('auth/postLogin', async (login
             console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
             navRefLogin("/m/home");
             axios.defaults.headers.common.Authorization = `Bearer ${postLoginDemoUserdata?.data?.token}`
-
+            console.log(postLoginDemoUserdata, "postLoginDemoUserdata")
             localStorage.setItem("TokenId", postLoginDemoUserdata?.data?.token);
-            localStorage.setItem("username", postLoginDemoUserdata?.data?.username);
+            localStorage.setItem("userTypeInfo", postLoginDemoUserdata?.data?.userTypeInfo);
         }
         return postLoginDemoUserdata
     } catch (err) {
@@ -81,6 +81,11 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postOldPassRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/user/first-login-cp`, OldPassWordData);
+        console.log(postOldPassRespose, "postOldPassRespose")
+        if (postOldPassRespose?.data?.status === true) {
+            navRef("./login");
+            localStorage.clear();
+        }
         if (
             postOldPassRespose.data.message
         ) {
@@ -115,6 +120,11 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postPasswordChangeRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/change-password`, passwordChanege);
+        console.log(postPasswordChangeRespose, "postPasswordChangeResposepostPasswordChangeRespose")
+        if (postPasswordChangeRespose?.data?.status === true) {
+            navRef("./login");
+            localStorage.clear();
+        }
         if (
             postPasswordChangeRespose.data.message
         ) {
