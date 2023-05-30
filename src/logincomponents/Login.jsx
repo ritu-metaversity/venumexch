@@ -27,9 +27,6 @@ const Login = () => {
   const [loginData, setLoginData] = useState("");
   const [apiHit, setApiHit] = useState(false);
   const [show, setShow] = useState(false);
-  const [demo, setDemo] = useState(false);
-  // const [signUpShow, setSignUpShow] = useState(false);
-  // const [signUpClose, setSignUpClose] = useState(false);
   const handleClose = () => setShow(false);
 
   const {
@@ -39,18 +36,6 @@ const Login = () => {
     postisselfbyappurlData
   } = useSelector((state) => state.auth);
 
-  // console.log(signUpShow, "userNameuserName");
-
-  // useEffect(() => {
-  //   if (PostuserselfregisterData?.data?.message === "User Created") {
-  //     setSignUpShow(true);
-  //   }
-  // }, [PostuserselfregisterData]);
-
-  // const handleSignUpShow = () => {
-  //   setSignUpClose(true);
-  //   setSignUpShow(false);
-  // };
   const nav = useNavigate()
   navRefLogin = nav
   useEffect(() => {
@@ -110,8 +95,8 @@ const Login = () => {
       setLogin({
         userId: userName,
         password: password,
-        appUrl: window.location.hostname,
-        // appUrl:"localhost"
+        // appUrl: window.location.hostname,
+        appUrl: "localhost"
       });
 
       setShow(true);

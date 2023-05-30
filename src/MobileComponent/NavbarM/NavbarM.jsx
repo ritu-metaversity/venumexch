@@ -18,9 +18,12 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   const [leftBar, setLeftBar] = useState(false);
   const MrqueeClose = useSelector((state) => state.auth.MrqueeClose);
   console.log(MrqueeClose);
+
+
   useEffect(() => {
     setRightBar(RightValue);
   }, [RightValue]);
+  
   const token = localStorage.getItem("TokenId");
   console.log(token, "tokentoken")
   console.log();

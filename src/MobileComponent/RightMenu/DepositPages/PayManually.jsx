@@ -43,7 +43,7 @@ const PayManually = (props) => {
   };
 
   const handleStaticAmount = (vl) => {
-    setBitValue(Bitvalue + vl);
+    setBitValue((Bitvalue)=>(Number(Bitvalue)||0) + Number(vl));
   };
 
   console.log(Bitvalue, "BitvalueBitvalue");
