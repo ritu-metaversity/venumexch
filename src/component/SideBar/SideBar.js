@@ -26,7 +26,8 @@ const SideBar = () => {
   }, [dispatch])
 
   const handleRoute = (id, id2) => {
-    navigate(`/game/${id}`)
+    // console.log(id, "hgjkljkhbn")
+    // navigate(`/game/${id}`)
     setValueForGame(true)
     setGameName(id2)
     setGameId(id)
@@ -39,12 +40,12 @@ const SideBar = () => {
     setValueForGame(false)
   }
 
-  useEffect(() => {
-    if (window.location.href === ("http://localhost:3000/home")) {
+  // useEffect(() => {
+  //   if (window.location.href === ("http://localhost:3000/home")) {
 
-      setValueForGame(false)
-    }
-  }, [window.location.href])
+  //     setValueForGame(false)
+  //   }
+  // }, [window.location.href])
 
 
   return (
@@ -67,7 +68,7 @@ const SideBar = () => {
 
                       <li data-v-4732acba="">
                         {console.log(item, "fdfdfgdfg")}
-                        <Link data-v-4732acba="" className="favourites-link" onClick={() => handleRoute(item?.sportId, "Cricket")}>
+                        <Link data-v-4732acba="" to={`/game/${item?.sportId}`} className="favourites-link" onClick={() => handleRoute(item?.sportId, "Cricket")}>
                           <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} className="game-icon" />
                           <span data-v-4732acba="" className="link-name">{item?.sportName}</span></Link>
                       </li>))) : ""}
