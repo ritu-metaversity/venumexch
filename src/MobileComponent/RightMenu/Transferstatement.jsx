@@ -26,20 +26,23 @@ const Transferstatement = () => {
   const [trueee, setTrueee] = useState(false);
   const [matchId, setMatchId] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
+
   var curr = new Date();
   const timeBefore = moment(curr).subtract(14, "days").format("YYYY-MM-DD");
   const time = moment(curr).format("YYYY-MM-DD");
+
+
   const [startDate, setStartDate] = useState(timeBefore);
   const [endDate, setEndDate] = useState(time);
   const [gameNameForType, setGameNameForType] = useState(1);
 
-  useEffect(() => {
-    if (PostTransferStatementData?.data === "") {
-      // console.log("true");
-    } else {
-      // console.log("false");
-    }
-  }, [PostTransferStatementData?.data]);
+  // useEffect(() => {
+  //   if (PostTransferStatementData?.data === "") {
+  // console.log("true");
+  // } else {
+  // console.log("false");
+  //   }
+  // }, [PostTransferStatementData?.data]);
 
   // console.log(PostTransferStatementData?.data?.totalPages, "hello");
 
@@ -56,8 +59,8 @@ const Transferstatement = () => {
     let data = {
       noOfRecords: 100,
       index: pageNumber,
-      fromDate: startDate,
-      toDate: endDate,
+      fromDate: timeBefore,
+      toDate: time,
       type: gameNameForType,
     };
     // console.log("apiiiiiii");
@@ -90,7 +93,7 @@ const Transferstatement = () => {
   };
 
   const handleSubmit = (e) => {
-
+    e.preventDefault()
     let data = {
       noOfRecords: 100,
       index: pageNumber,
@@ -103,15 +106,7 @@ const Transferstatement = () => {
   return (
     <>
       <div className="home-page">
-        {
-          PostTransferStatementDataLoading === true ? <div className=" PostselfwithdrawappDataLoadinglodding">
-            <i
-              className="fa fa-circle-o-notch fa-spin loading"
-              style={{ fontSize: "50px" }}
-            ></i>
-            <p className="loading-text">Loading...</p>{" "}
-          </div>
-            :
+      
 
 
             <div className="container-inner">
@@ -123,6 +118,7 @@ const Transferstatement = () => {
                     className="startDate"
                     defaultValue={dayjs(startDate)}
                     format={dateFormat}
+
                     onChange={StartDateValue}
                     disabledDate={(d) =>
                       !d ||
@@ -133,6 +129,7 @@ const Transferstatement = () => {
                   <DatePicker
                     className="endDate"
                     defaultValue={dayjs}
+
                     format={dateFormat}
                     onChange={EndDateValue}
                     disabledDate={(d) =>
@@ -147,7 +144,6 @@ const Transferstatement = () => {
                       className="selectionndsfsdfnn"
                       // name="cars"
                       // id="cars"
-
                       onChange={handleSelectGame}
                     >
                       <option value={1}> All</option>
@@ -164,57 +160,66 @@ const Transferstatement = () => {
                   </div>
                 </div>
                 <div className="table-responsive">
-                  <table className="table" style={{ width: "100%" }}>
-                    <thead className="tbodybody">
-                      <tr>
-                        <th>Date</th>
-                        <th style={{ width: "15%" }}>Credit</th>
-                        <th style={{ width: "13%" }}>Debit</th>
-                        <th className="Balance">Balance</th>
-                        <th>Remark</th>
-                      </tr>
-                    </thead>
-                    <tbody
-                      className="tbodybody"
-                      style={{
-                        height: "calc(100vh - 330px)",
-                        display: "block",
-                        overflow: "scroll",
-                      }}
-                    >
-                      {PostTransferStatementData?.data &&
-                        PostTransferStatementData?.data?.dataList ? (
-                        PostTransferStatementData?.data?.dataList.map((el) => (
-                          <tr
-                            className="accountStatment"
-                            onClick={() =>
-                              handleDetailsStatement(el?.marketid, el?.remark)
-                            }
-                          >
-                            <td>
-                              {" "}
-                              {moment(el?.date).format("YYYY-MM-DD  - h:mm")}
-                            </td>
-                            <td style={{ color: "green", width: "10%" }}>
-                              {" "}
-                              {el?.credit}
-                            </td>
-                            <td style={{ color: "red", width: "15%" }}>
-                              {el?.debit}
-                            </td>
-                            <td style={{ width: "15%" }}>{el?.pts}</td>
-                            <td style={{ width: "30%" }}>{el?.remark}</td>
-                          </tr>
-                        ))
-                      ) : (
-                        <tr>
-                          <td colspan="3" className="text-center">
-                            There Have Been No Transfers In The Last 14 Days.
+                {
+                  PostTransferStatementDataLoading === true ? <div className=" PostselfwithdrawappDataLoadinglodding">
+                    <i
+                      className="fa fa-circle-o-notch fa-spin loading"
+                      style={{ fontSize: "50px" }}
+                    ></i>
+                    <p className="loading-text">Loading...</p>{" "}
+                  </div>: <table className="table" style={{ width: "100%" }}>
+                  <thead className="tbodybody">
+                    <tr>
+                      <th>Date</th>
+                      <th style={{ width: "15%" }}>Credit</th>
+                      <th style={{ width: "13%" }}>Debit</th>
+                      <th className="Balance">Balance</th>
+                      <th>Remark</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    className="tbodybody"
+                    style={{
+                      height: "calc(100vh - 330px)",
+                      display: "block",
+                      overflow: "scroll",
+                    }}
+                  >
+                    {PostTransferStatementData?.data &&
+                      PostTransferStatementData?.data?.dataList ? (
+                      PostTransferStatementData?.data?.dataList.map((el) => (
+                        <tr
+                          className="accountStatment"
+                          onClick={() =>
+                            handleDetailsStatement(el?.marketid, el?.remark)
+                          }
+                        >
+                          <td>
+                            {" "}
+                            {moment(el?.date).format("YYYY-MM-DD  - h:mm")}
                           </td>
+                          <td style={{ color: "green", width: "10%" }}>
+                            {" "}
+                            {el?.credit}
+                          </td>
+                          <td style={{ color: "red", width: "15%" }}>
+                            {el?.debit}
+                          </td>
+                          <td style={{ width: "15%" }}>{el?.pts}</td>
+                          <td style={{ width: "30%" }}>{el?.remark}</td>
                         </tr>
-                      )}
-                    </tbody>
-                  </table>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colspan="3" className="text-center">
+                          There Have Been No Transfers In The Last 14 Days.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+                }
+                 
                 </div>
               </section>
               <div className="pagination">
@@ -264,7 +269,7 @@ const Transferstatement = () => {
                 </button>
               </div>
             </div>
-        }
+        
 
 
       </div>

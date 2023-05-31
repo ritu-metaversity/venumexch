@@ -94,18 +94,23 @@ const Login = () => {
       appUrl: window.location.hostname,
       // appUrl: "localhost"
     });
-    if (password && userName === "") {
-      setShow(false)
-    } else if (password === "") {
-      setShow(false)
 
+
+    if (userName === "" && password === "") {
+      setErrorPassword(true);
+      setErrorId(true);
+      setShow(false);
     } else if (userName === "") {
-      setShow(false)
-
+      setErrorId(true);
+      setShow(false);
+    } else if (password === "") {
+      setErrorPassword(true);
+      setShow(false);
     } else {
-      setShow(true)
 
+      setShow(true)
     }
+
 
 
   };
@@ -195,7 +200,7 @@ const Login = () => {
                             onChange={handleInput}
                             value={userName}
                           />
-                          {errorId ? (
+                          {errorId === true ? (
                             <span className="text-danger">
                               The Username field is required.
                             </span>

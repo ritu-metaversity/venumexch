@@ -256,8 +256,20 @@ export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', 
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer "+token
         const TransferStatementData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/account-statement`, data);
+        console.log(TransferStatementData, "TransferStatementDataTransferStatementData")
+
+
         return TransferStatementData
     } catch (err) {
+        if (
+            err?.response?.data?.message
+        ) toast.error(err.response.data.message || "Something went Wrong!!", {
+            style: {
+                background: "rgb(156,74,70)", minHeight: 40,
+                padding: 0,
+                color: "white",
+            }
+        });
         if (err) {
             throw err
         }

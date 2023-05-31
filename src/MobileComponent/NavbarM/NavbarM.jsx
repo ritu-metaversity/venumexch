@@ -124,10 +124,15 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   const handleRules = () => {
     navigate("./rules-casino");
   };
-
   const handleback = () => {
-    "history.back()";
-    window.history.back();
+    // "history.back()";
+    // window.history.back();
+    if (pathname.includes("casino/")) {
+      navigate("/home")
+    } else {
+
+      navigate(-1)
+    }
     // console.log("history.back()")
   };
   const userTypeInfo = localStorage.getItem("userTypeInfo");
