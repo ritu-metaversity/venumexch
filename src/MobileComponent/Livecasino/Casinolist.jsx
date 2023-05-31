@@ -79,7 +79,7 @@ const Casinolist = () => {
               <h2 data-v-6a7f44cc="" className="page-title text-center m-t-10">
                 Live Casino
               </h2>
-              <div data-v-6a7f44cc="" className="row row5">
+              <div data-v-6a7f44cc="" className="row row5 _margin">
                 {casinoList?.length &&
                   casinoList.map((item) => {
                     return (
@@ -94,7 +94,7 @@ const Casinolist = () => {
                             className="events-row text-center"
                           >
                             <div data-v-6a7f44cc="" className="d-inline-block ">
-                              <div className="row iconshadow">
+                              <div className=" iconshadow">
                                 {/* {console.log(item)} */}
                                 <Link data-v-6a7f44cc="" className="buttonsize">
                                   <img

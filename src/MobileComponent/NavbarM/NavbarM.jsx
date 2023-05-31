@@ -12,24 +12,25 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-
+  const [isSelfloading, setIsSelfLoading] = useState(true)
   const { PostTotalBalance } = useSelector((state) => state.auth);
   const [sideBarOpen, setRightBar] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
   const MrqueeClose = useSelector((state) => state.auth.MrqueeClose);
-  // console.log(MrqueeClose);
+  console.log(isSelfloading, "isSelfloadingisSelfloading");
+
+
   useEffect(() => {
     setRightBar(RightValue);
   }, [RightValue]);
+
   const token = localStorage.getItem("TokenId");
-  console.log(token, "tokentoken")
-  console.log();
-  // useEffect(() => {
-  //   if (token === null) {
-  //     navigate("./login");
-  // console.log("dushyantdlaflkjsdjd")
-  //   }
-  // }, [token]);
+
+  useEffect(() => {
+    if (token === null) {
+      navigate("./home");
+    }
+  }, [token]);
 
   const handlelogin = (vl) => {
     if (vl === "login") {
@@ -129,10 +130,9 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
     window.history.back();
     // console.log("history.back()")
   };
-
+  const userTypeInfo = localStorage.getItem("userTypeInfo");
 
   let appUrll = window.location.hostname;
-  // let appUrll = "localhost";
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
@@ -142,7 +142,10 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
         { appUrl: appUrll }
       )
       .then((res) => {
-        SetselfAllowedd(res?.data?.data);
+        setIsSelfLoading(false)
+
+        SetselfAllowedd(res?.data?.data?.selfAllowed);
+
       });
   }, [appUrll]);
   console.log(selfAllowedd)
@@ -213,17 +216,22 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                     : "0.00"}
                 </span>
               </button>
-            </div> : <div className="float-right login-signup">
+            </div> :
+              (isSelfloading === true ? ""
+                :
+                <div className="float-right login-signup">
 
-              {selfAllowedd?.selfAllowed
-                === true ? (
-                <button className="_button_nav" onClick={handlelogin}>SignUp</button>
-              ) : (
-                ""
-              )}
+                  {selfAllowedd === true ? (
+                    <button className="_button_nav" onClick={handlelogin}>SignUp</button>
+                  ) : (
+                    ""
+                  )}
 
-              <button className="_button_nav" onClick={() => handlelogin("login")}>Login</button>
-            </div>}
+                  <button className="_button_nav" onClick={() => handlelogin("login")}>Login</button>
+                </div>)
+
+
+            }
 
 
 

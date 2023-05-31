@@ -26,23 +26,23 @@ const Footer = () => {
       {/* <div style={{marginTop: "43px"}}> */}
       <footer data-v-2b4e1d6e="" className="footer dsdsdsdsds" style={{ width: "100%" }}>
         <p data-v-2b4e1d6e="" className="m-b-0 text-center p-t-10 upper-footer">
-          <Link data-v-2b4e1d6e="" to="/AboutUs" className="theme1font">
+          <Link data-v-2b4e1d6e="" to="/m/AboutUs" className="theme1font">
             About Us
           </Link> |
-          <Link data-v-2b4e1d6e="" to="/Terms-and-Conditions" className="theme1font">
+          <Link data-v-2b4e1d6e="" to="/m/Terms-and-Conditions" className="theme1font">
             Terms and Conditions
           </Link> |
-          <Link data-v-2b4e1d6e="" to="/ResponsibleGambling" className="theme1font">
+          <Link data-v-2b4e1d6e="" to="/m/ResponsibleGambling" className="theme1font">
             Responsible Gambling
           </Link> |
-          <Link data-v-2b4e1d6e="" to="home" className="theme1font" onClick={() => handleProhibited("Prohibited")} role="button">Prohibited Territories</Link> |
+          <Link data-v-2b4e1d6e="" className="theme1font" onClick={() => handleProhibited("Prohibited")} role="button">Prohibited Territories</Link> |
           <Link data-v-2b4e1d6e="" to="https://www.gamcare.org.uk/" target="blank"><img data-v-2b4e1d6e="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/rules/gamecare.svg" className="gamecare" alt='' /></Link> |
           <Link data-v-2b4e1d6e="" to="https://www.begambleaware.org/" target="blank"><img data-v-2b4e1d6e="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/rules/begambleaware.png" className="begambleaware" alt='' /></Link> |
           <Link data-v-2b4e1d6e="" to="https://www.gamstop.co.uk/" target="blank"><img data-v-2b4e1d6e="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/rules/gamstop.svg" className="gamstop" alt='' /></Link> |
           <Link data-v-2b4e1d6e="" to="/home" role="button" onClick={() => handleProhibited("plus18")} ><img data-v-2b4e1d6e="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/rules/18plus.png" className="plus18" alt='' /></Link>
         </p>
         <div data-v-2b4e1d6e="" className="m-b-0 text-center d-inline-block">
-          <Link data-v-2b4e1d6e="" to="/home" data-toggle="modal" data-target="#rules" onClick={() => setTrueee(true)}> <span data-v-2b4e1d6e="">Rules &amp; Regulations</span></Link> <span data-v-2b4e1d6e="">© 2016-2020</span>
+          <Link data-v-2b4e1d6e="" to="/m/home" data-toggle="modal" data-target="#rules" onClick={() => setTrueee(true)}> <span data-v-2b4e1d6e="">Rules &amp; Regulations</span></Link> <span data-v-2b4e1d6e="">© 2016-2020</span>
           <div data-v-2b4e1d6e="" className="powered-by"><span data-v-2b4e1d6e="">Powered By</span> <img data-v-2b4e1d6e="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/powered-by.png" alt='' /> </div>
         </div>
 

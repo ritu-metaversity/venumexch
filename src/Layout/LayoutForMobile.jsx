@@ -146,7 +146,7 @@ const LayoutForMobile = () => {
       <div className="wrapper">
         {/* <div className="main-cointainer right-menu-open" > */}
         <div
-          className={`main-cointainer ${RightValue === true
+          className={`main-cointainer ${RightValue === true && token !== null
             ? " right-menu-open"
             : LeftValue === true
               ? "left-menu-open"
@@ -177,7 +177,7 @@ const LayoutForMobile = () => {
         )}
 
         <div
-          className={RightValue === true ? "right-menu" : ""}
+          className={RightValue === true && token !== null ? "right-menu" : ""}
           style={{ overflowY: "hidden " }}
         >
           <RightMenu RightSideBarClose={RightSideBarClose} />

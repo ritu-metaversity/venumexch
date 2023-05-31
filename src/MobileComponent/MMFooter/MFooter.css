@@ -25,6 +25,7 @@ element.style {
 .m-b-0 {
     margin-bottom: 0 !important;
 }
+
 footer .lower-footer[data-v-7c8a6852] {
     background-color: #222;
 }
@@ -33,6 +34,7 @@ p {
     margin-top: 0;
     margin-bottom: 1rem;
 }
+
 .d-block {
     display: block !important;
 }
@@ -41,6 +43,7 @@ p {
 div {
     display: block;
 }
+
 .theme2font {
     color: #fff !important;
 }
@@ -51,62 +54,78 @@ a:-webkit-any-link {
     text-decoration: underline;
 }
 
-footer .upper-footer .gamecare[data-v-7c8a6852]{
-width: 80px;
-filter: brightness(0) invert(1);
+footer .upper-footer .gamecare[data-v-7c8a6852] {
+    width: 80px;
+    filter: brightness(0) invert(1);
 }
 
 
 img {
-overflow-clip-margin: content-box;
-overflow: clip;
+    overflow-clip-margin: content-box;
+    overflow: clip;
 }
-a, a:hover, a:focus, a:active {
-color: #000;
-text-decoration: none;
+
+a,
+a:hover,
+a:focus,
+a:active {
+    color: #000;
+    text-decoration: none;
 }
+
 a {
-color: #007bff;
-text-decoration: none;
-background-color: transparent;
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 a:-webkit-any-link {
-color: -webkit-link;
-cursor: pointer;
+    color: -webkit-link;
+    cursor: pointer;
 }
+
 .theme2font {
-color: #fff !important;
+    color: #fff !important;
 }
+
 .text-center {
-text-align: center !important;
+    text-align: center !important;
 }
 
 footer .upper-footer .begambleaware[data-v-7c8a6852] {
     width: 115px;
     filter: brightness(0) invert(1);
 }
+
 img {
     vertical-align: middle;
     border-style: none;
 }
+
 img {
     overflow-clip-margin: content-box;
     overflow: clip;
 }
-a, a:hover, a:focus, a:active {
+
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
+
 a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
 }
+
 footer .upper-footer .plus18[data-v-7c8a6852] {
     width: 28px;
 }
@@ -118,9 +137,11 @@ p {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
+
 .text-center {
     text-align: center !important;
 }
+
 footer .lower-footer[data-v-7c8a6852] {
     background-color: #222;
     margin: 0px -31px;
@@ -128,11 +149,13 @@ footer .lower-footer[data-v-7c8a6852] {
     margin-top: 10px;
 
 }
+
 .footer.custom-footer[data-v-7c8a6852] {
     position: fixed;
-    bottom: 0px;
+    /* bottom: -15px; */
     padding: 0px;
 }
+
 modal-content {
     position: relative;
     display: flex;
@@ -149,8 +172,9 @@ modal-content {
     /* margin-left: 100% !important; */
     right: -126%;
 }
+
 @media screen and (max-width: 800px) {
-    .eighteen-plus1{
-        top: 35vh  !important;
+    .eighteen-plus1 {
+        top: 35vh !important;
     }
 }

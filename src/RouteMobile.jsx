@@ -67,7 +67,6 @@ const RouteMobile = () => {
           <Route path="mymarkets" element={<MarketPage />} />
           <Route path="deposit" element={<Deposit />} />
           <Route path="withDraw" element={<WithDraw />} />
-          <Route path="AboutUs" element={<AboutUs />} />
           <Route path="Terms-and-Conditions" element={<TermsandConditions />} />
 
           <Route path="/m/game/:id" element={<Gamepage />} />
@@ -75,7 +74,15 @@ const RouteMobile = () => {
           <Route path="casino-list" element={<Casinolist />} />
           <Route path="/m/casino/:id" element={<Casino />} />
           {/* <Route path="/m/login" element={<Login />} /> */}
+          <Route path="AboutUs" element={<AboutUs />} />
         </Route>
+
+
+        <Route path="/m/Singup1" element={<SingupBanner1 />} />
+        <Route path="/m/Singup2" element={<SingupBanner2 />} />
+        <Route path="/m/Singup3" element={<SingupBanner3 />} />
+        <Route path="/m/Singup4" element={<SingupBanner4 />} />
+        <Route path="/m/Singup5" element={<SingupBanner5 />} />
         <Route
           path="/m/login"
           element={
@@ -84,12 +91,6 @@ const RouteMobile = () => {
             </>
           }
         />
-        <Route path="/m/Singup1" element={<SingupBanner1 />} />
-        <Route path="/m/Singup2" element={<SingupBanner2 />} />
-        <Route path="/m/Singup3" element={<SingupBanner3 />} />
-        <Route path="/m/Singup4" element={<SingupBanner4 />} />
-        <Route path="/m/Singup5" element={<SingupBanner5 />} />
-
         <Route
           path="/m/signup"
           element={

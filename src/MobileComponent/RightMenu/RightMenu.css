@@ -18,6 +18,8 @@ element.style {
     top: 0;
     display: block;
     padding-top: 10px;
+    min-height: 100vh;
+    max-height: 100%;
 }
 
 div {

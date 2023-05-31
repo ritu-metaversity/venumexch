@@ -11,8 +11,7 @@ import ValidationFile from "../../../Validation/ValidationFile";
 import "./WithDraw.css";
 import Modal from 'react-bootstrap/Modal';
 import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
-// import Modal from 'react-bootstrap/Modal';
-// import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
+import { useNavigate } from "react-router";
 
 const WithDraw = () => {
   const dispatch = useDispatch();
@@ -33,6 +32,15 @@ const WithDraw = () => {
   const [infoError, setInfoError] = useState(false);
   const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
   console.log(PostselfwithdrawappDataLoading, "PostselfwithdrawappDataLoading")
+  let navigate = useNavigate();
+  const userTypeInfo = localStorage.getItem("userTypeInfo");
+
+  useEffect(() => {
+    if (userTypeInfo === "2") {
+      navigate("./home");
+
+    }
+  }, [userTypeInfo])
   const handleInput = (e) => {
     let inputName = e.target.name;
     let inputValue = e.target.value;
