@@ -4,14 +4,16 @@ import { useNavigate } from "react-router";
 
 import Footer from "../component/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { Postuserselfregister } from "../App/Features/auth/authActions";
+import { postLoginDemoUser, Postuserselfregister } from "../App/Features/auth/authActions";
 import ValidationFile from "../Validation/ValidationFile";
 import { Modal } from "react-bootstrap";
-
+export let navRefLogin;
 export let setShowRegisterModalRef
 const Signup = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  const nav = useNavigate()
+  navRefLogin = nav
   const [show, setShow] = useState(false);
   const [signUpShow, setSignUpShow] = useState(false);
   // const [login, setLogin] = useState({});
@@ -87,6 +89,14 @@ const Signup = () => {
   // username
   // :
   // "anish2512"
+
+  const handleDemoLogin = () => {
+
+    dispatch(postLoginDemoUser({ "appUrl": window.location.hostname }));
+
+
+  };
+
   const handleSignup = (e) => {
     setInfoError(true);
 
@@ -231,9 +241,9 @@ const Signup = () => {
                         Sign Up
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
-                      <button className="btn btn-login" onClick={handleLogin}>
+                      <button className="btn btn-login" onClick={handleDemoLogin}>
                         <i className="ml-2 fas fa-sign-in-alt rotate-btn"></i>
-                        Login
+                        Demo Login
                       </button>
                       <p className="m-b-0">
                         <small className="recaptchaTerms">
