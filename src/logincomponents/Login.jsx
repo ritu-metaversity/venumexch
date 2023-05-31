@@ -12,7 +12,7 @@ import {
   postLogin, postLoginDemoUser
 } from "../App/Features/auth/authActions";
 
-export let navRefLogin;
+
 const Login = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -36,8 +36,7 @@ const Login = () => {
     postisselfbyappurlData
   } = useSelector((state) => state.auth);
 
-  const nav = useNavigate()
-  navRefLogin = nav
+
   useEffect(() => {
     if (apiHit === true) {
       if (postLoginData?.data?.token) {
@@ -88,19 +87,16 @@ const Login = () => {
   };
 
   const handleLogin = (vl) => {
-    if (vl === "demoUser") {
-      dispatch(postLoginDemoUser({ "appUrl": window.location.hostname }));
 
-    } else {
-      setLogin({
-        userId: userName,
-        password: password,
-        // appUrl: window.location.hostname,
-        appUrl: "localhost"
-      });
+    setLogin({
+      userId: userName,
+      password: password,
+      appUrl: window.location.hostname,
+      // appUrl: "localhost"
+    });
 
-      setShow(true);
-    }
+
+
 
   };
   const handleHome = () => {
@@ -228,10 +224,7 @@ const Login = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        <button className="btn btn-login" onClick={() => handleLogin("demoUser")}>
-                          Login With Demo Account
-                          <i className="ml-2 fas fa-sign-in-alt"></i>
-                        </button>
+
                         {selfAllowedd === true ? (
                           <button
                             className="btn btn-login"

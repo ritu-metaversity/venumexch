@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import AlertBtn from "../../../MobileComponent/Alert/AlertBtn";
 import { ImCross } from "react-icons/im"
-import { setShowRegisterModalRef } from "../../../logincomponents/Signup";
+import { navRefLogin, setShowRegisterModalRef } from "../../../logincomponents/Signup";
 import { navRef } from "../../../Layout/LayoutForMobile"
-import { navRefLogin } from "../../../logincomponents/Login";
+
 
 const token = localStorage.getItem("TokenId");
 
