@@ -27,7 +27,11 @@ const Login = () => {
   const [loginData, setLoginData] = useState("");
   const [apiHit, setApiHit] = useState(false);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setPassword("")
+    setUserName("")
+    setShow(false)
+  };
 
   const {
     postLoginData,
@@ -154,7 +158,7 @@ const Login = () => {
         { appUrl: appUrll }
       )
       .then((res) => {
-        SetselfAllowedd(res?.data?.data?.selfAllowed);
+        SetselfAllowedd(res?.data?.data);
       });
   }, [appUrll]);
 
@@ -176,7 +180,7 @@ const Login = () => {
                     <div className="logo">
                       <img
                         alt=""
-                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/front/logo-login.png"
+                        src={selfAllowedd?.logo}
                         className="logo"
                       />
                     </div>
@@ -240,7 +244,7 @@ const Login = () => {
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
 
-                        {selfAllowedd === true ? (
+                        {selfAllowedd?.selfAllowed === true ? (
                           <button
                             className="btn btn-login"
                             onClick={handleSignUp}
