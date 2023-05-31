@@ -8,6 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import moment from "moment";
 import "./Deposit.css";
 import PayManually from "./PayManually";
+import { useNavigate } from "react-router";
 const Deposit = () => {
   const dispatch = useDispatch();
   const {
@@ -20,12 +21,15 @@ const Deposit = () => {
   console.log(
     PostselfdepositappDataLoading, "PostselfdepositappDataLoadingPostselfdepositappDataLoadingPostselfdepositappDataLoading"
   );
+  const userTypeInfo = localStorage.getItem("userTypeInfo");
+  let navigate = useNavigate();
 
-  //   useEffect(()=>{
-  // if(PostselfdepositappData?.status===true){
+  useEffect(() => {
+    if (userTypeInfo === "2") {
+      navigate("./home");
 
-  // }
-  //   },[])
+    }
+  }, [userTypeInfo])
   const [trueee, setTrueee] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
 

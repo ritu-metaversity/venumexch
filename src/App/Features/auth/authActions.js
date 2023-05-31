@@ -49,11 +49,11 @@ export const postLoginDemoUser = createAsyncThunk('auth/postLogin', async (login
             });
         console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
         if (postLoginDemoUserdata?.data?.token) {
-            console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
             navRefLogin("/m/home");
             axios.defaults.headers.common.Authorization = `Bearer ${postLoginDemoUserdata?.data?.token}`
-            console.log(postLoginDemoUserdata, "postLoginDemoUserdata")
+
             localStorage.setItem("TokenId", postLoginDemoUserdata?.data?.token);
+            localStorage.setItem("usernameDemo", postLoginDemoUserdata?.data?.username);
             localStorage.setItem("userTypeInfo", postLoginDemoUserdata?.data?.userTypeInfo);
         }
         return postLoginDemoUserdata

@@ -17,20 +17,15 @@ import withdraw from "./withdrawicon.avif";
 const RightMenu = (props) => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  // console.log(props)
+
   const { PostTotalBalance, postisselfbyappurlData } = useSelector(
     (state) => state.auth
   );
-  const [avaliablebalance, setAvaliablebalance] = useState("");
+
+  const usernameDemo = localStorage.getItem("usernameDemo");
 
   let appUrll = window.location.hostname;
-  // let appUrll = "localhost";
-console.log(postisselfbyappurlData?.data?.logo,"postisselfbyappurlDatapostisselfbyappurlData")
-  useEffect(() => {
-    setAvaliablebalance(PostTotalBalance?.data?.data?.balance);
-  }, [PostTotalBalance]);
-  // console.log(PostTotalBalance?.data?.data?.libality)
-  // console.log(PostTotalBalance)
+
 
   const token = localStorage.getItem("TokenId");
   const userTypeInfo = localStorage.getItem("userTypeInfo");
@@ -93,7 +88,10 @@ console.log(postisselfbyappurlData?.data?.logo,"postisselfbyappurlDatapostisself
     <>
       <div className="menu-top-wrap">
         <div className="account-overview">
-          <p className="login-name">{userId}/INR</p>
+          <p className="login-name">
+            {userTypeInfo === "2" ? usernameDemo : <>{userId}/INR</>
+            }
+          </p>
           <div className="menu-item">
             <p className="label">
               <img
@@ -124,7 +122,6 @@ console.log(postisselfbyappurlData?.data?.logo,"postisselfbyappurlDatapostisself
               </div>
               <div className="group">
                 <div>Winnings:</div>
-                {/* <span   className="negative">{PostTotalBalance?.data?.data?.winnings ? PostTotalBalance?.data?.data?.winnings: "0:00"}</span> */}
                 {PostTotalBalance?.data?.data?.winnings > 0 ? (
                   <span className="negative" style={{ color: "green" }}>
                     {PostTotalBalance?.data?.data?.winnings
