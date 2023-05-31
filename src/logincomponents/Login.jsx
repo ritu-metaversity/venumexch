@@ -94,8 +94,18 @@ const Login = () => {
       appUrl: window.location.hostname,
       // appUrl: "localhost"
     });
+    if (password && userName === "") {
+      setShow(false)
+    } else if (password === "") {
+      setShow(false)
 
+    } else if (userName === "") {
+      setShow(false)
 
+    } else {
+      setShow(true)
+
+    }
 
 
   };
