@@ -76,11 +76,10 @@ const Mybets = () => {
         <div
           data-toggle="collapse"
           data-target=".matched-bet"
-          className={`toggleable-list-title m-t-10 ${
-            matchedBets === true ? "" : "collapsed"
-          }`}
+          className={`toggleable-list-title m-t-10 ${matchedBets === true ? "" : "collapsed"
+            }`}
           aria-expanded="true"
-          // aria-expanded={`${unmatchedBets===true? "true":"false"}`}
+        // aria-expanded={`${unmatchedBets===true? "true":"false"}`}
         >
           <span>Matched Bets</span>{" "}
           <i
@@ -99,12 +98,11 @@ const Mybets = () => {
             </div>
           ) : (
             <div
-              className={`events matched-bet ${
-                matchedBets === true ? "collapse " : "collapse show"
-              } `}
+              className={`events matched-bet ${matchedBets === true ? "collapse " : "collapse show"
+                } `}
             >
               {PostunsettledData?.data &&
-              PostunsettledData?.data?.dataList?.length > 0 ? (
+                PostunsettledData?.data?.dataList?.length > 0 ? (
                 PostunsettledData?.data?.dataList.map((el) => (
                   <div class="events matched-bet collapse show">
                     <ul>
@@ -113,9 +111,8 @@ const Mybets = () => {
                         <div>
                           <a
                             href={`/m/gamedetail/${el?.matchId}`}
-                            class={`${
-                              el?.isback === false ? "lay" : "back"
-                            }-bet`}
+                            class={`${el?.isback === false ? "lay" : "back"
+                              }-bet`}
                           >
                             <u>
                               {el?.isback === false ? "lay" : "Back"}{" "}
@@ -134,7 +131,7 @@ const Mybets = () => {
                           <div>
                             <b>Placed: </b>{" "}
                             <span>
-                              {moment(el?.time).format(" D/mm/YYYY h:mm")}
+                              {el?.time}
                             </span>
                           </div>
                         </div>
