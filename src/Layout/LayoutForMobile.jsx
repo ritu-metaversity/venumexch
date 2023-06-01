@@ -178,7 +178,7 @@ const LayoutForMobile = () => {
 
         <div
           className={RightValue === true && token !== null ? "right-menu" : ""}
-          style={{ overflowY: "hidden " }}
+          style={{ overflowY: "scroll " }}
         >
           <RightMenu RightSideBarClose={RightSideBarClose} />
         </div>
@@ -208,7 +208,7 @@ const LayoutForMobile = () => {
 
         {/* </div> */}
 
-        <div className="bottom-icon" style={{ width: "40px", height: "42px" }}>
+        <div className="bottom-icon" style={{ width: "40px", height: "40px" }}>
           <Eyeicon style={{ fontSize: "22px" }} />
         </div>
       </div>

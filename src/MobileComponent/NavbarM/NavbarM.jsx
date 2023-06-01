@@ -17,7 +17,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   const [sideBarOpen, setRightBar] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
   const MrqueeClose = useSelector((state) => state.auth.MrqueeClose);
-  console.log(isSelfloading, "isSelfloadingisSelfloading");
+  // console.log(isSelfloading, "isSelfloadingisSelfloading");
 
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
         "http://api.247365.exchange/admin-new-apis/enduser/get-user-message"
       )
       .then((response) => {
-        console.log(response, "responseresponse");
+        // console.log(response, "responseresponse");
         setMovingMessage(response?.data?.message);
       });
   }, []);
@@ -124,10 +124,15 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   const handleRules = () => {
     navigate("./rules-casino");
   };
-
   const handleback = () => {
-    "history.back()";
-    window.history.back();
+    // "history.back()";
+    // window.history.back();
+    if (pathname.includes("casino/")) {
+      navigate("/home")
+    } else {
+
+      navigate(-1)
+    }
     // console.log("history.back()")
   };
   const userTypeInfo = localStorage.getItem("userTypeInfo");
@@ -144,11 +149,11 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
       .then((res) => {
         setIsSelfLoading(false)
 
-        SetselfAllowedd(res?.data?.data?.selfAllowed);
+        SetselfAllowedd(res?.data?.data);
 
       });
   }, [appUrll]);
-
+  console.log(selfAllowedd, "selfAllowedd")
   return (
     <div>
       <header className="header">
@@ -188,11 +193,11 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
             {/* ARROW */}
 
             {/* ARROW */}
-            <div className="logo" onClick={handleInput}>
+            <div className="logo" style={{ height: "43px", marginTop: "-3px" }} onClick={handleInput}>
               {/* <Link href="/home"   className="router-link-exact-active router-link-active"> */}
               <img
                 alt=""
-                src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/mobile/logo.png"
+                src={selfAllowedd?.logo}
                 className="img-fluid"
                 style={{ height: "40px" }}
               />
@@ -220,7 +225,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                 :
                 <div className="float-right login-signup">
 
-                  {selfAllowedd === true ? (
+                  {selfAllowedd?.selfAllowed === true ? (
                     <button className="_button_nav" onClick={handlelogin}>SignUp</button>
                   ) : (
                     ""

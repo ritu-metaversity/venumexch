@@ -38,7 +38,7 @@ const Mybets = () => {
     (state) => state.auth
   );
 
-  console.log(PostunsettledDataLoading, "PostunsettledDataLoading");
+  // console.log(PostunsettledDataLoading, "PostunsettledDataLoading");
 
   const dispatch = useDispatch();
   // console.log(PostBetListByMatchIdData ,"dushyant")
@@ -60,9 +60,9 @@ const Mybets = () => {
       setPageNumber(PostunsettledData?.data?.totalPages);
     }
   };
-  console.log(pageNumber, "hello");
+  // console.log(pageNumber, "hello");
 
-  console.log(PostunsettledData, "PostunsettledData");
+  // console.log(PostunsettledData, "PostunsettledData");
   return (
     <>
       <section className="my-bets-container  manit">

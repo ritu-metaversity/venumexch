@@ -14,7 +14,7 @@ const TermsandConditions = () => {
   }, [])
   // const data = getTermAndConditionData?.data?.termandcondition
 
-  console.log(getTermAndConditionData, "getTermAndConditionData")
+  // console.log(getTermAndConditionData, "getTermAndConditionData")
   return (
     <div className="home-page  home-page-news" style={{
       marginTop: "102px",

@@ -13,20 +13,26 @@
     min-height: 100vh;
     padding-bottom: 100px;
 }
+
 /* 
 .betting-pnl .wrapper {
     height: auto;
 } */
 
-ul, li {
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0
 }
-ol, ul, dl {
+
+ol,
+ul,
+dl {
     margin-top: 0;
     margin-bottom: 1rem;
 }
+
 ul {
     display: block;
     list-style-type: disc;
@@ -45,19 +51,19 @@ div {
     transform: translateX(-260px);
     transition: .5s;
 }
+
 .right-menu-open {
     transform: translateX(-260px);
 }
 
 
-element.style {
-    overflow-y: auto;
-}
+
 .right-menu {
     display: block;
     position: fixed;
     z-index: 2;
 }
+
 .right-menu {
     transform: translateX(0);
     position: absolute;
@@ -70,6 +76,7 @@ element.style {
     display: block !important;
     padding-top: 10px;
 }
+
 .main-cointainer {
     padding-bottom: 145px !important;
 }
@@ -77,10 +84,12 @@ element.style {
 .main-cointainer {
     transition: .5s;
 }
+
 .left-menu-open {
     transform: translateX(250px);
     transition: .5s;
 }
+
 /* .left-menu-open {
     transform: translateX(260px);
 } */
@@ -89,11 +98,13 @@ element.style {
     width: 100%;
     padding-bottom: 100px;
 }
+
 .left-menu {
     display: block;
     position: fixed;
     z-index: 2;
 }
+
 .left-menu {
     transform: translateX(0);
     position: absolute;
@@ -109,12 +120,17 @@ element.style {
     height: 100%;
     max-height: 100%;
 }
-ul, li {
+
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-ol, ul, dl {
+
+ol,
+ul,
+dl {
     margin-top: 0;
     margin-bottom: 1rem;
 }
@@ -128,36 +144,38 @@ ul {
     margin-inline-end: 0px;
     padding-inline-start: 40px;
 }
-.d-none{
+
+.d-none {
     display: none !important;
 }
+
 .main-cointainer {
     padding-bottom: 100px !important;
 }
+
 .left-menu {
     display: block;
     position: fixed;
     z-index: 2;
 }
-.lay-border{
+
+.lay-border {
     border-bottom: 6px solid #FAA9BA;
     width: 100%;
 
 }
-.back-border{
+
+.back-border {
     border-bottom: 6px solid #72BBEF;
     width: 100%;
 }
 
-.modal-design
-{
-    margin-top: -68px;
-}
 
-.btnnnnnnnn{
+
+.btnnnnnnnn {
     height: 60px;
     position: fixed;
-    right:20px;
+    right: 20px;
     bottom: 20%;
     border-radius: 50%;
     outline: none;
@@ -183,6 +201,18 @@ button.eye-icon {
     height: 42px;
 }
 
-button.eye-icon i{
+button.eye-icon i {
     font-size: 22px;
 }
+
+/* @media (orientation:landscape) {
+
+    .bottom-icon {
+
+    }
+
+    .btnnnnnnnn {
+        background-color: #f00 !important;
+        margin-bottom: "-300px" !important
+    }
+} */

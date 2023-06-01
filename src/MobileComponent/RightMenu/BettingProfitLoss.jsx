@@ -56,7 +56,7 @@ const BettingProfitLoss = () => {
   };
 
 
-  console.log(PostprofitlossmatchwiseDatatataLoading, "PostprofitlossmatchwiseDatatataLoadingPostprofitlossmatchwiseDatatataLoading")
+  // console.log(PostprofitlossmatchwiseDatatataLoading, "PostprofitlossmatchwiseDatatataLoadingPostprofitlossmatchwiseDatatataLoading")
   useEffect(() => {
     if (Active === 1) {
       dispatch(getActiveSportList());
@@ -262,7 +262,7 @@ const BettingProfitLoss = () => {
   // console.log(pageNumber, "pageNumber");
   // console.log(endDate, "endDate");
   // console.log(startDate, "startDate");
-  console.log(casinoId, "casinoId");
+  // console.log(casinoId, "casinoId");
   // console.log(casinoList, "casinoList");
   // console.log(gamesData, "gamesData");
   // console.log(Active, "Active");
@@ -280,7 +280,7 @@ const BettingProfitLoss = () => {
         noOfRecords: 100,
         totalPages: "",
       };
-      console.log(ProfitLossPayload, "pageSportspageSports");
+      // console.log(ProfitLossPayload, "pageSportspageSports");
 
       dispatch(Postprofitlossmatchwise(ProfitLossPayload));
     } else {
@@ -295,7 +295,7 @@ const BettingProfitLoss = () => {
           noOfRecords: 100,
           totalPages: "",
         };
-        console.log(ProfitLossPayload, "pageSportspageSports");
+        // console.log(ProfitLossPayload, "pageSportspageSports");
 
         dispatch(Postprofitlossmatchwise(ProfitLossPayload));
       }
@@ -303,152 +303,154 @@ const BettingProfitLoss = () => {
   }, [pageSports]);
 
   return (
-    <>{PostprofitlossmatchwiseDatatataLoading === true ?
-      <div className=" PostselfwithdrawappDataLoadinglodding">
-        <i
-          className="fa fa-circle-o-notch fa-spin loading"
-          style={{ fontSize: "50px" }}
-        ></i>
-        <p className="loading-text">Loading...</p>{" "}
-      </div>
-      :
-      <>
-        <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
-          <div className="home-page">
-            <div className="container-inner">
-              <div>
-                <ToggleButtonGroup
-                  type="radio"
-                  name="options"
-                  className="row"
-                  defaultValue={1}
+
+    <>
+      <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
+        <div className="home-page">
+          <div className="container-inner">
+            <div>
+              <ToggleButtonGroup
+                type="radio"
+                name="options"
+                className="row"
+                defaultValue={1}
+              >
+                <ToggleButton
+                  id="tbg-radio-2"
+                  className={`${Active === 1 ? "active1" : ""}`}
+                  value={1}
+                  style={{ marginRight: "18px" }}
+                  onClick={() => handleActive(1, "Sports")}
                 >
-                  <ToggleButton
-                    id="tbg-radio-2"
-                    className={`${Active === 1 ? "active1" : ""}`}
-                    value={1}
-                    style={{ marginRight: "18px" }}
-                    onClick={() => handleActive(1, "Sports")}
-                  >
-                    Sport
-                  </ToggleButton>
-                  <ToggleButton
-                    id="tbg-radio-3"
-                    className={`${Active === 2 ? "active1" : ""}`}
-                    value={2}
-                    style={{ width: "15%" }}
-                    onClick={() => handleActive(2, "casino")}
-                  >
-                    casino
-                  </ToggleButton>
-                </ToggleButtonGroup>
-              </div>
+                  Sport
+                </ToggleButton>
+                <ToggleButton
+                  id="tbg-radio-3"
+                  className={`${Active === 2 ? "active1" : ""}`}
+                  value={2}
+                  style={{ width: "15%" }}
+                  onClick={() => handleActive(2, "casino")}
+                >
+                  casino
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </div>
 
-              {Active === 1 ? (
-                <div className="sport-data-list">
-                  <select
-                    className="selectionnnn"
-                    // name="cars"
-                    // id="cars"
-                    onChange={handleSelectGame}
-                  >
-                    {/* <option value="">Select Sports</option> */}
-                    {getActiveSportListData?.data?.data &&
-                      getActiveSportListData?.data?.data
-                      ? getActiveSportListData?.data?.data.map((item) => (
-                        <option value={item?.sportId}>
+            {Active === 1 ? (
+              <div className="sport-data-list">
+                <select
+                  className="selectionnnn"
+                  // name="cars"
+                  // id="cars"
+                  onChange={handleSelectGame}
+                >
+                  {/* <option value="">Select Sports</option> */}
+                  {getActiveSportListData?.data?.data &&
+                    getActiveSportListData?.data?.data
+                    ? getActiveSportListData?.data?.data.map((item) => (
+                      <option value={item?.sportId}>
 
-                          {item?.sportName}
+                        {item?.sportName}
+                      </option>
+                    ))
+                    : ""}{" "}
+                </select>
+
+                <select
+                  className="selectionnnn"
+                  name="cars"
+                  id="cars"
+                  onChange={handleGameName}
+                >
+                  <option value="">Select Match</option>
+
+                  {gamesData?.length > 0
+                    ? gamesData.map((item) => {
+                      return (
+                        <option value={item?.matchId}>
+                          {item?.matchName}
                         </option>
-                      ))
-                      : ""}{" "}
-                  </select>
+                      );
+                    })
+                    : ""}
+                </select>
+              </div>
+            ) : (
+              <div className="casino-section">
+                <select
+                  className="selectionnnn"
+                  name="cars"
+                  id="cars"
+                  onChange={handleCasino}
+                >
+                  {/* <option value="">Select Casino</option> */}
 
-                  <select
-                    className="selectionnnn"
-                    name="cars"
-                    id="cars"
-                    onChange={handleGameName}
-                  >
-                    <option value="">Select Match</option>
+                  {PostcasinoData?.data && PostcasinoData?.data
+                    ? PostcasinoData?.data.map((el) => (
+                      <option value={el?.id}>{el?.name}</option>
+                    ))
+                    : ""}
+                </select>
+                <select
+                  className="selectionnnn"
+                  name="cars"
+                  id="cars"
+                  style={{ marginLeft: "14px" }}
+                  onChange={handleCasinoMatch}
+                >
+                  <option value="">Select Match</option>
 
-                    {gamesData?.length > 0
-                      ? gamesData.map((item) => {
-                        return (
-                          <option value={item?.matchId}>
-                            {item?.matchName}
-                          </option>
-                        );
-                      })
-                      : ""}
-                  </select>
-                </div>
-              ) : (
-                <div className="casino-section">
-                  <select
-                    className="selectionnnn"
-                    name="cars"
-                    id="cars"
-                    onChange={handleCasino}
-                  >
-                    {/* <option value="">Select Casino</option> */}
-
-                    {PostcasinoData?.data && PostcasinoData?.data
-                      ? PostcasinoData?.data.map((el) => (
-                        <option value={el?.id}>{el?.name}</option>
-                      ))
-                      : ""}
-                  </select>
-                  <select
-                    className="selectionnnn"
-                    name="cars"
-                    id="cars"
-                    style={{ marginLeft: "14px" }}
-                    onChange={handleCasinoMatch}
-                  >
-                    <option value="">Select Match</option>
-
-                    {casinoList?.length &&
-                      casinoList.map((item) => {
-                        return (
-                          <option value={item.gameId}>{item?.gameName}</option>
-                        );
-                      })}
-                  </select>
-                </div>
-              )}
-              <DatePicker
-                className="startDate"
-                defaultValue={dayjs(startDate)}
-                format={dateFormat}
-                onChange={StartDateValue}
-                disabledDate={(d) =>
-                  !d ||
-                  d.isBefore(dayjs().subtract(2, "month")) ||
-                  d.isAfter(dayjs())
-                }
-              />
-              <DatePicker
-                className="endDate"
-                defaultValue={dayjs}
-                format={dateFormat}
-                onChange={EndDateValue}
-                disabledDate={(d) =>
-                  !d ||
-                  d.isBefore(dayjs().subtract(2, "month")) ||
-                  d.isAfter(dayjs())
-                }
-              />
-              {/* 
+                  {casinoList?.length &&
+                    casinoList.map((item) => {
+                      return (
+                        <option value={item.gameId}>{item?.gameName}</option>
+                      );
+                    })}
+                </select>
+              </div>
+            )}
+            <DatePicker
+              className="startDate"
+              defaultValue={dayjs(startDate)}
+              format={dateFormat}
+              onChange={StartDateValue}
+              disabledDate={(d) =>
+                !d ||
+                d.isBefore(dayjs().subtract(2, "month")) ||
+                d.isAfter(dayjs())
+              }
+            />
+            <DatePicker
+              className="endDate"
+              defaultValue={dayjs}
+              format={dateFormat}
+              onChange={EndDateValue}
+              disabledDate={(d) =>
+                !d ||
+                d.isBefore(dayjs().subtract(2, "month")) ||
+                d.isAfter(dayjs())
+              }
+            />
+            {/* 
 <DatePicker style={{width: "50%", height: "41px"}} onChange={handleStartDate}  />
 <DatePicker style={{width: "50%", height: "41px"}} onChange={handleEndDate} /> */}
 
-              <section class="m-t-10 betting-pnl">
-                <h2 class="page-title p-l-15">Betting Profit &amp; Loss</h2>
+            <section class="m-t-10 betting-pnl">
+              <h2 class="page-title p-l-15">Betting Profit &amp; Loss</h2>
 
-                {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
-                <div className="mainDivFor">
-                  {PostprofitlossmatchwiseDatatata?.data &&
+              {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
+              <div className="mainDivFor">
+
+                {PostprofitlossmatchwiseDatatataLoading === true ?
+                  <div className=" PostselfwithdrawappDataLoadinglodding">
+                    <i
+                      className="fa fa-circle-o-notch fa-spin loading"
+                      style={{ fontSize: "50px" }}
+                    ></i>
+                    <p className="loading-text">Loading...</p>{" "}
+                  </div>
+                  :
+                  PostprofitlossmatchwiseDatatata?.data &&
                     PostprofitlossmatchwiseDatatata?.data?.market &&
                     PostprofitlossmatchwiseDatatata?.data?.market.length > 0 ? (
                     PostprofitlossmatchwiseDatatata?.data?.market.map((el) => (
@@ -479,11 +481,14 @@ const BettingProfitLoss = () => {
                         <div class="pnl-numbers">
                           {el?.pnl < 0 ? (
                             <p class="m-b-0 negative">
-                              <b>{el?.pnl}</b>
+                              <b>{Number(el?.pnl).toFixed(2)}</b>
                             </p>
                           ) : (
                             <p style={{ color: "green" }}>
-                              <b>{el?.pnl}</b>
+                              <b>
+
+                                {Number(el?.pnl).toFixed(2)}
+                              </b>
                             </p>
                           )}
                         </div>
@@ -491,72 +496,72 @@ const BettingProfitLoss = () => {
                     ))
                   ) : (
                     <div className="nodataforund">NO DATA FOUND</div>
-                  )}
-                </div>
-              </section>
-            </div>
+                  )
+                }
+              </div>
+            </section>
           </div>
         </div>
-        <div className="pagination customclass" style={{ marginTop: "556px" }}>
-          <button
-            disabled={pageNumber === 1 ? true : false}
-            className="paginationBtn"
-            onClick={() => handleDoubleLeft("doubleleft")}
-          >
-            <AiOutlineDoubleLeft className="arrowDoubleLeft" />
-          </button>
-          <button
-            disabled={pageNumber === 1 ? true : false}
-            className="paginationBtn"
-            style={{ marginLeft: "-9px" }}
-            onClick={() => handleDoubleLeft("sigleleft")}
-          >
-            <AiOutlineLeft className="arrowSingleLeft" />
-          </button>
-          <div className="paginationno">
-            <div style={{ marginTop: "7px", marginLeft: "11px" }}>
-              {pageNumber}
-            </div>
+      </div>
+      <div className="pagination customclass" style={{ marginTop: "556px" }}>
+        <button
+          disabled={pageNumber === 1 ? true : false}
+          className="paginationBtn"
+          onClick={() => handleDoubleLeft("doubleleft")}
+        >
+          <AiOutlineDoubleLeft className="arrowDoubleLeft" />
+        </button>
+        <button
+          disabled={pageNumber === 1 ? true : false}
+          className="paginationBtn"
+          style={{ marginLeft: "-9px" }}
+          onClick={() => handleDoubleLeft("sigleleft")}
+        >
+          <AiOutlineLeft className="arrowSingleLeft" />
+        </button>
+        <div className="paginationno">
+          <div style={{ marginTop: "7px", marginLeft: "11px" }}>
+            {pageNumber}
           </div>
+        </div>
 
-          <button
-            disabled={
-              PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
-                null
+        <button
+          disabled={
+            PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
+              null
+              ? true
+              : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
+                pageNumber
                 ? true
-                : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
-                  pageNumber
-                  ? true
-                  : false
-            }
-            className="paginationBtn"
-            style={{ marginLeft: "-10px" }}
-            onClick={() => handleDoubleLeft("singleright")}
-          >
-            <AiOutlineRight className="arrowSingleRight" />
-          </button>
-          <button
-            disabled={
-              PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
-                null
+                : false
+          }
+          className="paginationBtn"
+          style={{ marginLeft: "-10px" }}
+          onClick={() => handleDoubleLeft("singleright")}
+        >
+          <AiOutlineRight className="arrowSingleRight" />
+        </button>
+        <button
+          disabled={
+            PostprofitlossmatchwiseDatatata?.data?.totalRecord === undefined ||
+              null
+              ? true
+              : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
+                pageNumber
                 ? true
-                : PostprofitlossmatchwiseDatatata?.data?.totalRecord ===
-                  pageNumber
-                  ? true
-                  : false
-            }
-            className="paginationBtn"
-            onClick={() => handleDoubleLeft("doubleright")}
-          >
-            <AiOutlineDoubleRight className="arrowDoubleRight" />
-          </button>
-          {console.log(
-            PostprofitlossmatchwiseDatatata?.data?.totalRecord,
-            "PostprofitlossmatchwiseDatatata?.data?.totalRecord"
-          )}
-        </div></>
-    }
-    </>
+                : false
+          }
+          className="paginationBtn"
+          onClick={() => handleDoubleLeft("doubleright")}
+        >
+          <AiOutlineDoubleRight className="arrowDoubleRight" />
+        </button>
+        {console.log(
+          PostprofitlossmatchwiseDatatata?.data?.totalRecord,
+          "PostprofitlossmatchwiseDatatata?.data?.totalRecord"
+        )}
+      </div></>
+
   );
 };
 

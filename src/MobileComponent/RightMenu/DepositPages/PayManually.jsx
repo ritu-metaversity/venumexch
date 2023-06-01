@@ -38,15 +38,19 @@ const PayManually = (props) => {
   const increment = () => {
     setBitValue(Bitvalue + 10);
   };
+
   const decrement = () => {
-    setBitValue(Bitvalue - 10);
+    if (Bitvalue - 10 >= 0) {
+
+      setBitValue(Bitvalue - 10);
+    }
   };
 
   const handleStaticAmount = (vl) => {
-    setBitValue((Bitvalue)=>(Number(Bitvalue)||0) + Number(vl));
+    setBitValue((Bitvalue) => (Number(Bitvalue) || 0) + Number(vl));
   };
 
-  console.log(Bitvalue, "BitvalueBitvalue");
+  // console.log(Bitvalue, "BitvalueBitvalue");
   useEffect(() => {
     const token = localStorage.getItem("TokenId");
 
@@ -88,7 +92,7 @@ const PayManually = (props) => {
               <span
                 className="fa fa-minus"
                 aria-hidden="true"
-                onClick={decrement}
+
               ></span>
             </button>
             <input
@@ -96,7 +100,7 @@ const PayManually = (props) => {
               placeholder="Enter Amount"
               className="priceinput"
               value={Bitvalue}
-              onChange={(e) => setBitValue(e.target.value)}
+              onChange={(e) => (Number(e.target.value) || e.target.value === "") && setBitValue(Number(e.target.value))}
             />
             <button
               className="stakeactionminus priceminus btn"
