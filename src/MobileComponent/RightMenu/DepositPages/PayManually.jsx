@@ -50,7 +50,7 @@ const PayManually = (props) => {
     setBitValue((Bitvalue) => (Number(Bitvalue) || 0) + Number(vl));
   };
 
-  console.log(Bitvalue, "BitvalueBitvalue");
+  // console.log(Bitvalue, "BitvalueBitvalue");
   useEffect(() => {
     const token = localStorage.getItem("TokenId");
 

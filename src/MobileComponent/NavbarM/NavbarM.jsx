@@ -17,7 +17,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   const [sideBarOpen, setRightBar] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
   const MrqueeClose = useSelector((state) => state.auth.MrqueeClose);
-  console.log(isSelfloading, "isSelfloadingisSelfloading");
+  // console.log(isSelfloading, "isSelfloadingisSelfloading");
 
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
         "http://api.247365.exchange/admin-new-apis/enduser/get-user-message"
       )
       .then((response) => {
-        console.log(response, "responseresponse");
+        // console.log(response, "responseresponse");
         setMovingMessage(response?.data?.message);
       });
   }, []);

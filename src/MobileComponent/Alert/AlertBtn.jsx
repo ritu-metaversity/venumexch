@@ -12,7 +12,7 @@ const AlertBtn = ({val}) => {
   // setTimeout(()=>{
   //   setAlertTimeOut(false)
   // }, 3000)
-console.log(val,"valvalvalvalvalval")
+// console.log(val,"valvalvalvalvalval")
 
 
   return (

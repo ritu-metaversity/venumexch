@@ -47,7 +47,7 @@ export const postLoginDemoUser = createAsyncThunk('auth/postLogin', async (login
             {
                 validateStatus: false
             });
-        console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
+        // console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
         if (postLoginDemoUserdata?.data?.token) {
             navRefLogin("/m/home");
             axios.defaults.headers.common.Authorization = `Bearer ${postLoginDemoUserdata?.data?.token}`
@@ -81,7 +81,7 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postOldPassRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/user/first-login-cp`, OldPassWordData);
-        console.log(postOldPassRespose, "postOldPassRespose")
+        // console.log(postOldPassRespose, "postOldPassRespose")
         if (postOldPassRespose?.data?.status === true) {
             navRef("./login");
             localStorage.clear();
@@ -120,7 +120,7 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postPasswordChangeRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/change-password`, passwordChanege);
-        console.log(postPasswordChangeRespose, "postPasswordChangeResposepostPasswordChangeRespose")
+        // console.log(postPasswordChangeRespose, "postPasswordChangeResposepostPasswordChangeRespose")
         if (postPasswordChangeRespose?.data?.status === true) {
             navRef("./login");
             localStorage.clear();
@@ -256,7 +256,7 @@ export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', 
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer "+token
         const TransferStatementData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/account-statement`, data);
-        console.log(TransferStatementData, "TransferStatementDataTransferStatementData")
+        // console.log(TransferStatementData, "TransferStatementDataTransferStatementData")
 
 
         return TransferStatementData
@@ -280,7 +280,7 @@ export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', 
 export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, { rejectWithValue }) => {
     try {
         const PlaceBet = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/place-bets`, data)
-        console.log(PlaceBet, "PlaceBetPlaceBetPlaceBet")
+        // console.log(PlaceBet, "PlaceBetPlaceBetPlaceBet")
         if (
             PlaceBet.data.message
         ) {
@@ -305,7 +305,7 @@ export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, {
             }
         });
         if (err) {
-            console.log(err, "errerrerrerrerr")
+            // console.log(err, "errerrerrerrerr")
             throw err
         }
         return err.response
@@ -438,7 +438,7 @@ export const Postselfdepositapp = createAsyncThunk('auth/Postselfdepositapp', as
         const PostselfdepositappDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/self-deposit-app`, data, {
             headers: { "Content-Type": "multipart/form-data" }
         });
-        console.log(PostselfdepositappDataaa, "PostselfdepositappDataaaPostselfdepositappDataaaPostselfdepositappDataaa")
+        // console.log(PostselfdepositappDataaa, "PostselfdepositappDataaaPostselfdepositappDataaaPostselfdepositappDataaa")
         if (
             PostselfdepositappDataaa.data.message
         ) {
@@ -526,7 +526,7 @@ export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken'
                 validateStatus: false
             });
         if (PostvalidatejwttokenDataaa.data.status === false) {
-            console.log("dfghjkldfghjklfghjklfghjklsdfghjk")
+            // console.log("dfghjkldfghjklfghjklfghjklsdfghjk")
             localStorage.clear()
             if (navRef) {
                 navRef("/m/home")

@@ -84,11 +84,11 @@ const Transferstatement = () => {
       setPageNumber(PostTransferStatementData?.data?.totalPages);
     }
   };
-  console.log(pageNumber, "hello");
+  // console.log(pageNumber, "hello");
 
   const handleSelectGame = (e) => {
     let inputValue = e.target.value;
-    console.log(inputValue, "dasjdhadhas");
+    // console.log(inputValue, "dasjdhadhas");
     setGameNameForType(inputValue);
   };
 

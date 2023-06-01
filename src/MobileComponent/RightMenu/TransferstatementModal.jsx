@@ -15,7 +15,7 @@ const TransferstatementModal = ({ matchId }) => {
   const [selectBet, setSelectBet] = useState("1");
   const handleSelectType = (vl) => {
     setSelectBet(vl);
-    console.log(vl, "dfshfsdhfk");
+    // console.log(vl, "dfshfsdhfk");
   };
 
   useEffect(() => {
@@ -32,14 +32,14 @@ const TransferstatementModal = ({ matchId }) => {
   // );
   // betList
 
-  console.log(
-    postBetMarketAndUserData?.data?.totalBets,
-    "postBetMarketAndUserData"
-  );
-  console.log(
-    postBetMarketAndUserData?.data?.totalStake,
-    "postBetMarketAndUserData"
-  );
+  // console.log(
+  //   postBetMarketAndUserData?.data?.totalBets,
+  //   "postBetMarketAndUserData"
+  // );
+  // console.log(
+  //   postBetMarketAndUserData?.data?.totalStake,
+  //   "postBetMarketAndUserData"
+  // );
   return (
     <div>
       <div id="__BVID__287___BV_modal_body_">

@@ -22,7 +22,7 @@ const HomePage = () => {
   const [isLoading, setIsloading] = useState(true)
 
 
-  console.log(window.location.pathname, "window.location.pathname")
+  // console.log(window.location.pathname, "window.location.pathname")
   let navigate = useNavigate();
   const { id } = useParams();
   // let GameName = state?.id2;
@@ -64,7 +64,7 @@ const HomePage = () => {
     dispatch(postUserBannerList(datata))
   }, [])
 
-  console.log(postUserBannerListData, "postUserBannerListDatapostUserBannerListData")
+  // console.log(postUserBannerListData, "postUserBannerListDatapostUserBannerListData")
 
   useEffect(() => {
     axios

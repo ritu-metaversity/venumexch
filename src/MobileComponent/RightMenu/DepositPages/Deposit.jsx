@@ -18,9 +18,9 @@ const Deposit = () => {
   } = useSelector((state) => state.auth);
   const [Bitvalue, setBitValue] = useState(0);
 
-  console.log(
-    PostselfdepositappDataLoading, "PostselfdepositappDataLoadingPostselfdepositappDataLoadingPostselfdepositappDataLoading"
-  );
+  // console.log(
+  //   PostselfdepositappDataLoading, "PostselfdepositappDataLoadingPostselfdepositappDataLoadingPostselfdepositappDataLoading"
+  // );
   const userTypeInfo = localStorage.getItem("userTypeInfo");
   let navigate = useNavigate();
 
