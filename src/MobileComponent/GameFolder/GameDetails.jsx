@@ -1227,6 +1227,7 @@ const GameDetails = () => {
                                               >
                                                 <b data-v-e03c6f20="">
                                                   <span data-v-e03c6f20="">
+                                                    {console.log(key, "fsdfsdfsd")}
                                                     {key}
                                                   </span>
                                                   dfs
@@ -1318,9 +1319,7 @@ const GameDetails = () => {
                                                       )}
                                                       <div
                                                         data-v-e03c6f20=""
-                                                        data-title={
-                                                          item?.gstatus
-                                                        }
+                                                        data-title={item?.gstatus}
                                                         // className="table-row"
                                                         className={`table-row ${item?.gstatus?.toLowerCase() ===
                                                           "suspended"
@@ -1407,8 +1406,7 @@ const GameDetails = () => {
                                                                       style={{
                                                                         color:
                                                                           "red",
-                                                                      }}
-                                                                    >
+                                                                      }}>
                                                                       {" "}
                                                                       <>
                                                                         {

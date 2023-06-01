@@ -520,7 +520,7 @@ const DestGamePage = () => {
                     <div className="header">
                         <h1 className='sportName'>
                             {gameDetailsData?.data?.Odds &&
-                                gameDetailsData?.data?.Odds[0]?.runners[0]?.name}{" "} "v"
+                                gameDetailsData?.data?.Odds[0]?.runners[0]?.name}{" "}  {" "}
                             {gameDetailsData?.data?.Odds &&
                                 gameDetailsData?.data?.Odds[0]?.runners[1]?.name} <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
                         </h1>
@@ -558,7 +558,7 @@ const DestGamePage = () => {
                                                                 className="event-name"
                                                                 style={{ color: "rgb(15, 35, 39)" }}
                                                             >
-                                                                <b>{item1?.name}</b>
+                                                                {item1?.name}
                                                             </div>
                                                             <p data-v-22b1a176="" className="m-b-0">
                                                                 <span data-v-22b1a176="" style={{ color: "black" }}>
@@ -579,10 +579,13 @@ const DestGamePage = () => {
 
                                                                     <td
                                                                         data-v-22b1a176=""
-                                                                        className="back unhighlighted betting-disabled"
+                                                                        className={`back ${id === 1 || id === 2
+                                                                            ? "unhighlighted"
+                                                                            : ""
+                                                                            }`}
                                                                     >
-                                                                        {item?.price}
-                                                                        <div>
+                                                                        <strong data-v-22b1a176 class="odds"> {item?.price}</strong>
+                                                                        <div data-v-22b1a176 class="size">
                                                                             {item?.size}
                                                                         </div>
                                                                     </td>
@@ -592,9 +595,12 @@ const DestGamePage = () => {
                                                         {item1?.ex?.availableToLay.map(
                                                             (item, id) => {
                                                                 return (
-                                                                    <td data-v-22b1a176="" className="lay betting-disabled">
-                                                                        {item?.price}
-                                                                        <div>
+                                                                    <td data-v-22b1a176="" className={`lay ${id === 1 || id === 2
+                                                                        ? "unhighlighted"
+                                                                        : ""
+                                                                        }`}>
+                                                                        <strong data-v-22b1a176 class="odds"> {item?.price}</strong>
+                                                                        <div data-v-22b1a176 class="size">
                                                                             {item?.size}
                                                                         </div>
                                                                     </td>
@@ -660,26 +666,26 @@ const DestGamePage = () => {
                                                                     {item?.nation}
                                                                 </div>
                                                                 <p className="m-b-0">
-                                                                    <span style={{ color: "black" }}>0</span>
+                                                                    <span style={{ color: "black" }}>121</span>
                                                                     <span style={{ display: "none", color: "black" }}>
 
-                                                                        &gt;&gt; 0
+                                                                        0
                                                                     </span>
                                                                 </p>
                                                             </td>
-                                                            <td className="back unhighlighted betting-disabled">
+                                                            <td className="back unhighlighted">
                                                                 <strong className="odds">0</strong>
                                                                 <div className="size">
                                                                     <span>0.0</span>
                                                                 </div>
                                                             </td>
-                                                            <td className="back unhighlighted betting-disabled">
+                                                            <td className="back unhighlighted">
                                                                 <strong className="odds">0</strong>
                                                                 <div className="size">
                                                                     <span>0.0</span>
                                                                 </div>
                                                             </td>
-                                                            <td className="back betting-disabled">
+                                                            <td className="back">
                                                                 <strong className="odds">{item?.b1}</strong>
                                                                 <div className="size">
 
@@ -748,107 +754,97 @@ const DestGamePage = () => {
 
                 </div>
 
-                
+
                 <div className="fancy-market-container">
                     <div className="fancy-market fancy-market1">
 
                         <div className="row m-b-20">
-                            <div className="col-md-12">
-                                <div className="game-title m-t-5">
-                                    <h5 className=" d-inline-block m-b-0">
-                                        <span>Fancy Market</span>
-                                    </h5>
-                                </div>
-                                <div className="table-header">
-                                    <div className="float-left country-name" />
-                                    <div className="box-w1 float-left ">No</div>
-                                    <div className=" box-w1 float-left ">Yes</div>
-                                    <div className="box-w2 float-left" />
-                                </div>
-                                <div className="table-body">
 
-
-
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="SUSPENDED" className="table-row suspended-fancy">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>Fall of 4th wkt PAK A</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center betting-disabled">
-
-                                            </div>
-                                            <div className="box-w1 back float-left text-center betting-disabled">
-
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>50K</span>
-                                                </span>
-                                            </div>
+                            {Object.keys(onlyFancyDetails).map(
+                                (key) => (
+                                    <div className="col-md-12">
+                                        <div className="game-title m-t-5">
+                                            <h5 className=" d-inline-block m-b-0">
+                                                <span>{key}</span>
+                                            </h5>
+                                        </div>
+                                        <div className="table-header">
+                                            <div className="float-left country-name" />
+                                            <div className="box-w1 float-left ">No</div>
+                                            <div className=" box-w1 float-left ">Yes</div>
+                                            <div className="box-w2 float-left" />
                                         </div>
 
+                                        {onlyFancyDetails &&
+                                            onlyFancyDetails[key].map(
+                                                (item, index) => (
+                                                    <div className="table-body">
+
+
+                                                        <div className="fancy-tripple fancy-tripple1">
+                                                            <div data-title={item?.gstatus}
+                                                                className="table-row"
+                                                            >
+                                                                {/*   className={`table-row ${item?.gstatus?.toLowerCase() ===
+                                                                "suspended"
+                                                                ? "suspend"
+                                                                : item.gstatus?.toLowerCase() ===
+                                                                  "ball running"
+                                                                  ? "suspend"
+                                                                  : ""
+                                                                }`}*/}
+                                                                <div
+                                                                    className="float-left country-name"
+                                                                    style={{ borderBottom: 0 }}
+                                                                >
+                                                                    <p className="m-b-0">
+                                                                        <span>{item?.nation}</span>
+                                                                        <img
+                                                                            src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
+                                                                            className="float-right ladder-icon m-t-5" alt=''
+                                                                        />
+                                                                    </p>
+                                                                    <p className="m-b-0">
+                                                                        <span style={{ color: "black" }}>0</span>
+                                                                    </p>
+                                                                </div>
+                                                                <div className="box-w1 lay float-left text-center">
+                                                                    <span className="odd d-block">{item?.l1}</span> <span> {item?.ls1}</span>
+                                                                </div>
+                                                                <div className="box-w1 back float-left text-center">
+                                                                    <span className="odd d-block">  {item?.b1} </span> <span>{item?.bs1}</span>
+                                                                </div>
+                                                                <div
+                                                                    className="box-w2 float-left text-right min-max"
+                                                                    style={{ borderBottom: 0 }}
+                                                                >
+                                                                    <span className="d-block">
+                                                                        Min: <span>{onlyFancyMaxMinDetails &&
+                                                                            onlyFancyMaxMinDetails[
+                                                                                key
+                                                                            ]?.[index]
+                                                                                ?.minBet}</span>
+                                                                    </span>
+                                                                    <span className="d-block">
+                                                                        Max: <span>{onlyFancyMaxMinDetails &&
+                                                                            onlyFancyMaxMinDetails[
+                                                                                key
+                                                                            ]?.[index]
+                                                                                ?.maxBet}</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                )
+                                            )}
                                     </div>
-
-                                    <div className="fancy-tripple fancy-tripple1">
-                                        <div data-title="" className="table-row">
-                                            <div
-                                                className="float-left country-name"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <p className="m-b-0">
-                                                    <span>I Butt run</span>
-                                                    <img
-                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                        className="float-right ladder-icon m-t-5" alt=''
-                                                    />
-                                                </p>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                </p>
-                                            </div>
-                                            <div className="box-w1 lay float-left text-center">
-                                                <span className="odd d-block">29</span> <span>110</span>
-                                            </div>
-                                            <div className="box-w1 back float-left text-center">
-                                                <span className="odd d-block">29</span> <span>90</span>
-                                            </div>
-                                            <div
-                                                className="box-w2 float-left text-right min-max"
-                                                style={{ borderBottom: 0 }}
-                                            >
-                                                <span className="d-block">
-                                                    Min: <span>50</span>
-                                                </span>
-                                                <span className="d-block">
-                                                    Max: <span>50K</span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-
-                                </div>
-                            </div>
+                                )
+                            )}
                         </div>
 
                     </div>
