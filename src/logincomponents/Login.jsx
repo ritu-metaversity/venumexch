@@ -95,8 +95,8 @@ const Login = () => {
     setLogin({
       userId: userName,
       password: password,
-      // appUrl: window.location.hostname,
-      appUrl: "localhost"
+      appUrl: window.location.hostname,
+      // appUrl: "localhost"
     });
 
 
