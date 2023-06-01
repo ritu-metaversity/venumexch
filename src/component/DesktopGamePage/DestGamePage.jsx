@@ -525,181 +525,230 @@ const DestGamePage = () => {
                                 gameDetailsData?.data?.Odds[0]?.runners[1]?.name} <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
                         </h1>
                     </div>
-                    <div data-v-22b1a176="">
-                        <table data-v-22b1a176="" className="market-listing-table table bet-fair">
-                            <thead data-v-22b1a176="">
-                                <tr data-v-22b1a176="">
-                                    <th data-v-22b1a176="" className="market-name title">
-                                        MATCH_ODDS
-                                    </th>
-                                    <th data-v-22b1a176="" colSpan={2} />
-                                    <th data-v-22b1a176="" className="back">
-                                        <span data-v-22b1a176="">Back</span>
-                                    </th>
-                                    <th data-v-22b1a176="" className="lay">
-                                        <span data-v-22b1a176="">Lay</span>
-                                    </th>
-                                    <th data-v-22b1a176="" colSpan={2} />
-                                </tr>
-                            </thead>
-                            <tbody data-v-22b1a176="" data-title="OPEN" className="">
-                                {gameDetailsData?.data &&
-                                    gameDetailsData?.data?.Odds?.map((item11, id1) => {
-                                        return (
-                                            <tr data-v-22b1a176="" data-title="OPEN" className="">
-                                                <td data-v-22b1a176="">
-                                                    <div
-                                                        data-v-22b1a176=""
-                                                        className="event-name"
-                                                        style={{ color: "rgb(15, 35, 39)" }}
-                                                    >
-                                                        {item11?.Name}
-                                                    </div>
-                                                    <p data-v-22b1a176="" className="m-b-0">
-                                                        <span data-v-22b1a176="" style={{ color: "black" }}>
-                                                            0
-                                                        </span>
-                                                        <span
-                                                            data-v-22b1a176=""
-                                                            style={{ display: "none", color: "black" }}
-                                                        >
-
-                                                            &gt;&gt; 0
-                                                        </span>
-                                                    </p>
-                                                </td>
-                                                <td
-                                                    data-v-22b1a176=""
-                                                    className="back unhighlighted betting-disabled"
-                                                >
-                                                    0
-                                                </td>
-                                                <td
-                                                    data-v-22b1a176=""
-                                                    className="back unhighlighted betting-disabled"
-                                                >
-                                                    0
-                                                </td>
-                                                <td data-v-22b1a176="" className="back betting-disabled">
-                                                    0
-                                                </td>
-                                                <td data-v-22b1a176="" className="lay betting-disabled">
-                                                    0
-                                                </td>
-                                                <td
-                                                    data-v-22b1a176=""
-                                                    className="lay unhighlighted betting-disabled"
-                                                >
-                                                    0
-                                                </td>
-                                                <td
-                                                    data-v-22b1a176=""
-                                                    className="lay unhighlighted betting-disabled"
-                                                >
-                                                    0
-                                                </td>
+                    {gameDetailsData?.data &&
+                        gameDetailsData?.data?.Odds?.map((item11, id1) => {
+                            return (
+                                <div data-v-22b1a176="">
+                                    <table data-v-22b1a176="" className="market-listing-table table bet-fair">
+                                        <thead data-v-22b1a176="">
+                                            <tr data-v-22b1a176="">
+                                                <th data-v-22b1a176="" className="market-name title">
+                                                    sdad   <b>{item11?.Name}</b>
+                                                </th>
+                                                <th data-v-22b1a176="" colSpan={2} />
+                                                <th data-v-22b1a176="" className="back">
+                                                    <span data-v-22b1a176="">Back</span>
+                                                </th>
+                                                <th data-v-22b1a176="" className="lay">
+                                                    <span data-v-22b1a176="">Lay</span>
+                                                </th>
+                                                <th data-v-22b1a176="" colSpan={2} />
                                             </tr>
-                                        );
-                                    })}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="row bookmaker-market">
-                        <div className="bm1 col-xl-12">
-                            <div>
-                                <div className="game-title m-t-5">
-                                    <h5 className=" d-inline-block m-b-0">Bookmaker</h5>
-                                </div>
-                                <table className="market-listing-table table m-b-0 m-t-5">
-                                    <thead>
-                                        <tr>
-                                            <th className="market-name title" /> <th colSpan={2} />
-                                            <th className="back">
-                                                <span>Back</span>
-                                            </th>
-                                            <th className="lay">
-                                                <span>Lay</span>
-                                            </th>
-                                            <th colSpan={2} />
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr data-title="SUSPENDED" className="suspended">
-                                            <td>
-                                                <div
-                                                    className="event-name"
-                                                    style={{ color: "rgb(15, 35, 39)" }}
-                                                >
-                                                    Zimbabwe A
-                                                </div>
-                                                <p className="m-b-0">
-                                                    <span style={{ color: "black" }}>0</span>
-                                                    <span style={{ display: "none", color: "black" }}>
+                                        </thead>
 
-                                                        &gt;&gt; 0
-                                                    </span>
-                                                </p>
-                                            </td>
-                                            <td className="back unhighlighted betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                            <td className="back unhighlighted betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                            <td className="back betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                            <td className="lay betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                            <td className="lay unhighlighted betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                            <td className="lay unhighlighted betting-disabled">
-                                                <strong className="odds">0</strong>
-                                                <div className="size">
-                                                    <span>0.0</span>
-                                                </div>
-                                            </td>
-                                        </tr>
 
-                                    </tbody>
-                                </table>
-                                <div className="min-max text-right mt-1" style={{ borderBottom: 0 }}>
-                                    <span>
-                                        Min: <span>50</span>
-                                    </span>
-                                    <span>
-                                        Max: <span>50K</span>
-                                    </span>
+                                        <tbody data-v-22b1a176="" data-title="OPEN" className="">
+                                            {item11?.runners?.map((item1, index) => {
+                                                return (
+                                                    <tr data-v-22b1a176="" data-title="OPEN" className="">
+                                                        <td data-v-22b1a176="">
+
+                                                            <div
+                                                                data-v-22b1a176=""
+                                                                className="event-name"
+                                                                style={{ color: "rgb(15, 35, 39)" }}
+                                                            >
+                                                                <b>{item1?.name}</b>
+                                                            </div>
+                                                            <p data-v-22b1a176="" className="m-b-0">
+                                                                <span data-v-22b1a176="" style={{ color: "black" }}>
+                                                                    0
+                                                                </span>
+                                                                <span
+                                                                    data-v-22b1a176=""
+                                                                    style={{ display: "none", color: "black" }}
+                                                                >
+
+                                                                    &gt;&gt; 0
+                                                                </span>
+                                                            </p>
+                                                        </td>
+                                                        {item1?.ex?.availableToBack
+                                                            .map((item, id) => {
+                                                                return (
+
+                                                                    <td
+                                                                        data-v-22b1a176=""
+                                                                        className="back unhighlighted betting-disabled"
+                                                                    >
+                                                                        {item?.price}
+                                                                        <div>
+                                                                            {item?.size}
+                                                                        </div>
+                                                                    </td>
+                                                                );
+                                                            })
+                                                            .reverse()}
+                                                        {item1?.ex?.availableToLay.map(
+                                                            (item, id) => {
+                                                                return (
+                                                                    <td data-v-22b1a176="" className="lay betting-disabled">
+                                                                        {item?.price}
+                                                                        <div>
+                                                                            {item?.size}
+                                                                        </div>
+                                                                    </td>
+
+                                                                );
+                                                            }
+                                                        )}
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+
+                                    </table>
                                 </div>
+                            );
+                        })}
+
+                    {gameDetailsData?.data?.Bookmaker?.length > 0 ? (
+                        <div className="row bookmaker-market">
+                            <div className="bm1 col-xl-12">
                                 <div>
-                                    <marquee>
-                                        Punjab Kings vs Rajasthan Royals Match Bets Started In Our
-                                        Exchange
-                                    </marquee>
+                                    <div className="game-title m-t-5">
+                                        <h5 className=" d-inline-block m-b-0">Bookmaker</h5>
+                                    </div>
+                                    <table className="market-listing-table table m-b-0 m-t-5">
+                                        <thead>
+                                            <tr>
+                                                <th className="market-name title" /> <th colSpan={2} />
+                                                <th className="back">
+                                                    <span>Back</span>
+                                                </th>
+                                                <th className="lay">
+                                                    <span>Lay</span>
+                                                </th>
+                                                <th colSpan={2} />
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {gameDetailsData?.data?.Bookmaker?.map(
+                                                (item, index) => {
+                                                    return (
+
+                                                        <tr
+                                                            data-title={`${item?.gstatus === "SUSPENDED"
+                                                                ? "SUSPENDED"
+                                                                : item.gstatus ===
+                                                                    "BALL RUNNING"
+                                                                    ? "Ball Running"
+                                                                    : ""
+                                                                }`} className={`${item?.gstatus === "SUSPENDED"
+                                                                    ? "suspend"
+                                                                    : item.gstatus ===
+                                                                        "BALL RUNNING"
+                                                                        ? "ballrunning"
+                                                                        : ""
+                                                                    }`}
+                                                        >
+                                                            <td>
+                                                                <div
+                                                                    className="event-name"
+                                                                    style={{ color: "rgb(15, 35, 39)" }}
+                                                                >
+                                                                    {item?.nation}
+                                                                </div>
+                                                                <p className="m-b-0">
+                                                                    <span style={{ color: "black" }}>0</span>
+                                                                    <span style={{ display: "none", color: "black" }}>
+
+                                                                        &gt;&gt; 0
+                                                                    </span>
+                                                                </p>
+                                                            </td>
+                                                            <td className="back unhighlighted betting-disabled">
+                                                                <strong className="odds">0</strong>
+                                                                <div className="size">
+                                                                    <span>0.0</span>
+                                                                </div>
+                                                            </td>
+                                                            <td className="back unhighlighted betting-disabled">
+                                                                <strong className="odds">0</strong>
+                                                                <div className="size">
+                                                                    <span>0.0</span>
+                                                                </div>
+                                                            </td>
+                                                            <td className="back betting-disabled">
+                                                                <strong className="odds">{item?.b1}</strong>
+                                                                <div className="size">
+
+                                                                    <span>{item?.bs1}</span>
+
+
+                                                                </div>
+                                                            </td>
+                                                            <td className="lay betting-disabled">
+                                                                <strong className="odds">{item?.l1}</strong>
+                                                                <div className="size">
+                                                                    <span>
+                                                                        <span>{item?.ls1}</span>
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td className="lay unhighlighted betting-disabled">
+                                                                <strong className="odds">0</strong>
+                                                                <div className="size">
+                                                                    <span>0.0</span>
+                                                                </div>
+                                                            </td>
+                                                            <td className="lay unhighlighted betting-disabled">
+                                                                <strong className="odds">0</strong>
+                                                                <div className="size">
+                                                                    <span>0.0</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+
+                                                    );
+                                                }
+                                            )}
+                                        </tbody>
+                                    </table>
+                                    <div className="min-max text-right mt-1" style={{ borderBottom: 0 }}>
+                                        <span>
+                                            Min: <span> {PostMinMaxGameDetailsData &&
+                                                PostMinMaxGameDetailsData?.Bookmaker &&
+                                                PostMinMaxGameDetailsData?.Bookmaker[0]
+                                                    ?.minBet}</span>
+                                        </span>
+                                        {" "}
+                                        <span>
+                                            Max: {PostMinMaxGameDetailsData &&
+                                                PostMinMaxGameDetailsData?.Bookmaker &&
+                                                PostMinMaxGameDetailsData?.Bookmaker[0]
+                                                    ?.maxBet}<span></span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <marquee>
+                                            {gameDetailsData?.data &&
+                                                gameDetailsData?.data?.Bookmaker[0]
+                                                    ?.display_message}
+                                        </marquee>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
+                    ) : (
+                        ""
+                    )}
 
                 </div>
+
+                
                 <div className="fancy-market-container">
                     <div className="fancy-market fancy-market1">
 

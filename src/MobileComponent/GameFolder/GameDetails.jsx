@@ -1229,6 +1229,7 @@ const GameDetails = () => {
                                                   <span data-v-e03c6f20="">
                                                     {key}
                                                   </span>
+                                                  dfs
                                                 </b>
                                               </div>
                                               <div
