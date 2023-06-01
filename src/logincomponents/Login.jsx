@@ -17,8 +17,8 @@ const Login = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [login, setLogin] = useState({});
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("poiuytrewq");
+  const [password, setPassword] = useState("111111");
   const { pathname } = useLocation();
 
   const [errorId, setErrorId] = useState(false);
@@ -95,8 +95,8 @@ const Login = () => {
     setLogin({
       userId: userName,
       password: password,
-      appUrl: window.location.hostname,
-      // appUrl: "localhost"
+      // appUrl: window.location.hostname,
+      appUrl: "localhost"
     });
 
 

@@ -106,68 +106,68 @@ const Transferstatement = () => {
   return (
     <>
       <div className="home-page">
-      
 
 
-            <div className="container-inner">
-              <section className="m-t-10 transfer">
-                <h2 className="page-title p-l-15">Account Statement</h2>
 
-                <div style={{ marginTop: "19px" }}>
-                  <DatePicker
-                    className="startDate"
-                    defaultValue={dayjs(startDate)}
-                    format={dateFormat}
+        <div className="container-inner">
+          <section className="m-t-10 transfer">
+            <h2 className="page-title p-l-15">Account Statement</h2>
 
-                    onChange={StartDateValue}
-                    disabledDate={(d) =>
-                      !d ||
-                      d.isBefore(dayjs().subtract(2, "month")) ||
-                      d.isAfter(dayjs())
-                    }
-                  />
-                  <DatePicker
-                    className="endDate"
-                    defaultValue={dayjs}
+            <div style={{ marginTop: "19px" }}>
+              <DatePicker
+                className="startDate"
+                defaultValue={dayjs(startDate)}
+                format={dateFormat}
 
-                    format={dateFormat}
-                    onChange={EndDateValue}
-                    disabledDate={(d) =>
-                      !d ||
-                      d.isBefore(dayjs().subtract(2, "month")) ||
-                      d.isAfter(dayjs())
-                    }
-                  />
-                  <div className="AccountBtnsubmit">
+                onChange={StartDateValue}
+                disabledDate={(d) =>
+                  !d ||
+                  d.isBefore(dayjs().subtract(2, "month")) ||
+                  d.isAfter(dayjs())
+                }
+              />
+              <DatePicker
+                className="endDate"
+                defaultValue={dayjs}
 
-                    <select
-                      className="selectionndsfsdfnn"
-                      // name="cars"
-                      // id="cars"
-                      onChange={handleSelectGame}
-                    >
-                      <option value={1}> All</option>
-                      <option value={2}> Deposite/Withdraw Report</option>
-                      <option value={3}> Game Report</option>
-                    </select>
-                    <button
-                      className="selectionndsfsdfnn"
-                      style={{ width: "45%" }}
-                      onClick={handleSubmit}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-                <div className="table-responsive">
-                {
-                  PostTransferStatementDataLoading === true ? <div className=" PostselfwithdrawappDataLoadinglodding">
-                    <i
-                      className="fa fa-circle-o-notch fa-spin loading"
-                      style={{ fontSize: "50px" }}
-                    ></i>
-                    <p className="loading-text">Loading...</p>{" "}
-                  </div>: <table className="table" style={{ width: "100%" }}>
+                format={dateFormat}
+                onChange={EndDateValue}
+                disabledDate={(d) =>
+                  !d ||
+                  d.isBefore(dayjs().subtract(2, "month")) ||
+                  d.isAfter(dayjs())
+                }
+              />
+              <div className="AccountBtnsubmit">
+
+                <select
+                  className="selectionndsfsdfnn"
+                  // name="cars"
+                  // id="cars"
+                  onChange={handleSelectGame}
+                >
+                  <option value={1}> All</option>
+                  <option value={2}> Deposite/Withdraw Report</option>
+                  <option value={3}> Game Report</option>
+                </select>
+                <button
+                  className="selectionndsfsdfnn"
+                  style={{ width: "45%" }}
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+            <div className="table-responsive">
+              {
+                PostTransferStatementDataLoading === true ? <div className=" PostselfwithdrawappDataLoadinglodding">
+                  <i
+                    className="fa fa-circle-o-notch fa-spin loading"
+                    style={{ fontSize: "50px" }}
+                  ></i>
+                  <p className="loading-text">Loading...</p>{" "}
+                </div> : <table className="table" style={{ width: "100%" }}>
                   <thead className="tbodybody">
                     <tr>
                       <th>Date</th>
@@ -180,7 +180,7 @@ const Transferstatement = () => {
                   <tbody
                     className="tbodybody"
                     style={{
-                      height: "calc(100vh - 330px)",
+                      height: "100vh",
                       display: "block",
                       overflow: "scroll",
                     }}
@@ -218,58 +218,58 @@ const Transferstatement = () => {
                     )}
                   </tbody>
                 </table>
-                }
-                 
-                </div>
-              </section>
-              <div className="pagination">
-                <button
-                  disabled={pageNumber === 0 ? true : false}
-                  className="paginationBtn"
-                  onClick={() => handleDoubleLeft("doubleleft")}
-                >
-                  <AiOutlineDoubleLeft className="arrowDoubleLeft" />
-                </button>
-                <button
-                  disabled={pageNumber === 0 ? true : false}
-                  className="paginationBtn"
-                  style={{ marginLeft: "-9px" }}
-                  onClick={() => handleDoubleLeft("sigleleft")}
-                >
-                  <AiOutlineLeft className="arrowSingleLeft" />
-                </button>
-                <div className="paginationno">
-                  <div style={{ marginTop: "7px", marginLeft: "11px" }}>
-                    {pageNumber + 1}
-                  </div>
-                </div>
+              }
 
-                <button
-                  disabled={
-                    PostTransferStatementData?.data?.totalPages === pageNumber + 1
-                      ? true
-                      : false
-                  }
-                  className="paginationBtn"
-                  style={{ marginLeft: "-10px" }}
-                  onClick={() => handleDoubleLeft("singleright")}
-                >
-                  <AiOutlineRight className="arrowSingleRight" />
-                </button>
-                <button
-                  disabled={
-                    PostTransferStatementData?.data?.totalPages === pageNumber + 1
-                      ? true
-                      : false
-                  }
-                  className="paginationBtn"
-                  onClick={() => handleDoubleLeft("doubleright")}
-                >
-                  <AiOutlineDoubleRight className="arrowDoubleRight" />
-                </button>
+            </div>
+          </section>
+          <div className="pagination">
+            <button
+              disabled={pageNumber === 0 ? true : false}
+              className="paginationBtn"
+              onClick={() => handleDoubleLeft("doubleleft")}
+            >
+              <AiOutlineDoubleLeft className="arrowDoubleLeft" />
+            </button>
+            <button
+              disabled={pageNumber === 0 ? true : false}
+              className="paginationBtn"
+              style={{ marginLeft: "-9px" }}
+              onClick={() => handleDoubleLeft("sigleleft")}
+            >
+              <AiOutlineLeft className="arrowSingleLeft" />
+            </button>
+            <div className="paginationno">
+              <div style={{ marginTop: "7px", marginLeft: "11px" }}>
+                {pageNumber + 1}
               </div>
             </div>
-        
+
+            <button
+              disabled={
+                PostTransferStatementData?.data?.totalPages === pageNumber + 1
+                  ? true
+                  : false
+              }
+              className="paginationBtn"
+              style={{ marginLeft: "-10px" }}
+              onClick={() => handleDoubleLeft("singleright")}
+            >
+              <AiOutlineRight className="arrowSingleRight" />
+            </button>
+            <button
+              disabled={
+                PostTransferStatementData?.data?.totalPages === pageNumber + 1
+                  ? true
+                  : false
+              }
+              className="paginationBtn"
+              onClick={() => handleDoubleLeft("doubleright")}
+            >
+              <AiOutlineDoubleRight className="arrowDoubleRight" />
+            </button>
+          </div>
+        </div>
+
 
 
       </div>
