@@ -268,7 +268,7 @@ const Login = () => {
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
                         <button className="btn btn-login" onClick={handleDemoLogin}>
-                          Demo Login
+                          Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
 

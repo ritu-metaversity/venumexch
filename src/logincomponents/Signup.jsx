@@ -109,6 +109,11 @@ const Signup = () => {
         }
       })
   };
+
+  const handleHome = () => {
+    navigate("/m/home");
+
+  };
   const handleSignup = (e) => {
     setInfoError(true);
 
@@ -254,9 +259,14 @@ const Signup = () => {
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
                       <button className="btn btn-login" onClick={handleDemoLogin}>
-                        <i className="ml-2 fas fa-sign-in-alt rotate-btn"></i>
-                        Demo Login
+                        Login with demo ID
+                        <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
+                      <button className="btn btn-login" onClick={handleHome}>
+                        Back
+                        <i className="ml-2 fas fa-sign-in-alt"></i>
+                      </button>
+
                       <p className="m-b-0">
                         <small className="recaptchaTerms">
                           This site is protected by reCAPTCHA and the Google
