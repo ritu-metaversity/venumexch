@@ -17,8 +17,8 @@ const Login = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [login, setLogin] = useState({});
-  const [userName, setUserName] = useState("poiuytrewq");
-  const [password, setPassword] = useState("111111");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const { pathname } = useLocation();
 
   const [errorId, setErrorId] = useState(false);
