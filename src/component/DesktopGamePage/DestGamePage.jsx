@@ -561,8 +561,30 @@ const DestGamePage = () => {
                                                                 {item1?.name}
                                                             </div>
                                                             <p data-v-22b1a176="" className="m-b-0">
-                                                                <span data-v-22b1a176="" style={{ color: "black" }}>
-                                                                    0
+                                                                <span
+                                                                    className="float-left ubook"
+                                                                    style={{
+                                                                        color:
+                                                                            profits.Odds[
+                                                                                item11?.marketId
+                                                                            ]?.find(
+                                                                                (itemPnl) =>
+                                                                                    itemPnl.sid ==
+                                                                                    item1.selectionId
+                                                                            )?.value < 0
+                                                                                ? "red"
+                                                                                : "green",
+                                                                    }}
+                                                                >
+                                                                    {
+                                                                        profits.Odds[
+                                                                            item11?.marketId
+                                                                        ]?.find(
+                                                                            (itemPnl) =>
+                                                                                itemPnl.sid ==
+                                                                                item1.selectionId
+                                                                        )?.value
+                                                                    }
                                                                 </span>
                                                                 <span
                                                                     data-v-22b1a176=""
@@ -666,7 +688,38 @@ const DestGamePage = () => {
                                                                     {item?.nation}
                                                                 </div>
                                                                 <p className="m-b-0">
-                                                                    <span style={{ color: "black" }}>121</span>
+                                                                    {profits.Bookmaker?.find(
+                                                                        (profit) =>
+                                                                            profit?.sid === item.sid
+                                                                    )?.value < 0 ? (
+                                                                        <span
+                                                                            className="float-left ubook"
+                                                                            style={{ color: "red" }}
+                                                                        >
+                                                                            {" "}
+                                                                            {
+                                                                                profits.Bookmaker?.find(
+                                                                                    (profit) =>
+                                                                                        profit?.sid ===
+                                                                                        item.sid
+                                                                                )?.value
+                                                                            }
+                                                                        </span>
+                                                                    ) : (
+                                                                        <span
+                                                                            className="float-left ubook"
+                                                                            style={{ color: "green" }}
+                                                                        >
+                                                                            {" "}
+                                                                            {
+                                                                                profits.Bookmaker?.find(
+                                                                                    (profit) =>
+                                                                                        profit?.sid ===
+                                                                                        item.sid
+                                                                                )?.value
+                                                                            }
+                                                                        </span>
+                                                                    )}
                                                                     <span style={{ display: "none", color: "black" }}>
 
                                                                         0
@@ -799,14 +852,102 @@ const DestGamePage = () => {
                                                                 >
                                                                     <p className="m-b-0">
                                                                         <span>{item?.nation}</span>
-                                                                        <img
-                                                                            src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ladder.png"
-                                                                            className="float-right ladder-icon m-t-5" alt=''
-                                                                        />
+                                                                        <span
+                                                                            data-v-e03c6f20=""
+                                                                            className="float-left ubook fancy-span"
+                                                                            style={{
+                                                                                height:
+                                                                                    "14px",
+                                                                            }}
+                                                                        >
+                                                                            {FancyPNL?.data ? (
+                                                                                FancyPNL?.data.find(
+                                                                                    (itemPnl) =>
+                                                                                        itemPnl?.marketId ==
+                                                                                        item?.sid
+                                                                                )?.pnl < 0 ? (
+                                                                                    <span
+                                                                                        className="float-left ubook"
+                                                                                        style={{
+                                                                                            color:
+                                                                                                "red",
+                                                                                        }}>
+                                                                                        {" "}
+                                                                                        <>
+                                                                                            {
+                                                                                                FancyPNL?.data.find(
+                                                                                                    (
+                                                                                                        itemPnl
+                                                                                                    ) =>
+                                                                                                        itemPnl?.marketId ==
+                                                                                                        item?.sid
+                                                                                                )?.pnl
+                                                                                            }
+                                                                                            <div
+                                                                                                data-v-e03c6f20=""
+                                                                                                className="float-right v-m"
+                                                                                            >
+                                                                                                <img
+                                                                                                    alt="Black Ladder"
+                                                                                                    src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder-black.png"
+                                                                                                    class="float-right ladder-icon"
+                                                                                                ></img>
+                                                                                            </div>
+                                                                                        </>
+                                                                                    </span>
+                                                                                ) : (
+                                                                                    <span
+                                                                                        className="float-left ubook"
+                                                                                        style={{
+                                                                                            color:
+                                                                                                "green",
+                                                                                        }}
+                                                                                    >
+                                                                                        {" "}
+                                                                                        {FancyPNL?.data ? (
+                                                                                            <>
+                                                                                                {
+                                                                                                    FancyPNL?.data.find(
+                                                                                                        (
+                                                                                                            itemPnl
+                                                                                                        ) =>
+                                                                                                            itemPnl?.marketId ==
+                                                                                                            item?.sid
+                                                                                                    )
+                                                                                                        ?.pnl
+                                                                                                }
+                                                                                                <div
+                                                                                                    data-v-e03c6f20=""
+                                                                                                    className="float-right v-m"
+                                                                                                >
+                                                                                                    <img
+                                                                                                        alt="Black Ladder"
+                                                                                                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder-black.png"
+                                                                                                        class="float-right ladder-icon"
+                                                                                                    ></img>
+                                                                                                </div>
+                                                                                            </>
+                                                                                        ) : (
+                                                                                            ""
+                                                                                        )}
+                                                                                        <div
+                                                                                            data-v-e03c6f20=""
+                                                                                            className="float-right v-m"
+                                                                                        >
+                                                                                            <img
+                                                                                                src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ladder.png"
+                                                                                                className="float-right ladder-icon"
+                                                                                                alt=""
+                                                                                            />
+                                                                                        </div>
+                                                                                    </span>
+                                                                                )
+                                                                            ) : (
+                                                                                ""
+                                                                            )}
+                                                                        </span>
                                                                     </p>
-                                                                    <p className="m-b-0">
-                                                                        <span style={{ color: "black" }}>0</span>
-                                                                    </p>
+
                                                                 </div>
                                                                 <div className="box-w1 lay float-left text-center">
                                                                     <span className="odd d-block">{item?.l1}</span> <span> {item?.ls1}</span>
