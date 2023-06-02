@@ -164,7 +164,7 @@
 
 .inplay-item__players {
     width: 50% !important;
-    min-width: 50% !important;
+    min-width: 45% !important;
     max-width: 50% !important;
 }
 
@@ -197,7 +197,7 @@
 
 .inplay-item__players.box-w2 {
     text-align: left;
-    padding-left: 12px;
+    padding-left: 9px;
     display: flex;
     flex-direction: row;
     align-items: baseline;

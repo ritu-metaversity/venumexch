@@ -13,12 +13,15 @@ import {
 } from "../App/Features/auth/authActions";
 
 
+
 const Login = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
+
+
   const [login, setLogin] = useState({});
-  const [userName, setUserName] = useState("poiuytrewq");
-  const [password, setPassword] = useState("111111");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const { pathname } = useLocation();
 
   const [errorId, setErrorId] = useState(false);
@@ -168,6 +171,27 @@ const Login = () => {
   //   dispatch(Postisselfbyappurl({ appUrl: appUrll }));
   // }, [appUrll]);
   console.log(selfAllowedd, "selfAllowedd");
+
+  const handleDemoLogin = () => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: window.location.hostname }
+      )
+      .then((res) => {
+        if (res?.data?.token) {
+          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
+
+          navigate("/m/home");
+          localStorage.setItem("TokenId", res?.data?.token);
+          localStorage.setItem("usernameDemo", res?.data?.username);
+          localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
+
+        }
+      })
+  };
+
+
   return (
     <div id="app">
       <div>
@@ -241,6 +265,10 @@ const Login = () => {
                         </div>
                         <button className="btn btn-login" onClick={handleLogin}>
                           Login
+                          <i className="ml-2 fas fa-sign-in-alt"></i>
+                        </button>
+                        <button className="btn btn-login" onClick={handleDemoLogin}>
+                          Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
 
