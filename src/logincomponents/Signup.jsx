@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { postLoginDemoUser, Postuserselfregister } from "../App/Features/auth/authActions";
 import ValidationFile from "../Validation/ValidationFile";
 import { Modal } from "react-bootstrap";
-export let navRefLogin;
+import axios from "axios";
+
 export let setShowRegisterModalRef
 const Signup = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const nav = useNavigate()
-  navRefLogin = nav
+
   const [show, setShow] = useState(false);
   const [signUpShow, setSignUpShow] = useState(false);
   // const [login, setLogin] = useState({});
@@ -91,12 +91,24 @@ const Signup = () => {
   // "anish2512"
 
   const handleDemoLogin = () => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: window.location.hostname }
+      )
+      .then((res) => {
+        if (res?.data?.token) {
 
-    dispatch(postLoginDemoUser({ "appUrl": window.location.hostname }));
+          navigate("/m/home");
+          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
 
+          localStorage.setItem("TokenId", res?.data?.token);
+          localStorage.setItem("usernameDemo", res?.data?.username);
+          localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
 
+        }
+      })
   };
-
   const handleSignup = (e) => {
     setInfoError(true);
 

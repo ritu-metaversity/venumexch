@@ -103,10 +103,10 @@ const Casinolist = () => {
                                     src={item.imageUrl}
                                     className="img-fluid casino-body-images "
                                   />
-                                  <button className="buttnnnname">
+                                  <div className="buttnnnname">
                                     {" "}
                                     {item?.gameName}
-                                  </button>
+                                  </div>
                                 </Link>
                               </div>
                             </div>

@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import AlertBtn from "../../../MobileComponent/Alert/AlertBtn";
 import { ImCross } from "react-icons/im"
-import { navRefLogin, setShowRegisterModalRef } from "../../../logincomponents/Signup";
+import { setShowRegisterModalRef } from "../../../logincomponents/Signup";
+
 import { navRef } from "../../../Layout/LayoutForMobile"
 
 
@@ -40,30 +41,31 @@ export const postLogin = createAsyncThunk('auth/postLogin', async (login, { reje
         return rejectWithValue(err.response.data)
     }
 })
-export const postLoginDemoUser = createAsyncThunk('auth/postLogin', async (login, { rejectWithValue }) => {
-    try {
-        const postLoginDemoUserdata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/demo-user-creation-login`, login,
+// export const postLoginDemoUser = createAsyncThunk('auth/postLogin', async (login, { rejectWithValue }) => {
+//     try {
+//         const postLoginDemoUserdata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/demo-user-creation-login`, login,
 
-            {
-                validateStatus: false
-            });
-        // console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
-        if (postLoginDemoUserdata?.data?.token) {
-            navRefLogin("/m/home");
-            axios.defaults.headers.common.Authorization = `Bearer ${postLoginDemoUserdata?.data?.token}`
+//             {
+//                 validateStatus: false
+//             });
+//         // console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
+//         if (postLoginDemoUserdata?.data?.token) {
+//             navRefSignLogin("/m/home");
+//             navRefLogin("/m/home");
+//             axios.defaults.headers.common.Authorization = `Bearer ${postLoginDemoUserdata?.data?.token}`
 
-            localStorage.setItem("TokenId", postLoginDemoUserdata?.data?.token);
-            localStorage.setItem("usernameDemo", postLoginDemoUserdata?.data?.username);
-            localStorage.setItem("userTypeInfo", postLoginDemoUserdata?.data?.userTypeInfo);
-        }
-        return postLoginDemoUserdata
-    } catch (err) {
-        if (err) {
-            throw err
-        }
-        return rejectWithValue(err.response.data)
-    }
-})
+//             localStorage.setItem("TokenId", postLoginDemoUserdata?.data?.token);
+//             localStorage.setItem("usernameDemo", postLoginDemoUserdata?.data?.username);
+//             localStorage.setItem("userTypeInfo", postLoginDemoUserdata?.data?.userTypeInfo);
+//         }
+//         return postLoginDemoUserdata
+//     } catch (err) {
+//         if (err) {
+//             throw err
+//         }
+//         return rejectWithValue(err.response.data)
+//     }
+// })
 
 export const getActiveSportList = createAsyncThunk('auth/getActiveSportList', async (login, { rejectWithValue }) => {
     try {
@@ -637,6 +639,8 @@ export const Postloginlogout = createAsyncThunk('auth/Postloginlogout', async (d
         // console.log("loooogogoogogogoog")
         const PostloginlogoutDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/logout`
         )
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`
+
         return PostloginlogoutDataaa
     } catch (err) {
         if (err) {
