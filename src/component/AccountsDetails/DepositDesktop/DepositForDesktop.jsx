@@ -71,7 +71,7 @@ const DepositForDesktop = () => {
     // console.log(trueee)
     return (
         <>
-            <div className="wrapper main-conatiner">
+            <div className="wrapper main-conatiner" style={{width: "1200px"}}>
                 <PayManually UpdateList={UpdateList} />
 
                 <div className="row row5 mt-2">

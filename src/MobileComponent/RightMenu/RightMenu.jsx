@@ -36,17 +36,17 @@ const RightMenu = (props) => {
       if (localStorage.getItem("PassWordType") === "old") {
       } else {
         const time = setInterval(() => {
-    const token = localStorage.getItem("TokenId");
-    if (token) {
+          const token = localStorage.getItem("TokenId");
+          if (token) {
 
-      if (localStorage.getItem("PassWordType") === "old") {
-      } else {
-        const time = setInterval(() => {
-          dispatch(PostBalance());
-        }, 5000);
-        return () => clearInterval(time);
-      }
-    }
+            if (localStorage.getItem("PassWordType") === "old") {
+            } else {
+              const time = setInterval(() => {
+                dispatch(PostBalance());
+              }, 5000);
+              return () => clearInterval(time);
+            }
+          }
 
         }, 5000);
         return () => clearInterval(time);

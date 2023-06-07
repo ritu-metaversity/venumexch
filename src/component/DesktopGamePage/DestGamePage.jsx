@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useOutletContext, useParams } from 'react-router';
@@ -7,11 +8,11 @@ import "./DestGamePage.css"
 import { createProfits } from './eventUtils';
 import { socket } from './socket';
 
-const DestGamePage = () => {
+const DestGamePage = ({ datatataProps }) => {
 
 
     let { id } = useParams();
-
+    // console.log(datatataProps, "valuevaluevalue")
 
     const dispatch = useDispatch();
 
@@ -92,63 +93,66 @@ const DestGamePage = () => {
         item11,
         oddsssss
     ) => {
-        //   if (price > 0) {
-        //     datatata({
-        //       Odds: price,
-        //       matchname: name,
-        //       isBack: color,
-        //       gameName: gamename,
-        //       marketId: marketId,
-        //       selectionId: item?.selectionId,
-        //       bettingTime: new Date(),
-        //       marketNameeee: item?.name,
-        //       "Gamenamemeeee ": "odds ",
-        //       AllBookmakerData: gameDetailsData?.data?.Bookmaker,
-        //       matchDetails: item11,
-        //       oddsssss: oddsssss,
-        //       profits,
-        //     });
-        //     setBetDetails({
-        //       isBack: color,
-        //       odds: price,
-        //       stake: 0,
-        //       selectionId: item.selectionId,
-        //       marketId: marketId,
-        //       priceValue: price,
-        //       isFancy: false,
-        //     });
-        //   } else {
-        //   }
+        if (price > 0) {
+            datatataProps({
+
+
+                Odds: price,
+                matchname: name,
+                isBack: color,
+                gameName: gamename,
+                marketId: marketId,
+                selectionId: item?.selectionId,
+                bettingTime: new Date(),
+                marketNameeee: item?.name,
+                "Gamenamemeeee ": "odds ",
+                AllBookmakerData: gameDetailsData?.data?.Bookmaker,
+                matchDetails: item11,
+                oddsssss: oddsssss,
+                profits,
+
+            });
+            setBetDetails({
+                isBack: color,
+                odds: price,
+                stake: 0,
+                selectionId: item.selectionId,
+                marketId: marketId,
+                priceValue: price,
+                isFancy: false,
+            });
+        } else {
+        }
     };
 
     const handleBitValueBookmaker = (price, name, color, item1) => {
-        //   if (price > 0) {
-        //     datatata({
-        //       Odds: price,
-        //       matchname: name,
-        //       isBack: color,
-        //       gameName: item1?.nation,
-        //       marketId: item1?.mid,
-        //       selectionId: item1?.sid,
-        //       t: item1?.t,
-        //       bettingTime: new Date(),
-        //       "Gamenamemeeee ": "Bookmaker ",
-        //       AllBookmakerData: gameDetailsData?.data?.Bookmaker,
-        //       matchDetails: gameDetailsData?.data?.Bookmaker,
-        //       bookmakerPnl: bookmakerPnl,
-        //       profits,
-        //     });
-        //     setBetDetails({
-        //       isBack: color,
-        //       odds: price,
-        //       stake: 0,
-        //       selectionId: item1.sid,
-        //       marketId: item1?.mid,
-        //       priceValue: price,
-        //       isFancy: false,
-        //     });
-        //   } else {
-        //   }
+        if (price > 0) {
+            datatataProps({
+                Odds: price,
+                matchname: name,
+                isBack: color,
+                gameName: item1?.nation,
+                marketId: item1?.mid,
+                selectionId: item1?.sid,
+                t: item1?.t,
+                bettingTime: new Date(),
+                "Gamenamemeeee ": "Bookmaker ",
+                AllBookmakerData: gameDetailsData?.data?.Bookmaker,
+                matchDetails: gameDetailsData?.data?.Bookmaker,
+                bookmakerPnl: bookmakerPnl,
+                profits,
+            });
+            setBetDetails({
+                isBack: color,
+                odds: price,
+                stake: 0,
+                selectionId: item1.sid,
+                marketId: item1?.mid,
+                priceValue: price,
+                isFancy: false,
+            });
+        } else {
+        }
     };
 
     const handleBitValueFancy = (
@@ -160,32 +164,32 @@ const DestGamePage = () => {
         keykey,
         ls1
     ) => {
-        //   if (price > 0) {
-        //     datatata({
-        //       Odds: price,
-        //       matchname: keykey,
-        //       isBack: color,
-        //       isFancy: trueData,
-        //       gameName: item?.nation,
-        //       marketId: item?.sid,
-        //       selectionId: 0,
-        //       t: item?.t,
-        //       bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
-        //       "Gamenamemeeee ": "Fancy ",
-        //       profits,
-        //       priceValue: ls1,
-        //     });
-        //     setBetDetails({
-        //       isBack: color,
-        //       odds: price,
-        //       stake: 0,
-        //       selectionId: 0,
-        //       marketId: item?.sid,
-        //       priceValue: price,
-        //       isFancy: false,
-        //     });
-        //   } else {
-        //   }
+        if (price > 0) {
+            datatataProps({
+                Odds: price,
+                matchname: keykey,
+                isBack: color,
+                isFancy: trueData,
+                gameName: item?.nation,
+                marketId: item?.sid,
+                selectionId: 0,
+                t: item?.t,
+                bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
+                "Gamenamemeeee ": "Fancy ",
+                profits,
+                priceValue: ls1,
+            });
+            setBetDetails({
+                isBack: color,
+                odds: price,
+                stake: 0,
+                selectionId: 0,
+                marketId: item?.sid,
+                priceValue: price,
+                isFancy: false,
+            });
+        } else {
+        }
     };
 
     useEffect(() => {
@@ -474,51 +478,120 @@ const DestGamePage = () => {
     };
     const [TvShow, setTvShow] = useState(false)
     const [toggleBtn1, settoggleBtn1] = useState(false)
-    const [toggleBtn2, settoggleBtn2] = useState(true)
+    // const [toggleBtn2, settoggleBtn2] = useState(true)
 
-    const handleTvShow = () => {
-        if (TvShow === false) {
-            setTvShow(true);
-            settoggleBtn1(false)
-            settoggleBtn2(false)
-        } else {
-            setTvShow(false);
-        }
-    };
+    // const handleTvShow = () => {
+    //     if (TvShow === false) {
+    //         setTvShow(true);
+    //         settoggleBtn1(false)
+    //         settoggleBtn2(false)
+    //     } else {
+    //         setTvShow(false);
+    //     }
+    // };
 
 
-    const handleOne = (e) => {
+    // const [toggleBtn1, settoggleBtn1] = useState(true);
+    // const [toggleBtn1, settoggleBtn1] = useState(true);
+    const [toggleBtn, settoggleBtn] = useState(false);
+
+    const handleSwitchInput = (e) => {
         e.preventDefault();
-        if (toggleBtn1 === false) {
-            settoggleBtn1(true)
-            setTvShow(false);
-            settoggleBtn2(false)
+        if (toggleBtn1 === true) {
+            settoggleBtn1(false);
 
         } else {
-            settoggleBtn1(false)
-
+            settoggleBtn1(true);
+            settoggleBtn(false)
         }
     };
 
-    const handleTwo = (e) => {
+    const handleSwitchInput1 = (e) => {
         e.preventDefault();
-
-        if (toggleBtn2 === false) {
-            settoggleBtn1(false)
-
-            settoggleBtn2(true)
-            setTvShow(false);
-
+        if (toggleBtn === true) {
+            settoggleBtn(false);
         } else {
-
-            settoggleBtn2(false)
+            settoggleBtn(true);
+            settoggleBtn1(false)
         }
     };
+
     return (
         <>
-            <div className="sports-wrapper" style={{ marginLeft: "21px" }}>
-                <div className="markets">
 
+            <div className="sports-wrapper" style={{ marginLeft: "21px" }}>
+                <div className="score_detail">
+                <h1 className='score_name'>
+                Scorecard
+                </h1>
+
+                    <div className="">
+                        <div className="scoreCard-icon desk_score score_card_update">
+                            <svg
+                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+                                focusable="false"
+                                aria-hidden="true"
+                                viewBox="0 0 24 24"
+                                data-testid="ScoreboardIcon">
+                                <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
+                            </svg>
+                            <div>
+                                <label
+                                    className={`onoffbtn dest_onoffbtn ${toggleBtn1 ? "active2" : ""
+                                        }`}
+                                    onClick={handleSwitchInput}>
+                                    <input type="checkbox" />
+                                </label>
+                            </div>
+                            <svg
+                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+                                focusable="false"
+                                aria-hidden="true"
+                                viewBox="0 0 24 24"
+                                data-testid="ScoreboardIcon">
+                                <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
+                            </svg>
+                            <div>
+                                <label
+                                    className={`onoffbtn ${toggleBtn ? "active2" : ""
+                                        }`}
+                                    onClick={handleSwitchInput1}>
+                                    <input type="checkbox" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="markets">
+                    {toggleBtn ? (
+                        <div id="scoreboard-box">
+                            <div className="scorecard scorecard-mobile">
+                                <div className="score-inner">
+                                    <iframe
+                                        src={`http://15.207.182.173:3050/event/${id}?theme=crazy-diamond`}
+                                        width="100%"
+                                        className="score-card desk_score_card"
+                                        title="scorecord"
+                                        allowFullScreen={true}></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    ) : toggleBtn1 ? (
+                        <div id="scoreboard-box">
+                            <div className="scorecard scorecard-mobile">
+                                <div className="score-inner ">
+                                    <iframe
+                                        src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                                        width="100%"
+                                        className="score-card desk_score_card"
+                                        title="scorecord"
+                                        allowFullScreen={true}></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        ""
+                    )}
                     <div className="header">
                         <h1 className='sportName'>
                             {gameDetailsData?.data?.Odds &&
@@ -553,7 +626,7 @@ const DestGamePage = () => {
                                             {item11?.runners?.map((item1, index) => {
                                                 return (
                                                     <tr data-v-22b1a176="" data-title="OPEN" className="">
-                                                        <td data-v-22b1a176="">
+                                                        <td data-v-22b1a176="" className="dest_game">
 
                                                             <div
                                                                 data-v-22b1a176=""
@@ -562,7 +635,7 @@ const DestGamePage = () => {
                                                             >
                                                                 {item1?.name}
                                                             </div>
-                                                            <p data-v-22b1a176="" className="m-b-0">
+                                                            <p data-v-22b1a176="" className="m-b-0 dest_para">
                                                                 <span
                                                                     className="float-left ubook"
                                                                     style={{
@@ -606,9 +679,32 @@ const DestGamePage = () => {
                                                                         className={`back ${id === 1 || id === 2
                                                                             ? "unhighlighted"
                                                                             : ""
-                                                                            }`}
+                                                                            }
+                                                                            ${item?.price !==
+                                                                                previousState?.data
+                                                                                    ?.Odds[id1]?.runners[
+                                                                                    index
+                                                                                ]?.ex?.availableToBack[
+                                                                                    id
+                                                                                ]?.price
+                                                                                ? "blink1"
+                                                                                : " "
+                                                                            }
+                                                                            `}
+
+                                                                        onClick={() =>
+                                                                            handleBitValue(
+                                                                                item?.price,
+                                                                                item1?.name,
+                                                                                "lay",
+                                                                                item11?.Name,
+                                                                                item11?.marketId,
+                                                                                item,
+                                                                                item1
+                                                                            )
+                                                                        }
                                                                     >
-                                                                        <strong data-v-22b1a176 class="odds"> {item?.price}</strong>
+                                                                        <strong data-v-22b1a176 class="odds" > {item?.price}</strong>
                                                                         <div data-v-22b1a176 class="size">
                                                                             {item?.size}
                                                                         </div>
@@ -622,7 +718,30 @@ const DestGamePage = () => {
                                                                     <td data-v-22b1a176="" className={`lay ${id === 1 || id === 2
                                                                         ? "unhighlighted"
                                                                         : ""
-                                                                        }`}>
+                                                                        }
+                                                                        ${item?.price !==
+                                                                            previousState?.data?.Odds[
+                                                                                id1
+                                                                            ]?.runners[index]?.ex
+                                                                                ?.availableToLay[id]
+                                                                                ?.price
+                                                                            ? " blink1"
+                                                                            : " "
+                                                                        }
+                                                                        `}
+
+
+                                                                        onClick={() =>
+                                                                            handleBitValue(
+                                                                                item?.price,
+                                                                                item1?.name,
+                                                                                "lay",
+                                                                                item11?.Name,
+                                                                                item11?.marketId,
+                                                                                item,
+                                                                                item1
+                                                                            )
+                                                                        }>
                                                                         <strong data-v-22b1a176 class="odds"> {item?.price}</strong>
                                                                         <div data-v-22b1a176 class="size">
                                                                             {item?.size}
@@ -728,19 +847,33 @@ const DestGamePage = () => {
                                                                     </span>
                                                                 </p>
                                                             </td>
-                                                            <td className="back unhighlighted">
+                                                            <td className="back unhighlighted betting-disabled">
                                                                 <strong className="odds">0</strong>
                                                                 <div className="size">
                                                                     <span>0.0</span>
                                                                 </div>
                                                             </td>
-                                                            <td className="back unhighlighted">
+                                                            <td className="back unhighlighted betting-disabled">
                                                                 <strong className="odds">0</strong>
                                                                 <div className="size">
                                                                     <span>0.0</span>
                                                                 </div>
                                                             </td>
-                                                            <td className="back">
+                                                            <td className={`back ${item?.b1 !==
+                                                                previousState?.data?.Bookmaker[
+                                                                    index
+                                                                ]?.b1
+                                                                ? "blink1"
+                                                                : " "
+                                                                }`} onClick={() =>
+                                                                    handleBitValueBookmaker(
+                                                                        item?.b1,
+                                                                        "Bookmaker",
+                                                                        "back",
+                                                                        item,
+                                                                        bookmakerPnl
+                                                                    )
+                                                                }>
                                                                 <strong className="odds">{item?.b1}</strong>
                                                                 <div className="size">
 
@@ -749,7 +882,20 @@ const DestGamePage = () => {
 
                                                                 </div>
                                                             </td>
-                                                            <td className="lay betting-disabled">
+                                                            <td className={`lay ${item?.l1 !==
+                                                                previousState?.data?.Bookmaker[
+                                                                    index
+                                                                ]?.l1
+                                                                ? "blink1"
+                                                                : " "
+                                                                }`} onClick={() =>
+                                                                    handleBitValueBookmaker(
+                                                                        item?.l1,
+                                                                        "Bookmaker",
+                                                                        "lay",
+                                                                        item
+                                                                    )
+                                                                }>
                                                                 <strong className="odds">{item?.l1}</strong>
                                                                 <div className="size">
                                                                     <span>
@@ -852,9 +998,9 @@ const DestGamePage = () => {
                                                                     className="float-left country-name"
                                                                     style={{ borderBottom: 0 }}
                                                                 >
-                                                                    <p className="m-b-0">
-                                                                        <span>{item?.nation}</span>
-                                                                        <span
+                                                                    <p className="m-b-0 dest_para dest_width">
+                                                                        <p>{item?.nation}</p>
+                                                                        <p
                                                                             data-v-e03c6f20=""
                                                                             className="float-left ubook fancy-span"
                                                                             style={{
@@ -874,7 +1020,6 @@ const DestGamePage = () => {
                                                                                             color:
                                                                                                 "red",
                                                                                         }}>
-                                                                                        {" "}
                                                                                         <>
                                                                                             {
                                                                                                 FancyPNL?.data.find(
@@ -947,15 +1092,53 @@ const DestGamePage = () => {
                                                                             ) : (
                                                                                 ""
                                                                             )}
-                                                                        </span>
+                                                                        </p>
                                                                     </p>
 
                                                                 </div>
-                                                                <div className="box-w1 lay float-left text-center">
-                                                                    <span className="odd d-block">{item?.l1}</span> <span> {item?.ls1}</span>
+                                                                <div className={`box-w1 lay float-left text-center  ${item?.l1 !==
+                                                                    previousStateFancyBlinker &&
+                                                                    previousStateFancyBlinker[
+                                                                        key
+                                                                    ]?.[index]?.l1
+                                                                    ? "blink1"
+                                                                    : " "
+                                                                    }`}
+                                                                    onClick={() =>
+                                                                        handleBitValueFancy(
+                                                                            item?.l1,
+                                                                            item.nation,
+                                                                            "lay",
+                                                                            true,
+                                                                            item,
+                                                                            key,
+                                                                            item?.ls1
+                                                                        )
+                                                                    } >
+                                                                    <span className="odd d-block">{item?.l1}</span>
+                                                                    <span> {item?.ls1}</span>
                                                                 </div>
-                                                                <div className="box-w1 back float-left text-center">
-                                                                    <span className="odd d-block">  {item?.b1} </span> <span>{item?.bs1}</span>
+                                                                <div className={`box-w1 back float-left text-center   
+                                                                ${item?.b1 !==
+                                                                        previousStateFancyBlinker &&
+                                                                        previousStateFancyBlinker[
+                                                                            key
+                                                                        ]?.[index]?.bi
+                                                                        ? "blink1"
+                                                                        : " "
+                                                                    }`} onClick={() =>
+                                                                        handleBitValueFancy(
+                                                                            item?.b1,
+                                                                            item.nation,
+                                                                            "back",
+                                                                            true,
+                                                                            item,
+                                                                            key,
+                                                                            item?.bs1
+                                                                        )
+                                                                    }>
+                                                                    <span className="odd d-block">  {item?.b1} </span>
+                                                                    <span>{item?.bs1}</span>
                                                                 </div>
                                                                 <div
                                                                     className="box-w2 float-left text-right min-max"

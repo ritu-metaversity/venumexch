@@ -9,7 +9,7 @@ import {
 import "./BitPopup.css";
 
 const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
-  console.log(bitValue, "llllll");
+  // console.log(bitValue, "llllll");
   const { PostGetStack } = useSelector((state) => state.auth);
   const [Bitvalue, setBitValue] = useState(bitValue?.Odds);
   const [updated, setUpdated] = useState("");
@@ -23,14 +23,14 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
     PostBetingOnGameDetailLoading,
     GetGeolocationIP,
   } = useSelector((state) => state.auth);
-  console.log(bitValue?.priceValue, "bitValue?.priceValue");
+  // console.log(bitValue?.priceValue, "bitValue?.priceValue");
   let { id } = useParams();
 
-  console.log(
-    PostBetingOnGameDetail,
-    PostBetingOnGameDetailLoading,
-    "PostBetingOnGameDetailLoadingPostBetingOnGameDetailLoading"
-  );
+  // console.log(
+  //   PostBetingOnGameDetail,
+  //   PostBetingOnGameDetailLoading,
+  //   "PostBetingOnGameDetailLoadingPostBetingOnGameDetailLoading"
+  // );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(PostGetStackApi());
@@ -62,7 +62,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
     fetch("http://15.207.182.173:3333/")
       .then((res) => res.json())
       .then((res) => {
-        console.log(res?.ip, "djfsodfjskdjm")
+        // console.log(res?.ip, "djfsodfjskdjm")
         setUserIP(res?.ip);
       });
   }, []);
@@ -135,7 +135,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                     className="fa fa-circle-o-notch fa-spin loading-bet"
                     style={{ fontSize: "50px" }}
                   ></i>
-                  <p className="loading-text">Loading...</p>{" "}
+                  <p className="loadinggggg">Loading...</p>{" "}
                 </div>
               )}
               <div className="m-l-5 m-r-5 row d-block">

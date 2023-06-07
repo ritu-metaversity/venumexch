@@ -1,27 +1,4 @@
-.desktop_if{
-    height: 97vh;
-}
-.mobole_if{
-    display: none;
-}
-section{
-    margin-top: -19px;
-display: block;
-width: 100% !important;
-margin-left: 0%;
-height: 100%;}
-@media screen and (max-width: 800px) {  
-.mobile_if{
-    height: 80vh;
-    display: block ;
-    margin-top: 105px;
-}
+.desktop_if {
 
-#splashscreen{
-    display: block !important;
-}
-.desktop_if{
-    display: none;
-}
-
+    width: 1237px;
 }

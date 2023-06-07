@@ -82,7 +82,7 @@ const Mybets = () => {
       <div className="_parent">
         <div className="mid-pane">
           <h1 className="betHeading">My Bets</h1>
-          {/* <div className="column m-r-40 d-inline-block">
+          <div className="column m-r-40 d-inline-block">
             <div className="selection">
               <div className="item selected">Current</div>
               <div className="item">Past</div>
@@ -91,7 +91,7 @@ const Mybets = () => {
               <div className="item selected">Matched</div>
               <div className="item">Unmatched</div>
             </div>
-  </div>
+          </div>
           <div className="column v-t m-r-40 d-inline-block">
             <form data-vv-scope="mybets">
               <div className="v-t d-inline-block">
@@ -234,7 +234,7 @@ const Mybets = () => {
               </div>
             </form>
           </div>
-          */}
+
           <div >
             <table className="table profit-loss-table">
               <thead>

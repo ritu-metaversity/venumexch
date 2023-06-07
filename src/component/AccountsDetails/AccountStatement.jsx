@@ -143,8 +143,8 @@ const AccountStatement = () => {
                     onChange={handleSelectGame}
                   >
                     <option value={1}> All</option>
-                    <option value={2}> Deposite/Withdraw Report</option>
-                    <option value={3}> Game Report</option>
+                    <option value={2}> Game Report</option>
+                    <option value={3}> Deposite/Withdraw Report</option>
                   </select>
                 </div>
               </div>

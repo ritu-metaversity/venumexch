@@ -72,6 +72,7 @@ const MidPage = () => {
                                           <tr>
                                              <td>
                                                 <div className="maindiv" onClick={() => handleEnterMatch(item?.matchId)}>
+                                                <div>
                                                    <div className="eventIcon">
                                                       <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_vir.png" alt="" class="icon-vir" />
                                                       {/* <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/game-icon.svg" alt="" class="icon-vir" />*/}
@@ -83,6 +84,7 @@ const MidPage = () => {
                                                       >
                                                          {item?.matchName}
                                                       </Link>
+                                                   </div>
                                                    </div>
                                                    <div>
                                                       <small>

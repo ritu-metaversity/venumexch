@@ -1495,7 +1495,8 @@ const GameDetails = () => {
 
                                                         <div
                                                           data-v-e03c6f20=""
-                                                          className={`box-w1 lay float-left text-center ${item?.l1 !==
+                                                          className={`box-w1 lay float-left text-center 
+                                                          ${item?.l1 !==
                                                             previousStateFancyBlinker &&
                                                             previousStateFancyBlinker[
                                                               key
@@ -1534,7 +1535,8 @@ const GameDetails = () => {
                                                         <div
                                                           // previousStateFancyBlinker
                                                           data-v-e03c6f20=""
-                                                          className={`box-w1 back float-left text-center ${item?.b1 !==
+                                                          className={`box-w1 back float-left text-center 
+                                                          ${item?.b1 !==
                                                             previousStateFancyBlinker &&
                                                             previousStateFancyBlinker[
                                                               key

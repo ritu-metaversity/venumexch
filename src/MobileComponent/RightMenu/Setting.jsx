@@ -13,18 +13,14 @@ const Setting = () => {
   const dispatch = useDispatch();
   const [stakeState, setStakeState] = useState({});
   const [stakeTwo, setStackUpadte] = useState(false);
-  const [stakeUpdate, setStakeThree] = useState("");
   const [EditStake, setEditStake] = useState(false);
-  // let token = localStorage.getItem("TokenId");
-  // console.log(stakeOne, "stakeOne");
-  // console.log(stakeThree, "stakeThree");
-  // console.log(stakeThree, "stakeThree");
+
   const { PostGetStack, PostEditStackData, PostEditStackDataError } =
     useSelector((state) => state.auth);
-  // console.log(PostEditStackData,"PostEditStackData");
+
   useEffect(() => {
     dispatch(PostGetStackApi());
-  }, [dispatch, stakeUpdate, EditStake]);
+  }, [dispatch, EditStake]);
 
   useEffect(() => {
     if (PostEditStackData?.status === true) {
@@ -35,47 +31,14 @@ const Setting = () => {
   useEffect(() => {
     setStakeState(PostGetStack?.data || {});
   }, [PostGetStack]);
-  // console.log(PostEditStackData,"PostEditStackData")
-  // console.log(PostEditStackDataError,"PostEditStackDataError")
-  // console.log(PostGetStack);
+
 
   const handleInput = (e) => {
     let inputValue = e.target.value;
     let inputName = e.target.name;
     setStakeState((prev) => ({ ...prev, [inputName]: inputValue }));
-    // switch (inputName) {
-    //   case "stackOne":
-    //     setStakeOne(inputValue);
-    //     break;
-    //   case "stackTwo":
-    //     setStakeTwo(inputValue);
-    //     break;
-    //   case "stackThree":
-    //     setStakeThree(inputValue);
-    //     break;
-    //   default:
-    //     return false;
-    // }
+ 
   };
-  // console.log(stakeState)
-
-  // const handleEditStakes = () => {
-  //   let dataataata = {
-  //     stack1: 101,
-  //     stack2: 102,
-  //     stack3: 103,
-  //     stack4: 104,
-  //     stack5: 105,
-  //     stack6: 106,
-  //     stack7: 107,
-  //     stack8: 108,
-  //     stack9: 109,
-  //     stack10: 120,
-  //   };
-  //   console.log(dataataata,"dataataata")
-  //   dispatch(PostEditStack(token,dataataata))
-  //   console.log("API HIT ");
-  // };
   const handleEditStakes = () => {
     setEditStake(true);
   };
@@ -140,35 +103,6 @@ const Setting = () => {
                       ""
                     )
                   ) : (
-                    // <>
-                    //   <input
-                    //     name={"stack"}
-                    //     text="number"
-                    //     onChange={handleInput}
-                    //     className="stake readonly"
-                    //     value={stakeOne}
-                    //   />
-                    //   {/* </div> */}
-                    //   {/* <div   className="stake readonly"> */}
-                    //   <input
-                    //     name="stackTwo"
-                    //     text="number"
-                    //     onChange={handleInput}
-                    //     className="stake readonly"
-                    //     value={stakeTwo}
-                    //   />
-                    //   {/* </div> */}
-                    //   {/* <div   className="stake readonly"> */}
-                    //   <input
-                    //     name="stackThree"
-                    //     text="number"
-                    //     onChange={handleInput}
-                    //     className="stake readonly"
-                    //     value={stakeThree}
-                    //   />
-                    //   {/* </div> */}
-                    // </>
-
                     <>
                       {PostGetStack?.data
                         ? Object.values(PostGetStack?.data)

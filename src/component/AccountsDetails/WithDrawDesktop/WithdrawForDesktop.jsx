@@ -134,8 +134,8 @@ const WithdrawForDesktop = () => {
 
     return (
 
-        <div >
-            <div className="main-account-containor">
+        <div className="dest_withdrow" >
+            <div className="main-account-containor ">
                 <div className="mx-input-wrapper account-field">
                     <label className="account-lable">Amount</label>
                     <input
@@ -242,7 +242,7 @@ const WithdrawForDesktop = () => {
                             role="table"
                             aria-busy="false"
                             aria-colcount="6"
-                            className="table b-table table-bordered"
+                            className="b-table table-bordered"
                             id="__BVID__104"
                         >
                             <thead>
@@ -307,7 +307,7 @@ const WithdrawForDesktop = () => {
                                         role="columnheader"
                                         scope="col"
                                         aria-colindex="6"
-                                        className="text-left"
+                                        className="text-left withdraw-data"
                                     >
                                         Remark
                                     </th>
@@ -325,7 +325,7 @@ const WithdrawForDesktop = () => {
                                 {PostwithdrawrequestclientData &&
                                     PostwithdrawrequestclientData?.data &&
                                     PostwithdrawrequestclientData?.data.map((item) => (
-                                        <tr role="row">
+                                        <tr role="row " className=" dest_tr">
                                             <td
                                                 aria-colindex="1"
                                                 className="text-left withdraw-data"
@@ -358,7 +358,7 @@ const WithdrawForDesktop = () => {
                                             </td>
                                             <td
                                                 aria-colindex="6"
-                                                className="text-lift withdraw-data"
+                                                className="text-lift"
                                             >
                                                 {item?.accountType}
                                             </td>
@@ -367,22 +367,22 @@ const WithdrawForDesktop = () => {
                                             </td>
                                             <td
                                                 aria-colindex="6"
-                                                className="text-lift withdraw-data"
+                                                className="text-lift"
                                             >
                                                 {item?.remark}
                                             </td>
                                             {item.status === "Pending" ? (
-                                                <td aria-colindex="4" style={{ color: "#ffa726" }}>
+                                                <td aria-colindex="4" style={{ color: "#ffa726", padding: "12px" }}>
                                                     {item?.status}
                                                 </td>
                                             ) : item.status === "Rejected" ? (
-                                                <td aria-colindex="4" style={{ color: "#f44336" }}>
+                                                <td aria-colindex="4" style={{ color: "#f44336", padding: "12px" }}>
                                                     {item?.status}
                                                 </td>
                                             ) : (
                                                 <td
                                                     aria-colindex="4"
-                                                    style={{ color: "#66bb6a", fontSize: "10px" }}
+                                                    style={{ color: "#66bb6a", fontSize: "10px", padding: "12px" }}
                                                 >
                                                     {item?.status}
                                                 </td>

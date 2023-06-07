@@ -39,11 +39,11 @@ const PayManually = (props) => {
     setBitValue(Bitvalue + 10);
   };
   const decrement = () => {
-    setBitValue(Bitvalue - 10);
+    setBitValue((Bitvalue)=>Bitvalue - 10);
   };
 
   const handleStaticAmount = (vl) => {
-    setBitValue(Bitvalue + vl);
+    setBitValue((Bitvalue)=>Bitvalue + vl);
   };
 
   console.log(Bitvalue, "BitvalueBitvalue");
@@ -155,7 +155,7 @@ const PayManually = (props) => {
             <h1>Pay {Bitvalue}/-</h1>
             <p>Pay Manually</p>
           </div>
-          <div className="bank-logo">
+          <div className="bank-logo dest_logo">
             <Row>
               {PostpaymnetdetailappDataData?.data?.paymentMethods.map(
                 (item, id) => (
@@ -197,7 +197,7 @@ const PayManually = (props) => {
         {pymentMode === "UPI" ? (
           <Container>
             <div className="bank-logo mode">
-              <Row className="upi-detail head-deposit">
+              <Row className="upi-detail dest_upi dest_logo head-deposit">
                 <Col className="name-d">
                   <div className="">
                     <p className="Typography-root ">Mode</p>
@@ -401,11 +401,11 @@ const PayManually = (props) => {
       <div className="paymethods">
         <Container>
           <div className="">
-            <Row className="upi-detail ">
+            <Row className="upi-detail dest_apiDetail">
               <Col className="name-d">
                 <label className="images-section">
                   {!files && (
-                    <div className="image-text">
+                    <div className="image-text dest_img">
                       <i class="fa fa-plus" aria-hidden="true"></i>
                       <p>Click here to upload payment screenshot</p>
                     </div>

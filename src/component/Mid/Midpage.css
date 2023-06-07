@@ -88,7 +88,7 @@ a.event-name {
 }
 
 .eventName {
-    width: 61%;
+    /* width: 61%; */
     float: left;
 }
 
@@ -102,7 +102,7 @@ a.event-name {
     flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 4px;
 }
 .nav {
