@@ -89,6 +89,19 @@ const Signup = () => {
   // username
   // :
   // "anish2512"
+  let appUrll = window.location.hostname;
+
+  const [selfAllowedd, SetselfAllowedd] = useState("");
+  useEffect(() => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        SetselfAllowedd(res?.data?.data);
+      });
+  }, [appUrll]);
 
   const handleDemoLogin = () => {
     axios
@@ -258,10 +271,15 @@ const Signup = () => {
                         Sign Up
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
-                      <button className="btn btn-login" onClick={handleDemoLogin}>
-                        Login with demo ID
-                        <i className="ml-2 fas fa-sign-in-alt"></i>
-                      </button>
+
+                      {selfAllowedd?.selfAllowed === true ? (
+                        <button className="btn btn-login" onClick={handleDemoLogin}>
+                          Login with demo ID
+                          <i className="ml-2 fas fa-sign-in-alt"></i>
+                        </button>) : (
+                        ""
+                      )}
+
                       <button className="btn btn-login" onClick={handleHome}>
                         Back
                         <i className="ml-2 fas fa-sign-in-alt"></i>

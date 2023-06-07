@@ -267,10 +267,13 @@ const Login = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        <button className="btn btn-login" onClick={handleDemoLogin}>
-                          Login with demo ID
-                          <i className="ml-2 fas fa-sign-in-alt"></i>
-                        </button>
+                        {selfAllowedd?.selfAllowed === true ? (
+                          <button className="btn btn-login" onClick={handleDemoLogin}>
+                            Login with demo ID
+                            <i className="ml-2 fas fa-sign-in-alt"></i>
+                          </button>) : (
+                          ""
+                        )}
 
                         {selfAllowedd?.selfAllowed === true ? (
                           <button
