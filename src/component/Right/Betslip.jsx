@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BetPage from "./BetPage";
 
 const Betslip = (props) => {
   const [betslip, setBetslip] = useState(true);
@@ -63,12 +64,19 @@ const Betslip = (props) => {
         <div className="sc-content">
           <ul className="content" style={{ position: "relative" }}>
             {betslip ? (
+
               <li>
                 <div className="betslip bets">
                   <div className="betslipContent">
+
+
                     <div className="text-center m-t-10">
                       Click on the odds to add selections to the betslip.
                     </div>
+
+                    <BetPage />
+
+
                   </div>
                 </div>
               </li>

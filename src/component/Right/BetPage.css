@@ -1,0 +1,54 @@
+.bets .button-stakes button {
+    width: 65px;
+    margin-right: 2px;
+    font-size: 10px;
+    margin-bottom: 3px;
+    background: #09262b;
+    padding: 5px !important;
+}
+button.btn.btn-link.clear_btn {
+    background: unset;
+    color: #09262b;
+    font-size: 12px;
+}
+.btn-remove {
+    background-color: #bf3e35 !important;
+    color: #FFFFFF !important;
+    border-bottom-color: #97312a !important;
+    border-right-color: #97312a !important;
+    padding: 5px !important;
+}
+.prima {
+    background-color: #5c996f !important;
+    color: #FFFFFF !important;
+    border-bottom-color: #497958 !important;
+    border-right-color: #497958 !important;
+    border-left-color: unset !important;
+    border-top-color: unset !important;
+    padding: 5px !important;
+
+}
+.lay_div {
+    height: 10px;
+    width: 10px;
+    margin-left: 12px;
+}
+.main_lay {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.m-b-0 {
+    margin-bottom: -3px !important;
+    margin-top: -2px;
+    margin-left: -16px;
+    font-size: 9px;
+}
+p.summary-info {
+    margin-top: 5px !important;
+}
+h6.m-b-0.p-l-10.bet-type-info {
+    margin-top: 0px;
+    margin-left: -18px;
+    font-size: 12px;
+}

@@ -11,6 +11,8 @@ const DestGamePage = () => {
 
 
     let { id } = useParams();
+
+
     const dispatch = useDispatch();
 
     const [market, setMarket] = useState(true);
