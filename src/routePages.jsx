@@ -24,6 +24,9 @@ import DepositForDesktop from "./component/AccountsDetails/DepositDesktop/Deposi
 import Game from "./component/Mid/Game";
 import Casinolist from "./component/SideBar/Casinolist";
 import Casino from "./component/SideBar/Casino";
+import Signup from "./LoginForDesktop/Signup";
+import TermsandConditions from "./MobileComponent/MMFooter/TermsandConditions";
+import AboutUs from "./MobileComponent/MMFooter/AboutUs";
 
 
 
@@ -53,10 +56,16 @@ const RoutesPages = () => {
           <Route path="/deposit" element={<DepositForDesktop />} />
           <Route path="/withDraw" element={<WithdrawForDesktop />} />
           <Route path="/Casino" element={<Casinolist />} />
+          <Route path="/Casino" element={<Casinolist />} />
+          <Route path="/Casino" element={<Casinolist />} />
           <Route path="/casino/:id" element={<Casino />} />
           <Route path="/game/:id" element={<Game />} />
           <Route path="/gamedetails/:id" element={<Home />} />
+          <Route path="AboutUs" element={<AboutUs />} />
+          <Route path="Terms-and-Conditions" element={<TermsandConditions />} />
+
         </Route>
+        <Route path="/Signup" element={<Signup />} />
 
 
 

@@ -17,7 +17,7 @@ const dateFormat = "YYYY-MM-DD";
 
 const AccountStatement = () => {
 
-  const { PostTransferStatementData } = useSelector((state) => state.auth);
+  const { PostTransferStatementData, PostTransferStatementDataLoading } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const [trueee, setTrueee] = useState(false);
@@ -80,7 +80,12 @@ const AccountStatement = () => {
     <div className="content boxed-layout-wrapper" >
 
 
+
+
+
+
       <div className='wid-100'>
+
         <h1 className='betHeading pnlHeading'>Account Statement</h1>
         <div className="column m-r-40 ">
           <form data-vv-scope="mybets" className='pnl'>
@@ -177,37 +182,55 @@ const AccountStatement = () => {
                 <th className="text-right">Remark</th>
               </tr>
             </thead>
-            <tbody>
-              {PostTransferStatementData?.data &&
-                PostTransferStatementData?.data?.dataList ? (
-                PostTransferStatementData?.data?.dataList.map((el) => (
+            {
+              PostTransferStatementDataLoading === true ?
 
-                  <tr>
 
-                    <td className="accountStatment"
-                      onClick={() =>
-                        handleDetailsStatement(el?.marketid, el?.remark)
-                      }
-                    > {" "}
-                      {console.log(el, "elelelel")}
-                      {moment(el?.date).format("YYYY-MM-DD  - h:mm")}</td>
-                    <td> {" "}
-                      {el?.credit}</td>
-                    <td className="text-right" style={{ color: "red", width: "15%" }}>
-                      {el?.debit} </td>
-                    <td className="text-right" style={{ width: "15%" }}>{el?.pts}</td>
-                    <td className="text-right" style={{ width: "30%" }}>{el?.remark}</td>
-                  </tr>
+                <div
 
-                ))
-              ) : (
-                <tr>
-                  <td colspan="3" className="text-center">
-                    There Have Been No Transfers In The Last 14 Days.
-                  </td>
-                </tr>
-              )}
-            </tbody>
+                  style={{
+
+                    backgroundColor: "#0000002b",
+                    height: "50vh",
+                    width: "1200px"
+                  }}>
+                  <i
+                    className="fa fa-spinner fa-spin loading"
+                    style={{ fontSize: "50px" }}
+                  ></i>
+                </div>
+                :
+                <tbody>
+                  {PostTransferStatementData?.data &&
+                    PostTransferStatementData?.data?.dataList ? (
+                    PostTransferStatementData?.data?.dataList.map((el) => (
+
+                      <tr>
+
+                        <td className="accountStatment"
+                          onClick={() =>
+                            handleDetailsStatement(el?.marketid, el?.remark)
+                          }
+                        > {" "}
+                          {console.log(el, "elelelel")}
+                          {moment(el?.date).format("YYYY-MM-DD  - h:mm")}</td>
+                        <td> {" "}
+                          {el?.credit}</td>
+                        <td className="text-right" style={{ color: "red", width: "15%" }}>
+                          {el?.debit} </td>
+                        <td className="text-right" style={{ width: "15%" }}>{el?.pts}</td>
+                        <td className="text-right" style={{ width: "30%" }}>{el?.remark}</td>
+                      </tr>
+
+                    ))
+                  ) : (
+                    <tr>
+                      <td colspan="3" className="text-center">
+                        There Have Been No Transfers In The Last 14 Days.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>}
           </table>
         </div>
         <div className="pagination">

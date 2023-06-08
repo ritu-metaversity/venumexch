@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-import Footer from "../component/Footer/Footer";
+import FooterForDesktop from "../FooterForDesktop/FooterForDesktop";
 import NavBar from "../component/navBar/NavBar";
 import NavBarWithOutLogin from "../component/navBar/NavBarWithOutLogin";
 import Home from "../component/Home/Home";
@@ -34,7 +34,7 @@ const LayoutForDesktop = () => {
 
 
       <div className="footer-desk">
-        <Footer />
+        <FooterForDesktop />
       </div>
     </div>
   );

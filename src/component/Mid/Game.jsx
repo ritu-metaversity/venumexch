@@ -7,10 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const Game = () => {
     const { id } = useParams();
-    //   console.log(id, "midpage");
-    //   const { state } = useLocation();
-
-    //     let GameName = state?.id2;
 
     const navigator = useNavigate()
     const [gamesData, setGamesData] = useState("");
@@ -19,7 +15,12 @@ const Game = () => {
     console.log(window.location.href, "window.location.pathname")
 
     const handleEnterMatch = (item) => {
-        navigator(`/gamedetails/${item}`)
+        console.log(token, "token")
+        if (token == null) {
+        } else {
+            navigator(`/gamedetails/${item}`)
+        }
+
     }
 
 
@@ -78,7 +79,6 @@ const Game = () => {
                                                                     </div>
                                                                     <div className="eventName">
                                                                         <Link
-                                                                            to="/gamedetail/1702080831"
                                                                             className="event-name"
                                                                         >
                                                                             {item?.matchName}

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import AlertBtn from "../../../MobileComponent/Alert/AlertBtn";
 import { ImCross } from "react-icons/im"
 import { setShowRegisterModalRef } from "../../../logincomponents/Signup";
+import { setShowRegisterModalRefDesktop } from "../../../LoginForDesktop/Signup";
 import { navRef } from "../../../Layout/LayoutForMobile"
 import { navRefLogin } from "../../../logincomponents/Login";
 
@@ -547,6 +548,7 @@ export const Postuserselfregister = createAsyncThunk('auth/Postuserselfregister'
                 }
             });
             setShowRegisterModalRef && setShowRegisterModalRef(true)
+            setShowRegisterModalRefDesktop && setShowRegisterModalRefDesktop(true)
         }
         return PostuserselfregisterDataaa
     } catch (err) {
@@ -697,6 +699,36 @@ export const getResponsibleGaming = createAsyncThunk('auth/getResponsibleGaming'
         const getResponsibleGamingDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getResponsibleGaming`, data
         )
         return getResponsibleGamingDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+// bet History
+export const postBetHistory = createAsyncThunk('auth/postBetHistory', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const postBetHistoryDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/bet-list-history`, data
+        )
+        return postBetHistoryDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+export const postleftmenudataopen = createAsyncThunk('auth/postleftmenudataopen', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        // http://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open
+        const postleftmenudataopenDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/left-menu-data-open`, data
+        )
+        return postleftmenudataopenDataa
     } catch (err) {
         if (err) {
             throw err

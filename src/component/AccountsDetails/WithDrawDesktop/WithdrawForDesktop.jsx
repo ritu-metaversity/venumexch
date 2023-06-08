@@ -11,7 +11,7 @@ import "./WithDrawForDesktop.css";
 
 const WithdrawForDesktop = () => {
     const dispatch = useDispatch();
-    const { PostselfwithdrawappData, PostwithdrawrequestclientData } =
+    const { PostselfwithdrawappData, PostwithdrawrequestclientData, PostwithdrawrequestclientDataLoading } =
         useSelector((state) => state.auth);
     const [amount, setAmount] = useState();
     const [accountHolderName, setAccountHolderName] = useState();
@@ -235,165 +235,183 @@ const WithdrawForDesktop = () => {
                     </button>
                 </div>
             </div>
-            <div className="row row5 mt-2">
-                <div className="col-12">
-                    <div className="table-responsive">
-                        <table
-                            role="table"
-                            aria-busy="false"
-                            aria-colcount="6"
-                            className="b-table table-bordered"
-                            id="__BVID__104"
-                        >
-                            <thead>
-                                <tr role="row" className="account-detail">
-                                    <th
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="1"
-                                        className="text-left"
-                                    >
-                                        Account Number
-                                    </th>
-                                    <th
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="2"
-                                        className="text-left"
-                                    >
-                                        Account Name
-                                    </th>
-                                    <th
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="3"
-                                        className="text-right"
-                                    >
-                                        Amount
-                                    </th>
-                                    <th
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="4"
-                                        className="text-left"
-                                    >
-                                        Bank Name/ Address
-                                    </th>
-                                    <th
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="5"
-                                        className="text-left"
-                                    >
-                                        IFSC Code
-                                    </th>
-                                    <th
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="6"
-                                        className="text-left"
-                                    >
-                                        Account Type / Currency
-                                    </th>
-                                    <th
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="6"
-                                        className="text-left withdraw-data"
-                                    >
-                                        Date
-                                    </th>
-                                    <th
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="6"
-                                        className="text-left withdraw-data"
-                                    >
-                                        Remark
-                                    </th>
-                                    <th
-                                        role="columnheader"
-                                        scope="col"
-                                        aria-colindex="6"
-                                        className="text-left"
-                                    >
-                                        Status
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {PostwithdrawrequestclientData &&
-                                    PostwithdrawrequestclientData?.data &&
-                                    PostwithdrawrequestclientData?.data.map((item) => (
-                                        <tr role="row " className=" dest_tr">
-                                            <td
-                                                aria-colindex="1"
-                                                className="text-left withdraw-data"
-                                            >
-                                                {item?.accountNumber}
-                                            </td>
-                                            <td
-                                                aria-colindex="2"
-                                                className="text-left withdraw-data"
-                                            >
-                                                {item?.accountHolderName}
-                                            </td>
-                                            <td
-                                                aria-colindex="3"
-                                                className="text-right withdraw-data "
-                                            >
-                                                {item?.amount}
-                                            </td>
-                                            <td
-                                                aria-colindex="4"
-                                                className="text-left withdraw-data "
-                                            >
-                                                {item?.bankName}
-                                            </td>
-                                            <td
-                                                aria-colindex="5"
-                                                className="text-left withdraw-data "
-                                            >
-                                                {item?.ifsc}
-                                            </td>
-                                            <td
-                                                aria-colindex="6"
-                                                className="text-lift"
-                                            >
-                                                {item?.accountType}
-                                            </td>
-                                            <td aria-colindex="6" className="text-lift">
-                                                {moment(item?.time).format("MM DD YYYY - HH MM ")}
-                                            </td>
-                                            <td
-                                                aria-colindex="6"
-                                                className="text-lift"
-                                            >
-                                                {item?.remark}
-                                            </td>
-                                            {item.status === "Pending" ? (
-                                                <td aria-colindex="4" style={{ color: "#ffa726", padding: "12px" }}>
-                                                    {item?.status}
+
+            {PostwithdrawrequestclientDataLoading === true ?
+
+
+                <div
+
+                    style={{
+
+                        backgroundColor: "#0000002b",
+
+
+                    }}>
+                    <i
+                        className="fa fa-spinner fa-spin loading"
+                        style={{ fontSize: "50px" }}
+                    ></i>
+                </div>
+                :
+                <div className="row row5 mt-2">
+                    <div className="col-12">
+                        <div className="table-responsive">
+                            <table
+                                role="table"
+                                aria-busy="false"
+                                aria-colcount="6"
+                                className="b-table table-bordered"
+                                id="__BVID__104"
+                            >
+                                <thead>
+                                    <tr role="row" className="account-detail">
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="1"
+                                            className="text-left"
+                                        >
+                                            Account Number
+                                        </th>
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="2"
+                                            className="text-left"
+                                        >
+                                            Account Name
+                                        </th>
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="3"
+                                            className="text-right"
+                                        >
+                                            Amount
+                                        </th>
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="4"
+                                            className="text-left"
+                                        >
+                                            Bank Name/ Address
+                                        </th>
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="5"
+                                            className="text-left"
+                                        >
+                                            IFSC Code
+                                        </th>
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="6"
+                                            className="text-left"
+                                        >
+                                            Account Type / Currency
+                                        </th>
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="6"
+                                            className="text-left withdraw-data"
+                                        >
+                                            Date
+                                        </th>
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="6"
+                                            className="text-left withdraw-data"
+                                        >
+                                            Remark
+                                        </th>
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="6"
+                                            className="text-left"
+                                        >
+                                            Status
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {PostwithdrawrequestclientData &&
+                                        PostwithdrawrequestclientData?.data &&
+                                        PostwithdrawrequestclientData?.data.map((item) => (
+                                            <tr role="row " className=" dest_tr">
+                                                <td
+                                                    aria-colindex="1"
+                                                    className="text-left withdraw-data"
+                                                >
+                                                    {item?.accountNumber}
                                                 </td>
-                                            ) : item.status === "Rejected" ? (
-                                                <td aria-colindex="4" style={{ color: "#f44336", padding: "12px" }}>
-                                                    {item?.status}
+                                                <td
+                                                    aria-colindex="2"
+                                                    className="text-left withdraw-data"
+                                                >
+                                                    {item?.accountHolderName}
                                                 </td>
-                                            ) : (
+                                                <td
+                                                    aria-colindex="3"
+                                                    className="text-right withdraw-data "
+                                                >
+                                                    {item?.amount}
+                                                </td>
                                                 <td
                                                     aria-colindex="4"
-                                                    style={{ color: "#66bb6a", fontSize: "10px", padding: "12px" }}
+                                                    className="text-left withdraw-data "
                                                 >
-                                                    {item?.status}
+                                                    {item?.bankName}
                                                 </td>
-                                            )}
-                                        </tr>
-                                    ))}
-                            </tbody>
-                        </table>
+                                                <td
+                                                    aria-colindex="5"
+                                                    className="text-left withdraw-data "
+                                                >
+                                                    {item?.ifsc}
+                                                </td>
+                                                <td
+                                                    aria-colindex="6"
+                                                    className="text-lift"
+                                                >
+                                                    {item?.accountType}
+                                                </td>
+                                                <td aria-colindex="6" className="text-lift">
+                                                    {moment(item?.time).format("MM DD YYYY - HH MM ")}
+                                                </td>
+                                                <td
+                                                    aria-colindex="6"
+                                                    className="text-lift"
+                                                >
+                                                    {item?.remark}
+                                                </td>
+                                                {item.status === "Pending" ? (
+                                                    <td aria-colindex="4" style={{ color: "#ffa726", padding: "12px" }}>
+                                                        {item?.status}
+                                                    </td>
+                                                ) : item.status === "Rejected" ? (
+                                                    <td aria-colindex="4" style={{ color: "#f44336", padding: "12px" }}>
+                                                        {item?.status}
+                                                    </td>
+                                                ) : (
+                                                    <td
+                                                        aria-colindex="4"
+                                                        style={{ color: "#66bb6a", fontSize: "10px", padding: "12px" }}
+                                                    >
+                                                        {item?.status}
+                                                    </td>
+                                                )}
+                                            </tr>
+                                        ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>}
         </div>
     );
 };

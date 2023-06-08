@@ -71,10 +71,10 @@ const BetPage = ({ gamedetailsData }) => {
         dispatch(PostPlaceBet(data));
 
     };
-
+    console.log(gamedetailsData?.popupshow, "fsdfdssfdfdfsdfs")
     return (
 
-        <div  >
+        <div style={{ display: gamedetailsData?.popupshow === true ? "" : "none" }}>
 
             <div>
                 <div className="m-t-10 main_lay">

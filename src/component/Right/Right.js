@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router";
 import { PostBalance } from "../../App/Features/auth/authActions";
 import Betslip from "./Betslip";
 import "./Right.css";
@@ -14,34 +15,37 @@ const Right = ({ gamedetailsData }) => {
    const { PostTotalBalance, postisselfbyappurlData } = useSelector(
       (state) => state.auth
    );
-   const usernameDemo = localStorage.getItem("usernameDemo");
+   const { pathname } = useLocation();
 
+   //   (pathname.includes("/gamedetails/")
+   const usernameDemo = localStorage.getItem("usernameDemo");
+   // console.log((window.location.pathname.includes("/gamedetails/"), "adfasndlasdljas"))
    let appUrll = window.location.hostname;
    const token = localStorage.getItem("TokenId");
-   useEffect(() => {
-      if (token) {
+   // useEffect(() => {
+   //    if (token) {
 
-         if (localStorage.getItem("PassWordType") === "old") {
-         } else {
-            const time = setInterval(() => {
-               const token = localStorage.getItem("TokenId");
-               if (token) {
+   //       if (localStorage.getItem("PassWordType") === "old") {
+   //       } else {
+   //          const time = setInterval(() => {
+   //             const token = localStorage.getItem("TokenId");
+   //             if (token) {
 
-                  if (localStorage.getItem("PassWordType") === "old") {
-                  } else {
-                     const time = setInterval(() => {
-                        dispatch(PostBalance());
-                     }, 5000);
-                     return () => clearInterval(time);
-                  }
-               }
+   //                if (localStorage.getItem("PassWordType") === "old") {
+   //                } else {
+   //                   const time = setInterval(() => {
+   //                      dispatch(PostBalance());
+   //                   }, 5000);
+   //                   return () => clearInterval(time);
+   //                }
+   //             }
 
-            }, 5000);
-            return () => clearInterval(time);
-         }
-      }
+   //          }, 5000);
+   //          return () => clearInterval(time);
+   //       }
+   //    }
 
-   }, [token]);
+   // }, [token]);
    const handleDropdown = () => {
       if (creditDropDown === "") {
          setCreaditDropDown("show");
@@ -85,6 +89,7 @@ const Right = ({ gamedetailsData }) => {
       setTvShow(!TvShow)
    }
 
+   console.log(gamedetailsData?.popupshow, "fdsfsdfsdfdfsdfsdfdffsds")
    return (
       <div>
          <div className="right-pane">
@@ -97,8 +102,8 @@ const Right = ({ gamedetailsData }) => {
                   <span>
                      <strong>Available Credit: </strong>{" "}
                      <span className="value">{PostTotalBalance?.data?.data?.balance
-                        ? PostTotalBalance?.data?.data?.balance -
-                        PostTotalBalance?.data?.data?.libality
+                        ? (Number(PostTotalBalance?.data?.data?.balance -
+                           PostTotalBalance?.data?.data?.libality).toFixed(2))
                         : "0:00"}</span>
                   </span>
                   <i
@@ -108,9 +113,10 @@ const Right = ({ gamedetailsData }) => {
                </div>
                <ul className={`credit-box ${creditDropDown}`}>
                   <li>
-                     <strong>Credit Limit: </strong> <span>{PostTotalBalance?.data?.data?.creditLimit
-                        ? PostTotalBalance?.data?.data?.creditLimit
-                        : "0:00"}</span>
+                     <strong>Credit Limit: </strong> <span>
+                        {PostTotalBalance?.data?.data?.creditLimit
+                           ? Number(PostTotalBalance?.data?.data?.creditLimit).toFixed(2)
+                           : "0:00"}</span>
                   </li>
                   <li>
                      <strong>Winnings:</strong>
@@ -118,21 +124,22 @@ const Right = ({ gamedetailsData }) => {
                      {PostTotalBalance?.data?.data?.winnings > 0 ? (
                         <span style={{ color: "green" }}>
                            {PostTotalBalance?.data?.data?.winnings
-                              ? PostTotalBalance?.data?.data?.winnings
+                              ? Number(PostTotalBalance?.data?.data?.winnings).toFixed(2)
                               : "0:00"}
                         </span>
                      ) : (
                         <span >
                            {PostTotalBalance?.data?.data?.winnings
-                              ? PostTotalBalance?.data?.data?.winnings
+                              ? Number(PostTotalBalance?.data?.data?.winnings).toFixed(2)
                               : "0:00"}
                         </span>)}
                   </li>
                   <li>
-                     <strong>Available Credit: </strong> <span>            {PostTotalBalance?.data?.data?.balance
-                        ? PostTotalBalance?.data?.data?.balance -
-                        PostTotalBalance?.data?.data?.libality
-                        : "0:00"}</span>
+                     <strong>Available Credit: </strong> <span>
+                        {PostTotalBalance?.data?.data?.balance
+                           ? (Number(PostTotalBalance?.data?.data?.balance -
+                              PostTotalBalance?.data?.data?.libality).toFixed(2))
+                           : "0:00"}</span>
                   </li>
                </ul>
             </div>
@@ -171,39 +178,40 @@ const Right = ({ gamedetailsData }) => {
                      </div></> : ""}
 
                </div>
-               <h4 class="m-b-5 collapsed"
-                  aria-controls="collapse1"
-                  aria-expanded="false"
-                  role="button"
+               {pathname.includes("/gamedetails/") ?
+                  <>
+                     <h4 class="m-b-5 collapsed"
 
-                  style={{ cursor: "pointer", borderBottom: "1px solid #000", paddingBottom: "5px" }}>
-                  Live TV <i onClick={handleTv} className={`fas fa-angle-${TvShow ? "up" : "down"} m-l-5 toggle-icon tv-toggle`}></i>
-               </h4>
-               {
-                  TvShow ? (
-                     <div>
-                        <div id="scoreboard-box">
-                           <div className="scorecard scorecard-mobile">
-                              <div className="score-inner">
-                                 <iframe
-                                    // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
-                                    src={`http://43.205.116.130/tv.php?eventId=32183614`}
-                                    width="100%"
-                                    className="score-card desk_score_card"
-                                    title="scorecord"
-                                    allowFullScreen={true}></iframe>
+
+                        style={{ cursor: "pointer", borderBottom: "1px solid #000", paddingBottom: "5px", fontSize: "13px" }}>
+                        Live TV <i onClick={handleTv} className={`fas fa-angle-${TvShow ? "up" : "down"} m-l-5 toggle-icon tv-toggle`}></i>
+                     </h4>
+                     {
+                        TvShow ? (
+                           <div>
+                              <div id="scoreboard-box">
+                                 <div className="scorecard scorecard-mobile">
+                                    <div className="score-inner">
+                                       <iframe
+                                          // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
+                                          src={`http://43.205.116.130/tv.php?eventId=32183614`}
+                                          width="100%"
+                                          className="score-card desk_score_card"
+                                          title="scorecord"
+                                          allowFullScreen={true}></iframe>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                     </div>
-                  ) : ""
+                        ) : ""
+                     }
+                  </> : ""
                }
-
                <Betslip BackBlack={BackBlack} gamedetailsData={gamedetailsData} />
 
             </div>
          </div>
-      </div>
+      </div >
    );
 };
 

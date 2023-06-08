@@ -50,10 +50,6 @@ const Betslip = ({ props, gamedetailsData }) => {
     }
   };
 
-
-
-
-
   const { PostGetStack, PostEditStackData, PostEditStackDataError } =
     useSelector((state) => state.auth);
 
@@ -71,7 +67,6 @@ const Betslip = ({ props, gamedetailsData }) => {
     setStakeState(PostGetStack?.data || {});
   }, [PostGetStack]);
 
-
   const handleInput = (e) => {
     let inputValue = e.target.value;
     let inputName = e.target.name;
@@ -81,6 +76,7 @@ const Betslip = ({ props, gamedetailsData }) => {
   const handleEditStakes = () => {
     setEditStake(true);
   };
+
   const handleSaveStakes = () => {
     setEditStake(false);
     // console.log("postapi");
@@ -89,16 +85,14 @@ const Betslip = ({ props, gamedetailsData }) => {
     dispatch(PostGetStackApi());
     setEditBtn("none");
     props.BackBlack("none");
-
   };
-
 
   return (
     <div >
       {" "}
       <div className="bet-manager" >
         <h4>Betslip</h4>
-        <ul className="tabs" style={{borderBottom:"1px solid #000", paddingBottom:"12px"}}>
+        <ul className="tabs" style={{ borderBottom: "1px solid #000", paddingBottom: "12px" }}>
           <li
             className={`tab-bet-slip ${betslip === true ? "active" : ""}`}
             onClick={() => handleBetslip("Betslip")}
@@ -184,18 +178,18 @@ const Betslip = ({ props, gamedetailsData }) => {
                           <label className="custom-control-label" for="__BVID__79">Order By Date</label></div>
                       </div>
                     </div>
-                    <b><a href="/gamedetail/32403633" className="router-link-exact-active router-link-active">Sri Lanka v Afghanistan</a></b>
+                    {/*   <b><a href="/gamedetail/32403633" className="router-link-exact-active router-link-active">Sri Lanka v Afghanistan</a></b>*/}
                     <div className="table-responsive">
                       <table className="table">
-                        <thead>
+                        {/*  <thead>
                           <th colspan="4">Sri Lanka.</th>
-                        </thead>
+            </thead>*/}
                         <tbody>
                           <tr className="odds-header">
-                            <td className="text-center">Nation</td>
-                            <td className="text-center">Odds</td>
-                            <td className="text-center">Stake</td>
-                            <td className="text-center">Profit/Liability</td>
+                            <td className="text-left">Nation</td>
+                            <td className="text-left">Odds</td>
+                            <td className="text-right">Stake</td>
+                            <td className="text-right">Profit/Liability</td>
                           </tr>
                           {PostBetListByMatchIdData?.data &&
                             Object.keys(PostBetListByMatchIdData?.data).map((key) => (
@@ -203,8 +197,8 @@ const Betslip = ({ props, gamedetailsData }) => {
                                 {PostBetListByMatchIdData?.data[key].map((item) => (
                                   <>
                                     <tr className={`back ${item?.back === false ? "lay" : "back"}`}>
-                                      <td>{item?.nation}</td>
-                                      <td className="text-right">{item?.priveValue}</td>
+                                      <td className="text-left">{item?.nation}</td>
+                                      <td className="text-left">{item?.priveValue}</td>
                                       <td className="text-right">{item?.amount}</td>
 
                                       <td className="text-right">{item?.priveValue}</td>
@@ -252,12 +246,14 @@ const Betslip = ({ props, gamedetailsData }) => {
 
                   <div className="text-center m-t-10">
                     <button
-                      className="btn btn-link text-right"
+                      className="btn editBtn text-left"
                       onClick={handleEditBtn}
+
                     >
                       Cancel
                     </button>
-                    <button className="btn btn-primary" onClick={handleSaveStakes}>Save</button>
+
+                    <button className="btn editBtn" onClick={handleSaveStakes}>Save</button>
                   </div>
                 </div>
               </div>

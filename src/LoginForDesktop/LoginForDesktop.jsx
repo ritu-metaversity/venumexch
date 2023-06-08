@@ -7,12 +7,13 @@ import { useLocation, useNavigate } from "react-router";
 // import PleaseConfirm from './PleaseConfirm';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import MFooter from "../MobileComponent/MMFooter/MFooter";
+import FooterForDesktop from "../FooterForDesktop/FooterForDesktop";
 import {
   Postisselfbyappurl,
-  postLogin,
+  postLogin, postLoginDemoUser
 } from "../App/Features/auth/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import Footer from "../component/Footer/Footer";
 
 const LoginForMobile = () => {
   const dispatch = useDispatch();
@@ -28,30 +29,14 @@ const LoginForMobile = () => {
   const [loginData, setLoginData] = useState("");
   const [apiHit, setApiHit] = useState(false);
   const [show, setShow] = useState(false);
-  // const [signUpShow, setSignUpShow] = useState(false);
-  // const [signUpClose, setSignUpClose] = useState(false);
   const handleClose = () => setShow(false);
 
   const {
     postLoginData,
     postLoginDataError,
     PostuserselfregisterData,
-    postisselfbyappurlData,
+    postisselfbyappurlData
   } = useSelector((state) => state.auth);
-
-  console.log(PostuserselfregisterData, "userNameuserName");
-  // console.log(signUpShow, "userNameuserName");
-
-  // useEffect(() => {
-  //   if (PostuserselfregisterData?.data?.message === "User Created") {
-  //     setSignUpShow(true);
-  //   }
-  // }, [PostuserselfregisterData]);
-
-  // const handleSignUpShow = () => {
-  //   setSignUpClose(true);
-  //   setSignUpShow(false);
-  // };
 
   useEffect(() => {
     if (apiHit === true) {
@@ -76,12 +61,13 @@ const LoginForMobile = () => {
   }, [postLoginData]);
 
   // useEffect(() => {
-  //   const token = localStorage.getItem("TokenId");
-
-  //   if (token !== null) {
+  //   console.log(postLoginDemoUserData?.token, "asdfghjkl")
+  //   if (postLoginDemoUserData?.token) {
   //     navigate("/home");
+  //     localStorage.setItem("TokenId", postLoginData?.token);
+  //     localStorage.setItem("username", postLoginData?.username);
   //   }
-  // }, []);
+  // }, [postLoginDemoUserData]);
 
   const handleInput = (e) => {
     let inputName = e.target.name;
@@ -101,20 +87,28 @@ const LoginForMobile = () => {
     }
   };
 
-  const handleLogin = (e) => {
-    setLogin({
-      userId: userName,
-      password: password,
-      appUrl: window.location.hostname,
-      // appUrl:"localhost"
-    });
+  const handleLogin = (vl) => {
+    if (vl === "demoUser") {
+      dispatch(postLoginDemoUser({ "appUrl": window.location.hostname }));
 
-    setShow(true);
+    } else {
+      setLogin({
+        userId: userName,
+        password: password,
+        // appUrl: window.location.hostname,
+        appUrl: "localhost"
+      });
+
+      setShow(true);
+    }
+
   };
   const handleHome = () => {
     navigate("/home");
 
   };
+
+
 
   const handleLoginConfirm = (val) => {
     if (userName === "" && password === "") {
@@ -128,9 +122,12 @@ const LoginForMobile = () => {
       setErrorPassword(true);
       setShow(false);
     } else {
+
+
       dispatch(postLogin(login));
       setShow(false);
       setApiHit(true);
+
     }
   };
 
@@ -139,13 +136,17 @@ const LoginForMobile = () => {
   };
   let appUrll = window.location.hostname;
   // let appUrll = "localhost";
+  // let appUrll = "localhost";
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
     axios.post("http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
       { appUrl: appUrll })
-      .then((res) => { SetselfAllowedd(res?.data?.data?.selfAllowed) });
+      .then((res) => { SetselfAllowedd(res?.data?.data) }
+
+      );
   }, [appUrll]);
+
 
   return (
     <div id="app">
@@ -159,12 +160,12 @@ const LoginForMobile = () => {
                     <div className="logo">
                       <img
                         alt=""
-                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/front/logo-login.png"
+                        src={selfAllowedd?.logo}
                         className="logo"
                       />
                     </div>
                   </div>
-                  <div className="panel-body">
+                  <div className="panel-body panel">
                     <form
                       data-vv-scope="form-login"
                       onSubmit={(e) => e.preventDefault()}
@@ -173,9 +174,8 @@ const LoginForMobile = () => {
                         <div className="flash__wrapper"></div>
                       </div>
                       <fieldset>
-                        {/* <button onClick={"hanndsnd"}> hello</button> */}
+                        {/* <button onClick={hanndsnd}> hello</button> */}
                         <div className="form-group">
-
                           <input
                             name="Username"
                             type="text"
@@ -191,10 +191,6 @@ const LoginForMobile = () => {
                           ) : (
                             ""
                           )}
-
-
-
-
                         </div>
                         <div className="form-group">
                           <input
@@ -227,7 +223,11 @@ const LoginForMobile = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        {selfAllowedd === true ? (
+                        <button className="btn btn-login" onClick={() => handleLogin("demoUser")}>
+                          Login With Demo Account
+                          <i className="ml-2 fas fa-sign-in-alt"></i>
+                        </button>
+                        {selfAllowedd?.selfAllowed === true ? (
                           <button
                             className="btn btn-login"
                             onClick={handleSignUp}
@@ -241,12 +241,9 @@ const LoginForMobile = () => {
                         <button className="btn btn-login" onClick={handleHome}>
                           Back
 
-                        </button>d
+                        </button>
                         <p className="m-b-0">
-                          <small
-                            className="recaptchaTerms"
-                            style={{ marginTop: "0" }}
-                          >
+                          <small className="recaptchaTerms">
                             This site is protected by reCAPTCHA and the Google
                             <a href="https://policies.google.com/privacy">
                               Privacy Policy
@@ -266,40 +263,46 @@ const LoginForMobile = () => {
             </div>
           </div>
         </div>
-        <MFooter />
-        <>
-          <div className="confirmation" style={{ width: "300px" }}>
 
-            <Modal
-
-              show={show}
-              onHide={handleClose}
-              backdrop="static"
-              keyboard={false}
-              style={{ backgroundColor: "black", width: "300px" }}
-            >
-              <Modal.Header>
-                <Modal.Title>Modal title</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                Underage gambling is prohibited. Please confirm if you are 18
-                years old and above as of today
-              </Modal.Body>
+        {/* <button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </button> */}
+        <div className="login-modal">
+          <Modal
+            className="login-confirm-modal"
+            show={show}
+            style={{ marginLeft: "1%" }}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header style={{ width: "100%", textAlign: "center" }}>
+              <Modal.Title className="modaltitleeee">
+                Please Confirm
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Underage gambling is prohibited. Please confirm if you are 18
+              years old and above as of today
+            </Modal.Body>
+            <div className="confirm">
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" style={{ backgroundColor: "#dc3545" }} onClick={handleClose}>
                   Exit
                 </Button>
                 <Button
-                  variant="primary"
+                  className="confirmation btn-info"
+                  variant=""
                   onClick={() => handleLoginConfirm("true")}
                 >
                   Confirm
                 </Button>
               </Modal.Footer>
-            </Modal>
-          </div>
-        </>
+            </div>
+          </Modal>
+        </div>
       </div>
+      <FooterForDesktop />
     </div>
   );
 };

@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
-import Footer from "../component/Footer/Footer";
+import FooterForDesktop from "../FooterForDesktop/FooterForDesktop";
 import { useDispatch, useSelector } from "react-redux";
 import { Postuserselfregister } from "../App/Features/auth/authActions";
 import ValidationFile from "../Validation/ValidationFile";
 import { Modal } from "react-bootstrap";
 
-export let setShowRegisterModalRef
+export let setShowRegisterModalRefDesktop
 const Signup = () => {
+
+
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -26,7 +28,7 @@ const Signup = () => {
   const { PostuserselfregisterData, PostuserselfregisterDataError } =
     useSelector((state) => state.auth);
 
-  setShowRegisterModalRef = setSignUpShow;
+    setShowRegisterModalRefDesktop = setSignUpShow;
   const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
 
   const [infoError, setInfoError] = useState(false);
@@ -37,7 +39,7 @@ const Signup = () => {
   // }, [PostuserselfregisterData])
 
   const handleLogin = () => {
-    navigate("/m/login");
+    navigate("/login");
   };
   const handleInput = (e) => {
     let inputName = e.target.name;
@@ -117,9 +119,8 @@ const Signup = () => {
   const handleSignUpShow = () => {
     setSignUpClose(true);
     setSignUpShow(false);
-    navigate("/m/login");
+    navigate("/login");
   };
-
   return (
     <div id="app">
       <div>
@@ -234,7 +235,7 @@ const Signup = () => {
                       </button>
                       <button className="btn btn-login" onClick={handleLogin}>
                         <i className="ml-2 fas fa-sign-in-alt rotate-btn"></i>
-                        Login
+                        Back
                       </button>
                       <p className="m-b-0">
                         <small className="recaptchaTerms">
@@ -302,7 +303,7 @@ const Signup = () => {
           </div>
         </>
       </div>
-      <Footer />
+      <FooterForDesktop />
     </div>
   );
 };

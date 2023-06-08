@@ -17,10 +17,14 @@ const MidPage = () => {
    console.log(window.location.pathname, "window.location.pathname")
 
    const handleEnterMatch = (item) => {
-      navigator(`/gamedetails/${item}`)
+      if (token == null) {
+      } else {
+         navigator(`/gamedetails/${item}`)
+      }
    }
+
    useEffect(() => {
-      const activeMatchSportWise = { sportId: id ? id : "4" };
+      // const activeMatchSportWise = { sportId: id ? id : "4" };
       axios
          .get(
             "http://43.205.50.127:9000/betfair_api/active_match/4",
@@ -30,6 +34,7 @@ const MidPage = () => {
             // console.log(res?.data?.data)
          });
    }, [id, token]);
+
 
    return (
       <div>
@@ -72,19 +77,19 @@ const MidPage = () => {
                                           <tr>
                                              <td>
                                                 <div className="maindiv" onClick={() => handleEnterMatch(item?.matchId)}>
-                                                <div>
-                                                   <div className="eventIcon">
-                                                      <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_vir.png" alt="" class="icon-vir" />
-                                                      {/* <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/game-icon.svg" alt="" class="icon-vir" />*/}
-                                                   </div>
-                                                   <div className="eventName">
-                                                      <Link
-                                                         to="/gamedetail/1702080831"
-                                                         className="event-name"
-                                                      >
-                                                         {item?.matchName}
-                                                      </Link>
-                                                   </div>
+                                                   <div>
+                                                      <div className="eventIcon">
+                                                         <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_vir.png" alt="" class="icon-vir" />
+                                                         {/* <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/game-icon.svg" alt="" class="icon-vir" />*/}
+                                                      </div>
+                                                      <div className="eventName">
+                                                         <Link
+
+                                                            className="event-name"
+                                                         >
+                                                            {item?.matchName}
+                                                         </Link>
+                                                      </div>
                                                    </div>
                                                    <div>
                                                       <small>

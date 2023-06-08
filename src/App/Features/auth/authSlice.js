@@ -4,7 +4,7 @@ import {
     PostGameDetailsByMI, PostGetStackApi, PostEditStack, PostBetListByMatchId, PostTransferStatement, PostPlaceBet, Postactivematchsport,
     Postunsettleddddd, Postcasino, Postprofitlossmatchwise, postBetMarketAndUser, Postisselfbyappurl, Postdepsositrequestclient, Postpaymnetdetailapp,
     Postselfdepositapp, Postselfwithdrawapp, Postwithdrawrequestclient, Postvalidatejwttoken, Postuserselfregister, PostMinMaxGameDetails, PostUserOddPnl, PostUserfancypnl,
-    Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition, getResponsibleGaming, postLoginDemoUser
+    Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition, getResponsibleGaming, postLoginDemoUser, postBetHistory, postleftmenudataopen
 } from './authActions'
 
 const INITAL_STATE = {
@@ -159,6 +159,14 @@ const INITAL_STATE = {
     getResponsibleGamingData: null,
     getResponsibleGamingDataLoading: false,
     getResponsibleGamingDataError: null,
+
+    postBetHistoryData: null,
+    postBetHistoryDataLoading: false,
+    postBetHistoryDataError: null,
+
+    postleftmenudataopenData: null,
+    postleftmenudataopenDataLoading: false,
+    postleftmenudataopenDataError: null,
 
 
 
@@ -639,6 +647,32 @@ const authSlice = createSlice({
                 state.getResponsibleGamingData = action.payload.data;
                 state.getResponsibleGamingDataLoading = false;
                 state.getResponsibleGamingDataError = null;
+            })
+            .addCase(postBetHistory.pending, (state) => {
+                state.postBetHistoryData = null;
+                state.postBetHistoryDataLoading = true;
+                state.postBetHistoryDataError = null;
+            }).addCase(postBetHistory.rejected, (state, action) => {
+                state.postBetHistoryData = null;
+                state.postBetHistoryDataLoading = false;
+                state.postBetHistoryDataError = action.error.message;
+            }).addCase(postBetHistory.fulfilled, (state, action) => {
+                state.postBetHistoryData = action.payload.data;
+                state.postBetHistoryDataLoading = false;
+                state.postBetHistoryDataError = null;
+            })
+            .addCase(postleftmenudataopen.pending, (state) => {
+                state.postleftmenudataopenData = null;
+                state.postleftmenudataopenDataLoading = true;
+                state.postleftmenudataopenDataError = null;
+            }).addCase(postleftmenudataopen.rejected, (state, action) => {
+                state.postleftmenudataopenData = null;
+                state.postleftmenudataopenDataLoading = false;
+                state.postleftmenudataopenDataError = action.error.message;
+            }).addCase(postleftmenudataopen.fulfilled, (state, action) => {
+                state.postleftmenudataopenData = action.payload.data;
+                state.postleftmenudataopenDataLoading = false;
+                state.postleftmenudataopenDataError = null;
             })
 
     }

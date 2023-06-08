@@ -8,8 +8,8 @@ import SubSideBar from './SubSideBar';
 const SideBar = () => {
 
   const [valueForGame, setValueForGame] = useState(false)
-  const [gameiD, setGameId] = useState("")
-  const [gameName, setGameName] = useState("")
+  // const [gameiD, setGameId] = useState("")
+  const [sideGameData, setSideGameData] = useState("")
   let navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -26,17 +26,18 @@ const SideBar = () => {
   }, [dispatch])
 
   const handleRoute = (id, id2) => {
-    // console.log(id, "hgjkljkhbn")
+    console.log(id, id2, "hgjkljkhbn")
     // navigate(`/game/${id}`)
     setValueForGame(true)
-    setGameName(id2)
-    setGameId(id)
+    setSideGameData({ "sportsid": id, "SportsName": id2 })
+    // setGameName(id2)
+    // setGameId(id)
 
     //  console.log("paresnt to child ")
   }
 
+  // console.log(getActiveSportListData?.data?.data, "hgjkljkhbn")
   const sendData = (vl) => {
-    // console.log("child to parents")
     setValueForGame(false)
   }
 
@@ -53,7 +54,7 @@ const SideBar = () => {
       <div data-v-4732acba="" className="left-pane fdsfsdffs">
         {valueForGame === true ?
 
-          <SubSideBar valueForGame={valueForGame} gameiD={gameiD} gameName={gameName} sendData={sendData} />
+          <SubSideBar valueForGame={valueForGame} sideGameData={sideGameData} sendData={sendData} />
 
           :
           <aside data-v-4732acba="" className="menu">
@@ -68,7 +69,7 @@ const SideBar = () => {
 
                       <li data-v-4732acba="">
                         {console.log(item, "fdfdfgdfg")}
-                        <Link data-v-4732acba="" to={`/game/${item?.sportId}`} className="favourites-link" onClick={() => handleRoute(item?.sportId, "Cricket")}>
+                        <Link data-v-4732acba="" to={`/game/${item?.sportId}`} className="favourites-link" onClick={() => handleRoute(item?.sportId, item?.sportName)}>
                           <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} className="game-icon" />
                           <span data-v-4732acba="" className="link-name">{item?.sportName}</span></Link>
                       </li>))) : ""}

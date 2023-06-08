@@ -28,7 +28,7 @@ const NavBar = () => {
         setMovingMessage(response?.data?.message);
       });
   }, []);
-  // const token = localStorage.getItem("TokenId");
+  const token = localStorage.getItem("TokenId");
 
   // // console.log();
   // useEffect(() => {
@@ -88,6 +88,10 @@ const NavBar = () => {
   };
   return (
     <div className="nav newnav">
+      {
+        account ? <div className="overLay" onClick={() => setAccount(false)}></div> : ""
+      }
+
       <header className="header">
         <marquee className="marquee">
           <div>{movingMessage}</div>
@@ -279,12 +283,30 @@ const NavBar = () => {
                   </Link>
                 </div>
               </li>
-              <li>
-                <Link to="./login">
-                  <i className="fas fa-running m-r-5"></i>{" "}
-                  <span onClick={handlogout}>LogOut</span>
-                </Link>
-              </li>
+
+              {token === null ? <>
+                <li className="login_btn">
+                  <Link to="./login">
+                    <i className="fas fa-running m-r-5"></i>{" "}
+                    <span onClick={handlogout}>LogIn</span>
+                  </Link>
+                </li>
+                <li className="login_btn">
+                  <Link to="./login">
+                    <i className="fas fa-running m-r-5"></i>{" "}
+                    <span onClick={handlogout}>SignUp</span>
+                  </Link>
+                </li></> :
+                <li>
+                  <Link to="./login">
+                    <i className="fas fa-running m-r-5"></i>{" "}
+                    <span onClick={handlogout}>LogOut</span>
+                  </Link>
+                </li>
+
+              }
+
+
             </ul>
           </div>
         </div>
