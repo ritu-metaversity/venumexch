@@ -7,7 +7,7 @@ import { ImCross } from "react-icons/im"
 import { setShowRegisterModalRef } from "../../../logincomponents/Signup";
 import { setShowRegisterModalRefDesktop } from "../../../LoginForDesktop/Signup";
 import { navRef } from "../../../Layout/LayoutForMobile"
-import { navRefLogin } from "../../../logincomponents/Login";
+
 
 const token = localStorage.getItem("TokenId");
 
@@ -41,30 +41,31 @@ export const postLogin = createAsyncThunk('auth/postLogin', async (login, { reje
         return rejectWithValue(err.response.data)
     }
 })
-export const postLoginDemoUser = createAsyncThunk('auth/postLogin', async (login, { rejectWithValue }) => {
-    try {
-        const postLoginDemoUserdata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/demo-user-creation-login`, login,
+// export const postLoginDemoUser = createAsyncThunk('auth/postLogin', async (login, { rejectWithValue }) => {
+//     try {
+//         const postLoginDemoUserdata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/demo-user-creation-login`, login,
 
-            {
-                validateStatus: false
-            });
-        console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
-        if (postLoginDemoUserdata?.data?.token) {
-            navRefLogin("/m/home");
-            axios.defaults.headers.common.Authorization = `Bearer ${postLoginDemoUserdata?.data?.token}`
+//             {
+//                 validateStatus: false
+//             });
+//         // console.log(postLoginDemoUserdata, "postLoginDemoUserdatapostLoginDemoUserdata")
+//         if (postLoginDemoUserdata?.data?.token) {
+//             navRefSignLogin("/m/home");
+//             navRefLogin("/m/home");
+//             axios.defaults.headers.common.Authorization = `Bearer ${postLoginDemoUserdata?.data?.token}`
 
-            localStorage.setItem("TokenId", postLoginDemoUserdata?.data?.token);
-            localStorage.setItem("usernameDemo", postLoginDemoUserdata?.data?.username);
-            localStorage.setItem("userTypeInfo", postLoginDemoUserdata?.data?.userTypeInfo);
-        }
-        return postLoginDemoUserdata
-    } catch (err) {
-        if (err) {
-            throw err
-        }
-        return rejectWithValue(err.response.data)
-    }
-})
+//             localStorage.setItem("TokenId", postLoginDemoUserdata?.data?.token);
+//             localStorage.setItem("usernameDemo", postLoginDemoUserdata?.data?.username);
+//             localStorage.setItem("userTypeInfo", postLoginDemoUserdata?.data?.userTypeInfo);
+//         }
+//         return postLoginDemoUserdata
+//     } catch (err) {
+//         if (err) {
+//             throw err
+//         }
+//         return rejectWithValue(err.response.data)
+//     }
+// })
 
 export const getActiveSportList = createAsyncThunk('auth/getActiveSportList', async (login, { rejectWithValue }) => {
     try {
@@ -82,9 +83,10 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postOldPassRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/user/first-login-cp`, OldPassWordData);
-        console.log(postOldPassRespose, "postOldPassRespose")
+        // console.log(postOldPassRespose, "postOldPassRespose")
         if (postOldPassRespose?.data?.status === true) {
-            navRef("./login");
+            window.location.replace("./login");
+
             localStorage.clear();
         }
         if (
@@ -121,9 +123,9 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postPasswordChangeRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/change-password`, passwordChanege);
-        console.log(postPasswordChangeRespose, "postPasswordChangeResposepostPasswordChangeRespose")
+        // console.log(postPasswordChangeRespose, "postPasswordChangeResposepostPasswordChangeRespose")
         if (postPasswordChangeRespose?.data?.status === true) {
-            navRef("./login");
+            window.location.replace("./login");
             localStorage.clear();
         }
         if (
@@ -257,8 +259,20 @@ export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', 
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer "+token
         const TransferStatementData = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/account-statement`, data);
+        // console.log(TransferStatementData, "TransferStatementDataTransferStatementData")
+
+
         return TransferStatementData
     } catch (err) {
+        if (
+            err?.response?.data?.message
+        ) toast.error(err.response.data.message || "Something went Wrong!!", {
+            style: {
+                background: "rgb(156,74,70)", minHeight: 40,
+                padding: 0,
+                color: "white",
+            }
+        });
         if (err) {
             throw err
         }
@@ -269,7 +283,7 @@ export const PostTransferStatement = createAsyncThunk('auth/TransferStatement', 
 export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, { rejectWithValue }) => {
     try {
         const PlaceBet = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/place-bets`, data)
-        console.log(PlaceBet, "PlaceBetPlaceBetPlaceBet")
+        // console.log(PlaceBet, "PlaceBetPlaceBetPlaceBet")
         if (
             PlaceBet.data.message
         ) {
@@ -294,7 +308,7 @@ export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, {
             }
         });
         if (err) {
-            console.log(err, "errerrerrerrerr")
+            // console.log(err, "errerrerrerrerr")
             throw err
         }
         return err.response
@@ -427,7 +441,7 @@ export const Postselfdepositapp = createAsyncThunk('auth/Postselfdepositapp', as
         const PostselfdepositappDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/self-deposit-app`, data, {
             headers: { "Content-Type": "multipart/form-data" }
         });
-        console.log(PostselfdepositappDataaa, "PostselfdepositappDataaaPostselfdepositappDataaaPostselfdepositappDataaa")
+        // console.log(PostselfdepositappDataaa, "PostselfdepositappDataaaPostselfdepositappDataaaPostselfdepositappDataaa")
         if (
             PostselfdepositappDataaa.data.message
         ) {
@@ -515,11 +529,11 @@ export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken'
                 validateStatus: false
             });
         if (PostvalidatejwttokenDataaa.data.status === false) {
-            console.log("dfghjkldfghjklfghjklfghjklsdfghjk")
+            // console.log("dfghjkldfghjklfghjklfghjklsdfghjk")
             localStorage.clear()
-            if (navRef) {
-                navRef("/m/home")
-            }
+            // if (navRef) {
+            //     navRef("/m/home")
+            // }
         }
         return PostvalidatejwttokenDataaa
     } catch (err) {
@@ -627,6 +641,8 @@ export const Postloginlogout = createAsyncThunk('auth/Postloginlogout', async (d
         // console.log("loooogogoogogogoog")
         const PostloginlogoutDataaa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/login/logout`
         )
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`
+
         return PostloginlogoutDataaa
     } catch (err) {
         if (err) {
@@ -729,6 +745,21 @@ export const postleftmenudataopen = createAsyncThunk('auth/postleftmenudataopen'
         const postleftmenudataopenDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/left-menu-data-open`, data
         )
         return postleftmenudataopenDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+export const postDemoLogin = createAsyncThunk('auth/postDemoLogin', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        // http://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open
+        const postDemoLoginDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/left-menu-data-open`, data
+        )
+        return postDemoLoginDataa
     } catch (err) {
         if (err) {
             throw err

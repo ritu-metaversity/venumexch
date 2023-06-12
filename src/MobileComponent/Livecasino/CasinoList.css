@@ -136,10 +136,29 @@ img {
     width: 16.55%;
 }
 
-@media screen and (min-width:300px) and (max-width:500px) {
+@media screen and (min-width:300px) and (max-width:800px) {
     .colllcsss {
         width: 33%;
     }
+    img.img-fluid.casino-body-images {
+        width: 106px;
+        height: 70px;
+    }
+    .buttnnnname {
+        width: 94% !important;
+    }
+}
+
+
+@media screen and (min-width: 800px) and (max-width: 30000px) {
+    img.img-fluid.casino-body-images {
+        width: 106px;
+        height: 70px;
+    }
+    .buttnnnname {
+        width: 94% !important;
+    }
+    
 }
 
 .buttttt {
@@ -150,9 +169,9 @@ img {
     padding: 20px;
 }
 
-.casino-body-images {
+/* .casino-body-images {
     width: 75%;
-}
+} */
 
 .casino-images {
     width: 39px;
@@ -160,16 +179,29 @@ img {
 }
 
 .buttnnnname {
-    width: 75%;
-    padding: 5px;
     background-color: #183f45 !important;
-    /* border-radius: 0px 0px 6px 6px; */
-    border: none;
-    background: none;
+    padding: 5px;
+    position: absolute;
+    width: 100%;
+    bottom: -15px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0px;
+    font-size: 8px;
+    right: 0;
+    /* margin-inline: 2.5%; */
+    color: #fff;
 }
 
 .iconshadow {
-    box-shadow: 0 25px 8px -23px;
+    position: relative;
+    box-shadow: 0 25px 8px -8px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 15px;
 }
 
 /* @media only screen and (min-width:800px) and (max-width: 2000px) {
@@ -181,10 +213,32 @@ img {
 /* .buttonsize {
     width: 59%;
 } */
-.casino-body-images {
-    width: 95%;
+/* .casino-body-images {
+    width: 107px;
     height: 75px;
+} */
+
+@media screen and (min-width:555px) {
+    /* .casino-body-images {
+        width: 200px;
+        height: 75px;
+    } */
 }
+
+@media screen and (min-width: 700px)and (max-width:1000px) {
+    /* .casino-body-images {
+        width: 96px;
+        height: 75px;
+    } */
+}
+
+@media screen and (min-width: 500px)and (max-width:700px) {
+    /* .casino-body-images {
+        width: 80px;
+        height: 75px;
+    } */
+}
+
 
 button.buttnnnname {
     width: 95%;

@@ -449,14 +449,14 @@ const BettingProfitandLoss = () => {
     <DatePicker style={{width: "50%", height: "41px"}} onChange={handleStartDate}  />
     <DatePicker style={{width: "50%", height: "41px"}} onChange={handleEndDate} /> */}
 
-                  <section class="m-t-10 betting-pnl">
+                  <section class="betting-pnl pnlsection">
                     <h2 class="page-title p-l-15">Betting Profit &amp; Loss</h2>
 
                     {/* <div class="game-date"><span>15th March 2023</span> <span class="float-right">P&amp;L: <span style={{color: "black"}}>0.00</span></span></div> */}
                     {PostprofitlossmatchwiseDatatataLoading === true ?
-                      <div className=" PostselfwithdrawappDataLoadinglodding">
+                      <div className=" PostselfwithdrawappDataLoadinglodding acc_loading">
                         <i
-                          className="fa fa-spinner fa-spin loading"
+                          className="fa fa-spinner fa-spin loading loading1"
                           style={{ fontSize: "50px" }}
                         ></i>
                       </div>

@@ -13,6 +13,7 @@ import { Modal, ModalBody, ModalHeader, ModalTitle } from "react-bootstrap";
 
 const DestGamePage = ({ datatataProps }) => {
 
+    const token = localStorage.getItem("TokenId");
 
     let { id } = useParams();
     // console.log(datatataProps, "valuevaluevalue")
@@ -155,6 +156,7 @@ const DestGamePage = ({ datatataProps }) => {
                 matchDetails: gameDetailsData?.data?.Bookmaker,
                 bookmakerPnl: bookmakerPnl,
                 profits,
+                popupshow: true
             });
             setBetDetails({
                 isBack: color,
@@ -164,7 +166,7 @@ const DestGamePage = ({ datatataProps }) => {
                 marketId: item1?.mid,
                 priceValue: price,
                 isFancy: false,
-                popupshow: true
+
             });
         } else {
         }
@@ -193,6 +195,7 @@ const DestGamePage = ({ datatataProps }) => {
                 "Gamenamemeeee ": "Fancy ",
                 profits,
                 priceValue: ls1,
+                popupshow: true
             });
             setBetDetails({
                 isBack: color,
@@ -202,7 +205,6 @@ const DestGamePage = ({ datatataProps }) => {
                 marketId: item?.sid,
                 priceValue: price,
                 isFancy: false,
-                popupshow: true
             });
         } else {
         }
@@ -241,7 +243,7 @@ const DestGamePage = ({ datatataProps }) => {
             setOddSocketConnected(true);
         });
     }, []);
-    const token = localStorage.getItem("TokenId");
+
 
     useEffect(() => {
         if (token) {
@@ -252,7 +254,7 @@ const DestGamePage = ({ datatataProps }) => {
                     socket.emit("JoinRoom", {
                         eventId: id,
                     }),
-                1000
+                500
             );
             return () => {
                 clearInterval(timer);
@@ -642,7 +644,7 @@ const DestGamePage = ({ datatataProps }) => {
                                                 <thead data-v-22b1a176="">
                                                     <tr data-v-22b1a176="">
                                                         <th data-v-22b1a176="" className="market-name title">
-                                                            sdad   <b>{item11?.Name}</b>
+                                                            <b>{item11?.Name}</b>
                                                         </th>
                                                         <th data-v-22b1a176="" colSpan={2} />
                                                         <th data-v-22b1a176="" className="back">
@@ -730,7 +732,7 @@ const DestGamePage = ({ datatataProps }) => {
                                                                                     handleBitValue(
                                                                                         item?.price,
                                                                                         item1?.name,
-                                                                                        "lay",
+                                                                                        "back",
                                                                                         item11?.Name,
                                                                                         item11?.marketId,
                                                                                         item,

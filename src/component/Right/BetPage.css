@@ -52,3 +52,13 @@ h6.m-b-0.p-l-10.bet-type-info {
     margin-left: -18px;
     font-size: 12px;
 }
+._gameLoading {
+    position: absolute;
+    left: 0%;
+    width: 100% !important;
+    height: 100%;
+}
+._gameLoading  i{
+    position: absolute !important;
+    top: 40%;
+}

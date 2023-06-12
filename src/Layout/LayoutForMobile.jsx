@@ -47,18 +47,18 @@ const LayoutForMobile = () => {
   // "old"
   // const PassWordType = localStorage.getItem("PassWordType");
 
-  useEffect(() => {
-    if (localStorage.getItem("PassWordType") === "old") {
-    } else {
-      const time = setInterval(() => {
-        if (token) {
+  // useEffect(() => {
+  //   if (localStorage.getItem("PassWordType") === "old") {
+  //   } else {
+  //     const time = setInterval(() => {
+  //       if (token) {
 
-          dispatch(Postvalidatejwttoken());
-        }
-      }, 5000);
-      return () => clearInterval(time);
-    }
-  }, [token]);
+  //         dispatch(Postvalidatejwttoken());
+  //       }
+  //     }, 5000);
+  //     return () => clearInterval(time);
+  //   }
+  // }, [token]);
   console.log(window.location.pathname, "window.location.pathname")
   // /m/game/
   // /m/casino-list
@@ -178,7 +178,7 @@ const LayoutForMobile = () => {
 
         <div
           className={RightValue === true && token !== null ? "right-menu" : ""}
-          style={{ overflowY: "hidden " }}
+          style={{ overflowY: "scroll " }}
         >
           <RightMenu RightSideBarClose={RightSideBarClose} />
         </div>
@@ -208,7 +208,7 @@ const LayoutForMobile = () => {
 
         {/* </div> */}
 
-        <div className="bottom-icon" style={{ width: "40px", height: "42px" }}>
+        <div className="bottom-icon" style={{ width: "40px", height: "40px" }}>
           <Eyeicon style={{ fontSize: "22px" }} />
         </div>
       </div>
@@ -217,6 +217,7 @@ const LayoutForMobile = () => {
         <div
           className={`eighteen-plus  ${BetType}-border  ${BetTypeFooter ? "" : "modal-design"
             } ${cssClsssssssssssss ? cssClsssssssssssss : ""}`}
+            style={{marginLeft:"0px"}}
         >
           <Modal.Body style={{ marginLeft: "-72% !important" }}>
             <BitPopup

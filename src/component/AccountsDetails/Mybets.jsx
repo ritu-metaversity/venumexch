@@ -11,37 +11,47 @@ import moment from "moment";
 const dateFormat = "YYYY-MM-DD";
 const Mybets = () => {
   const dispatch = useDispatch();
-
-
   const [matchid, setMatchId] = useState("")
-
-
-
-
-
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+  const [current, setcurrent] = useState(true)
+  const [history, setHistory] = useState(false)
+  const [historyData, setHistoryData] = useState({})
+  const [unsettledbetmatchdata, setUnsettledbetmatchdata] = useState({})
+  const [unmatchedBets, setUnmatchedBets] = useState(false);
+  const [matchedBets, setmatchedBets] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  const { PostunsettledData, PostunsettledDataLoading, postBetHistoryData, postBetHistoryDataLoading, getActiveSportListData } = useSelector(
+    (state) => state.auth
+  );
 
-  console.log(startDate, "jksdfhkjdfh")
-  console.log(endDate, "jksdfhkjdfh")
+
   const StartDateValue = (date, dateString) => {
     setStartDate(dateString);
   };
+
   const EndDateValue = (date, dateString) => {
     setEndDate(dateString);
   };
 
 
 
-  const [unmatchedBets, setUnmatchedBets] = useState(false);
-  const [matchedBets, setmatchedBets] = useState(false);
-  const [pageNumber, setPageNumber] = useState(0);
-
-  const { getActiveSportListData } = useSelector(state => state.auth)
   useEffect(() => {
     dispatch(getActiveSportList())
   }, [])
 
+  useEffect(() => {
+    if (postBetHistoryData?.data && postBetHistoryData?.data?.dataList) {
+      setUnsettledbetmatchdata(postBetHistoryData?.data && postBetHistoryData?.data?.dataList)
+    }
+
+  }, [postBetHistoryData])
+  useEffect(() => {
+
+    if (PostunsettledData?.data && PostunsettledData?.data?.dataList) {
+      setUnsettledbetmatchdata(PostunsettledData?.data && PostunsettledData?.data?.dataList)
+    }
+  }, [PostunsettledData])
   const handleGameName = (e) => {
     let inputValue = e.target.value;
     setMatchId(inputValue)
@@ -55,6 +65,8 @@ const Mybets = () => {
     }
     // console.log("ssjjk");
   };
+
+
   const handlematched = () => {
     if (matchedBets === true) {
       setmatchedBets(false);
@@ -64,20 +76,13 @@ const Mybets = () => {
     // console.log("ssjjk");
   };
 
-  const { PostunsettledData, PostunsettledDataLoading, postBetHistoryData, postBetHistoryDataLoading } = useSelector(
-    (state) => state.auth
-  );
-
-  console.log(PostunsettledDataLoading, "PostunsettledDataLoading");
-
-  // console.log(PostBetListByMatchIdData ,"dushyant")
 
   useEffect(() => {
     let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1 };
 
     dispatch(Postunsettleddddd(data));
 
-  }, [pageNumber]);
+  }, [pageNumber, current]);
 
   const handleDoubleLeft = (vl) => {
     if (vl === "doubleleft") {
@@ -90,8 +95,7 @@ const Mybets = () => {
       setPageNumber(PostunsettledData?.data?.totalPages);
     }
   };
-  const [current, setcurrent] = useState(true)
-  const [history, setHistory] = useState(false)
+
   const handleSelect = (vl) => {
     if (vl === "selected1") {
       setcurrent(true)
@@ -105,9 +109,6 @@ const Mybets = () => {
   const [historyError, setHistoryError] = useState("false")
 
   const handleSearch = () => {
-    console.log(startDate, "startDate")
-    console.log(endDate, "startDate")
-    console.log(matchid, "startDate")
     if (startDate !== undefined && endDate !== undefined && matchid !== "") {
       console.log("eeee")
       setHistoryError("false")
@@ -122,46 +123,15 @@ const Mybets = () => {
       })
       dispatch(postBetHistory(data))
     } else {
-
       setHistoryError("true")
       console.log("hello")
     }
   }
   console.log(historyError, "historyErrorhistoryError")
-  // var curr = new Date();
 
-  // const timeBefore = moment(curr).subtract(14, "days").format("YYYY-MM-DD");
-  // const time = moment(curr).format("YYYY-MM-DD");
-  // console.log(timeBefore, "timeBefore")
-  // console.log(time, "timeBefore")
 
-  // useEffect(() => {
-  //   let data = ({
-  //     fromDate: time,
-  //     index: 0,
-  //     isdeleted: false,
-  //     noOfRecords: 100,
-  //     sportId: matchid,
-  //     toDate: timeBefore
-  //   })
-  //   dispatch(postBetHistory(data))
-  // }, [history])
 
-  const [historyData, setHistoryData] = useState({})
-  const [unsettledbetmatchdata, setUnsettledbetmatchdata] = useState({})
-  useEffect(() => {
-    if (postBetHistoryData?.data && postBetHistoryData?.data?.dataList) {
-      setUnsettledbetmatchdata(postBetHistoryData?.data && postBetHistoryData?.data?.dataList)
-    }
 
-  }, [postBetHistoryData])
-  useEffect(() => {
-
-    if (PostunsettledData?.data && PostunsettledData?.data?.dataList) {
-      setUnsettledbetmatchdata(PostunsettledData?.data && PostunsettledData?.data?.dataList)
-    }
-  }, [PostunsettledData])
-  console.log(postBetHistoryData?.data?.dataList, "jksdfhkjdfh")
 
   return (
     <div className="content boxed-layout-wrapper _flex wid-100">

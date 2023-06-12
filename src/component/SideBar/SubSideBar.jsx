@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { postleftmenudataopen } from "../../App/Features/auth/authActions";
-
+import "./SubSideBar.css"
 const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
   const dispatch = useDispatch()
   // const [ valueForGame,setValueForGame]=useState("false")
@@ -26,7 +26,8 @@ const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
     dispatch(postleftmenudataopen())
   }, [sideGameData])
 
-  console.log(postleftmenudataopenData, "postleftmenudataopenData")
+  // console.log(postleftmenudataopenData, "fsdfsdfsdsfsd")
+
   return (
     <div>
 
@@ -46,6 +47,7 @@ const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
                     >
                       Sports
                     </span>
+
                   </Link>
                 </li>
                 <li>
@@ -59,15 +61,36 @@ const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
                       alt=""
                     />{" "}
                     <span className="link-name">{sideGameData?.SportsName}</span>
-                  </Link>
-                </li>
 
-                <li>
-                  <Link href="/" className="link-lvl-prev">
+                  </Link>
+                  <li>
+                  <Link href="/" className="link-lvl-prev" onClick={() => handleBackSports()}>
                     <i className="fas fa-chevron-circle-left"></i>{" "}
                     <span className="link-name">Previous</span>
                   </Link>
                 </li>
+                  {postleftmenudataopenData?.data?.find(i => i.sportId === sideGameData?.sportsid)?.matchList.map(match =>
+
+
+
+
+                    <Link to={`gamedetails/${match.matchId}`}>
+                      <li data-v-91c481c8="">
+                        <a data-v-91c481c8="" href="/game/4/101480" class="menu-link menu_list sport-type-Cricket">
+                          <p data-v-91c481c8="" class="link-name">{match.matchName}</p>
+                          <p>
+                          <i data-v-91c481c8="" class="fas fa-angle-right "></i>
+                          </p>
+                        </a>
+                      </li>
+                      {/*  <div className="subside-leftmenudata">
+                        {match.matchName}{" "}({match.date})
+                  </div>*/}
+                    </Link>
+                  )}
+                </li>
+
+              
                 <span>
                   <li></li>
                 </span>

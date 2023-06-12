@@ -26,20 +26,23 @@ const Transferstatement = () => {
   const [trueee, setTrueee] = useState(false);
   const [matchId, setMatchId] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
+
   var curr = new Date();
   const timeBefore = moment(curr).subtract(14, "days").format("YYYY-MM-DD");
   const time = moment(curr).format("YYYY-MM-DD");
+
+
   const [startDate, setStartDate] = useState(timeBefore);
   const [endDate, setEndDate] = useState(time);
   const [gameNameForType, setGameNameForType] = useState(1);
 
-  useEffect(() => {
-    if (PostTransferStatementData?.data === "") {
-      // console.log("true");
-    } else {
-      // console.log("false");
-    }
-  }, [PostTransferStatementData?.data]);
+  // useEffect(() => {
+  //   if (PostTransferStatementData?.data === "") {
+  // console.log("true");
+  // } else {
+  // console.log("false");
+  //   }
+  // }, [PostTransferStatementData?.data]);
 
   // console.log(PostTransferStatementData?.data?.totalPages, "hello");
 
@@ -56,8 +59,8 @@ const Transferstatement = () => {
     let data = {
       noOfRecords: 100,
       index: pageNumber,
-      fromDate: startDate,
-      toDate: endDate,
+      fromDate: timeBefore,
+      toDate: time,
       type: gameNameForType,
     };
     // console.log("apiiiiiii");
@@ -81,16 +84,16 @@ const Transferstatement = () => {
       setPageNumber(PostTransferStatementData?.data?.totalPages);
     }
   };
-  console.log(pageNumber, "hello");
+  // console.log(pageNumber, "hello");
 
   const handleSelectGame = (e) => {
     let inputValue = e.target.value;
-    console.log(inputValue, "dasjdhadhas");
+    // console.log(inputValue, "dasjdhadhas");
     setGameNameForType(inputValue);
   };
 
   const handleSubmit = (e) => {
-
+    e.preventDefault()
     let data = {
       noOfRecords: 100,
       index: pageNumber,
@@ -103,168 +106,170 @@ const Transferstatement = () => {
   return (
     <>
       <div className="home-page">
-        {
-          PostTransferStatementDataLoading === true ? <div className=" PostselfwithdrawappDataLoadinglodding">
-            <i
-              className="fa fa-circle-o-notch fa-spin loading"
-              style={{ fontSize: "50px" }}
-            ></i>
-            <p className="loading-text">Loading...</p>{" "}
-          </div>
-            :
 
 
-            <div className="container-inner">
-              <section className="m-t-10 transfer">
-                <h2 className="page-title p-l-15">Account Statement</h2>
 
-                <div style={{ marginTop: "19px" }}>
-                  <DatePicker
-                    className="startDate"
-                    defaultValue={dayjs(startDate)}
-                    format={dateFormat}
-                    onChange={StartDateValue}
-                    disabledDate={(d) =>
-                      !d ||
-                      d.isBefore(dayjs().subtract(2, "month")) ||
-                      d.isAfter(dayjs())
-                    }
-                  />
-                  <DatePicker
-                    className="endDate"
-                    defaultValue={dayjs}
-                    format={dateFormat}
-                    onChange={EndDateValue}
-                    disabledDate={(d) =>
-                      !d ||
-                      d.isBefore(dayjs().subtract(2, "month")) ||
-                      d.isAfter(dayjs())
-                    }
-                  />
-                  <div className="AccountBtnsubmit">
+        <div className="container-inner">
+          <section className="m-t-10 transfer">
+            <h2 className="page-title p-l-15">Account Statement</h2>
 
-                    <select
-                      className="selectionndsfsdfnn"
-                      // name="cars"
-                      // id="cars"
+            <div style={{ marginTop: "19px" }}>
+              <DatePicker
+                className="startDate"
+                defaultValue={dayjs(startDate)}
+                format={dateFormat}
 
-                      onChange={handleSelectGame}
-                    >
-                      <option value={1}> All</option>
-                      <option value={2}> Deposite/Withdraw Report</option>
-                      <option value={3}> Game Report</option>
-                    </select>
-                    <button
-                      className="selectionndsfsdfnn"
-                      style={{ width: "45%" }}
-                      onClick={handleSubmit}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-                <div className="table-responsive">
-                  <table className="table" style={{ width: "100%" }}>
-                    <thead className="tbodybody">
-                      <tr>
-                        <th>Date</th>
-                        <th style={{ width: "15%" }}>Credit</th>
-                        <th style={{ width: "13%" }}>Debit</th>
-                        <th className="Balance">Balance</th>
-                        <th>Remark</th>
-                      </tr>
-                    </thead>
-                    <tbody
-                      className="tbodybody"
-                      style={{
-                        height: "calc(100vh - 330px)",
-                        display: "block",
-                        overflow: "scroll",
-                      }}
-                    >
-                      {PostTransferStatementData?.data &&
-                        PostTransferStatementData?.data?.dataList ? (
-                        PostTransferStatementData?.data?.dataList.map((el) => (
-                          <tr
-                            className="accountStatment"
-                            onClick={() =>
-                              handleDetailsStatement(el?.marketid, el?.remark)
-                            }
-                          >
-                            <td>
-                              {" "}
-                              {moment(el?.date).format("YYYY-MM-DD  - h:mm")}
-                            </td>
-                            <td style={{ color: "green", width: "10%" }}>
-                              {" "}
-                              {el?.credit}
-                            </td>
-                            <td style={{ color: "red", width: "15%" }}>
-                              {el?.debit}
-                            </td>
-                            <td style={{ width: "15%" }}>{el?.pts}</td>
-                            <td style={{ width: "30%" }}>{el?.remark}</td>
-                          </tr>
-                        ))
-                      ) : (
-                        <tr>
-                          <td colspan="3" className="text-center">
-                            There Have Been No Transfers In The Last 14 Days.
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-              <div className="pagination">
-                <button
-                  disabled={pageNumber === 0 ? true : false}
-                  className="paginationBtn"
-                  onClick={() => handleDoubleLeft("doubleleft")}
+                onChange={StartDateValue}
+                disabledDate={(d) =>
+                  !d ||
+                  d.isBefore(dayjs().subtract(2, "month")) ||
+                  d.isAfter(dayjs())
+                }
+              />
+              <DatePicker
+                className="endDate"
+                defaultValue={dayjs}
+
+                format={dateFormat}
+                onChange={EndDateValue}
+                disabledDate={(d) =>
+                  !d ||
+                  d.isBefore(dayjs().subtract(2, "month")) ||
+                  d.isAfter(dayjs())
+                }
+              />
+              <div className="AccountBtnsubmit">
+
+                <select
+                  className="selectionndsfsdfnn"
+                  // name="cars"
+                  // id="cars"
+                  onChange={handleSelectGame}
                 >
-                  <AiOutlineDoubleLeft className="arrowDoubleLeft" />
-                </button>
+                  <option value={1}> All</option>
+                  <option value={2}> Deposite/Withdraw Report</option>
+                  <option value={3}> Game Report</option>
+                </select>
                 <button
-                  disabled={pageNumber === 0 ? true : false}
-                  className="paginationBtn"
-                  style={{ marginLeft: "-9px" }}
-                  onClick={() => handleDoubleLeft("sigleleft")}
+                  className="selectionndsfsdfnn"
+                  style={{ width: "45%" }}
+                  onClick={handleSubmit}
                 >
-                  <AiOutlineLeft className="arrowSingleLeft" />
-                </button>
-                <div className="paginationno">
-                  <div style={{ marginTop: "7px", marginLeft: "11px" }}>
-                    {pageNumber + 1}
-                  </div>
-                </div>
-
-                <button
-                  disabled={
-                    PostTransferStatementData?.data?.totalPages === pageNumber + 1
-                      ? true
-                      : false
-                  }
-                  className="paginationBtn"
-                  style={{ marginLeft: "-10px" }}
-                  onClick={() => handleDoubleLeft("singleright")}
-                >
-                  <AiOutlineRight className="arrowSingleRight" />
-                </button>
-                <button
-                  disabled={
-                    PostTransferStatementData?.data?.totalPages === pageNumber + 1
-                      ? true
-                      : false
-                  }
-                  className="paginationBtn"
-                  onClick={() => handleDoubleLeft("doubleright")}
-                >
-                  <AiOutlineDoubleRight className="arrowDoubleRight" />
+                  Submit
                 </button>
               </div>
             </div>
-        }
+            <div className="table-responsive">
+              {
+                PostTransferStatementDataLoading === true ? <div className=" PostselfwithdrawappDataLoadinglodding">
+                  <i
+                    className="fa fa-circle-o-notch fa-spin loading"
+                    style={{ fontSize: "50px" }}
+                  ></i>
+                  <p className="loading-text">Loading...</p>{" "}
+                </div> : <table className="table" style={{ width: "100%" }}>
+                  <thead className="tbodybody">
+                    <tr>
+                      <th>Date</th>
+                      <th style={{ width: "15%" }}>Credit</th>
+                      <th style={{ width: "13%" }}>Debit</th>
+                      <th className="Balance">Balance</th>
+                      <th>Remark</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    className="tbodybody"
+                    style={{
+                      height: "100vh",
+                      display: "block",
+                      overflow: "scroll",
+                    }}
+                  >
+                    {PostTransferStatementData?.data &&
+                      PostTransferStatementData?.data?.dataList ? (
+                      PostTransferStatementData?.data?.dataList.map((el) => (
+                        <tr
+                          className="accountStatment"
+                          onClick={() =>
+                            handleDetailsStatement(el?.marketid, el?.remark)
+                          }
+                        >
+                          <td>
+                            {" "}
+                            {moment(el?.date).format("YYYY-MM-DD  - h:mm")}
+                          </td>
+                          <td style={{ color: "green", width: "10%" }}>
+                            {" "}
+                            {el?.credit}
+                          </td>
+                          <td style={{ color: "red", width: "15%" }}>
+                            {el?.debit}
+                          </td>
+                          <td style={{ width: "19%" }}>{el?.pts}</td>
+                          <td style={{ width: "30%" }}>{el?.remark}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colspan="3" className="text-center">
+                          There Have Been No Transfers In The Last 14 Days.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              }
+
+            </div>
+          </section>
+          <div className="pagination">
+            <button
+              disabled={pageNumber === 0 ? true : false}
+              className="paginationBtn"
+              onClick={() => handleDoubleLeft("doubleleft")}
+            >
+              <AiOutlineDoubleLeft className="arrowDoubleLeft" />
+            </button>
+            <button
+              disabled={pageNumber === 0 ? true : false}
+              className="paginationBtn"
+              style={{ marginLeft: "-9px" }}
+              onClick={() => handleDoubleLeft("sigleleft")}
+            >
+              <AiOutlineLeft className="arrowSingleLeft" />
+            </button>
+            <div className="paginationno">
+              <div style={{ marginTop: "7px", marginLeft: "11px" }}>
+                {pageNumber + 1}
+              </div>
+            </div>
+
+            <button
+              disabled={
+                PostTransferStatementData?.data?.totalPages === pageNumber + 1
+                  ? true
+                  : false
+              }
+              className="paginationBtn"
+              style={{ marginLeft: "-10px" }}
+              onClick={() => handleDoubleLeft("singleright")}
+            >
+              <AiOutlineRight className="arrowSingleRight" />
+            </button>
+            <button
+              disabled={
+                PostTransferStatementData?.data?.totalPages === pageNumber + 1
+                  ? true
+                  : false
+              }
+              className="paginationBtn"
+              onClick={() => handleDoubleLeft("doubleright")}
+            >
+              <AiOutlineDoubleRight className="arrowDoubleRight" />
+            </button>
+          </div>
+        </div>
+
 
 
       </div>

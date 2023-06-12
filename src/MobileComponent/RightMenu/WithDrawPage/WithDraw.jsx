@@ -31,7 +31,7 @@ const WithDraw = () => {
   const [ifscError, setIfscError] = useState(false);
   const [infoError, setInfoError] = useState(false);
   const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
-  console.log(PostselfwithdrawappDataLoading, "PostselfwithdrawappDataLoading")
+  // console.log(PostselfwithdrawappDataLoading, "PostselfwithdrawappDataLoading")
   let navigate = useNavigate();
   const userTypeInfo = localStorage.getItem("userTypeInfo");
 
@@ -265,7 +265,7 @@ const WithDraw = () => {
                     <option value="Current">Current</option>
                   </select>
                 </div>
-                <div className="mx-input-wrapper account-field withdrawBtn">
+                <div className="">
                   <button
                     className="btn btn-primary btn-block btn-sm wsubmit"
                     style={{ marginTop: "20px" }}
@@ -403,9 +403,11 @@ const WithDraw = () => {
                                 {item?.accountType}
                               </td>
                               <td aria-colindex="6" className="text-lift">
-                                {moment(item?.time).format("MM DD YYYY - HH MM ")}
+                                {/*  {moment(item?.time).format("MM DD YYYY - HH MM ")}*/}
+                                {item?.time}
+
                               </td>
-                              {console.log(item, "dfsfsfsdfs")}
+
                               <td
                                 aria-colindex="6"
                                 className="text-lift withdraw-data"

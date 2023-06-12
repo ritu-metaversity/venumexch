@@ -24,6 +24,7 @@ const ChangePassword = () => {
    const [emptyNewPassWord, setemptyPassWord] = useState(false);
    const [emptyConfirm, setemptyConfirm] = useState(false);
    const [infoError, setInfoError] = useState(false);
+   const [samePassword, setSamePassword] = useState(false);
 
    let dispatch = useDispatch();
 
@@ -57,12 +58,14 @@ const ChangePassword = () => {
             setemptyPassWord(
                ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
             );
+            setSamePassword(false)
             break;
          case "ConfirmNewPassword":
             setConfirmPassword(ValidationFile.spaceNotAccept(inputValue));
             setemptyConfirm(
                ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
             );
+            setSamePassword(false)
             break;
          default:
             return false;
@@ -105,7 +108,7 @@ const ChangePassword = () => {
       ) {
          dispatch(PostPwChangeFirstTime(passwordData));
          localStorage.clear();
-         navigate("./login");
+         // navigate("./login");
          // window.location.replace("/");
       }
    };
@@ -134,112 +137,119 @@ const ChangePassword = () => {
          !ValidationFile.isEmpty(newPassword) &&
          !ValidationFile.isEmpty(confirmPassword)
       ) {
-         dispatch(PostPasswordChange(passwordData));
-         localStorage.clear();
-         navigate("./login");
+         if (confirmPassword === newPassword) {
+
+            dispatch(PostPasswordChange(passwordData));
+         } else {
+            setSamePassword(true)
+         }
+
+
          // window.location.replace("/");
       }
    };
 
-
    return (
       <div className="content boxed-layout-wrapper" >
-         <div className="change-password">
-            <form data-vv-scope="form-changepassword" style={{ width: "300px" }}>
-               <h1 className='ch-pass betHeading pnlHeading'>Change Password</h1>
+         <div className="change-password" style={{ width: "310px" }}>
 
-               <div className="placeholder-wrapper pnlHeading activated m-t-25">
-                  <div className="placeholder">Old Password</div>
-                  <div>
+            <h1 className='ch-pass betHeading pnlHeading'>Change Password</h1>
 
-                     <input
-                        name="CurrentPassword"
-                        type="password"
-                        placeholder="Current Password"
-                        className="form-control"
-                        onChange={handleInput}
-                     />
-                     {emptyCurrent && infoError ? (
-                        <>
-                           <span className="text-danger">
-                              {" "}
-                              The Current Password is required.
-                           </span>{" "}
-                        </>
-                     ) : (
-                        ""
-                     )}
-                     <span className="text-danger error" style={{ display: "none" }}></span></div>
-               </div>
-               <div className="placeholder-wrapper pnlHeading activated m-t-25">
-                  <div className="placeholder">New Password</div>
-                  <div>
-                     <input
-                        name="NewPassword"
-                        type="password"
-                        placeholder="New Password"
-                        className="form-control"
-                        onChange={handleInput}
-                     />
-                     {emptyNewPassWord && infoError ? (
-                        <>
-                           <span className="text-danger">
-                              {" "}
-                              The New Password is required.
-                           </span>{" "}
-                        </>
-                     ) : (
-                        ""
-                     )}
+            <div className="placeholder-wrapper pnlHeading activated m-t-25">
+               <div className="placeholder">Old Password</div>
+               <div>
 
-                     <span className="text-danger error" style={{ display: "none" }}></span></div>
-               </div>
-               <div className="placeholder-wrapper pnlHeading activated m-t-25">
-                  <div className="placeholder">Repeat Password</div>
-                  <div>
-                     <input
-                        name="ConfirmNewPassword"
-                        data-vv-as="NewPassword"
-                        type="password"
-                        placeholder="Confirm New Password"
-                        className="form-control"
-                        onChange={handleInput}
-                     />{" "}
-                     {emptyConfirm && infoError ? (
-                        <>
-                           <span className="text-danger">
-                              {" "}
-                              The Confirm New Password is required.
-                           </span>{" "}
-                        </>
-                     ) : (
-                        ""
-                     )}
-                     <span className="text-danger error" style={{ display: "none" }}></span></div>
-               </div>
-               <div className="m-t-2 text-right">
-                  {PasswordStatus === "old" ? (
-                     <button
-                        type="submit"
-                        className="mt-0 w-0 btn-primary searchBtnNew"
-                        onClick={handleSavePassWordFirstTime}
-                        style={{ marginRight: "4%" }}
-                     >
-                        Save
-                     </button>
+                  <input
+                     name="CurrentPassword"
+                     type="password"
+                     placeholder="Current Password"
+                     className="form-control"
+                     onChange={handleInput}
+                  />
+                  {emptyCurrent && infoError ? (
+                     <>
+                        <span className="text-danger">
+                           {" "}
+                           The Current Password is required.
+                        </span>{" "}
+                     </>
                   ) : (
-                     <button
-                        type="submit"
-                        className="mt-0 w-0 btn-primary searchBtnNew"
-                        onClick={handleSavePassWord}
-                        style={{ marginRight: "4%" }}
-                     >
-                        Savewewe
-                     </button>
+                     ""
+                  )}
+                  <span className="text-danger error" style={{ display: "none" }}></span></div>
+            </div>
+            <div className="placeholder-wrapper pnlHeading activated m-t-25">
+               <div className="placeholder">New Password</div>
+               <div>
+                  <input
+                     name="NewPassword"
+                     type="password"
+                     placeholder="New Password"
+                     className="form-control"
+                     onChange={handleInput}
+                  />
+                  {emptyNewPassWord && infoError ? (
+                     <>
+                        <span className="text-danger">
+                           {" "}
+                           The New Password is required.
+                        </span>{" "}
+                     </>
+                  ) : (
+                     ""
                   )}
 
-               </div>
-            </form>
+                  <span className="text-danger error" style={{ display: "none" }}></span></div>
+            </div>
+            <div className="placeholder-wrapper pnlHeading activated m-t-25">
+               <div className="placeholder">Repeat Password</div>
+               <div>
+                  <input
+                     name="ConfirmNewPassword"
+                     data-vv-as="NewPassword"
+                     type="password"
+                     placeholder="Confirm New Password"
+                     className="form-control"
+                     onChange={handleInput}
+                  />{" "}
+                  {emptyConfirm && infoError ? (
+                     <>
+                        <span className="text-danger">
+                           {" "}
+                           The Confirm New Password is required.
+                        </span>{" "}
+                     </>
+                  ) : (
+                     ""
+                  )}
+                  <span className="text-danger error" style={{ display: "none" }}></span></div>
+               <span class="text-danger">
+                  {samePassword === true ? "New Password and Confirmation Password should be same" : ""}
+               </span>
+            </div>
+            <div className="m-t-2 text-right">
+               {PasswordStatus === "old" ? (
+                  <button
+                     type="submit"
+                     className="mt-0 w-0 btn-primary searchBtnNew"
+                     onClick={handleSavePassWordFirstTime}
+                     style={{ marginRight: "4%" }}
+                  >
+                     Save
+                  </button>
+               ) : (
+                  <button
+                     type="submit"
+                     className="mt-0 w-0 btn-primary searchBtnNew"
+                     onClick={handleSavePassWord}
+                     style={{ marginRight: "4%" }}
+                  >
+                     Save
+                  </button>
+               )}
+
+            </div>
+
          </div></div>
    )
 }

@@ -30,7 +30,7 @@ const UpperBanner = () => {
             <Slider {...settings}>
                 {postUserBannerListData?.data?.length &&
                     postUserBannerListData?.data?.map((res) => {
-                        console.log(res, "dsfdsg");
+                        // console.log(res, "dsfdsg");
                         return (
                             <div>
                                 <img src={res?.path} alt="" className="bannerImage" />

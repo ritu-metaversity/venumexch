@@ -449,3 +449,33 @@ label.active1.btn.btn-primary {
 .ant-picker.css-dev-only-do-not-override-1km3mtt.dest_end.dest_startDate {
     margin-left: 4px !important;
 }
+
+.acc_loading {
+    background-color: #0000002b;
+    height: calc(100vh - 400px) !important;
+    position: absolute;
+    width: 62%;
+}
+
+.loading1 {
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* height: 100vh; */
+    background: unset;
+    position: absolute;
+    height: 0;
+    top: 50%;
+}
+
+.page-title {
+    margin-bottom: 12px !important;
+}
+
+div#radios2 {
+    display: flex !important;
+}
+
+.pnlsection {
+    margin-top: -1px !important;
+}

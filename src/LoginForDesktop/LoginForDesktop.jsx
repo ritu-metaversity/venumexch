@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import FooterForDesktop from "../FooterForDesktop/FooterForDesktop";
 import {
   Postisselfbyappurl,
-  postLogin, postLoginDemoUser
+  postLogin
 } from "../App/Features/auth/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../component/Footer/Footer";
@@ -19,8 +19,8 @@ const LoginForMobile = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [login, setLogin] = useState({});
-  const [userName, setUserName] = useState("poiuytrewq");
-  const [password, setPassword] = useState("111111");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const { pathname } = useLocation();
 
   const [errorId, setErrorId] = useState(false);
@@ -60,15 +60,23 @@ const LoginForMobile = () => {
     setLoginData(postLoginData);
   }, [postLoginData]);
 
-  // useEffect(() => {
-  //   console.log(postLoginDemoUserData?.token, "asdfghjkl")
-  //   if (postLoginDemoUserData?.token) {
-  //     navigate("/home");
-  //     localStorage.setItem("TokenId", postLoginData?.token);
-  //     localStorage.setItem("username", postLoginData?.username);
-  //   }
-  // }, [postLoginDemoUserData]);
+  const handleDemoLogin = () => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: window.location.hostname }
+      )
+      .then((res) => {
+        if (res?.data?.token) {
+          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
+          navigate("/home");
+          localStorage.setItem("TokenId", res?.data?.token);
+          localStorage.setItem("usernameDemo", res?.data?.username);
+          localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
 
+        }
+      })
+  };
   const handleInput = (e) => {
     let inputName = e.target.name;
     let inputValue = e.target.value;
@@ -88,19 +96,16 @@ const LoginForMobile = () => {
   };
 
   const handleLogin = (vl) => {
-    if (vl === "demoUser") {
-      dispatch(postLoginDemoUser({ "appUrl": window.location.hostname }));
 
-    } else {
-      setLogin({
-        userId: userName,
-        password: password,
-        // appUrl: window.location.hostname,
-        appUrl: "localhost"
-      });
+    setLogin({
+      userId: userName,
+      password: password,
+      appUrl: window.location.hostname,
+      // appUrl: "localhost"
+    });
 
-      setShow(true);
-    }
+    setShow(true);
+
 
   };
   const handleHome = () => {
@@ -148,6 +153,8 @@ const LoginForMobile = () => {
   }, [appUrll]);
 
 
+
+
   return (
     <div id="app">
       <div>
@@ -162,6 +169,7 @@ const LoginForMobile = () => {
                         alt=""
                         src={selfAllowedd?.logo}
                         className="logo"
+                        style={{ height: "190px" }}
                       />
                     </div>
                   </div>
@@ -223,8 +231,8 @@ const LoginForMobile = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        <button className="btn btn-login" onClick={() => handleLogin("demoUser")}>
-                          Login With Demo Account
+                        <button className="btn btn-login" onClick={handleDemoLogin}>
+                          Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
                         {selfAllowedd?.selfAllowed === true ? (

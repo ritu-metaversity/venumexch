@@ -78,14 +78,7 @@ const AccountStatement = () => {
   };
   return (
     <div className="content boxed-layout-wrapper" >
-
-
-
-
-
-
       <div className='wid-100'>
-
         <h1 className='betHeading pnlHeading'>Account Statement</h1>
         <div className="column m-r-40 ">
           <form data-vv-scope="mybets" className='pnl'>

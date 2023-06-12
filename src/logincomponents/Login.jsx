@@ -12,10 +12,13 @@ import {
   postLogin, postLoginDemoUser
 } from "../App/Features/auth/authActions";
 
-export let navRefLogin;
+
+
 const Login = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
+
+
   const [login, setLogin] = useState({});
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +30,11 @@ const Login = () => {
   const [loginData, setLoginData] = useState("");
   const [apiHit, setApiHit] = useState(false);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setPassword("")
+    setUserName("")
+    setShow(false)
+  };
 
   const {
     postLoginData,
@@ -36,8 +43,6 @@ const Login = () => {
     postisselfbyappurlData
   } = useSelector((state) => state.auth);
 
-  const nav = useNavigate()
-  navRefLogin = nav
 
   useEffect(() => {
     if (apiHit === true) {
@@ -89,19 +94,31 @@ const Login = () => {
   };
 
   const handleLogin = (vl) => {
-    if (vl === "demoUser") {
-      dispatch(postLoginDemoUser({ "appUrl": window.location.hostname }));
 
+    setLogin({
+      userId: userName,
+      password: password,
+      appUrl: window.location.hostname,
+      // appUrl: "localhost"
+    });
+
+
+    if (userName === "" && password === "") {
+      setErrorPassword(true);
+      setErrorId(true);
+      setShow(false);
+    } else if (userName === "") {
+      setErrorId(true);
+      setShow(false);
+    } else if (password === "") {
+      setErrorPassword(true);
+      setShow(false);
     } else {
-      setLogin({
-        userId: userName,
-        password: password,
-        // appUrl: window.location.hostname,
-        appUrl: "localhost"
-      });
 
-      setShow(true);
+      setShow(true)
     }
+
+
 
   };
   const handleHome = () => {
@@ -141,11 +158,14 @@ const Login = () => {
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
-    axios.post("http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
-      { appUrl: appUrll })
-      .then((res) => { SetselfAllowedd(res?.data?.data) }
-
-      );
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        SetselfAllowedd(res?.data?.data);
+      });
   }, [appUrll]);
 
   // http://${REACT_APP_API_URL}/admin-new-apis/login/is-self-by-app-url
@@ -154,6 +174,27 @@ const Login = () => {
   //   dispatch(Postisselfbyappurl({ appUrl: appUrll }));
   // }, [appUrll]);
   console.log(selfAllowedd, "selfAllowedd");
+
+  const handleDemoLogin = () => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: window.location.hostname }
+      )
+      .then((res) => {
+        if (res?.data?.token) {
+          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
+
+          navigate("/m/home");
+          localStorage.setItem("TokenId", res?.data?.token);
+          localStorage.setItem("usernameDemo", res?.data?.username);
+          localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
+
+        }
+      })
+  };
+
+
   return (
     <div id="app">
       <div>
@@ -167,7 +208,7 @@ const Login = () => {
                       <img
                         alt=""
                         src={selfAllowedd?.logo}
-                        className="logo"
+                        className="logo w_logo"
                       />
                     </div>
                   </div>
@@ -190,7 +231,7 @@ const Login = () => {
                             onChange={handleInput}
                             value={userName}
                           />
-                          {errorId ? (
+                          {errorId === true ? (
                             <span className="text-danger">
                               The Username field is required.
                             </span>
@@ -229,10 +270,12 @@ const Login = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        <button className="btn btn-login" onClick={() => handleLogin("demoUser")}>
-                          Login With Demo Account
+
+                        <button className="btn btn-login" onClick={handleDemoLogin}>
+                          Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>
-                        </button>
+                        </button>)
+
                         {selfAllowedd?.selfAllowed === true ? (
                           <button
                             className="btn btn-login"

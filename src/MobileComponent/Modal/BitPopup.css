@@ -279,7 +279,7 @@ button {
 .modal-body {
     position: relative;
     flex: 1 1 auto;
-    padding: 1rem;
+    padding: 1rem 0;
 }
 
 /* .back {
@@ -1359,15 +1359,28 @@ i.fa.fa-circle-o-notch.fa-spin.loading-bet {
 
 .mani_loading {
     position: absolute;
-    z-index: 999;
+    z-index: 9;
     background: #00000075;
-    height: 111.6%;
-    width: 105.2%;
+    height: 117%;
+    width: 100%;
     padding: 0;
-    margin-left: -12px;
+    margin-left: 2px;
     margin-top: -24px;
 }
 
 .incrementBtn {
     margin-left: 0px !important;
+}
+
+.loadinggggg {
+    text-align: center;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.modal-design {
+    margin-top: 0px;
+}
+.m-l-10 {
+    margin-left: -21px !important;
 }

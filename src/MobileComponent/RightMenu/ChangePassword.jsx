@@ -27,6 +27,7 @@ const ChangePassword = () => {
   const [emptyNewPassWord, setemptyPassWord] = useState(false);
   const [emptyConfirm, setemptyConfirm] = useState(false);
   const [infoError, setInfoError] = useState(false);
+  const [samePassword, setSamePassword] = useState(false);
 
   let dispatch = useDispatch();
 
@@ -60,12 +61,14 @@ const ChangePassword = () => {
         setemptyPassWord(
           ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
         );
+        setSamePassword(false)
         break;
       case "ConfirmNewPassword":
         setConfirmPassword(ValidationFile.spaceNotAccept(inputValue));
         setemptyConfirm(
           ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
         );
+        setSamePassword(false)
         break;
       default:
         return false;
@@ -137,7 +140,12 @@ const ChangePassword = () => {
       !ValidationFile.isEmpty(newPassword) &&
       !ValidationFile.isEmpty(confirmPassword)
     ) {
-      dispatch(PostPasswordChange(passwordData));
+      if (confirmPassword === newPassword) {
+
+        dispatch(PostPasswordChange(passwordData));
+      } else {
+        setSamePassword(true)
+      }
 
 
       // window.location.replace("/");
@@ -230,10 +238,9 @@ const ChangePassword = () => {
               ) : (
                 ""
               )} */}
-              {/* <span class="text-danger">
-                The password must contain at least: 1 uppercase letter, 1
-                lowercase letter, 1 number and 8 to 15 characters needed !
-              </span> */}
+              <span class="text-danger">
+                {samePassword === true ? "New Password and Confirmation Password should be same" : ""}
+              </span>
             </div>
             <div>
               {PasswordStatus === "old" ? (

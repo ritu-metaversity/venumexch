@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { getActiveSportList } from '../../App/Features/auth/authActions';
+import { getActiveSportList, postleftmenudataopen } from '../../App/Features/auth/authActions';
 import './SideBar.css'
 import SubSideBar from './SubSideBar';
 const SideBar = () => {
+  const { pathname } = useLocation();
 
   const [valueForGame, setValueForGame] = useState(false)
   // const [gameiD, setGameId] = useState("")
@@ -13,6 +14,20 @@ const SideBar = () => {
   let navigate = useNavigate();
 
   const dispatch = useDispatch();
+  const { postleftmenudataopenData } = useSelector(state => state.auth)
+
+  const handleBackSports = () => {
+    // console.log("hello");
+    navigate("/home")
+    sendData(true);
+  };
+
+
+  useEffect(() => {
+    dispatch(postleftmenudataopen())
+  }, [])
+
+  console.log(postleftmenudataopenData, "fsdfsdfsdsfsd")
 
 
   const [leftmenuClose, setLeftMenuClose] = useState("false")
@@ -41,13 +56,18 @@ const SideBar = () => {
     setValueForGame(false)
   }
 
-  // useEffect(() => {
-  //   if (window.location.href === ("http://localhost:3000/home")) {
+  useEffect(() => {
+    if (window.location.href === ("")) {
 
-  //     setValueForGame(false)
-  //   }
-  // }, [window.location.href])
+      setValueForGame(false)
+    }
+  }, [window.location.href])
 
+  useEffect(() => {
+    if (pathname.includes("/home")) {
+      setValueForGame(false)
+    }
+  }, [pathname]);
 
   return (
     <>
@@ -57,19 +77,28 @@ const SideBar = () => {
           <SubSideBar valueForGame={valueForGame} sideGameData={sideGameData} sendData={sendData} />
 
           :
+
           <aside data-v-4732acba="" className="menu">
             <nav data-v-4732acba="" className="tree-menu">
               <div data-v-4732acba="" className="left-menu-inner">
                 <ul data-v-4732acba="" className="menu-column menu-lvl-0">
-
-                  {getActiveSportListData?.data?.data &&
-                    getActiveSportListData?.data?.data ? (
-                    getActiveSportListData?.data?.data.map((item) => (
+                  <Link data-v-91c481c8="" to="/home" class="favourites-link download-apk">
+                    <img
+                      src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/inplay.png"
+                      alt=""
+                      className='game-icon'
+                    />
+                    <span data-v-91c481c8=""
+                      class="link-name"> In-Play</span></Link>
+                  {postleftmenudataopenData?.data &&
+                    postleftmenudataopenData?.data ? (
+                    postleftmenudataopenData?.data.map((item) => (
 
 
                       <li data-v-4732acba="">
                         {console.log(item, "fdfdfgdfg")}
-                        <Link data-v-4732acba="" to={`/game/${item?.sportId}`} className="favourites-link" onClick={() => handleRoute(item?.sportId, item?.sportName)}>
+
+                        <Link data-v-4732acba="" to={`/game/${item?.sportName}/${item?.sportId}`} className="favourites-link" onClick={() => handleRoute(item?.sportId, item?.sportName)}>
                           <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} className="game-icon" />
                           <span data-v-4732acba="" className="link-name">{item?.sportName}</span></Link>
                       </li>))) : ""}

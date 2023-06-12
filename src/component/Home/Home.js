@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router'
 import DestGamePage from '../DesktopGamePage/DestGamePage'
 import MidPage from '../Mid/MidPage'
@@ -9,7 +9,9 @@ import './Home.css'
 
 const Home = () => {
 
-
+  const { PostBetingOnGameDetailLoading } = useSelector(
+    (state) => state.auth
+  );
   const { pathname } = useLocation();
 
   const [gamedetailsData, setGamedetailsData] = useState({})
@@ -21,6 +23,7 @@ const Home = () => {
     <>
       {/* <div   className="content boxed-layout-wrapper" > */}
       <div className='d-flex main-desk-view mt-56'>
+      
 
         {
           pathname.includes("/gamedetails/") ? <DestGamePage datatataProps={datatataProps} /> : <MidPage />
@@ -28,6 +31,7 @@ const Home = () => {
         <div>
           <Right gamedetailsData={gamedetailsData} />
         </div>
+
 
       </div>
     </>

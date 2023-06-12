@@ -73,7 +73,7 @@ ul.menu-column.menu-lvl-0 li {
 .mid-pane {
     padding: 0 0 20px 20px;
     height: 100%;
-    
+
 }
 
 
@@ -92,6 +92,11 @@ a.event-name {
     float: left;
 }
 
+.eventNameee {
+    width: 93%;
+    float: left;
+}
+
 .eventIcon {
     float: left;
     margin-right: 3px;
@@ -105,6 +110,7 @@ a.event-name {
     justify-content: space-between;
     gap: 4px;
 }
+
 .nav {
     display: flex;
     flex-wrap: wrap;
@@ -115,3 +121,27 @@ a.event-name {
 }
 
 /* .{    width: 100%;} */
+.main-game-Name {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: flex-start;
+    width: 100%;
+    gap: 9px;
+}
+
+.game-logo {
+    width: 10%;
+}
+
+.game-name {
+    width: 60%;
+}
+
+.game-inPlay {
+    width: 30%;
+}
+.main_div{
+    display: flex;
+    align-items: center;
+}

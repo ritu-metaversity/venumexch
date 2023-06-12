@@ -6,6 +6,25 @@
     height: 100%;
 }
 
+@media screen and (max-width: 800px) {
+    body {
+        font-family: Lato, Avenir, Verdana, Nunito;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 17px;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        background: #fff;
+        color: #0f2327;
+        letter-spacing: 0;
+        box-sizing: border-box;
+        background: url("https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/main-bg.jpg") center center !important;
+        background-size: 20%;
+    }
+}
+
+
+
 /* .nav{
 	background-color: #183f45;
 
@@ -24,6 +43,7 @@
 } */
 .newnav {
     height: 113px;
+    background: #0f2326;
 }
 
 .newnav>.header {
@@ -230,7 +250,7 @@ header.header {
     justify-content: flex-start !important;
     max-width: 1254px;
     margin: 0 auto;
-    
+
 }
 
 header.header .logo-area {
@@ -577,9 +597,11 @@ header.header .dropdown .dropdown-menu {
     height: 80vh;
     overflow: scroll;
 }
-.cPointer{
+
+.cPointer {
     cursor: pointer !important;
 }
+
 li.login_btn a {
     border: 1px solid #ddd;
     padding: 6px 11px;

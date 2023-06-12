@@ -5,8 +5,8 @@ import moment from "moment";
 import Modal from "react-bootstrap/Modal";
 import Rules from "./Rules";
 import axios from "axios";
-import { Postloginlogout } from "../../App/Features/auth/authActions";
-import { useDispatch } from "react-redux";
+import { Postisselfbyappurl, Postloginlogout } from "../../App/Features/auth/authActions";
+import { useDispatch, useSelector } from "react-redux";
 const NavBar = () => {
   let navigate = useNavigate();
   const [account, setAccount] = useState(false);
@@ -17,6 +17,10 @@ const NavBar = () => {
   const [movingMessage, setMovingMessage] = useState("");
   const dispatch = useDispatch();
   let userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("TokenId");
+  const [selfAllowedd, SetselfAllowedd] = useState("");
+  const userTypeInfo = localStorage.getItem("userTypeInfo");
+  const usernameDemo = localStorage.getItem("usernameDemo");
 
   useEffect(() => {
     axios
@@ -28,8 +32,9 @@ const NavBar = () => {
         setMovingMessage(response?.data?.message);
       });
   }, []);
-  const token = localStorage.getItem("TokenId");
-
+  const { postisselfbyappurlData } = useSelector(
+    (state) => state.auth
+  );
   // // console.log();
   // useEffect(() => {
   //   if (token === null) {
@@ -55,7 +60,9 @@ const NavBar = () => {
     let time = new Date();
     setDateState(time);
   };
+
   setInterval(liveTime, 5000);
+
 
   const handleModal = () => {
     setShow(true);
@@ -83,9 +90,34 @@ const NavBar = () => {
     }
   };
   const hanldletimeZone = (vl) => {
-    // console.log(vl)
+    console.log(vl, "sfdfsdfsdfsdf")
+    // if (vl === "+00:00") {
+    //   // setDateState(vl+dateState)
+    // } else {
+
     setShowZone(vl);
+    // }
   };
+  let appUrll = window.location.hostname;
+
+  useEffect(() => {
+    dispatch(Postisselfbyappurl({ appUrl: appUrll }));
+  }, [appUrll]);
+
+  useEffect(() => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        // setIsSelfLoading(false)
+
+        SetselfAllowedd(res?.data?.data);
+
+      });
+  }, [appUrll]);
+  console.log(selfAllowedd)
   return (
     <div className="nav newnav">
       {
@@ -104,15 +136,27 @@ const NavBar = () => {
             <div className="logo-area float-left">
               <img
                 alt=""
-                src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/front/logo.png"
+                src={selfAllowedd?.logo}
                 className="logo"
+                style={{ marginTop: "-12px", height: " 90px" }}
               />
             </div>
           </Link>
           <div className="clock float-left">
-            <span>{moment(dateState).format("MMM DD YYYY")}</span>{" "}
+            <span>
+
+              {moment(dateState).format("MMM DD YYYY")}
+
+            </span>{" "}
             <span className="time">
-              {moment(dateState).format("hh:mm:ss")}
+
+              { }
+              {
+                showZone === "+00:00" ?
+                  moment(dateState).subtract(330, 'm').format("H:MM:ss") :
+                  moment(dateState).format("H:MM:ss")
+              }
+
             </span>
             <span
               className="clock-timezone-settings dropdown show"
@@ -169,9 +213,12 @@ const NavBar = () => {
                 </div>
               </li>
               <li>
-                <p>Logged in as {userId}/INR</p>
+                {token !== null ?
+                  <p>Logged in as - {userTypeInfo === "2" ? usernameDemo : userId}</p>
+                  : ""
+                }
                 <p className="last-login">
-                  Last logged in: <span>08/02/2023 10:33:03</span>
+                  {/*Last logged in: <span>08/02/2023 10:33:03</span>*/}
                 </p>
               </li>
               <li>
@@ -226,7 +273,7 @@ const NavBar = () => {
                     My Bets
                   </Link>{" "}
                   <Link
-                    to="/profitloss"
+                    to="/p&l"
                     className="dropdown-item"
                     onClick={() => setAccount(false)}
                   >
@@ -267,20 +314,28 @@ const NavBar = () => {
                   >
                     Message
                   </Link>*/}
-                  <Link
-                    to="/deposit"
-                    className="dropdown-item"
-                    onClick={() => setAccount(false)}
-                  >
-                    Deposit
-                  </Link>
-                  <Link
-                    to="/withDraw"
-                    className="dropdown-item"
-                    onClick={() => setAccount(false)}
-                  >
-                    Withdraw
-                  </Link>
+                  {
+                    userTypeInfo === "2" ?
+                      "" : (postisselfbyappurlData?.data?.selfAllowed === true ? (
+                        <>
+                          <Link
+                            to="/deposit"
+                            className="dropdown-item"
+                            onClick={() => setAccount(false)}
+                          >
+                            Deposit
+                          </Link>
+                          <Link
+                            to="/withDraw"
+                            className="dropdown-item"
+                            onClick={() => setAccount(false)}
+                          >
+                            Withdraw
+                          </Link>
+                        </>) : (
+                        ""
+                      ))
+                  }
                 </div>
               </li>
 

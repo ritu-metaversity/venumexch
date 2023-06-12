@@ -11,17 +11,19 @@ const Betslip = ({ props, gamedetailsData }) => {
   const [betslip, setBetslip] = useState(true);
   const [openBet, setOpenBet] = useState(false);
   const [editStakeBtn, setEditBtn] = useState("none");
+  const token = localStorage.getItem("TokenId");
 
   const [gameIframeId, setGameIframeId] = useState(4);
 
   const {
-    PostBetListByMatchIdData,
+    PostBetListByMatchIdData, PostGetStack, PostEditStackData, PostEditStackDataError
   } = useSelector((state) => state.auth);
 
   const iddd = localStorage.getItem("SportId");
-  useEffect(() => {
-    setGameIframeId(iddd);
-  }, [iddd]);
+  // useEffect(() => {
+  //   setGameIframeId(iddd);
+  // }, [iddd]);
+
   const handleEditBtn = () => {
     if (editStakeBtn === "none") {
       setEditBtn("block");
@@ -32,8 +34,6 @@ const Betslip = ({ props, gamedetailsData }) => {
     }
   };
 
-
-  console.log(PostBetListByMatchIdData, "PostBetListByMatchIdDataPostBetListByMatchIdData")
   const handleBetslip = () => {
     if (openBet === true) {
       setOpenBet(false);
@@ -50,12 +50,11 @@ const Betslip = ({ props, gamedetailsData }) => {
     }
   };
 
-  const { PostGetStack, PostEditStackData, PostEditStackDataError } =
-    useSelector((state) => state.auth);
-
   useEffect(() => {
-    dispatch(PostGetStackApi());
-  }, [dispatch, EditStake]);
+    if (token !== null) {
+      dispatch(PostGetStackApi());
+    }
+  }, [EditStake]);
 
   useEffect(() => {
     if (PostEditStackData?.status === true) {
@@ -92,7 +91,7 @@ const Betslip = ({ props, gamedetailsData }) => {
       {" "}
       <div className="bet-manager" >
         <h4>Betslip</h4>
-        <ul className="tabs" style={{ borderBottom: "1px solid #000", paddingBottom: "12px" }}>
+        <ul className="tabs">
           <li
             className={`tab-bet-slip ${betslip === true ? "active" : ""}`}
             onClick={() => handleBetslip("Betslip")}
@@ -106,13 +105,15 @@ const Betslip = ({ props, gamedetailsData }) => {
             <a href="javascript:void(0)">Open Bets</a>
           </li>
           <li>
-            <button
-              type="button"
-              className="btn editBtn m-r-5"
-              onClick={handleEditBtn}
-            >
-              Edit Stakes
-            </button>
+            {token === null ? "" :
+              <button
+                type="button"
+                className="btn editBtn m-r-5"
+                onClick={handleEditBtn}
+              >
+                Edit Stakes
+              </button>
+            }
           </li>
         </ul>
         <div className="sc-content">
@@ -191,22 +192,24 @@ const Betslip = ({ props, gamedetailsData }) => {
                             <td className="text-right">Stake</td>
                             <td className="text-right">Profit/Liability</td>
                           </tr>
-                          {PostBetListByMatchIdData?.data &&
-                            Object.keys(PostBetListByMatchIdData?.data).map((key) => (
-                              <>
-                                {PostBetListByMatchIdData?.data[key].map((item) => (
-                                  <>
-                                    <tr className={`back ${item?.back === false ? "lay" : "back"}`}>
-                                      <td className="text-left">{item?.nation}</td>
-                                      <td className="text-left">{item?.priveValue}</td>
-                                      <td className="text-right">{item?.amount}</td>
+                          {token === null ? "" :
+                            (PostBetListByMatchIdData?.data &&
+                              Object.keys(PostBetListByMatchIdData?.data).map((key) => (
+                                <>
+                                  {PostBetListByMatchIdData?.data[key].map((item) => (
+                                    <>
+                                      <tr className={`back ${item?.back === false ? "lay" : "back"}`}>
+                                        <td className="text-left">{item?.nation}</td>
+                                        <td className="text-left">{item?.priveValue}</td>
+                                        <td className="text-right">{item?.amount}</td>
 
-                                      <td className="text-right">{item?.priveValue}</td>
-                                    </tr>
-                                  </>
-                                ))}
-                              </>
-                            ))}
+                                        <td className="text-right">{item?.priveValue}</td>
+                                      </tr>
+                                    </>
+                                  ))}
+                                </>
+                              )))
+                          }
                         </tbody>
                       </table>
                     </div>

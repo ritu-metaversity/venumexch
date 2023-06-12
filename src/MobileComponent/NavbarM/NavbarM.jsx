@@ -17,7 +17,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   const [sideBarOpen, setRightBar] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
   const MrqueeClose = useSelector((state) => state.auth.MrqueeClose);
-  console.log(isSelfloading, "isSelfloadingisSelfloading");
+  // console.log(isSelfloading, "isSelfloadingisSelfloading");
 
 
   useEffect(() => {
@@ -26,11 +26,11 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
 
   const token = localStorage.getItem("TokenId");
 
-  useEffect(() => {
-    if (token === null) {
-      navigate("./home");
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token === null) {
+  //     navigate("./home");
+  //   }
+  // }, [token]);
 
   const handlelogin = (vl) => {
     if (vl === "login") {
@@ -50,6 +50,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
         "http://api.247365.exchange/admin-new-apis/enduser/get-user-message"
       )
       .then((response) => {
+        // console.log(response, "responseresponse");
         // console.log(response, "responseresponse");
         setMovingMessage(response?.data?.message);
       });
@@ -124,10 +125,15 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   const handleRules = () => {
     navigate("./rules-casino");
   };
-
   const handleback = () => {
-    "history.back()";
-    window.history.back();
+    // "history.back()";
+    // window.history.back();
+    if (pathname.includes("casino/")) {
+      navigate("/home")
+    } else {
+
+      navigate(-1)
+    }
     // console.log("history.back()")
   };
   const userTypeInfo = localStorage.getItem("userTypeInfo");
@@ -144,7 +150,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
       .then((res) => {
         setIsSelfLoading(false)
 
-        SetselfAllowedd(res?.data?.data?.selfAllowed);
+        SetselfAllowedd(res?.data?.data);
 
       });
   }, [appUrll]);
@@ -189,13 +195,13 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
             {/* ARROW */}
 
             {/* ARROW */}
-            <div className="logo" onClick={handleInput}>
+            <div className="logo" style={{ height: "43px", marginTop: "-3px" }} onClick={handleInput}>
               {/* <Link href="/home"   className="router-link-exact-active router-link-active"> */}
               <img
                 alt=""
                 src={selfAllowedd?.logo}
                 className="img-fluid"
-                style={{ height: "40px" }}
+                style={{ height: "90px", marginTop: "-22px" }}
               />
               {/* </Link> */}
             </div>
@@ -211,8 +217,8 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                 <i className="fas fa-user d-block"></i>{" "}
                 <span className="balance">
                   {PostTotalBalance?.data?.data?.balance
-                    ? PostTotalBalance?.data?.data?.balance -
-                    PostTotalBalance?.data?.data?.libality
+                    ? Number(PostTotalBalance?.data?.data?.balance -
+                      PostTotalBalance?.data?.data?.libality).toFixed(2)
                     : "0.00"}
                 </span>
               </button>
@@ -221,7 +227,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                 :
                 <div className="float-right login-signup">
 
-                  {selfAllowedd === true ? (
+                  {selfAllowedd?.selfAllowed === true ? (
                     <button className="_button_nav" onClick={handlelogin}>SignUp</button>
                   ) : (
                     ""
@@ -229,15 +235,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
 
                   <button className="_button_nav" onClick={() => handlelogin("login")}>Login</button>
                 </div>)
-
-
             }
-
-
-
-
-
-
           </div>
         </nav>
       </header>

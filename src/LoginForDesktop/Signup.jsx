@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Postuserselfregister } from "../App/Features/auth/authActions";
 import ValidationFile from "../Validation/ValidationFile";
 import { Modal } from "react-bootstrap";
+import axios from "axios";
 
 export let setShowRegisterModalRefDesktop
 const Signup = () => {
@@ -28,7 +29,7 @@ const Signup = () => {
   const { PostuserselfregisterData, PostuserselfregisterDataError } =
     useSelector((state) => state.auth);
 
-    setShowRegisterModalRefDesktop = setSignUpShow;
+  setShowRegisterModalRefDesktop = setSignUpShow;
   const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
 
   const [infoError, setInfoError] = useState(false);
@@ -120,6 +121,25 @@ const Signup = () => {
     setSignUpClose(true);
     setSignUpShow(false);
     navigate("/login");
+  };
+  const handleDemoLogin = () => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: window.location.hostname }
+      )
+      .then((res) => {
+        if (res?.data?.token) {
+
+          navigate("/home");
+          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
+
+          localStorage.setItem("TokenId", res?.data?.token);
+          localStorage.setItem("usernameDemo", res?.data?.username);
+          localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
+
+        }
+      })
   };
   return (
     <div id="app">
@@ -233,6 +253,11 @@ const Signup = () => {
                         Sign Up
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
+                      <button className="btn btn-login" onClick={handleDemoLogin}>
+                        Login with demo ID
+                        <i className="ml-2 fas fa-sign-in-alt"></i>
+                      </button>
+
                       <button className="btn btn-login" onClick={handleLogin}>
                         <i className="ml-2 fas fa-sign-in-alt rotate-btn"></i>
                         Back

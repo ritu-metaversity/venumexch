@@ -1,5 +1,5 @@
 import { Route, useLocation, useNavigate } from "react-router";
-// import './App.css';
+import './App.css';
 // import Footer from './component/Footer/Footer';
 import NavBar from "./component/navBar/NavBar";
 import Home from "./component/Home/Home";
@@ -11,7 +11,8 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { ImCross } from "react-icons/im";
 import { useDispatch } from "react-redux";
-import { PostBalance } from "./App/Features/auth/authActions";
+import { PostBalance, Postvalidatejwttoken } from "./App/Features/auth/authActions";
+import axios from "axios";
 
 // import { Provider } from "react-redux";
 // import store from "./Store";
@@ -24,6 +25,8 @@ function App() {
   const [mobileRoutes, setMoileRoutes] = useState(true);
 
   const { pathname } = useLocation();
+  let appUrll = window.location.hostname;
+  const token = localStorage.getItem("TokenId");
 
   useEffect(() => {
     if (window.innerWidth > 750) {
@@ -31,12 +34,14 @@ function App() {
       // navigate("./home");
 
       if (pathname.includes("/m/")) {
+
+
         navigate("/home");
       }
       // console.log("mobile")
     } else {
       setMoileRoutes(false);
-      // navigate("./m/home");
+      navigate("./m/home");
 
       // if (pathname.includes("/m/")) {
       //   navigate("./home");
@@ -44,8 +49,12 @@ function App() {
       // console.log("pc")
     }
   }, []);
-  const token = localStorage.getItem("TokenId");
 
+  useEffect(() => {
+    if (token === null) {
+      navigate("./home");
+    }
+  }, [token]);
   useEffect(() => {
     if (token) {
 
@@ -53,7 +62,9 @@ function App() {
       } else {
         // const time = setInterval(() => {
         const token = localStorage.getItem("TokenId");
+
         if (token) {
+          dispatch(PostBalance());
 
           if (localStorage.getItem("PassWordType") === "old") {
           } else {
@@ -68,8 +79,39 @@ function App() {
         // return () => clearInterval(time);
       }
     }
-
   }, [token]);
+
+  useEffect(() => {
+    if (localStorage.getItem("PassWordType") === "old") {
+    } else {
+      const time = setInterval(() => {
+        if (token) {
+
+          dispatch(Postvalidatejwttoken());
+        }
+      }, 1000);
+      return () => clearInterval(time);
+    }
+  }, [token]);
+
+
+  useEffect(() => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = res.data.data.favicon;
+        document.getElementsByTagName('head')[0].appendChild(link);
+      })
+  }, []);
+
+
+
 
   // console.log(mobileRoutes, "fsdfsd")
   return (

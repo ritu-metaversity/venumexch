@@ -6,8 +6,9 @@ import "./Midpage.css";
 import { useNavigate } from "react-router-dom";
 
 const Game = () => {
-    const { id } = useParams();
-
+    const { id, type } = useParams();
+    // const { id } = useParams();
+    console.log(id, type, "categorycategory")
     const navigator = useNavigate()
     const [gamesData, setGamesData] = useState("");
     const token = localStorage.getItem("TokenId");
@@ -17,6 +18,7 @@ const Game = () => {
     const handleEnterMatch = (item) => {
         console.log(token, "token")
         if (token == null) {
+            navigator("/login")
         } else {
             navigator(`/gamedetails/${item}`)
         }
@@ -45,7 +47,7 @@ const Game = () => {
                         {gamesData?.length > 0 ? (
                             <div className="events">
                                 <h1 className="event-heading">
-                                    {id}
+                                    {type}
                                     <span className="starts-in-label">
                                         Betting from 30 mins before start
                                     </span>
@@ -73,18 +75,21 @@ const Game = () => {
                                                         <tr>
                                                             <td>
                                                                 <div className="maindiv" onClick={() => handleEnterMatch(item?.matchId)}>
-                                                                    <div className="eventIcon">
-                                                                        <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_vir.png" alt="" class="icon-vir" />
-                                                                        {/* <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/game-icon.svg" alt="" class="icon-vir" />*/}
+                                                                    <div className="main_div">
+
+                                                                        <div className="eventIcon">
+                                                                            <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_vir.png" alt="" class="icon-vir" />
+                                                                            {/* <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/game-icon.svg" alt="" class="icon-vir" />*/}
+                                                                        </div>
+                                                                        <div className="eventNameee">
+                                                                            <Link
+                                                                                className="event-name"
+                                                                            >
+                                                                                {item?.matchName}
+                                                                            </Link>
+                                                                        </div>
                                                                     </div>
-                                                                    <div className="eventName">
-                                                                        <Link
-                                                                            className="event-name"
-                                                                        >
-                                                                            {item?.matchName}
-                                                                        </Link>
-                                                                    </div>
-                                                                    <div>
+                                                                    <div style={{ width: "33%" }}>
                                                                         <small>
                                                                             <span className="event-inplay float-right date-inplay">
                                                                                 {item?.inPlay === true ? (

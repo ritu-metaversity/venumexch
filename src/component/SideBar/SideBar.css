@@ -30,7 +30,7 @@ user agent stylesheet div {
 
 .tree-menu {
     width: 178px;
-    overflow: hidden;
+    overflow: scroll;
     height: 100%;
     /* margin-top: 116px; */
 }

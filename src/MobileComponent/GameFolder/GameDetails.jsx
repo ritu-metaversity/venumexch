@@ -773,7 +773,7 @@ const GameDetails = () => {
                                       {item11?.runners?.map((item1, index) => {
                                         return (
                                           <>
-                                            {console.log(item11?.status, "item11?.runners.status")}
+
                                             <div
                                               data-title={`${item11?.status === "SUSPENDED"
                                                 ? "SUSPENDED"
@@ -1001,10 +1001,7 @@ const GameDetails = () => {
                                           data-title="OPEN"
                                           className="table-body"
                                         >
-                                          {console.log(
-                                            item?.gstatus,
-                                            "item?.gstatus"
-                                          )}
+                                        
                                           <div
                                             data-title={`${item?.gstatus === "SUSPENDED"
                                               ? "SUSPENDED"
@@ -1021,10 +1018,7 @@ const GameDetails = () => {
                                                 : ""
                                               }`}
                                           >
-                                            {console.log(
-                                              item.gstatus,
-                                              "item.gstatus"
-                                            )}
+                                           
                                             <div className="float-left box-w6 country-name">
                                               <span
                                                 className="team-name"
@@ -1313,10 +1307,7 @@ const GameDetails = () => {
                                                       data-v-e03c6f20=""
                                                       className="fancy-tripple "
                                                     >
-                                                      {console.log(
-                                                        item.gstatus,
-                                                        "item.gstatus"
-                                                      )}
+                                                      
                                                       <div
                                                         data-v-e03c6f20=""
                                                         data-title={item?.gstatus}
@@ -1360,15 +1351,7 @@ const GameDetails = () => {
                                                                   : "40px",
                                                             }}
                                                           >
-                                                            {console.log(
-                                                              FancyPNL?.data &&
-                                                              FancyPNL?.data.find(
-                                                                (itemPnl) =>
-                                                                  itemPnl?.marketId ==
-                                                                  item?.sid
-                                                              )?.pnl,
-                                                              "dafdsfsd"
-                                                            )}
+                                                           
                                                             <span
                                                               data-v-e03c6f20=""
                                                               className="team-name"

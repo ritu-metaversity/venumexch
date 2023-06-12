@@ -1,0 +1,25 @@
+.subside-leftmenudata {
+    font-size: 13px;
+    color: black;
+    border: 0.5px solid black;
+    padding: 8px;
+}
+.menu_list{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 0 8px !important;
+    /* height: 30px; */
+}
+
+.link-lvl-prev {
+    color: #8c1000 !important;
+    background: #f3e9e7 !important;
+}
+a.link-lvl-sport.router-link-exact-active.router-link-active {
+    background: #8c1000 !important;
+    color: #fff !important;
+}
+a.menu-link.menu_list.sport-type-Cricket{
+    color: #8c1000 !important;
+}

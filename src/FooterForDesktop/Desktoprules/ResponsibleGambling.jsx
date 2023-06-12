@@ -5,7 +5,7 @@ import { getResponsibleGaming } from '../../App/Features/auth/authActions';
 const ResponsibleGambling = () => {
    const dispatch = useDispatch()
 
-   let appUrl = "247lordsexch.com"
+   let appUrl = window.location.hostname
    const { getResponsibleGamingData } = useSelector((state) => state.auth);
    useEffect(() => {
       dispatch(getResponsibleGaming({ appUrl }))

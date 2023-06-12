@@ -8,8 +8,8 @@ import "./BetPage.css"
 const BetPage = ({ gamedetailsData }) => {
     const dispatch = useDispatch();
     let { id } = useParams();
-
-    const { PostGetStack } = useSelector((state) => state.auth);
+    console.log(gamedetailsData, "asdasdasdas")
+    const { PostGetStack, PostBetingOnGameDetailLoading } = useSelector((state) => state.auth);
 
     const [Bitvalue, setBitValue] = useState(gamedetailsData?.Odds);
     const [updated, setUpdated] = useState("");
@@ -75,10 +75,25 @@ const BetPage = ({ gamedetailsData }) => {
     return (
 
         <div style={{ display: gamedetailsData?.popupshow === true ? "" : "none" }}>
+            {PostBetingOnGameDetailLoading &&
+                (
+                    <div
+                        className='_gameLoading'
+                        style={{
 
+                            backgroundColor: "#0000002b",
+                            zIndex: "3"
+
+                        }}>
+                        <i
+                            className="fa fa-spinner fa-spin loading"
+                            style={{ fontSize: "50px", height: "0px", position: "absolute" }}
+                        ></i>
+                    </div>
+                )}
             <div>
                 <div className="m-t-10 main_lay">
-                    <div className='lay_div back'></div>
+                    <div className={`lay_div ${gamedetailsData?.isBack}`}></div>
                     <h6 className="m-b-0 p-l-10 bet-type-info">{gamedetailsData?.isBack}</h6>
                 </div>
                 <div className="market-list">

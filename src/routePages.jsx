@@ -48,7 +48,7 @@ const RoutesPages = () => {
           />
           <Route path="/mybets" element={<Mybets />} />
           <Route path="/accountstatement" element={<AccountStatement />} />
-          <Route path="/profitloss" element={<BettingProfitandLoss />} />
+          <Route path="/p&l" element={<BettingProfitandLoss />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/secureauth" element={<SecureAuthVarification />} />
           <Route path="/transferstatement" element={<TransferStatement />} />
@@ -59,7 +59,7 @@ const RoutesPages = () => {
           <Route path="/Casino" element={<Casinolist />} />
           <Route path="/Casino" element={<Casinolist />} />
           <Route path="/casino/:id" element={<Casino />} />
-          <Route path="/game/:id" element={<Game />} />
+          <Route path="/game/:type/:id" element={<Game />} />
           <Route path="/gamedetails/:id" element={<Home />} />
           <Route path="AboutUs" element={<AboutUs />} />
           <Route path="Terms-and-Conditions" element={<TermsandConditions />} />
@@ -68,6 +68,7 @@ const RoutesPages = () => {
         <Route path="/Signup" element={<Signup />} />
 
 
+        <Route path="*" element={<Navigate to="/home" />} />
 
       </Routes>
 
