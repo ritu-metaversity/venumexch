@@ -160,8 +160,10 @@ const BettingProfitLoss = () => {
 
   // const token = localStorage.getItem("TokenId");
 
+  // const token = localStorage.getItem("TokenId");
+
   useEffect(() => {
-    const token = localStorage.getItem("TokenId");
+  const token = localStorage.getItem("TokenId");
 
     if (token) {
 

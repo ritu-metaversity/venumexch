@@ -1,0 +1,123 @@
+/* deposit-list th {
+    background-color: #2C3D50;
+    color: #fff;
+}
+
+.main-conatiner {
+    overflow: scroll;
+    margin-top: 100px;
+}
+
+.price-input {
+    margin-top: 12px;
+}
+
+.inputfield {
+    margin-left: -27px;
+}
+
+.priceinput {
+    height: 29px;
+    width: 197%;
+    border-radius: unset !important;
+    outline: unset;
+    padding-left: 5px;
+    padding-right: 0px;
+    margin-right: -35px;
+}
+
+.priceminus {
+    height: 29px;
+    width: 30%;
+    color: #fff;
+    padding-bottom: 22px;
+    padding-top: 2px;
+    background-color: #2c3d50;
+}
+
+.price-values {
+    margin-top: 12px;
+    margin-right: 12px;
+}
+
+.price-values div button {
+    padding: 0px;
+}
+
+.price-data {
+    padding: 0px;
+}
+
+.previous-deposite {
+    background-color: #0088CC;
+    color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+    .main-pricecontainor {
+        display: block;
+    }
+
+    .price-data {
+        margin-top: 12px;
+    }
+
+    .row.price-values {
+        display: flex;
+        width: 209%;
+        margin-inline: 1px;
+    }
+
+    .priceinput {
+        height: 29px;
+        width: unset;
+    }
+}
+
+button.stakeactionminus.btn {
+    background: #000;
+    border: none !important;
+    border-radius: unset;
+    outline: none;
+    margin-left: 35px;
+}
+
+.fkjsdfsdkfjsd {
+    width: 35px;
+    height: 33px;
+    margin-left: 10%;
+    border-radius: 118px;
+}
+
+@media screen and (min-width: 500px) {
+    .deposit-table {
+        width: 85%;
+        margin: auto;
+    }
+
+    .table th,
+    .table td {
+        font-size: 14px;
+    }
+
+    .table::-webkit-scrollbar {
+        display: none;
+    }
+
+    .wrapper.main-conatiner {
+        overflow: unset;
+    }
+
+    .mx-input-wrapper.account-field {
+        display: flex;
+        flex-direction: column;
+    }
+} */
+
+.dest_logo {
+    width: 44% !important;
+}
+
+.dest_upi{
+    width: 104% !important;
+}

@@ -136,10 +136,29 @@ img {
     width: 16.55%;
 }
 
-@media screen and (min-width:300px) and (max-width:500px) {
+@media screen and (min-width:300px) and (max-width:800px) {
     .colllcsss {
         width: 33%;
     }
+    img.img-fluid.casino-body-images {
+        width: 106px;
+        height: 70px;
+    }
+    .buttnnnname {
+        width: 94% !important;
+    }
+}
+
+
+@media screen and (min-width: 800px) and (max-width: 30000px) {
+    img.img-fluid.casino-body-images {
+        width: 106px;
+        height: 70px;
+    }
+    .buttnnnname {
+        width: 94% !important;
+    }
+    
 }
 
 .buttttt {
@@ -150,9 +169,9 @@ img {
     padding: 20px;
 }
 
-.casino-body-images {
+/* .casino-body-images {
     width: 75%;
-}
+} */
 
 .casino-images {
     width: 39px;
@@ -194,30 +213,30 @@ img {
 /* .buttonsize {
     width: 59%;
 } */
-.casino-body-images {
+/* .casino-body-images {
     width: 107px;
     height: 75px;
-}
+} */
 
 @media screen and (min-width:555px) {
-    .casino-body-images {
+    /* .casino-body-images {
         width: 200px;
         height: 75px;
-    }
+    } */
 }
 
 @media screen and (min-width: 700px)and (max-width:1000px) {
-    .casino-body-images {
+    /* .casino-body-images {
         width: 96px;
         height: 75px;
-    }
+    } */
 }
 
 @media screen and (min-width: 500px)and (max-width:700px) {
-    .casino-body-images {
+    /* .casino-body-images {
         width: 80px;
         height: 75px;
-    }
+    } */
 }
 
 

@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import AlertBtn from "../../../MobileComponent/Alert/AlertBtn";
 import { ImCross } from "react-icons/im"
 import { setShowRegisterModalRef } from "../../../logincomponents/Signup";
-
+import { setShowRegisterModalRefDesktop } from "../../../LoginForDesktop/Signup";
 import { navRef } from "../../../Layout/LayoutForMobile"
 
 
@@ -85,7 +85,8 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
         const postOldPassRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/user/first-login-cp`, OldPassWordData);
         // console.log(postOldPassRespose, "postOldPassRespose")
         if (postOldPassRespose?.data?.status === true) {
-            navRef("./login");
+            window.location.replace("./login");
+
             localStorage.clear();
         }
         if (
@@ -124,7 +125,7 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
         const postPasswordChangeRespose = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/change-password`, passwordChanege);
         // console.log(postPasswordChangeRespose, "postPasswordChangeResposepostPasswordChangeRespose")
         if (postPasswordChangeRespose?.data?.status === true) {
-            navRef("./login");
+            window.location.replace("./login");
             localStorage.clear();
         }
         if (
@@ -530,9 +531,9 @@ export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken'
         if (PostvalidatejwttokenDataaa.data.status === false) {
             // console.log("dfghjkldfghjklfghjklfghjklsdfghjk")
             localStorage.clear()
-            if (navRef) {
-                navRef("/m/home")
-            }
+            // if (navRef) {
+            //     navRef("/m/home")
+            // }
         }
         return PostvalidatejwttokenDataaa
     } catch (err) {
@@ -561,6 +562,7 @@ export const Postuserselfregister = createAsyncThunk('auth/Postuserselfregister'
                 }
             });
             setShowRegisterModalRef && setShowRegisterModalRef(true)
+            setShowRegisterModalRefDesktop && setShowRegisterModalRefDesktop(true)
         }
         return PostuserselfregisterDataaa
     } catch (err) {
@@ -713,6 +715,51 @@ export const getResponsibleGaming = createAsyncThunk('auth/getResponsibleGaming'
         const getResponsibleGamingDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/app/getResponsibleGaming`, data
         )
         return getResponsibleGamingDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+// bet History
+export const postBetHistory = createAsyncThunk('auth/postBetHistory', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        const postBetHistoryDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/bet-list-history`, data
+        )
+        return postBetHistoryDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+export const postleftmenudataopen = createAsyncThunk('auth/postleftmenudataopen', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        // http://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open
+        const postleftmenudataopenDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/left-menu-data-open`, data
+        )
+        return postleftmenudataopenDataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+export const postDemoLogin = createAsyncThunk('auth/postDemoLogin', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        // http://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open
+        const postDemoLoginDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/left-menu-data-open`, data
+        )
+        return postDemoLoginDataa
     } catch (err) {
         if (err) {
             throw err

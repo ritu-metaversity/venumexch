@@ -128,7 +128,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
       <div id="__BVID__31___BV_modal_body_" className="modal-body p-0">
         <div className="place-bet">
           <div>
-            <form data-vv-scope="form-placebet" className="m-b-0">
+            <form data-vv-scope="form-placebet" className="m-b-0" style={{    marginLeft: "12px"}}>
               {PostBetingOnGameDetailLoading && (
                 <div className="mani_loading">
                   <i
@@ -150,7 +150,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                   </h4>
                 </div>
               </div>
-              <div className="row m-l-5 m-r-5 m-t-10">
+              <div className="row m-l-10 m-r-5 m-t-10">
                 <div className="col-6 p-l-5 p-r-5">
                   <div
                     className="float-right d-flex"

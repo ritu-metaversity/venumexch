@@ -265,7 +265,7 @@ const WithDraw = () => {
                     <option value="Current">Current</option>
                   </select>
                 </div>
-                <div className="mx-input-wrapper account-field withdrawBtn">
+                <div className="">
                   <button
                     className="btn btn-primary btn-block btn-sm wsubmit"
                     style={{ marginTop: "20px" }}

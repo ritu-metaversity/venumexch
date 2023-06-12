@@ -16,9 +16,10 @@ const Casino = () => {
         height="82vh"
         className="mobile_if"
         width="100%"
+        style={{ minHeight: "600px" }}
         title="mobile"
         allowFullScreen={true}
-       
+
       ></iframe>
 
     </section>

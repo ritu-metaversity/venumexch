@@ -22,7 +22,7 @@ import TimeSetting from "./MobileComponent/RightMenu/TimeSetting";
 import Rules from "./MobileComponent/NavbarM/Rules";
 import GameDetails from "./MobileComponent/GameFolder/GameDetails";
 import Login from "./logincomponents/Login";
-import LoginForMobile from "./LoginForMobile/LoginForMobile";
+
 import MarketPage from "./MobileComponent/EyeIcon/MarketPage";
 import { useState } from "react";
 import Casinolist from "./MobileComponent/Livecasino/Casinolist";

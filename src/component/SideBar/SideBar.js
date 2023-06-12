@@ -1,110 +1,118 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { getActiveSportList, postleftmenudataopen } from '../../App/Features/auth/authActions';
 import './SideBar.css'
 import SubSideBar from './SubSideBar';
 const SideBar = () => {
+  const { pathname } = useLocation();
 
-   const [ valueForGame,setValueForGame]=useState(false)
-   const [ gameiD,setGameId]=useState("")
-   const [ gameName,setGameName]=useState("")
-   let navigate = useNavigate();
- 
-   const handleRoute=(id , id2)=>{
-     navigate(`/game/${id}`)
-     setValueForGame(true)
-     setGameName(id2)
-     setGameId(id)
+  const [valueForGame, setValueForGame] = useState(false)
+  // const [gameiD, setGameId] = useState("")
+  const [sideGameData, setSideGameData] = useState("")
+  let navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { postleftmenudataopenData } = useSelector(state => state.auth)
+
+  const handleBackSports = () => {
+    // console.log("hello");
+    navigate("/home")
+    sendData(true);
+  };
+
+
+  useEffect(() => {
+    dispatch(postleftmenudataopen())
+  }, [])
+
+  console.log(postleftmenudataopenData, "fsdfsdfsdsfsd")
+
+
+  const [leftmenuClose, setLeftMenuClose] = useState("false")
+  const { getActiveSportListData } = useSelector(state => state.auth)
+  useEffect(() => {
+    // console.log("balaaac")
+
+    dispatch(getActiveSportList())
+
+
+  }, [dispatch])
+
+  const handleRoute = (id, id2) => {
+    console.log(id, id2, "hgjkljkhbn")
+    // navigate(`/game/${id}`)
+    setValueForGame(true)
+    setSideGameData({ "sportsid": id, "SportsName": id2 })
+    // setGameName(id2)
+    // setGameId(id)
 
     //  console.log("paresnt to child ")
-   }
+  }
 
-   const sendData=(vl)=>{
-    // console.log("child to parents")
-     setValueForGame(false)
-   }
+  // console.log(getActiveSportListData?.data?.data, "hgjkljkhbn")
+  const sendData = (vl) => {
+    setValueForGame(false)
+  }
 
-   useEffect(()=>{
-    if(window.location.href===("http://localhost:3000/home")){
-   
+  useEffect(() => {
+    if (window.location.href === ("")) {
+
       setValueForGame(false)
     }
-      },[window.location.href])
-      
+  }, [window.location.href])
+
+  useEffect(() => {
+    if (pathname.includes("/home")) {
+      setValueForGame(false)
+    }
+  }, [pathname]);
 
   return (
     <>
-        <div data-v-4732acba=""  className="left-pane">
-        {valueForGame===true ?
+      <div data-v-4732acba="" className="left-pane fdsfsdffs">
+        {valueForGame === true ?
 
-    <SubSideBar valueForGame={valueForGame} gameiD={gameiD} gameName={gameName} sendData={sendData}/>
+          <SubSideBar valueForGame={valueForGame} sideGameData={sideGameData} sendData={sendData} />
 
-:
-<aside data-v-4732acba=""   className="menu">
-<nav data-v-4732acba=""   className="tree-menu">
-   <div data-v-4732acba=""   className="left-menu-inner">
-      <ul data-v-4732acba=""   className="menu-column menu-lvl-0">
-       <li data-v-4732acba="">
-         <a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("1","Football")} >
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/1.png"   className="game-icon"/>
-          <span data-v-4732acba=""   className="link-name">Football</span>
+          :
 
-          </a>
-          </li>
+          <aside data-v-4732acba="" className="menu">
+            <nav data-v-4732acba="" className="tree-menu">
+              <div data-v-4732acba="" className="left-menu-inner">
+                <ul data-v-4732acba="" className="menu-column menu-lvl-0">
+                  <Link data-v-91c481c8="" to="/home" class="favourites-link download-apk">
+                    <img
+                      src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/inplay.png"
+                      alt=""
+                      className='game-icon'
+                    />
+                    <span data-v-91c481c8=""
+                      class="link-name"> In-Play</span></Link>
+                  {postleftmenudataopenData?.data &&
+                    postleftmenudataopenData?.data ? (
+                    postleftmenudataopenData?.data.map((item) => (
 
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("2","Tennis")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/2.png"   className="game-icon"/>
-          <span data-v-4732acba=""   className="link-name">Tennis</span></a></li>
 
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("4","Cricket")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/4.png"   className="game-icon"/> 
-           <span data-v-4732acba=""   className="link-name">Cricket</span></a></li>
+                      <li data-v-4732acba="">
+                        {console.log(item, "fdfdfgdfg")}
 
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("70","Table Tennis")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/70.png"   className="game-icon"/>
-            <span data-v-4732acba=""   className="link-name">Table Tennis</span></a></li>
+                        <Link data-v-4732acba="" to={`/game/${item?.sportName}/${item?.sportId}`} className="favourites-link" onClick={() => handleRoute(item?.sportId, item?.sportName)}>
+                          <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} className="game-icon" />
+                          <span data-v-4732acba="" className="link-name">{item?.sportName}</span></Link>
+                      </li>))) : ""}
 
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("3503","Darts")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/3503.png"   className="game-icon"/> 
-           <span data-v-4732acba=""   className="link-name">Darts</span></a></li>
+                  <Link data-v-91c481c8="" to="/Casino" class="favourites-link download-apk">
+                    <img data-v-91c481c8="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_live_casino.png" class="game-icon" />
+                    <span data-v-91c481c8=""
+                      class="link-name">Live Casino</span></Link>
+                </ul>
 
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("71","Badminton")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/71.png"   className="game-icon"/>
-            <span data-v-4732acba=""   className="link-name">Badminton</span></a></li>
-
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("52","Kabaddi")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/52.png"   className="game-icon"/> 
-           <span data-v-4732acba=""   className="link-name">Kabaddi</span></a></li>
-
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("6","Boxing")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/6.png"   className="game-icon"/>
-            <span data-v-4732acba=""   className="link-name">Boxing</span></a></li>
-
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("26420387","Mixed Martial Arts")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/26420387.png"   className="game-icon"/> 
-           <span data-v-4732acba=""   className="link-name">Mixed Martial Arts</span></a></li>
-
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("8","Motor Sport")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/8.png"   className="game-icon"/> 
-           <span data-v-4732acba=""   className="link-name">Motor Sport</span></a></li>
-           
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("7522","Basketball")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/gicons/7522.png"   className="game-icon"/> 
-           <span data-v-4732acba=""   className="link-name">Basketball</span></a></li>
-
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link" onClick={()=>handleRoute("lottery","Lottery Casino")}>
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/lottery.png"   className="game-icon"/> 
-           <span data-v-4732acba=""   className="link-name">Lottery Casino</span></a></li>
-
-         <li data-v-4732acba=""><a data-v-4732acba=""    className="favourites-link download-apk" onClick={()=>handleRoute("casino","Live Casino")}> 
-           <img alt="" data-v-4732acba="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_live_casino.png"   className="game-icon"/> 
-           <span data-v-4732acba=""   className="link-name">Live Casino</span></a></li> 
-      </ul>
-
-   </div>
-</nav>
-</aside>}
-         </div>
+              </div>
+            </nav>
+          </aside>}
+      </div>
     </>
   )
 }

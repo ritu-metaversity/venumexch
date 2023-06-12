@@ -1,5 +1,5 @@
 import { Route, useLocation, useNavigate } from "react-router";
-// import './App.css';
+import './App.css';
 // import Footer from './component/Footer/Footer';
 import NavBar from "./component/navBar/NavBar";
 import Home from "./component/Home/Home";
@@ -10,6 +10,8 @@ import { ToastContainer } from "react-toastify";
 
 import 'react-toastify/dist/ReactToastify.css';
 import { ImCross } from "react-icons/im";
+import { useDispatch } from "react-redux";
+import { PostBalance, Postvalidatejwttoken } from "./App/Features/auth/authActions";
 import axios from "axios";
 
 // import { Provider } from "react-redux";
@@ -17,12 +19,81 @@ import axios from "axios";
 
 function App() {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // console.log("page hit app.js")
   const [mobileRoutes, setMoileRoutes] = useState(true);
 
   const { pathname } = useLocation();
   let appUrll = window.location.hostname;
+  const token = localStorage.getItem("TokenId");
+
+  useEffect(() => {
+    if (window.innerWidth > 750) {
+      setMoileRoutes(true);
+      // navigate("./home");
+
+      if (pathname.includes("/m/")) {
+
+
+        navigate("/home");
+      }
+      // console.log("mobile")
+    } else {
+      setMoileRoutes(false);
+      navigate("./m/home");
+
+      // if (pathname.includes("/m/")) {
+      //   navigate("./home");
+      // }
+      // console.log("pc")
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token === null) {
+      navigate("./home");
+    }
+  }, [token]);
+  useEffect(() => {
+    if (token) {
+
+      if (localStorage.getItem("PassWordType") === "old") {
+      } else {
+        // const time = setInterval(() => {
+        const token = localStorage.getItem("TokenId");
+
+        if (token) {
+          dispatch(PostBalance());
+
+          if (localStorage.getItem("PassWordType") === "old") {
+          } else {
+            const time = setInterval(() => {
+              dispatch(PostBalance());
+            }, 3000);
+            return () => clearInterval(time);
+          }
+        }
+
+        // }, 3000);
+        // return () => clearInterval(time);
+      }
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (localStorage.getItem("PassWordType") === "old") {
+    } else {
+      const time = setInterval(() => {
+        if (token) {
+
+          dispatch(Postvalidatejwttoken());
+        }
+      }, 1000);
+      return () => clearInterval(time);
+    }
+  }, [token]);
+
 
   useEffect(() => {
     axios
@@ -31,7 +102,6 @@ function App() {
         { appUrl: appUrll }
       )
       .then((res) => {
-
         var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
         link.type = 'image/x-icon';
         link.rel = 'shortcut icon';
@@ -41,6 +111,9 @@ function App() {
   }, []);
 
 
+
+
+  // console.log(mobileRoutes, "fsdfsd")
   return (
 
     <div className="App">
@@ -64,9 +137,9 @@ function App() {
       />
 
 
-      {/* {mobileRoutes === true ? <RoutesPages /> : */}
-      <RouteMobile />
-      {/* } */}
+      {mobileRoutes === true ? <RoutesPages /> :
+        <RouteMobile />
+      }
 
     </div>
 

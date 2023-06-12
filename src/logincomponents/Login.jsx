@@ -126,6 +126,8 @@ const Login = () => {
 
   };
 
+
+
   const handleLoginConfirm = (val) => {
     if (userName === "" && password === "") {
       setErrorPassword(true);
@@ -151,6 +153,7 @@ const Login = () => {
     navigate("/m/signup");
   };
   let appUrll = window.location.hostname;
+  // let appUrll = "localhost";
   // let appUrll = "localhost";
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
@@ -205,7 +208,7 @@ const Login = () => {
                       <img
                         alt=""
                         src={selfAllowedd?.logo}
-                        className="logo"
+                        className="logo w_logo"
                       />
                     </div>
                   </div>
@@ -267,13 +270,11 @@ const Login = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        {selfAllowedd?.selfAllowed === true ? (
-                          <button className="btn btn-login" onClick={handleDemoLogin}>
-                            Login with demo ID
-                            <i className="ml-2 fas fa-sign-in-alt"></i>
-                          </button>) : (
-                          ""
-                        )}
+
+                        <button className="btn btn-login" onClick={handleDemoLogin}>
+                          Login with demo ID
+                          <i className="ml-2 fas fa-sign-in-alt"></i>
+                        </button>)
 
                         {selfAllowedd?.selfAllowed === true ? (
                           <button

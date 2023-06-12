@@ -28,8 +28,12 @@ const MFooter = () => {
       >
         <p
           data-v-7c8a6852=""
-          className="m-b-0 text-center p-t-10 upper-footer theme2font"
-        >
+          className="text-center p-t-10 upper-footer theme2font"
+
+          style={{
+            marginBottom: "15px",
+            marginTop: "0px"
+          }}  >
           <Link
             data-v-7c8a6852=""
             to="./AboutUs"

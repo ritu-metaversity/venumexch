@@ -1,17 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { PostEditStack, PostGetStackApi } from "../../App/Features/auth/authActions";
+import BetPage from "./BetPage";
 
-const Betslip = (props) => {
+const Betslip = ({ props, gamedetailsData }) => {
+  const dispatch = useDispatch();
+  const [stakeState, setStakeState] = useState({});
+  // const [stakeTwo, setStackUpadte] = useState(false);
+  const [EditStake, setEditStake] = useState(false);
   const [betslip, setBetslip] = useState(true);
   const [openBet, setOpenBet] = useState(false);
+  const [editStakeBtn, setEditBtn] = useState("none");
+  const token = localStorage.getItem("TokenId");
 
-  const [editStake, setEditStake] = useState("none");
+  const [gameIframeId, setGameIframeId] = useState(4);
 
-  const handleEditStakes = () => {
-    if (editStake === "none") {
-      setEditStake("block");
+  const {
+    PostBetListByMatchIdData, PostGetStack, PostEditStackData, PostEditStackDataError
+  } = useSelector((state) => state.auth);
+
+  const iddd = localStorage.getItem("SportId");
+  // useEffect(() => {
+  //   setGameIframeId(iddd);
+  // }, [iddd]);
+
+  const handleEditBtn = () => {
+    if (editStakeBtn === "none") {
+      setEditBtn("block");
       props.BackBlack("block");
     } else {
-      setEditStake("none");
+      setEditBtn("none");
       props.BackBlack("none");
     }
   };
@@ -32,10 +50,46 @@ const Betslip = (props) => {
     }
   };
 
+  useEffect(() => {
+    if (token !== null) {
+      dispatch(PostGetStackApi());
+    }
+  }, [EditStake]);
+
+  useEffect(() => {
+    if (PostEditStackData?.status === true) {
+      dispatch(PostGetStackApi());
+    }
+  }, [PostEditStackData?.status]);
+
+  useEffect(() => {
+    setStakeState(PostGetStack?.data || {});
+  }, [PostGetStack]);
+
+  const handleInput = (e) => {
+    let inputValue = e.target.value;
+    let inputName = e.target.name;
+    setStakeState((prev) => ({ ...prev, [inputName]: inputValue }));
+
+  };
+  const handleEditStakes = () => {
+    setEditStake(true);
+  };
+
+  const handleSaveStakes = () => {
+    setEditStake(false);
+    // console.log("postapi");
+    dispatch(PostEditStack(stakeState));
+    // setStackUpadte(true);
+    dispatch(PostGetStackApi());
+    setEditBtn("none");
+    props.BackBlack("none");
+  };
+
   return (
-    <div>
+    <div >
       {" "}
-      <div className="bet-manager">
+      <div className="bet-manager" >
         <h4>Betslip</h4>
         <ul className="tabs">
           <li
@@ -51,24 +105,33 @@ const Betslip = (props) => {
             <a href="javascript:void(0)">Open Bets</a>
           </li>
           <li>
-            <button
-              type="button"
-              className="btn btn-primary m-r-5"
-              onClick={handleEditStakes}
-            >
-              Edit Stakes
-            </button>
+            {token === null ? "" :
+              <button
+                type="button"
+                className="btn editBtn m-r-5"
+                onClick={handleEditBtn}
+              >
+                Edit Stakes
+              </button>
+            }
           </li>
         </ul>
         <div className="sc-content">
           <ul className="content" style={{ position: "relative" }}>
             {betslip ? (
+
               <li>
                 <div className="betslip bets">
                   <div className="betslipContent">
+
+
                     <div className="text-center m-t-10">
                       Click on the odds to add selections to the betslip.
                     </div>
+
+                    <BetPage gamedetailsData={gamedetailsData} />
+
+
                   </div>
                 </div>
               </li>
@@ -101,75 +164,58 @@ const Betslip = (props) => {
                     </label>
                   </div>
                   <div className="matched-bets">
-                    <div className="toggleable-list-title">
-                      <span>Unmatched Bets</span>{" "}
-                      <i className="fas fa-angle-down m-l-5 toggle-icon"></i>
-                    </div>
-                    <p className="empty-list-info">
-                      <span>You Have no Unmatched Bet</span>
-                    </p>
-                  </div>
-
-                  <div className="matched-bets">
-                    <div className="toggleable-list-title">
-                      <span>Matched Bets</span>{" "}
-                      <i className="fas fa-angle-down m-l-5 toggle-icon"></i>
-                    </div>
+                    <div className="toggleable-list-title"><span>Matched Bets</span> <i className="fas fa-angle-down m-l-5 toggle-icon"></i></div>
                     <div className="filter">
                       <div id="radios2" role="group" tabindex="-1" className="">
                         <div className="custom-control custom-control-inline custom-checkbox">
-                          <input
-                            type="checkbox"
-                            name="radioSubComponent"
-                            autocomplete="off"
-                            className="custom-control-input"
-                            value="bet"
-                            id="__BVID__72"
-                          />
-                          <label
-                            className="custom-control-label"
-                            for="__BVID__72"
-                          >
-                            Consolidate
-                          </label>
+                          <input type="checkbox" name="radioSubComponent" autocomplete="off" className="custom-control-input" value="bet" id="__BVID__77" />
+                          <label className="custom-control-label" for="__BVID__77">Consolidate</label>
                         </div>
-
                         <div className="custom-control custom-control-inline custom-checkbox">
-                          <input
-                            type="checkbox"
-                            name="radioSubComponent"
-                            autocomplete="off"
-                            className="custom-control-input"
-                            value="average"
-                            id="__BVID__73"
-                          />
-                          <label
-                            className="custom-control-label"
-                            for="__BVID__73"
-                          >
-                            Average Odd
-                          </label>
-                        </div>
-
+                          <input type="checkbox" name="radioSubComponent" autocomplete="off" className="custom-control-input" value="average" id="__BVID__78" />
+                          <label className="custom-control-label" for="__BVID__78">Average Odd</label></div>
                         <div className="custom-control custom-control-inline custom-checkbox">
-                          <input
-                            type="checkbox"
-                            name="radioSubComponent"
-                            autocomplete="off"
-                            className="custom-control-input"
-                            value="date"
-                            id="__BVID__74"
-                          />
-                          <label
-                            className="custom-control-label"
-                            for="__BVID__74"
-                          >
-                            Order By Date
-                          </label>
-                        </div>
+                          <input type="checkbox" name="radioSubComponent" autocomplete="off" className="custom-control-input" value="date" id="__BVID__79" />
+                          <label className="custom-control-label" for="__BVID__79">Order By Date</label></div>
                       </div>
                     </div>
+                    {/*   <b><a href="/gamedetail/32403633" className="router-link-exact-active router-link-active">Sri Lanka v Afghanistan</a></b>*/}
+                    <div className="table-responsive">
+                      <table className="table">
+                        {/*  <thead>
+                          <th colspan="4">Sri Lanka.</th>
+            </thead>*/}
+                        <tbody>
+                          <tr className="odds-header">
+                            <td className="text-left">Nation</td>
+                            <td className="text-left">Odds</td>
+                            <td className="text-right">Stake</td>
+                            <td className="text-right">Profit/Liability</td>
+                          </tr>
+                          {token === null ? "" :
+                            (PostBetListByMatchIdData?.data &&
+                              Object.keys(PostBetListByMatchIdData?.data).map((key) => (
+                                <>
+                                  {PostBetListByMatchIdData?.data[key].map((item) => (
+                                    <>
+                                      <tr className={`back ${item?.back === false ? "lay" : "back"}`}>
+                                        <td className="text-left">{item?.nation}</td>
+                                        <td className="text-left">{item?.priveValue}</td>
+                                        <td className="text-right">{item?.amount}</td>
+
+                                        <td className="text-right">{item?.priveValue}</td>
+                                      </tr>
+                                    </>
+                                  ))}
+                                </>
+                              )))
+                          }
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
+
+
                 </div>
               </li>
             )}
@@ -177,65 +223,40 @@ const Betslip = (props) => {
             <li>
               <div
                 className="edit-stakes-buttons"
-                style={{ display: `${editStake}` }}
+                style={{ display: `${editStakeBtn}` }}
               >
                 <div className="buttons-div">
-                  <input
-                    type="number"
-                    onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-                    name="ButtonValue1"
-                    aria-required="true"
-                    aria-invalid="false"
-                    value="1111"
-                  />
-                  <input
-                    type="number"
-                    onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-                    name="ButtonValue2"
-                    aria-required="true"
-                    aria-invalid="false"
-                    value="2222"
-                  />
-                  <input
-                    type="number"
-                    onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-                    name="ButtonValue3"
-                    aria-required="true"
-                    aria-invalid="false"
-                    value="3333"
-                  />
-                  <input
-                    type="number"
-                    onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-                    name="ButtonValue4"
-                    aria-required="true"
-                    aria-invalid="false"
-                    value="4444"
-                  />
-                  <input
-                    type="number"
-                    onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-                    name="ButtonValue5"
-                    aria-required="true"
-                    aria-invalid="false"
-                    value="5555"
-                  />
-                  <input
-                    type="number"
-                    onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57"
-                    name="ButtonValue6"
-                    aria-required="true"
-                    aria-invalid="false"
-                    value="6666"
-                  />
+                  {
+                    PostGetStack?.data ? (
+                      Object.keys(PostGetStack?.data)
+                        .slice(0, 6)
+                        .map((key, index) => {
+                          return (
+                            <input
+                              name={key}
+                              text="number"
+                              value={stakeState[key]}
+                              onChange={handleInput}
+                              className="stake readonly"
+                            />
+                          );
+                        })
+                    ) : (
+                      ""
+                    )
+                  }
+
+
                   <div className="text-center m-t-10">
                     <button
-                      className="btn btn-link text-right"
-                      onClick={handleEditStakes}
+                      className="btn editBtn text-left"
+                      onClick={handleEditBtn}
+
                     >
                       Cancel
                     </button>
-                    <button className="btn btn-primary">Save</button>
+
+                    <button className="btn editBtn" onClick={handleSaveStakes}>Save</button>
                   </div>
                 </div>
               </div>

@@ -47,18 +47,18 @@ const LayoutForMobile = () => {
   // "old"
   // const PassWordType = localStorage.getItem("PassWordType");
 
-  useEffect(() => {
-    if (localStorage.getItem("PassWordType") === "old") {
-    } else {
-      const time = setInterval(() => {
-        if (token) {
+  // useEffect(() => {
+  //   if (localStorage.getItem("PassWordType") === "old") {
+  //   } else {
+  //     const time = setInterval(() => {
+  //       if (token) {
 
-          dispatch(Postvalidatejwttoken());
-        }
-      }, 5000);
-      return () => clearInterval(time);
-    }
-  }, [token]);
+  //         dispatch(Postvalidatejwttoken());
+  //       }
+  //     }, 5000);
+  //     return () => clearInterval(time);
+  //   }
+  // }, [token]);
   console.log(window.location.pathname, "window.location.pathname")
   // /m/game/
   // /m/casino-list
@@ -217,6 +217,7 @@ const LayoutForMobile = () => {
         <div
           className={`eighteen-plus  ${BetType}-border  ${BetTypeFooter ? "" : "modal-design"
             } ${cssClsssssssssssss ? cssClsssssssssssss : ""}`}
+            style={{marginLeft:"0px"}}
         >
           <Modal.Body style={{ marginLeft: "-72% !important" }}>
             <BitPopup

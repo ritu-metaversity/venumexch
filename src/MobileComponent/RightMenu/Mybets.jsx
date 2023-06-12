@@ -47,6 +47,7 @@ const Mybets = () => {
     let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1 };
 
     dispatch(Postunsettleddddd(data));
+    
   }, [pageNumber]);
 
   const handleDoubleLeft = (vl) => {

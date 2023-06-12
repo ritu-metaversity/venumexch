@@ -1,0 +1,117 @@
+.sportName {
+    margin-bottom: 10px;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid rgba(15, 35, 39, 0.4);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+h5.d-inline-block.m-b-0 {
+    color: #0f2327;
+}
+
+h5.d-inline-block.m-b-0 {
+    padding: 0 0 10px 0;
+    font-size: 1.25rem;
+
+    margin-left: 10px;
+    width: 97%;
+
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(15, 35, 39, 0.4);
+}
+
+.fancy-market1 {
+    width: 49.5% !important;
+    float: left;
+}
+
+.lay.unhighlighted {
+    background-color: #fdeef2 !important;
+}
+
+.fancy-tripple1 {
+    margin-bottom: 0px !important;
+}
+
+.dest_para {
+    margin-left: 2px;
+    margin-top: 0 !important;
+}
+
+p.m-b-0.dest_para.dest_width {
+    width: 161px;
+}
+
+.float-right.v-m img {
+    top: 67px !important;
+    right: 7px !important;
+}
+
+.ps.Po-fixed {
+    position: fixed;
+    width: 25.2%;
+}
+
+.desk_score {
+    position: unset !important;
+}
+
+.desk_game_heading {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score_detail {
+    display: flex;
+    justify-content: space-between;
+    background: #1e5058;
+    color: #fff;
+    padding: 3px 4px;
+    align-items: center;
+}
+
+.event_time {
+    border-right: 2px solid #fff;
+    padding-right: 4px;
+}
+
+.active2 {
+    background-color: #fff !important;
+    border-color: transparent !important;
+    color: #fff !important;
+}
+
+.active2 {
+    background-color: #fff !important;
+}
+
+.onoffbtn.active2:after {
+    left: 100%;
+    margin-left: -22px;
+    background: #1e5058;
+    content: '';
+}
+
+.desk_score_card {
+    margin-top: 0px !important;
+}
+
+.scoreCard-icon.desk_score.score_card_update svg {
+    font-size: 24px;
+    margin-right: 5px;
+    margin-left: 2px;
+}
+
+label.dest_onoffbtn {
+    margin-top: 4px;
+}
+
+iframe.score-card.desk_score_card {
+    height: 250px;
+}
+
+.score_name {
+    font-size: 18px;
+    padding-left: 12px;
+}

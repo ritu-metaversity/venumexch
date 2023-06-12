@@ -1,107 +1,301 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBar from '../SideBar/SideBar'
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
+import Modal from "react-bootstrap/Modal";
+
+import { AiOutlineDoubleLeft } from "@react-icons/all-files/ai/AiOutlineDoubleLeft";
+import { AiOutlineLeft } from "@react-icons/all-files/ai/AiOutlineLeft";
+import { AiOutlineRight } from "@react-icons/all-files/ai/AiOutlineRight";
+import { AiOutlineDoubleRight } from "@react-icons/all-files/ai/AiOutlineDoubleRight";
+import { PostTransferStatement } from '../../App/Features/auth/authActions';
+import TransferstatementModal from '../../MobileComponent/RightMenu/TransferstatementModal'
+const dateFormat = "YYYY-MM-DD";
 
 const AccountStatement = () => {
+
+  const { PostTransferStatementData, PostTransferStatementDataLoading } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const [trueee, setTrueee] = useState(false);
+  const [matchId, setMatchId] = useState("");
+  const [pageNumber, setPageNumber] = useState(0);
+  var curr = new Date()
+  const timeBefore = moment(curr).subtract(14, "days").format("YYYY-MM-DD");
+  const time = moment(curr).format("YYYY-MM-DD");
+  const [startDate, setStartDate] = useState(timeBefore);
+  const [endDate, setEndDate] = useState(time);
+  const [gameNameForType, setGameNameForType] = useState(1);
+  const StartDateValue = (date, dateString) => {
+    setStartDate(dateString);
+  };
+  const EndDateValue = (date, dateString) => {
+    setEndDate(dateString);
+
+  }
+
+  const handleSelectGame = (e) => {
+    let inputValue = e.target.value;
+    console.log(inputValue, "dasjdhadhas");
+    setGameNameForType(inputValue);
+  };
+
+  const handleDoubleLeft = (vl) => {
+    if (vl === "doubleleft") {
+      setPageNumber(0);
+    } else if (vl === "sigleleft") {
+      setPageNumber(pageNumber - 1);
+    } else if (vl === "singleright") {
+      setPageNumber(1 + pageNumber);
+    } else {
+      setPageNumber(PostTransferStatementData?.data?.totalPages);
+    }
+  };
+  console.log(pageNumber, "hello");
+
+  useEffect(() => {
+    // let d = new Date();
+    // d.setDate(d.getDate() - 14);
+    let data = {
+      noOfRecords: 100,
+      index: pageNumber,
+      fromDate: startDate,
+      toDate: endDate,
+      type: gameNameForType,
+    };
+    // console.log("apiiiiiii");
+    dispatch(PostTransferStatement(data));
+    // console.log();
+  }, [endDate, pageNumber, startDate, gameNameForType]);
+
+  const handleDetailsStatement = (item1, item2) => {
+    console.log(item1, item2, "item1,item2")
+    setMatchId({ matchid: item1, remark: item2 });
+    setTrueee(true);
+  };
   return (
-    <div   className="content boxed-layout-wrapper" >
-      
-      <SideBar/>
-      <div>
-   <h1>Account Statement</h1>
-   <div   className="column m-r-40">
-      <form data-vv-scope="accountStatement">
-         <div   className="form-group v-t m-r-20 d-inline-block">
-            <label>From:</label> 
-            <div   className="mx-datepicker vuedatepicker" name="FromDate" not-before="Tue Dec 13 2022 05:30:00 GMT+0530 (India Standard Time)" not-after="Mon Feb 13 2023 05:30:00 GMT+0530 (India Standard Time)">
-               <div   className="mx-input-wrapper">
-                  <input name="date" type="text" autocomplete="off" placeholder="Select Date"   className="mx-input"/> <span   className="mx-input-append mx-clear-wrapper"><i   className="mx-input-icon mx-clear-icon"></i></span> 
-                  <span   className="mx-input-append">
-                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200"   className="mx-calendar-icon">
-                        <rect x="13" y="29" rx="14" ry="14" width="174" height="158" fill="transparent"></rect>
-                        <line x1="46" x2="46" y1="8" y2="50"></line>
-                        <line x1="154" x2="154" y1="8" y2="50"></line>
-                        <line x1="13" x2="187" y1="70" y2="70"></line>
-                        <text x="50%" y="135" font-size="90" stroke-width="1" text-anchor="middle" dominant-baseline="middle">13</text>
-                     </svg>
-                  </span>
-               </div>
-               <div   className="mx-datepicker-popup" style={{display: "none"}}>
-          
-                  <div   className="mx-calendar mx-calendar-panel-none" name="FromDate">
-                     <div   className="mx-calendar-header"><a   className="mx-icon-last-year">«</a> <a   className="mx-icon-last-month" style={{display: "none"}}>‹</a> <a   className="mx-icon-next-year">»</a> <a   className="mx-icon-next-month" style={{display: "none"}}>›</a> <a   className="mx-current-month" style={{display: "none"}}>Feb</a> <a   className="mx-current-year" style={{display: "none"}}>2023</a> <a   className="mx-current-year" style={{display: "none"}}>2020 ~ 2029</a> <a   className="mx-time-header" style={{display: "none"}}>2023-02-06</a></div>
-                     <div   className="mx-calendar-content">
-                       
-                        <div   className="mx-panel mx-panel-year" style={{display: "none"}}><span   className="cell disabled">2020</span><span   className="cell disabled">2021</span><span   className="cell">2022</span><span   className="cell actived">2023</span><span   className="cell disabled">2024</span><span   className="cell disabled">2025</span><span   className="cell disabled">2026</span><span   className="cell disabled">2027</span><span   className="cell disabled">2028</span><span   className="cell disabled">2029</span></div>
-                        <div   className="mx-panel mx-panel-month" style={{display: "none"}}><span   className="cell">Jan</span><span   className="cell actived">Feb</span><span   className="cell disabled">Mar</span><span   className="cell disabled">Apr</span><span   className="cell disabled">May</span><span   className="cell disabled">Jun</span><span   className="cell disabled">Jul</span><span   className="cell disabled">Aug</span><span   className="cell disabled">Sep</span><span   className="cell disabled">Oct</span><span   className="cell disabled">Nov</span><span   className="cell disabled">Dec</span></div>
-                      
-                     </div>
-                  </div>
-                  
-               </div>
+    <div className="content boxed-layout-wrapper" >
+      <div className='wid-100'>
+        <h1 className='betHeading pnlHeading'>Account Statement</h1>
+        <div className="column m-r-40 ">
+          <form data-vv-scope="mybets" className='pnl'>
+            <div className="v-t d-inline-block">
+              <label className="mb-0">From:</label>
+              <div
+                className="mx-datepicker vuedatepicker"
+                name="FromDate"
+              >
+                <div className="mx-input-wrapper">
+                  <DatePicker
+                    className=" startDateNew"
+                    defaultValue={dayjs(startDate)}
+                    format={dateFormat}
+                    onChange={StartDateValue}
+                    disabledDate={(d) =>
+                      !d ||
+                      d.isBefore(dayjs().subtract(2, "month")) ||
+                      d.isAfter(dayjs())
+                    }
+                  />
+                </div>
+              </div>
+              <span className="text-danger error-report m-l-10"></span>
             </div>
-            <span   className="text-danger error-report m-l-10"></span>
-         </div>
-         <div   className="form-group v-t m-r-20 d-inline-block">
-            <label>To:</label> 
-            <div   className="mx-datepicker vuedatepicker" name="ToDate" not-before="Tue Dec 13 2022 05:30:00 GMT+0530 (India Standard Time)" not-after="Mon Feb 13 2023 05:30:00 GMT+0530 (India Standard Time)">
-               <div   className="mx-input-wrapper">
-                  <input name="date" type="text" autocomplete="off" placeholder="Select Date"   className="mx-input"/> <span   className="mx-input-append mx-clear-wrapper"><i   className="mx-input-icon mx-clear-icon"></i></span> 
-                  <span   className="mx-input-append">
-                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200"   className="mx-calendar-icon">
-                        <rect x="13" y="29" rx="14" ry="14" width="174" height="158" fill="transparent"></rect>
-                        <line x1="46" x2="46" y1="8" y2="50"></line>
-                        <line x1="154" x2="154" y1="8" y2="50"></line>
-                        <line x1="13" x2="187" y1="70" y2="70"></line>
-                        <text x="50%" y="135" font-size="90" stroke-width="1" text-anchor="middle" dominant-baseline="middle">13</text>
-                     </svg>
-                  </span>
-               </div>
-               <div   className="mx-datepicker-popup" style={{display: "none"}}>
-               
-                  <div   className="mx-calendar mx-calendar-panel-none" name="ToDate">
-                     <div   className="mx-calendar-header"><a   className="mx-icon-last-year">«</a> <a   className="mx-icon-last-month" style={{display: "none"}}>‹</a> <a   className="mx-icon-next-year">»</a> <a   className="mx-icon-next-month" style={{display: "none"}}>›</a> <a   className="mx-current-month" style={{display: "none"}}>Feb</a> <a   className="mx-current-year" style={{display: "none"}}>2023</a> <a   className="mx-current-year" style={{display: "none"}}>2020 ~ 2029</a> <a   className="mx-time-header" style={{display: "none"}}>2023-02-13</a></div>
-                     <div   className="mx-calendar-content">
-                       
-                        <div   className="mx-panel mx-panel-year" style={{display: "none"}}><span   className="cell disabled">2020</span><span   className="cell disabled">2021</span><span   className="cell">2022</span><span   className="cell actived">2023</span><span   className="cell disabled">2024</span><span   className="cell disabled">2025</span><span   className="cell disabled">2026</span><span   className="cell disabled">2027</span><span   className="cell disabled">2028</span><span   className="cell disabled">2029</span></div>
-                        <div   className="mx-panel mx-panel-month" style={{display: "none"}}><span   className="cell">Jan</span><span   className="cell actived">Feb</span><span   className="cell disabled">Mar</span><span   className="cell disabled">Apr</span><span   className="cell disabled">May</span><span   className="cell disabled">Jun</span><span   className="cell disabled">Jul</span><span   className="cell disabled">Aug</span><span   className="cell disabled">Sep</span><span   className="cell disabled">Oct</span><span   className="cell disabled">Nov</span><span   className="cell disabled">Dec</span></div>
-                        
-                     </div>
-                  </div>
-                  
-               </div>
+            <div className=" v-t d-inline-block" style={{ marginLeft: "-18px" }}>
+              <label className="mb-0">To:</label>
+              <div
+                className="mx-datepicker vuedatepicker"
+                name="ToDate"
+              >
+                <div className="mx-input-wrapper">
+                  <DatePicker
+                    className="startDateNew"
+                    defaultValue={dayjs}
+                    format={dateFormat}
+                    onChange={EndDateValue}
+                    disabledDate={(d) =>
+                      !d ||
+                      d.isBefore(dayjs().subtract(2, "month")) ||
+                      d.isAfter(dayjs())
+                    }
+                  />
+                </div>
+              </div>
+              <span className="text-danger error-report "></span>
             </div>
-            <span   className="text-danger error-report "></span>
-         </div>
-         <div   className="form-group m-r-20 d-inline-block"><label   className="d-block">&nbsp;</label> <button   className="btn btn-primary" style={{height: "35px"}}><i   className="fa fa-search m-r-5"></i>Search</button></div>
-      </form>
-   </div>
-   <div   className="games-profit-loss">
-      <ul   className="d-inline-block">
-         <li   className="total-pnl">
-            <p   className="m-b-0"><span>Total P&amp;L : </span> <span   className="positive">0</span></p>
-         </li>
-      </ul>
-   </div>
-   <div   className="table-responsive">
-      <table   className="table profit-loss-table">
-         <thead>
-            <tr>
-               <th>Date</th>
-               <th>Description</th>
-               <th></th>
-               <th   className="text-right">P&amp;L</th>
-               <th   className="text-right">Credit Limit</th>
-               <th   className="text-right">Balance</th>
-            </tr>
-         </thead>
-         <tbody></tbody>
-      </table>
-   </div>
- 
-</div>
-      
-      
+            <div className=" v-t d-inline-block" style={{ marginLeft: "-18px" }}>
+              <label className="mb-0">To:</label>
+              <div
+                className="mx-datepicker vuedatepicker"
+                name="ToDate"
+              >
+                <div className="mx-input-wrapper">
+                  <select
+                    className="selectionndsfsdfnn"
+                    // name="cars"
+                    // id="cars"
+
+                    onChange={handleSelectGame}
+                  >
+                    <option value={1}> All</option>
+                    <option value={2}> Game Report</option>
+                    <option value={3}> Deposite/Withdraw Report</option>
+                  </select>
+                </div>
+              </div>
+              <span className="text-danger error-report "></span>
+            </div>
+            {/*   <div className="form-group m-r-20 d-inline-block">
+
+              <button className="btn-primary searchBtnNew">
+                <i className="fa fa-search m-r-5"></i>Search
+              </button>
+                  </div>*/}
+          </form>
+        </div>
+        <div className="games-profit-loss">
+          <ul className="d-inline-block">
+            <li className="total-pnl pnlHeading">
+              <p className="m-b-0"><span>Total P&amp;L : </span> <span className="positive">0</span></p>
+            </li>
+          </ul>
+        </div>
+        <div className="table-responsive">
+          <table className="table profit-loss-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Credit</th>
+
+                <th className="text-right">Debit</th>
+                <th className="text-right">Balance</th>
+                <th className="text-right">Remark</th>
+              </tr>
+            </thead>
+            {
+              PostTransferStatementDataLoading === true ?
+
+
+                <div
+
+                  style={{
+
+                    backgroundColor: "#0000002b",
+                    height: "50vh",
+                    width: "1200px"
+                  }}>
+                  <i
+                    className="fa fa-spinner fa-spin loading"
+                    style={{ fontSize: "50px" }}
+                  ></i>
+                </div>
+                :
+                <tbody>
+                  {PostTransferStatementData?.data &&
+                    PostTransferStatementData?.data?.dataList ? (
+                    PostTransferStatementData?.data?.dataList.map((el) => (
+
+                      <tr>
+
+                        <td className="accountStatment"
+                          onClick={() =>
+                            handleDetailsStatement(el?.marketid, el?.remark)
+                          }
+                        > {" "}
+                          {console.log(el, "elelelel")}
+                          {moment(el?.date).format("YYYY-MM-DD  - h:mm")}</td>
+                        <td> {" "}
+                          {el?.credit}</td>
+                        <td className="text-right" style={{ color: "red", width: "15%" }}>
+                          {el?.debit} </td>
+                        <td className="text-right" style={{ width: "15%" }}>{el?.pts}</td>
+                        <td className="text-right" style={{ width: "30%" }}>{el?.remark}</td>
+                      </tr>
+
+                    ))
+                  ) : (
+                    <tr>
+                      <td colspan="3" className="text-center">
+                        There Have Been No Transfers In The Last 14 Days.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>}
+          </table>
+        </div>
+        <div className="pagination">
+          <button
+            disabled={pageNumber === 0 ? true : false}
+            className="paginationBtn"
+            onClick={() => handleDoubleLeft("doubleleft")}
+          >
+            <AiOutlineDoubleLeft className="arrowDoubleLeft" />
+          </button>
+          <button
+            disabled={pageNumber === 0 ? true : false}
+            className="paginationBtn"
+            style={{ marginLeft: "-9px" }}
+            onClick={() => handleDoubleLeft("sigleleft")}
+          >
+            <AiOutlineLeft className="arrowSingleLeft" />
+          </button>
+          <div className="paginationno">
+            <div style={{ marginTop: "7px", marginLeft: "11px" }}>
+              {pageNumber + 1}
+            </div>
+          </div>
+
+          <button
+            disabled={
+              PostTransferStatementData?.data?.totalPages === pageNumber + 1
+                ? true
+                : false
+            }
+            className="paginationBtn"
+            style={{ marginLeft: "-10px" }}
+            onClick={() => handleDoubleLeft("singleright")}
+          >
+            <AiOutlineRight className="arrowSingleRight" />
+          </button>
+          <button
+            disabled={
+              PostTransferStatementData?.data?.totalPages === pageNumber + 1
+                ? true
+                : false
+            }
+            className="paginationBtn"
+            onClick={() => handleDoubleLeft("doubleright")}
+          >
+            <AiOutlineDoubleRight className="arrowDoubleRight" />
+          </button>
+        </div>
       </div>
+
+      <Modal
+        show={trueee}
+        onHide={() => setTrueee(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton style={{ width: "100%" }} className="back1">
+          <Modal.Title
+            id="contained-modal-title-vcenter"
+            style={{ marginBottom: "-30px" }}
+          >
+            Result
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ width: "100%" }}>
+          <div>
+            <TransferstatementModal matchId={matchId} />
+          </div>
+        </Modal.Body>
+      </Modal>
+    </div>
   )
 }
 

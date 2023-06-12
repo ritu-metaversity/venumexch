@@ -61,6 +61,7 @@ const ChangePassword = () => {
         setemptyPassWord(
           ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
         );
+        setSamePassword(false)
         break;
       case "ConfirmNewPassword":
         setConfirmPassword(ValidationFile.spaceNotAccept(inputValue));

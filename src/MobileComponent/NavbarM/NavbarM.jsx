@@ -26,11 +26,11 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
 
   const token = localStorage.getItem("TokenId");
 
-  useEffect(() => {
-    if (token === null) {
-      navigate("./home");
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token === null) {
+  //     navigate("./home");
+  //   }
+  // }, [token]);
 
   const handlelogin = (vl) => {
     if (vl === "login") {
@@ -50,6 +50,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
         "http://api.247365.exchange/admin-new-apis/enduser/get-user-message"
       )
       .then((response) => {
+        // console.log(response, "responseresponse");
         // console.log(response, "responseresponse");
         setMovingMessage(response?.data?.message);
       });
@@ -153,7 +154,8 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
 
       });
   }, [appUrll]);
-  console.log(selfAllowedd, "selfAllowedd")
+  console.log(selfAllowedd)
+
   return (
     <div>
       <header className="header">
@@ -199,7 +201,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                 alt=""
                 src={selfAllowedd?.logo}
                 className="img-fluid"
-                style={{ height: "40px" }}
+                style={{ height: "90px", marginTop: "-22px" }}
               />
               {/* </Link> */}
             </div>
@@ -215,8 +217,8 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                 <i className="fas fa-user d-block"></i>{" "}
                 <span className="balance">
                   {PostTotalBalance?.data?.data?.balance
-                    ? PostTotalBalance?.data?.data?.balance -
-                    PostTotalBalance?.data?.data?.libality
+                    ? Number(PostTotalBalance?.data?.data?.balance -
+                      PostTotalBalance?.data?.data?.libality).toFixed(2)
                     : "0.00"}
                 </span>
               </button>
@@ -233,15 +235,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
 
                   <button className="_button_nav" onClick={() => handlelogin("login")}>Login</button>
                 </div>)
-
-
             }
-
-
-
-
-
-
           </div>
         </nav>
       </header>

@@ -1221,8 +1221,10 @@ const GameDetails = () => {
                                               >
                                                 <b data-v-e03c6f20="">
                                                   <span data-v-e03c6f20="">
+                                                    {console.log(key, "fsdfsdfsd")}
                                                     {key}
                                                   </span>
+                                                  dfs
                                                 </b>
                                               </div>
                                               <div
@@ -1308,9 +1310,7 @@ const GameDetails = () => {
                                                       
                                                       <div
                                                         data-v-e03c6f20=""
-                                                        data-title={
-                                                          item?.gstatus
-                                                        }
+                                                        data-title={item?.gstatus}
                                                         // className="table-row"
                                                         className={`table-row ${item?.gstatus?.toLowerCase() ===
                                                           "suspended"
@@ -1389,8 +1389,7 @@ const GameDetails = () => {
                                                                       style={{
                                                                         color:
                                                                           "red",
-                                                                      }}
-                                                                    >
+                                                                      }}>
                                                                       {" "}
                                                                       <>
                                                                         {
@@ -1479,7 +1478,8 @@ const GameDetails = () => {
 
                                                         <div
                                                           data-v-e03c6f20=""
-                                                          className={`box-w1 lay float-left text-center ${item?.l1 !==
+                                                          className={`box-w1 lay float-left text-center 
+                                                          ${item?.l1 !==
                                                             previousStateFancyBlinker &&
                                                             previousStateFancyBlinker[
                                                               key
@@ -1518,7 +1518,8 @@ const GameDetails = () => {
                                                         <div
                                                           // previousStateFancyBlinker
                                                           data-v-e03c6f20=""
-                                                          className={`box-w1 back float-left text-center ${item?.b1 !==
+                                                          className={`box-w1 back float-left text-center 
+                                                          ${item?.b1 !==
                                                             previousStateFancyBlinker &&
                                                             previousStateFancyBlinker[
                                                               key

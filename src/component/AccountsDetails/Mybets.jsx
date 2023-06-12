@@ -1,129 +1,308 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import SideBar from '../SideBar/SideBar'
-import "./Mybets.css"
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import SideBar from "../SideBar/SideBar";
+import "./Mybets.css";
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
+import { useDispatch, useSelector } from "react-redux";
+import { getActiveSportList, postBetHistory, Postunsettleddddd } from "../../App/Features/auth/authActions";
+import moment from "moment";
 
+const dateFormat = "YYYY-MM-DD";
 const Mybets = () => {
-  return (
-    <div   className="content boxed-layout-wrapper" >
-      
-    <SideBar/>
-    
-    
-    <div   className="mid-pane">
-   <h1>My Bets</h1>
-   <div   className="column m-r-40 d-inline-block">
-      <div   className="selection">
-         <div   className="item selected">
-            Current
-         </div>
-         <div   className="item">
-            Past
-         </div>
-      </div>
-      <div   className="selection m-u">
-         <div   className="item selected">
-            Matched
-         </div>
-         <div   className="item">
-            Unmatched
-         </div>
-      </div>
-   </div>
-   <div   className="column v-t m-r-40 d-inline-block">
-      <form data-vv-scope="mybets">
-         <div   className="form-group v-t m-r-20 d-inline-block">
-            <label>From:</label> 
-            <div   className="mx-datepicker vuedatepicker" name="FromDate" not-before="Tue Dec 13 2022 05:30:00 GMT+0530 (India Standard Time)" not-after="Mon Feb 13 2023 05:30:00 GMT+0530 (India Standard Time)">
-               <div   className="mx-input-wrapper">
-                  <input name="date" type="text" autocomplete="off" placeholder="Select Date"   className="mx-input"/> <span   className="mx-input-append mx-clear-wrapper"><i   className="mx-input-icon mx-clear-icon"></i></span> 
-                  <span   className="mx-input-append">
-                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200"   className="mx-calendar-icon">
-                        <rect x="13" y="29" rx="14" ry="14" width="174" height="158" fill="transparent"></rect>
-                        <line x1="46" x2="46" y1="8" y2="50"></line>
-                        <line x1="154" x2="154" y1="8" y2="50"></line>
-                        <line x1="13" x2="187" y1="70" y2="70"></line>
-                        <text x="50%" y="135" font-size="90" stroke-width="1" text-anchor="middle" dominant-baseline="middle">13</text>
-                     </svg>
-                  </span>
-               </div>
-               <div   className="mx-datepicker-popup" style={{display: "none"}}>
-                   
-                  <div   className="mx-calendar mx-calendar-panel-none" name="FromDate">
-                     <div   className="mx-calendar-header"><Link   className="mx-icon-last-year">«</Link> <Link   className="mx-icon-last-month" style={{display: "none"}}>‹</Link> <Link   className="mx-icon-next-year">»</Link> <Link   className="mx-icon-next-month" style={{display: "none"}}>›</Link> <Link   className="mx-current-month" style={{display: "none"}}>Feb</Link> <Link   className="mx-current-year" style={{display: "none"}}>2023</Link> <Link   className="mx-current-year" style={{display: "none"}}>2020 ~ 2029</Link> <Link   className="mx-time-header" style={{display: "none"}}>2023-02-06</Link></div>
-                     <div   className="mx-calendar-content">
-                     
-                        <div   className="mx-panel mx-panel-year" style={{display: "none"}}><span   className="cell disabled">2020</span><span   className="cell disabled">2021</span><span   className="cell">2022</span><span   className="cell actived">2023</span><span   className="cell disabled">2024</span><span   className="cell disabled">2025</span><span   className="cell disabled">2026</span><span   className="cell disabled">2027</span><span   className="cell disabled">2028</span><span   className="cell disabled">2029</span></div>
-                        <div   className="mx-panel mx-panel-month" style={{display: "none"}}><span   className="cell">Jan</span><span   className="cell actived">Feb</span><span   className="cell disabled">Mar</span><span   className="cell disabled">Apr</span><span   className="cell disabled">May</span><span   className="cell disabled">Jun</span><span   className="cell disabled">Jul</span><span   className="cell disabled">Aug</span><span   className="cell disabled">Sep</span><span   className="cell disabled">Oct</span><span   className="cell disabled">Nov</span><span   className="cell disabled">Dec</span></div>
-                        <div   className="mx-panel mx-panel-time" style={{display: "none"}}>
-                        
-                        </div>
-                     </div>
-                  </div>
-                  
-               </div>
-            </div>
-            <span   className="text-danger error-report m-l-10"></span>
-         </div>
-         <div   className="form-group v-t m-r-20 d-inline-block">
-            <label>To:</label> 
-            <div   className="mx-datepicker vuedatepicker" name="ToDate" not-before="Tue Dec 13 2022 05:30:00 GMT+0530 (India Standard Time)" not-after="Mon Feb 13 2023 05:30:00 GMT+0530 (India Standard Time)">
-               <div   className="mx-input-wrapper">
-                  <input name="date" type="text" autocomplete="off" placeholder="Select Date"   className="mx-input"/> <span   className="mx-input-append mx-clear-wrapper"><i   className="mx-input-icon mx-clear-icon"></i></span> 
-                  <span   className="mx-input-append">
-                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200"   className="mx-calendar-icon">
-                        <rect x="13" y="29" rx="14" ry="14" width="174" height="158" fill="transparent"></rect>
-                        <line x1="46" x2="46" y1="8" y2="50"></line>
-                        <line x1="154" x2="154" y1="8" y2="50"></line>
-                        <line x1="13" x2="187" y1="70" y2="70"></line>
-                        <text x="50%" y="135" font-size="90" stroke-width="1" text-anchor="middle" dominant-baseline="middle">13</text>
-                     </svg>
-                  </span>
-               </div>
-               <div   className="mx-datepicker-popup" style={{display: "none"}}>
-                   
-                  <div   className="mx-calendar mx-calendar-panel-none" name="ToDate">
-                     <div   className="mx-calendar-header"><Link   className="mx-icon-last-year">«</Link> <Link   className="mx-icon-last-month" style={{display: "none"}}>‹</Link> <Link   className="mx-icon-next-year">»</Link> <Link   className="mx-icon-next-month" style={{display: "none"}}>›</Link> <Link   className="mx-current-month" style={{display: "none"}}>Feb</Link> <Link   className="mx-current-year" style={{display: "none"}}>2023</Link> <Link   className="mx-current-year" style={{display: "none"}}>2020 ~ 2029</Link> <Link   className="mx-time-header" style={{display: "none"}}>2023-02-13</Link></div>
-                     <div   className="mx-calendar-content">
-                      
-                     </div>
-                  </div>
-                  
-               </div>
-            </div>
-            <span   className="text-danger error-report "></span>
-         </div>
-         <div   className="form-group m-r-20 d-inline-block"><label   className="d-block">&nbsp;</label> <button   className="btn btn-primary" style={{height: "35px"}}><i   className="fa fa-search m-r-5"></i>Search</button></div>
-      </form>
-   </div>
-   <div   className="table-responsive">
-      <table   className="table profit-loss-table">
-         <thead>
-            <tr>
-               <th>
-                  <span>Placed</span> 
-               </th>
-               <th>Description</th>
-               <th>Type</th>
-               <th   className="text-right">Odds</th>
-               <th   className="text-right">Stake</th>
-               <th   className="text-right">
-                  <span>Liability</span> 
-               </th>
-               <th><span>Potential Profit</span></th>
-               
-            </tr>
-         </thead>
-         <tbody>
-            <tr>
-               <td colspan="7"   className="text-center">There are no record to display</td>
-            </tr>
-         </tbody>
-      </table>
-   </div>
-</div>
-    </div>
-  )
-}
+  const dispatch = useDispatch();
+  const [matchid, setMatchId] = useState("")
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [current, setcurrent] = useState(true)
+  const [history, setHistory] = useState(false)
+  const [historyData, setHistoryData] = useState({})
+  const [unsettledbetmatchdata, setUnsettledbetmatchdata] = useState({})
+  const [unmatchedBets, setUnmatchedBets] = useState(false);
+  const [matchedBets, setmatchedBets] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  const { PostunsettledData, PostunsettledDataLoading, postBetHistoryData, postBetHistoryDataLoading, getActiveSportListData } = useSelector(
+    (state) => state.auth
+  );
 
-export default Mybets
+
+  const StartDateValue = (date, dateString) => {
+    setStartDate(dateString);
+  };
+
+  const EndDateValue = (date, dateString) => {
+    setEndDate(dateString);
+  };
+
+
+
+  useEffect(() => {
+    dispatch(getActiveSportList())
+  }, [])
+
+  useEffect(() => {
+    if (postBetHistoryData?.data && postBetHistoryData?.data?.dataList) {
+      setUnsettledbetmatchdata(postBetHistoryData?.data && postBetHistoryData?.data?.dataList)
+    }
+
+  }, [postBetHistoryData])
+  useEffect(() => {
+
+    if (PostunsettledData?.data && PostunsettledData?.data?.dataList) {
+      setUnsettledbetmatchdata(PostunsettledData?.data && PostunsettledData?.data?.dataList)
+    }
+  }, [PostunsettledData])
+  const handleGameName = (e) => {
+    let inputValue = e.target.value;
+    setMatchId(inputValue)
+  };
+
+  const handleUnmatched = () => {
+    if (unmatchedBets === true) {
+      setUnmatchedBets(false);
+    } else {
+      setUnmatchedBets(true);
+    }
+    // console.log("ssjjk");
+  };
+
+
+  const handlematched = () => {
+    if (matchedBets === true) {
+      setmatchedBets(false);
+    } else {
+      setmatchedBets(true);
+    }
+    // console.log("ssjjk");
+  };
+
+
+  useEffect(() => {
+    let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1 };
+
+    dispatch(Postunsettleddddd(data));
+
+  }, [pageNumber, current]);
+
+  const handleDoubleLeft = (vl) => {
+    if (vl === "doubleleft") {
+      setPageNumber(0);
+    } else if (vl === "sigleleft") {
+      setPageNumber(pageNumber - 1);
+    } else if (vl === "singleright") {
+      setPageNumber(1 + pageNumber);
+    } else {
+      setPageNumber(PostunsettledData?.data?.totalPages);
+    }
+  };
+
+  const handleSelect = (vl) => {
+    if (vl === "selected1") {
+      setcurrent(true)
+      setHistory(false)
+    } else {
+      setHistory(true)
+      setcurrent(false)
+
+    }
+  }
+  const [historyError, setHistoryError] = useState("false")
+
+  const handleSearch = () => {
+    if (startDate !== undefined && endDate !== undefined && matchid !== "") {
+      console.log("eeee")
+      setHistoryError("false")
+
+      let data = ({
+        fromDate: startDate,
+        index: 0,
+        isdeleted: false,
+        noOfRecords: 100,
+        sportId: matchid,
+        toDate: endDate
+      })
+      dispatch(postBetHistory(data))
+    } else {
+      setHistoryError("true")
+      console.log("hello")
+    }
+  }
+  console.log(historyError, "historyErrorhistoryError")
+
+
+
+
+
+  return (
+    <div className="content boxed-layout-wrapper _flex wid-100">
+
+      <div className="_parent">
+        <div className="mid-pane">
+          <h1 className="betHeading">My Bets</h1>
+          <div className="column m-r-40 d-inline-block">
+            <div className="selection">
+              <div className={`item ${current === true ? "selected" : ""}`} onClick={() => handleSelect("selected1")}>Current</div>
+              <div className={`item ${history === true ? "selected" : ""}`} onClick={() => handleSelect("selected2")}>Past</div>
+            </div>
+            {current === false ? "" :
+              <div className="selection m-u">
+                <div className={`item ${current === true ? "selected" : ""}`}>Matched</div>
+                <div className="item">Unmatched</div>
+              </div>}
+            {history === true ?
+              <div className="selection m-u">
+                <select style={{ width: "110px" }}
+                  className="item selected"
+                  name="cars"
+                  id="cars"
+                  onChange={handleGameName}
+                >
+                  <option value="">Select Match</option>
+
+                  {getActiveSportListData?.data?.data?.length > 0
+                    ? getActiveSportListData?.data?.data.map((item) => {
+                      return (
+                        <option value={item?.sportId}>
+                          {item?.sportName}
+                        </option>
+                      );
+                    })
+                    : ""}
+                </select>
+              </div> : ""}
+
+          </div>
+          {current === false ?
+            <div className="column v-t m-r-40 d-inline-block">
+              <div data-vv-scope="mybets">
+                <div className="v-t d-inline-block">
+                  <label className="mb-0">From:</label>
+                  <div
+                    className="mx-datepicker vuedatepicker"
+                    name="FromDate"
+                  >
+                    <div className="mx-input-wrapper" aria-disabled="true">
+                      <DatePicker
+                        className=" startDateNew"
+                        // defaultValue={dayjs(startDate)}
+                        format={dateFormat}
+                        onChange={StartDateValue}
+                        disabledDate={(d) =>
+                          !d ||
+                          d.isBefore(dayjs().subtract(2, "month")) ||
+                          d.isAfter(dayjs())
+                        }
+                      />
+                    </div>
+                    <div
+                      className="mx-datepicker-popup"
+                      style={{ display: "none" }}
+                    >
+
+                    </div>
+                  </div>
+                  <span className="text-danger error-report m-l-10"></span>
+                </div>
+                <div className=" v-t d-inline-block" style={{ marginLeft: "-18px" }}>
+                  <label className="mb-0">To:</label>
+                  <div
+                    className="mx-datepicker vuedatepicker"
+                    name="ToDate"
+                  >
+                    <div className="mx-input-wrapper">
+                      <DatePicker
+                        className=" startDateNew"
+                        // defaultValue={dayjs(endDate)}
+                        format={dateFormat}
+                        onChange={EndDateValue}
+                        disabledDate={(d) =>
+                          !d ||
+                          d.isBefore(dayjs().subtract(2, "month")) ||
+                          d.isAfter(dayjs())
+                        }
+                      />
+                    </div>
+                  </div>
+                  <span className="text-danger error-report "></span>
+                </div>
+                <div className="form-group m-r-20 d-inline-block">
+
+                  <button className="btn-primary searchBtnNew" onClick={handleSearch}>
+                    <i className="fa fa-search m-r-5"></i>Search
+                  </button>
+                  {historyError === "true" ? <div style={{ color: "red" }}>please select all Fields</div> : ""}
+                </div>
+              </div>
+            </div> : ""
+          }
+          <div >
+            {
+              postBetHistoryDataLoading || PostunsettledDataLoading === true ?
+
+
+                <div
+
+                  style={{
+
+                    backgroundColor: "#0000002b",
+                    height: "50vh",
+                    width: "1000px"
+                  }}>
+                  <i
+                    className="fa fa-spinner fa-spin loading"
+                    style={{ fontSize: "50px" }}
+                  ></i>
+                </div>
+                :
+                <table className="table profit-loss-table">
+                  <thead>
+                    <tr>
+                      <th>Sports Name</th>
+                      <th>Event Name</th>
+                      <th>Market Name</th>
+                      <th>Nation</th>
+                      <th className="text-right">User Rate</th>
+                      <th className="text-right"> P & L</th>
+                      <th className="text-right">Amount</th>
+                      <th className="text-right">Time</th>
+
+                    </tr>
+                  </thead>
+
+
+                  <tbody >
+
+                    {
+                      unsettledbetmatchdata?.length > 0 ? (
+                        unsettledbetmatchdata.map((item) => (
+                          <tr className={`odd oddNew ${item?.isback === true ? "back_1" : "lay"} unhighlighted`}>
+                            <td className="text-left">{item?.sportName}</td>
+                            <td className="text-left">{item?.eventName}</td>
+                            <td className="text-left">{item?.marketname}</td>
+                            <td className="text-left">{item?.nation}</td>
+                            <td className="text-right">{item?.rate}</td>
+                            <td className="text-right">{item?.pnl}</td>
+                            <td className="text-right">{item?.amount}</td>
+
+                            <td className="text-right"><span className="d-block"> {moment(item?.time).format(" D/mm/YYYY h:mm")}</span>
+                            </td>
+
+                          </tr>))) : (<tr>
+                            <td colspan="7" className="text-center">
+                              There are no record to display
+                            </td>
+                          </tr>)
+                    }
+                  </tbody>
+
+
+                </table>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Mybets;

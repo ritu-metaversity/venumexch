@@ -205,7 +205,7 @@ const Transferstatement = () => {
                           <td style={{ color: "red", width: "15%" }}>
                             {el?.debit}
                           </td>
-                          <td style={{ width: "15%" }}>{el?.pts}</td>
+                          <td style={{ width: "19%" }}>{el?.pts}</td>
                           <td style={{ width: "30%" }}>{el?.remark}</td>
                         </tr>
                       ))

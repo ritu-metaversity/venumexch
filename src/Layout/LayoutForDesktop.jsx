@@ -2,10 +2,12 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-import Footer from "../component/Footer/Footer";
+import FooterForDesktop from "../FooterForDesktop/FooterForDesktop";
 import NavBar from "../component/navBar/NavBar";
 import NavBarWithOutLogin from "../component/navBar/NavBarWithOutLogin";
 import Home from "../component/Home/Home";
+import './LayoutForDesktop.css';
+import SideBar from "../component/SideBar/SideBar";
 
 const LayoutForDesktop = () => {
   const [footerCondition, setFooterCondion] = useState(false);
@@ -20,10 +22,20 @@ const LayoutForDesktop = () => {
 
   return (
     <div>
+
       {footerCondition ? <NavBarWithOutLogin /> : <NavBar />}
 
-      <Outlet />
-      <Footer />
+      <div className="maincontainer boxed-layout-wrapper-new">
+        <SideBar />
+        <div className="content " >
+          <Outlet />
+        </div>
+      </div>
+
+
+      <div className="footer-desk">
+        <FooterForDesktop />
+      </div>
     </div>
   );
 };

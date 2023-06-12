@@ -36,7 +36,18 @@ const RightMenu = (props) => {
       if (localStorage.getItem("PassWordType") === "old") {
       } else {
         const time = setInterval(() => {
-          dispatch(PostBalance());
+          const token = localStorage.getItem("TokenId");
+          if (token) {
+
+            if (localStorage.getItem("PassWordType") === "old") {
+            } else {
+              const time = setInterval(() => {
+                dispatch(PostBalance());
+              }, 5000);
+              return () => clearInterval(time);
+            }
+          }
+
         }, 5000);
         return () => clearInterval(time);
       }
@@ -106,8 +117,8 @@ const RightMenu = (props) => {
                 <span>
                   <strong>
                     {PostTotalBalance?.data?.data?.balance
-                      ? PostTotalBalance?.data?.data?.balance -
-                      PostTotalBalance?.data?.data?.libality
+                      ? (Number(PostTotalBalance?.data?.data?.balance -
+                        PostTotalBalance?.data?.data?.libality).toFixed(2))
                       : "0:00"}
                   </strong>
                 </span>
@@ -125,16 +136,19 @@ const RightMenu = (props) => {
                 {PostTotalBalance?.data?.data?.winnings > 0 ? (
                   <span className="negative" style={{ color: "green" }}>
                     {PostTotalBalance?.data?.data?.winnings
-                      ? PostTotalBalance?.data?.data?.winnings
+                      ? Number(PostTotalBalance?.data?.data?.winnings).toFixed(2)
                       : "0:00"}
                   </span>
                 ) : (
                   <span className="negative">
                     {PostTotalBalance?.data?.data?.winnings
-                      ? PostTotalBalance?.data?.data?.winnings
+                      ? Number(PostTotalBalance?.data?.data?.winnings).toFixed(2)
                       : "0:00"}
                   </span>
+
                 )}
+
+
               </div>
               <div className="group">
                 <div>Net Exposure:</div>

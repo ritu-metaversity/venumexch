@@ -3,10 +3,10 @@ element.style {
     width: 100%;
 }
 
-.footer {
+/* .footer{
     position: fixed;
     bottom: 0;
-}
+} */
 
 /* .footer.custom-footer[data-v-7c8a6852] {
     position: fixed;
@@ -152,7 +152,7 @@ footer .lower-footer[data-v-7c8a6852] {
 
 .footer.custom-footer[data-v-7c8a6852] {
     position: fixed;
-    /* bottom: -15px; */
+    bottom: 0px !important;
     padding: 0px;
 }
 
