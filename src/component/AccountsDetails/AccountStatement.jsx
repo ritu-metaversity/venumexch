@@ -87,6 +87,7 @@ const AccountStatement = () => {
               <div
                 className="mx-datepicker vuedatepicker"
                 name="FromDate"
+                style={{ marginRight: "35px" }}
               >
                 <div className="mx-input-wrapper">
                   <DatePicker
@@ -272,7 +273,7 @@ const AccountStatement = () => {
             <AiOutlineDoubleRight className="arrowDoubleRight" />
           </button>
         </div>
-      </div>
+      </div >
 
       <Modal
         show={trueee}
@@ -295,7 +296,7 @@ const AccountStatement = () => {
           </div>
         </Modal.Body>
       </Modal>
-    </div>
+    </div >
   )
 }
 
