@@ -529,11 +529,8 @@ export const Postvalidatejwttoken = createAsyncThunk('auth/Postvalidatejwttoken'
                 validateStatus: false
             });
         if (PostvalidatejwttokenDataaa.data.status === false) {
-            // console.log("dfghjkldfghjklfghjklfghjklsdfghjk")
             localStorage.clear()
-            // if (navRef) {
-            //     navRef("/m/home")
-            // }
+            window.location.replace("./login");
         }
         return PostvalidatejwttokenDataaa
     } catch (err) {
@@ -654,11 +651,21 @@ export const Postloginlogout = createAsyncThunk('auth/Postloginlogout', async (d
 
 
 
-export const postpendingapppii = createAsyncThunk('auth/Postloginlogout', async (data, { rejectWithValue }) => {
+export const postpendingapppii = createAsyncThunk('auth/postpendingapppii', async (data, { rejectWithValue }) => {
     try {
-        // console.log("loooogogoogogogoog")
-        const Postpendingdtaatata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/cancel-withdraw-request-eu`
-        )
+        console.log("loooogogoogogogoog")
+        const Postpendingdtaatata = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/cancel-withdraw-request-eu`, data)
+        console.log(Postpendingdtaatata, "PostpendingdtaatataPostpendingdtaatata")
+        // if (Postpendingdtaatata.data.message) {
+        //     toast.success(Postpendingdtaatata.data.message || "SUSUSUSUS!!", {
+        //         style: {
+        //             background: "rgb(74,117,67)", minHeight: 40,
+        //             padding: 0,
+        //             color: "white",
+        //         }
+        //     });
+
+        // }
         return Postpendingdtaatata
     } catch (err) {
         if (err) {

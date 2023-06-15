@@ -5,6 +5,7 @@ import {
     Postunsettleddddd, Postcasino, Postprofitlossmatchwise, postBetMarketAndUser, Postisselfbyappurl, Postdepsositrequestclient, Postpaymnetdetailapp,
     Postselfdepositapp, Postselfwithdrawapp, Postwithdrawrequestclient, Postvalidatejwttoken, Postuserselfregister, PostMinMaxGameDetails, PostUserOddPnl, PostUserfancypnl,
     Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition, getResponsibleGaming, postLoginDemoUser, postBetHistory, postleftmenudataopen
+    ,postpendingapppii
 } from './authActions'
 
 const INITAL_STATE = {
@@ -167,6 +168,11 @@ const INITAL_STATE = {
     postleftmenudataopenData: null,
     postleftmenudataopenDataLoading: false,
     postleftmenudataopenDataError: null,
+
+
+    postpendingapppiiData: null,
+    postpendingapppiiDataLoading: false,
+    postpendingapppiiDataError: null,
 
 
 
@@ -673,6 +679,20 @@ const authSlice = createSlice({
                 state.postleftmenudataopenData = action.payload.data;
                 state.postleftmenudataopenDataLoading = false;
                 state.postleftmenudataopenDataError = null;
+            })
+
+            .addCase(postpendingapppii.pending, (state) => {
+                state.postpendingapppiiData = null;
+                state.postpendingapppiiDataLoading = true;
+                state.postpendingapppiiDataError = null;
+            }).addCase(postpendingapppii.rejected, (state, action) => {
+                state.postpendingapppiiData = null;
+                state.postpendingapppiiDataLoading = false;
+                state.postpendingapppiiDataError = action.error.message;
+            }).addCase(postpendingapppii.fulfilled, (state, action) => {
+                state.postpendingapppiiData = action.payload.data;
+                state.postpendingapppiiDataLoading = false;
+                state.postpendingapppiiDataError = null;
             })
 
     }

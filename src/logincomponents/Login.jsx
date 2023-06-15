@@ -276,7 +276,7 @@ const Login = () => {
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>)
 
-                        {selfAllowedd?.selfAllowed === true ? (
+                        {selfAllowedd?.selfAllowed === true ?
                           <button
                             className="btn btn-login"
                             onClick={handleSignUp}
@@ -284,13 +284,15 @@ const Login = () => {
                             Sign Up
                             <i className="ml-2 fas fa-sign-in-alt"></i>
                           </button>
-                        ) : (
+                         : 
                           ""
-                        )}
+                        }
                         <button className="btn btn-login" onClick={handleHome}>
                           Back
 
                         </button>
+
+
                         <p className="m-b-0">
                           <small className="recaptchaTerms">
                             This site is protected by reCAPTCHA and the Google
@@ -330,7 +332,7 @@ const Login = () => {
                 Please Confirm
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{padding: "12px"}}>
               Underage gambling is prohibited. Please confirm if you are 18
               years old and above as of today
             </Modal.Body>

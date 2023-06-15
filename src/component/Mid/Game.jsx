@@ -32,7 +32,7 @@ const Game = () => {
 
         axios
             .get(
-                ` http://43.205.50.127:9000/betfair_api/active_match/${activeMatchSportWise}`
+                ` https://oddsapi.247idhub.com/betfair_api/active_match/${activeMatchSportWise}`
             )
             .then((res) => {
                 setGamesData(res?.data?.data);

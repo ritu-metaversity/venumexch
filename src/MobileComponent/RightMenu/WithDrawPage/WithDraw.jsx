@@ -149,17 +149,18 @@ const WithDraw = () => {
 
   const handleCloseFancyModal = () => setpendingmodal(false);
   const handlepennding = () => setpendingmodal(true);
+  const [withDrawId, setWithDrawId] = useState("")
 
   const [pendingmodal, setpendingmodal] = useState(false)
-  const handlependingg = () => {
+  const handlependingg = (data) => {
     setpendingmodal(true)
+    setWithDrawId(data)
   }
 
-  const handlependingsucesss = (ddd) => {
-    let data = { id: ddd }
-
+  const handlependingsucesss = () => {
+    let data = { id: withDrawId }
     dispatch(postpendingapppii(data))
-
+    setpendingmodal(false)
   }
   return (
     <>
@@ -268,7 +269,7 @@ const WithDraw = () => {
                 <div className="">
                   <button
                     className="btn btn-primary btn-block btn-sm wsubmit"
-                    style={{ marginTop: "20px" }}
+                    style={{ marginTop: "20px " }}
                     onClick={handleClick}
                   >
                     Submit
@@ -449,7 +450,7 @@ const WithDraw = () => {
                                         </div>
                                         <div className="butonnnn">
                                           <button className="bynnnn" onClick={() => setpendingmodal(false)}>Close</button>
-                                          <button className="bynnnn" onClick={() => handlependingsucesss(item.id)}>Submit</button>
+                                          <button className="bynnnn" onClick={handlependingsucesss}>Submit</button>
                                         </div>
                                       </div>
                                     </Modal.Body>

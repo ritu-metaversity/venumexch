@@ -118,10 +118,10 @@ const HomePage = () => {
 
 
         <section style={{ marginTop: "0px" }}>
-        {
-          localStorage.getItem("TokenId") !==null ?"":<UpperBanner />
-        }
-        
+          {
+            localStorage.getItem("TokenId") !== null ? "" : <UpperBanner />
+          }
+
 
           <div
             className="in-play page-title m-t-20 m-l-15"
@@ -129,29 +129,29 @@ const HomePage = () => {
           >
             <i className="fas fa-play-circle"></i>
             {""}
-           
+
             <span className="label">In Play</span>
           </div>
-          
+
           <>
             {
-            token ?
-              <Link to="/m/mybets" className="">
-                <span className="open-bets-link" style={{ marginLeft: "7%" }}>
-                  Open Bets {""}(
-                  {PostunsettledData?.data &&
-                    PostunsettledData?.data?.dataList &&
-                    PostunsettledData?.data?.dataList?.length
-                    ? PostunsettledData?.data &&
-                    PostunsettledData?.data?.dataList &&
-                    PostunsettledData?.data?.dataList?.length
-                    : "0"}
-                  )
-                </span>
-              </Link> : ""
+              token ?
+                <Link to="/m/mybets" className="">
+                  <span className="open-bets-link" style={{ marginLeft: "7%" }}>
+                    Open Bets {""}(
+                    {PostunsettledData?.data &&
+                      PostunsettledData?.data?.dataList &&
+                      PostunsettledData?.data?.dataList?.length
+                      ? PostunsettledData?.data &&
+                      PostunsettledData?.data?.dataList &&
+                      PostunsettledData?.data?.dataList?.length
+                      : "0"}
+                    )
+                  </span>
+                </Link> : ""
             }
-              </>
-          
+          </>
+
 
           <div>
             <ul className="market-listing m-t-10 fsfsdf mt-23">

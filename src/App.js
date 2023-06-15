@@ -29,7 +29,7 @@ function App() {
   const token = localStorage.getItem("TokenId");
 
   useEffect(() => {
-    if (window.innerWidth > 750) {
+    if (window.innerWidth > 1000) {
       setMoileRoutes(true);
       // navigate("./home");
 
@@ -94,7 +94,13 @@ function App() {
     }
   }, [token]);
 
-
+  // useEffect(() => {
+  //   if (PostvalidatejwttokenDataError?.status === false) {
+  //     localStorage.clear();
+  //     navigate("/m/home");
+  // window.location.replace("/");
+  //   }
+  // }, [PostvalidatejwttokenDataError]);
   useEffect(() => {
     axios
       .post(

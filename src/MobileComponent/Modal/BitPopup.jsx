@@ -59,7 +59,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    fetch("http://15.207.182.173:3333/")
+    fetch("https://oddsapi.247idhub.com/betfair_api/my-ip")
       .then((res) => res.json())
       .then((res) => {
         // console.log(res?.ip, "djfsodfjskdjm")
@@ -128,7 +128,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
       <div id="__BVID__31___BV_modal_body_" className="modal-body p-0">
         <div className="place-bet">
           <div>
-            <form data-vv-scope="form-placebet" className="m-b-0" style={{    marginLeft: "12px"}}>
+            <form data-vv-scope="form-placebet" className="m-b-0" style={{ marginLeft: "12px" }}>
               {PostBetingOnGameDetailLoading && (
                 <div className="mani_loading">
                   <i

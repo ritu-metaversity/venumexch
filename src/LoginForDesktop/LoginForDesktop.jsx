@@ -18,6 +18,8 @@ import Footer from "../component/Footer/Footer";
 const LoginForMobile = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
+
+
   const [login, setLogin] = useState({});
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +31,11 @@ const LoginForMobile = () => {
   const [loginData, setLoginData] = useState("");
   const [apiHit, setApiHit] = useState(false);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setPassword("")
+    setUserName("")
+    setShow(false)
+  };
 
   const {
     postLoginData,
@@ -37,6 +43,7 @@ const LoginForMobile = () => {
     PostuserselfregisterData,
     postisselfbyappurlData
   } = useSelector((state) => state.auth);
+
 
   useEffect(() => {
     if (apiHit === true) {
@@ -51,32 +58,24 @@ const LoginForMobile = () => {
         axios.defaults.headers.common.Authorization = `Bearer ${postLoginData?.data?.token}`;
 
         if (postLoginData?.data?.passwordtype === "old") {
-          navigate("/changepassword");
+          navigate("/m/changepassword");
         } else {
-          navigate("/home");
+          navigate("/m/home");
         }
       }
     }
     setLoginData(postLoginData);
   }, [postLoginData]);
 
-  const handleDemoLogin = () => {
-    axios
-      .post(
-        "http://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
-        { appUrl: window.location.hostname }
-      )
-      .then((res) => {
-        if (res?.data?.token) {
-          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
-          navigate("/home");
-          localStorage.setItem("TokenId", res?.data?.token);
-          localStorage.setItem("usernameDemo", res?.data?.username);
-          localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
+  // useEffect(() => {
+  //   console.log(postLoginDemoUserData?.token, "asdfghjkl")
+  //   if (postLoginDemoUserData?.token) {
+  //     navigate("/m/home");
+  //     localStorage.setItem("TokenId", postLoginData?.token);
+  //     localStorage.setItem("username", postLoginData?.username);
+  //   }
+  // }, [postLoginDemoUserData]);
 
-        }
-      })
-  };
   const handleInput = (e) => {
     let inputName = e.target.name;
     let inputValue = e.target.value;
@@ -104,7 +103,22 @@ const LoginForMobile = () => {
       // appUrl: "localhost"
     });
 
-    setShow(true);
+
+    if (userName === "" && password === "") {
+      setErrorPassword(true);
+      setErrorId(true);
+      setShow(false);
+    } else if (userName === "") {
+      setErrorId(true);
+      setShow(false);
+    } else if (password === "") {
+      setErrorPassword(true);
+      setShow(false);
+    } else {
+
+      setShow(true)
+    }
+
 
 
   };
@@ -145,15 +159,41 @@ const LoginForMobile = () => {
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
-    axios.post("http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
-      { appUrl: appUrll })
-      .then((res) => { SetselfAllowedd(res?.data?.data) }
-
-      );
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        SetselfAllowedd(res?.data?.data);
+      });
   }, [appUrll]);
 
+  // http://${REACT_APP_API_URL}/admin-new-apis/login/is-self-by-app-url
 
+  // useEffect(() => {
+  //   dispatch(Postisselfbyappurl({ appUrl: appUrll }));
+  // }, [appUrll]);
+  console.log(selfAllowedd, "selfAllowedd");
 
+  const handleDemoLogin = () => {
+    axios
+      .post(
+        "http://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: "localhost" }
+      )
+      .then((res) => {
+        if (res?.data?.token) {
+          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
+
+          navigate("/m/home");
+          localStorage.setItem("TokenId", res?.data?.token);
+          localStorage.setItem("usernameDemo", res?.data?.username);
+          localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
+
+        }
+      })
+  };
 
   return (
     <div id="app">
@@ -192,7 +232,7 @@ const LoginForMobile = () => {
                             onChange={handleInput}
                             value={userName}
                           />
-                          {errorId ? (
+                          {errorId === true ? (
                             <span className="text-danger">
                               The Username field is required.
                             </span>
@@ -231,11 +271,13 @@ const LoginForMobile = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
+
                         <button className="btn btn-login" onClick={handleDemoLogin}>
                           Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>
-                        </button>
-                        {selfAllowedd?.selfAllowed === true ? (
+                        </button>)
+
+                        {selfAllowedd?.selfAllowed === true ?
                           <button
                             className="btn btn-login"
                             onClick={handleSignUp}
@@ -243,13 +285,15 @@ const LoginForMobile = () => {
                             Sign Up
                             <i className="ml-2 fas fa-sign-in-alt"></i>
                           </button>
-                        ) : (
+                          :
                           ""
-                        )}
+                        }
                         <button className="btn btn-login" onClick={handleHome}>
                           Back
 
                         </button>
+
+
                         <p className="m-b-0">
                           <small className="recaptchaTerms">
                             This site is protected by reCAPTCHA and the Google
@@ -273,8 +317,8 @@ const LoginForMobile = () => {
         </div>
 
         {/* <button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </button> */}
+      Launch demo modal
+    </button> */}
         <div className="login-modal">
           <Modal
             className="login-confirm-modal"
@@ -289,7 +333,7 @@ const LoginForMobile = () => {
                 Please Confirm
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{ padding: "12px" }}>
               Underage gambling is prohibited. Please confirm if you are 18
               years old and above as of today
             </Modal.Body>
@@ -309,8 +353,9 @@ const LoginForMobile = () => {
             </div>
           </Modal>
         </div>
+        {/* </> */}
       </div>
-      <FooterForDesktop />
+      <Footer />
     </div>
   );
 };
