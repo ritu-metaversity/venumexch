@@ -47,7 +47,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   useEffect(() => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/enduser/get-user-message"
+        "https://api.247365.exchange/admin-new-apis/enduser/get-user-message"
       )
       .then((response) => {
         // console.log(response, "responseresponse");
@@ -144,7 +144,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   useEffect(() => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
         { appUrl: appUrll }
       )
       .then((res) => {

@@ -748,7 +748,7 @@ export const postBetHistory = createAsyncThunk('auth/postBetHistory', async (dat
 export const postleftmenudataopen = createAsyncThunk('auth/postleftmenudataopen', async (data, { rejectWithValue }) => {
     try {
         // console.log("loooogogoogogogoog")
-        // http://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open
+        // https://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open
         const postleftmenudataopenDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/left-menu-data-open`, data
         )
         return postleftmenudataopenDataa
@@ -763,7 +763,7 @@ export const postleftmenudataopen = createAsyncThunk('auth/postleftmenudataopen'
 export const postDemoLogin = createAsyncThunk('auth/postDemoLogin', async (data, { rejectWithValue }) => {
     try {
         // console.log("loooogogoogogogoog")
-        // http://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open
+        // https://api.247365.exchange/admin-new-apis/enduser/left-menu-data-open
         const postDemoLoginDataa = await axios.post(`http://${REACT_APP_API_URL}/admin-new-apis/enduser/left-menu-data-open`, data
         )
         return postDemoLoginDataa

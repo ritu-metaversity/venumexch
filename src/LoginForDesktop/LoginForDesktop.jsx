@@ -161,7 +161,7 @@ const LoginForMobile = () => {
   useEffect(() => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -179,7 +179,7 @@ const LoginForMobile = () => {
   const handleDemoLogin = () => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        "https://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
         { appUrl: "localhost" }
       )
       .then((res) => {

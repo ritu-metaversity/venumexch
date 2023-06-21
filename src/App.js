@@ -104,7 +104,7 @@ function App() {
   useEffect(() => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
         { appUrl: appUrll }
       )
       .then((res) => {
