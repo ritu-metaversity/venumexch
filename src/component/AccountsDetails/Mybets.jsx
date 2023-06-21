@@ -179,6 +179,7 @@ const Mybets = () => {
                   <label className="mb-0">From:</label>
                   <div
                     className="mx-datepicker vuedatepicker"
+                    style={{ marginRight: "35px" }}
                     name="FromDate"
                   >
                     <div className="mx-input-wrapper" aria-disabled="true">

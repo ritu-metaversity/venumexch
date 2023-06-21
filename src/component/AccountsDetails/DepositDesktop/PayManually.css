@@ -413,7 +413,7 @@ label.images-section {
 
 @media screen and (min-width: 350px) and (max-width: 450px) {
     .image-text {
-        left: 25%;
+        left: 19%;
     }
 
     .upi-detail.head-deposit.row {
@@ -437,10 +437,12 @@ label.images-section {
         margin: auto;
     }
 }
-.dest_apiDetail{
+
+.dest_apiDetail {
     width: 52% !important;
     margin: auto !important;
 }
+
 .dest_img {
     left: 32% !important;
 }
@@ -449,6 +451,7 @@ button.btn.btn-secondary.btn-block.mb-2 {
     background-color: red !important;
     height: 135%;
 }
+
 button.stakeactionminus.btn {
     border-radius: unset !important;
 }

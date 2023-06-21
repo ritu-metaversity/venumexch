@@ -25,14 +25,14 @@ const NavBar = () => {
   useEffect(() => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/enduser/get-user-message"
+        "https://api.247365.exchange/admin-new-apis/enduser/get-user-message"
       )
       .then((response) => {
         console.log(response, "responseresponse");
         setMovingMessage(response?.data?.message);
       });
   }, []);
-  const { postisselfbyappurlData } = useSelector(
+  const { postisselfbyappurlData, PostTotalBalance } = useSelector(
     (state) => state.auth
   );
   // // console.log();
@@ -107,7 +107,7 @@ const NavBar = () => {
   useEffect(() => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -217,9 +217,39 @@ const NavBar = () => {
                   <p>Logged in as - {userTypeInfo === "2" ? usernameDemo : userId}</p>
                   : ""
                 }
-                <p className="last-login">
-                  {/*Last logged in: <span>08/02/2023 10:33:03</span>*/}
-                </p>
+
+
+
+                {token !== null ?
+                  <p className="last-login">
+                    Available Balance : <span>{(PostTotalBalance?.data?.data?.balance
+                      ? (Number(PostTotalBalance?.data?.data?.balance -
+                        PostTotalBalance?.data?.data?.libality).toFixed(2))
+                      : "0:00")} </span>
+
+
+
+                  </p>
+
+                  : ""
+
+                }
+
+                {token !== null ?
+                  <p className="last-login">
+                    Expo : <span>{(PostTotalBalance?.data?.data?.libality
+                      ? (Number(
+                        PostTotalBalance?.data?.data?.libality).toFixed(2))
+                      : "0:00")} </span>
+
+
+
+                  </p>
+
+                  : ""
+
+                }
+
               </li>
               <li>
                 <Link to="home">
@@ -252,92 +282,94 @@ const NavBar = () => {
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
                       <Modal/> */}
-              <li className="dropdown">
-                <Link
-                  to="/home"
-                  data-toggle="dropdown"
-                  className="dropdown-toggle"
-                  onClick={handleAccount}
-                >
-                  <i className="fas fa-user m-r-5"></i> <span>Account</span>
-                </Link>
-                {/* <div   className="dropdown-menu show"> */}
-                <div
-                  className={account ? "dropdown-menu show" : "dropdown-menu"}
-                >
+              {token !== null ?
+                <li className="dropdown">
+
                   <Link
-                    to="/mybets"
-                    className="dropdown-item"
-                    onClick={() => setAccount(false)}
+                    to="/home"
+                    data-toggle="dropdown"
+                    className="dropdown-toggle"
+                    onClick={handleAccount}
                   >
-                    My Bets
-                  </Link>{" "}
-                  <Link
-                    to="/p&l"
-                    className="dropdown-item"
-                    onClick={() => setAccount(false)}
+                    <i className="fas fa-user m-r-5"></i> <span>Account</span>
+                  </Link>
+                  {/* <div   className="dropdown-menu show"> */}
+                  <div
+                    className={account ? "dropdown-menu show" : "dropdown-menu"}
                   >
-                    Betting Profit and Loss
-                  </Link>{" "}
-                  <Link
-                    to="/accountstatement"
-                    className="dropdown-item"
-                    onClick={() => setAccount(false)}
-                  >
-                    Account Statement
-                  </Link>{" "}
-                  {/* <Link
+                    <Link
+                      to="/mybets"
+                      className="dropdown-item"
+                      onClick={() => setAccount(false)}
+                    >
+                      My Bets
+                    </Link>{" "}
+                    <Link
+                      to="/p&l"
+                      className="dropdown-item"
+                      onClick={() => setAccount(false)}
+                    >
+                      Betting Profit and Loss
+                    </Link>{" "}
+                    <Link
+                      to="./accountstatement"
+                      className="dropdown-item"
+                      onClick={() => setAccount(false)}
+                    >
+                      Account Statement
+                    </Link>{" "}
+                    {/* <Link
                     to="/transferstatement"
                     className="dropdown-item"
                     onClick={() => setAccount(false)}
                   >
                     Transfer Statement
                     </Link>{" "}*/}
-                  <Link
-                    to="/changepassword"
-                    className="dropdown-item"
-                    onClick={() => setAccount(false)}
-                  >
-                    Change Password
-                  </Link>{" "}
-                  {/*  <Link
+                    <Link
+                      to="/changepassword"
+                      className="dropdown-item"
+                      onClick={() => setAccount(false)}
+                    >
+                      Change Password
+                    </Link>{" "}
+                    {/*  <Link
                     to="/secureauth"
                     className="dropdown-item"
                     onClick={() => setAccount(false)}
                   >
                     Secure Auth
                   </Link>*/}
-                  {/* <Link
+                    {/* <Link
                     to="/message"
                     className="dropdown-item"
                     onClick={() => setAccount(false)}
                   >
                     Message
                   </Link>*/}
-                  {
-                    userTypeInfo === "2" ?
-                      "" : (postisselfbyappurlData?.data?.selfAllowed === true ? (
-                        <>
-                          <Link
-                            to="/deposit"
-                            className="dropdown-item"
-                            onClick={() => setAccount(false)}
-                          >
-                            Deposit
-                          </Link>
-                          <Link
-                            to="/withDraw"
-                            className="dropdown-item"
-                            onClick={() => setAccount(false)}
-                          >
-                            Withdraw
-                          </Link>
-                        </>) : (
-                        ""
-                      ))
-                  }
-                </div>
-              </li>
+                    {
+                      userTypeInfo === "2" ?
+                        "" : (postisselfbyappurlData?.data?.selfAllowed === true ? (
+                          <>
+                            <Link
+                              to="/deposit"
+                              className="dropdown-item"
+                              onClick={() => setAccount(false)}
+                            >
+                              Deposit
+                            </Link>
+                            <Link
+                              to="/withDraw"
+                              className="dropdown-item"
+                              onClick={() => setAccount(false)}
+                            >
+                              Withdraw
+                            </Link>
+                          </>) : (
+                          ""
+                        ))
+                    }
+                  </div>
+                </li> : ""}
 
               {token === null ? <>
                 <li className="login_btn">
@@ -347,7 +379,7 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li className="login_btn">
-                  <Link to="./login">
+                  <Link to="./signup">
                     <i className="fas fa-running m-r-5"></i>{" "}
                     <span onClick={handlogout}>SignUp</span>
                   </Link>

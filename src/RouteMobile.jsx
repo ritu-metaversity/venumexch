@@ -83,14 +83,7 @@ const RouteMobile = () => {
         <Route path="/m/Singup3" element={<SingupBanner3 />} />
         <Route path="/m/Singup4" element={<SingupBanner4 />} />
         <Route path="/m/Singup5" element={<SingupBanner5 />} />
-        <Route
-          path="/m/login"
-          element={
-            <>
-              <Login />
-            </>
-          }
-        />
+        <Route path="/m/login" element={<><Login /></>} />
         <Route
           path="/m/signup"
           element={

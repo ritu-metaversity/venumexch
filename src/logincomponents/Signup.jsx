@@ -95,7 +95,7 @@ const Signup = () => {
   useEffect(() => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -106,7 +106,7 @@ const Signup = () => {
   const handleDemoLogin = () => {
     axios
       .post(
-        "http://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        "https://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
         { appUrl: window.location.hostname }
       )
       .then((res) => {
@@ -274,10 +274,10 @@ const Signup = () => {
                       </button>
 
 
-                        <button className="btn btn-login" onClick={handleDemoLogin}>
-                          Login with demo ID
-                          <i className="ml-2 fas fa-sign-in-alt"></i>
-                        </button>)
+                      <button className="btn btn-login" onClick={handleDemoLogin}>
+                        Login with demo ID
+                        <i className="ml-2 fas fa-sign-in-alt"></i>
+                      </button>)
 
                       <button className="btn btn-login" onClick={handleHome}>
                         Back

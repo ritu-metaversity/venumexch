@@ -4,14 +4,19 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     Postselfwithdrawapp,
+    postpendingapppii,
     Postwithdrawrequestclient,
 } from "../../../App/Features/auth/authActions";
 import ValidationFile from "../../../Validation/ValidationFile";
 import "./WithDrawForDesktop.css";
+import Modal from 'react-bootstrap/Modal';
+
+import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
+
 
 const WithdrawForDesktop = () => {
     const dispatch = useDispatch();
-    const { PostselfwithdrawappData, PostwithdrawrequestclientData, PostwithdrawrequestclientDataLoading } =
+    const { PostselfwithdrawappData, PostwithdrawrequestclientData, PostwithdrawrequestclientDataLoading, postpendingapppiiData } =
         useSelector((state) => state.auth);
     const [amount, setAmount] = useState();
     const [accountHolderName, setAccountHolderName] = useState();
@@ -27,7 +32,7 @@ const WithdrawForDesktop = () => {
     const [ifscError, setIfscError] = useState(false);
     const [infoError, setInfoError] = useState(false);
     const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
-
+    console.log(postpendingapppiiData, "postpendingapppiiDatapostpendingapppiiDatapostpendingapppiiData")
     const handleInput = (e) => {
         let inputName = e.target.name;
         let inputValue = e.target.value;
@@ -68,6 +73,11 @@ const WithdrawForDesktop = () => {
         }
     };
 
+    // useEffect(() => {
+    //     if (postpendingapppiiData?.status === true) {
+    //         dispatch(Postwithdrawrequestclient());
+    //     }
+    // }, [postpendingapppiiData])
     const handleClick = () => {
         setInfoError(true);
 
@@ -128,10 +138,27 @@ const WithdrawForDesktop = () => {
     useEffect(() => {
         dispatch(Postwithdrawrequestclient());
     }, []);
-
+    const [pendingmodal, setpendingmodal] = useState(false)
+    const [withDrawId, setWithDrawId] = useState("")
     // console.log(PostselfwithdrawappData,"post datatata")
     // console.log(PostwithdrawrequestclientData,"gett  dataatatatat ")
 
+    const handleCloseFancyModal = () => setpendingmodal(false);
+
+    const handlepennding = (data) => {
+        setpendingmodal(true)
+        setWithDrawId(data)
+    };
+
+    const handlependingg = () => {
+        setpendingmodal(true)
+    }
+
+    const handlependingsucesss = () => {
+        let data = { id: withDrawId }
+        dispatch(postpendingapppii(data))
+        setpendingmodal(false)
+    }
     return (
 
         <div className="dest_withdrow" >
@@ -255,7 +282,7 @@ const WithdrawForDesktop = () => {
                 :
                 <div className="row row5 mt-2">
                     <div className="col-12">
-                        <div className="table-responsive">
+                        <div className="table-responsive" style={{ width: "80%" }}>
                             <table
                                 role="table"
                                 aria-busy="false"
@@ -337,6 +364,14 @@ const WithdrawForDesktop = () => {
                                         >
                                             Status
                                         </th>
+                                        <th
+                                            role="columnheader"
+                                            scope="col"
+                                            aria-colindex="6"
+                                            className="text-left"
+                                        >
+                                            Action
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -405,6 +440,42 @@ const WithdrawForDesktop = () => {
                                                         {item?.status}
                                                     </td>
                                                 )}
+                                                <td> {item.status === "Pending" ?
+                                                    < button onClick={() => handlepennding(item.id)} className="handlepennfoifjfi" > <IoCloseCircleOutline size={25} color={"black"} />
+                                                    </button>
+                                                    : ""
+                                                }
+
+                                                    <Modal
+                                                        show={pendingmodal}
+                                                        onHide={() => setpendingmodal(false)}
+
+                                                        aria-labelledby="contained-modal-title-vcenter"
+                                                        centered
+                                                    >
+                                                        <Modal.Header closeButton style={{ height: "39px" }}>
+                                                            <Modal.Title id="contained-modal-title-vcenter">
+                                                                Cancel Request
+                                                                <button onClick={handleCloseFancyModal} className="closebtnonpnl" style={{ top: "6px" }}>
+                                                                    <IoCloseCircleOutline size={25} color={"black"} />
+                                                                </button>
+                                                            </Modal.Title>
+                                                        </Modal.Header>
+                                                        <Modal.Body style={{ width: "100%" }}>
+                                                            <div className="modalldatata">
+                                                                <div style={{ padding: "12px" }}>
+                                                                    Are you sure want to cancel this request ?
+                                                                </div>
+                                                                <div className="butonnnn butonnnn1">
+
+                                                                    <button className="bynnnn bynnnn1" onClick={() => setpendingmodal(false)}>Close</button>
+                                                                    <button className="bynnnn bynnnn1" onClick={() => handlependingsucesss()}>Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </Modal.Body>
+                                                    </Modal>
+                                                </td>
+
                                             </tr>
                                         ))}
                                 </tbody>
@@ -412,7 +483,7 @@ const WithdrawForDesktop = () => {
                         </div>
                     </div>
                 </div>}
-        </div>
+        </div >
     );
 };
 

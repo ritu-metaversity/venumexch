@@ -14,17 +14,20 @@ import {
 } from "../../../App/Features/auth/authActions";
 // import { ImageUploadContainer } from "../../../../../../Deposit/styledComponents";
 const PayManually = (props) => {
+
+  const buttonAmountArr = [100, 500, 1000, 5000];
   const [files, setFiles] = useState(null);
   const [loading, setLoading] = useState(false);
   const [trueee, setTrueee] = useState(false);
   const [active, setActive] = useState(0);
+  const [amount, setAmount] = useState(0);
 
   const dispatch = useDispatch();
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
     (state) => state.auth
   );
 
-  const [Bitvalue, setBitValue] = useState(0);
+  // const [Bitvalue, setBitValue] = useState(0);
 
   const [pymentMode, setPymentMode] = useState("UPI");
 
@@ -36,19 +39,25 @@ const PayManually = (props) => {
   };
 
   const increment = () => {
-    setBitValue(Bitvalue + 10);
+    // setBitValue(Bitvalue + 10);
+    setAmount((prev) => (prev + 10 > 100 ? prev + 10 : 100));
+
   };
 
   const decrement = () => {
-    if (Bitvalue - 10 >= 0) {
+    // if (Bitvalue - 10 >= 0) {
 
-      setBitValue(Bitvalue - 10);
-    }
+    //   setBitValue(Bitvalue - 10);
+
+    // }
+    setAmount((prev) => (prev - 10 > 100 ? prev - 10 : 100));
+
+    // setBitValue((prev) => (prev + 10 > 100 ? prev + 10 : 100));
   };
 
-  const handleStaticAmount = (vl) => {
-    setBitValue((Bitvalue) => (Number(Bitvalue) || 0) + Number(vl));
-  };
+  // const handleStaticAmount = (vl) => {
+  //   setBitValue((Bitvalue) => (Number(Bitvalue) || 0) + Number(vl));
+  // };
 
   // console.log(Bitvalue, "BitvalueBitvalue");
   useEffect(() => {
@@ -61,7 +70,7 @@ const PayManually = (props) => {
 
   const handleSubmit = () => {
     const data = new FormData();
-    data.append("amount", Bitvalue.toString());
+    data.append("amount", amount.toString());
 
     data.append("image", files || "");
 
@@ -71,7 +80,8 @@ const PayManually = (props) => {
 
   useEffect(() => {
     if (PostselfdepositappData?.status) {
-      setBitValue(0);
+      // setBitValue(0);
+      setAmount(0)
       setFiles(null);
     }
   }, [PostselfdepositappData?.status]);
@@ -99,8 +109,8 @@ const PayManually = (props) => {
               type="number"
               placeholder="Enter Amount"
               className="priceinput"
-              value={Bitvalue}
-              onChange={(e) => (Number(e.target.value) || e.target.value === "") && setBitValue(Number(e.target.value))}
+              value={amount || ""}
+              onChange={(e) => (Number(e.target.value) || e.target.value === "") && setAmount(Number(e.target.value))}
             />
             <button
               className="stakeactionminus priceminus btn"
@@ -116,53 +126,28 @@ const PayManually = (props) => {
         </div>
         <div className="col-6 pValue">
           <div className="row price-values">
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                style={{ backgroundColor: "#183f45" }}
-                value="100"
-                onClick={() => handleStaticAmount(1000)}
-              >
-                +1000
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                style={{ backgroundColor: "#183f45" }}
-                value="2000"
-                onClick={() => handleStaticAmount(5000)}
-              >
-                +5000
-              </button>
-            </div>
-            <div className="col-3 price-data" >
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                style={{ backgroundColor: "#183f45" }}
-                value="300"
-                onClick={() => handleStaticAmount(10000)}
-              >
-                +10000
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                style={{ backgroundColor: "#183f45" }}
-                value="300"
-                onClick={() => handleStaticAmount(50000)}
-              >
-                +50000
-              </button>
-            </div>
+            {buttonAmountArr.map((amount) => (
+              <div className="col-3 price-data">
+                <button
+                  className="btn btn-secondary btn-block mb-2"
+                  style={{ backgroundColor: "#183f45" }}
+                  // value="100"
+                  key={`${amount}-button`}
+                  onClick={() => setAmount((o) => o + amount)}
+                >
+                  +{amount}
+                </button>
+              </div>
+            ))}
+
+
           </div>
         </div>
       </div>
       <div className="paymethods">
         <Container>
           <div className="amount">
-            <h1>Pay {Bitvalue}/-</h1>
+            <h1>Pay {amount}/-</h1>
             <p>Pay Manually</p>
           </div>
           <div className="bank-logo">
@@ -437,7 +422,7 @@ const PayManually = (props) => {
                     style={{ display: "none" }}
                   />
                 </label>
-                {files !== null && Bitvalue !== 0 ? (
+                {files !== null && amount !== 0 ? (
                   <button
                     className="submit-deposit bbbbbbbb"
                     onClick={handleSubmit}

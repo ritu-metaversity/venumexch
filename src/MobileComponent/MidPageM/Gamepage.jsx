@@ -45,7 +45,7 @@ const Gamepage = () => {
   const handleGameDetails = (id, item) => {
     // console.log("home page load ")
     // console.log(item?.openDate)
-  const token = localStorage.getItem("TokenId");
+    const token = localStorage.getItem("TokenId");
 
     if (token) {
 
@@ -75,7 +75,7 @@ const Gamepage = () => {
 
     axios
       .get(
-        ` http://43.205.50.127:9000/betfair_api/active_match/${activeMatchSportWise}`
+        ` https://oddsapi.247idhub.com/betfair_api/active_match/${activeMatchSportWise}`
       )
       .then((res) => {
         setGamesData(res?.data?.data);
@@ -145,7 +145,7 @@ const Gamepage = () => {
           </div>
         </div>
       </div>
-      <div class="inplay-item" style={{ marginTop: "2px" }}>
+      <div class="" style={{ marginTop: "2px" }}>
         <div class="inplay-item__content">
           {gamesData?.length && gamesData.map((item) => {
             return (
