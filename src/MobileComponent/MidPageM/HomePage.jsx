@@ -68,7 +68,7 @@ const HomePage = () => {
 
   useEffect(() => {
     axios
-      .get("http://43.205.50.127:9000/betfair_api/active_match")
+      .get("https://43.205.50.127:9000/betfair_api/active_match")
       .then((res) => {
         setGamesData(res?.data?.data);
         setIsloading(false)
