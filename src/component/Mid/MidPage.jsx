@@ -41,7 +41,7 @@ const MidPage = () => {
 
    useEffect(() => {
       axios
-         .get("https://43.205.50.127:9000/betfair_api/active_match")
+         .get("https://oddsapi.247idhub.com/betfair_api/active_match")
          .then((res) => {
             setGamesData(res?.data?.data);
             setIsloading(false)
