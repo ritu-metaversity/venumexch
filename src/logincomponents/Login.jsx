@@ -209,6 +209,7 @@ const Login = () => {
                         alt=""
                         src={selfAllowedd?.logo}
                         className="logo w_logo"
+                        style={{ width: "300px", height: "42px" }}
                       />
                     </div>
                   </div>
