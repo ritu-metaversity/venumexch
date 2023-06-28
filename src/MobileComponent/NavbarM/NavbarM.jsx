@@ -201,7 +201,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                 alt=""
                 src={selfAllowedd?.logo}
                 className="img-fluid"
-                style={{ height: "90px", marginTop: "-22px" }}
+                style={{ height: "40px", }}
               />
               {/* </Link> */}
             </div>

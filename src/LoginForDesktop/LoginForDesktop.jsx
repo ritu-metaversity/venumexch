@@ -209,7 +209,7 @@ const LoginForMobile = () => {
                         alt=""
                         src={selfAllowedd?.logo}
                         className="logo"
-                        style={{ height: "190px" }}
+                      // style={{ height: "190px" }}
                       />
                     </div>
                   </div>

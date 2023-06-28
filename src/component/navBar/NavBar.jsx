@@ -138,7 +138,7 @@ const NavBar = () => {
                 alt=""
                 src={selfAllowedd?.logo}
                 className="logo"
-                style={{ marginTop: "-12px", height: " 90px" }}
+                style={{ height: " 90px" }}
               />
             </div>
           </Link>
