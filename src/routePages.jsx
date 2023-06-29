@@ -27,6 +27,7 @@ import Casino from "./component/SideBar/Casino";
 import Signup from "./LoginForDesktop/Signup";
 import TermsandConditions from "./MobileComponent/MMFooter/TermsandConditions";
 import AboutUs from "./MobileComponent/MMFooter/AboutUs";
+import WithDraw1 from "./MobileComponent/RightMenu/WithDrawPage/WithDraw1";
 
 
 
@@ -54,7 +55,7 @@ const RoutesPages = () => {
           <Route path="/transferstatement" element={<TransferStatement />} />
           <Route path="/message" element={<Messages />} />
           <Route path="/deposit" element={<DepositForDesktop />} />
-          <Route path="/withDraw" element={<WithdrawForDesktop />} />
+          <Route path="/withDraw" element={<WithDraw1 />} />
           <Route path="/Casino" element={<Casinolist />} />
           <Route path="/Casino" element={<Casinolist />} />
           <Route path="/Casino" element={<Casinolist />} />

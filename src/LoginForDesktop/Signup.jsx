@@ -141,6 +141,18 @@ const Signup = () => {
         }
       })
   };
+  let appUrll = window.location.hostname;
+  const [selfAllowedd, SetselfAllowedd] = useState("");
+  useEffect(() => {
+    axios
+      .post(
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        SetselfAllowedd(res?.data?.data);
+      });
+  }, [appUrll]);
   return (
     <div id="app">
       <div>
@@ -253,10 +265,11 @@ const Signup = () => {
                         Sign Up
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
-                      <button className="btn btn-login" onClick={handleDemoLogin}>
-                        Login with demo ID
-                        <i className="ml-2 fas fa-sign-in-alt"></i>
-                      </button>
+                      {selfAllowedd?.selfAllowed === true ?
+                        <button className="btn btn-login" onClick={handleDemoLogin}>
+                          Login with demo ID
+                          <i className="ml-2 fas fa-sign-in-alt"></i>
+                        </button> : ""}
 
                       <button className="btn btn-login" onClick={handleLogin}>
                         <i className="ml-2 fas fa-sign-in-alt rotate-btn"></i>
@@ -293,11 +306,12 @@ const Signup = () => {
               backdrop="static"
               keyboard={false}
               centered
+
             >
               <Modal.Header className="register-head" closeButton>
                 <Modal.Title className="regTital">Register</Modal.Title>
               </Modal.Header>
-              <Modal.Body>
+              <Modal.Body style={{ marginLeft: "20%" }}>
                 <div>
                   <div>
                     <div className="">
@@ -329,7 +343,7 @@ const Signup = () => {
         </>
       </div>
       <FooterForDesktop />
-    </div>
+    </div >
   );
 };
 

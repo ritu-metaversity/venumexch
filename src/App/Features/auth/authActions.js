@@ -126,6 +126,7 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
         // console.log(postPasswordChangeRespose, "postPasswordChangeResposepostPasswordChangeRespose")
         if (postPasswordChangeRespose?.data?.status === true) {
             window.location.replace("./login");
+            window.location.reload()
             localStorage.clear();
         }
         if (

@@ -1,0 +1,204 @@
+.withdrow_coin {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 34px;
+    align-items: center;
+}
+
+.coin_value {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.coin_value button {
+    border: 0.1rem solid #2C3D50;
+    padding: 10px 30px;
+    margin: 3px 5px;
+    border-radius: 5px;
+    background: unset;
+    color: #0f2326 !important;
+    font-weight: 600 !important;
+
+}
+
+.withdrow_title p,
+.choose_val {
+    margin: 6px -8px;
+    font-weight: 500;
+    color: #000000b0;
+    font-size: 17px;
+}
+
+.withdrow_title input {
+    height: 43px;
+    width: 200px;
+    background: #F1F5F8;
+    border: 0.1rem solid #F1F5F8;
+    outline: unset;
+    border-radius: 5px;
+    padding: 0px 6px;
+}
+
+.withdrow_type select {
+    width: 93%;
+    margin: 0 31px;
+    height: 37px;
+    border-radius: 3px;
+}
+
+.withdrow_type p {
+    padding-top: 12px;
+    margin: 12px 30px;
+    /* font-size: 18px; */
+    font-weight: 600;
+}
+
+.with_paymethod {
+    width: 97%;
+    margin-top: 19px;
+    margin: auto;
+}
+
+.withdraw_image img {
+    display: block;
+    margin: auto;
+    width: 70px;
+    height: 70px;
+    background: #F1F5F8;
+    padding: 7px;
+    border-radius: 50%;
+}
+
+.withdraw_image.col .css-1502y4u {
+    padding: 12px 0px;
+}
+
+.withdraw_table input {
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+.withdrow_type h5 {
+    margin: 22px 27px;
+    border: 0.1rem solid #ddd;
+    padding: 5px 14px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    background: #F1F5F8;
+}
+
+.bank-logo.with_bank_logo {
+    background: #fff;
+    border: 1px solid #F1F5F8;
+}
+
+.withdraw_image.col {
+    background: #ddddddc7;
+    margin: 15px 19px;
+    border-radius: 15px;
+    width: 243px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.withdraw_coin_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.withdraw_coin_btn button {
+    border: unset;
+    color: #fff;
+    font-weight: 600;
+    background: #2c4f58;
+    padding: 14px 63px;
+    border-radius: 5px;
+    margin-top: 17px;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.main_withdrow {
+    justify-content: center;
+    margin-top: 44px;
+    /* margin-left: -41px; */
+    margin-bottom: 23px;
+}
+
+p.lodder.depositLoading.withloading.withdraw_deposit {
+    height: 47px !important;
+    bottom: 12px;
+    width: 229px !important;
+    opacity: 1 !important;
+    background: #f1f5f8ad;
+}
+
+p.lodder.depositLoading.withloading.withdraw_deposit i {
+    font-size: 22px !important;
+}
+
+@media screen and (min-width:801px) {
+    .accountWith {
+        width: 30%;
+    }
+
+    .accounttype {
+        width: 100% !important;
+    }
+}
+
+.accounttype {
+    width: 39%;
+}
+
+@media screen and (max-width:800px) {
+    .withdrow_coin {
+        display: block;
+    }
+
+    .withdrow_coin {
+        margin: 95px 24px 0 6px;
+    }
+
+    .coin_value button {
+        width: 44%;
+    }
+
+    .withdrow_type select {
+        width: 96%;
+        margin-inline: -15px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        margin-left: 6px;
+    }
+
+    .mx-input-wrapper.account-field {
+        width: 100%;
+    }
+
+    .card-header.header-card {
+        border-radius: unset !important;
+    }
+
+    .main_withdrow {
+        margin-inline: 13px !important;
+    }
+
+    .withdraw_coin_btn {
+        width: 100%;
+    }
+}
+
+.modal-dialog {
+    margin-top: 50px !important;
+}
+
+button.sve.btn {
+    color: #fff;
+    background: #16272c;
+}

@@ -110,8 +110,8 @@ const ChangePassword = () => {
       !ValidationFile.isEmpty(confirmPassword)
     ) {
       dispatch(PostPwChangeFirstTime(passwordData));
-      localStorage.clear();
-      // navigate("./login");
+      // localStorage.clear();
+      // // navigate("./login");
       // window.location.replace("/");
     }
   };
