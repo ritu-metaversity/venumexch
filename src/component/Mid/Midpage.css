@@ -141,7 +141,8 @@ a.event-name {
 .game-inPlay {
     width: 30%;
 }
-.main_div{
+
+.main_div {
     display: flex;
     align-items: center;
 }
