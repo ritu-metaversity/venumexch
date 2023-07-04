@@ -174,7 +174,7 @@ const Deposit = () => {
                                 </Modal.Body>
                               </Modal>
                               <td aria-colindex="3" className="">
-                                {moment(item?.time).format("MM-DD-YYYY - hh:mm")}
+                                {item?.time}
                               </td>
                               {item.status === "Pending" ? (
                                 <td aria-colindex="4" style={{ color: "#ffa726" }}>

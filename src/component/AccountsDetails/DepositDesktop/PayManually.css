@@ -455,3 +455,6 @@ button.btn.btn-secondary.btn-block.mb-2 {
 button.stakeactionminus.btn {
     border-radius: unset !important;
 }
+.d-none{
+    display: none;
+}

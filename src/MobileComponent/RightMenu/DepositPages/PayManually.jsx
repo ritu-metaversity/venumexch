@@ -12,10 +12,13 @@ import {
   Postpaymnetdetailapp,
   Postselfdepositapp,
 } from "../../../App/Features/auth/authActions";
+import axios from "axios";
 // import { ImageUploadContainer } from "../../../../../../Deposit/styledComponents";
 const PayManually = (props) => {
 
   const buttonAmountArr = [100, 500, 1000, 5000];
+  const [stackValue, setStackValue] = useState();
+
   const [files, setFiles] = useState(null);
   const [loading, setLoading] = useState(false);
   const [trueee, setTrueee] = useState(false);
@@ -26,7 +29,25 @@ const PayManually = (props) => {
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
     (state) => state.auth
   );
+  const TokenId = localStorage.getItem("TokenId");
 
+  useEffect(() => {
+    axios
+      .post(
+        "http://18.143.24.35/admin-new-apis/request-stack",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TokenId}`,
+          },
+        }
+      )
+      .then((res) => {
+        setStackValue(res?.data?.data);
+        console.log(res?.data?.data, "yguhvjuiyfghv");
+      });
+  }, [])
   // const [Bitvalue, setBitValue] = useState(0);
 
   const [pymentMode, setPymentMode] = useState("UPI");
@@ -126,16 +147,16 @@ const PayManually = (props) => {
         </div>
         <div className="col-6 pValue">
           <div className="row price-values">
-            {buttonAmountArr.map((amount) => (
+            {stackValue && stackValue.map(({ value, key }) => (
               <div className="col-3 price-data">
                 <button
                   className="btn btn-secondary btn-block mb-2"
                   style={{ backgroundColor: "#183f45" }}
                   // value="100"
-                  key={`${amount}-button`}
-                  onClick={() => setAmount((o) => o + amount)}
+                  // key={`${amount?.value}-button`}
+                  onClick={() => setAmount((o) => o + value)}
                 >
-                  +{amount}
+                  {key}
                 </button>
               </div>
             ))}
@@ -154,7 +175,7 @@ const PayManually = (props) => {
             <Row>
               {PostpaymnetdetailappDataData?.data?.paymentMethods.map(
                 (item, id) => (
-                  <Col onClick={() => handlePaymentName(item.methodName, id)}>
+                  <Col className={item.methodName === "Bank"?"d-none":""} onClick={() => handlePaymentName(item.methodName, id)}>
                     <div
                       className={`css-1502y4u ${active === id ? "active3" : ""
                         }`}
