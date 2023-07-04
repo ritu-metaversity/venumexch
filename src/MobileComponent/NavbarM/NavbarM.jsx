@@ -8,6 +8,7 @@ import { PostBalance } from "../../App/Features/auth/authActions";
 
 import "./NavbarM.css";
 
+
 const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -201,7 +202,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
                 alt=""
                 src={selfAllowedd?.logo}
                 className="img-fluid"
-                style={{ height: "40px", }}
+                style={{ height: "44px" }}
               />
               {/* </Link> */}
             </div>

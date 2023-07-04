@@ -128,8 +128,36 @@ const WithDraw1 = () => {
                 setErrorAlert(true);
                 setIsLoading(false);
                 setColorName("success");
-                setMessage(res?.data?.message);
+                if (
+                    res?.data?.message
+                ) {
+                    toast.success(res?.data?.message || "SUSUSUSUS!!", {
+                        style: {
+                            background: "rgb(74,117,67)", minHeight: 40,
+                            padding: 0,
+                            color: "white",
+                        }
+                    });
+                }
+                // setMessage(res?.data?.message);
 
+            })
+            .catch((error) => {
+                setErrorAlert(true);
+                setIsLoading(false);
+                setColorName("danger");
+                if (
+                    error?.response?.data?.message
+                ) {
+                    toast.error(error?.response?.data?.message || "SUSUSUSUS!!", {
+                        style: {
+                            background: "rgb(156,74,70)", minHeight: 40,
+                            padding: 0,
+                            color: "white",
+                        }
+                    });
+                }
+                // setMessage(error?.response?.data?.message);
             });
     };
     const handleBtnValue = (val) => {
@@ -222,12 +250,25 @@ const WithDraw1 = () => {
             .then((res) => {
                 // if (res?.data?.data?.bankExist === false) {
                 setShow(true);
+                console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
                 // } else {
-                // setMessage(res?.data);
+                setMessage(res?.data?.message
+                );
                 // setErrorAlert(true);
                 // setColorName("success");
                 // setIsLoading(false);
                 // }
+                if (
+                    res?.data?.message
+                ) {
+                    toast.success(res?.data?.message || "SUSUSUSUS!!", {
+                        style: {
+                            background: "rgb(74,117,67)", minHeight: 40,
+                            padding: 0,
+                            color: "white",
+                        }
+                    });
+                }
             })
             .catch((error) => {
                 setErrorAlert(true);

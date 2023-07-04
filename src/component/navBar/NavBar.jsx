@@ -21,6 +21,7 @@ const NavBar = () => {
   const [selfAllowedd, SetselfAllowedd] = useState("");
   const userTypeInfo = localStorage.getItem("userTypeInfo");
   const usernameDemo = localStorage.getItem("usernameDemo");
+  const [isSelfloading, setIsSelfLoading] = useState(true)
 
   useEffect(() => {
     axios
@@ -111,7 +112,7 @@ const NavBar = () => {
         { appUrl: appUrll }
       )
       .then((res) => {
-        // setIsSelfLoading(false)
+        setIsSelfLoading(false)
 
         SetselfAllowedd(res?.data?.data);
 
@@ -378,12 +379,18 @@ const NavBar = () => {
                     <span onClick={handlogout}>LogIn</span>
                   </Link>
                 </li>
-                <li className="login_btn">
-                  <Link to="./signup">
-                    <i className="fas fa-running m-r-5"></i>{" "}
-                    <span onClick={handlogout}>SignUp</span>
-                  </Link>
-                </li></> :
+                {isSelfloading === true ? ""
+                  :
+                  selfAllowedd?.selfAllowed === true ?
+                    <li className="login_btn">
+                      <Link to="./signup">
+                        <i className="fas fa-running m-r-5"></i>{" "}
+                        <span onClick={handlogout}>SignUp</span>
+                      </Link>
+                    </li>
+                    : ""}
+
+              </> :
                 <li>
                   <Link to="./login">
                     <i className="fas fa-running m-r-5"></i>{" "}
