@@ -58,9 +58,9 @@ const LoginForMobile = () => {
         axios.defaults.headers.common.Authorization = `Bearer ${postLoginData?.data?.token}`;
 
         if (postLoginData?.data?.passwordtype === "old") {
-          navigate("/m/changepassword");
+          navigate("/changepassword");
         } else {
-          navigate("/m/home");
+          navigate("/home");
         }
       }
     }
@@ -209,7 +209,7 @@ const LoginForMobile = () => {
                         alt=""
                         src={selfAllowedd?.logo}
                         className="logo"
-                      // style={{ height: "190px" }}
+                        style={{ height: "100px" }}
                       />
                     </div>
                   </div>
@@ -277,7 +277,7 @@ const LoginForMobile = () => {
                             <i className="ml-2 fas fa-sign-in-alt"></i>
                           </button>
                           : ""}
-                        )
+
 
                         {selfAllowedd?.selfAllowed === true ?
                           <button

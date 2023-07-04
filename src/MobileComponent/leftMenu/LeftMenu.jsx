@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Link, useNavigate, useOutletContext } from 'react-router-dom'
-import { getActiveSportList } from '../../App/Features/auth/authActions';
+import { Link, useNavigate, useOutletContext } from 'react-router-dom'
+import { getActiveSportList, postleftmenudataopen } from '../../App/Features/auth/authActions';
 import "./LeftMenu.css"
 
 const LeftMenu = (props) => {
    const dispatch = useDispatch();
-   
+
    let navigate = useNavigate();
-   const [leftmenuClose , setLeftMenuClose] =useState("false")
-   const { getActiveSportListData } = useSelector(state => state.auth)
-   useEffect(()=>{
-      // console.log("balaaac")
-   
-      dispatch(getActiveSportList())
-   
-   },[dispatch])
+   const [leftmenuClose, setLeftMenuClose] = useState("false")
+   const { postleftmenudataopenData } = useSelector(state => state.auth)
+   // useEffect(()=>{
+   //    // console.log("balaaac")
+
+   //    dispatch(getActiveSportList())
+
+   // },[dispatch])
+
+   useEffect(() => {
+      dispatch(postleftmenudataopen())
+   }, [])
    // const gameNamePass = useOutletContext()
    // getActiveSportListData
 
@@ -34,38 +38,38 @@ const LeftMenu = (props) => {
    // }
 
    // console.log(getActiveSportListData?.data)
-   const handleRoute=(id ,id2 )=>{
+   const handleRoute = (id, id2) => {
       // props.gameNamePass(id2)
-   props.eftMenuClose(false)
-      navigate(`/m/game/${id}`,{state:{id2}})
+      props.eftMenuClose(false)
+      navigate(`/m/game/${id}`, { state: { id2 } })
       // console.log(id2)
-    }
+   }
 
-    const handleMyMarket=()=>{
+   const handleMyMarket = () => {
       navigate("./mymarkets")
-   props.eftMenuClose(false)
+      props.eftMenuClose(false)
 
-    }
+   }
 
-  return (
-    <>
-    {/* <div   className='left-menu'></div> */}
-    <li>   
-          <div   className="menu-lvl-1 "  style={{cursor: "pointer"}}  onClick={()=>handleMyMarket() }> 
-             <div   className="item"><i   className="fas fa-eye"></i> <span   className="menu-name">My Markets</span></div>
-          </div>
-    </li>
-    {getActiveSportListData?.data?.data &&
-                getActiveSportListData?.data?.data ? (
-                  getActiveSportListData?.data?.data.map((item) => (
-    <li>
-       <div onClick={()=>handleRoute(item?.sportId,item?.sportName)} style={{cursor: "pointer"}}    className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" ><img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} alt=''   className="game-icon"/> <span   className="menu-name">{item?.sportName}</span></div>
-          </div>
-       </div>
-    </li>))):""}
-  {/* 
+   return (
+      <>
+         {/* <div   className='left-menu'></div> */}
+         <li>
+            <div className="menu-lvl-1 " style={{ cursor: "pointer" }} onClick={() => handleMyMarket()}>
+               <div className="item"><i className="fas fa-eye"></i> <span className="menu-name">My Markets</span></div>
+            </div>
+         </li>
+         {postleftmenudataopenData?.data &&
+            postleftmenudataopenData?.data ? (
+            postleftmenudataopenData?.data.map((item) => (
+               <li>
+                  <div onClick={() => handleRoute(item?.sportId, item?.sportName)} style={{ cursor: "pointer" }} className="favourites-a">
+                     <div className="menu-lvl-1">
+                        <div className="item" ><img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} alt='' className="game-icon" /> <span className="menu-name">{item?.sportName}</span></div>
+                     </div>
+                  </div>
+               </li>))) : ""}
+         {/* 
    <li>
        <a onClick={()=>handleRoute("1","Football")}    className="favourites-a">
           <div   className="menu-lvl-1">
@@ -160,15 +164,15 @@ const LeftMenu = (props) => {
           </div>
        </a>
     </li> */}
-     <li>
-       <Link to="/m/casino-list"   className="">
-          <div   className="menu-lvl-1" onClick={()=>props.eftMenuClose(false)()}>
-             <div   className="item"><img alt="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/casino.jpg"   className="game-icon"/> <span   className="menu-name download-apk">Live Casino</span></div>
-          </div>
-       </Link>
-    </li> 
-</>
-  )
+         <li>
+            <Link to="/m/casino-list" className="">
+               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                  <div className="item"><img alt="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/casino.jpg" className="game-icon" /> <span className="menu-name download-apk">Live Casino</span></div>
+               </div>
+            </Link>
+         </li>
+      </>
+   )
 }
 
 export default LeftMenu

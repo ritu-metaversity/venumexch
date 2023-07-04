@@ -210,7 +210,7 @@ const Login = () => {
                         alt=""
                         src={selfAllowedd?.logo}
                         className="logo w_logo"
-                        style={{ width: "300px", height: "42px" }}
+                      // style={{ width: "300px", height: "42px" }}
                       />
                     </div>
                   </div>
@@ -264,9 +264,7 @@ const Login = () => {
                             <span className="text-danger">
                               {postLoginData?.data?.message}
                             </span>
-                          ) : (
-                            ""
-                          )}
+                          ) : ""}
                         </div>
                         <button className="btn btn-login" onClick={handleLogin}>
                           Login
@@ -276,13 +274,10 @@ const Login = () => {
                           <button className="btn btn-login" onClick={handleDemoLogin}>
                             Login with demo ID
                             <i className="ml-2 fas fa-sign-in-alt"></i>
-                          </button> : ""})
+                          </button> : ""}
 
                         {selfAllowedd?.selfAllowed === true ?
-                          <button
-                            className="btn btn-login"
-                            onClick={handleSignUp}
-                          >
+                          <button className="btn btn-login" onClick={handleSignUp}>
                             Sign Up
                             <i className="ml-2 fas fa-sign-in-alt"></i>
                           </button>

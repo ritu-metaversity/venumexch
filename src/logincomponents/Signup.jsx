@@ -159,7 +159,7 @@ const Signup = () => {
     setSignUpShow(false);
     navigate("/m/login");
   };
-
+  console.log(selfAllowedd, "selfAlloweddselfAllowedd")
   return (
     <div id="app">
       <div>
@@ -172,8 +172,10 @@ const Signup = () => {
                     <div className="logo">
                       <img
                         alt=""
-                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/themes/lordsexch.com/front/logo-login.png"
+                        src={selfAllowedd?.logo}
                         className="logo"
+                        style={{ height: "100px" }}
+
                       />
                     </div>
                   </div>
