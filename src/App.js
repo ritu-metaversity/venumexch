@@ -22,26 +22,27 @@ function App() {
   const dispatch = useDispatch();
 
   // console.log("page hit app.js")
-  const [mobileRoutes, setMoileRoutes] = useState(true);
+  const [mobileRoutes, setMoileRoutes] = useState(null);
 
   const { pathname } = useLocation();
   let appUrll = window.location.hostname;
   const token = localStorage.getItem("TokenId");
 
   useEffect(() => {
+
+    console.log(window.innerWidth, "mobidasdasle")
+
     if (window.innerWidth > 1000) {
-      setMoileRoutes(true);
+      setMoileRoutes(false);
       // navigate("./home");
-
       if (pathname.includes("/m/")) {
-
-
         navigate("/home");
       }
-      // console.log("mobile")
     } else {
-      setMoileRoutes(false);
-      navigate("./m/home");
+      console.log("andar hai kya");
+      setMoileRoutes(true);
+      if (!pathname.includes("/m/"))
+        navigate("./m/home");
 
       // if (pathname.includes("/m/")) {
       //   navigate("./home");
@@ -143,8 +144,9 @@ function App() {
       />
 
 
-      {mobileRoutes === true ? <RoutesPages /> :
+      {mobileRoutes === true ?
         <RouteMobile />
+        : mobileRoutes === false ? <RoutesPages /> : <></>
       }
 
     </div>

@@ -1,12 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { postpendingapppii, Postwithdrawrequestclient } from '../../../App/Features/auth/authActions';
 import './WithDraw1.css'
+import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
 
 const WithDraw1 = () => {
+    const dispatch = useDispatch();
+
     const [withdrawData, setWithdrawData] = useState();
     // const [active, setActive] = useState(0);
+    const { PostwithdrawrequestclientData } =
+        useSelector((state) => state.auth);
     const [show, setShow] = useState(false);
     const [withType, setwithType] = useState("");
     const [withCoinValue, setwithCoinValue] = useState(0);
@@ -52,7 +59,7 @@ const WithDraw1 = () => {
         const TokenId = localStorage.getItem("TokenId");
         axios
             .post(
-                "https://api.247365.exchange/admin-new-apis/withtype-subadmin/get",
+                "http://18.143.24.35/admin-new-apis/withtype-subadmin/get",
                 {},
                 {
                     headers: {
@@ -66,7 +73,7 @@ const WithDraw1 = () => {
             });
         axios
             .post(
-                "https://api.247365.exchange/admin-new-apis/request-stack",
+                "http://18.143.24.35/admin-new-apis/request-stack",
                 {},
                 {
                     headers: {
@@ -81,7 +88,7 @@ const WithDraw1 = () => {
             });
         axios
             .post(
-                "https://api.247365.exchange/admin-new-apis/get/client-bank",
+                "http://18.143.24.35/admin-new-apis/get/client-bank",
                 {},
                 {
                     headers: {
@@ -117,7 +124,7 @@ const WithDraw1 = () => {
             withdrawType: bankID,
         };
         axios
-            .post("https://api.247365.exchange/admin-new-apis/save/client-bank", data, {
+            .post("http://18.143.24.35/admin-new-apis/save/client-bank", data, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("TokenId")}`,
@@ -172,122 +179,243 @@ const WithDraw1 = () => {
         const result = e.target.value.replace(/[^a-z]/gi, "");
         setAccountHolderName(e.target.value.replace(/[^a-z]/gi, ""));
     };
-    const handleClick = () => {
 
-        console.log("heloo")
-        setErrorAlert(false);
-        setIsLoading(true);
+    const handleValidate = () => {
         if (userBalance < withCoinValue) {
             setMessage("insufficient balance");
             setErrorAlert(true);
             setColorName("danger");
             setIsLoading(false);
+            return false;
         }
+
         if (withType === "BANK") {
-            if (withCoinValue === "" || withCoinValue === undefined) {
-                setMessage("The Amount field is required");
-                setErrorAlert(true);
-                setColorName("danger");
+            console.log("helooo");
+            if (
+                withCoinValue === "" ||
+                withCoinValue === undefined ||
+                withCoinValue === 0
+            ) {
+
+                toast.error("The Amount field is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+
                 setIsLoading(false);
+                return false;
             } else if (accountNumber === "") {
-                setMessage("The Account Number is required");
-                setErrorAlert(true);
-                setColorName("danger");
+
+                toast.error("The Account Number is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
                 setIsLoading(false);
+                return false;
             } else if (accountHolderName === "") {
-                setMessage("The Account Name field is required");
-                setErrorAlert(true);
-                setColorName("danger");
+                toast.error("The Account Name field is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
                 setIsLoading(false);
+                return false;
             } else if (bankName === "") {
-                setMessage("The Bank Name field is required");
-                setErrorAlert(true);
-                setColorName("danger");
+
+                toast.error("The Bank Name field is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
                 setIsLoading(false);
+                return false;
             } else if (ifsc === "") {
-                setMessage("The IFSC field is required");
-                setErrorAlert(true);
-                setColorName("danger");
+                toast.error("The IFSC field is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
                 setIsLoading(false);
+                return false;
             }
-        } else {
-            if (withCoinValue === "" || withCoinValue === undefined) {
-                setMessage("The Amount field is required");
-                setErrorAlert(true);
-                setColorName("danger");
+        } else if (withType === "PAYTM") {
+            console.log("heloo");
+            if (
+                withCoinValue === "" ||
+                withCoinValue === undefined ||
+                withCoinValue === 0
+            ) {
+                toast.error("The Amount field is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
                 setIsLoading(false);
+                return false;
             } else if (accountNumber === "") {
-                setMessage("UPI Number is required");
-                setErrorAlert(true);
-                setColorName("danger");
+
+                toast.error("Mobile Number is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
                 setIsLoading(false);
+                return false;
             } else if (accountHolderName === "") {
-                setMessage("The Account Name field is required");
+
+                toast.error("The Account Name field is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+                setIsLoading(false);
+                return false;
+            }
+        } else if (withType == "UPI") {
+            console.log("helo");
+            if (
+                withCoinValue === "" ||
+                withCoinValue === undefined ||
+                withCoinValue === 0
+            ) {
+
+                toast.error("The Amount field is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+                setIsLoading(false);
+                return false;
+            } else if (accountNumber === "") {
+
+                toast.error("UPI ID is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+                setIsLoading(false);
+                return false;
+            } else if (accountHolderName === "") {
+                toast.error("The Account Name field is required", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
                 setErrorAlert(true);
                 setColorName("danger");
                 setIsLoading(false);
+                return false;
+            } else if (
+                accountNumber.match(/^[a-zA-Z0-9.-]{2,256}@[a-zA-Z][a-zA-Z]{2,64}$/) ===
+                null
+            ) {
+
+                toast.error("Enter Valid UPI ID", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+                setErrorAlert(true);
+                setColorName("danger");
+                setIsLoading(false);
+                return false;
             }
         }
-        // if (accountHolderName !== "" && accountNumber !== "" && userBalance >= withCoinValue) {
-        const data = {
-            accountHolderName: accountHolderName,
-            bankName: bankName,
-            accountType: withType === "BANK" ? AccountType : "",
-            amount: withCoinValue,
-            ifsc: ifsc,
-            accountNumber: accountNumber,
-            withdrawType: bankID,
-            withdrawMode: withdrawType,
-        };
-        const TokenId = localStorage.getItem("TokenId");
-        axios
-            .post("https://api.247365.exchange/admin-new-apis/self-withdraw-app", data, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${TokenId}`,
-                },
-            })
-            .then((res) => {
-                // if (res?.data?.data?.bankExist === false) {
-                setShow(true);
-                console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
-                // } else {
-                setMessage(res?.data?.message
-                );
-                // setErrorAlert(true);
-                // setColorName("success");
-                // setIsLoading(false);
-                // }
-                if (
-                    res?.data?.message
-                ) {
-                    toast.success(res?.data?.message || "SUSUSUSUS!!", {
-                        style: {
-                            background: "rgb(74,117,67)", minHeight: 40,
-                            padding: 0,
-                            color: "white",
-                        }
-                    });
-                }
-            })
-            .catch((error) => {
-                setErrorAlert(true);
-                setIsLoading(false);
-                setColorName("danger");
-                if (
-                    error?.response?.data?.message
-                ) {
-                    toast.error(error?.response?.data?.message || "SUSUSUSUS!!", {
-                        style: {
-                            background: "rgb(156,74,70)", minHeight: 40,
-                            padding: 0,
-                            color: "white",
-                        }
-                    });
-                }
-                // setMessage(error?.response?.data?.message);
-            });
-        // }
+        return true;
+    };
+
+    const handleClick = () => {
+
+
+        setErrorAlert(false);
+        setIsLoading(true);
+
+        if (handleValidate()) {
+            const data = {
+                accountHolderName: accountHolderName,
+                bankName: bankName,
+                accountType: withType === "BANK" ? AccountType : "",
+                amount: withCoinValue,
+                ifsc: ifsc,
+                accountNumber: accountNumber,
+                withdrawType: bankID,
+                withdrawMode: withdrawType,
+            };
+            const TokenId = localStorage.getItem("TokenId");
+            axios
+                .post("http://18.143.24.35/admin-new-apis/self-withdraw-app", data, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${TokenId}`,
+                    },
+                })
+                .then((res) => {
+                    if (res?.data?.data?.bankExist === false) {
+                        setShow(true);
+                        console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
+                    } else {
+                        setMessage(res?.data?.message
+                        );
+                        setErrorAlert(true);
+                        setColorName("success");
+                        setIsLoading(false);
+                    }
+                    if (
+                        res?.data?.message
+                    ) {
+                        toast.success(res?.data?.message || "SUSUSUSUS!!", {
+                            style: {
+                                background: "rgb(74,117,67)", minHeight: 40,
+                                padding: 0,
+                                color: "white",
+                            }
+                        });
+                    }
+                })
+                .catch((error) => {
+                    setErrorAlert(true);
+                    setIsLoading(false);
+                    setColorName("danger");
+                    if (
+                        error?.response?.data?.message
+                    ) {
+                        toast.error(error?.response?.data?.message || "SUSUSUSUS!!", {
+                            style: {
+                                background: "rgb(156,74,70)", minHeight: 40,
+                                padding: 0,
+                                color: "white",
+                            }
+                        });
+                    }
+                    // setMessage(error?.response?.data?.message);
+                });
+        }
     };
     const handleWithdrawData = (
         accNumber,
@@ -304,82 +432,98 @@ const WithDraw1 = () => {
     };
 
     console.log(message, "dfsfsdfssfgdsdjijfv")
+    const handlepennding = () => setpendingmodal(true);
+    const [withDrawId, setWithDrawId] = useState("")
 
+    const [pendingmodal, setpendingmodal] = useState(false)
+    const handleCloseFancyModal = () => setpendingmodal(false);
+    useEffect(() => {
+        dispatch(Postwithdrawrequestclient());
+    }, []);
+    const handlependingg = (data) => {
+        setpendingmodal(true)
+        setWithDrawId(data)
+    }
 
+    const handlependingsucesss = () => {
+        let data = { id: withDrawId }
+        dispatch(postpendingapppii(data))
+        setpendingmodal(false)
+    }
     return (
-        <>
-            <div>
-                <div className="withdrow_coin">
-                    <div className="withdrow_title">
-                        <p style={{ marginLeft: "-1px", marginBottom: "10px" }}>
-                            Withdraw Coins
-                        </p>
-                        <input
-                            placeholder="Withdraw Coins"
-                            value={withCoinValue}
-                            onChange={handleStaticAmountInput}
-                            type="number"
-                        />
+        <div >
+
+            <div className="withdrow_coin">
+                <div className="withdrow_title">
+                    <p style={{ marginLeft: "-1px", marginBottom: "10px" }}>
+                        Withdraw Coins
+                    </p>
+                    <input
+                        placeholder="Withdraw Coins"
+                        value={withCoinValue}
+                        onChange={handleStaticAmountInput}
+                        type="number"
+                    />
+                </div>
+                <div>
+                    <p
+                        className="choose_val"
+                        style={{ marginLeft: "0px", marginBottom: "10px" }}>
+                        Choose From your favourate transaction{" "}
+                    </p>
+                    <div className="coin_value">
+                        {stackValue?.map((res) => {
+                            return (
+                                <button onClick={() => handleBtnValue(res?.value)}>
+                                    {res?.key}
+                                </button>
+                            );
+                        })}
                     </div>
-                    <div>
-                        <p
-                            className="choose_val"
-                            style={{ marginLeft: "0px", marginBottom: "10px" }}>
-                            Choose From your favourate transaction{" "}
-                        </p>
-                        <div className="coin_value">
-                            {stackValue?.map((res) => {
+                </div>
+            </div>
+            <div
+                className="withdrow_type"
+                style={{ marginBottom: "12px", width: "100%" }}>
+                <select onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%" }}>
+                    <option selected>Select Withdraw Type</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Instant">Instant</option>
+                </select>
+            </div>
+            <div className="with_paymethod">
+                <Container>
+                    <div className="bank-logo with_bank_logo">
+                        <Row>
+                            {withdrawData?.map((res, id) => {
                                 return (
-                                    <button onClick={() => handleBtnValue(res?.value)}>
-                                        {res?.key}
-                                    </button>
+                                    <>
+                                        <Col
+                                            className="withdraw_image"
+                                            onClick={() =>
+                                                handlePaymentDetails(
+                                                    res?.withdrawType,
+                                                    res?.id
+                                                )
+                                            }>
+                                            <div className="css-1502y4u">
+                                                <img
+                                                    src={res?.image}
+                                                    className="css-37vfbv"
+                                                    alt="Bank"
+                                                />
+                                                <p className="Typography-root ">
+                                                    {res?.withdrawType}
+                                                </p>
+                                            </div>
+                                        </Col>
+                                    </>
                                 );
                             })}
-                        </div>
+                        </Row>
                     </div>
-                </div>
-                <div
-                    className="withdrow_type"
-                    style={{ marginBottom: "12px", width: "100%" }}>
-                    <select onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%" }}>
-                        <option selected>Select Withdraw Type</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Instant">Instant</option>
-                    </select>
-                </div>
-                <div className="with_paymethod">
-                    <Container>
-                        <div className="bank-logo with_bank_logo">
-                            <Row>
-                                {withdrawData?.map((res, id) => {
-                                    return (
-                                        <>
-                                            <Col
-                                                className="withdraw_image"
-                                                onClick={() =>
-                                                    handlePaymentDetails(
-                                                        res?.withdrawType,
-                                                        res?.id
-                                                    )
-                                                }>
-                                                <div className="css-1502y4u">
-                                                    <img
-                                                        src={res?.image}
-                                                        className="css-37vfbv"
-                                                        alt="Bank"
-                                                    />
-                                                    <p className="Typography-root ">
-                                                        {res?.withdrawType}
-                                                    </p>
-                                                </div>
-                                            </Col>
-                                        </>
-                                    );
-                                })}
-                            </Row>
-                        </div>
-                    </Container>
-                </div>
+                </Container>
+
 
 
                 {withType === "BANK" ? (
@@ -388,7 +532,7 @@ const WithDraw1 = () => {
                             } accountWith`}>
                         <div className="mx-input-wrapper account-field">
                             <label className="account-lable">Account Number</label>
-                            <br />
+
                             <input
                                 type="number"
                                 className="account-input"
@@ -398,7 +542,7 @@ const WithDraw1 = () => {
                         </div>
                         <div className="mx-input-wrapper account-field">
                             <label className="account-lable">Account Name</label>
-                            <br />
+
                             <input
                                 type="text"
                                 className="account-input"
@@ -412,7 +556,7 @@ const WithDraw1 = () => {
                         </div>
                         <div className="mx-input-wrapper account-field">
                             <label className="account-lable">Bank Name</label>
-                            <br />
+
                             <input
                                 type="type"
                                 className="account-input"
@@ -426,7 +570,7 @@ const WithDraw1 = () => {
                         </div>
                         <div className="mx-input-wrapper account-field">
                             <label className="account-lable">IFSC</label>
-                            <br />
+
                             <input
                                 type="type"
                                 className="account-input"
@@ -438,7 +582,7 @@ const WithDraw1 = () => {
                         </div>
                         <div className="mx-input-wrapper account-field">
                             <label className="account-lable">Account Type</label>
-                            <br />
+
                             <select
                                 name="reportType"
                                 // style={{ width: "100%" }}
@@ -457,7 +601,7 @@ const WithDraw1 = () => {
                             <label className="account-lable">
                                 {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
                             </label>
-                            <br />
+
                             {withType === "PAYTM" ? (
                                 <input
                                     type="number"
@@ -484,7 +628,7 @@ const WithDraw1 = () => {
                             <label className="account-lable">
                                 {withType === "PAYTM" ? "Name" : "Account Name"}
                             </label>
-                            <br />
+
                             <input
                                 type="text"
                                 className="account-input"
@@ -613,20 +757,7 @@ const WithDraw1 = () => {
                                             </tbody>
                                         );
                                     })}
-                                    <tbody>
-                                        <tr
-                                            role="row"
-                                        //   className={${dataLenth === 0 ? "" : "d-none"}}
-                                        >
-                                            <td
-                                                colSpan="6"
-                                                className="text-left withdraw-data">
-                                                <p className="no-record-found">
-                                                    No records found
-                                                </p>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -640,6 +771,7 @@ const WithDraw1 = () => {
                         </div>
                     </div>
                 </div>
+
             </div>
             <Modal show={show} onHide={handleClose} style={{ marginTop: "53px" }}>
 
@@ -663,7 +795,217 @@ const WithDraw1 = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </>
+
+            <div className="table-responsive withdrow-table">
+
+                <div className="withdraw_coin_btn" style={{
+
+                    backgroundColor: "#386f7d",
+                    height: "25px",
+                    marginTop: "12px"
+                }}>
+
+
+                    Widthdraw History
+
+                </div>
+                <table
+                    role="table"
+                    aria-busy="false"
+                    aria-colcount="6"
+                    className="table b-table table-bordered"
+                    id="_BVID_104">
+
+                    <div> </div>
+
+                    <thead>
+                        <tr role="row" className="account-detail">
+                            <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="1"
+                                className="text-left"
+                            >
+                                Account Number
+                            </th>
+                            <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="2"
+                                className="text-left"
+                            >
+                                Account Name
+                            </th>
+                            <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="3"
+                                className="text-right"
+                            >
+                                Amount
+                            </th>
+                            <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="4"
+                                className="text-left"
+                            >
+                                Bank Name/ Address
+                            </th>
+                            <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="5"
+                                className="text-left"
+                            >
+                                IFSC Code
+                            </th>
+                            <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="6"
+                                className="text-left"
+                            >
+                                Account Type / Currency
+                            </th>
+                            <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="6"
+                                className="text-left withdraw-data"
+                            >
+                                Date
+                            </th>
+                            <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="6"
+                                className="text-left"
+                            >
+                                Remark
+                            </th>
+                            <th
+                                role="columnheader"
+                                scope="col"
+                                aria-colindex="6"
+                                className="text-left"
+                            >
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {PostwithdrawrequestclientData &&
+                            PostwithdrawrequestclientData?.data &&
+                            PostwithdrawrequestclientData?.data.map((item) => (
+                                <tr role="row">
+                                    <td
+                                        aria-colindex="1"
+                                        className="text-left withdraw-data"
+                                    >
+                                        {item?.accountNumber}
+                                    </td>
+                                    <td
+                                        aria-colindex="2"
+                                        className="text-left withdraw-data"
+                                    >
+                                        {item?.accountHolderName}
+                                    </td>
+                                    <td
+                                        aria-colindex="3"
+                                        className="text-right withdraw-data "
+                                    >
+                                        {item?.amount}
+                                    </td>
+                                    <td
+                                        aria-colindex="4"
+                                        className="text-left withdraw-data "
+                                    >
+                                        {item?.bankName}
+                                    </td>
+                                    <td
+                                        aria-colindex="5"
+                                        className="text-left withdraw-data "
+                                    >
+                                        {item?.ifsc}
+                                    </td>
+                                    <td
+                                        aria-colindex="6"
+                                        className="text-lift withdraw-data"
+                                    >
+                                        {item?.accountType}
+                                    </td>
+                                    <td aria-colindex="6" className="text-lift">
+                                        {/*  {moment(item?.time).format("MM DD YYYY - HH MM ")}*/}
+                                        {item?.time}
+
+                                    </td>
+
+                                    <td
+                                        aria-colindex="6"
+                                        className="text-lift withdraw-data"
+                                    >
+                                        {item?.remark}
+                                    </td>
+                                    {item.status === "Pending" ? (
+                                        <td aria-colindex="4" style={{ color: "#ffa726" }}>
+                                            <div className="pendinggggg">
+                                                <div >
+
+                                                    {item?.status}
+                                                </div>
+                                                <div onClick={handlependingg}>
+                                                    {item?.status === "Pending" ? <button onClick={handlepennding} className="handlepennfoifjfi" >
+                                                        <IoCloseCircleOutline size={25} color={"black"} />
+                                                    </button> : ""}
+                                                </div>
+                                            </div>
+                                            <Modal
+                                                show={pendingmodal}
+                                                onHide={() => setpendingmodal(false)}
+                                                size="lg"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                            >
+                                                <Modal.Header closeButton style={{ height: "39px" }}>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                        Cancel Request
+                                                        <button onClick={handleCloseFancyModal} className="closebtnonpnl" style={{ top: "6px" }}>
+                                                            <IoCloseCircleOutline size={25} color={"black"} />
+                                                        </button>
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                    <div className="modalldatata">
+                                                        <div>
+                                                            Are you sure want to cancel this request ?
+                                                        </div>
+                                                        <div className="butonnnn">
+                                                            <button className="bynnnn" onClick={() => setpendingmodal(false)}>Close</button>
+                                                            <button className="bynnnn" onClick={handlependingsucesss}>Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </Modal.Body>
+                                            </Modal>
+                                        </td>
+                                    ) : item.status === "Rejected" ? (
+                                        <td aria-colindex="4" style={{ color: "#f44336" }}>
+                                            {item?.status}
+                                        </td>
+                                    ) : (
+                                        <td
+                                            aria-colindex="4"
+                                            style={{ color: "#66bb6a", fontSize: "10px" }}
+                                        >
+                                            {item?.status}
+                                        </td>
+                                    )}
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     )
 }
 

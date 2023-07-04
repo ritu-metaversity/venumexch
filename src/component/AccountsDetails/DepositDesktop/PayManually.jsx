@@ -12,18 +12,38 @@ import {
   Postpaymnetdetailapp,
   Postselfdepositapp,
 } from "../../../App/Features/auth/authActions";
+import axios from "axios";
 // import { ImageUploadContainer } from "../../../../../../Deposit/styledComponents";
 const PayManually = (props) => {
   const [files, setFiles] = useState(null);
   const [loading, setLoading] = useState(false);
   const [trueee, setTrueee] = useState(false);
   const [active, setActive] = useState(0);
+  const [stackValue, setStackValue] = useState();
 
   const dispatch = useDispatch();
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
     (state) => state.auth
   );
+  const TokenId = localStorage.getItem("TokenId");
 
+  useEffect(() => {
+    axios
+      .post(
+        "http://18.143.24.35/admin-new-apis/request-stack",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TokenId}`,
+          },
+        }
+      )
+      .then((res) => {
+        setStackValue(res?.data?.data);
+        console.log(res?.data?.data, "yguhvjuiyfghv");
+      });
+  }, [])
   const [Bitvalue, setBitValue] = useState(0);
 
   const [pymentMode, setPymentMode] = useState("UPI");
@@ -39,11 +59,11 @@ const PayManually = (props) => {
     setBitValue(Bitvalue + 10);
   };
   const decrement = () => {
-    setBitValue((Bitvalue)=>Bitvalue - 10);
+    setBitValue((Bitvalue) => Bitvalue - 10);
   };
 
   const handleStaticAmount = (vl) => {
-    setBitValue((Bitvalue)=>Bitvalue + vl);
+    setBitValue((Bitvalue) => Bitvalue + vl);
   };
 
   console.log(Bitvalue, "BitvalueBitvalue");
@@ -110,42 +130,21 @@ const PayManually = (props) => {
         </div>
         <div className="col-6 pValue">
           <div className="row price-values">
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="100"
-                onClick={() => handleStaticAmount(1000)}
-              >
-                +1000
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="2000"
-                onClick={() => handleStaticAmount(5000)}
-              >
-                +5000
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="300"
-                onClick={() => handleStaticAmount(10000)}
-              >
-                +10000
-              </button>
-            </div>
-            <div className="col-3 price-data">
-              <button
-                className="btn btn-secondary btn-block mb-2"
-                value="300"
-                onClick={() => handleStaticAmount(50000)}
-              >
-                +50000
-              </button>
-            </div>
+            {stackValue && stackValue.map(({ value, key }) => (
+
+              <div className="col-3 price-data" style={{ marginTop: "18px" }}>
+                <button
+                  className="btn btn-secondary btn-block mb-2"
+                  style={{ backgroundColor: "#183f45" }}
+                  // value="100"
+                  // key={`${amount?.value}-button`}
+                  onClick={() => handleStaticAmount((o) => o + value)}
+                >
+                  {key}
+                </button>
+              </div>
+            ))}
+
           </div>
         </div>
       </div>
@@ -159,7 +158,7 @@ const PayManually = (props) => {
             <Row>
               {PostpaymnetdetailappDataData?.data?.paymentMethods.map(
                 (item, id) => (
-                  <Col onClick={() => handlePaymentName(item.methodName, id)}>
+                  <Col className={item.methodName === "Bank"?"d-none":""} onClick={() => handlePaymentName(item.methodName, id)}>
                     <div
                       className={`css-1502y4u ${active === id ? "active3" : ""
                         }`}
