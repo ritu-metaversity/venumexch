@@ -180,7 +180,7 @@ const LoginForMobile = () => {
     axios
       .post(
         "https://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
-        { appUrl: "localhost" }
+        { appUrl: window.location.hostname }
       )
       .then((res) => {
         if (res?.data?.token) {
