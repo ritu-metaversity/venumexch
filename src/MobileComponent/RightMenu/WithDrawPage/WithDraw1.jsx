@@ -52,7 +52,7 @@ const WithDraw1 = () => {
         const TokenId = localStorage.getItem("TokenId");
         axios
             .post(
-                "http://api.247365.exchange/admin-new-apis/withtype-subadmin/get",
+                "https://api.247365.exchange/admin-new-apis/withtype-subadmin/get",
                 {},
                 {
                     headers: {
@@ -66,7 +66,7 @@ const WithDraw1 = () => {
             });
         axios
             .post(
-                "http://api.247365.exchange/admin-new-apis/request-stack",
+                "https://api.247365.exchange/admin-new-apis/request-stack",
                 {},
                 {
                     headers: {
@@ -81,7 +81,7 @@ const WithDraw1 = () => {
             });
         axios
             .post(
-                "http://api.247365.exchange/admin-new-apis/get/client-bank",
+                "https://api.247365.exchange/admin-new-apis/get/client-bank",
                 {},
                 {
                     headers: {
@@ -117,7 +117,7 @@ const WithDraw1 = () => {
             withdrawType: bankID,
         };
         axios
-            .post("http://api.247365.exchange/admin-new-apis/save/client-bank", data, {
+            .post("https://api.247365.exchange/admin-new-apis/save/client-bank", data, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("TokenId")}`,
@@ -241,7 +241,7 @@ const WithDraw1 = () => {
         };
         const TokenId = localStorage.getItem("TokenId");
         axios
-            .post("http://api.247365.exchange/admin-new-apis/self-withdraw-app", data, {
+            .post("https://api.247365.exchange/admin-new-apis/self-withdraw-app", data, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${TokenId}`,
