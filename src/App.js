@@ -126,9 +126,11 @@ function App() {
   }, []);
 
 
+  useEffect(() => {
+    document.title = window.location.hostname;
+  }, []);
 
 
-  // console.log(mobileRoutes, "fsdfsd")
   return (
 
     <div className="App">
