@@ -61,37 +61,42 @@ const RightMenu = (props) => {
 
   const handleInput = (vl) => {
     props.RightSideBarClose(false);
-    if (vl === "OpenBets") {
-      navigate("./mybets");
-    } else if (vl === "Betting") {
-      navigate("./profitloss");
-    } else if (vl === "Deposit") {
-      navigate("./deposit");
-    } else if (vl === "withDraw") {
-      navigate("./withDraw");
-    } else if (vl === "TransferStatement") {
-      navigate("./transferstatement");
-    } else if (vl === "Message") {
-      navigate("./message");
-    } else if (vl === "TimeSetting") {
-      navigate("./TimeSetting");
-    } else if (vl === "ChangePassword") {
-      navigate("./changepassword");
-    } else if (vl === "SecureAuth") {
-      navigate("./secureauth");
-    } else if (vl === "Rules") {
-      navigate("./rules-regulations");
-    } else if (vl === "Settings") {
-      navigate("./Settings");
-    } else if (vl === "SignOut") {
-      navigate("./home");
-      localStorage.clear();
+    if (localStorage.getItem("PassWordType") === "old") {
+
     } else {
-      dispatch(Postloginlogout);
-      localStorage.clear();
-      navigate("./home");
+
+
+      if (vl === "OpenBets") {
+        navigate("./mybets");
+      } else if (vl === "Betting") {
+        navigate("./profitloss");
+      } else if (vl === "Deposit") {
+        navigate("./deposit");
+      } else if (vl === "withDraw") {
+        navigate("./withDraw");
+      } else if (vl === "TransferStatement") {
+        navigate("./transferstatement");
+      } else if (vl === "Message") {
+        navigate("./message");
+      } else if (vl === "TimeSetting") {
+        navigate("./TimeSetting");
+      } else if (vl === "ChangePassword") {
+        navigate("./changepassword");
+      } else if (vl === "SecureAuth") {
+        navigate("./secureauth");
+      } else if (vl === "Rules") {
+        navigate("./rules-regulations");
+      } else if (vl === "Settings") {
+        navigate("./Settings");
+      }
     }
   };
+
+  const handleSignOut = () => {
+    navigate("./home");
+    dispatch(Postloginlogout);
+    localStorage.clear();
+  }
 
   const userId = localStorage.getItem("userId");
 
@@ -324,7 +329,7 @@ const RightMenu = (props) => {
             {/* <Link href="javascript:void(0)"> */}
             <div
               className="menu-lvl-1 sign-out"
-              onClick={() => handleInput("SignOut")}
+              onClick={() => handleSignOut("SignOut")}
             >
               <div className="item signItem">
                 <i className="fas fa-running m-r-20"></i>{" "}

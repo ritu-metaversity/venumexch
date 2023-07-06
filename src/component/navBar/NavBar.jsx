@@ -46,13 +46,16 @@ const NavBar = () => {
 
   const handleAccount = (e) => {
     // console.log("accounts")
-    e.preventDefault();
-    if (account === false) {
-      // console.log("tre")
-      setAccount(true);
+    if (localStorage.getItem("PassWordType") === "old") {
     } else {
-      setAccount(false);
-      // console.log("false")
+      e.preventDefault();
+      if (account === false) {
+        // console.log("tre")
+        setAccount(true);
+      } else {
+        setAccount(false);
+        // console.log("false")
+      }
     }
     //  console.log(window.width)
   };
@@ -66,7 +69,11 @@ const NavBar = () => {
 
 
   const handleModal = () => {
-    setShow(true);
+    if (localStorage.getItem("PassWordType") === "old") {
+    } else {
+      setShow(true);
+
+    }
   };
 
   const handlogout = () => {
@@ -119,6 +126,20 @@ const NavBar = () => {
       });
   }, [appUrll]);
   console.log(selfAllowedd)
+  // const handleroute = () => {
+  //   if (localStorage.getItem("PassWordType") === "old") {
+
+  //   } else {
+  //   navigate("./home")
+
+  //   // }
+  // }
+  const handleHome = () => {
+    if ((localStorage.getItem("PassWordType") === "old")) {
+    } else {
+      navigate("/home")
+    }
+  }
   return (
     <div className="nav newnav">
       {
@@ -131,15 +152,20 @@ const NavBar = () => {
         </marquee>
         <div className="boxed-layout-wrapper">
           <Link
-            to="/home"
+
+            onClick={handleHome}
             className="router-link-exact-active router-link-active"
           >
             <div className="logo-area float-left">
               <img
+                // onClick={handleroute}
                 alt=""
                 src={selfAllowedd?.logo}
                 className="logo"
-                style={{ height: " 90px" }}
+                style={{
+                  height: " 90px",
+                  width: "116px"
+                }}
               />
             </div>
           </Link>
@@ -164,7 +190,7 @@ const NavBar = () => {
               onClick={hanldeTime}
             >
               <Link
-                to="/home"
+
                 data-toggle="dropdown"
                 className="dropdown-toggle"
               >
@@ -173,21 +199,21 @@ const NavBar = () => {
               </Link>
               <div className={`dropdown-menu ${showTimes}`}>
                 <Link
-                  to="/home"
+
                   className="dropdown-item"
                   onClick={() => hanldletimeZone("+00:00")}
                 >
                   System time - (GMT +00:00 )
                 </Link>{" "}
                 <Link
-                  to="/home"
+
                   className="dropdown-item"
                   onClick={() => hanldletimeZone("+05:30")}
                 >
                   Your computer time - (GMT +05:30)
                 </Link>{" "}
                 <Link
-                  to="/home"
+
                   className="dropdown-item"
                   onClick={() => hanldletimeZone("+05:30")}
                 >
@@ -253,7 +279,7 @@ const NavBar = () => {
 
               </li>
               <li>
-                <Link to="home">
+                <Link >
                   <i className="fas fa-ruler-vertical m-r-5"></i>{" "}
                   <span onClick={handleModal}>Rules</span>
                 </Link>
@@ -287,7 +313,7 @@ const NavBar = () => {
                 <li className="dropdown">
 
                   <Link
-                    to="/home"
+
                     data-toggle="dropdown"
                     className="dropdown-toggle"
                     onClick={handleAccount}
@@ -301,6 +327,7 @@ const NavBar = () => {
                     <Link
                       to="/mybets"
                       className="dropdown-item"
+
                       onClick={() => setAccount(false)}
                     >
                       My Bets
@@ -315,7 +342,7 @@ const NavBar = () => {
                     <Link
                       to="./accountstatement"
                       className="dropdown-item"
-                      onClick={() => setAccount(false)}
+                      onClick={() => { setAccount(false) }}
                     >
                       Account Statement
                     </Link>{" "}

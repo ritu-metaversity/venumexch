@@ -20,17 +20,19 @@ const PayManually = (props) => {
   const [trueee, setTrueee] = useState(false);
   const [active, setActive] = useState(0);
   const [stackValue, setStackValue] = useState();
-
+  // const [active, setActive] = useState(0);
+  const [amount, setAmount] = useState(0);
   const dispatch = useDispatch();
   const { PostpaymnetdetailappDataData, PostselfdepositappData } = useSelector(
     (state) => state.auth
   );
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
   const TokenId = localStorage.getItem("TokenId");
 
   useEffect(() => {
     axios
       .post(
-        "http://18.143.24.35/admin-new-apis/request-stack",
+        `${REACT_APP_API_URL}/request-stack`,
         {},
         {
           headers: {
@@ -55,18 +57,19 @@ const PayManually = (props) => {
     setActive(id);
   };
 
+
   const increment = () => {
-    setBitValue(Bitvalue + 10);
+    setAmount((prev) => (prev + 10 > 100 ? prev + 10 : 100));
   };
+
   const decrement = () => {
-    setBitValue((Bitvalue) => Bitvalue - 10);
+    setAmount((prev) => (prev - 10 > 100 ? prev - 10 : 100));
   };
 
   const handleStaticAmount = (vl) => {
     setBitValue((Bitvalue) => Bitvalue + vl);
   };
 
-  console.log(Bitvalue, "BitvalueBitvalue");
   useEffect(() => {
     if (token) {
       dispatch(Postpaymnetdetailapp());
@@ -85,7 +88,7 @@ const PayManually = (props) => {
 
   useEffect(() => {
     if (PostselfdepositappData?.status) {
-      setBitValue(0);
+      setAmount(0);
       setFiles(null);
     }
   }, [PostselfdepositappData?.status]);
@@ -113,8 +116,8 @@ const PayManually = (props) => {
               type="number"
               placeholder="Enter Amount"
               className="priceinput"
-              value={Bitvalue}
-              onChange={(e) => setBitValue(e.target.value)}
+              value={amount || ""}
+              onChange={(e) => (Number(e.target.value) || e.target.value === "") && setAmount(Number(e.target.value))}
             />
             <button
               className="stakeactionminus priceminus btn"
@@ -138,7 +141,7 @@ const PayManually = (props) => {
                   style={{ backgroundColor: "#183f45" }}
                   // value="100"
                   // key={`${amount?.value}-button`}
-                  onClick={() => handleStaticAmount((o) => o + value)}
+                  onClick={() => setAmount((o) => o + value)}
                 >
                   {key}
                 </button>
@@ -151,14 +154,14 @@ const PayManually = (props) => {
       <div className="paymethods">
         <Container>
           <div className="amount">
-            <h1>Pay {Bitvalue}/-</h1>
+            <h1>Pay {amount}/-</h1>
             <p>Pay Manually</p>
           </div>
           <div className="bank-logo dest_logo">
             <Row>
               {PostpaymnetdetailappDataData?.data?.paymentMethods.map(
                 (item, id) => (
-                  <Col className={item.methodName === "Bank"?"d-none":""} onClick={() => handlePaymentName(item.methodName, id)}>
+                  <Col className={item.methodName === "Bank" ? "d-none" : ""} onClick={() => handlePaymentName(item.methodName, id)}>
                     <div
                       className={`css-1502y4u ${active === id ? "active3" : ""
                         }`}
@@ -426,7 +429,7 @@ const PayManually = (props) => {
                     style={{ display: "none" }}
                   />
                 </label>
-                {files !== null && Bitvalue !== 0 ? (
+                {files !== null && amount !== 0 ? (
                   <button
                     className="submit-deposit bbbbbbbb"
                     onClick={handleSubmit}

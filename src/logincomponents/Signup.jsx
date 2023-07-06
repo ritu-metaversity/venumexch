@@ -174,7 +174,7 @@ const Signup = () => {
                         alt=""
                         src={selfAllowedd?.logo}
                         className="logo"
-                        style={{ height: "100px" }}
+                        style={{ height: "100px",width:"200px" }}
 
                       />
                     </div>

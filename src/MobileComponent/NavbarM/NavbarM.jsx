@@ -119,21 +119,36 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   };
 
   const handleInput = () => {
-    setLeftBar(false);
-    navigate("./home");
+    if (localStorage.getItem("PassWordType") === "old") {
+
+    } else {
+
+      setLeftBar(false);
+      navigate("./home");
+    }
   };
 
   const handleRules = () => {
-    navigate("./rules-casino");
+    if (localStorage.getItem("PassWordType") === "old") {
+
+    } else {
+
+      navigate("./rules-casino")
+    }
   };
   const handleback = () => {
     // "history.back()";
     // window.history.back();
-    if (pathname.includes("casino/")) {
-      navigate("/home")
+    if (localStorage.getItem("PassWordType") === "old") {
+
     } else {
 
-      navigate(-1)
+      if (pathname.includes("casino/")) {
+        navigate("/home")
+      } else {
+
+        navigate(-1)
+      }
     }
     // console.log("history.back()")
   };
@@ -196,13 +211,17 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
             {/* ARROW */}
 
             {/* ARROW */}
+
             <div className="logo" style={{ height: "43px", marginTop: "-3px" }} onClick={handleInput}>
               {/* <Link href="/home"   className="router-link-exact-active router-link-active"> */}
               <img
                 alt=""
                 src={selfAllowedd?.logo}
                 className="img-fluid"
-                style={{ height: "44px" }}
+                style={{
+                  height: "44px",
+                  width: "110px"
+                }}
               />
               {/* </Link> */}
             </div>

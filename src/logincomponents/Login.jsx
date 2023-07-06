@@ -43,7 +43,9 @@ const Login = () => {
     postisselfbyappurlData
   } = useSelector((state) => state.auth);
 
+  useEffect(() => {
 
+  }, []);
   useEffect(() => {
     if (apiHit === true) {
       if (postLoginData?.data?.token) {
@@ -66,14 +68,7 @@ const Login = () => {
     setLoginData(postLoginData);
   }, [postLoginData]);
 
-  // useEffect(() => {
-  //   console.log(postLoginDemoUserData?.token, "asdfghjkl")
-  //   if (postLoginDemoUserData?.token) {
-  //     navigate("/m/home");
-  //     localStorage.setItem("TokenId", postLoginData?.token);
-  //     localStorage.setItem("username", postLoginData?.username);
-  //   }
-  // }, [postLoginDemoUserData]);
+
 
   const handleInput = (e) => {
     let inputName = e.target.name;
@@ -210,7 +205,7 @@ const Login = () => {
                         alt=""
                         src={selfAllowedd?.logo}
                         className="logo w_logo"
-                      // style={{ width: "300px", height: "42px" }}
+                        style={{ width: "200px" }}
                       />
                     </div>
                   </div>

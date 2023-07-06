@@ -550,6 +550,10 @@ const GameDetails = () => {
                   <div className="tv-icon" onClick={handleTvShow}>
                     <p className="fjsdlkfjld">
                       <i className="fa fa-tv"></i>
+                      <img
+                        alt=""
+                        src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
+                      />
                     </p>
                   </div>
                   <div className="scoreCard-icon">
@@ -587,10 +591,7 @@ const GameDetails = () => {
                 </div>
                 <div style={{ marginTop: "10px", width: "86%" }}>
 
-                  <img
-                    alt=""
-                    src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
-                  />
+
                   <h4 className="m-b-0">
                     {gameDetailsData?.data?.Odds &&
                       gameDetailsData?.data?.Odds[0]?.runners[0]?.name}{" "}
@@ -1001,7 +1002,7 @@ const GameDetails = () => {
                                           data-title="OPEN"
                                           className="table-body"
                                         >
-                                        
+
                                           <div
                                             data-title={`${item?.gstatus === "SUSPENDED"
                                               ? "SUSPENDED"
@@ -1018,7 +1019,7 @@ const GameDetails = () => {
                                                 : ""
                                               }`}
                                           >
-                                           
+
                                             <div className="float-left box-w6 country-name">
                                               <span
                                                 className="team-name"
@@ -1307,7 +1308,7 @@ const GameDetails = () => {
                                                       data-v-e03c6f20=""
                                                       className="fancy-tripple "
                                                     >
-                                                      
+
                                                       <div
                                                         data-v-e03c6f20=""
                                                         data-title={item?.gstatus}
@@ -1351,7 +1352,7 @@ const GameDetails = () => {
                                                                   : "40px",
                                                             }}
                                                           >
-                                                           
+
                                                             <span
                                                               data-v-e03c6f20=""
                                                               className="team-name"
@@ -1480,12 +1481,12 @@ const GameDetails = () => {
                                                           data-v-e03c6f20=""
                                                           className={`box-w1 lay float-left text-center 
                                                           ${item?.l1 !==
-                                                            previousStateFancyBlinker &&
-                                                            previousStateFancyBlinker[
-                                                              key
-                                                            ]?.[index]?.l1
-                                                            ? "blink1"
-                                                            : " "
+                                                              previousStateFancyBlinker &&
+                                                              previousStateFancyBlinker[
+                                                                key
+                                                              ]?.[index]?.l1
+                                                              ? "blink1"
+                                                              : " "
                                                             }`}
                                                         >
                                                           <button
@@ -1520,12 +1521,12 @@ const GameDetails = () => {
                                                           data-v-e03c6f20=""
                                                           className={`box-w1 back float-left text-center 
                                                           ${item?.b1 !==
-                                                            previousStateFancyBlinker &&
-                                                            previousStateFancyBlinker[
-                                                              key
-                                                            ]?.[index]?.bi
-                                                            ? "blink1"
-                                                            : " "
+                                                              previousStateFancyBlinker &&
+                                                              previousStateFancyBlinker[
+                                                                key
+                                                              ]?.[index]?.bi
+                                                              ? "blink1"
+                                                              : " "
                                                             }`}
                                                         >
                                                           <button

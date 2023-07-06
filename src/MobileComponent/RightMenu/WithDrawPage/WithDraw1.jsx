@@ -6,10 +6,10 @@ import { toast } from 'react-toastify';
 import { postpendingapppii, Postwithdrawrequestclient } from '../../../App/Features/auth/authActions';
 import './WithDraw1.css'
 import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
-
 const WithDraw1 = () => {
     const dispatch = useDispatch();
 
+    let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
     const [withdrawData, setWithdrawData] = useState();
     // const [active, setActive] = useState(0);
     const { PostwithdrawrequestclientData } =
@@ -59,7 +59,7 @@ const WithDraw1 = () => {
         const TokenId = localStorage.getItem("TokenId");
         axios
             .post(
-                "http://api.247365.exchange/admin-new-apis/withtype-subadmin/get",
+                `${REACT_APP_API_URL}/withtype-subadmin/get`,
                 {},
                 {
                     headers: {
@@ -73,7 +73,7 @@ const WithDraw1 = () => {
             });
         axios
             .post(
-                "http://api.247365.exchange/admin-new-apis/request-stack",
+                `${REACT_APP_API_URL}/request-stack`,
                 {},
                 {
                     headers: {
@@ -88,7 +88,7 @@ const WithDraw1 = () => {
             });
         axios
             .post(
-                "http://api.247365.exchange/admin-new-apis/get/client-bank",
+                `${REACT_APP_API_URL}/get/client-bank`,
                 {},
                 {
                     headers: {
@@ -124,7 +124,7 @@ const WithDraw1 = () => {
             withdrawType: bankID,
         };
         axios
-            .post("http://api.247365.exchange/admin-new-apis/save/client-bank", data, {
+            .post(`${REACT_APP_API_URL}/save/client-bank`, data, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("TokenId")}`,
@@ -369,7 +369,7 @@ const WithDraw1 = () => {
             };
             const TokenId = localStorage.getItem("TokenId");
             axios
-                .post("http://api.247365.exchange/admin-new-apis/self-withdraw-app", data, {
+                .post(`${REACT_APP_API_URL}/self-withdraw-app`, data, {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${TokenId}`,
@@ -380,8 +380,9 @@ const WithDraw1 = () => {
                         setShow(true);
                         console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
                     } else {
-                        setMessage(res?.data?.message
-                        );
+                        // setMessage(res?.data?.message
+                        // );
+                        console.log('hellooioiioioi')
                         setErrorAlert(true);
                         setColorName("success");
                         setIsLoading(false);
@@ -761,8 +762,13 @@ const WithDraw1 = () => {
                                 </table>
                             </div>
                         </div>
-                        <div className="withdraw_coin_btn">
 
+                        <div className="withdraw_coin_btn" >
+                            {!isLoading && (
+                                <p className="lodder depositLoading withloading withdraw_deposit">
+                                    <i className="fa fa-spinner fa-spin"></i>
+                                </p>
+                            )}
                             <button onClick={handleClick}
                             //   disabled={!openForm}
                             >
@@ -795,20 +801,25 @@ const WithDraw1 = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <div className="withdraw_coin_btn" style={{
 
+                backgroundColor: "#386f7d",
+                height: "25px",
+                marginTop: "12px",
+                width:"97%",
+                marginLeft:"20px",
+                padding: "3px 12px",
+                color: "#fff"
+
+            }}>
+
+
+                Widthdraw History
+
+            </div>
             <div className="table-responsive withdrow-table">
 
-                <div className="withdraw_coin_btn" style={{
-
-                    backgroundColor: "#386f7d",
-                    height: "25px",
-                    marginTop: "12px"
-                }}>
-
-
-                    Widthdraw History
-
-                </div>
+               
                 <table
                     role="table"
                     aria-busy="false"

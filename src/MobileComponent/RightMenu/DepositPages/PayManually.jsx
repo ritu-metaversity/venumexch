@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 // import { ImageUploadContainer } from "../../../../../../Deposit/styledComponents";
 const PayManually = (props) => {
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const buttonAmountArr = [100, 500, 1000, 5000];
   const [stackValue, setStackValue] = useState();
@@ -34,7 +35,7 @@ const PayManually = (props) => {
   useEffect(() => {
     axios
       .post(
-        "http://18.143.24.35/admin-new-apis/request-stack",
+        `${REACT_APP_API_URL}/request-stack`,
         {},
         {
           headers: {
@@ -175,7 +176,7 @@ const PayManually = (props) => {
             <Row>
               {PostpaymnetdetailappDataData?.data?.paymentMethods.map(
                 (item, id) => (
-                  <Col className={item.methodName === "Bank"?"d-none":""} onClick={() => handlePaymentName(item.methodName, id)}>
+                  <Col className={item.methodName === "Bank" ? "d-none" : ""} onClick={() => handlePaymentName(item.methodName, id)}>
                     <div
                       className={`css-1502y4u ${active === id ? "active3" : ""
                         }`}

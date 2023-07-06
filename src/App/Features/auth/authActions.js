@@ -82,28 +82,39 @@ export const getActiveSportList = createAsyncThunk('auth/getActiveSportList', as
 
 export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTime', async (OldPassWordData, { rejectWithValue }) => {
     try {
-        // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postOldPassRespose = await axios.post(`${REACT_APP_API_URL}/user/first-login-cp`, OldPassWordData);
-        // console.log(postOldPassRespose, "postOldPassRespose")
         if (postOldPassRespose?.data?.status === true) {
             window.location.replace("./login");
-
             localStorage.clear();
         }
+        console.log(postOldPassRespose.data.message, "kjhgfdghjkl")
         if (
             postOldPassRespose.data.message
         ) {
-            toast.success(postOldPassRespose.data.message || "SUSUSUSUS!!", {
-                style: {
-                    background: "rgb(74,117,67)", minHeight: 40,
-                    padding: 0,
-                    color: "white",
-                }
-            });
+            if (postOldPassRespose.data.status === false) {
+                toast.error(postOldPassRespose.data.message || "Something went Wrong!!", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                })
+            } else {
+
+                toast.success(postOldPassRespose.data.message || "", {
+                    style: {
+                        background: "rgb(74,117,67)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+            }
         }
         return postOldPassRespose
     } catch (err) {
+        console.log(err.response.data.message, "kjhgfdghjkl")
         if (
+
             err.response.data.message
         ) toast.error(err.response.data.message || "Something went Wrong!!", {
             style: {
@@ -133,7 +144,7 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
         if (
             postPasswordChangeRespose.data.message
         ) {
-            toast.success(postPasswordChangeRespose.data.message || "SUSUSUSUS!!", {
+            toast.success(postPasswordChangeRespose.data.message || "", {
                 style: {
                     background: "rgb(74,117,67)", minHeight: 40,
                     padding: 0,
@@ -215,7 +226,7 @@ export const PostEditStack = createAsyncThunk('auth/PostEditStack', async (data,
         if (
             PostEditStackData.data.message
         ) {
-            toast.success(PostEditStackData.data.message || "SUSUSUSUS!!", {
+            toast.success(PostEditStackData.data.message || "", {
                 style: {
                     background: "rgb(74,117,67)", minHeight: 40,
                     padding: 0,
@@ -289,7 +300,7 @@ export const PostPlaceBet = createAsyncThunk('auth/PostPlaceBet', async (data, {
         if (
             PlaceBet.data.message
         ) {
-            toast.success(PlaceBet.data.message || "SUSUSUSUS!!", {
+            toast.success(PlaceBet.data.message || "", {
                 style: {
                     background: "rgb(74,117,67)", minHeight: 40,
                     padding: 0,
@@ -447,7 +458,7 @@ export const Postselfdepositapp = createAsyncThunk('auth/Postselfdepositapp', as
         if (
             PostselfdepositappDataaa.data.message
         ) {
-            toast.success(PostselfdepositappDataaa.data.message || "SUSUSUSUS!!", {
+            toast.success(PostselfdepositappDataaa.data.message || "", {
                 style: {
                     background: "rgb(74,117,67)", minHeight: 40,
                     padding: 0,
@@ -481,7 +492,7 @@ export const Postselfwithdrawapp = createAsyncThunk('auth/Postselfwithdrawapp', 
         if (
             PostselfwithdrawappDataaa.data.message
         ) {
-            toast.success(PostselfwithdrawappDataaa.data.message || "SUSUSUSUS!!", {
+            toast.success(PostselfwithdrawappDataaa.data.message || "", {
                 style: {
                     background: "rgb(74,117,67)", minHeight: 40,
                     padding: 0,
@@ -553,7 +564,7 @@ export const Postuserselfregister = createAsyncThunk('auth/Postuserselfregister'
         if (
             PostuserselfregisterDataaa.data.message
         ) {
-            toast.success(PostuserselfregisterDataaa.data.message || "SUSUSUSUS!!", {
+            toast.success(PostuserselfregisterDataaa.data.message || "", {
                 style: {
                     background: "rgb(74,117,67)", minHeight: 40,
                     padding: 0,
@@ -659,7 +670,7 @@ export const postpendingapppii = createAsyncThunk('auth/postpendingapppii', asyn
         const Postpendingdtaatata = await axios.post(`${REACT_APP_API_URL}/enduser/cancel-withdraw-request-eu`, data)
         console.log(Postpendingdtaatata, "PostpendingdtaatataPostpendingdtaatata")
         // if (Postpendingdtaatata.data.message) {
-        //     toast.success(Postpendingdtaatata.data.message || "SUSUSUSUS!!", {
+        //     toast.success(Postpendingdtaatata.data.message || "", {
         //         style: {
         //             background: "rgb(74,117,67)", minHeight: 40,
         //             padding: 0,
