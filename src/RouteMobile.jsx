@@ -49,15 +49,16 @@ const RouteMobile = () => {
     <Suspense> */}
 
       <Routes>
+
         <Route path="m" element={<LayoutForMobile />}>
+
+
+
+
           <Route path="home" element={<Midpage />} />
           <Route path="mybets" element={<Mybets />} />
           <Route path="profitloss" element={<BettingProfitLoss />} />
-          <Route
-            path="/m/responsibleGambling"
-            element={<ResponsibleGambling />}
-          />
-          <Route path="changepassword" element={<ChangePassword />} />
+          <Route path="/m/responsibleGambling" element={<ResponsibleGambling />} />
           <Route path="secureauth" element={<Secureauth />} />
           <Route path="transferstatement" element={<Transferstatement />} />
           <Route path="message" element={<Messages />} />
@@ -69,13 +70,14 @@ const RouteMobile = () => {
           <Route path="deposit" element={<Deposit />} />
           <Route path="withDraw" element={<WithDraw1 />} />
           <Route path="Terms-and-Conditions" element={<TermsandConditions />} />
-
           <Route path="/m/game/:id" element={<Gamepage />} />
           <Route path="/m/gamedetail/:id" element={<GameDetails />} />
           <Route path="casino-list" element={<Casinolist />} />
           <Route path="/m/casino/:id" element={<Casino />} />
           {/* <Route path="/m/login" element={<Login />} /> */}
           <Route path="AboutUs" element={<AboutUs />} />
+          <Route path="changepassword" element={<ChangePassword />} />
+
 
         </Route>
 
@@ -94,13 +96,8 @@ const RouteMobile = () => {
             </>
           }
         />
-
         <Route path="*" element={<Navigate to="m/home" />} />
-
-        {/* <Route path="*" element={<Navigate to="/m/home" />} /> */}
       </Routes>
-      {/* </Suspense>
-            </BrowserRouter> */}
     </div>
   );
 };

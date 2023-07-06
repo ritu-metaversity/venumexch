@@ -209,7 +209,7 @@ const LoginForMobile = () => {
                         alt=""
                         src={selfAllowedd?.logo}
                         className="logo"
-                        style={{ height: "100px" }}
+                        style={{ height: "100px", width: "200px" }}
                       />
                     </div>
                   </div>
@@ -230,7 +230,7 @@ const LoginForMobile = () => {
                             placeholder="Username"
                             className="form-control"
                             onChange={handleInput}
-                            value={userName}
+                            value={userName.trim()}
                           />
                           {errorId === true ? (
                             <span className="text-danger">
@@ -247,7 +247,7 @@ const LoginForMobile = () => {
                             placeholder="Password"
                             className="form-control"
                             onChange={handleInput}
-                            value={password}
+                            value={password.trim()}
                           />
 
                           {errorPassword ? (

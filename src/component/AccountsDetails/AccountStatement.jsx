@@ -128,7 +128,7 @@ const AccountStatement = () => {
               <span className="text-danger error-report "></span>
             </div>
             <div className=" v-t d-inline-block" style={{ marginLeft: "-18px" }}>
-              <label className="mb-0">To:</label>
+              <label className="mb-0"></label>
               <div
                 className="mx-datepicker vuedatepicker"
                 name="ToDate"
@@ -138,7 +138,7 @@ const AccountStatement = () => {
                     className="selectionndsfsdfnn"
                     // name="cars"
                     // id="cars"
-
+                    style={{ marginTop: "20px" }}
                     onChange={handleSelectGame}
                   >
                     <option value={1}> All</option>

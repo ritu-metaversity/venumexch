@@ -76,16 +76,7 @@ const ChangePassword = () => {
   };
 
   const handleSavePassWordFirstTime = () => {
-    if (currentPassword?.length <= 7) {
-      // console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
-      setemptyCurrentLength(true);
-    }
-    if (currentPassword?.length >= 10) {
-      // console.log("passWordSamedsfnkfnksdnfkjsdnfksndfksndfknsd,fsdfmsdfkdf,sdnfs")
-      setemptyCurrentLength(true);
-    } else {
-      setemptyCurrentLength(false);
-    }
+
     setInfoError(true);
     let passwordData = {
       newPassword: newPassword,
@@ -109,7 +100,13 @@ const ChangePassword = () => {
       !ValidationFile.isEmpty(newPassword) &&
       !ValidationFile.isEmpty(confirmPassword)
     ) {
-      dispatch(PostPwChangeFirstTime(passwordData));
+      if (confirmPassword === newPassword) {
+
+        dispatch(PostPwChangeFirstTime(passwordData));
+      } else {
+        setSamePassword(true)
+      }
+
       // localStorage.clear();
       // // navigate("./login");
       // window.location.replace("/");

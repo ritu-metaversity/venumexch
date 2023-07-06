@@ -56,6 +56,14 @@ function App() {
       navigate("./home");
     }
   }, [token]);
+
+
+  useEffect(() => {
+    if (token !== null) {
+      navigate("./home");
+    }
+  }, [token])
+
   useEffect(() => {
     if (token) {
 

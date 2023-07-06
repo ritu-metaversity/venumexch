@@ -134,6 +134,7 @@ css-pw8cd7 .selected {
     margin-left: -10px;
     margin-top: -10px;
     border-radius: 8px 8px 0px 0px;
+    margin-right: -9px;
 }
 
 label.images-section {
@@ -416,9 +417,9 @@ label.images-section {
         left: 19%;
     }
 
-    .upi-detail.head-deposit.row {
+    /* .upi-detail.head-deposit.row {
         width: 105%;
-    }
+    } */
 
 }
 
@@ -455,6 +456,7 @@ button.btn.btn-secondary.btn-block.mb-2 {
 button.stakeactionminus.btn {
     border-radius: unset !important;
 }
-.d-none{
+
+.d-none {
     display: none;
 }

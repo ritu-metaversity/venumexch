@@ -113,7 +113,7 @@ button:disabled {
         font-size: 31px;
         margin-left: 30%;
         margin-top: 30px;
-      
+
     }
 
 }
@@ -166,16 +166,37 @@ button:disabled {
         width: 45%;
         height: 34px;
         font-size: 15px;
-        margin-left: 60px !important;
-        margin: 7px;
+        /* margin-left: 60px !important; */
+        /* margin: 7px; */
         background: #2c4f58;
         color: #fff;
         text-align: center;
-        padding: 6px 22px;
-        margin: 8px;
-        margin-left: 1px;
+        /* padding: 6px 22px; */
+        /* margin: 8px; */
+        /* margin-left: 1px; */
     }
 
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+
+    .AccountBtnsubmit {
+        margin-left: 25px;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width: 2200px) {
+
+    .AccountBtnsubmit {
+        margin-left: 85px;
+    }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1500px) {
+
+    .AccountBtnsubmit {
+        margin-left: 35px;
+    }
 }
 
 
