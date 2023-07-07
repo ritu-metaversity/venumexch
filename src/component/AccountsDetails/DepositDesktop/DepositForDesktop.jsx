@@ -43,7 +43,7 @@ const DepositForDesktop = () => {
             dispatch(Postdepsositrequestclient());
             dispatch(Postpaymnetdetailapp());
         }
-    }, [token]);
+    }, []);
     // console.log(PostdepsositrequestclientData,"line 18")
     const handleModal = (e, url) => {
         e.preventDefault();
@@ -78,7 +78,7 @@ const DepositForDesktop = () => {
                         ></i>
                     </div>
                     :
-                    <div className="wrapper main-conatiner" style={{ width: "1200px" }}>
+                    <div className="" style={{ width: "900px" }}>
                         <PayManually UpdateList={UpdateList} />
 
                         <div className="row row5 mt-2">
@@ -116,7 +116,7 @@ const DepositForDesktop = () => {
                                                     role="columnheader"
                                                     scope="col"
                                                     aria-colindex="3"
-                                                    className="text-right"
+                                                    className="text-center"
                                                 >
                                                     Date
                                                 </th>
@@ -124,7 +124,7 @@ const DepositForDesktop = () => {
                                                     role="columnheader"
                                                     scope="col"
                                                     aria-colindex="4"
-                                                    className="text-right"
+                                                    className="text-center"
                                                 >
                                                     Status
                                                 </th>
@@ -145,7 +145,7 @@ const DepositForDesktop = () => {
                                                         >
                                                             <img
                                                                 alt=""
-                                                                className="fkjsdfsdkfjsd"
+                                                                className="fkjsdfsdkfjsd text-center"
                                                                 src={item?.image}
                                                             />
                                                         </td>
@@ -160,20 +160,23 @@ const DepositForDesktop = () => {
                                                                 <img src={imgUrl} alt="" className="imgggggggg" />
                                                             </Modal.Body>
                                                         </Modal>
-                                                        <td aria-colindex="3" className="">
+                                                        <td aria-colindex="3" className="text-center">
                                                             {item?.time}
                                                         </td>
                                                         {item.status === "Pending" ? (
-                                                            <td aria-colindex="4" style={{ color: "#ffa726" }}>
+                                                            <td aria-colindex="4" style={{ color: "#ffa726" }}
+                                                                className="text-center">
                                                                 {item?.status}
                                                             </td>
                                                         ) : item.status === "Rejected" ? (
-                                                            <td aria-colindex="4" style={{ color: "#f44336" }}>
+                                                            <td aria-colindex="4" style={{ color: "#f44336" }}
+                                                                className="text-center">
                                                                 {item?.status}
                                                             </td>
                                                         ) : (
                                                             <td
                                                                 aria-colindex="4"
+                                                                className="text-center"
                                                                 style={{ color: "#66bb6a", fontSize: "10px" }}
                                                             >
                                                                 {item?.status}

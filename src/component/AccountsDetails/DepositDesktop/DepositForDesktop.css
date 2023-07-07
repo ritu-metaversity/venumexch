@@ -118,6 +118,10 @@ button.stakeactionminus.btn {
     width: 44% !important;
 }
 
-.dest_upi{
+.dest_upi {
     width: 104% !important;
+}
+
+.wrapper {
+    overflow-x: unset !important;
 }

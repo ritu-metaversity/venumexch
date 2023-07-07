@@ -88,7 +88,7 @@ const PayManually = (props) => {
     if (token) {
       dispatch(Postpaymnetdetailapp());
     }
-  }, [token]);
+  }, []);
 
   const handleSubmit = () => {
     const data = new FormData();
@@ -146,10 +146,10 @@ const PayManually = (props) => {
             </button>
           </div>
         </div>
-        <div className="col-6 pValue">
+        <div className="col-6 pValue" >
           <div className="row price-values">
             {stackValue && stackValue.map(({ value, key }) => (
-              <div className="col-3 price-data">
+              <div className="col-3 price-data" style={{ marginTop: "17px" }}>
                 <button
                   className="btn btn-secondary btn-block mb-2"
                   style={{ backgroundColor: "#183f45" }}

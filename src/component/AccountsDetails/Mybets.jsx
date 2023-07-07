@@ -289,7 +289,7 @@ const Mybets = () => {
                             </td>
 
                           </tr>))) : (<tr>
-                            <td colspan="7" className="text-center">
+                            <td colspan="8" className="text-center">
                               There are no record to display
                             </td>
                           </tr>)

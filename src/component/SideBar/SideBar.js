@@ -38,7 +38,7 @@ const SideBar = () => {
     dispatch(getActiveSportList())
 
 
-  }, [dispatch])
+  }, [])
 
   const handleRoute = (id, id2) => {
     // console.log(id, id2, "hgjkljkhbn")
@@ -69,7 +69,7 @@ const SideBar = () => {
 
       setValueForGame(false)
     }
-  }, [window.location.href])
+  }, [])
 
   useEffect(() => {
     if (pathname.includes("/home")) {
@@ -77,12 +77,12 @@ const SideBar = () => {
     }
   }, [pathname]);
 
-  const handeInplay = () => {
-    if ((localStorage.getItem("PassWordType") === "old")) {
-    } else {
-      navigate("/home")
-    }
-  }
+  // const handeInplay = () => {
+  //   if ((localStorage.getItem("PassWordType") === "old")) {
+  //   } else {
+  //     navigate("/home")
+  //   }
+  // }
   return (
     <>
       <div data-v-4732acba="" className="left-pane fdsfsdffs">
@@ -96,7 +96,7 @@ const SideBar = () => {
             <nav data-v-4732acba="" className="tree-menu">
               <div data-v-4732acba="" className="left-menu-inner">
                 <ul data-v-4732acba="" className="menu-column menu-lvl-0">
-                  <Link data-v-91c481c8="" onClick={handeInplay} class="favourites-link download-apk">
+                  <Link data-v-91c481c8="" to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/home"} class="favourites-link download-apk">
                     <img
                       src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/inplay.png"
                       alt=""
@@ -117,8 +117,8 @@ const SideBar = () => {
                           <span data-v-4732acba="" className="link-name">{item?.sportName}dasda</span></Link>
                       </li>))) : ""}
 
-                  <Link data-v-91c481c8=""
-                    onClick={handeCasino}
+                  <Link
+                    to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/casino"}
                     class="favourites-link download-apk">
                     <img data-v-91c481c8="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_live_casino.png" class="game-icon" />
                     <span data-v-91c481c8=""

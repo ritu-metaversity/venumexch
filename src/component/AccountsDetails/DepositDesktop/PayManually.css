@@ -301,7 +301,7 @@ label.images-section {
 
 }
 
-@media screen and (min-width:500px) and (max-width: 3000px) {
+@media screen and (min-width:700px) and (max-width: 3000px) {
     label.images-section {
         /* width: 50% !important; */
         margin: auto !important;
@@ -335,11 +335,11 @@ label.images-section {
         margin: 12px auto !important;
     }
 
-    h3.enter-amount {
+    /* h3.enter-amount {
         margin-left: 39% !important;
         padding-left: 10px;
 
-    }
+    } */
 
     .bank-logo {
         width: 100% !important;
@@ -459,4 +459,8 @@ button.stakeactionminus.btn {
 
 .d-none {
     display: none;
+}
+
+@media screen and (min-width: 501px) and (max-width: 699px) {
+  
 }

@@ -168,7 +168,7 @@ const BettingProfitandLoss = () => {
 
       dispatch(Postcasino());
     }
-  }, [token]);
+  }, []);
   useEffect(() => {
     const id = {
       id: "323334",
