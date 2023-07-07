@@ -5,7 +5,7 @@ import {
     Postunsettleddddd, Postcasino, Postprofitlossmatchwise, postBetMarketAndUser, Postisselfbyappurl, Postdepsositrequestclient, Postpaymnetdetailapp,
     Postselfdepositapp, Postselfwithdrawapp, Postwithdrawrequestclient, Postvalidatejwttoken, Postuserselfregister, PostMinMaxGameDetails, PostUserOddPnl, PostUserfancypnl,
     Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition, getResponsibleGaming, postLoginDemoUser, postBetHistory, postleftmenudataopen
-    ,postpendingapppii
+    , postpendingapppii
 } from './authActions'
 
 const INITAL_STATE = {
@@ -184,6 +184,9 @@ const authSlice = createSlice({
     reducers: {
         setMrqueeClose: (state, action) => {
             state.MrqueeClose = action.payload;
+        },
+        clearLoginInfo: (state) => {
+            state.postLoginData = null
         }
     },
     extraReducers: bulder => {
@@ -698,5 +701,5 @@ const authSlice = createSlice({
     }
 });
 
-export const { setMrqueeClose } = authSlice.actions;
+export const { setMrqueeClose, clearLoginInfo } = authSlice.actions;
 export default authSlice.reducer

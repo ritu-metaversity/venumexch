@@ -486,7 +486,8 @@ const BettingProfitLoss = () => {
                               <b>{Number(el?.pnl).toFixed(2)}</b>
                             </p>
                           ) : (
-                            <p style={{ color: "green" }}>
+                            <p class="m-b-0 negative"
+                              style={{ color: "green" }}>
                               <b>
 
                                 {Number(el?.pnl).toFixed(2)}

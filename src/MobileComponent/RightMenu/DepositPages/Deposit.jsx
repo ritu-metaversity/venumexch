@@ -127,7 +127,7 @@ const Deposit = () => {
                             role="columnheader"
                             scope="col"
                             aria-colindex="3"
-                            className="text-right"
+                            className="text-center"
                           >
                             Date
                           </th>
@@ -135,7 +135,7 @@ const Deposit = () => {
                             role="columnheader"
                             scope="col"
                             aria-colindex="4"
-                            className="text-right"
+                            className="text-center"
                           >
                             Status
                           </th>

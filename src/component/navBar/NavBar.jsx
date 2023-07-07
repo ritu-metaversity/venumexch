@@ -65,7 +65,6 @@ const NavBar = () => {
     setDateState(time);
   };
 
-  setInterval(liveTime, 5000);
 
 
   const handleModal = () => {
@@ -106,13 +105,16 @@ const NavBar = () => {
     setShowZone(vl);
     // }
   };
-  let appUrll = window.location.hostname;
 
   useEffect(() => {
+    setInterval(liveTime, 5000);
+    let appUrll = window.location.hostname;
     dispatch(Postisselfbyappurl({ appUrl: appUrll }));
-  }, [appUrll]);
+  }, []);
 
   useEffect(() => {
+    let appUrll = window.location.hostname;
+
     axios
       .post(
         "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
@@ -124,7 +126,7 @@ const NavBar = () => {
         SetselfAllowedd(res?.data?.data);
 
       });
-  }, [appUrll]);
+  }, []);
   console.log(selfAllowedd)
   // const handleroute = () => {
   //   if (localStorage.getItem("PassWordType") === "old") {
@@ -153,7 +155,7 @@ const NavBar = () => {
         <div className="boxed-layout-wrapper">
           <Link
 
-            onClick={handleHome}
+            to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/home"}
             className="router-link-exact-active router-link-active"
           >
             <div className="logo-area float-left">

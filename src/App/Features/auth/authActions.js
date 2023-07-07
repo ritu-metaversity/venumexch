@@ -33,7 +33,8 @@ export const postLogin = createAsyncThunk('auth/postLogin', async (login, { reje
             {
                 validateStatus: false
             });
-
+        // window.location.replace("./home");
+        // localStorage.clear();
         return postsLoginRespose
     } catch (err) {
         if (err) {
@@ -88,28 +89,28 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
             localStorage.clear();
         }
         console.log(postOldPassRespose.data.message, "kjhgfdghjkl")
-        if (
-            postOldPassRespose.data.message
-        ) {
-            if (postOldPassRespose.data.status === false) {
-                toast.error(postOldPassRespose.data.message || "Something went Wrong!!", {
-                    style: {
-                        background: "rgb(156,74,70)", minHeight: 40,
-                        padding: 0,
-                        color: "white",
-                    }
-                })
-            } else {
-
-                toast.success(postOldPassRespose.data.message || "", {
-                    style: {
-                        background: "rgb(74,117,67)", minHeight: 40,
-                        padding: 0,
-                        color: "white",
-                    }
-                });
-            }
+        // if (
+        //     postOldPassRespose.data.message
+        // ) {
+        if (postOldPassRespose.data.status === false) {
+            toast.error(postOldPassRespose.data.message || "Something went Wrong!!", {
+                style: {
+                    background: "rgb(156,74,70)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            })
+        } else {
+            console.log(postOldPassRespose.data.message, "kjlhygtfgcvbnjiuiy")
+            toast.success(postOldPassRespose.data.message || "", {
+                style: {
+                    background: "rgb(74,117,67)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
         }
+        // }
         return postOldPassRespose
     } catch (err) {
         console.log(err.response.data.message, "kjhgfdghjkl")
@@ -144,13 +145,24 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
         if (
             postPasswordChangeRespose.data.message
         ) {
-            toast.success(postPasswordChangeRespose.data.message || "", {
-                style: {
-                    background: "rgb(74,117,67)", minHeight: 40,
-                    padding: 0,
-                    color: "white",
-                }
-            });
+            if (postPasswordChangeRespose.data.status === false) {
+                toast.error(postPasswordChangeRespose.data.message || "Something went Wrong!!", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                })
+            } else {
+
+                toast.success(postPasswordChangeRespose.data.message || "", {
+                    style: {
+                        background: "rgb(74,117,67)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+            }
         }
         return postPasswordChangeRespose
 

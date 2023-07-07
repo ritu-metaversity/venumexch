@@ -163,7 +163,7 @@ const WithDraw = () => {
     setpendingmodal(false)
   }
   return (
-    <div>
+    <div >
       {
         PostselfwithdrawappDataLoading === true ?
           <div className=" PostselfwithdrawappDataLoadinglodding">

@@ -47,7 +47,7 @@ html {
 
 @media screen and (min-width: 300px) and (max-width: 768px) {
     .login-confirm-modal .modal-content {
-        width: unset;
+        width: 100% !important;
         margin-top: 76%;
 
     }
@@ -107,7 +107,7 @@ html {
     font-weight: bold;
 }
 
-@media only screen and (min-width:800px) and (max-width: 2000px) {
+@media screen and (min-width:800px) and (max-width: 2000px) {
     .login-modal>.login-confirm-modal {
         position: absolute;
         color: #000;
@@ -285,11 +285,11 @@ button.confirmation.btn.btn-primary {
     margin-left: -63%;
 }
 
-@media only screen and (min-height:680px) and (max-height: 1000px) {
+@media screen and (min-height:680px) and (max-height: 1000px) {
     .login-confirm-modal .modal-content {
-        /* width: unset; */
+        width: 65%;
         margin-top: 84%;
-
+        margin-left: 75px;
     }
 }
 

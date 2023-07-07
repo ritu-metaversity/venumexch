@@ -14,6 +14,7 @@ import {
 } from "../App/Features/auth/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../component/Footer/Footer";
+import { clearLoginInfo } from "../App/Features/auth/authSlice";
 
 const LoginForMobile = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,16 @@ const LoginForMobile = () => {
     postisselfbyappurlData
   } = useSelector((state) => state.auth);
 
+
+  useEffect(() => {
+    if (localStorage.getItem("TokenId") !== null && pathname.includes("login")) {
+      navigate("./home");
+    }
+  }, [pathname])
+
+  useEffect(() => {
+    dispatch(clearLoginInfo())
+  }, [])
 
   useEffect(() => {
     if (apiHit === true) {

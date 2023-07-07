@@ -452,7 +452,7 @@ const WithDraw1 = () => {
         setpendingmodal(false)
     }
     return (
-        <div >
+        <div className="withdraw_page">
 
             <div className="withdrow_coin">
                 <div className="withdrow_title">
@@ -470,7 +470,7 @@ const WithDraw1 = () => {
                     <p
                         className="choose_val"
                         style={{ marginLeft: "0px", marginBottom: "10px" }}>
-                        Choose From your favourate transaction{" "}
+                        Choose From your Favourite transaction{" "}
                     </p>
                     <div className="coin_value">
                         {stackValue?.map((res) => {
@@ -764,7 +764,7 @@ const WithDraw1 = () => {
                         </div>
 
                         <div className="withdraw_coin_btn" >
-                            {!isLoading && (
+                            {isLoading && (
                                 <p className="lodder depositLoading withloading withdraw_deposit">
                                     <i className="fa fa-spinner fa-spin"></i>
                                 </p>
@@ -806,20 +806,19 @@ const WithDraw1 = () => {
                 backgroundColor: "#386f7d",
                 height: "25px",
                 marginTop: "12px",
-                width:"97%",
-                marginLeft:"20px",
+                width: "97%",
                 padding: "3px 12px",
                 color: "#fff"
 
             }}>
 
 
-                Widthdraw History
+                Withdraw History
 
             </div>
             <div className="table-responsive withdrow-table">
 
-               
+
                 <table
                     role="table"
                     aria-busy="false"

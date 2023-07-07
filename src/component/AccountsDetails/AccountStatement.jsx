@@ -169,7 +169,7 @@ const AccountStatement = () => {
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Credit</th>
+                <th className='text-right'> Credit</th>
 
                 <th className="text-right">Debit</th>
                 <th className="text-right">Balance</th>
@@ -208,11 +208,11 @@ const AccountStatement = () => {
                         > {" "}
                           {console.log(el, "elelelel")}
                           {moment(el?.date).format("YYYY-MM-DD  - h:mm")}</td>
-                        <td className="text-left">  {" "}
+                        <td className="text-right">  {" "}
                           {el?.credit}</td>
-                        <td className="text-left" style={{ color: "red", width: "15%" }}>
+                        <td className="text-right" style={{ color: "red", width: "20%" }}>
                           {el?.debit} </td>
-                        <td className="text-left" style={{ width: "15%" }}>{el?.pts}</td>
+                        <td className="text-right" style={{ width: "20%" }}>{el?.pts}</td>
                         <td className="text-left" style={{ width: "30%" }}>{el?.remark}</td>
                       </tr>
 

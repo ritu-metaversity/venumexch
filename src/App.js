@@ -58,11 +58,6 @@ function App() {
   }, [token]);
 
 
-  useEffect(() => {
-    if (token !== null) {
-      navigate("./home");
-    }
-  }, [token])
 
   useEffect(() => {
     if (token) {
@@ -91,17 +86,17 @@ function App() {
   }, [token]);
 
   useEffect(() => {
-    if (localStorage.getItem("PassWordType") === "old") {
-    } else {
-      const time = setInterval(() => {
-        if (token) {
+    const time = setInterval(() => {
+      if (localStorage.getItem("PassWordType") === "old") {
+      } else {
+        if (localStorage.getItem("TokenId")) {
 
           dispatch(Postvalidatejwttoken());
         }
-      }, 1000);
-      return () => clearInterval(time);
-    }
-  }, [token]);
+      }
+    }, 1000);
+    return () => clearInterval(time);
+  }, []);
 
   // useEffect(() => {
   //   if (PostvalidatejwttokenDataError?.status === false) {
@@ -129,6 +124,15 @@ function App() {
   useEffect(() => {
     document.title = window.location.hostname;
   }, []);
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("PassWordType") !== "new" && !pathname.includes("changepassword")) {
+
+  //   }
+
+  //   return () => {
+  //   }
+  // }, [])
 
 
   return (

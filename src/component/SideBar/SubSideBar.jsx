@@ -64,11 +64,11 @@ const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
 
                   </Link>
                   <li>
-                  <Link href="/" className="link-lvl-prev" onClick={() => handleBackSports()}>
-                    <i className="fas fa-chevron-circle-left"></i>{" "}
-                    <span className="link-name">Previous</span>
-                  </Link>
-                </li>
+                    <Link href="/" className="link-lvl-prev" onClick={() => handleBackSports()}>
+                      <i className="fas fa-chevron-circle-left"></i>{" "}
+                      <span className="link-name">Previous</span>
+                    </Link>
+                  </li>
                   {postleftmenudataopenData?.data?.find(i => i.sportId === sideGameData?.sportsid)?.matchList.map(match =>
 
 
@@ -79,7 +79,7 @@ const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
                         <a data-v-91c481c8="" href="/game/4/101480" class="menu-link menu_list sport-type-Cricket">
                           <p data-v-91c481c8="" class="link-name">{match.matchName}</p>
                           <p>
-                          <i data-v-91c481c8="" class="fas fa-angle-right "></i>
+                            <i data-v-91c481c8="" class="fas fa-angle-right "></i>
                           </p>
                         </a>
                       </li>
@@ -90,7 +90,7 @@ const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
                   )}
                 </li>
 
-              
+
                 <span>
                   <li></li>
                 </span>

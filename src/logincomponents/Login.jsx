@@ -11,6 +11,7 @@ import {
   Postisselfbyappurl,
   postLogin, postLoginDemoUser
 } from "../App/Features/auth/authActions";
+import { clearLoginInfo } from "../App/Features/auth/authSlice";
 
 
 
@@ -44,8 +45,15 @@ const Login = () => {
   } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    if (localStorage.getItem("TokenId") !== null && pathname.includes("login")) {
+      navigate("./home");
+    }
+  }, [pathname])
 
-  }, []);
+  useEffect(() => {
+    dispatch(clearLoginInfo())
+  }, [])
+
   useEffect(() => {
     if (apiHit === true) {
       if (postLoginData?.data?.token) {
@@ -57,17 +65,18 @@ const Login = () => {
         localStorage.setItem("userId", postLoginData?.data?.userId);
         localStorage.setItem("SportId", 4);
         axios.defaults.headers.common.Authorization = `Bearer ${postLoginData?.data?.token}`;
-
+        console.log("fisrt")
         if (postLoginData?.data?.passwordtype === "old") {
+          console.log("second")
           navigate("/m/changepassword");
         } else {
+          console.log("third")
           navigate("/m/home");
         }
       }
     }
     setLoginData(postLoginData);
   }, [postLoginData]);
-
 
 
   const handleInput = (e) => {
@@ -120,6 +129,7 @@ const Login = () => {
     navigate("/m/home");
 
   };
+
 
 
 

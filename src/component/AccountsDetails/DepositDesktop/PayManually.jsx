@@ -46,11 +46,9 @@ const PayManually = (props) => {
         console.log(res?.data?.data, "yguhvjuiyfghv");
       });
   }, [])
-  const [Bitvalue, setBitValue] = useState(0);
 
   const [pymentMode, setPymentMode] = useState("UPI");
 
-  const token = localStorage.getItem("TokenId");
 
   const handlePaymentName = (VL, id) => {
     setPymentMode(VL);
@@ -66,19 +64,15 @@ const PayManually = (props) => {
     setAmount((prev) => (prev - 10 > 100 ? prev - 10 : 100));
   };
 
-  const handleStaticAmount = (vl) => {
-    setBitValue((Bitvalue) => Bitvalue + vl);
-  };
-
   useEffect(() => {
-    if (token) {
+    if (localStorage.getItem("TokenId")) {
       dispatch(Postpaymnetdetailapp());
     }
-  }, [token]);
+  }, []);
 
   const handleSubmit = () => {
     const data = new FormData();
-    data.append("amount", Bitvalue.toString());
+    data.append("amount", amount.toString());
 
     data.append("image", files || "");
 
@@ -94,7 +88,7 @@ const PayManually = (props) => {
   }, [PostselfdepositappData?.status]);
 
   return (
-    <div>
+    <div style={{ marginTop: "38px" }}>
       <h3 className="enter-amount"> Enter Amount</h3>
       <div className="row row5 main-pricecontainor">
         <div
