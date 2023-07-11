@@ -78,7 +78,7 @@ const Deposit = () => {
     <>
       <div className="wrapper main-conatiner">
         {
-          PostselfdepositappDataLoading === true ?
+          !PostselfdepositappDataLoading === true ?
 
             <div className=" PostselfwithdrawappDataLoadinglodding">
               <i

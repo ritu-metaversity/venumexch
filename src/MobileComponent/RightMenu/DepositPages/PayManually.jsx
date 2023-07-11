@@ -19,7 +19,6 @@ const PayManually = (props) => {
 
   const buttonAmountArr = [100, 500, 1000, 5000];
   const [stackValue, setStackValue] = useState();
-
   const [files, setFiles] = useState(null);
   const [loading, setLoading] = useState(false);
   const [trueee, setTrueee] = useState(false);
@@ -59,23 +58,14 @@ const PayManually = (props) => {
     setPymentMode(VL);
     setActive(id);
   };
-
-  const increment = () => {
-    // setBitValue(Bitvalue + 10);
-    setAmount((prev) => (prev + 10 > 100 ? prev + 10 : 100));
-
-  };
-
   const decrement = () => {
-    // if (Bitvalue - 10 >= 0) {
-
-    //   setBitValue(Bitvalue - 10);
-
-    // }
     setAmount((prev) => (prev - 10 > 100 ? prev - 10 : 100));
-
-    // setBitValue((prev) => (prev + 10 > 100 ? prev + 10 : 100));
   };
+  const increment = () => {
+    setAmount((prev) => (prev + 10 > 100 ? prev + 10 : 100));
+  };
+
+
 
   // const handleStaticAmount = (vl) => {
   //   setBitValue((Bitvalue) => (Number(Bitvalue) || 0) + Number(vl));
@@ -444,18 +434,19 @@ const PayManually = (props) => {
                     style={{ display: "none" }}
                   />
                 </label>
-                {files !== null && amount !== 0 ? (
-                  <button
-                    className="submit-deposit bbbbbbbb"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </button>
-                ) : (
-                  ""
-                )}
+
               </Col>
             </Row>
+            {files !== null && amount !== 0 ? (
+              <button
+                className="submit-deposit bbbbbbbb"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </Container>
       </div>

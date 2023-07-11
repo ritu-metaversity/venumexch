@@ -140,10 +140,12 @@ img {
     .colllcsss {
         width: 33%;
     }
+
     img.img-fluid.casino-body-images {
         width: 106px;
         height: 70px;
     }
+
     .buttnnnname {
         width: 94% !important;
     }
@@ -155,10 +157,11 @@ img {
         width: 106px;
         height: 70px;
     }
+
     .buttnnnname {
         width: 94% !important;
     }
-    
+
 }
 
 .buttttt {
@@ -225,19 +228,20 @@ img {
     } */
 }
 
-@media screen and (min-width: 700px)and (max-width:1000px) {
-    /* .casino-body-images {
-        width: 96px;
-        height: 75px;
-    } */
+@media screen and (max-width:700px) {
+    .for_Desktop {
+        display: none;
+        width: 100%;
+    }
 }
 
-@media screen and (min-width: 500px)and (max-width:700px) {
-    /* .casino-body-images {
-        width: 80px;
-        height: 75px;
-    } */
+@media screen and (min-width: 700px) {
+
+    .For_mobile {
+        display: none;
+    }
 }
+
 
 
 button.buttnnnname {
@@ -247,4 +251,19 @@ button.buttnnnname {
 
 ._margin {
     margin: 15px auto;
+}
+
+.modal_CrosssIcon {
+    position: absolute;
+    top: 1px;
+    right: 3px;
+    color: white;
+    font-size: 21px;
+}
+
+@media screen and (min-width: 870px) {
+    .slot_game .modal-dialog {
+        width: 100%;
+        min-width: 100% !important;
+    }
 }

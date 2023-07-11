@@ -396,7 +396,7 @@ const PayManually = (props) => {
       </div>
       <div className="paymethods">
         <Container>
-          <div className="">
+          <div className="deposit-mainnn">
             <Row className="upi-detail dest_apiDetail">
               <Col className="name-d">
                 <label className="images-section">
@@ -423,18 +423,19 @@ const PayManually = (props) => {
                     style={{ display: "none" }}
                   />
                 </label>
-                {files !== null && amount !== 0 ? (
-                  <button
-                    className="submit-deposit bbbbbbbb"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </button>
-                ) : (
-                  ""
-                )}
+
               </Col>
             </Row>
+            {files !== null && amount !== 0 ? (
+              <button
+                className="submit-deposit"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </Container>
       </div>
