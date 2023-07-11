@@ -171,6 +171,7 @@ label.images-section {
     padding: 12px 26px;
     margin-left: -34px;
     border: unset;
+    border-radius: 5px;
 }
 
 .root {
@@ -312,14 +313,17 @@ label.images-section {
         float: left !important;
         margin-right: -45px !important;
     }
+
     .d-flex.inputfield {
         width: 53% !important;
         float: right !important;
     }
+
     .upi-detail.head-deposit.row {
         width: 106% !important;
     }
-    .row.price-values {    
+
+    .row.price-values {
         margin-inline: unset !important;
         margin-left: -83px !important;
     }
@@ -349,7 +353,8 @@ label.images-section {
         width: 25%;
         margin: 12px auto !important;
     }
-/* 
+
+    /* 
     h3.enter-amount {
         margin-left: 39% !important;
         padding-left: 10px;
@@ -474,3 +479,9 @@ h3.enter-amount {
     width: 54% !important;
 }
 } */
+.deposit-mainnn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

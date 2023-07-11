@@ -1,28 +1,33 @@
-.desktop_if{
+.desktop_if {
     height: 97vh;
 }
-.mobole_if{
+
+.mobole_if {
     display: none;
 }
-section{
+
+section {
     margin-top: -19px;
-display: block;
-width: 100% !important;
-margin-left: 0%;
-height: 100%;}
-@media screen and (max-width: 800px) {  
-    .mobile_if {
+    display: block;
+    width: 100% !important;
+    margin-left: 0%;
+    height: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    /* .mobile_if {
         height: 123vh;
         display: block;
         margin-top: 104px;
+    } */
+
+    #splashscreen {
+        display: block !important;
     }
 
-#splashscreen{
-    display: block !important;
-}
-.desktop_if{
-    display: none;
-}
+    .desktop_if {
+        display: none;
+    }
 
 }
 

@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Postcasino } from "../../App/Features/auth/authActions";
 import "./CasinoList.css";
+import Modal from "react-bootstrap/Modal";
+import { RxCross2 } from 'react-icons/rx'
 const Casinolist = () => {
   const { PostcasinoData } = useSelector((state) => state.auth);
   const [sportId, setSportId] = useState(323334);
   const [casinoList, setCasinoList] = useState(323334);
   let navigate = useNavigate();
-
+  const [trueee, setTrueee] = useState(false);
+  const [casionId, setCasionId] = useState("")
   // console.log(PostunsettledData?.data?.dataList)
 
   const dispatch = useDispatch();
@@ -50,7 +53,8 @@ const Casinolist = () => {
       token
     ) {
 
-      navigate(`/casino/${val}`);
+      setCasionId(val)
+      setTrueee(true)
     } else {
       navigate("/login");
 
@@ -119,7 +123,43 @@ const Casinolist = () => {
           </div>
         </section>
       </div>
+      <Modal
+        show={trueee}
+        size="xl"
+        className="slot_game"
+        onHide={() => setTrueee(false)}
+        style={{ padding: "10px" }}
+ 
+        >
 
+        <>
+          <RxCross2 className="modal_CrosssIcon" onClick={() => setTrueee(false)} />
+          <iframe
+            src={`https://d2.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
+            // height="82vh"
+            // className="mobile_if"
+            width="100%"
+            style={{ minHeight: "100vh" }}
+            title="mobile"
+            className="for_Desktop"
+            allowFullScreen={true}
+
+          ></iframe>
+          <iframe
+            src={`https://m2.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
+            // height="82vh"
+            // className="mobile_if"
+            width="100%"
+            style={{ minHeight: "100vh" }}
+            title="mobile"
+            className="For_mobile"
+            allowFullScreen={true}
+
+          ></iframe>
+        </>
+
+
+      </Modal>
     </>
   );
 };
