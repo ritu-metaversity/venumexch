@@ -49,9 +49,11 @@ const Deposit = () => {
   };
   const UpdateList = (vl) => {
     if (vl === true) {
+      console.log(vl, "hgfds");
       dispatch(Postdepsositrequestclient());
     }
   };
+
   useEffect(() => {
     const token = localStorage.getItem("TokenId");
 
@@ -78,7 +80,7 @@ const Deposit = () => {
     <>
       <div className="wrapper main-conatiner">
         {
-          !PostselfdepositappDataLoading === true ?
+          PostselfdepositappDataLoading === true ?
 
             <div className=" PostselfwithdrawappDataLoadinglodding">
               <i

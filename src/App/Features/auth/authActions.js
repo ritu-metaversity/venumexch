@@ -85,23 +85,6 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
     try {
         const postOldPassRespose = await axios.post(`${REACT_APP_API_URL}/user/first-login-cp`, OldPassWordData);
         if (postOldPassRespose?.data?.status === true) {
-            window.location.replace("./login");
-            localStorage.clear();
-        }
-        console.log(postOldPassRespose.data.message, "kjhgfdghjkl")
-        // if (
-        //     postOldPassRespose.data.message
-        // ) {
-        if (postOldPassRespose.data.status === false) {
-            toast.error(postOldPassRespose.data.message || "Something went Wrong!!", {
-                style: {
-                    background: "rgb(156,74,70)", minHeight: 40,
-                    padding: 0,
-                    color: "white",
-                }
-            })
-        } else {
-            console.log(postOldPassRespose.data.message, "kjlhygtfgcvbnjiuiy")
             toast.success(postOldPassRespose.data.message || "", {
                 style: {
                     background: "rgb(74,117,67)", minHeight: 40,
@@ -109,8 +92,17 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
                     color: "white",
                 }
             });
+            window.location.replace("./login");
+            localStorage.clear();
+        } else if (postOldPassRespose.data.status === false) {
+            toast.error(postOldPassRespose.data.message || "Something went Wrong!!", {
+                style: {
+                    background: "rgb(156,74,70)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            })
         }
-        // }
         return postOldPassRespose
     } catch (err) {
         console.log(err.response.data.message, "kjhgfdghjkl")
@@ -136,33 +128,28 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postPasswordChangeRespose = await axios.post(`${REACT_APP_API_URL}/enduser/change-password`, passwordChanege);
-        // console.log(postPasswordChangeRespose, "postPasswordChangeResposepostPasswordChangeRespose")
+        console.log(postPasswordChangeRespose, "fsdfsdfsd")
         if (postPasswordChangeRespose?.data?.status === true) {
+            toast.success(postPasswordChangeRespose.data.message || "", {
+                style: {
+                    background: "rgb(74,117,67)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
             window.location.replace("./login");
-            window.location.reload()
+            // window.location.reload()
             localStorage.clear();
-        }
-        if (
-            postPasswordChangeRespose.data.message
-        ) {
-            if (postPasswordChangeRespose.data.status === false) {
-                toast.error(postPasswordChangeRespose.data.message || "Something went Wrong!!", {
-                    style: {
-                        background: "rgb(156,74,70)", minHeight: 40,
-                        padding: 0,
-                        color: "white",
-                    }
-                })
-            } else {
 
-                toast.success(postPasswordChangeRespose.data.message || "", {
-                    style: {
-                        background: "rgb(74,117,67)", minHeight: 40,
-                        padding: 0,
-                        color: "white",
-                    }
-                });
-            }
+        } else if (postPasswordChangeRespose.data.status === false) {
+            toast.error(postPasswordChangeRespose.data.message || "Something went Wrong!!", {
+                style: {
+                    background: "rgb(156,74,70)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            })
+
         }
         return postPasswordChangeRespose
 
@@ -447,7 +434,7 @@ export const Postdepsositrequestclient = createAsyncThunk('auth/Postdepsositrequ
 // get-paymnet-detail-app-id-wise
 export const Postpaymnetdetailapp = createAsyncThunk('auth/Postpaymnetdetailapp', async (data, { rejectWithValue }) => {
     try {
-        const PostpaymnetdetailappDataaa = await axios.post(`${REACT_APP_API_URL}/enduser/get-paymnet-detail-app-id-wise`, data,
+        const PostpaymnetdetailappDataaa = await axios.post(`${REACT_APP_API_URL}/deposit-type/get_sub`, data,
 
         );
         return PostpaymnetdetailappDataaa

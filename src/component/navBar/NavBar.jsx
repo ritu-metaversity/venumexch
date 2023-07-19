@@ -12,7 +12,7 @@ const NavBar = () => {
   const [account, setAccount] = useState(false);
   const [dateState, setDateState] = useState();
   const [show, setShow] = useState(false);
-  const [showTimes, setShowTimes] = useState("none");
+  const [showTimes, setShowTimes] = useState(false);
   const [showZone, setShowZone] = useState("+05:30");
   const [movingMessage, setMovingMessage] = useState("");
   const dispatch = useDispatch();
@@ -88,11 +88,13 @@ const NavBar = () => {
     setShow(false);
   };
   const hanldeTime = () => {
-    if (showTimes === "none") {
+    if (showTimes === false) {
       // console.log("tre")
-      setShowTimes("show");
+      setShowTimes(true);
+
     } else {
-      setShowTimes("none");
+      setShowTimes(false);
+
       //  console.log("false")
     }
   };
@@ -143,11 +145,17 @@ const NavBar = () => {
     }
   }
   return (
+
+
+
     <div className="nav newnav">
+
       {
         account ? <div className="overLay" onClick={() => setAccount(false)}></div> : ""
       }
-
+      {
+        showTimes ? <div className="overLay" onClick={() => setShowTimes(false)}></div> : ""
+      }
       <header className="header">
         <marquee className="marquee">
           <div>{movingMessage}</div>
@@ -199,7 +207,7 @@ const NavBar = () => {
                 ( {showZone}
                 <i className="fas fa-angle-down m-l-5  "></i> )
               </Link>
-              <div className={`dropdown-menu ${showTimes}`}>
+              <div className={`dropdown-menu ${showTimes === true ? "show" : "none"}`}>
                 <Link
 
                   className="dropdown-item"
@@ -435,6 +443,7 @@ const NavBar = () => {
         </div>
       </header>
     </div>
+
   );
 };
 

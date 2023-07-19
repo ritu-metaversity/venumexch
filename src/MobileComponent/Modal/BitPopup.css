@@ -578,8 +578,8 @@ user agent stylesheet h4 {
 .col-1 {
     position: relative;
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: unset !important;
+    padding-left: unset !important;
 }
 
 .float-right {

@@ -166,7 +166,7 @@ const Signup = () => {
         <div className="login">
           <div className="login-view">
             <div className="login-container">
-              <div className="login-form" style={{ marginTop: "3%" }}>
+              <div className="login-form" style={{ justifyContent: "center", marginTop: "6%" }}>
                 <div className="login-panel">
                   <div className="panel-heading">
                     <div className="logo">
@@ -174,7 +174,7 @@ const Signup = () => {
                         alt=""
                         src={selfAllowedd?.logo}
                         className="logo"
-                        style={{ height: "100px",width:"200px" }}
+                        style={{ height: "100px", width: "200px" }}
 
                       />
                     </div>

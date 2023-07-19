@@ -310,129 +310,136 @@ const BettingProfitLoss = () => {
       <div className="main-content" style={{ minHeight: "calc(100% - 163px)" }}>
         <div className="home-page">
           <div className="container-inner">
-            <div>
-              <ToggleButtonGroup
-                type="radio"
-                name="options"
-                className="row"
-                defaultValue={1}
-              >
-                <ToggleButton
-                  id="tbg-radio-2"
-                  className={`${Active === 1 ? "active1" : ""}`}
+
+            <div className='outer_box'>
+              <div className="main_for_sports">
+
+                <button
+
+                  className="box_selection_time"
                   value={1}
-                  style={{ marginRight: "18px" }}
                   onClick={() => handleActive(1, "Sports")}
+                  style={{ backgroundColor: Active === 1 ? "#317383" : "#2c4f58" }}
                 >
                   Sport
-                </ToggleButton>
-                <ToggleButton
-                  id="tbg-radio-3"
-                  className={`${Active === 2 ? "active1" : ""}`}
+                </button>
+                <button
+
+                  className="box_selection_time"
                   value={2}
-                  style={{ width: "15%" }}
                   onClick={() => handleActive(2, "casino")}
+                  style={{ backgroundColor: Active === 2 ? "#317383" : "#2c4f58" }}
                 >
                   casino
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </div>
+                </button>
+              </div>
 
-            {Active === 1 ? (
-              <div className="sport-data-list">
-                <select
-                  className="selectionnnn"
-                  // name="cars"
-                  // id="cars"
-                  onChange={handleSelectGame}
-                >
-                  {/* <option value="">Select Sports</option> */}
-                  {getActiveSportListData?.data?.data &&
-                    getActiveSportListData?.data?.data
-                    ? getActiveSportListData?.data?.data.map((item) => (
-                      <option value={item?.sportId}>
 
-                        {item?.sportName}
-                      </option>
-                    ))
-                    : ""}{" "}
-                </select>
+              {Active === 1 ? (
+                <div className="main_for_sports">
+                  <select
+                    className="box_selection_time"
+                    // name="cars"
+                    // id="cars"
+                    onChange={handleSelectGame}
+                  >
+                    {/* <option value="">Select Sports</option> */}
+                    {getActiveSportListData?.data?.data &&
+                      getActiveSportListData?.data?.data
+                      ? getActiveSportListData?.data?.data.map((item) => (
+                        <option value={item?.sportId}>
 
-                <select
-                  className="selectionnnn"
-                  name="cars"
-                  id="cars"
-                  onChange={handleGameName}
-                >
-                  <option value="">Select Match</option>
-
-                  {gamesData?.length > 0
-                    ? gamesData.map((item) => {
-                      return (
-                        <option value={item?.matchId}>
-                          {item?.matchName}
+                          {item?.sportName}
                         </option>
-                      );
-                    })
-                    : ""}
-                </select>
-              </div>
-            ) : (
-              <div className="casino-section">
-                <select
-                  className="selectionnnn"
-                  name="cars"
-                  id="cars"
-                  onChange={handleCasino}
-                >
-                  {/* <option value="">Select Casino</option> */}
+                      ))
+                      : ""}{" "}
+                  </select>
 
-                  {PostcasinoData?.data && PostcasinoData?.data
-                    ? PostcasinoData?.data.map((el) => (
-                      <option value={el?.id}>{el?.name}</option>
-                    ))
-                    : ""}
-                </select>
-                <select
-                  className="selectionnnn"
-                  name="cars"
-                  id="cars"
-                  style={{ marginLeft: "14px" }}
-                  onChange={handleCasinoMatch}
-                >
-                  <option value="">Select Match</option>
+                  <select
+                    className="box_selection_time"
+                    name="cars"
+                    id="cars"
+                    onChange={handleGameName}
+                  >
+                    <option value="">Select Match</option>
 
-                  {casinoList?.length &&
-                    casinoList.map((item) => {
-                      return (
-                        <option value={item.gameId}>{item?.gameName}</option>
-                      );
-                    })}
-                </select>
+                    {gamesData?.length > 0
+                      ? gamesData.map((item) => {
+                        return (
+                          <option value={item?.matchId}>
+                            {item?.matchName}
+                          </option>
+                        );
+                      })
+                      : ""}
+                  </select>
+                </div>
+              ) : (
+                <div className="main_for_sports">
+                  <select
+                    className="box_selection_time"
+                    name="cars"
+                    id="cars"
+                    onChange={handleCasino}
+                  >
+                    {/* <option value="">Select Casino</option> */}
+
+                    {PostcasinoData?.data && PostcasinoData?.data
+                      ? PostcasinoData?.data.map((el) => (
+                        <option value={el?.id}>{el?.name}</option>
+                      ))
+                      : ""}
+                  </select>
+                  <select
+                    className="box_selection_time "
+                    name="cars"
+                    id="cars"
+                    style={{ marginLeft: "14px", }}
+                    onChange={handleCasinoMatch}
+
+                  >
+                    <option value="">Select Match</option>
+
+                    {casinoList?.length &&
+                      casinoList.map((item) => {
+                        return (
+                          <option value={item.gameId}>{item?.gameName}</option>
+                        );
+                      })}
+                  </select>
+                </div>
+              )}
+              <div className="main_for_sports">
+                <DatePicker
+                  className="box_selection_time"
+                  defaultValue={dayjs(startDate)}
+                  format={dateFormat}
+                  onChange={StartDateValue}
+                  disabledDate={(d) =>
+                    !d ||
+                    d.isBefore(dayjs().subtract(2, "month")) ||
+                    d.isAfter(dayjs())
+                  }
+                // style={{ width: "23.2%" }}
+                />
+                <DatePicker
+                  className="box_selection_time"
+                  defaultValue={dayjs}
+                  format={dateFormat}
+                  onChange={EndDateValue}
+                  disabledDate={(d) =>
+                    !d ||
+                    d.isBefore(dayjs().subtract(2, "month")) ||
+                    d.isAfter(dayjs())
+                  }
+                // style={{
+                //   width: "23.2%",
+                //   marginLeft: "4px"
+                // }}
+                />
               </div>
-            )}
-            <DatePicker
-              className="startDate"
-              defaultValue={dayjs(startDate)}
-              format={dateFormat}
-              onChange={StartDateValue}
-              disabledDate={(d) =>
-                !d ||
-                d.isBefore(dayjs().subtract(2, "month")) ||
-                d.isAfter(dayjs())
-              }
-            />
-            <DatePicker
-              className="endDate"
-              defaultValue={dayjs}
-              format={dateFormat}
-              onChange={EndDateValue}
-              disabledDate={(d) =>
-                !d ||
-                d.isBefore(dayjs().subtract(2, "month")) ||
-                d.isAfter(dayjs())
-              }
-            />
+
+            </div>
             {/* 
 <DatePicker style={{width: "50%", height: "41px"}} onChange={handleStartDate}  />
 <DatePicker style={{width: "50%", height: "41px"}} onChange={handleEndDate} /> */}

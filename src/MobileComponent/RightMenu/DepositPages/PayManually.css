@@ -43,9 +43,9 @@
     padding: 0px;
 }
 
-.inputfield {
+/* .inputfield {
     margin-left: 12px;
-}
+} */
 
 .previous-deposite {
     background-color: #2c4f58;
@@ -124,7 +124,8 @@ css-pw8cd7 .selected {
     margin-bottom: 13px;
 } */
 .name-d {
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
+    /* border: 1px solid #ddd; */
 }
 
 .head-deposit {
@@ -137,13 +138,13 @@ css-pw8cd7 .selected {
 }
 
 label.images-section {
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     /* padding: 60px; */
-    width: 123%;
+    /* width: 123%; */
     height: 164px;
     margin-top: 12px;
     position: relative;
-    margin-left: -36px;
+    /* margin-left: -36px; */
     border-radius: 7px;
 }
 
@@ -216,7 +217,7 @@ button.download {
 }
 
 label.images-section {
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     /* padding: 60px; */
     width: 100%;
     height: 164px;
@@ -272,7 +273,7 @@ label.images-section {
     height: 35vh;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
     .main-pricecontainor {
         display: block;
     }
@@ -301,7 +302,7 @@ label.images-section {
 
 }
 
-@media screen and (min-width:500px) and (max-width: 3000px) {
+@media screen and (min-width:800px) and (max-width: 3000px) {
     label.images-section {
         /* width: 50% !important; */
         margin: auto !important;
@@ -319,9 +320,9 @@ label.images-section {
         float: right !important;
     }
 
-    .upi-detail.head-deposit.row {
+    /* .upi-detail.head-deposit.row {
         width: 106% !important;
-    }
+    } */
 
     .row.price-values {
         margin-inline: unset !important;
@@ -335,9 +336,9 @@ label.images-section {
         left: 39%;
     }
 
-    .head-deposit {
+    /* .head-deposit {
         width: 104%;
-    }
+    } */
 
     .bank-detail.container {
         width: 48%;
@@ -392,9 +393,9 @@ label.images-section {
         margin-top: 17px;
     }
 
-    .upi-detail.head-deposit.row {
+    /* .upi-detail.head-deposit.row {
         width: 102%;
-    }
+    } */
 
     .bank-detail.container {
         width: 66%;
@@ -405,6 +406,7 @@ label.images-section {
 .active3 {
     border: 1px solid #2c4f58;
     border-radius: 5px;
+    width: 80%;
 }
 
 @media screen and (max-width: 350px) {
@@ -415,18 +417,18 @@ label.images-section {
         left: 14%;
     }
 
-    .upi-detail.head-deposit.row {
+    /* .upi-detail.head-deposit.row {
         width: 107%;
-    }
+    } */
 
     label.images-section {
-        border: 1px solid #ddd;
+        /* border: 1px solid #ddd; */
         /* padding: 60px; */
-        width: 104%;
+        /* width: 104%; */
         height: 164px;
         margin-top: 0%;
         position: relative;
-        margin-left: -2%;
+        /* margin-left: -2%; */
         border-color: black;
     }
 }
@@ -437,16 +439,16 @@ label.images-section {
         left: 17%;
     }
 
-    .upi-detail.head-deposit.row {
+    /* .upi-detail.head-deposit.row {
         width: 105.6%;
-    }
+    } */
 
 }
 
 @media screen and (min-width: 450px) and (max-width: 767px) {
-    .upi-detail.head-deposit.row {
+    /* .upi-detail.head-deposit.row {
         width: 104%;
-    }
+    } */
 
 }
 
@@ -484,4 +486,311 @@ h3.enter-amount {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.main_divvvvv {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 16px;
+}
+
+.inner_divvvv1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.inner_divvvv2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.inner_span11 {}
+
+.modal_img_qr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 45%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+@media screen and (min-width:300px) and (max-width: 700px) {
+    .modal_img_qr {
+        display: flex;
+        width: 100%;
+    }
+}
+
+.root {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.qr-payment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: -32px;
+}
+
+button.download {
+    text-decoration: none;
+    width: 100%;
+    margin-top: 12px;
+    border: none;
+    background: #08c;
+    color: #fff;
+    padding: 0px;
+    padding-right: 22px;
+    padding-bottom: 12px;
+}
+
+.bank-detail p {
+    margin-top: 13px;
+    margin-bottom: 1px;
+}
+
+.qr-payment input {
+    border-radius: unset;
+    margin-top: 9px;
+    margin-bottom: -5px;
+}
+
+label.images-section {
+    border: 1px solid #ddd;
+    /* padding: 60px; */
+    width: 100%;
+    height: 164px;
+    margin-top: 12px;
+    position: relative;
+}
+
+.images-section img {
+    max-width: 100% !important;
+    max-width: 100% !important;
+    height: 164px;
+}
+
+.image-text {
+    text-align: center;
+    margin-top: 18%;
+}
+
+.deposit-button {
+    width: 90%;
+    margin-inline: 5%;
+}
+
+.modals-image {
+    width: 100%;
+    margin: auto;
+    display: block;
+    margin-left: -13px;
+}
+
+@media screen and (min-width:700px) and (max-width: 1600px) {
+    .image-text {
+        margin-top: 58px;
+    }
+
+    .images-section img {
+        margin: auto;
+        display: block;
+    }
+
+}
+
+p.lodder.depositLoading {
+    position: absolute;
+    width: 100%;
+    opacity: 0.6;
+    height: calc(100% - 86px);
+    z-index: 1;
+    top: 144px;
+}
+
+
+@media screen and (max-width: 800px) {
+    .deBtn {
+        width: unset !important;
+    }
+}
+
+.main_box_amount {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0px 10px;
+}
+
+.enter_amount_div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 22px;
+
+    gap: 10px;
+
+}
+
+.enter_amount_input {}
+
+.enter_amount_decrement {
+    background-color: black;
+}
+
+.stack_box_mobile {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+
+    gap: 10px;
+
+}
+
+.stack_box_mobile_btn {
+    width: 69px;
+    height: 31px;
+    border-radius: 5px;
+    border: unset;
+    background-color: #d11313;
+}
+
+.Pay_Manually_ui {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 5px;
+}
+
+.enter_pay_manuallll {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.enter_amount_name {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.upload_file {
+    width: 100%;
+    border: solid 1px;
+    height: 164px;
+    border-color: black;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+
+.upload_file_btnnn {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload_file_image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px
+}
+
+.deposit_button_btnnn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.deposit_button_main {
+    width: 40%;
+    height: 36px;
+    background-color: #2c4f58;
+    border: unset;
+    border-radius: 5px;
+}
+
+.Qr_code_img {
+    width: 100%;
+    /* padding: 10px;
+    height: 48px; */
+}
+
+.qr_main_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+
+}
+
+.qr_inner_box {
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 50%;
+    gap: 20px;
+    justify-content: center;
+}
+
+.main_banks_div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 15px;
+    height: 100%;
+}
+
+.inner_banks_div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    gap: 10px;
+}
+
+.banks_looggoog {
+    width: 100%;
+    height: 80%;
+    border-radius: 9px;
+}
+
+.banks_name {
+    height: 20%;
+    color: #000;
 }

@@ -205,9 +205,9 @@ const Login = () => {
     <div id="app">
       <div>
         <div className="login">
-          <div className="login-view">
+          <div className="">
             <div className="login-container">
-              <div className="login-form">
+              <div className="login-form" style={{ justifyContent: "center", marginTop: "6%" }}>
                 <div className="login-panel">
                   <div className="panel-heading">
                     <div className="logo">

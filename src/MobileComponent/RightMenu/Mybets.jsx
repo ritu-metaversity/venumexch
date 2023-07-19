@@ -47,7 +47,7 @@ const Mybets = () => {
     let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1 };
 
     dispatch(Postunsettleddddd(data));
-    
+
   }, [pageNumber]);
 
   const handleDoubleLeft = (vl) => {
@@ -154,48 +154,52 @@ const Mybets = () => {
           )}
         </div>
       </section>
-      <div className="pagination myBetpagination">
-        <button
-          disabled={pageNumber === 0 ? true : false}
-          className="paginationBtn "
-          onClick={() => handleDoubleLeft("doubleleft")}
-        >
-          <AiOutlineDoubleLeft className="arrowDoubleLeft" />
-        </button>
-        <button
-          disabled={pageNumber === 0 ? true : false}
-          className="paginationBtn "
-          style={{ marginLeft: "-9px" }}
-          onClick={() => handleDoubleLeft("sigleleft")}
-        >
-          <AiOutlineLeft className="arrowSingleLeft" />
-        </button>
-        <div className="paginationno">
-          <div style={{ marginTop: "7px", marginLeft: "11px" }}>
-            {pageNumber + 1}
+      {PostunsettledData?.data?.totalPages === 1 ?
+        ""
+        : <div className="pagination myBetpagination">
+          <button
+            disabled={pageNumber === 0 ? true : false}
+            className="paginationBtn "
+            onClick={() => handleDoubleLeft("doubleleft")}
+          >
+            <AiOutlineDoubleLeft className="arrowDoubleLeft" />
+          </button>
+          <button
+            disabled={pageNumber === 0 ? true : false}
+            className="paginationBtn "
+            style={{ marginLeft: "-9px" }}
+            onClick={() => handleDoubleLeft("sigleleft")}
+          >
+            <AiOutlineLeft className="arrowSingleLeft" />
+          </button>
+          <div className="paginationno">
+            <div style={{ marginTop: "7px", marginLeft: "11px" }}>
+              {pageNumber + 1}
+            </div>
           </div>
-        </div>
 
-        <button
-          disabled={
-            PostunsettledData?.data?.totalPages === pageNumber ? true : false
-          }
-          className="paginationBtn"
-          style={{ marginLeft: "-10px" }}
-          onClick={() => handleDoubleLeft("singleright")}
-        >
-          <AiOutlineRight className="arrowSingleRight" />
-        </button>
-        <button
-          disabled={
-            PostunsettledData?.data?.totalPages === pageNumber ? true : false
-          }
-          className="paginationBtn"
-          onClick={() => handleDoubleLeft("doubleright")}
-        >
-          <AiOutlineDoubleRight className="arrowDoubleRight" />
-        </button>
-      </div>
+          <button
+            disabled={
+              PostunsettledData?.data?.totalPages === pageNumber ? true : false
+            }
+            className="paginationBtn"
+            style={{ marginLeft: "-10px" }}
+            onClick={() => handleDoubleLeft("singleright")}
+          >
+            <AiOutlineRight className="arrowSingleRight" />
+          </button>
+          <button
+            disabled={
+              PostunsettledData?.data?.totalPages === pageNumber ? true : false
+            }
+            className="paginationBtn"
+            onClick={() => handleDoubleLeft("doubleright")}
+          >
+            <AiOutlineDoubleRight className="arrowDoubleRight" />
+          </button>
+        </div>
+      }
+
     </>
   );
 };

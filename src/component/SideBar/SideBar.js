@@ -114,7 +114,7 @@ const SideBar = () => {
 
                         <Link data-v-4732acba="" className="favourites-link" onClick={() => handleRoute(item?.sportId, item?.sportName)}>
                           <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} className="game-icon" />
-                          <span data-v-4732acba="" className="link-name">{item?.sportName}dasda</span></Link>
+                          <span data-v-4732acba="" className="link-name">{item?.sportName}</span></Link>
                       </li>))) : ""}
 
                   <Link
