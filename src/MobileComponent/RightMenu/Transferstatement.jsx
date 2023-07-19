@@ -113,35 +113,38 @@ const Transferstatement = () => {
           <section className="m-t-10 transfer">
             <h2 className="page-title p-l-15">Account Statement</h2>
 
-            <div style={{ marginTop: "19px" }}>
-              <DatePicker
-                className="startDate"
-                defaultValue={dayjs(startDate)}
-                format={dateFormat}
+            <div className='outer_box1'>
+              <div className="main_for_sports1">
 
-                onChange={StartDateValue}
-                disabledDate={(d) =>
-                  !d ||
-                  d.isBefore(dayjs().subtract(2, "month")) ||
-                  d.isAfter(dayjs())
-                }
-              />
-              <DatePicker
-                className="endDate"
-                defaultValue={dayjs}
+                <DatePicker
+                  className="box_selection_time1"
+                  defaultValue={dayjs(startDate)}
+                  format={dateFormat}
 
-                format={dateFormat}
-                onChange={EndDateValue}
-                disabledDate={(d) =>
-                  !d ||
-                  d.isBefore(dayjs().subtract(2, "month")) ||
-                  d.isAfter(dayjs())
-                }
-              />
-              <div className="AccountBtnsubmit">
+                  onChange={StartDateValue}
+                  disabledDate={(d) =>
+                    !d ||
+                    d.isBefore(dayjs().subtract(2, "month")) ||
+                    d.isAfter(dayjs())
+                  }
+                />
+                <DatePicker
+                  className="box_selection_time1"
+                  defaultValue={dayjs}
+
+                  format={dateFormat}
+                  onChange={EndDateValue}
+                  disabledDate={(d) =>
+                    !d ||
+                    d.isBefore(dayjs().subtract(2, "month")) ||
+                    d.isAfter(dayjs())
+                  }
+                />
+              </div>
+              <div className="main_for_sports1">
 
                 <select
-                  className="selectionndsfsdfnn"
+                  className="box_selection_time1"
                   // name="cars"
                   // id="cars"
                   onChange={handleSelectGame}
@@ -151,8 +154,8 @@ const Transferstatement = () => {
                   <option value={3}> Deposite/Withdraw Report</option>
                 </select>
                 <button
-                  className="selectionndsfsdfnn"
-                  style={{ width: "45%" }}
+                  className="box_selection_time1"
+                  style={{ backgroundColor: "#2c4f58" }}
                   onClick={handleSubmit}
                 >
                   Submit

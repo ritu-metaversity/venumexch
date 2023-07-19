@@ -78,117 +78,117 @@ const DepositForDesktop = () => {
                         ></i>
                     </div>
                     :
-                    <div className="" style={{ width: "900px" }}>
+                    <div className="main_div_for_deposite" >
                         <PayManually UpdateList={UpdateList} />
 
-                        <div className="row row5 mt-2">
-                            <div className="col-12">
-                                <div className="table-responsive">
-                                    <table
-                                        role="table"
-                                        aria-busy="false"
-                                        aria-colcount="6"
-                                        className="table b-table table-bordered deposit-table"
-                                        id="__BVID__104"
+
+
+
+                        <table
+                            role="table"
+                            aria-busy="false"
+                            aria-colcount="6"
+                            className="table b-table table-bordered deposit-table"
+                            id="__BVID__104"
+                        >
+                            <thead>
+                                <tr className="previous-deposite">
+                                    <th colSpan="4">Previous Deposite</th>
+                                </tr>
+                                <tr role="row" className="deposit-list">
+                                    <th
+                                        role="columnheader"
+                                        scope="col"
+                                        aria-colindex="1"
+                                        className="text-left"
                                     >
-                                        <thead>
-                                            <tr className="previous-deposite">
-                                                <th colSpan="4">Previous Deposite</th>
-                                            </tr>
-                                            <tr role="row" className="deposit-list">
-                                                <th
-                                                    role="columnheader"
-                                                    scope="col"
-                                                    aria-colindex="1"
-                                                    className="text-left"
-                                                >
-                                                    Amount
-                                                </th>
-                                                <th
-                                                    role="columnheader"
-                                                    scope="col"
-                                                    aria-colindex="2"
-                                                    className="text-center"
-                                                >
-                                                    Image
-                                                </th>
-                                                <th
-                                                    role="columnheader"
-                                                    scope="col"
-                                                    aria-colindex="3"
-                                                    className="text-center"
-                                                >
-                                                    Date
-                                                </th>
-                                                <th
-                                                    role="columnheader"
-                                                    scope="col"
+                                        Amount
+                                    </th>
+                                    <th
+                                        role="columnheader"
+                                        scope="col"
+                                        aria-colindex="2"
+                                        className="text-center"
+                                    >
+                                        Image
+                                    </th>
+                                    <th
+                                        role="columnheader"
+                                        scope="col"
+                                        aria-colindex="3"
+                                        className="text-center"
+                                    >
+                                        Date
+                                    </th>
+                                    <th
+                                        role="columnheader"
+                                        scope="col"
+                                        aria-colindex="4"
+                                        className="text-center"
+                                    >
+                                        Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            {PostdepsositrequestclientData &&
+                                PostdepsositrequestclientData?.data &&
+                                PostdepsositrequestclientData?.data.map((item) => (
+                                    <tbody>
+                                        <tr role="row">
+                                            <td aria-colindex="1" className="text-left">
+                                                {item?.amount}
+                                            </td>
+                                            <td
+                                                aria-colindex="2"
+                                                className="text-center"
+                                                onClick={(e) => handleModal(e, item?.image)}
+                                            >
+                                                <img
+                                                    alt=""
+                                                    className="fkjsdfsdkfjsd text-center"
+                                                    src={item?.image}
+                                                />
+                                            </td>
+                                            <Modal
+                                                show={trueee}
+                                                onHide={() => setTrueee(false)}
+                                                size="lg"
+                                                centered
+                                            >
+                                                <Modal.Body>
+                                                    {/* {console.log("nsjdsjdnjnf")} */}
+                                                    <img src={imgUrl} alt="" className="imgggggggg" />
+                                                </Modal.Body>
+                                            </Modal>
+                                            <td aria-colindex="3" className="text-center">
+                                                {item?.time}
+                                            </td>
+                                            {item.status === "Pending" ? (
+                                                <td aria-colindex="4" style={{ color: "#ffa726" }}
+                                                    className="text-center">
+                                                    {item?.status}
+                                                </td>
+                                            ) : item.status === "Rejected" ? (
+                                                <td aria-colindex="4" style={{ color: "#f44336" }}
+                                                    className="text-center">
+                                                    {item?.status}
+                                                </td>
+                                            ) : (
+                                                <td
                                                     aria-colindex="4"
                                                     className="text-center"
+                                                    style={{ color: "#66bb6a", fontSize: "10px" }}
                                                 >
-                                                    Status
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        {PostdepsositrequestclientData &&
-                                            PostdepsositrequestclientData?.data &&
-                                            PostdepsositrequestclientData?.data.map((item) => (
-                                                <tbody>
-                                                    <tr role="row">
-                                                        <td aria-colindex="1" className="text-left">
-                                                            {item?.amount}
-                                                        </td>
-                                                        <td
-                                                            aria-colindex="2"
-                                                            className="text-center"
-                                                            onClick={(e) => handleModal(e, item?.image)}
-                                                        >
-                                                            <img
-                                                                alt=""
-                                                                className="fkjsdfsdkfjsd text-center"
-                                                                src={item?.image}
-                                                            />
-                                                        </td>
-                                                        <Modal
-                                                            show={trueee}
-                                                            onHide={() => setTrueee(false)}
-                                                            size="lg"
-                                                            centered
-                                                        >
-                                                            <Modal.Body>
-                                                                {/* {console.log("nsjdsjdnjnf")} */}
-                                                                <img src={imgUrl} alt="" className="imgggggggg" />
-                                                            </Modal.Body>
-                                                        </Modal>
-                                                        <td aria-colindex="3" className="text-center">
-                                                            {item?.time}
-                                                        </td>
-                                                        {item.status === "Pending" ? (
-                                                            <td aria-colindex="4" style={{ color: "#ffa726" }}
-                                                                className="text-center">
-                                                                {item?.status}
-                                                            </td>
-                                                        ) : item.status === "Rejected" ? (
-                                                            <td aria-colindex="4" style={{ color: "#f44336" }}
-                                                                className="text-center">
-                                                                {item?.status}
-                                                            </td>
-                                                        ) : (
-                                                            <td
-                                                                aria-colindex="4"
-                                                                className="text-center"
-                                                                style={{ color: "#66bb6a", fontSize: "10px" }}
-                                                            >
-                                                                {item?.status}
-                                                            </td>
-                                                        )}
-                                                    </tr>
-                                                </tbody>
-                                            ))}
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                                                    {item?.status}
+                                                </td>
+                                            )}
+                                        </tr>
+                                    </tbody>
+                                ))}
+                        </table>
+
+
+
                     </div>}
         </>
     );

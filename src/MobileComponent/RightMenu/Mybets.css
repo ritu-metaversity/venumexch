@@ -424,19 +424,23 @@ section {
     margin-right: 9%;
     font-size: 19px;
 }
+
 .lodding {
     background-color: #00000063;
     height: 63vh;
 }
+
 .pagination.myBetpagination {
     position: fixed;
     left: 2%;
-    bottom: 106px;
+    bottom: 130px;
 }
+
 .main-matchBet {
     height: 609px;
     overflow: scroll;
 }
-.main-matchBet::-webkit-scrollbar{
+
+.main-matchBet::-webkit-scrollbar {
     display: none;
 }

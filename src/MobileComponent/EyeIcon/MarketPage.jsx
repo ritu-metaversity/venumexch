@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Postunsettleddddd } from "../../App/Features/auth/authActions";
 import "./MarketPage.css";
 
@@ -48,16 +49,17 @@ const MarketPage = () => {
           {myMarket &&
             myMarket.map((item) => {
               return (
-                <li class="market-list-item" style={{ marginTop: "12px" }}>
+                <li class="market-list-item" >
                   {console.log(item, "myMarketmyMarketmyMarket")}
                   <a href={`/m/gamedetail/${item?.matchId}`} class="">
-                    <div class="item-inner">
+                    <div class="item-innerrrr">
                       <img
                         src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.eventType}.png`}
                         alt="market-images"
+                        className="game_logo_market_page"
                       />{" "}
                       <span
-                        class="m-l-10 game-name v-m"
+                        className="game_name_market_page"
                         style={{ color: "black" }}
                       >
                         {item?.eventName}

@@ -114,14 +114,24 @@ button.stakeactionminus.btn {
     }
 } */
 
-.dest_logo {
+/* .dest_logo {
     width: 44% !important;
-}
+} */
 
-.dest_upi {
+/* .dest_upi {
     width: 104% !important;
-}
+} */
 
 .wrapper {
     overflow-x: unset !important;
+}
+
+.main_div_for_deposite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    width: 1030px;
+    padding: 23px
 }

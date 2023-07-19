@@ -487,7 +487,7 @@ const WithDraw1 = () => {
                 className="withdrow_type"
                 style={{ marginBottom: "12px", width: "100%" }}>
                 <select onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%" }}>
-                    <option selected>Select Withdraw Type</option>
+                    <option value="">Select Withdraw Type</option>
                     <option value="Normal">Normal</option>
                     <option value="Instant">Instant</option>
                 </select>

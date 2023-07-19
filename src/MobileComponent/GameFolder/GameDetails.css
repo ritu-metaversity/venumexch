@@ -1626,19 +1626,19 @@ strong {
         margin-left: -11%;
     }
 
-    .inputfield {
+    /* .inputfield {
 
         margin-left: 34% !important;
-    }
+    } */
 
-    .enter-amount {
+    /* .enter-amount {
         margin-top: 0% !important;
         margin-left: 20% !important;
-        /* margin-bottom: 0%; */
+       
         height: 15px !important;
         font-size: 160% !important;
 
-    }
+    } */
 
     .head-deposit {
         background-color: #2C3D50;

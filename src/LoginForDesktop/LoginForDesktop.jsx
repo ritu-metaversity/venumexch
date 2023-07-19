@@ -210,7 +210,7 @@ const LoginForMobile = () => {
     <div id="app">
       <div>
         <div className="login">
-          <div className="login-view">
+          <div className="">
             <div className="login-container">
               <div className="login-form">
                 <div className="login-panel">
