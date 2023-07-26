@@ -72,7 +72,7 @@ const WithDraw1 = () => {
     const [savedBankdetailsName, setSavedBankdetailsName] = useState("")
     const handleClose = () => {
         setShow(false);
-        toast.success("Withdraw Request Submited Successfully");
+        // toast.success("Withdraw Request Submited Successfully");
         setErrorAlert(true);
         setIsLoading(false);
         setColorName("success");
@@ -143,6 +143,21 @@ const WithDraw1 = () => {
             )
             .then((res) => {
                 setGetAccountData(res?.data?.data);
+            });
+        axios
+            .post(
+                `${REACT_APP_API_URL}/enduser/get-user-balance`,
+                {},
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${TokenId}`,
+                    },
+                }
+            )
+            .then((res) => {
+                setuserBalance(res?.data?.data?.balance);
+
             });
         // UserAPI.User_Balance().then((res)=>{
         //   setuserBalance(res?.data?.balance)
