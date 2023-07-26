@@ -72,7 +72,7 @@ header.header {
 }
 
 header.header a {
-    color: #ffecc6;
+    color: #ffecc6 !important;
 }
 
 header.header .dropdown .dropdown-menu a {
@@ -446,9 +446,7 @@ header.header .infobar .last-login {
     font-size: 11px;
 }
 
-header.header a {
-    color: #ffecc6;
-}
+
 
 header.header .logo-area {
     width: 178px;

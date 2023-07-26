@@ -204,7 +204,7 @@ const ChangePassword = () => {
         }
       });
     } else if (oldPassword === "" && confirmPassword === "" && newPassword === "") {
-      return toast.error("Please enter all the mandatory details" || "Something went Wrong!!", {
+      return toast.error("All fields are mandatory" || "Something went Wrong!!", {
         style: {
           background: "rgb(156,74,70)", minHeight: 40,
           padding: 0,
@@ -212,8 +212,8 @@ const ChangePassword = () => {
         }
       });
     }
-    const userid = localStorage.getItem("userid") || "";
-    const token = localStorage.getItem("token") || "";
+    const userid = localStorage.getItem("userId") || "";
+    const token = localStorage.getItem("TokenId") || "";
 
     if ((newPassword?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
       null) === true) {
@@ -222,11 +222,12 @@ const ChangePassword = () => {
       );
     } else {
       dispatch(PostPwChangeFirstTime({
-        oldPassword,
+        oldPassword: oldPassword,
         currentPassword: oldPassword,
-        newPassword,
-        confirmPassword,
-        userid,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+        userid: userid,
+        token: token
 
       }));
     }
@@ -243,7 +244,7 @@ const ChangePassword = () => {
         }
       });
     } else if (oldPassword === "" && confirmPassword === "" && newPassword === "") {
-      return toast.error("Please enter all the mandatory details" || "Something went Wrong!!", {
+      return toast.error("All fields are mandatory" || "Something went Wrong!!", {
         style: {
           background: "rgb(156,74,70)", minHeight: 40,
           padding: 0,
@@ -259,9 +260,11 @@ const ChangePassword = () => {
       );
     } else {
       dispatch(PostPasswordChange({
-        oldPassword,
+        oldPassword: oldPassword,
         currentPassword: oldPassword,
         newPassword,
+        newPassword,
+
       }))
       //   const { response } = await userServices.changePassword({
       //     oldPassword,
@@ -315,7 +318,7 @@ const ChangePassword = () => {
                 value={newPassword}
                 onChange={handlePassWordsValidation}
               />
-              <label style={{ color: "red" }}>{passworderror}</label>
+              <label style={{ color: "red", display: "block" }}>{passworderror}</label>
             </div>
 
             <div className="form-group m-b-10">

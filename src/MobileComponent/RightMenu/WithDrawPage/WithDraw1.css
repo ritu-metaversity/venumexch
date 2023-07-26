@@ -1,7 +1,7 @@
 .withdrow_coin {
     display: flex;
     justify-content: space-between;
-    margin: 12px 34px;
+    margin: 12px 55px;
     align-items: center;
 }
 
@@ -23,6 +23,12 @@
 
 }
 
+.asdfghjkl {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .withdrow_title p,
 .choose_val {
     margin: 6px -8px;
@@ -42,10 +48,14 @@
 }
 
 .withdrow_type select {
-    width: 97%;
+    width: 94%;
     margin: 0 31px;
     height: 37px;
     border-radius: 3px;
+}
+
+.d-none {
+    display: none;
 }
 
 .withdrow_type p {
@@ -55,10 +65,19 @@
     font-weight: 600;
 }
 
+.table {
+    width: 97%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
 .with_paymethod {
     width: 97%;
     margin-top: 19px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
 }
 
 .withdraw_image img {
@@ -72,8 +91,16 @@
 }
 
 .withdraw_image.col .css-1502y4u {
-    padding: 12px 0px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
+/* .withdraw_image.col:hover {
+    background-color: #7b7c7f;
+} */
 
 .withdraw_table input {
     border: 1px solid #ddd;
@@ -111,6 +138,8 @@
     align-items: center;
 }
 
+.input {}
+
 .withdraw_coin_btn button {
     border: unset;
     color: #fff;
@@ -125,7 +154,7 @@
 
 .main_withdrow {
     justify-content: center;
-    margin-top: 44px;
+    /* margin-top: 44px; */
     /* margin-left: -41px; */
     margin-bottom: 23px;
 }
@@ -143,20 +172,25 @@ p.lodder.depositLoading.withloading.withdraw_deposit i {
 }
 
 @media screen and (min-width:801px) {
+
     /* .accountWith {
         width: 30%;
     } */
     .mainAccount.main_withdrow.accountWith {
         display: flex;
         justify-content: center;
+        gap: 2%;
     }
+
     select.custom-select.select-type.accounttype {
         height: 35px;
         width: 139px !important;
     }
+
     .accounttype {
         width: 100% !important;
     }
+
     .withdrow_coin {
         margin-top: 99px;
     }
@@ -165,23 +199,89 @@ p.lodder.depositLoading.withloading.withdraw_deposit i {
 .accounttype {
     width: 39%;
 }
+
 .withdraw_coin_btn {
     position: relative;
     display: block;
     margin: auto;
 }
+
 select.custom-select.select-type.accounttype {
     height: 35px;
-    width: 135px !important;
+    width: 189px !important;
 
 }
+
+.innerRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.bet-boxxxxx {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: rgb(157, 157, 158);
+    /* padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 51px; */
+    padding: 30px;
+}
+
+.main-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    gap: 15px;
+    /* margin-top: 10%; */
+    /* gap: 3%; */
+
+}
+
+.btnnn-modal {
+    border: transparent;
+    border-radius: 5px;
+    /* padding: 7px 19px; */
+}
+
+.headdddd {
+    color: #000;
+}
+
+.tbnnnn {
+    background-color: #183f45;
+    padding: 5px 14px;
+    border-radius: 5px;
+    border: unset;
+
+}
+
+.Bet-succccccc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    /* margin-top: 49px; */
+    gap: 11%;
+}
+
 @media screen and (max-width:800px) {
     .withdrow_coin {
         display: block;
     }
 
     .withdrow_coin {
-        margin: 95px 24px 0 6px;
+        margin: 100px 24px 0 6px;
     }
 
     .coin_value button {
@@ -198,6 +298,11 @@ select.custom-select.select-type.accounttype {
 
     .mx-input-wrapper.account-field {
         width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px
     }
 
     .card-header.header-card {
@@ -205,20 +310,30 @@ select.custom-select.select-type.accounttype {
     }
 
     .main_withdrow {
-        margin-inline: 13px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        gap: 10px;
     }
 
     .withdraw_coin_btn {
         width: 100%;
         display: flex;
     }
-  
+
+}
+
+.withdraw_page {
+    padding: 3%;
 }
 
 @media screen and (min-width: 801px) {
     .withdraw_page {
-        width: 74vw;
+        width: 100%;
         margin-top: -73px;
+        padding: 3%;
     }
 }
 
@@ -251,6 +366,15 @@ p.lodder.depositLoading.withloading.withdraw_deposit {
     width: 254px !important;
     top: 6px;
 }
+
 input.account-input {
     height: 35px;
+}
+
+.maindiccccc {}
+
+@media screen and (min-width:1200px) {
+    .maindiccccc {
+        width: 70%;
+    }
 }

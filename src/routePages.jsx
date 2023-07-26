@@ -24,10 +24,11 @@ import DepositForDesktop from "./component/AccountsDetails/DepositDesktop/Deposi
 import Game from "./component/Mid/Game";
 import Casinolist from "./component/SideBar/Casinolist";
 import Casino from "./component/SideBar/Casino";
-import Signup from "./LoginForDesktop/Signup";
+// import Signup from "./LoginForDesktop/Signup";
 import TermsandConditions from "./MobileComponent/MMFooter/TermsandConditions";
 import AboutUs from "./MobileComponent/MMFooter/AboutUs";
 import WithDraw1 from "./MobileComponent/RightMenu/WithDrawPage/WithDraw1";
+import Signup from "./LoginForDesktop/Signup";
 
 
 

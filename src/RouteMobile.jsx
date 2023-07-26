@@ -29,7 +29,7 @@ import Casinolist from "./MobileComponent/Livecasino/Casinolist";
 import Casino from "./MobileComponent/Livecasino/Casino";
 import Deposit from "./MobileComponent/RightMenu/DepositPages/Deposit";
 import WithDraw from "./MobileComponent/RightMenu/WithDrawPage/WithDraw";
-import Signup from "./logincomponents/Signup";
+// import Signup from "./logincomponents/Signup";
 import Gamepage from "./MobileComponent/MidPageM/Gamepage";
 import SingupBanner1 from "./MobileComponent/LandingForSignup/SingupBanner1";
 import SingupBanner2 from "./MobileComponent/LandingForSignup/SingupBanner2";
@@ -39,6 +39,7 @@ import SingupBanner5 from "./MobileComponent/LandingForSignup/SingupBanner5";
 import AboutUs from "./MobileComponent/MMFooter/AboutUs";
 import TermsandConditions from "./MobileComponent/MMFooter/TermsandConditions";
 import WithDraw1 from "./MobileComponent/RightMenu/WithDrawPage/WithDraw1";
+import Signup from "./LoginForDesktop/Signup";
 // const Login = lazy(() => import('./logincomponents/Login'))
 const RouteMobile = () => {
   const { pathname } = useLocation();

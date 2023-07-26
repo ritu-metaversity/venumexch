@@ -8,157 +8,139 @@ import { Postuserselfregister } from "../App/Features/auth/authActions";
 import ValidationFile from "../Validation/ValidationFile";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import "./signip.css"
 export let setShowRegisterModalRefDesktop
+
 const Signup = () => {
-
-
-  const dispatch = useDispatch();
-  let navigate = useNavigate();
-  const [show, setShow] = useState(false);
   const [signUpShow, setSignUpShow] = useState(false);
-  // const [login, setLogin] = useState({});
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [mobileNumber, setMobileumber] = useState();
-  const [errorId, setErrorId] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
-  const [errorMobile, setErrorMobile] = useState(false);
   const [signUpClose, setSignUpClose] = useState(false);
-  const [register, setRegistration] = useState({
-    username: "",
-    password: "",
-    mobile: "",
-    confirmPassword: "",
-    appUrl: "",
-  });
-  const { PostuserselfregisterData, PostuserselfregisterDataError } =
-    useSelector((state) => state.auth);
+  const [open, setOpen] = useState(false);
+  const [newCredAfterRegister, setNewCredAfterRegister] = useState("");
+  const navigate = useNavigate();
+  const [selfAllowedd, SetselfAllowedd] = useState("");
+  // const [selfAllowedd, SetselfAllowedd] = useState();
 
-  setShowRegisterModalRefDesktop = setSignUpShow;
-  //   const [password, setPassword] = useState("");
-  const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
-
-  const [errorForall, setErrorForall] = useState("")
-  const [useeerror, setUserNameError] = useState("")
-  const [mobileerror, setmobileNumberError] = useState("")
-  const [passworderror, setPasswordError] = useState("")
-  const [confirmpassword, setConfirmPasswordError] = useState("")
-  const handleClick = async () => {
-
-    if (register.username === "" && register.mobile === "" && register.password === "" && register.confirmPassword === "") {
-      return setErrorForall("Please enter all the mandatory details");
-    } else if (register?.password !== "" && register?.mobile === "" && register?.username !== "" && register?.confirmPassword !== "") {
-      return setErrorForall(" invalid mobile number");
-    } else if (register?.password === "" && register?.mobile !== "" && register?.username !== "" && register?.confirmPassword !== "") {
-      return setErrorForall("invalid password ");
-    } else if (register?.password !== "" && register?.mobile !== "" && register?.username !== "" && register?.confirmPassword === "") {
-      return setErrorForall("invalid Confirm password");
-    } else if (register.password !== register.confirmPassword) {
-      return setErrorForall("Password does not match!!");
-    } else if ((register?.password?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
-      null) === true) {
-      return setPasswordError(
-        "Password should contain atleast one number and one lower case and one upper case."
-      );
-    } else {
-      // const { response } = await authServices.registeration({
-      //   ...register,
-      //   userId: register.username,
-      // });
-      dispatch(Postuserselfregister(register));
-
-      // if (response?.status) {
-      //   snackBarUtil.success(response.message);
-      //   setOpen(true);
-      //   setNewCredAfterRegister(response);
-      //   // navigate("/sign-in", { replace: true });
-      // } else {
-      // }
-    }
-  };
-  // useEffect(() => {
-  //   if (PostuserselfregisterData?.status === 200 && signUpShow === false) {
-  //     setSignUpShow(true);
-  //   }
-  // }, [PostuserselfregisterData])
-
-  const handleLogin = () => {
-    navigate("/login");
-  };
-  const handleInput = (e) => {
-    let inputName = e.target.name;
-    let inputValue = e.target.value;
-    switch (inputName) {
-      case "Username":
-        setUserName(ValidationFile.spaceNotAccept(inputValue));
-        setErrorId(
-          ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
-        );
-
-        // setErrorId(false);
-        break;
-      case "Password":
-        // setPassword(inputValue);
-        // setErrorPassword(false);
-        setPassword(ValidationFile.spaceNotAccept(inputValue));
-        setErrorPassword(
-          ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
-        );
-
-        break;
-      case "mobileNumber":
-        // setMobileumber(inputValue);
-        // setErrorMobile(false);
-
-        if (inputValue.length === 4) {
-          // console.log("mobile no leass then 9")
-        }
-        setMobileumber(ValidationFile.spaceNotAccept(inputValue));
-        setErrorMobile(
-          ValidationFile.isEmpty(ValidationFile.spaceNotAccept(inputValue))
-        );
-
-        break;
-      default:
-        return false;
-    }
-  };
-
-  // password
-  // :
-  // "2222222"
-  // status
-  // :
-  // true
-  // username
-  // :
-  // "anish2512"
-  const handleSignup = (e) => {
-    // setInfoError(true);
-
-    let data = {
-      username: userName,
-      password: password,
-      appUrl: window.location.hostname,
-      mobile: mobileNumber,
-      userId: userName,
-    };
-    if (ValidationFile.isEmpty(userName)) {
-      setErrorId(true);
-    }
-    if (ValidationFile.isEmpty(password)) {
-      setErrorPassword(true);
-    }
-    if (ValidationFile.isEmpty(mobileNumber)) {
-      setErrorMobile(true);
-    }
-    if (
-      !ValidationFile.isEmpty(userName) &&
-      !ValidationFile.isEmpty(password) &&
-      !ValidationFile.isEmpty(mobileNumber)
+  const [password, setPassword] = useState(0);
+  const [mobileNumber, setMobileNumber] = useState();
+  const [UserName, setUserName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [errorMsg, setErrorMsg] = useState();
+  const [StatusVal, setStatusVal] = useState(true);
+  const [StatusCode, setStatusCode] = useState();
+  const [logo, setLogo] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  // const [message, setMessage] = useState("");
+  // const [isLoading1, setIsLoading1] = useState(false);
+  // const [alertBtnColor, setAlertBtnColor] = useState();
+  // const nav = useNavigate();
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [mobileNumberError, setmobileNumberError] = useState("");
+  const [userNameError, setUserNameError] = useState("");
+  const handleValidation = () => {
+    console.log(password, confirmPassword, "kjhgfghj");
+    if (UserName === "" && mobileNumber === 0 && password === 0) {
+      setUserNameError("User Name is required");
+      setPasswordError("Password is required.");
+      setmobileNumberError("Mobile number must not be empty.");
+      return false;
+    } else if (UserName === "") {
+      setUserNameError("User Name is required");
+      return false;
+    } else if (mobileNumber === 0 || mobileNumber === undefined) {
+      setmobileNumberError("Mobile number must not be empty.");
+      return false;
+    } else if (password === 0) {
+      setPasswordError("Password is required.");
+      return false;
+    } else if (confirmPassword === undefined) {
+      setConfirmPasswordError("Confirm Password is required.");
+      return false;
+    } else if (confirmPassword !== password) {
+      setConfirmPasswordError("Password must be equal.");
+      return false;
+    } else if (mobileNumber?.length !== 10) {
+      return false;
+    } else if (password === 0) {
+      setPasswordError("Password is required.");
+      return false;
+    } else if (
+      password.match(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/
+      ) === null
     ) {
-      dispatch(Postuserselfregister(data));
+      return false;
+    } else if (UserName?.length < 4) {
+      return false;
+    } else if (UserName?.length > 8) {
+      return false;
+    } else if (UserName?.match(/^[a-zA-Z0-9]+$/) === null) {
+      return false;
+    } else if (password?.length < 8) {
+      return false;
+    } else if (password.length > 12) {
+      return false;
+    }
+    return true;
+  };
+
+
+  const handleLogin = async () => {
+    setStatusVal(true);
+    let data = {
+      appUrl: window.location.hostname,
+      username: UserName,
+      password: password,
+      confirmPassword: confirmPassword,
+      mobile: mobileNumber,
+      userId: UserName,
+    }
+    if (handleValidation()) {
+
+      axios
+        .post(
+          "https://api.247365.exchange/admin-new-apis/user/self-register", data
+        )
+        .then((res) => {
+          if (res?.status) {
+            setOpen(true)
+            toast.success(res?.data?.message || "", {
+              style: {
+                background: "rgb(74,117,67)", minHeight: 40,
+                padding: 0,
+                color: "white",
+              }
+            });
+            // snackBarUtil.success(res?.data?.message);
+            console.log(res?.data)
+            setSignUpShow(true)
+            setNewCredAfterRegister(res?.data);
+          } else {
+            toast.error(res?.data?.message || "", {
+              style: {
+                background: "rgb(156,74,70)", minHeight: 40,
+                padding: 0,
+                color: "white",
+              }
+            });
+            // snackBarUtil.error(res?.data?.message);
+          }
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message || "", {
+            style: {
+              background: "rgb(156,74,70)", minHeight: 40,
+              padding: 0,
+              color: "white",
+            }
+          });
+          // snackBarUtil.error(error.response.data.message);
+          // setStatusCode(error.response.status);
+          // setErrorMsg(error.response.data.message);
+          // setStatusVal(false);
+          // setAlertBtnColor("danger");
+        });
     }
   };
   const handleSignUpShow = () => {
@@ -185,29 +167,58 @@ const Signup = () => {
         }
       })
   };
-  let appUrll = window.location.hostname;
-  const [selfAllowedd, SetselfAllowedd] = useState("");
-  useEffect(() => {
-    axios
-      .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
-        { appUrl: appUrll }
-      )
-      .then((res) => {
-        SetselfAllowedd(res?.data?.data);
-      });
-  }, [appUrll]);
+
+
+  const handlePassWordsValidation = (e) => {
+    setPassword(e.target.value);
+    const passData = e.target.value;
+    if (passData === "") {
+      setPasswordError("Password is required.");
+    } else if (passData?.length < 8) {
+      setPasswordError("Minimum 8 letters required.");
+    } else if (passData?.length > 13) {
+      setPasswordError("Maximum 12 letters required");
+    } else if (
+      passData?.match(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$#!%*?&_]{8,12}$/
+      ) === null
+    ) {
+      setPasswordError(
+        "Password should contain atleast one number and one lower case and one upper case."
+      );
+    } else {
+      setPasswordError("");
+    }
+  };
+  const handleConfirmPasswordsValidation = (e) => {
+    setConfirmPassword(e.target.value);
+    const confirmPass = e.target.value;
+    if (password !== confirmPass) {
+      setConfirmPasswordError("Password must be equal.");
+    } else {
+      setConfirmPasswordError("");
+    }
+  };
+
+
+  const handleMobileNumber = (e) => {
+    console.log(e.target.value, "luhbnoihb")
+    if (e.target.value.match(/^[0-9]{0,10}$/) !== null) {
+      setMobileNumber(e.target.value);
+    }
+    if (e.target.value.match(/^[0-9]{0,10}$/) === "") {
+      setmobileNumberError("Mobile number must not be empty.");
+    } else if (e.target.value?.length !== 10) {
+      setmobileNumberError("Mobile number must be 10 digit number");
+    } else {
+      setmobileNumberError("");
+    }
+  };
 
 
   const handleUserName = (e) => {
-    setRegistration({
-      username: e.target.value,
-      password: register?.password,
-      mobile: register?.mobile,
-      confirmPassword: register?.confirmPassword,
-      appUrl: window.location.hostname,
-    })
-    // setUserName(e.target.value);
+    setUserName(e.target.value);
+
     const userData = e.target.value;
     if (userData === "") {
       setUserNameError("User Name is required");
@@ -218,91 +229,51 @@ const Signup = () => {
     } else if (userData?.match(/^[a-zA-Z0-9]+$/) === null) {
       setUserNameError("Only number and alphabet are allowed.");
     } else {
-      setUserNameError("")
+      setUserNameError("");
     }
   };
-  const handlePassWordsValidation = (e) => {
-    setRegistration({
-      username: register?.username,
-      password: e.target.value,
-      mobile: register?.mobile,
-      confirmPassword: register?.confirmPassword,
-      appUrl: window.location.hostname,
-    })
-    const passData = e.target.value;
-    if (passData === "") {
-      setPasswordError("Password is required.");
-    } else if (passData?.length < 8) {
-      setPasswordError("Minimum 8 letters required.");
-    } else if (passData?.length > 13) {
-      setPasswordError("Maximum 12 letters required");
-    } else if (
-      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
-      null
-    ) {
-      setPasswordError(
-        "Password should contain atleast one number and one lower case and one upper case."
-      );
-    } else {
-      setPasswordError("")
-    }
-    console.log(passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
-      null, "uytgbnjiygbn")
-  };
 
+  useEffect(() => {
+    let appUrll = window.location.hostname;
+    // let appUrll = "localhost";
+    axios
+      .post(
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        console.log(res, "dadasdas")
+        // SetselfAllowedd(res?.data?.data?.logo);
+        setLogo(res?.data?.data?.logo);
+        SetselfAllowedd(res?.data?.data)
+        // setStatusBtn(res?.data?.data?.selfAllowed);
+        // setIsDemoIdLoginAllowed(res?.data?.data?.isDemoIdLoginAllowed)
+        if (res?.data?.data?.selfAllowed === false) {
 
+          navigate("/sign-in")
+        } else {
 
-  // useEffect(() => {
-  //   setPasswordError("")
-  //   setmobileNumberError("")
-  //   setUserNameError("")
-  //   setConfirmPasswordError("")
-  // }, [])
+        }
+      });
+  }, []);
 
-  const handleConfirmPasswordsValidation = (e) => {
-    setRegistration({
-      username: register?.username,
-      password: register?.password,
-      mobile: register?.mobile,
-      confirmPassword: e.target.value,
-      appUrl: window.location.hostname,
-    })
-    const confirmPass = e.target.value;
-    if (register?.password !== confirmPass) {
-      setConfirmPasswordError("Password must be equal.");
-    } else {
-      setConfirmPasswordError("")
-    }
-  };
-  const handleMobileNumber = (e) => {
-    setRegistration({
-      username: register?.username,
-      password: register?.password,
-      mobile: e.target.value,
-      confirmPassword: register?.confirmPassword,
-      appUrl: window.location.hostname,
-    })
-    if (e.target.value === "") {
-      setmobileNumberError("Mobile number must not be empty.");
-    } else if (e.target.value?.length !== 10) {
-      setmobileNumberError("Must be minimum 10 digit");
-    } else {
-      setmobileNumberError("")
-    }
-  };
+  const handleClickLogin = () => {
+    navigate("/login")
+
+  }
   return (
     <div id="app">
       <div>
         <div className="login">
-          <div className="login-view">
-            <div className="login-container">
+          <div className="">
+            <div className="">
               <div className="login-form" style={{ marginTop: "3%" }}>
                 <div className="login-panel">
                   <div className="panel-heading">
                     <div className="logo">
                       <img
                         alt=""
-                        src={selfAllowedd?.logo}
+                        src={logo}
                         className="logo"
                         style={{ height: "100px", width: "200px" }}
                       />
@@ -324,23 +295,35 @@ const Signup = () => {
                           type="text"
                           placeholder="Username"
                           className="form-control"
-                          value={register?.username}
+                          value={UserName}
                           onChange={handleUserName}
                         />
-                        <label style={{ color: "red" }}>{useeerror}</label>
+                        <label style={{ color: "red" }}>{userNameError}</label>
 
                       </div>
+                      <div className="form-group">
+                        <input
+                          name="mobileNumber"
+                          type="number"
+                          placeholder="Mobile Number"
+                          className="form-control"
 
+                          maxlength="10"
+                          value={mobileNumber}
+                          onChange={handleMobileNumber} />
+                        <label style={{ color: "red" }}>{mobileNumberError}</label>
+
+                      </div>
                       <div className="form-group">
                         <input
                           name="Password"
                           type="password"
                           placeholder="Password"
                           className="form-control"
-                          value={register?.password}
+                          // value={register?.password}/
                           onChange={handlePassWordsValidation}
                         />
-                        <label style={{ color: "red" }}>{passworderror}</label>
+                        <label style={{ color: "red" }}>{passwordError}</label>
                       </div>
 
                       <div className="form-group">
@@ -352,42 +335,25 @@ const Signup = () => {
                           type="password"
                           className="form-control"
 
-                          value={register?.confirmPassword}
+                          // value={register?.confirmPassword}
                           onChange={handleConfirmPasswordsValidation}
                         />
-                        <label style={{ color: "red" }}>{confirmpassword}</label>
+                        <label style={{ color: "red" }}>{confirmPasswordError}</label>
 
 
                       </div>
-                      <div className="form-group">
-                        <input
-                          name="mobileNumber"
-                          type="number"
-                          placeholder="Mobile Number"
-                          className="form-control"
 
-                          maxlength="10"
-                          value={register?.mobile}
-                          onChange={handleMobileNumber}
-
-                          onKeyDown={(e) =>
-                            symbolsArrMail.includes(e.key) && e.preventDefault()
-                          } />
-                        <label style={{ color: "red" }}>{mobileerror}</label>
-
-                      </div>
-                      <button className="btn btn-login" onClick={handleClick}>
+                      <button className="btn btn-login" onClick={handleLogin}>
                         Sign Up
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
-                      <label style={{ color: "red" }}>{errorForall}</label>
                       {selfAllowedd?.selfAllowed === true ?
                         <button className="btn btn-login" onClick={handleDemoLogin}>
                           Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button> : ""}
 
-                      <button className="btn btn-login" onClick={handleLogin}>
+                      <button className="btn btn-login" onClick={handleClickLogin}>
                         <i className="ml-2 fas fa-sign-in-alt rotate-btn"></i>
                         Back
                       </button>
@@ -427,7 +393,7 @@ const Signup = () => {
               <Modal.Header className="register-head" closeButton>
                 <Modal.Title className="regTital">Register</Modal.Title>
               </Modal.Header>
-              <Modal.Body style={{ marginLeft: "20%" }}>
+              <Modal.Body className="singn_popup" >
                 <div>
                   <div>
                     <div className="">
@@ -437,11 +403,11 @@ const Signup = () => {
                       </div>
                       <div className="user-id user">
                         <p>User Name:</p>
-                        <p>{PostuserselfregisterData?.data?.username}</p>
+                        <p>{newCredAfterRegister?.username}</p>
                       </div>
                       <div className="user-id">
                         <p>Password:</p>
-                        <p>{PostuserselfregisterData?.data?.password}</p>
+                        <p>{newCredAfterRegister?.password}</p>
                       </div>
                     </div>
                   </div>

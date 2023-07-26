@@ -1,0 +1,7 @@
+.singn_popup {}
+
+@media screen and (min-width:1200px) {
+    .singn_popup {
+        margin-left: 15%;
+    }
+}

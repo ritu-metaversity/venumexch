@@ -185,7 +185,7 @@ const NavBar = () => {
               {moment(dateState).format("MMM DD YYYY")}
 
             </span>{" "}
-            <span className="time">
+            <span className="time" >
 
               { }
               {
@@ -203,6 +203,7 @@ const NavBar = () => {
 
                 data-toggle="dropdown"
                 className="dropdown-toggle"
+                style={{color:"#ffecc6 !important"}}
               >
                 ( {showZone}
                 <i className="fas fa-angle-down m-l-5  "></i> )
@@ -219,6 +220,7 @@ const NavBar = () => {
 
                   className="dropdown-item"
                   onClick={() => hanldletimeZone("+05:30")}
+                  
                 >
                   Your computer time - (GMT +05:30)
                 </Link>{" "}
@@ -288,10 +290,10 @@ const NavBar = () => {
                 }
 
               </li>
-              <li>
-                <Link >
-                  <i className="fas fa-ruler-vertical m-r-5"></i>{" "}
-                  <span onClick={handleModal}>Rules</span>
+              <li   >
+                <Link  >
+                  <i style={{color:"#ffecc6"}} className="fas fa-ruler-vertical m-r-5"></i>{" "}
+                  <span style={{color:"#ffecc6"}} onClick={handleModal}>Rules</span>
                 </Link>
               </li>
               <Modal
@@ -328,7 +330,7 @@ const NavBar = () => {
                     className="dropdown-toggle"
                     onClick={handleAccount}
                   >
-                    <i className="fas fa-user m-r-5"></i> <span>Account</span>
+                    <i style={{color:"#ffecc6"}} className="fas fa-user m-r-5"></i> <span style={{color:"#ffecc6"}}>Account</span>
                   </Link>
                   {/* <div   className="dropdown-menu show"> */}
                   <div
@@ -410,7 +412,7 @@ const NavBar = () => {
                 </li> : ""}
 
               {token === null ? <>
-                <li className="login_btn">
+                <li className="login_btn"  style={{color:"#ffecc6"}}>
                   <Link to="./login">
                     <i className="fas fa-running m-r-5"></i>{" "}
                     <span onClick={handlogout}>LogIn</span>
@@ -419,19 +421,19 @@ const NavBar = () => {
                 {isSelfloading === true ? ""
                   :
                   selfAllowedd?.selfAllowed === true ?
-                    <li className="login_btn">
+                    <li className="login_btn" style={{color:"#ffecc6"}}>
                       <Link to="./signup">
-                        <i className="fas fa-running m-r-5"></i>{" "}
-                        <span onClick={handlogout}>SignUp</span>
+                        <i className="fas fa-running m-r-5" style={{color:"#ffecc6"}}></i>{" "}
+                        <span onClick={handlogout} style={{color:"#ffecc6"}}>SignUp</span>
                       </Link>
                     </li>
                     : ""}
 
               </> :
-                <li>
+                <li style={{color:"#ffecc6"}}>
                   <Link to="./login">
-                    <i className="fas fa-running m-r-5"></i>{" "}
-                    <span onClick={handlogout}>LogOut</span>
+                    <i className="fas fa-running m-r-5" style={{color:"#ffecc6"}}></i>{" "}
+                    <span onClick={handlogout} style={{color:"#ffecc6"}}>LogOut</span>
                   </Link>
                 </li>
 
