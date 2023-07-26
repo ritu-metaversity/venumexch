@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PostEditStack, PostGetStackApi } from "../../App/Features/auth/authActions";
+import { useParams } from "react-router";
+import { PostBetListByMatchId, PostEditStack, PostGetStackApi } from "../../App/Features/auth/authActions";
 import BetPage from "./BetPage";
 
 const Betslip = ({ props, gamedetailsData }) => {
@@ -14,6 +15,7 @@ const Betslip = ({ props, gamedetailsData }) => {
   const token = localStorage.getItem("TokenId");
 
   const [gameIframeId, setGameIframeId] = useState(4);
+  const { id } = useParams();
 
   const {
     PostBetListByMatchIdData, PostGetStack, PostEditStackData, PostEditStackDataError
@@ -42,10 +44,11 @@ const Betslip = ({ props, gamedetailsData }) => {
     // setBetslip(true)
   };
 
+
+
   const handleOpenBets = () => {
     if (betslip === true) {
       setBetslip(false);
-
       setOpenBet(true);
     }
   };
@@ -55,6 +58,13 @@ const Betslip = ({ props, gamedetailsData }) => {
       dispatch(PostGetStackApi());
     }
   }, [EditStake]);
+
+
+  useEffect(() => {
+    if (token !== null) {
+      dispatch(PostBetListByMatchId({ matchId: id }));
+    }
+  }, []);
 
   useEffect(() => {
     if (PostEditStackData?.status === true) {
