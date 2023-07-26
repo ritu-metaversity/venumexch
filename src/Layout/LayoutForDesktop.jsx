@@ -27,9 +27,9 @@ const LayoutForDesktop = () => {
 
       <div className="maincontainer boxed-layout-wrapper-new">
         <SideBar />
-        <div className="content " >
-          <Outlet />
-        </div>
+
+        <Outlet />
+
       </div>
 
 
