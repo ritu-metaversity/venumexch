@@ -9,17 +9,53 @@ import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOu
 const WithDraw1 = () => {
     const dispatch = useDispatch();
 
-    let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-    const [withdrawData, setWithdrawData] = useState();
+    // let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+    // const [withdrawData, setWithdrawData] = useState();
     // const [active, setActive] = useState(0);
     const { PostwithdrawrequestclientData } =
         useSelector((state) => state.auth);
+    // const [show, setShow] = useState(false);
+    // const [withType, setwithType] = useState("");
+    // const [withCoinValue, setwithCoinValue] = useState(0);
+    // const [userAmount, setUserAmount] = useState();
+    // const [accountNumber, setAccountNumber] = useState();
+    // const [accountHolderName, setAccountHolderName] = useState();
+    // const [ifsc, setIFSC] = useState();
+    // const [bankName, setBankName] = useState();
+    // const [AccountType, setAccountType] = useState("Saving");
+    // const [errorAlert, setErrorAlert] = useState(false);
+    //const [message, setMessage] = useState();
+    //const [colorName, setColorName] = useState();
+    //const [isLoading, setIsLoading] = useState(false);
+    //const [bankID, setBankId] = useState();
+    //const [stackValue, setStackValue] = useState();
+    //const [openForm, setOpenForm] = useState(false);
+    // const [withdrawType, setWithdrawType] = useState();
+    // const [getAccountData, setGetAccountData] = useState();
+    // const [userBalance, setuserBalance] = useState();
+
+    const erreeee = {
+        Amountfieldrequired: "The Amount field is required",
+        AmountNumberrequired: "The Account Number is required",
+        AmountNamerequired: "The Account Name field is required",
+        bankName: "The Bank Name field is required",
+        infcRequired: "The IFSC field is required",
+        mobilenorequired: "Mobile Number is required",
+        upireq: "UPI ID is required",
+        upivalid: "Enter Valid UPI ID",
+    };
+    const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
+
+    let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+    const [withdrawData, setWithdrawData] = useState();
+    // const [active, setActive] = useState(0);
+
     const [show, setShow] = useState(false);
-    const [withType, setwithType] = useState("");
+    const [withType, setwithType] = useState();
     const [withCoinValue, setwithCoinValue] = useState(0);
     // const [userAmount, setUserAmount] = useState();
     const [accountNumber, setAccountNumber] = useState();
-    const [accountHolderName, setAccountHolderName] = useState();
+    const [accountHolderName, setAccountHolderName] = useState("");
     const [ifsc, setIFSC] = useState();
     const [bankName, setBankName] = useState();
     const [AccountType, setAccountType] = useState("Saving");
@@ -33,9 +69,10 @@ const WithDraw1 = () => {
     const [withdrawType, setWithdrawType] = useState();
     const [getAccountData, setGetAccountData] = useState();
     const [userBalance, setuserBalance] = useState();
+    const [savedBankdetailsName, setSavedBankdetailsName] = useState("")
     const handleClose = () => {
         setShow(false);
-        setMessage("Withdraw Request Submited Successfully");
+        toast.success("Withdraw Request Submited Successfully");
         setErrorAlert(true);
         setIsLoading(false);
         setColorName("success");
@@ -45,6 +82,10 @@ const WithDraw1 = () => {
         setBankName("");
         setwithCoinValue(0);
     };
+    console.log(withType, "iuhjuhnij");
+    // const handleCancel = () => {
+    //     setshowWithdraw(false);
+    //   };
     const handlePaymentDetails = (val, id) => {
         setwithType(val);
         setBankId(id);
@@ -53,7 +94,10 @@ const WithDraw1 = () => {
         setAccountNumber("");
         setIFSC("");
         setBankName("");
-        setwithCoinValue(0);
+        // setwithCoinValue(0);
+        setSavedBankdetailsName(val)
+        console.log(val, id, "lkjhgfdsa")
+
     };
     useEffect(() => {
         const TokenId = localStorage.getItem("TokenId");
@@ -145,9 +189,25 @@ const WithDraw1 = () => {
                             color: "white",
                         }
                     });
-                }
-                // setMessage(res?.data?.message);
+                    const TokenId = localStorage.getItem("TokenId");
 
+                    axios
+                        .post(
+                            `${REACT_APP_API_URL}/get/client-bank`,
+                            {},
+                            {
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    Authorization: `Bearer ${TokenId}`,
+                                },
+                            }
+                        )
+                        .then((res) => {
+                            setGetAccountData(res?.data?.data);
+                        });
+                    // setMessage(res?.data?.message);
+
+                }
             })
             .catch((error) => {
                 setErrorAlert(true);
@@ -164,6 +224,7 @@ const WithDraw1 = () => {
                         }
                     });
                 }
+
                 // setMessage(error?.response?.data?.message);
             });
     };
@@ -172,6 +233,7 @@ const WithDraw1 = () => {
             (withCoinValue) => (Number(withCoinValue) || 0) + Number(val)
         );
     };
+    //console.log(alert(message))
     const popupClose = (vl) => {
         setErrorAlert(vl);
     };
@@ -182,7 +244,13 @@ const WithDraw1 = () => {
 
     const handleValidate = () => {
         if (userBalance < withCoinValue) {
-            setMessage("insufficient balance");
+            toast.error("insufficient balance", {
+                style: {
+                    background: "rgb(156,74,70)", minHeight: 40,
+                    padding: 0,
+                    color: "white",
+                }
+            });
             setErrorAlert(true);
             setColorName("danger");
             setIsLoading(false);
@@ -196,20 +264,22 @@ const WithDraw1 = () => {
                 withCoinValue === undefined ||
                 withCoinValue === 0
             ) {
-
-                toast.error("The Amount field is required", {
+                //toast.error("Sorry no payment Methods Found")
+                //apiWithErrorSnackbar(erreeee?.Amountfieldrequired)
+                toast.error(erreeee?.Amountfieldrequired, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
                         color: "white",
                     }
                 });
+
+
 
                 setIsLoading(false);
                 return false;
             } else if (accountNumber === "") {
-
-                toast.error("The Account Number is required", {
+                toast.error(erreeee?.AmountNumberrequired, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
@@ -218,8 +288,20 @@ const WithDraw1 = () => {
                 });
                 setIsLoading(false);
                 return false;
+            } else if (accountNumber.match(/^[0-9]{8,18}$/) === null) {
+                toast.error("Invalid account number", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+                setIsLoading(false);
+
+                setIsLoading(false);
+                return false;
             } else if (accountHolderName === "") {
-                toast.error("The Account Name field is required", {
+                toast.error(erreeee?.AmountNamerequired, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
@@ -229,8 +311,11 @@ const WithDraw1 = () => {
                 setIsLoading(false);
                 return false;
             } else if (bankName === "") {
-
-                toast.error("The Bank Name field is required", {
+                toast.error(erreeee?.bankName)
+                setIsLoading(false);
+                return false;
+            } else if (ifsc === "") {
+                toast.error(erreeee?.infcRequired, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
@@ -240,7 +325,18 @@ const WithDraw1 = () => {
                 setIsLoading(false);
                 return false;
             } else if (ifsc === "") {
-                toast.error("The IFSC field is required", {
+                toast.error(erreeee?.infcRequired, {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+                setIsLoading(false);
+                return false;
+            }
+            else if (ifsc.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
+                toast.error("Please enter a valid IFSC CODE", {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
@@ -257,7 +353,7 @@ const WithDraw1 = () => {
                 withCoinValue === undefined ||
                 withCoinValue === 0
             ) {
-                toast.error("The Amount field is required", {
+                toast.error(erreeee?.Amountfieldrequired, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
@@ -267,8 +363,22 @@ const WithDraw1 = () => {
                 setIsLoading(false);
                 return false;
             } else if (accountNumber === "") {
+                toast.error(erreeee?.mobilenorequired)
+                setIsLoading(false);
+                return false;
+            } else if (accountNumber.match(/^[0-9]{10}$/) === null) {
+                toast.error("Invalid number", {
+                    style: {
+                        background: "rgb(156,74,70)", minHeight: 40,
+                        padding: 0,
+                        color: "white",
+                    }
+                });
+                setIsLoading(false);
 
-                toast.error("Mobile Number is required", {
+                return false;
+            } else if (accountHolderName === "") {
+                toast.error(erreeee?.AmountNamerequired, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
@@ -277,38 +387,38 @@ const WithDraw1 = () => {
                 });
                 setIsLoading(false);
                 return false;
-            } else if (accountHolderName === "") {
-
-                toast.error("The Account Name field is required", {
+            } else if (accountNumber.length !== 10) {
+                toast.error("Enter Valid Mobile number", {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
                         color: "white",
                     }
                 });
+                // setErrorAlert(true);
+                // setColorName("danger");
                 setIsLoading(false);
                 return false;
             }
-        } else if (withType == "UPI") {
+        } else if (withType === "UPI") {
             console.log("helo");
             if (
                 withCoinValue === "" ||
                 withCoinValue === undefined ||
                 withCoinValue === 0
             ) {
-
-                toast.error("The Amount field is required", {
+                toast.error(erreeee?.Amountfieldrequired, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
                         color: "white",
                     }
                 });
+
                 setIsLoading(false);
                 return false;
             } else if (accountNumber === "") {
-
-                toast.error("UPI ID is required", {
+                toast.error(erreeee?.upireq, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
@@ -318,31 +428,30 @@ const WithDraw1 = () => {
                 setIsLoading(false);
                 return false;
             } else if (accountHolderName === "") {
-                toast.error("The Account Name field is required", {
+                toast.error(erreeee?.AmountNamerequired, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
                         color: "white",
                     }
                 });
-                setErrorAlert(true);
-                setColorName("danger");
+                // setErrorAlert(true);
+                // setColorName("danger");
                 setIsLoading(false);
                 return false;
             } else if (
                 accountNumber.match(/^[a-zA-Z0-9.-]{2,256}@[a-zA-Z][a-zA-Z]{2,64}$/) ===
                 null
             ) {
-
-                toast.error("Enter Valid UPI ID", {
+                toast.error(erreeee?.upivalid, {
                     style: {
                         background: "rgb(156,74,70)", minHeight: 40,
                         padding: 0,
                         color: "white",
                     }
                 });
-                setErrorAlert(true);
-                setColorName("danger");
+                // setErrorAlert(true);
+                // setColorName("danger");
                 setIsLoading(false);
                 return false;
             }
@@ -359,10 +468,10 @@ const WithDraw1 = () => {
         if (handleValidate()) {
             const data = {
                 accountHolderName: accountHolderName,
-                bankName: bankName,
+                bankName: bankName ? bankName : "",
                 accountType: withType === "BANK" ? AccountType : "",
                 amount: withCoinValue,
-                ifsc: ifsc,
+                ifsc: ifsc ? ifsc.toUpperCase() : "",
                 accountNumber: accountNumber,
                 withdrawType: bankID,
                 withdrawMode: withdrawType,
@@ -376,9 +485,20 @@ const WithDraw1 = () => {
                     },
                 })
                 .then((res) => {
+                    // setWithdrawReq(res.data);
+                    // setDataLength(res.data.length);
+                    // console.log(res?.data?.data                        , "sdsadasd")
                     if (res?.data?.data?.bankExist === false) {
+                        // console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
                         setShow(true);
-                        console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
+                        toast.success(res?.data?.message, {
+                            style: {
+                                background: "rgb(74,117,67)", minHeight: 40,
+                                padding: 0,
+                                color: "white",
+                            }
+                        });
+
                     } else {
                         // setMessage(res?.data?.message
                         // );
@@ -386,34 +506,33 @@ const WithDraw1 = () => {
                         setErrorAlert(true);
                         setColorName("success");
                         setIsLoading(false);
-                    }
-                    if (
-                        res?.data?.message
-                    ) {
-                        toast.success(res?.data?.message || "SUSUSUSUS!!", {
+                        setAccountHolderName("");
+                        setAccountNumber("");
+                        setIFSC("");
+                        setBankName("");
+                        setwithCoinValue(0);
+                        toast.success(res?.data?.message, {
                             style: {
                                 background: "rgb(74,117,67)", minHeight: 40,
                                 padding: 0,
                                 color: "white",
                             }
                         });
+
                     }
+
                 })
                 .catch((error) => {
-                    setErrorAlert(true);
+                    // setErrorAlert(true);
                     setIsLoading(false);
-                    setColorName("danger");
-                    if (
-                        error?.response?.data?.message
-                    ) {
-                        toast.error(error?.response?.data?.message || "SUSUSUSUS!!", {
-                            style: {
-                                background: "rgb(156,74,70)", minHeight: 40,
-                                padding: 0,
-                                color: "white",
-                            }
-                        });
-                    }
+                    // setColorName("danger");
+                    toast.error(error?.response?.data?.message, {
+                        style: {
+                            background: "rgb(156,74,70)", minHeight: 40,
+                            padding: 0,
+                            color: "white",
+                        }
+                    });
                     // setMessage(error?.response?.data?.message);
                 });
         }
@@ -423,14 +542,21 @@ const WithDraw1 = () => {
         accHolderName,
         BankName,
         ifscNum,
-        accType
+        accType,
+        withdrawType,
+        bankid
+
     ) => {
         setAccountHolderName(accHolderName);
         setAccountNumber(accNumber);
         setBankName(BankName);
         setIFSC(ifscNum);
         setAccountType(accType);
+        setwithType(withdrawType)
+        // setBankId(bankid)
+        // setWithdrawType(withdrawType)
     };
+
 
     console.log(message, "dfsfsdfssfgdsdjijfv")
     const handlepennding = () => setpendingmodal(true);
@@ -452,7 +578,7 @@ const WithDraw1 = () => {
         setpendingmodal(false)
     }
     return (
-        <div className="withdraw_page">
+        <div className=" maindiccccc">
 
             <div className="withdrow_coin">
                 <div className="withdrow_title">
@@ -464,6 +590,9 @@ const WithDraw1 = () => {
                         value={withCoinValue}
                         onChange={handleStaticAmountInput}
                         type="number"
+                        onKeyDown={(e) =>
+                            symbolsArrMail.includes(e.key) && e.preventDefault()
+                        }
                     />
                 </div>
                 <div>
@@ -495,7 +624,7 @@ const WithDraw1 = () => {
             <div className="with_paymethod">
                 <Container>
                     <div className="bank-logo with_bank_logo">
-                        <Row>
+                        <Row className='innerRow'>
                             {withdrawData?.map((res, id) => {
                                 return (
                                     <>
@@ -505,8 +634,9 @@ const WithDraw1 = () => {
                                                 handlePaymentDetails(
                                                     res?.withdrawType,
                                                     res?.id
-                                                )
-                                            }>
+                                                )}
+                                            style={{ backgroundColor: (bankID === res?.id) ? "#7b7c7f" : "" }}
+                                        >
                                             <div className="css-1502y4u">
                                                 <img
                                                     src={res?.image}
@@ -526,123 +656,143 @@ const WithDraw1 = () => {
                 </Container>
 
 
+                {
+                    withType === "BANK" ? (
+                        <div
+                            className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
+                                } accountWith`}>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">Account Number</label>
 
-                {withType === "BANK" ? (
-                    <div
-                        className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
-                            } accountWith`}>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">Account Number</label>
-
-                            <input
-                                type="number"
-                                className="account-input"
-                                value={accountNumber}
-                                onChange={(e) => setAccountNumber(e.target.value)}
-                            />
-                        </div>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">Account Name</label>
-
-                            <input
-                                type="text"
-                                className="account-input"
-                                value={accountHolderName}
-                                onChange={(e) =>
-                                    setAccountHolderName(
-                                        e.target.value.replace(/[^A-Za-z]+$/, " ")
-                                    )
-                                }
-                            />
-                        </div>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">Bank Name</label>
-
-                            <input
-                                type="type"
-                                className="account-input"
-                                value={bankName}
-                                onChange={(e) =>
-                                    setBankName(
-                                        e.target.value.replace(/[^A-Za-z]+$/, " ")
-                                    )
-                                }
-                            />
-                        </div>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">IFSC</label>
-
-                            <input
-                                type="type"
-                                className="account-input"
-                                value={ifsc}
-                                onChange={(e) =>
-                                    setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " "))
-                                }
-                            />
-                        </div>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">Account Type</label>
-
-                            <select
-                                name="reportType"
-                                // style={{ width: "100%" }}
-                                className="custom-select select-type accounttype"
-                                onChange={(e) => setAccountType(e.target.value)}>
-                                <option value="Saving">Saving</option>
-                                <option value="Current">Current</option>
-                            </select>
-                        </div>
-                    </div>
-                ) : (
-                    <div
-                        className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
-                            } accountWith`}>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">
-                                {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
-                            </label>
-
-                            {withType === "PAYTM" ? (
                                 <input
-                                    type="number"
+                                    // type="number"
                                     className="account-input"
-                                    value={accountNumber}
-                                    onChange={(e) => setAccountNumber(e.target.value)}
+                                    value={accountNumber?.toString().replace(".", "")}
+                                    onChange={(e) => e.target.value.match(/^[0-9]{0,18}$/) && setAccountNumber(e.target.value)}
+
+                                // onChange={(e) =>
+                                //     e.target.value.match(/^[0-9]*$/) &&
+                                //     setAccountNumber(Number(e.target.value))}
+                                // onKeyDown={(e) =>
+                                //     symbolsArrMail.includes(e.key) && e.preventDefault()
+                                // }
                                 />
-                            ) : (
+                            </div>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">Account Name</label>
+
                                 <input
                                     type="text"
                                     className="account-input"
-                                    value={accountNumber}
+                                    value={accountHolderName.trimStart()}
                                     onChange={(e) =>
-                                        setAccountNumber(
-                                            e.target.value.replace(
-                                                /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/
-                                            )
+                                        e.target.value.match(/^[a-zA-Z ]*$/) &&
+                                        setAccountHolderName(
+                                            e.target.value
                                         )
                                     }
                                 />
-                            )}
-                        </div>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">
-                                {withType === "PAYTM" ? "Name" : "Account Name"}
-                            </label>
+                            </div>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">Bank Name</label>
 
-                            <input
-                                type="text"
-                                className="account-input"
-                                value={accountHolderName}
-                                onChange={(e) =>
-                                    setAccountHolderName(
-                                        e.target.value.replace(/[^A-Za-z]+$/, " ")
-                                    )
-                                }
-                            />
+                                <input
+                                    type="type"
+                                    className="account-input"
+                                    value={bankName}
+                                    onChange={(e) =>
+                                        e.target.value.match(/^[a-zA-Z ]*$/) &&
+                                        setBankName(
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">IFSC</label>
+
+                                <input
+                                    type="type"
+                                    className="account-input"
+                                    value={ifsc}
+                                    onChange={(e) =>
+                                        setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " ").toUpperCase())
+                                    }
+                                />
+                            </div>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">Account Type</label>
+
+                                <select
+                                    name="reportType"
+                                    // style={{ width: "100%" }}
+                                    className="custom-select select-type accounttype"
+                                    onChange={(e) => setAccountType(e.target.value)}>
+                                    <option value="Saving">Saving</option>
+                                    <option value="Current">Current</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    ) : (
+                        <div
+                            className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
+                                } accountWith`}>
+                            <div className="mx-input-wrapper account-field asdfghjkl">
+                                <label className="account-lable">
+                                    {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
+                                </label>
+
+                                {withType === "PAYTM" ? (
+                                    <input
+                                        // type="number"
+                                        className="account-input"
+                                        value={accountNumber}
+                                        onChange={(e) => e.target.value.match(/^[0-9]{0,10}$/) && setAccountNumber(e.target.value)}
+                                    // onKeyDown={(e) =>
+                                    //     symbolsArrMail.includes(e.key) && e.preventDefault()
+                                    // }
+                                    />
+                                ) : (
+                                    <input
+                                        type="text"
+                                        className="account-input"
+                                        value={accountNumber}
+                                        onChange={(e) =>
+                                            setAccountNumber(
+                                                e.target.value.replace(
+                                                    /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/, ""
+                                                )
+                                            )
+                                        }
+                                    />
+                                )}
+                            </div>
+                            <div className="mx-input-wrapper account-field asdfghjkl">
+                                <label className="account-lable">
+                                    {withType === "PAYTM" ? "Name" : "Account Name"}
+                                </label>
+
+                                <input
+                                    type="text"
+                                    className="account-input"
+                                    value={accountHolderName.trimStart()}
+                                    onChange={(e) =>
+                                        e.target.value.match(/^[a-zA-Z ]*$/) &&
+                                        setAccountHolderName(
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                        </div>
+                    )
+
+
+                }
+
+
+
+
                 <div className={openForm ? "" : "d-none"}>
                     <div className="row row5 mt-2">
                         <div className="col-12">
@@ -735,8 +885,9 @@ const WithDraw1 = () => {
                                                         aria-colindex="5"
                                                         className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
                                                             }`}>
-                                                        {item?.accountType}
+                                                        {item?.accountType}fsdfd
                                                     </td>
+                                                    {console.log(item, "jhgfds")}
                                                     <td
                                                         style={{ cursor: "pointer" }}
                                                         onClick={() =>
@@ -745,7 +896,10 @@ const WithDraw1 = () => {
                                                                 item.accountHolderName,
                                                                 item?.bankName,
                                                                 item?.ifsc,
-                                                                item?.accountType
+                                                                item?.accountType,
+                                                                item?.withdrawType,
+                                                                item?.id
+
                                                             )
                                                         }
                                                         aria-colindex="5"
@@ -778,44 +932,41 @@ const WithDraw1 = () => {
                     </div>
                 </div>
 
-            </div>
-            <Modal show={show} onHide={handleClose} style={{ marginTop: "53px" }}>
+            </div >
+            <Modal
+                show={show}
+                onHide={handleClose}
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
+                style={{ marginTop: "53px", padding: "25px" }}
+            >
 
-                <Modal.Body>
-                    Do you want to save the Bank Details?
-                </Modal.Body>
+                <div className="main-count">
+                    <div className="headdddd">
+                        Do you want to save the Bank Details?
+                    </div>
 
-                <Modal.Footer>
-                    <Button
+                    <div className="Bet-succccccc">
 
-                        variant="secondary"
-                        onClick={handleClose}>
-                        Cancel
-                    </Button>
-                    <Button
-                        className='sve'
+                        <button
+                            className='tbnnnn'
 
-                        variant=""
-                        onClick={handleSaveDetail}>
-                        Save
-                    </Button>
-                </Modal.Footer>
+                            onClick={handleClose}>
+                            Cancel
+                        </button>
+                        <button
+                            className='tbnnnn'
+
+                            variant=""
+                            onClick={handleSaveDetail}>
+                            Save
+                        </button>
+                    </div>
+                </div>
+
             </Modal>
-            <div className="withdraw_coin_btn" style={{
-
-                backgroundColor: "#386f7d",
-                height: "25px",
-                marginTop: "12px",
-                width: "97%",
-                padding: "3px 12px",
-                color: "#fff"
-
-            }}>
 
 
-                Withdraw History
-
-            </div>
             <div className="table-responsive withdrow-table">
 
 
@@ -964,11 +1115,11 @@ const WithDraw1 = () => {
 
                                                     {item?.status}
                                                 </div>
-                                                <div onClick={handlependingg}>
+                                                {/*<div onClick={handlependingg}>
                                                     {item?.status === "Pending" ? <button onClick={handlepennding} className="handlepennfoifjfi" >
                                                         <IoCloseCircleOutline size={25} color={"black"} />
                                                     </button> : ""}
-                                                </div>
+                                    </div>*/}
                                             </div>
                                             <Modal
                                                 show={pendingmodal}

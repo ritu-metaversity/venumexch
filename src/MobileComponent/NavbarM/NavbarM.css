@@ -488,9 +488,9 @@ a:-webkit-any-link {
     text-decoration: underline;
 }
 
-header.header a {
+/* header.header a {
     color: #f8f9fa !important;
-}
+} */
 
 .header .fa-arrow-left {
     font-size: 20px;

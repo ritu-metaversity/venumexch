@@ -154,7 +154,7 @@ const Mybets = () => {
           )}
         </div>
       </section>
-      {PostunsettledData?.data?.totalPages === 1 ?
+      {PostunsettledData?.data?.totalPages < 1 ?
         ""
         : <div className="pagination myBetpagination">
           <button

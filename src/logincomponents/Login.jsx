@@ -206,7 +206,7 @@ const Login = () => {
       <div>
         <div className="login">
           <div className="">
-            <div className="login-container">
+            <div className="login-container" style={{ overflow: "scroll " }}>
               <div className="login-form" style={{ justifyContent: "center", marginTop: "6%" }}>
                 <div className="login-panel">
                   <div className="panel-heading">

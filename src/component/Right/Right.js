@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { PostBalance } from "../../App/Features/auth/authActions";
 import Betslip from "./Betslip";
 import "./Right.css";
 
 const Right = ({ gamedetailsData }) => {
    const dispatch = useDispatch();
+   const { id } = useParams();
 
    const [creditDropDown, setCreaditDropDown] = useState("show");
    const [editStake, setEditStake] = useState("none");
@@ -170,7 +171,7 @@ const Right = ({ gamedetailsData }) => {
                                     <div className="score-inner">
                                        <iframe
                                           // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
-                                          src={`http://43.205.116.130/tv.php?eventId=32183614`}
+                                          src={`http://43.205.116.130/tv.php?eventId=${id}`}
                                           width="100%"
                                           className="score-card desk_score_card"
                                           title="scorecord"
