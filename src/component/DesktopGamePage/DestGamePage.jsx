@@ -11,7 +11,7 @@ import PnlModals from "./PnlModals";
 import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
 import { Modal, ModalBody, ModalHeader, ModalTitle } from "react-bootstrap";
 
-const DestGamePage = ({ datatataProps }) => {
+const DestGamePage = ({ datatataProps,gamenameOpenbet }) => {
 
     const token = localStorage.getItem("TokenId");
 
@@ -215,6 +215,8 @@ const DestGamePage = ({ datatataProps }) => {
             setGameDetailsData((gameDetailsData) => {
                 if (gameDetailsData) {
                     const oldOdds = { ...gameDetailsData };
+                    gamenameOpenbet(gameDetailsData?.data?.Odds &&
+                        gameDetailsData?.data?.Odds[0]?.matchName)
                     setPreviousState(oldOdds);
                 } else {
                     setPreviousState({ data: PostMinMaxGameDetailsData });
@@ -630,10 +632,9 @@ const DestGamePage = ({ datatataProps }) => {
                             )}
                             <div className="header">
                                 <h1 className='sportName'>
+
                                     {gameDetailsData?.data?.Odds &&
-                                        gameDetailsData?.data?.Odds[0]?.runners[0]?.name}{" "}  {" "}
-                                    {gameDetailsData?.data?.Odds &&
-                                        gameDetailsData?.data?.Odds[0]?.runners[1]?.name} <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
+                                        gameDetailsData?.data?.Odds[0]?.matchName} <span>{gameDetailsData?.data?.Odds[0]?.eventTime}</span>
                                 </h1>
                             </div>
                             {gameDetailsData?.data &&

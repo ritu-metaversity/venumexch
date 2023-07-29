@@ -25,7 +25,9 @@ const LayoutForDesktop = () => {
 
       {footerCondition ? <NavBarWithOutLogin /> : <NavBar />}
 
-      <div className="maincontainer boxed-layout-wrapper-new">
+      <div className="maincontainer boxed-layout-wrapper-new"
+        style={{ marginTop: localStorage.getItem("TokenId") === null ? "" : "10px" }}
+      >
         <SideBar />
 
         <Outlet />

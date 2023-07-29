@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { PostPlaceBet } from '../../App/Features/auth/authActions';
+import { clearPostPlaceBet } from '../../App/Features/auth/authSlice';
 import "./BetPage.css"
 
 
-const BetPage = ({ gamedetailsData }) => {
+const BetPage = ({ gamedetailsData, Closepopup, setBetDetailData }) => {
     const dispatch = useDispatch();
     let { id } = useParams();
     console.log(gamedetailsData, "asdasdasdas")
-    const { PostGetStack, PostBetingOnGameDetailLoading } = useSelector((state) => state.auth);
+    const { PostGetStack, PostBetingOnGameDetail, PostBetingOnGameDetailLoading } = useSelector((state) => state.auth);
 
     const [Bitvalue, setBitValue] = useState(gamedetailsData?.Odds);
     const [updated, setUpdated] = useState("");
@@ -17,6 +18,15 @@ const BetPage = ({ gamedetailsData }) => {
     const [userIP, setUserIP] = useState("");
     console.log(gamedetailsData, "dasasdasda")
 
+    useEffect(() => {
+        if (PostBetingOnGameDetail?.status === true) {
+            Closepopup(false)
+            setBetDetailData({})
+            dispatch(clearPostPlaceBet())
+        }
+        return () => {
+        }
+    }, [PostBetingOnGameDetail])
 
     const handleInput = (val) => {
         // console.log(val);
@@ -71,7 +81,11 @@ const BetPage = ({ gamedetailsData }) => {
         dispatch(PostPlaceBet(data));
 
     };
-    console.log(gamedetailsData?.popupshow, "fsdfdssfdfdfsdfs")
+
+    const handleRemove = () => {
+        Closepopup(false)
+        console.log("hellooo")
+    }
     return (
 
         <div style={{ display: gamedetailsData?.popupshow === true ? "" : "none" }}>
@@ -122,7 +136,7 @@ const BetPage = ({ gamedetailsData }) => {
                                     </div>
                                 </div>
                                 <div className="placeholder-wrapper betslip-input">
-                                    <input type="text" placeholder="Stake" name="betamount" value={updated} />
+                                    <input type="number" placeholder="Stake" name="betamount" onChange={(e) => setUpdated(e.target.value)} value={updated} />
                                 </div>
                                 <div className="info-field">
                                     <span className="title">Profit</span>
@@ -166,8 +180,10 @@ const BetPage = ({ gamedetailsData }) => {
             </div>
             <p className="summary-info">Liability: 0.00</p>
 
-
-            <button type="submit" className="btn prima" onClick={handleSubmit}>Place Bets</button>
+            <div className="remove_placebet">
+                <button type="submit" className="btn btn-remove _px_2" onClick={() => { setBetDetailData({}) }}>Remove</button>
+                <button type="submit" className="btn prima _px_2" disabled={updated === "" ? "disabled" : ""} onClick={handleSubmit}>Place Bets</button>
+            </div>
 
             {/*<label className="confirmation-checkbox"><input type="checkbox" />
                                         <span>Confirm bets before placing</span></label>*/}

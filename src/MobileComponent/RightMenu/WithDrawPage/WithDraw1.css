@@ -375,6 +375,30 @@ input.account-input {
 
 @media screen and (min-width:1200px) {
     .maindiccccc {
-        width: 70%;
+        width: 84%;
     }
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* width: 400px; */
+    align-items: baseline;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    margin: auto;
+    /* margin-left: 100% !important; */
+    /* left: 307px; */
+}
+
+.withdraw-popup-btn {
+    border: unset;
+    background-color: #183f45;
+    padding: 4px 12px 4px 15px;
+    border-radius: 5px;
 }

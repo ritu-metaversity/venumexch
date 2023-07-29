@@ -55,6 +55,7 @@ const Mybets = () => {
   const handleGameName = (e) => {
     let inputValue = e.target.value;
     setMatchId(inputValue)
+    console.log(inputValue, "kjhytrds")
   };
 
   const handleUnmatched = () => {
@@ -78,7 +79,7 @@ const Mybets = () => {
 
 
   useEffect(() => {
-    let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1 };
+    let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1, isDeleted: "false" };
 
     dispatch(Postunsettleddddd(data));
 

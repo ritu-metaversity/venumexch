@@ -5,7 +5,7 @@ import {
     Postunsettleddddd, Postcasino, Postprofitlossmatchwise, postBetMarketAndUser, Postisselfbyappurl, Postdepsositrequestclient, Postpaymnetdetailapp,
     Postselfdepositapp, Postselfwithdrawapp, Postwithdrawrequestclient, Postvalidatejwttoken, Postuserselfregister, PostMinMaxGameDetails, PostUserOddPnl, PostUserfancypnl,
     Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition, getResponsibleGaming, postLoginDemoUser, postBetHistory, postleftmenudataopen
-    , postpendingapppii
+    , postpendingapppii, psotbetsingleusevalue
 } from './authActions'
 
 const INITAL_STATE = {
@@ -174,6 +174,10 @@ const INITAL_STATE = {
     postpendingapppiiDataLoading: false,
     postpendingapppiiDataError: null,
 
+    psotbetsingleusevalueData: null,
+    psotbetsingleusevalueDataLoading: false,
+    psotbetsingleusevalueDataError: null,
+
 
 
 }
@@ -187,6 +191,11 @@ const authSlice = createSlice({
         },
         clearLoginInfo: (state) => {
             state.postLoginData = null
+        },
+        clearPostPlaceBet: (state) => {
+            state.PostBetingOnGameDetail = null;
+            state.PostBetingOnGameDetailLoading = false;
+            state.PostBetingOnGameDetailError = null;
         }
     },
     extraReducers: bulder => {
@@ -697,9 +706,22 @@ const authSlice = createSlice({
                 state.postpendingapppiiDataLoading = false;
                 state.postpendingapppiiDataError = null;
             })
+            .addCase(psotbetsingleusevalue.pending, (state) => {
+                state.psotbetsingleusevalueData = null;
+                state.psotbetsingleusevalueDataLoading = true;
+                state.psotbetsingleusevalueDataError = null;
+            }).addCase(psotbetsingleusevalue.rejected, (state, action) => {
+                state.psotbetsingleusevalueData = null;
+                state.psotbetsingleusevalueDataLoading = false;
+                state.psotbetsingleusevalueDataError = action.error.message;
+            }).addCase(psotbetsingleusevalue.fulfilled, (state, action) => {
+                state.psotbetsingleusevalueData = action.payload.data;
+                state.psotbetsingleusevalueDataLoading = false;
+                state.psotbetsingleusevalueDataError = null;
+            })
 
     }
 });
 
-export const { setMrqueeClose, clearLoginInfo } = authSlice.actions;
+export const { setMrqueeClose, clearLoginInfo, clearPostPlaceBet } = authSlice.actions;
 export default authSlice.reducer

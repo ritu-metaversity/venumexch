@@ -5,7 +5,7 @@ import { PostBalance } from "../../App/Features/auth/authActions";
 import Betslip from "./Betslip";
 import "./Right.css";
 
-const Right = ({ gamedetailsData }) => {
+const Right = ({ gamedetailsData, setGameDetailData,gameNmeForOpenBet }) => {
    const dispatch = useDispatch();
    const { id } = useParams();
 
@@ -184,7 +184,7 @@ const Right = ({ gamedetailsData }) => {
                      }
                   </> : ""
                }
-               <Betslip BackBlack={BackBlack} gamedetailsData={gamedetailsData} />
+               <Betslip BackBlack={BackBlack} setGameDetailData={setGameDetailData} gamedetailsData={gamedetailsData} gameNmeForOpenBet={gameNmeForOpenBet}/>
 
             </div>
          </div>

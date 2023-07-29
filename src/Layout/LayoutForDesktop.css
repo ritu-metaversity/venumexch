@@ -9,6 +9,6 @@
     min-height: calc(100vh - 230px);
     flex-wrap: nowrap;
     justify-content: center;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 
 }

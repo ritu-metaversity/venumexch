@@ -199,15 +199,20 @@ img {
 
 .modal_CrosssIcon {
     position: absolute;
-    top: 1px;
+    top: 2px;
     right: 3px;
     color: white;
     font-size: 21px;
+    padding: 0px 0px 28px 55px;
+    background-color: #0f2227;
+
 }
 
 @media screen and (min-width: 870px) {
-    .slot_game .modal-dialog{
+    .slot_game .modal-dialog {
         width: 100%;
         min-width: 100% !important;
     }
+
+   
 }

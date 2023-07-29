@@ -44,7 +44,7 @@ const Mybets = () => {
   // console.log(PostBetListByMatchIdData ,"dushyant")
 
   useEffect(() => {
-    let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1 };
+    let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1, isDeleted: "false" };
 
     dispatch(Postunsettleddddd(data));
 

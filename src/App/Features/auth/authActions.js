@@ -786,3 +786,18 @@ export const postDemoLogin = createAsyncThunk('auth/postDemoLogin', async (data,
         return rejectWithValue(err.response.data)
     }
 })
+
+export const psotbetsingleusevalue = createAsyncThunk('auth/psotbetsingleusevalue', async (data, { rejectWithValue }) => {
+    try {
+        // console.log("loooogogoogogogoog")
+        // https://api.247365.exchange/enduser/left-menu-data-open
+        const psotbetsingleusevaluedataa = await axios.post(`${REACT_APP_API_URL}/bet-modifier/single-user-value`,
+        )
+        return psotbetsingleusevaluedataa
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})

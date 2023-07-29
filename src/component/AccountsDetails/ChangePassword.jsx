@@ -129,7 +129,7 @@ const ChangePassword = () => {
       };
    }
    return (
-      <div className="content boxed-layout-wrapper" >
+      <div className="content" >
          <div className="change-password" style={{ width: "310px" }}>
 
             <h1 className='ch-pass betHeading pnlHeading'>Change Password</h1>
