@@ -49,6 +49,7 @@ const WithDraw1 = () => {
     let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
     const [withdrawData, setWithdrawData] = useState();
     // const [active, setActive] = useState(0);
+    const [radioButton, setRadioButton] = useState(false)
 
     const [show, setShow] = useState(false);
     const [withType, setwithType] = useState();
@@ -97,6 +98,7 @@ const WithDraw1 = () => {
         // setwithCoinValue(0);
         setSavedBankdetailsName(val)
         console.log(val, id, "lkjhgfdsa")
+        setRadioButton(false)
 
     };
     useEffect(() => {
@@ -533,6 +535,7 @@ const WithDraw1 = () => {
                                 color: "white",
                             }
                         });
+                        setRadioButton(false)
 
                     }
 
@@ -570,6 +573,8 @@ const WithDraw1 = () => {
         setwithType(withdrawType)
         // setBankId(bankid)
         // setWithdrawType(withdrawType)
+        setRadioButton(accNumber)
+
     };
 
 
@@ -589,6 +594,7 @@ const WithDraw1 = () => {
 
     const handlependingsucesss = () => {
         let data = { id: withDrawId }
+        console.log(data)
         dispatch(postpendingapppii(data))
         setpendingmodal(false)
     }
@@ -919,7 +925,7 @@ const WithDraw1 = () => {
                                                         }
                                                         aria-colindex="5"
                                                         className="text-left">
-                                                        <div className="custom-control custom-control-inline custom-radio">
+                                                        <div className="custom-control custom-control-inline custom-radio" checked={radioButton === item.accountNumber ? true : false}>
                                                             <input type="radio" name="radio_btn" />{" "}
                                                         </div>
                                                     </td>
@@ -1130,39 +1136,13 @@ const WithDraw1 = () => {
 
                                                     {item?.status}
                                                 </div>
-                                                {/*<div onClick={handlependingg}>
-                                                    {item?.status === "Pending" ? <button onClick={handlepennding} className="handlepennfoifjfi" >
+                                                <div onClick={() => handlependingg(item?.id)}>
+                                                    {item?.status === "Pending" ? <button onClick={() => handlependingg(item?.id)} className="handlepennfoifjfi" >
                                                         <IoCloseCircleOutline size={25} color={"black"} />
                                                     </button> : ""}
-                                    </div>*/}
+                                                </div>
                                             </div>
-                                            <Modal
-                                                show={pendingmodal}
-                                                onHide={() => setpendingmodal(false)}
-                                                size="lg"
-                                                aria-labelledby="contained-modal-title-vcenter"
-                                                centered
-                                            >
-                                                <Modal.Header closeButton style={{ height: "39px" }}>
-                                                    <Modal.Title id="contained-modal-title-vcenter">
-                                                        Cancel Request
-                                                        <button onClick={handleCloseFancyModal} className="closebtnonpnl" style={{ top: "6px" }}>
-                                                            <IoCloseCircleOutline size={25} color={"black"} />
-                                                        </button>
-                                                    </Modal.Title>
-                                                </Modal.Header>
-                                                <Modal.Body>
-                                                    <div className="modalldatata">
-                                                        <div>
-                                                            Are you sure want to cancel this request ?
-                                                        </div>
-                                                        <div className="butonnnn">
-                                                            <button className="bynnnn" onClick={() => setpendingmodal(false)}>Close</button>
-                                                            <button className="bynnnn" onClick={handlependingsucesss}>Submit</button>
-                                                        </div>
-                                                    </div>
-                                                </Modal.Body>
-                                            </Modal>
+
                                         </td>
                                     ) : item.status === "Rejected" ? (
                                         <td aria-colindex="4" style={{ color: "#f44336" }}>
@@ -1181,7 +1161,42 @@ const WithDraw1 = () => {
                     </tbody>
                 </table>
             </div>
-        </div>
+            <Modal
+                show={pendingmodal}
+                className="custom_wothdraw_pending_popup"
+                onHide={() => setpendingmodal(false)}
+                size="sm"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+
+            // style={{ width: "30%" }}
+            >
+                <Modal.Header closeButton style={{ height: "39px" }}>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Cancel Request
+                        <button onClick={handleCloseFancyModal} className="closebtnonpnl" style={{ top: "6px" }}>
+                            <IoCloseCircleOutline size={25} color={"black"} />
+                        </button>
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "auto"
+                }}>
+                    <div className="modalldatata">
+                        <div>
+                            Are you sure want to cancel this request ?
+                        </div>
+                        <div className="butonnnn">
+                            <button className="withdraw-popup-btn" onClick={() => setpendingmodal(false)}>Close</button>
+                            <button className="withdraw-popup-btn" onClick={handlependingsucesss}>Submit</button>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        </div >
     )
 }
 

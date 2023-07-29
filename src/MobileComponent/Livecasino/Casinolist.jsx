@@ -7,6 +7,7 @@ import { Postcasino } from "../../App/Features/auth/authActions";
 import "./CasinoList.css";
 import Modal from "react-bootstrap/Modal";
 import { RxCross2 } from 'react-icons/rx'
+import CasinoModals from "./CasinoModals";
 const Casinolist = () => {
   const { PostcasinoData } = useSelector((state) => state.auth);
   const [sportId, setSportId] = useState(323334);
@@ -19,7 +20,15 @@ const Casinolist = () => {
   const dispatch = useDispatch();
   // console.log(PostcasinoData, "dushyant");
   const token = localStorage.getItem("TokenId");
+  const [Casinoshow, setCasinoShow] = useState(false);
+  const handleClose = () => setCasinoShow(false);
+  const [show, setShow] = useState(false)
 
+
+  const handleAgree = () => {
+    setTrueee(true)
+    setShow(false)
+  }
   useEffect(() => {
     if (token) {
 
@@ -53,7 +62,9 @@ const Casinolist = () => {
       token
     ) {
       setCasionId(val)
-      setTrueee(true)
+      // setTrueee(true)
+      setShow(true)
+
       // navigate(`/m/casino/${val}`);
     } else {
       navigate("/m/login");
@@ -125,15 +136,26 @@ const Casinolist = () => {
           </section>
         </div>
       </div>
+      <Modal centered show={show} onHide={handleClose}>
+        <Modal.Body className="casino_modals_body">
+          <CasinoModals />
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={() => setShow(false)}>No, I Don't Agree</button>
+          </div>
+        </Modal.Body>
+      </Modal>
       <Modal
         show={trueee}
         onHide={() => setTrueee(false)}
-        style={{ padding: "10px" }}
+
         size="xl"
         className="slot_game">
 
         <>
-          <RxCross2 className="modal_CrosssIcon" onClick={() => setTrueee(false)} />
+          <div className="modal_CrosssIcon">
+            <RxCross2 onClick={() => setTrueee(false)} />
+          </div>
           <iframe
             src={`https://d2.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
             // height="82vh"

@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { PostBetListByMatchId, PostEditStack, PostGetStackApi } from "../../App/Features/auth/authActions";
 import BetPage from "./BetPage";
 
-const Betslip = ({ props, gamedetailsData }) => {
+const Betslip = ({ props, gamedetailsData, setGameDetailData, gameNmeForOpenBet }) => {
   const dispatch = useDispatch();
   const [stakeState, setStakeState] = useState({});
   // const [stakeTwo, setStackUpadte] = useState(false);
@@ -18,14 +18,15 @@ const Betslip = ({ props, gamedetailsData }) => {
   const { id } = useParams();
 
   const {
-    PostBetListByMatchIdData, PostGetStack, PostEditStackData, PostEditStackDataError
+    PostBetListByMatchIdData, PostGetStack, PostEditStackData, PostEditStackDataError,
   } = useSelector((state) => state.auth);
+
 
   const iddd = localStorage.getItem("SportId");
   // useEffect(() => {
   //   setGameIframeId(iddd);
   // }, [iddd]);
-
+  console.log(props, gamedetailsData?.AllBookmakerData?.[0]?.matchName, "alllllldatatadtadta")
   const handleEditBtn = () => {
     if (editStakeBtn === "none") {
       setEditBtn("block");
@@ -43,7 +44,7 @@ const Betslip = ({ props, gamedetailsData }) => {
     }
     // setBetslip(true)
   };
-
+  console.log(gameNmeForOpenBet, "gameNmeForOpenBet")
 
 
   const handleOpenBets = () => {
@@ -95,6 +96,11 @@ const Betslip = ({ props, gamedetailsData }) => {
     setEditBtn("none");
     props.BackBlack("none");
   };
+  const Closepopup = () => {
+    setBetslip(false)
+    setOpenBet(true);
+
+  }
 
   return (
     <div >
@@ -139,7 +145,7 @@ const Betslip = ({ props, gamedetailsData }) => {
                       Click on the odds to add selections to the betslip.
                     </div>
 
-                    <BetPage gamedetailsData={gamedetailsData} />
+                    <BetPage setBetDetailData={setGameDetailData} gamedetailsData={gamedetailsData} Closepopup={Closepopup} />
 
 
                   </div>
@@ -189,23 +195,37 @@ const Betslip = ({ props, gamedetailsData }) => {
                           <label className="custom-control-label" for="__BVID__79">Order By Date</label></div>
                       </div>
                     </div>
+
                     {/*   <b><a href="/gamedetail/32403633" className="router-link-exact-active router-link-active">Sri Lanka v Afghanistan</a></b>*/}
                     <div className="table-responsive">
                       <table className="table">
                         {/*  <thead>
                           <th colspan="4">Sri Lanka.</th>
             </thead>*/}
+                        <span style={{
+                          fontSize: "13px",
+                          fontWeight: "700"
+                        }}>
+                          {
+                            gameNmeForOpenBet
+                          }
+                        </span>
                         <tbody>
-                          <tr className="odds-header">
-                            <td className="text-left">Nation</td>
-                            <td className="text-left">Odds</td>
-                            <td className="text-right">Stake</td>
-                            <td className="text-right">Profit/Liability</td>
-                          </tr>
+
                           {token === null ? "" :
-                            (PostBetListByMatchIdData?.data &&
-                              Object.keys(PostBetListByMatchIdData?.data).map((key) => (
+                            (PostBetListByMatchIdData?.data ?
+                              Object.keys(PostBetListByMatchIdData?.data)?.map((key) => (
                                 <>
+                                  <div style={{
+                                    padding: "7px 0px 7px 0px",
+                                    fontWeight: "700"
+                                  }}> {console.log(PostBetListByMatchIdData, "PostBetListByMatchIdData")}{key}</div>
+                                  <tr className="odds-header">
+                                    <td className="text-left">Nation</td>
+                                    <td className="text-left">Odds</td>
+                                    <td className="text-right">Stake</td>
+                                    <td className="text-right">Profit/Liability</td>
+                                  </tr>
                                   {PostBetListByMatchIdData?.data[key].map((item) => (
                                     <>
                                       <tr className={`back ${item?.back === false ? "lay" : "back"}`}>
@@ -213,12 +233,14 @@ const Betslip = ({ props, gamedetailsData }) => {
                                         <td className="text-left">{item?.priveValue}</td>
                                         <td className="text-right">{item?.amount}</td>
 
-                                        <td className="text-right">{item?.priveValue}</td>
+                                        <td className="text-right">{item?.pnl}</td>
                                       </tr>
                                     </>
                                   ))}
                                 </>
-                              )))
+                              ))
+                              : ""
+                            )
                           }
                         </tbody>
                       </table>

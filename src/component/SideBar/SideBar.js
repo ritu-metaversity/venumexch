@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { getActiveSportList, postleftmenudataopen } from '../../App/Features/auth/authActions';
 import './SideBar.css'
 import SubSideBar from './SubSideBar';
+import hours from "./sideBarHorse.6c8a9ff3.svg"
+
 const SideBar = () => {
   const { pathname } = useLocation();
 
@@ -113,8 +115,14 @@ const SideBar = () => {
                         {console.log(item, "fdfdfgdfg")}
 
                         <Link data-v-4732acba="" className="favourites-link" onClick={() => handleRoute(item?.sportId, item?.sportName)}>
-                          <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} className="game-icon" />
-                          <span data-v-4732acba="" className="link-name">{item?.sportName}</span></Link>
+                          {item?.sportId === 77 ?
+                            <img src={hours} alt='' className="game-icon" />
+                            :
+                            <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId === 14 ? 52 : item?.sportId}.png`} alt='' className="game-icon" />
+                          }
+                          <span data-v-4732acba="" className="link-name">
+                            {item?.sportName}
+                          </span></Link>
                       </li>))) : ""}
 
                   <Link

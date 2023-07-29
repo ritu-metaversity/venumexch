@@ -661,7 +661,7 @@ const GameDetails = () => {
                           <div className="scorecard scorecard-mobile">
                             <div className="score-inner">
                               <iframe
-                                src="https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true"
+                                src={`http://43.205.116.130/tv.php?eventId=${id}?theme=dark-wolf`}
                                 // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                 width="100%"
                                 height="290px"

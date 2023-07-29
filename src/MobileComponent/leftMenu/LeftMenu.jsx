@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import { getActiveSportList, postleftmenudataopen } from '../../App/Features/auth/authActions';
 import "./LeftMenu.css"
+import hours from "./sideBarHorse.6c8a9ff3.svg"
 
 const LeftMenu = (props) => {
    const dispatch = useDispatch();
@@ -65,7 +66,13 @@ const LeftMenu = (props) => {
                <li>
                   <div onClick={() => handleRoute(item?.sportId, item?.sportName)} style={{ cursor: "pointer" }} className="favourites-a">
                      <div className="menu-lvl-1">
-                        <div className="item" ><img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId}.png`} alt='' className="game-icon" /> <span className="menu-name">{item?.sportName}</span></div>
+                        <div className="item" >
+                           {item?.sportId === 77 ?
+                              <img src={hours} alt='' className="game-icon" />
+                              :
+                              <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId === 14 ? 52 : item?.sportId}.png`} alt='' className="game-icon" />
+                           }
+                           <span className="menu-name">{item?.sportName}</span></div>
                      </div>
                   </div>
                </li>))) : ""}

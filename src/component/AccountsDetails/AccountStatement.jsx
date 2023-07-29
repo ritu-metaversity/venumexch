@@ -219,7 +219,7 @@ const AccountStatement = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colspan="3" className="text-center">
+                      <td colspan="5" className="text-center">
                         There Have Been No Transfers In The Last 14 Days.
                       </td>
                     </tr>

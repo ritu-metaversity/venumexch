@@ -15,21 +15,25 @@ const Home = () => {
   const { pathname } = useLocation();
 
   const [gamedetailsData, setGamedetailsData] = useState({})
+  const [gameNmeForOpenBet, setGameNmeForOpenBet] = useState("")
 
   const datatataProps = (value) => {
     setGamedetailsData(value)
+  }
+  const gamenameOpenbet = (value) => {
+    setGameNmeForOpenBet(value)
   }
   return (
     <>
       {/* <div   className="content boxed-layout-wrapper" > */}
       <div className='d-flex main-desk-view mt-56'>
-      
+
 
         {
-          pathname.includes("/gamedetails/") ? <DestGamePage datatataProps={datatataProps} /> : <MidPage />
+          pathname.includes("/gamedetails/") ? <DestGamePage datatataProps={datatataProps} gamenameOpenbet={gamenameOpenbet} /> : <MidPage />
         }
         <div>
-          <Right gamedetailsData={gamedetailsData} />
+          <Right gamedetailsData={gamedetailsData} setGameDetailData={setGamedetailsData} gameNmeForOpenBet={gameNmeForOpenBet} />
         </div>
 
 
