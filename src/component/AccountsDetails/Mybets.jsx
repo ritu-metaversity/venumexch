@@ -11,10 +11,17 @@ import moment from "moment";
 const dateFormat = "YYYY-MM-DD";
 const Mybets = () => {
   const dispatch = useDispatch();
-  const [matchid, setMatchId] = useState("")
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [matchid, setMatchId] = useState(4)
+  const date = new Date();
+  const futureDate = date.getDate() - 60;
+  date.setDate(futureDate);
+  const defaultValue = moment().subtract(7, "days").format("YYYY-MM-DD");
+  const currentValue = moment().format("YYYY-MM-DD");
+  const [startDate, setStartDate] = useState(defaultValue);
+  const [endDate, setEndDate] = useState(currentValue);
   const [current, setcurrent] = useState(true)
+  const [gameSportCasion, setGameSportCasion] = useState("Sport")
+  // const [gameSportCasionId, setGameSportCasionId] = useState(1)
   const [history, setHistory] = useState(false)
   const [historyData, setHistoryData] = useState({})
   const [unsettledbetmatchdata, setUnsettledbetmatchdata] = useState({})
@@ -101,17 +108,27 @@ const Mybets = () => {
     if (vl === "selected1") {
       setcurrent(true)
       setHistory(false)
+      setGameSportCasion("Sport")
+
     } else {
       setHistory(true)
       setcurrent(false)
-
+      let data = ({
+        fromDate: startDate,
+        index: 0,
+        isdeleted: false,
+        noOfRecords: 100,
+        sportId: 4,
+        toDate: endDate
+      })
+      dispatch(postBetHistory(data))
     }
   }
   const [historyError, setHistoryError] = useState("false")
 
   const handleSearch = () => {
-    if (startDate !== undefined && endDate !== undefined && matchid !== "") {
-      console.log("eeee")
+    if (startDate !== "" && endDate !== "" && matchid !== "") {
+      console.log(startDate, "eeee")
       setHistoryError("false")
 
       let data = ({
@@ -132,7 +149,25 @@ const Mybets = () => {
 
 
 
+  const handleSeleteGame = (vl) => {
+    if (vl === "Sport") {
 
+      setGameSportCasion("Sport")
+      // setGameSportCasionId(1)
+      let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 1, isDeleted: "false" };
+
+      dispatch(Postunsettleddddd(data));
+
+    } else {
+      setGameSportCasion("Casion")
+      // setGameSportCasionId(2)
+      let data = { betType: 1, index: pageNumber, noOfRecords: 5, sportType: 2, isDeleted: "false" };
+
+      dispatch(Postunsettleddddd(data));
+
+
+    }
+  }
 
   return (
     <div className="content boxed-layout-wrapper _flex wid-100">
@@ -147,8 +182,8 @@ const Mybets = () => {
             </div>
             {current === false ? "" :
               <div className="selection m-u">
-                <div className={`item ${current === true ? "selected" : ""}`}>Matched</div>
-                <div className="item">Unmatched</div>
+                <div className={`item ${gameSportCasion === "Sport" ? "selected" : ""}`} onClick={() => handleSeleteGame("Sport")}>Sports</div>
+                <div className={`item ${gameSportCasion === "Casion" ? "selected" : ""}`} onClick={() => handleSeleteGame("Casion")}> casino</div>
               </div>}
             {history === true ?
               <div className="selection m-u">
@@ -157,6 +192,7 @@ const Mybets = () => {
                   name="cars"
                   id="cars"
                   onChange={handleGameName}
+                  value={matchid}
                 >
                   <option value="">Select Match</option>
 
@@ -186,7 +222,7 @@ const Mybets = () => {
                     <div className="mx-input-wrapper" aria-disabled="true">
                       <DatePicker
                         className=" startDateNew"
-                        // defaultValue={dayjs(startDate)}
+                        defaultValue={dayjs(startDate)}
                         format={dateFormat}
                         onChange={StartDateValue}
                         disabledDate={(d) =>
@@ -214,7 +250,7 @@ const Mybets = () => {
                     <div className="mx-input-wrapper">
                       <DatePicker
                         className=" startDateNew"
-                        // defaultValue={dayjs(endDate)}
+                        defaultValue={dayjs(endDate)}
                         format={dateFormat}
                         onChange={EndDateValue}
                         disabledDate={(d) =>
@@ -259,11 +295,14 @@ const Mybets = () => {
                 <table className="table profit-loss-table">
                   <thead>
                     <tr>
-                      <th>Sports Name</th>
+                      {gameSportCasion === "Casion" ?
+                        "" :
+                        <th>Sports Name</th>
+                      }
                       <th>Event Name</th>
                       <th>Market Name</th>
                       <th>Nation</th>
-                      <th className="text-right">User Rate</th>
+                      <th className="text-right" >User Rate</th>
                       <th className="text-right"> P & L</th>
                       <th className="text-right">Amount</th>
                       <th className="text-right">Time</th>
@@ -278,7 +317,9 @@ const Mybets = () => {
                       unsettledbetmatchdata?.length > 0 ? (
                         unsettledbetmatchdata.map((item) => (
                           <tr className={`odd oddNew ${item?.isback === true ? "back_1" : "lay"} unhighlighted`}>
-                            <td className="text-left">{item?.sportName}</td>
+
+                            {gameSportCasion === "Casion" ?
+                              "" : <td className="text-left">{item?.sportName}</td>}
                             <td className="text-left">{item?.eventName}</td>
                             <td className="text-left">{item?.marketname}</td>
                             <td className="text-left">{item?.nation}</td>
@@ -286,11 +327,11 @@ const Mybets = () => {
                             <td className="text-right">{item?.pnl}</td>
                             <td className="text-right">{item?.amount}</td>
 
-                            <td className="text-right"><span className="d-block"> {moment(item?.time).format(" D/mm/YYYY h:mm")}</span>
+                            <td className="text-right"><span className="d-block"> {item?.time}</span>
                             </td>
 
                           </tr>))) : (<tr>
-                            <td colspan="8" className="text-center">
+                            <td colspan={gameSportCasion === "Casion" ? 7 : 8} className="text-center">
                               There are no record to display
                             </td>
                           </tr>)
@@ -303,7 +344,7 @@ const Mybets = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
