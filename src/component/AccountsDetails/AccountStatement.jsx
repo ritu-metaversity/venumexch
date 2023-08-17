@@ -282,10 +282,15 @@ const AccountStatement = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton style={{ width: "100%" }} className="back1">
+        <Modal.Header closeButton style={{
+          width: "100%", display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          margin: "auto"
+        }} className="back1">
           <Modal.Title
             id="contained-modal-title-vcenter"
-            style={{ marginBottom: "-30px" }}
+          // style={{ marginBottom: "-30px" }}
           >
             Result
           </Modal.Title>

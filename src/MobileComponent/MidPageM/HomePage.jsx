@@ -74,7 +74,7 @@ const HomePage = () => {
         setIsloading(false)
       });
   }, [id, token]);
-
+  console.log(gamesData, "gamesData");
   useEffect(() => {
     if (token) {
 
@@ -154,111 +154,48 @@ const HomePage = () => {
 
 
           <div>
-            <ul className="market-listing m-t-10 fsfsdf mt-23">
-              {gamesData && gamesData?.length > 0 ? (
-                Object.keys(gamesData).map((key, item) => (
-                  <>
+            <div className="main_card_for_homepage">
+              <div className="inner_card_for_homepage1">
+                <div className="gamename_card_img_inplay" style={{ width: "10%" }}>
+                  <img className="card_logo_homePage" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ic_vir.png" alt="das" />
+                </div>
 
-                    <div className={`row ${gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ? "" : "d-none"}`}>
-                      <div className="col-md-12 wh" >
-                        <div className=" odds-name fl">
-                          {gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ?
-                            <span className="sports-name" >
-                              {console.log()}
-                              {gamesData[key]?.name}
-                            </span>
-                            : ""}
-                        </div>
-                        {
-                          gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ? (
-                            <div className=" numberval" style={{ marginTop: "20px" }} >
-                              <div className="value-num">
-                                <div>1</div>
-                                <div>X</div>
-                                <div>2</div>
-                              </div>
-                            </div>
-                          ) : ""
-                        }
+                <div className="card_Name_Date_homepage" >
+                  <div className="card_Name_homepage">Hobart Hurricanes XI v Adelaide Strikers XI</div>
+                  <div className="card_Date_homepage"> 17/08/2023 12:40</div>
+                </div>
 
-                      </div>
+                <div style={{ width: "5%", color: "#2aa033" }}>
+                  <i className="fas fa-play-circle"></i>
 
-
-
-
-                    </div>
-
-                    {gamesData &&
-                      gamesData[key] &&
-                      gamesData[key]?.matchList.map((item, index) => (
-                        <div class="inplay-item__row homerow" >
-                          {console.log(gamesData[key]?.sportid, "fsdsdfsdfsdfsdf")}
-                          <div class="inplay-item__score">
-                            <div class="score-content empty" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
-                              <div class="date-content"><span class="inPlayDate-content__date" style={{ color: "#247b23" }}> {moment(item?.openDate).format('D-MM-YYYY h:mm')}</span></div>
-                            </div>
-                          </div>
-                          <div class="inplay-item__players box-w2" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}><p class="inplay-item__player"> {item?.matchName}</p>
-                            <div className="inplayyyy">
-                              {item?.inPlay === true ? (
-                                <i className="fas fa-play-circle "></i>
-                              ) : (
-                                ""
-                              )}
-                            </div>
-                          </div>
-                          <div onClick={() => setIsRight(o => !o)} class={"inplay-item__back" + (isRight ? " isRight" : "")}>
-                            <div class="inplay-item__back-inner">
-                              <div class="inplay-item__back-inner inplay-item__back-inner-left">
-                                <span class="odd-button back     ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.team1Back}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button back not-active    ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.team2Back}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button back     ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.drawBack}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button lay     ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.drawLay}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button lay     ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.team1Lay}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button lay not-active    ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.team2Lay}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-
-                                  </span>
-                                </span>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                  </>
-                ))
-              ) : (
-                <div className="noLiveMatch">No live match now</div>
-              )}
-            </ul>
+                </div>
+              </div>
+              <div className="inner_card_for_homepage2">
+                <div className="inner_card_nameAndpnl_homepage">
+                  <span className="game_name_btxi">  BT XI</span>
+                  <span className="game_name_pnllll"> 0</span>
+                </div>
+                <div className="inner_card_rate_homepage">
+                  <div className="inner_card_lay">
+                    <span>12</span>
+                    <span>34</span>
+                  </div>
+                  <div className="inner_card_back">
+                    <span>12</span>
+                    <span>34</span></div>
+                </div>
+              </div>
+              <div className="inner_card_for_homepage2">
+                <div className="inner_card_nameAndpnl_homepage">
+                  <span className="game_name_btxi">  BT XI</span>
+                  <span className="game_name_pnllll"> 0</span>
+                </div>
+                <div className="inner_card_rate_homepage">
+                  <span className="inner_card_lay">23</span>
+                  <span className="inner_card_back">11</span>
+                </div>
+              </div>
+            </div>
             <Casinolist />
           </div>
 

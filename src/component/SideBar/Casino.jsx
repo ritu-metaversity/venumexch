@@ -12,7 +12,7 @@ const Casino = () => {
 
 
     <iframe
-      src={`https://d2.fawk.app/#/splash-screen/${token}/9482/?opentable=${id}`}
+      src={`https://d.fawk.app/#/splash-screen/${token}/9482/?opentable=${id}`}
       className="desktop_if"
       width="100%"
       title="desktop"

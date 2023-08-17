@@ -116,32 +116,31 @@ const Gamepage = () => {
   return (
     <>
       <div style={{ marginTop: "108px" }}>
-        {token ? <Link to="/m/mybets" className="openbetsssss" >
+        {/*   {token ? <Link to="/m/mybets" className="openbetsssss" >
           <span className="open-bets-link">
             Open Bets {""}(
             {PostunsettledData?.data &&
               PostunsettledData?.data?.dataList &&
-              PostunsettledData?.data?.dataList?.length}
+              PostunsettledData?.data?.dataList?.length }
             )
           </span>
         </Link> : ""
+      }*/}
 
 
-        }
 
 
         <div className="wh1">
-          <h2 class="page-title p-l-15 odds-name fl gam-name" >
+          <div class="page-title p-l-15 odds-name fl gam-name" >
             <span><img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${id}.png `} alt="" width="22px" /></span>
             <span style={{ marginLeft: "4px" }}>{GameName}</span>
-
-          </h2>
+          </div>
           <div className=" numberval">
-            <div className="value-num val-num">
-              <div>1</div>
-              <div>X</div>
-              <div>2</div>
-            </div>
+
+            <span>1</span>
+            <span>X</span>
+            <span>2</span>
+
           </div>
         </div>
       </div>

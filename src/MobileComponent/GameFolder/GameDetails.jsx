@@ -1676,7 +1676,7 @@ const GameDetails = () => {
         <ModalHeader
           closeButton
           closeVariant="white"
-          style={{ marginTop: "49px", padding: "7px", height: "29px" }}
+          style={{ marginTop: "9px", padding: "7px", height: "29px" }}
         >
           <ModalTitle>Run Amount</ModalTitle>
         </ModalHeader>

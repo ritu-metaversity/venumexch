@@ -112,6 +112,10 @@
 .numberval {
     width: 40%;
     float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 31%;
 }
 
 .fl {
@@ -162,3 +166,82 @@
 ul.market-listing.m-t-10.fsfsdf.mt-23 {
     margin-top: -47px !important;
 }
+
+.main_card_for_homepage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    width: 100%;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.inner_card_for_homepage1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: row;
+    /* background-color: violet; */
+    padding: 3px;
+    /* gap: 5%; */
+}
+
+.inner_card_for_homepage2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+/* .inner_card_for_homepage3 {} */
+
+.gamename_card_img_inplay {}
+
+.card_logo_homePage {
+    width: 19px;
+}
+
+.card_Name_Date_homepage {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    width: 85%;
+}
+
+.card_Name_homepage {
+    font-size: 16px;
+}
+
+.card_Date_homepage {
+    font-size: 12px;
+
+}
+
+.inner_card_nameAndpnl_homepage {
+    width: 40%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.game_name_btxi {
+    font-weight: bolder;
+    font-size: 14px;
+}
+
+.game_name_pnllll {}
+
+.inner_card_rate_homepage {
+    width: 60%;
+
+}
+
+.inner_card_lay {}
+
+.inner_card_back {}
