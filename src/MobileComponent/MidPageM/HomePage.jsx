@@ -39,7 +39,7 @@ const HomePage = () => {
     const token = localStorage.getItem("TokenId");
 
     if (token) {
-
+      console.log(item, "itemitemitemitem")
       let data = {
         matchName: item?.matchName,
         openDate: item?.openDate,
@@ -66,10 +66,20 @@ const HomePage = () => {
 
   // console.log(postUserBannerListData, "postUserBannerListDatapostUserBannerListData")
 
+  // useEffect(() => {
+  //   axios
+  //     .get("https://oddsapi.247idhub.com/betfair_api/active_match")
+  //     .then((res) => {
+  //       setGamesData(res?.data?.data);
+  //       setIsloading(false)
+  //     });
+  // }, [id, token]);
   useEffect(() => {
     axios
-      .get("https://oddsapi.247idhub.com/betfair_api/active_match")
+      .get("https://oddsapi.247idhub.com/betfair_api/active_match/v2")
       .then((res) => {
+        console.log(res?.data?.data, "resresresresres");
+
         setGamesData(res?.data?.data);
         setIsloading(false)
       });
@@ -154,48 +164,79 @@ const HomePage = () => {
 
 
           <div>
-            <div className="main_card_for_homepage">
-              <div className="inner_card_for_homepage1">
-                <div className="gamename_card_img_inplay" style={{ width: "10%" }}>
-                  <img className="card_logo_homePage" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/ic_vir.png" alt="das" />
-                </div>
+            <div className="home_card_mainPage">
 
-                <div className="card_Name_Date_homepage" >
-                  <div className="card_Name_homepage">Hobart Hurricanes XI v Adelaide Strikers XI</div>
-                  <div className="card_Date_homepage"> 17/08/2023 12:40</div>
-                </div>
+              {gamesData && gamesData?.length > 0 ? (
+                Object.keys(gamesData).map((key, item) => (
+                  gamesData &&
+                  gamesData[key] &&
+                  gamesData[key]?.matchList.map((item, index) => (
+                    <div className="main_card_for_homepage" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
+                      {console.log(item, "itemitem")}
+                      <div className="inner_card_for_homepage1">
+                        <div className="gamename_card_img_inplay" style={{ width: "10%" }}>
 
-                <div style={{ width: "5%", color: "#2aa033" }}>
-                  <i className="fas fa-play-circle"></i>
+                          <img className="card_logo_homePage" src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${gamesData[key]?.sportid}.png`} alt="das" />
+                        </div>
 
-                </div>
-              </div>
-              <div className="inner_card_for_homepage2">
-                <div className="inner_card_nameAndpnl_homepage">
-                  <span className="game_name_btxi">  BT XI</span>
-                  <span className="game_name_pnllll"> 0</span>
-                </div>
-                <div className="inner_card_rate_homepage">
-                  <div className="inner_card_lay">
-                    <span>12</span>
-                    <span>34</span>
-                  </div>
-                  <div className="inner_card_back">
-                    <span>12</span>
-                    <span>34</span></div>
-                </div>
-              </div>
-              <div className="inner_card_for_homepage2">
-                <div className="inner_card_nameAndpnl_homepage">
-                  <span className="game_name_btxi">  BT XI</span>
-                  <span className="game_name_pnllll"> 0</span>
-                </div>
-                <div className="inner_card_rate_homepage">
-                  <span className="inner_card_lay">23</span>
-                  <span className="inner_card_back">11</span>
-                </div>
-              </div>
+                        <div className="card_Name_Date_homepage" >
+                          <div className="card_Name_homepage">{item?.matchName}</div>
+                          <div className="card_Date_homepage"> {item?.openDate}</div>
+                        </div>
+
+                        <div style={{ width: "5%", color: "#2aa033" }}>
+                          <i className="fas fa-play-circle"></i>
+
+                        </div>
+                      </div>
+                      {console.log(item, "hui") || <></>}
+                      {item?.runners?.map((item1, index) => {
+                        return (
+                          <>
+                            <div className="inner_card_for_homepage2"
+                              style={{ borderBottom: "1px solid #f2f2f2" }}>
+                              <div className="inner_card_nameAndpnl_homepage">
+                                <span className="game_name_btxi">{item1?.runnerName}</span>
+                                <span className="game_name_pnllll"> 0</span>
+                              </div>
+                              <div className="inner_card_rate_homepage">
+
+                                <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back" >
+                                  <span className="oddddddssss">{item1?.back3}</span>
+                                </div>
+                                <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back">
+                                  <span className="oddddddssss">{item1?.back2}</span>
+                                </div>
+                                <div className="inner_card_back mainnnnnn">
+                                  <span className="oddddddssss">{item1?.back1}</span>
+                                </div>
+                                <div className="inner_card_lay mainnnnnn">
+                                  <span className="oddddddssss">{item1?.lay1}</span>
+
+                                </div>
+                                <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
+                                  <span className="oddddddssss">{item1?.lay2}</span>
+
+                                </div>
+                                <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
+                                  <span className="oddddddssss">{item1?.lay3}</span>
+
+                                </div>
+                              </div>
+                            </div>
+
+                          </>)
+                      })}
+
+                    </div>))
+                ))) : (
+
+                <div className="noLiveMatch">No live match now</div>
+              )}
+
+
             </div>
+
             <Casinolist />
           </div>
 

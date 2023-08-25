@@ -179,7 +179,7 @@ ul.market-listing.m-t-10.fsfsdf.mt-23 {
 
 .inner_card_for_homepage1 {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
     flex-direction: row;
@@ -194,6 +194,7 @@ ul.market-listing.m-t-10.fsfsdf.mt-23 {
     justify-content: center;
     flex-direction: row;
     width: 100%;
+    padding: 2px;
 }
 
 /* .inner_card_for_homepage3 {} */
@@ -239,9 +240,77 @@ ul.market-listing.m-t-10.fsfsdf.mt-23 {
 
 .inner_card_rate_homepage {
     width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.inner_card_lay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #FAA9BA;
+}
+
+.mainnnnnn {
+    width: 17%;
+    padding: 7px;
+}
+
+.oddddddssss {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.rateeeeee {
+    font-size: 11px;
+}
+
+.blurrrrrrr_back {
+    background-color: #e3f3fe !important;
+}
+
+.blurrrrrrr_lay {
+    background-color: #fdeef2 !important;
+}
+
+.inner_card_back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #72BBEF;
+}
+
+@media screen and (max-width: 500px) {
+
+    .mobile_to_desktop_view_block {
+        display: none;
+    }
+
+    .mainnnnnn {
+        width: 50%;
+    }
+
+    .inner_card_nameAndpnl_homepage {
+        width: 60%;
+    }
+
+    .inner_card_rate_homepage {
+        width: 40%;
+    }
 
 }
 
-.inner_card_lay {}
-
-.inner_card_back {}
+.home_card_mainPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+    padding-top: 8px;
+}
