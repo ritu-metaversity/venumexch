@@ -13,6 +13,8 @@ import "./HomePage.css";
 import moment from "moment"
 import Casinolist from "../Livecasino/Casinolist";
 import UpperBanner from "./UpperBanner";
+import Modal from "react-bootstrap/Modal";
+import BitPopup from "../../MobileComponent/Modal/BitPopup";
 
 
 const HomePage = () => {
@@ -34,7 +36,56 @@ const HomePage = () => {
     localStorage.setItem("SportId", id);
   }, [id]);
   const { PostunsettledData, postUserBannerListData } = useSelector((state) => state.auth);
+  const [bitValue, setBitValue] = useState({});
+  const [show, setShow] = useState(false);
+  // const [userIP, setUserIP] = useState("");
 
+  // useEffect(() => {
+  //   fetch("https://oddsapi.247idhub.com/betfair_api/my-ip")
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       // console.log(res?.ip, "djfsodfjskdjm")
+  //       setUserIP(res?.ip);
+  //     });
+  // }, []);
+
+  const handleHomeBet = (vl1, vl2, matchName, matchid, oddss, selectionId, marketId) => {
+    console.log(vl1, vl2, matchName, matchid, marketId, oddss, "dfsfsdfsd")
+    setBitValue({
+      Odds: 2,
+      matchname: matchName,
+      isBack: vl2,
+      isFancy: "false",
+      profits: {
+        Odds: {},
+        Bookmaker: [],
+        Fancy: [],
+
+      },
+      marketId: marketId,
+      selectionId: selectionId,
+      marketName: matchName,
+      bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
+      matchId: matchid
+    });
+    setShow(true)
+    //   setBetDetails({
+    //     isBack: color,
+    //     odds: price,
+    //     stake: 0,
+    //     selectionId: item.selectionId,
+    //     marketId: marketId,
+    //     priceValue: price,
+    //     isFancy: false,
+    //   });
+  }
+  console.log(bitValue, "bitValue")
+  const closePopUp = (vl) => {
+    setShow(false);
+  };
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleGameDetails = (id, item, sportId) => {
     const token = localStorage.getItem("TokenId");
 
@@ -171,7 +222,7 @@ const HomePage = () => {
                   gamesData &&
                   gamesData[key] &&
                   gamesData[key]?.matchList.map((item, index) => (
-                    <div className="main_card_for_homepage" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
+                    <div className="main_card_for_homepage">
                       {console.log(item, "itemitem")}
                       <div className="inner_card_for_homepage1">
                         <div className="gamename_card_img_inplay" style={{ width: "10%" }}>
@@ -179,7 +230,7 @@ const HomePage = () => {
                           <img className="card_logo_homePage" src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${gamesData[key]?.sportid}.png`} alt="das" />
                         </div>
 
-                        <div className="card_Name_Date_homepage" >
+                        <div className="card_Name_Date_homepage" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
                           <div className="card_Name_homepage">{item?.matchName}</div>
                           <div className="card_Date_homepage"> {item?.openDate}</div>
                         </div>
@@ -208,10 +259,10 @@ const HomePage = () => {
                                   <span className="oddddddssss">{item1?.back2}</span>
                                 </div>
                                 <div className="inner_card_back mainnnnnn">
-                                  <span className="oddddddssss">{item1?.back1}</span>
+                                  <span className="oddddddssss" onClick={() => handleHomeBet(item1, "back", item?.matchName, item?.matchId, item1?.back1, item1?.selectionId, item?.marketId)}>{item1?.back1}</span>
                                 </div>
                                 <div className="inner_card_lay mainnnnnn">
-                                  <span className="oddddddssss">{item1?.lay1}</span>
+                                  <span className="oddddddssss" onClick={() => handleHomeBet(item1, "lay", item?.matchName, item?.matchId, item1?.lay1, item1?.selectionId, item?.marketId)}>{item1?.lay1}</span>
 
                                 </div>
                                 <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
@@ -239,7 +290,20 @@ const HomePage = () => {
 
             <Casinolist />
           </div>
+          <Modal show={show} onHide={handleClose}>
+            <div
 
+              style={{ marginLeft: "0px" }}>
+              <Modal.Body style={{ marginLeft: "-72% !important" }}>
+                {<BitPopup
+                  bitValue={bitValue}
+
+
+                  closePopUp={closePopUp}
+                />}
+              </Modal.Body>
+            </div>
+          </Modal>
         </section>
       }
     </>

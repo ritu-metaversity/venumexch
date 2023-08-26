@@ -82,7 +82,7 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
       marketName: bitValue?.gameName,
       placeTime: bitValue?.bettingTime,
       marketId: bitValue?.marketId,
-      matchId: id,
+      matchId: bitValue?.matchId || id,
 
       t: "",
       deviceInfo: {
