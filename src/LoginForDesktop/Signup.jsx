@@ -39,7 +39,7 @@ const Signup = () => {
   const [mobileNumberError, setmobileNumberError] = useState("");
   const [userNameError, setUserNameError] = useState("");
   const handleValidation = () => {
-    console.log(password, confirmPassword, "kjhgfghj");
+    // console.log(password, confirmPassword, "kjhgfghj");
     if (UserName === "" && mobileNumber === 0 && password === 0) {
       setUserNameError("User Name is required");
       setPasswordError("Password is required.");
@@ -113,7 +113,7 @@ const Signup = () => {
               }
             });
             // snackBarUtil.success(res?.data?.message);
-            console.log(res?.data)
+            // console.log(res?.data)
             setSignUpShow(true)
             setNewCredAfterRegister(res?.data);
           } else {
@@ -202,7 +202,7 @@ const Signup = () => {
 
 
   const handleMobileNumber = (e) => {
-    console.log(e.target.value, "luhbnoihb")
+    // console.log(e.target.value, "luhbnoihb")
     if (e.target.value.match(/^[0-9]{0,10}$/) !== null) {
       setMobileNumber(e.target.value);
     }
@@ -242,7 +242,7 @@ const Signup = () => {
         { appUrl: appUrll }
       )
       .then((res) => {
-        console.log(res, "dadasdas")
+        // console.log(res, "dadasdas")
         // SetselfAllowedd(res?.data?.data?.logo);
         setLogo(res?.data?.data?.logo);
         SetselfAllowedd(res?.data?.data)

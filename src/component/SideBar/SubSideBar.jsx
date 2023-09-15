@@ -14,7 +14,7 @@ const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
   let navigate = useNavigate();
   const { postleftmenudataopenData } = useSelector(state => state.auth)
 
-  console.log(sideGameData, "sdfsjhfs");
+  // console.log(sideGameData, "sdfsjhfs");
   const handleBackSports = () => {
     // console.log("hello");
     navigate("/home")

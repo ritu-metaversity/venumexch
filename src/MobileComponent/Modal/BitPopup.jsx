@@ -1,18 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import {
   PostGetStackApi,
   PostPlaceBet,
 } from "../../App/Features/auth/authActions";
 import "./BitPopup.css";
+import { clearPostPlaceBet } from "../../App/Features/auth/authSlice";
 
 const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
   // console.log(bitValue, "llllll");
   const { PostGetStack } = useSelector((state) => state.auth);
   const [Bitvalue, setBitValue] = useState(bitValue?.Odds);
-  const [updated, setUpdated] = useState("");
+  const [updated, setUpdated] = useState(0);
   const [ConfirmBet, setConfirmBet] = useState(false);
   const [userIP, setUserIP] = useState("");
 
@@ -25,7 +26,10 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
   } = useSelector((state) => state.auth);
   // console.log(bitValue?.priceValue, "bitValue?.priceValue");
   let { id } = useParams();
+  const { pathname } = useLocation();
 
+  pathname.includes("/m/home/")
+  // console.log(pathname.includes("/m/home"), "kjsjdfkjshd")
   // console.log(
   //   PostBetingOnGameDetail,
   //   PostBetingOnGameDetailLoading,
@@ -110,6 +114,11 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
   useEffect(() => {
     if (updated !== "" && PostBetingOnGameDetail?.status === true) {
       closePopUp("false");
+    }
+    return () => {
+      if (updated !== "" && PostBetingOnGameDetail?.status === true) {
+        dispatch(clearPostPlaceBet())
+      }
     }
   }, [PostBetingOnGameDetail]);
   const handleCloseButton = () => {
@@ -238,23 +247,29 @@ const BitPopup = ({ bitValue, datatattatattat, cssClasssss, closePopUp }) => {
                 <div className="col-6 p-l-5 p-r-5">
                   <button
                     type="button"
-                    disabled={updated === "" ? "disabled" : ""}
+                    disabled={updated === 0 ? "disabled" : ""}
                     className="btn btn-submit"
                     onClick={handleSubmit}
                   >
                     Submit
                     <span className="d-block">
                       Profit:
-                      {bitValue?.isBack === "back"
-                        ? bitValue.isFancy
-                          ? (updated * bitValue.priceValue) / 100
-                          : (marketId?.includes("BM") ||
-                            marketId?.includes("bm") ||
-                            marketId?.includes("Bm")
-                            ? (bitValue.Odds * updated) / 100
-                            : (bitValue.Odds - 1) * updated
-                          ).toFixed(2)
-                        : updated}
+                      {pathname.includes("/m/home") === true ?
+                        updated :
+                        bitValue?.isBack === "back"
+                          ? bitValue.isFancy
+                            ? (updated * bitValue.priceValue) / 100
+                            : (marketId?.includes("BM") ||
+                              marketId?.includes("bm") ||
+                              marketId?.includes("Bm")
+                              ? (bitValue.Odds * updated) / 100
+                              : (bitValue.Odds - 1) * updated
+                            ).toFixed(2)
+                          : updated
+
+
+                      }
+
                     </span>
                   </button>
                 </div>

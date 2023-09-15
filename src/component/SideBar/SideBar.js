@@ -29,7 +29,7 @@ const SideBar = () => {
     dispatch(postleftmenudataopen())
   }, [])
 
-  console.log(postleftmenudataopenData, "fsdfsdfsdsfsd")
+  // console.log(postleftmenudataopenData, "fsdfsdfsdsfsd")
 
 
   const [leftmenuClose, setLeftMenuClose] = useState("false")
@@ -112,7 +112,7 @@ const SideBar = () => {
 
 
                       <li data-v-4732acba="">
-                        {console.log(item, "fdfdfgdfg")}
+
 
                         <Link data-v-4732acba="" className="favourites-link" onClick={() => handleRoute(item?.sportId, item?.sportName)}>
                           {item?.sportId === 77 ?

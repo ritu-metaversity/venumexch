@@ -31,7 +31,7 @@ const DestGamePage = ({ datatataProps,gamenameOpenbet }) => {
     const [previousStateFancyBlinker, setPreviousStateFancyBlinker] = useState(
         {}
     );
-    console.log(gameDetailsData, "gameDetailsDatagameDetailsData")
+    // console.log(gameDetailsData, "gameDetailsDatagameDetailsData")
     //   useEffect(() => {
     //   if (PostvalidatejwttokenDataError?.status === false) {
     //     localStorage.clear();

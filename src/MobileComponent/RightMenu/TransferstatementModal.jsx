@@ -15,7 +15,7 @@ const TransferstatementModal = ({ matchId }) => {
   const [selectBet, setSelectBet] = useState("1");
   const handleSelectType = (vl) => {
     setSelectBet(vl);
-    console.log(vl, "dfshfsdhfk");
+
   };
 
   useEffect(() => {

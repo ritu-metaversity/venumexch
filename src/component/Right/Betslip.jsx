@@ -26,7 +26,7 @@ const Betslip = ({ props, gamedetailsData, setGameDetailData, gameNmeForOpenBet 
   // useEffect(() => {
   //   setGameIframeId(iddd);
   // }, [iddd]);
-  console.log(props, gamedetailsData?.AllBookmakerData?.[0]?.matchName, "alllllldatatadtadta")
+  // console.log(props, gamedetailsData?.AllBookmakerData?.[0]?.matchName, "alllllldatatadtadta")
   const handleEditBtn = () => {
     if (editStakeBtn === "none") {
       setEditBtn("block");
@@ -44,7 +44,7 @@ const Betslip = ({ props, gamedetailsData, setGameDetailData, gameNmeForOpenBet 
     }
     // setBetslip(true)
   };
-  console.log(gameNmeForOpenBet, "gameNmeForOpenBet")
+  // console.log(gameNmeForOpenBet, "gameNmeForOpenBet")
 
 
   const handleOpenBets = () => {
@@ -219,7 +219,7 @@ const Betslip = ({ props, gamedetailsData, setGameDetailData, gameNmeForOpenBet 
                                   <div style={{
                                     padding: "7px 0px 7px 0px",
                                     fontWeight: "700"
-                                  }}> {console.log(PostBetListByMatchIdData, "PostBetListByMatchIdData")}{key}</div>
+                                  }}> {key}</div>
                                   <tr className="odds-header">
                                     <td className="text-left">Nation</td>
                                     <td className="text-left">Odds</td>

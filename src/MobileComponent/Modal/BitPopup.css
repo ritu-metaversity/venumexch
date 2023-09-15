@@ -1357,7 +1357,7 @@ i.fa.fa-circle-o-notch.fa-spin.loading-bet {
     color: #fff;
 }
 
-.mani_loading {
+/* .mani_loading {
     position: absolute;
     z-index: 9;
     background: #00000075;
@@ -1366,6 +1366,16 @@ i.fa.fa-circle-o-notch.fa-spin.loading-bet {
     padding: 0;
     margin-left: 2px;
     margin-top: -24px;
+} */
+.mani_loading {
+    position: absolute;
+    z-index: 9;
+    background: #00000075;
+    height: 117%;
+    width: 103%;
+    /* padding: 0; */
+    margin-left: -11px;
+    margin-top: -22px;
 }
 
 .incrementBtn {
@@ -1381,6 +1391,7 @@ i.fa.fa-circle-o-notch.fa-spin.loading-bet {
 .modal-design {
     margin-top: 0px;
 }
+
 .m-l-10 {
     margin-left: -21px !important;
 }

@@ -107,7 +107,7 @@ const Mybets = () => {
                 PostunsettledData?.data?.dataList.map((el) => (
                   <div class="events matched-bet collapse show">
                     <ul>
-                      {console.log(el, "elelelel")}
+
                       <li>
                         <div>
                           <a
@@ -143,7 +143,7 @@ const Mybets = () => {
               ) : (
                 <tbody>
                   <tr>
-                    {console.log("asdkjasdlkajsdkjasldkajslakjdas")}
+
                     <td colspan="3" className="text-center">
                       There Have Been No Transfers.
                     </td>

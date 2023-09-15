@@ -9,14 +9,14 @@ import "./BetPage.css"
 const BetPage = ({ gamedetailsData, Closepopup, setBetDetailData }) => {
     const dispatch = useDispatch();
     let { id } = useParams();
-    console.log(gamedetailsData, "asdasdasdas")
+    // console.log(gamedetailsData, "asdasdasdas")
     const { PostGetStack, PostBetingOnGameDetail, PostBetingOnGameDetailLoading } = useSelector((state) => state.auth);
 
     const [Bitvalue, setBitValue] = useState(gamedetailsData?.Odds);
     const [updated, setUpdated] = useState("");
     const [ConfirmBet, setConfirmBet] = useState(false);
     const [userIP, setUserIP] = useState("");
-    console.log(gamedetailsData, "dasasdasda")
+    // console.log(gamedetailsData, "dasasdasda")
 
     useEffect(() => {
         if (PostBetingOnGameDetail?.status === true) {
@@ -44,7 +44,7 @@ const BetPage = ({ gamedetailsData, Closepopup, setBetDetailData }) => {
         fetch("https://oddsapi.247idhub.com/betfair_api/my-ip")
             .then((res) => res.json())
             .then((res) => {
-                console.log(res?.ip, "djfsodfjskdjm")
+                // console.log(res?.ip, "djfsodfjskdjm")
                 setUserIP(res?.ip);
             });
     }, []);
@@ -84,7 +84,7 @@ const BetPage = ({ gamedetailsData, Closepopup, setBetDetailData }) => {
 
     const handleRemove = () => {
         Closepopup(false)
-        console.log("hellooo")
+        // console.log("hellooo")
     }
     return (
 

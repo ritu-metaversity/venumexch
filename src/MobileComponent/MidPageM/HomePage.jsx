@@ -8,6 +8,7 @@ import {
   PostGameDetailsBySportsId,
   Postunsettleddddd,
   postUserBannerList,
+  PostUserOddPnl,
 } from "../../App/Features/auth/authActions";
 import "./HomePage.css";
 import moment from "moment"
@@ -18,10 +19,13 @@ import BitPopup from "../../MobileComponent/Modal/BitPopup";
 
 
 const HomePage = () => {
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
   const datatata = useOutletContext();
   const { state } = useLocation();
   const { pathname } = useLocation();
   const [isLoading, setIsloading] = useState(true)
+  const [betTypeeee, setBetTypeeee] = useState("")
 
 
   // console.log(window.location.pathname, "window.location.pathname")
@@ -39,6 +43,7 @@ const HomePage = () => {
   const [bitValue, setBitValue] = useState({});
   const [show, setShow] = useState(false);
   // const [userIP, setUserIP] = useState("");
+  console.log(show, "showshow");
 
   // useEffect(() => {
   //   fetch("https://oddsapi.247idhub.com/betfair_api/my-ip")
@@ -48,38 +53,49 @@ const HomePage = () => {
   //       setUserIP(res?.ip);
   //     });
   // }, []);
-
+  const [profits, setProfits] = useState({
+    Odds: {},
+    Bookmaker: [],
+    Fancy: [],
+  });
+  // const token = localStorage.getItem("TokenId");
   const handleHomeBet = (vl1, vl2, matchName, matchid, oddss, selectionId, marketId) => {
-    console.log(vl1, vl2, matchName, matchid, marketId, oddss, "dfsfsdfsd")
-    setBitValue({
-      Odds: 2,
-      matchname: matchName,
-      isBack: vl2,
-      isFancy: "false",
-      profits: {
-        Odds: {},
-        Bookmaker: [],
-        Fancy: [],
+    // console.log(vl1, vl2, matchName, matchid, marketId, oddss, "dfsfsdfsd")
+    if (localStorage.getItem("TokenId")) {
 
-      },
-      marketId: marketId,
-      selectionId: selectionId,
-      marketName: matchName,
-      bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
-      matchId: matchid
-    });
-    setShow(true)
-    //   setBetDetails({
-    //     isBack: color,
-    //     odds: price,
-    //     stake: 0,
-    //     selectionId: item.selectionId,
-    //     marketId: marketId,
-    //     priceValue: price,
-    //     isFancy: false,
+      setBitValue({
+        Odds: oddss,
+        matchname: matchName,
+        isBack: vl2,
+        isFancy: "false",
+        profits: profits,
+        marketId: marketId,
+        selectionId: selectionId,
+        marketName: matchName,
+        bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
+        matchId: matchid
+      });
+      setShow(true)
+      setBetTypeeee(vl2)
+      //   setBetDetails({
+      //     isBack: color,
+      //     odds: price,
+      //     stake: 0,
+      //     selectionId: item.selectionId,
+      //     marketId: marketId,
+      //     priceValue: price,
+      //     isFancy: false,
+    }
     //   });
   }
-  console.log(bitValue, "bitValue")
+  // console.log(bitValue, "bitValue")
+  // const {
+  //   PostUserOddPnlData
+  // } = useSelector((state) => state.auth);
+  // useEffect(() => {
+  //   dispatch(PostUserOddPnl({ matchId: id }));
+
+  // })
   const closePopUp = (vl) => {
     setShow(false);
   };
@@ -87,29 +103,29 @@ const HomePage = () => {
     setShow(false);
   };
   const handleGameDetails = (id, item, sportId) => {
+    // console.log(id, "dddddddsdss");
     const token = localStorage.getItem("TokenId");
 
     if (token) {
-      console.log(item, "itemitemitemitem")
+      // console.log(item, "itemitemitemitem")
       let data = {
         matchName: item?.matchName,
         openDate: item?.openDate,
         Odds: "",
       };
-
       datatata(data);
       navigate(`/m/gamedetail/${id}`);
     } else {
       navigate(`/m/login`)
-
+      // console.log(item, "itemitemitemitem")
     }
-    // console.log(sportId, "sportIdsportIdsportId")
     localStorage.setItem("SportId", sportId);
-
   };
+
   // useEffect(() => {
   //   localStorage.setItem("SportId", id);
   // }, [id]);
+
   useEffect(() => {
     let datata = { "type": 1 }
     dispatch(postUserBannerList(datata))
@@ -125,21 +141,96 @@ const HomePage = () => {
   //       setIsloading(false)
   //     });
   // }, [id, token]);
+
   useEffect(() => {
+
+    // const time = setInterval(() => {
     axios
       .get("https://oddsapi.247idhub.com/betfair_api/active_match/v2")
       .then((res) => {
-        console.log(res?.data?.data, "resresresresres");
+        // console.log(res?.data?.data, "resresresresres");
 
         setGamesData(res?.data?.data);
         setIsloading(false)
       });
+    // }, 5000);
+
+    // return () => clearInterval(time);
+
   }, [id, token]);
-  console.log(gamesData, "gamesData");
+  const [pnlData, setPnlData] = useState({})
+
+  const [allMatchId, setAllMatchId] = useState()
+  useEffect(() => {
+
+    const time = setInterval(() => {
+
+      axios
+        .get("https://oddsapi.247idhub.com/betfair_api/active_match/v2")
+        .then((res) => {
+          const allMatddchiddddd = [];
+          if (res?.data?.data?.length) for (let x of res.data.data) for (let y of x.matchList) allMatddchiddddd.push(y.matchId);
+          // setAllMatchId(allMatddchiddddd)
+          console.log(allMatddchiddddd, "sdfsdfsdf")
+          setGamesData(res?.data?.data);
+          setIsloading(false)
+          if (res?.data) {
+            axios
+              .post(
+                `${REACT_APP_API_URL}/enduser/user-odds-pnl-by-match-ids`, { "matchIds": allMatddchiddddd },
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              )
+              .then((res) => {
+                const pnlObj = {}
+                res?.data?.data?.forEach(item => {
+                  const pnlNumberObj = {
+                    [item.selection1]: item.pnl1,
+                    [item.selection2]: item.pnl2,
+                    [item.selection3]: item.pnl3
+                  }
+                  item.pnlObj = pnlNumberObj;
+                  if (pnlObj[item.matchId]) {
+                    pnlObj[item.matchId][item.marketId] = item
+                  } else {
+                    pnlObj[item.matchId] = {
+                      [item.marketId]: item
+                    };
+                  }
+                })
+                setPnlData(pnlObj)
+                console.log(res, "sdfsdfsdf")
+
+                // console.log(pnlObj, "sdfsdffdsd");
+                // setEditStack(res?.data)
+
+                // console.log(res?.data?.data, "yguhvjuiyfghv");
+              });
+          }
+        });
+    }, 5000);
+
+    return () => clearInterval(time);
+
+  }, [id, token]);
+  let data = [2384234, 234234234]
+  console.log(allMatchId, data, "sdfsdffdsd");
+
+  useEffect(() => {
+
+
+  }, [id, token]);
+  // console.log(pnlData, "gamesData");
   useEffect(() => {
     if (token) {
 
-      let data = { betType: 1, index: 0, noOfRecords: 5, sportType: 1 };
+      let data = {
+        betType: 1, index: 0, noOfRecords: 5, sportType: 1, isDeleted: "false"
+      };
 
       dispatch(Postunsettleddddd(data));
     }
@@ -161,6 +252,7 @@ const HomePage = () => {
     return () => {
     }
   }, [isRight])
+  // console.log(PostunsettledData?.data, "PostunsettledData");
 
   return (
     <>
@@ -223,7 +315,6 @@ const HomePage = () => {
                   gamesData[key] &&
                   gamesData[key]?.matchList.map((item, index) => (
                     <div className="main_card_for_homepage">
-                      {console.log(item, "itemitem")}
                       <div className="inner_card_for_homepage1">
                         <div className="gamename_card_img_inplay" style={{ width: "10%" }}>
 
@@ -240,16 +331,18 @@ const HomePage = () => {
 
                         </div>
                       </div>
-                      {console.log(item, "hui") || <></>}
+
                       {item?.runners?.map((item1, index) => {
+                        console.log(item, "item");
                         return (
                           <>
                             <div className="inner_card_for_homepage2"
                               style={{ borderBottom: "1px solid #f2f2f2" }}>
                               <div className="inner_card_nameAndpnl_homepage">
                                 <span className="game_name_btxi">{item1?.runnerName}</span>
-                                <span className="game_name_pnllll"> 0</span>
+                                <span className="game_name_pnllll" style={{ color: pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] >= 0 ? "green" : (pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] <= 0) ? "red" : "black" }}> {pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] || 0}</span>
                               </div>
+                              {console.log(pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId], "sdfsddfsd")}
                               <div className="inner_card_rate_homepage">
 
                                 <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back" >
@@ -289,10 +382,10 @@ const HomePage = () => {
             </div>
 
             <Casinolist />
-          </div>
+          </div >
           <Modal show={show} onHide={handleClose}>
             <div
-
+              className={`eighteen-plus  ${betTypeeee}-border`}
               style={{ marginLeft: "0px" }}>
               <Modal.Body style={{ marginLeft: "-72% !important" }}>
                 {<BitPopup
@@ -304,7 +397,7 @@ const HomePage = () => {
               </Modal.Body>
             </div>
           </Modal>
-        </section>
+        </section >
       }
     </>
   );

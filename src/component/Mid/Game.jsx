@@ -8,15 +8,15 @@ import { useNavigate } from "react-router-dom";
 const Game = () => {
     const { id, type } = useParams();
     // const { id } = useParams();
-    console.log(id, type, "categorycategory")
+
     const navigator = useNavigate()
     const [gamesData, setGamesData] = useState("");
     const token = localStorage.getItem("TokenId");
 
-    console.log(window.location.href, "window.location.pathname")
+
 
     const handleEnterMatch = (item) => {
-        console.log(token, "token")
+
         if (token == null) {
             navigator("/login")
         } else {
@@ -111,7 +111,6 @@ const Game = () => {
                                                             </td>
                                                             <td className="back">
                                                                 <strong className="odds">
-                                                                    {console.log(item, "itemitemitemitemitemitemitem")}
                                                                     {item?.team1Back}
                                                                 </strong>
                                                             </td>

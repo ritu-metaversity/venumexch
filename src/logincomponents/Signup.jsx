@@ -159,7 +159,7 @@ const Signup = () => {
     setSignUpShow(false);
     navigate("/m/login");
   };
-  console.log(selfAllowedd, "selfAlloweddselfAllowedd")
+  // console.log(selfAllowedd, "selfAlloweddselfAllowedd")
   return (
     <div id="app">
       <div>

@@ -29,7 +29,7 @@ const NavBar = () => {
         "https://api.247365.exchange/admin-new-apis/enduser/get-user-message"
       )
       .then((response) => {
-        console.log(response, "responseresponse");
+
         setMovingMessage(response?.data?.message);
       });
   }, []);
@@ -99,7 +99,7 @@ const NavBar = () => {
     }
   };
   const hanldletimeZone = (vl) => {
-    console.log(vl, "sfdfsdfsdfsdf")
+
     // if (vl === "+00:00") {
     //   // setDateState(vl+dateState)
     // } else {
@@ -129,7 +129,7 @@ const NavBar = () => {
 
       });
   }, []);
-  console.log(selfAllowedd)
+
   // const handleroute = () => {
   //   if (localStorage.getItem("PassWordType") === "old") {
 

@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
 
-    console.log(window.innerWidth, "mobidasdasle")
+    // console.log(window.innerWidth, "mobidasdasle")
 
     if (window.innerWidth > 1000) {
       setMoileRoutes(false);
@@ -39,7 +39,7 @@ function App() {
         navigate("/home");
       }
     } else {
-      console.log("andar hai kya");
+
       setMoileRoutes(true);
       if (!pathname.includes("/m/"))
         navigate("./m/home");
