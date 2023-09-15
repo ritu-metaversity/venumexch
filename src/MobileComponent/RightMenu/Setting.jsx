@@ -37,7 +37,7 @@ const Setting = () => {
     let inputValue = e.target.value;
     let inputName = e.target.name;
     setStakeState((prev) => ({ ...prev, [inputName]: inputValue }));
- 
+
   };
   const handleEditStakes = () => {
     setEditStake(true);
@@ -106,20 +106,20 @@ const Setting = () => {
                     <>
                       {PostGetStack?.data
                         ? Object.values(PostGetStack?.data)
-                            .slice(0, 6)
-                            .map((key, value) => {
-                              return (
-                                <div
-                                  name="stackOne"
-                                  text="number"
-                                  // onChange={handleInput}
-                                  className="stake readonly"
-                                >
-                                  <p className="m-b-0">{key}</p>
-                                  {/* {item} */}
-                                </div>
-                              );
-                            })
+                          .slice(0, 6)
+                          .map((key, value) => {
+                            return (
+                              <div
+                                name="stackOne"
+                                text="number"
+                                // onChange={handleInput}
+                                className="stake readonly"
+                              >
+                                <p className="m-b-0">{key}</p>
+                                {/* {item} */}
+                              </div>
+                            );
+                          })
                         : ""}
                     </>
                   )}
@@ -128,7 +128,7 @@ const Setting = () => {
                 </div>
                 {EditStake === true ? (
                   <button
-                    className=" float-right btn-primary m-t-20"
+                    className="btn float-right m-t-20 stackBtnEdit"
                     style={{ paddingTop: "7px", fontSize: "14px" }}
                     onClick={handleSaveStakes}
                   >

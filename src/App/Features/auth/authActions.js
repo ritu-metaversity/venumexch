@@ -105,7 +105,7 @@ export const PostPwChangeFirstTime = createAsyncThunk('auth/PostPwChangeFirstTim
         }
         return postOldPassRespose
     } catch (err) {
-        console.log(err.response.data.message, "kjhgfdghjkl")
+        // console.log(err.response.data.message, "kjhgfdghjkl")
         if (
 
             err.response.data.message
@@ -128,7 +128,7 @@ export const PostPasswordChange = createAsyncThunk('auth/PostPasswordChange', as
     try {
         // axios.defaults.headers.post['Authorization'] = "Bearer " + token
         const postPasswordChangeRespose = await axios.post(`${REACT_APP_API_URL}/enduser/change-password`, passwordChanege);
-        console.log(postPasswordChangeRespose, "fsdfsdfsd")
+        // console.log(postPasswordChangeRespose, "fsdfsdfsd")
         if (postPasswordChangeRespose?.data?.status === true) {
             toast.success(postPasswordChangeRespose.data.message || "", {
                 style: {
@@ -665,9 +665,9 @@ export const Postloginlogout = createAsyncThunk('auth/Postloginlogout', async (d
 
 export const postpendingapppii = createAsyncThunk('auth/postpendingapppii', async (data, { rejectWithValue }) => {
     try {
-        console.log("loooogogoogogogoog")
+        // console.log("loooogogoogogogoog")
         const Postpendingdtaatata = await axios.post(`${REACT_APP_API_URL}/enduser/cancel-withdraw-request-eu`, data)
-        console.log(Postpendingdtaatata, "PostpendingdtaatataPostpendingdtaatata")
+        // console.log(Postpendingdtaatata, "PostpendingdtaatataPostpendingdtaatata")
         // if (Postpendingdtaatata.data.message) {
         //     toast.success(Postpendingdtaatata.data.message || "", {
         //         style: {

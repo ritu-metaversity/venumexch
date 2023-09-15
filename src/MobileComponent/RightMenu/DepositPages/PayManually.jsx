@@ -73,7 +73,7 @@ const PayManually = (props) => {
         },
       }
     ).then((res) => {
-      console.log(res, "dsfsdfsdf");
+      // console.log(res, "dsfsdfsdf");
       setPayMethods(res?.data);
       setUpiDetail(res?.data);
       setAllDatataa(res?.data);
@@ -122,7 +122,7 @@ const PayManually = (props) => {
       data.append("image", files || "");
       // if (Bitvalue > 99 && Bitvalue !== "" && Bitvalue != NaN) {
       const TokenId = localStorage.getItem("TokenId");
-      console.log(Bitvalue, files, "sdfdsd")
+      // console.log(Bitvalue, files, "sdfdsd")
       axios.post(
         `${REACT_APP_API_URL}/enduser/self-deposit-app`, (data),
         {
@@ -134,7 +134,7 @@ const PayManually = (props) => {
         }
       )
         .then((res) => {
-          console.log(res, "sdfdsda")
+          // console.log(res, "sdfdsda")
 
           setIsLoading(false);
           // props.UpdateDetails(true);
@@ -146,7 +146,7 @@ const PayManually = (props) => {
             setFiles(null);
             setPaymentMode("UPI");
             setActive(0);
-            console.log(res.status, "hgfds")
+            // console.log(res.status, "hgfds")
             props.UpdateList(true);
             setBitValue(0)
             setFiles(null)
@@ -154,7 +154,7 @@ const PayManually = (props) => {
 
         })
         .catch((error) => {
-          console.log(error, "sdfdsdab")
+          // console.log(error, "sdfdsdab")
 
           setIsLoading(false);
           setMessege(error.respose.data.message);
@@ -162,7 +162,7 @@ const PayManually = (props) => {
           setAlertBtnshow(true);
         });
       // }
-      console.log("not errror");
+      // console.log("not errror");
     }
     catch { console.log("errrordasdfghjkl;"); }
 

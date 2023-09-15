@@ -49,7 +49,7 @@ const Deposit = () => {
   };
   const UpdateList = (vl) => {
     if (vl === true) {
-      console.log(vl, "hgfds");
+      // console.log(vl, "hgfds");
       dispatch(Postdepsositrequestclient());
     }
   };

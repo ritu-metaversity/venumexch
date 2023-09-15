@@ -6,7 +6,7 @@ const PnlModals = ({ matchId, FancyID }) => {
   const dispatch = useDispatch();
 
   const { Postuserfancybookdata } = useSelector((state) => state.auth);
-  console.log(Postuserfancybookdata, "PostuserfancybookdataPostuserfancybookdata")
+  // console.log(Postuserfancybookdata, "PostuserfancybookdataPostuserfancybookdata")
   useEffect(() => {
     dispatch(Postuserfancybook({ matchId: matchId, fancyId: FancyID }));
   }, [matchId, FancyID]);

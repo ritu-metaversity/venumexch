@@ -8,7 +8,7 @@ const CasinoModals = () => {
     const dispatch = useDispatch();
     const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
 
-    console.log(psotbetsingleusevalueData, "kjhgfcvbhuytfv")
+    // console.log(psotbetsingleusevalueData, "kjhgfcvbhuytfv")
     useEffect(() => {
         // GameAPI.SINGLE_USER_VALUE().then((res) => {
         //     setSingleUserValue(res?.data?.value)

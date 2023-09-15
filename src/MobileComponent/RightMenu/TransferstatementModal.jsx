@@ -15,7 +15,7 @@ const TransferstatementModal = ({ matchId }) => {
   const [selectBet, setSelectBet] = useState("1");
   const handleSelectType = (vl) => {
     setSelectBet(vl);
-    // console.log(vl, "dfshfsdhfk");
+
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const TransferstatementModal = ({ matchId }) => {
                       >
                         <div
                           className="col-4 custom-control custom-control-inline custom-radio p-l"
-                          // onChange={() => handleSelectType("all")}
+                        // onChange={() => handleSelectType("all")}
                         >
                           <input
                             id="all"
@@ -72,6 +72,8 @@ const TransferstatementModal = ({ matchId }) => {
                           />
                           <label
                             htmlFor="all"
+                            onChange={() => handleSelectType("1")}
+
                             className="custom-control-label control-label1"
                           >
                             <span>All</span>
@@ -87,6 +89,8 @@ const TransferstatementModal = ({ matchId }) => {
                           />
                           <label
                             htmlFor="Back"
+                            onChange={() => handleSelectType("2")}
+
                             className="custom-control-label control-label1"
                           >
                             <span>Back</span>
@@ -103,6 +107,8 @@ const TransferstatementModal = ({ matchId }) => {
                           {/* <input type="radio"/> */}
                           <label
                             htmlFor="Lay"
+                            onChange={() => handleSelectType("3")}
+
                             className="custom-control-label control-label1"
                           >
                             <span>Lay</span>

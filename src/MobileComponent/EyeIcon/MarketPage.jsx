@@ -50,7 +50,6 @@ const MarketPage = () => {
             myMarket.map((item) => {
               return (
                 <li class="market-list-item" >
-                  {console.log(item, "myMarketmyMarketmyMarket")}
                   <a href={`/m/gamedetail/${item?.matchId}`} class="">
                     <div class="item-innerrrr">
                       <img

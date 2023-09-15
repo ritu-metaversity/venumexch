@@ -185,7 +185,7 @@ const LoginForMobile = () => {
   // useEffect(() => {
   //   dispatch(Postisselfbyappurl({ appUrl: appUrll }));
   // }, [appUrll]);
-  console.log(selfAllowedd, "selfAllowedd");
+  // console.log(selfAllowedd, "selfAllowedd");
 
   const handleDemoLogin = () => {
     axios

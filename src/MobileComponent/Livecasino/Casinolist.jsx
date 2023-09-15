@@ -51,7 +51,7 @@ const Casinolist = () => {
       .then((res) => {
         setCasinoList(res.data);
 
-        console.log(res?.data, "dsfsfsdfsd")
+        // console.log(res?.data, "dsfsfsdfsd")
       })
   }, [sportId]);
 

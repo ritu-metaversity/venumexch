@@ -65,12 +65,12 @@ const Login = () => {
         localStorage.setItem("userId", postLoginData?.data?.userId);
         localStorage.setItem("SportId", 4);
         axios.defaults.headers.common.Authorization = `Bearer ${postLoginData?.data?.token}`;
-        console.log("fisrt")
+        // console.log("fisrt")
         if (postLoginData?.data?.passwordtype === "old") {
-          console.log("second")
+          // console.log("second")
           navigate("/m/changepassword");
         } else {
-          console.log("third")
+          // console.log("third")
           navigate("/m/home");
         }
       }
@@ -169,7 +169,7 @@ const Login = () => {
         { appUrl: appUrll }
       )
       .then((res) => {
-        console.log(res, "dadasdas")
+        // console.log(res, "dadasdas")
         SetselfAllowedd(res?.data?.data);
       });
   }, [appUrll]);
@@ -179,7 +179,7 @@ const Login = () => {
   // useEffect(() => {
   //   dispatch(Postisselfbyappurl({ appUrl: appUrll }));
   // }, [appUrll]);
-  console.log(selfAllowedd, "selfAllowedd");
+  // console.log(selfAllowedd, "selfAllowedd");
 
   const handleDemoLogin = () => {
     axios

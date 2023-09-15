@@ -8,18 +8,24 @@ import {
   PostGameDetailsBySportsId,
   Postunsettleddddd,
   postUserBannerList,
+  PostUserOddPnl,
 } from "../../App/Features/auth/authActions";
 import "./HomePage.css";
 import moment from "moment"
 import Casinolist from "../Livecasino/Casinolist";
 import UpperBanner from "./UpperBanner";
+import Modal from "react-bootstrap/Modal";
+import BitPopup from "../../MobileComponent/Modal/BitPopup";
 
 
 const HomePage = () => {
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
   const datatata = useOutletContext();
   const { state } = useLocation();
   const { pathname } = useLocation();
   const [isLoading, setIsloading] = useState(true)
+  const [betTypeeee, setBetTypeeee] = useState("")
 
 
   // console.log(window.location.pathname, "window.location.pathname")
@@ -34,31 +40,92 @@ const HomePage = () => {
     localStorage.setItem("SportId", id);
   }, [id]);
   const { PostunsettledData, postUserBannerListData } = useSelector((state) => state.auth);
+  const [bitValue, setBitValue] = useState({});
+  const [show, setShow] = useState(false);
+  // const [userIP, setUserIP] = useState("");
+  console.log(show, "showshow");
 
+  // useEffect(() => {
+  //   fetch("https://oddsapi.247idhub.com/betfair_api/my-ip")
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       // console.log(res?.ip, "djfsodfjskdjm")
+  //       setUserIP(res?.ip);
+  //     });
+  // }, []);
+  const [profits, setProfits] = useState({
+    Odds: {},
+    Bookmaker: [],
+    Fancy: [],
+  });
+  // const token = localStorage.getItem("TokenId");
+  const handleHomeBet = (vl1, vl2, matchName, matchid, oddss, selectionId, marketId) => {
+    // console.log(vl1, vl2, matchName, matchid, marketId, oddss, "dfsfsdfsd")
+    if (localStorage.getItem("TokenId")) {
+
+      setBitValue({
+        Odds: oddss,
+        matchname: matchName,
+        isBack: vl2,
+        isFancy: "false",
+        profits: profits,
+        marketId: marketId,
+        selectionId: selectionId,
+        marketName: matchName,
+        bettingTime: moment(new Date()).add(5, "hours").add(30, "months"),
+        matchId: matchid
+      });
+      setShow(true)
+      setBetTypeeee(vl2)
+      //   setBetDetails({
+      //     isBack: color,
+      //     odds: price,
+      //     stake: 0,
+      //     selectionId: item.selectionId,
+      //     marketId: marketId,
+      //     priceValue: price,
+      //     isFancy: false,
+    }
+    //   });
+  }
+  // console.log(bitValue, "bitValue")
+  // const {
+  //   PostUserOddPnlData
+  // } = useSelector((state) => state.auth);
+  // useEffect(() => {
+  //   dispatch(PostUserOddPnl({ matchId: id }));
+
+  // })
+  const closePopUp = (vl) => {
+    setShow(false);
+  };
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleGameDetails = (id, item, sportId) => {
+    // console.log(id, "dddddddsdss");
     const token = localStorage.getItem("TokenId");
 
     if (token) {
-
+      // console.log(item, "itemitemitemitem")
       let data = {
         matchName: item?.matchName,
         openDate: item?.openDate,
         Odds: "",
       };
-
       datatata(data);
       navigate(`/m/gamedetail/${id}`);
     } else {
       navigate(`/m/login`)
-
+      // console.log(item, "itemitemitemitem")
     }
-    // console.log(sportId, "sportIdsportIdsportId")
     localStorage.setItem("SportId", sportId);
-
   };
+
   // useEffect(() => {
   //   localStorage.setItem("SportId", id);
   // }, [id]);
+
   useEffect(() => {
     let datata = { "type": 1 }
     dispatch(postUserBannerList(datata))
@@ -66,19 +133,104 @@ const HomePage = () => {
 
   // console.log(postUserBannerListData, "postUserBannerListDatapostUserBannerListData")
 
+  // useEffect(() => {
+  //   axios
+  //     .get("https://oddsapi.247idhub.com/betfair_api/active_match")
+  //     .then((res) => {
+  //       setGamesData(res?.data?.data);
+  //       setIsloading(false)
+  //     });
+  // }, [id, token]);
+
   useEffect(() => {
+
+    // const time = setInterval(() => {
     axios
-      .get("https://oddsapi.247idhub.com/betfair_api/active_match")
+      .get("https://oddsapi.247idhub.com/betfair_api/active_match/v2")
       .then((res) => {
+        // console.log(res?.data?.data, "resresresresres");
+
         setGamesData(res?.data?.data);
         setIsloading(false)
       });
-  }, [id, token]);
+    // }, 5000);
 
+    // return () => clearInterval(time);
+
+  }, [id, token]);
+  const [pnlData, setPnlData] = useState({})
+
+  const [allMatchId, setAllMatchId] = useState()
+  useEffect(() => {
+
+    const time = setInterval(() => {
+
+      axios
+        .get("https://oddsapi.247idhub.com/betfair_api/active_match/v2")
+        .then((res) => {
+          const allMatddchiddddd = [];
+          if (res?.data?.data?.length) for (let x of res.data.data) for (let y of x.matchList) allMatddchiddddd.push(y.matchId);
+          // setAllMatchId(allMatddchiddddd)
+          console.log(allMatddchiddddd, "sdfsdfsdf")
+          setGamesData(res?.data?.data);
+          setIsloading(false)
+          if (res?.data) {
+            axios
+              .post(
+                `${REACT_APP_API_URL}/enduser/user-odds-pnl-by-match-ids`, { "matchIds": allMatddchiddddd },
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              )
+              .then((res) => {
+                const pnlObj = {}
+                res?.data?.data?.forEach(item => {
+                  const pnlNumberObj = {
+                    [item.selection1]: item.pnl1,
+                    [item.selection2]: item.pnl2,
+                    [item.selection3]: item.pnl3
+                  }
+                  item.pnlObj = pnlNumberObj;
+                  if (pnlObj[item.matchId]) {
+                    pnlObj[item.matchId][item.marketId] = item
+                  } else {
+                    pnlObj[item.matchId] = {
+                      [item.marketId]: item
+                    };
+                  }
+                })
+                setPnlData(pnlObj)
+                console.log(res, "sdfsdfsdf")
+
+                // console.log(pnlObj, "sdfsdffdsd");
+                // setEditStack(res?.data)
+
+                // console.log(res?.data?.data, "yguhvjuiyfghv");
+              });
+          }
+        });
+    }, 5000);
+
+    return () => clearInterval(time);
+
+  }, [id, token]);
+  let data = [2384234, 234234234]
+  console.log(allMatchId, data, "sdfsdffdsd");
+
+  useEffect(() => {
+
+
+  }, [id, token]);
+  // console.log(pnlData, "gamesData");
   useEffect(() => {
     if (token) {
 
-      let data = { betType: 1, index: 0, noOfRecords: 5, sportType: 1 };
+      let data = {
+        betType: 1, index: 0, noOfRecords: 5, sportType: 1, isDeleted: "false"
+      };
 
       dispatch(Postunsettleddddd(data));
     }
@@ -100,6 +252,7 @@ const HomePage = () => {
     return () => {
     }
   }, [isRight])
+  // console.log(PostunsettledData?.data, "PostunsettledData");
 
   return (
     <>
@@ -154,115 +307,97 @@ const HomePage = () => {
 
 
           <div>
-            <ul className="market-listing m-t-10 fsfsdf mt-23">
+            <div className="home_card_mainPage">
+
               {gamesData && gamesData?.length > 0 ? (
                 Object.keys(gamesData).map((key, item) => (
-                  <>
+                  gamesData &&
+                  gamesData[key] &&
+                  gamesData[key]?.matchList.map((item, index) => (
+                    <div className="main_card_for_homepage">
+                      <div className="inner_card_for_homepage1">
+                        <div className="gamename_card_img_inplay" style={{ width: "10%" }}>
 
-                    <div className={`row ${gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ? "" : "d-none"}`}>
-                      <div className="col-md-12 wh" >
-                        <div className=" odds-name fl">
-                          {gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ?
-                            <span className="sports-name" >
-                              {console.log()}
-                              {gamesData[key]?.name}
-                            </span>
-                            : ""}
+                          <img className="card_logo_homePage" src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${gamesData[key]?.sportid}.png`} alt="das" />
                         </div>
-                        {
-                          gamesData[key]?.name && gamesData[key]?.matchList?.length > 0 ? (
-                            <div className=" numberval" style={{ marginTop: "20px" }} >
-                              <div className="value-num">
-                                <div>1</div>
-                                <div>X</div>
-                                <div>2</div>
-                              </div>
-                            </div>
-                          ) : ""
-                        }
 
+                        <div className="card_Name_Date_homepage" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
+                          <div className="card_Name_homepage">{item?.matchName}</div>
+                          <div className="card_Date_homepage"> {item?.openDate}</div>
+                        </div>
+
+                        <div style={{ width: "5%", color: "#2aa033" }}>
+                          <i className="fas fa-play-circle"></i>
+
+                        </div>
                       </div>
 
+                      {item?.runners?.map((item1, index) => {
+                        console.log(item, "item");
+                        return (
+                          <>
+                            <div className="inner_card_for_homepage2"
+                              style={{ borderBottom: "1px solid #f2f2f2" }}>
+                              <div className="inner_card_nameAndpnl_homepage">
+                                <span className="game_name_btxi">{item1?.runnerName}</span>
+                                <span className="game_name_pnllll" style={{ color: pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] >= 0 ? "green" : (pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] <= 0) ? "red" : "black" }}> {pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] || 0}</span>
+                              </div>
+                              {console.log(pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId], "sdfsddfsd")}
+                              <div className="inner_card_rate_homepage">
 
+                                <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back" >
+                                  <span className="oddddddssss">{item1?.back3}</span>
+                                </div>
+                                <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back">
+                                  <span className="oddddddssss">{item1?.back2}</span>
+                                </div>
+                                <div className="inner_card_back mainnnnnn">
+                                  <span className="oddddddssss" onClick={() => handleHomeBet(item1, "back", item?.matchName, item?.matchId, item1?.back1, item1?.selectionId, item?.marketId)}>{item1?.back1}</span>
+                                </div>
+                                <div className="inner_card_lay mainnnnnn">
+                                  <span className="oddddddssss" onClick={() => handleHomeBet(item1, "lay", item?.matchName, item?.matchId, item1?.lay1, item1?.selectionId, item?.marketId)}>{item1?.lay1}</span>
 
+                                </div>
+                                <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
+                                  <span className="oddddddssss">{item1?.lay2}</span>
 
-                    </div>
+                                </div>
+                                <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
+                                  <span className="oddddddssss">{item1?.lay3}</span>
 
-                    {gamesData &&
-                      gamesData[key] &&
-                      gamesData[key]?.matchList.map((item, index) => (
-                        <div class="inplay-item__row homerow" >
-                          {console.log(gamesData[key]?.sportid, "fsdsdfsdfsdfsdf")}
-                          <div class="inplay-item__score">
-                            <div class="score-content empty" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
-                              <div class="date-content"><span class="inPlayDate-content__date" style={{ color: "#247b23" }}> {moment(item?.openDate).format('D-MM-YYYY h:mm')}</span></div>
-                            </div>
-                          </div>
-                          <div class="inplay-item__players box-w2" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}><p class="inplay-item__player"> {item?.matchName}</p>
-                            <div className="inplayyyy">
-                              {item?.inPlay === true ? (
-                                <i className="fas fa-play-circle "></i>
-                              ) : (
-                                ""
-                              )}
-                            </div>
-                          </div>
-                          <div onClick={() => setIsRight(o => !o)} class={"inplay-item__back" + (isRight ? " isRight" : "")}>
-                            <div class="inplay-item__back-inner">
-                              <div class="inplay-item__back-inner inplay-item__back-inner-left">
-                                <span class="odd-button back     ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.team1Back}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button back not-active    ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.team2Back}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button back     ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.drawBack}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button lay     ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.drawLay}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button lay     ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.team1Lay}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-                                  </span>
-                                </span>
-                                <span class="odd-button lay not-active    ">
-                                  <span class="odd-button__inner odd-button__inner--centered ">
-                                    <div class="odd-button__price text-center">{item?.team2Lay}</div>
-                                    <div class="odd-button__volume text-center">0</div>
-
-                                  </span>
-                                </span>
-
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                      ))}
-                  </>
-                ))
-              ) : (
+
+                          </>)
+                      })}
+
+                    </div>))
+                ))) : (
+
                 <div className="noLiveMatch">No live match now</div>
               )}
-            </ul>
-            <Casinolist />
-          </div>
 
-        </section>
+
+            </div>
+
+            <Casinolist />
+          </div >
+          <Modal show={show} onHide={handleClose}>
+            <div
+              className={`eighteen-plus  ${betTypeeee}-border`}
+              style={{ marginLeft: "0px" }}>
+              <Modal.Body style={{ marginLeft: "-72% !important" }}>
+                {<BitPopup
+                  bitValue={bitValue}
+
+
+                  closePopUp={closePopUp}
+                />}
+              </Modal.Body>
+            </div>
+          </Modal>
+        </section >
       }
     </>
   );

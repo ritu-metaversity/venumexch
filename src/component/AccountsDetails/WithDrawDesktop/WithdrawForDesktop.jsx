@@ -32,7 +32,7 @@ const WithdrawForDesktop = () => {
     const [ifscError, setIfscError] = useState(false);
     const [infoError, setInfoError] = useState(false);
     const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
-    console.log(postpendingapppiiData, "postpendingapppiiDatapostpendingapppiiDatapostpendingapppiiData")
+    // console.log(postpendingapppiiData, "postpendingapppiiDatapostpendingapppiiDatapostpendingapppiiData")
     const handleInput = (e) => {
         let inputName = e.target.name;
         let inputValue = e.target.value;

@@ -264,7 +264,7 @@ const BettingProfitandLoss = () => {
   // console.log(pageNumber, "pageNumber");
   // console.log(endDate, "endDate");
   // console.log(startDate, "startDate");
-  console.log(casinoId, "casinoId");
+  // console.log(casinoId, "casinoId");
   // console.log(casinoList, "casinoList");
   // console.log(gamesData, "gamesData");
   // console.log(Active, "Active");
@@ -282,7 +282,7 @@ const BettingProfitandLoss = () => {
         noOfRecords: 100,
         totalPages: "",
       };
-      console.log(ProfitLossPayload, "pageSportspageSports");
+      // console.log(ProfitLossPayload, "pageSportspageSports");
 
       dispatch(Postprofitlossmatchwise(ProfitLossPayload));
     } else {
@@ -297,7 +297,7 @@ const BettingProfitandLoss = () => {
           noOfRecords: 100,
           totalPages: "",
         };
-        console.log(ProfitLossPayload, "pageSportspageSports");
+        // console.log(ProfitLossPayload, "pageSportspageSports");
 
         dispatch(Postprofitlossmatchwise(ProfitLossPayload));
       }
@@ -470,7 +470,6 @@ const BettingProfitandLoss = () => {
                             <div class="dsfsfdfsd">
                               <div class="info">
                                 <p class="m-b-0  game-name">
-                                  {console.log(el, "el?.matchId}")}
                                   <Link
                                     to={`/m/gamedetail/${el?.matchId}`}
                                     class="betting-back"
@@ -567,10 +566,7 @@ const BettingProfitandLoss = () => {
               >
                 <AiOutlineDoubleRight className="arrowDoubleRight" />
               </button>
-              {console.log(
-                PostprofitlossmatchwiseDatatata?.data?.totalRecord,
-                "PostprofitlossmatchwiseDatatata?.data?.totalRecord"
-              )}
+
             </div></>
 
         </>

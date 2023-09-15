@@ -62,7 +62,7 @@ const Mybets = () => {
   const handleGameName = (e) => {
     let inputValue = e.target.value;
     setMatchId(inputValue)
-    console.log(inputValue, "kjhytrds")
+    // console.log(inputValue, "kjhytrds")
   };
 
   const handleUnmatched = () => {
@@ -128,7 +128,7 @@ const Mybets = () => {
 
   const handleSearch = () => {
     if (startDate !== "" && endDate !== "" && matchid !== "") {
-      console.log(startDate, "eeee")
+      // console.log(startDate, "eeee")
       setHistoryError("false")
 
       let data = ({
@@ -142,10 +142,10 @@ const Mybets = () => {
       dispatch(postBetHistory(data))
     } else {
       setHistoryError("true")
-      console.log("hello")
+      // console.log("hello")
     }
   }
-  console.log(historyError, "historyErrorhistoryError")
+  // console.log(historyError, "historyErrorhistoryError")
 
 
 

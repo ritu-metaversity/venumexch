@@ -16,7 +16,7 @@ const MidPage = () => {
    const [isLoading, setIsloading] = useState(true)
 
 
-   console.log(window.location.pathname, "window.location.pathname")
+
 
    const handleEnterMatch = (item) => {
       if (token == null) {
@@ -47,7 +47,7 @@ const MidPage = () => {
             setIsloading(false)
          });
    }, [id, token]);
-   console.log(gamesData, "dahdushant")
+
 
    return (
       <div>
@@ -136,7 +136,7 @@ const MidPage = () => {
                                                 </td>
                                                 <td className="back">
                                                    <strong className="odds">
-                                                      {console.log(item, "itemitemitemitemitemitemitem")}
+
                                                       {item?.team1Back}
                                                    </strong>
                                                 </td>

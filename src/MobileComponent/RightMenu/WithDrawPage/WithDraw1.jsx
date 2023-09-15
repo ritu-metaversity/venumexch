@@ -83,7 +83,7 @@ const WithDraw1 = () => {
         setBankName("");
         setwithCoinValue(0);
     };
-    console.log(withType, "iuhjuhnij");
+    // console.log(withType, "iuhjuhnij");
     // const handleCancel = () => {
     //     setshowWithdraw(false);
     //   };
@@ -97,7 +97,7 @@ const WithDraw1 = () => {
         setBankName("");
         // setwithCoinValue(0);
         setSavedBankdetailsName(val)
-        console.log(val, id, "lkjhgfdsa")
+        // console.log(val, id, "lkjhgfdsa")
         setRadioButton(false)
 
     };
@@ -130,7 +130,7 @@ const WithDraw1 = () => {
             )
             .then((res) => {
                 setStackValue(res?.data?.data);
-                console.log(res?.data?.data);
+                // console.log(res?.data?.data);
             });
         axios
             .post(
@@ -275,7 +275,7 @@ const WithDraw1 = () => {
         }
 
         if (withType === "BANK") {
-            console.log("helooo");
+            // console.log("helooo");
             if (
                 withCoinValue === "" ||
                 withCoinValue === undefined ||
@@ -364,7 +364,7 @@ const WithDraw1 = () => {
                 return false;
             }
         } else if (withType === "PAYTM") {
-            console.log("heloo");
+            // console.log("heloo");
             if (
                 withCoinValue === "" ||
                 withCoinValue === undefined ||
@@ -418,7 +418,7 @@ const WithDraw1 = () => {
                 return false;
             }
         } else if (withType === "UPI") {
-            console.log("helo");
+            // console.log("helo");
             if (
                 withCoinValue === "" ||
                 withCoinValue === undefined ||
@@ -519,7 +519,7 @@ const WithDraw1 = () => {
                     } else {
                         // setMessage(res?.data?.message
                         // );
-                        console.log('hellooioiioioi')
+                        // console.log('hellooioiioioi')
                         setErrorAlert(true);
                         setColorName("success");
                         setIsLoading(false);
@@ -578,7 +578,7 @@ const WithDraw1 = () => {
     };
 
 
-    console.log(message, "dfsfsdfssfgdsdjijfv")
+    // console.log(message, "dfsfsdfssfgdsdjijfv")
     const handlepennding = () => setpendingmodal(true);
     const [withDrawId, setWithDrawId] = useState("")
 
@@ -594,7 +594,7 @@ const WithDraw1 = () => {
 
     const handlependingsucesss = () => {
         let data = { id: withDrawId }
-        console.log(data)
+        // console.log(data)
         dispatch(postpendingapppii(data))
         setpendingmodal(false)
     }
@@ -908,7 +908,6 @@ const WithDraw1 = () => {
                                                             }`}>
                                                         {item?.accountType}fsdfd
                                                     </td>
-                                                    {console.log(item, "jhgfds")}
                                                     <td
                                                         style={{ cursor: "pointer" }}
                                                         onClick={() =>

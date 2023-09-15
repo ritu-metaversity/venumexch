@@ -16,6 +16,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Postvalidatejwttoken } from "../App/Features/auth/authActions";
+import { modalClasses } from "@mui/material";
 
 export let navRef;
 const LayoutForMobile = () => {
@@ -59,7 +60,7 @@ const LayoutForMobile = () => {
   //     return () => clearInterval(time);
   //   }
   // }, [token]);
-  console.log(window.location.pathname, "window.location.pathname")
+  // console.log(window.location.pathname, "window.location.pathname")
   // /m/game/
   // /m/casino-list
 
@@ -90,6 +91,7 @@ const LayoutForMobile = () => {
       setShow(false);
     } else {
       setShow(true);
+      // console.log(vl?.isBack, "sdfsdfsdfsd");
       setBetType(vl?.isBack);
     }
   };
@@ -102,11 +104,12 @@ const LayoutForMobile = () => {
   useEffect(() => { }, []);
 
   const datatattatattat = (vl) => {
+    // console.log(vl, "fssdfdsfs");
     setBetTypeFooter(vl);
   };
 
   const cssClasssss = (vl) => {
-    // console.log(vl)
+    // console.log(vl, "sfdfsdfsdf")
     setCssClassssssssss(vl);
   };
   const closePopUp = (vl) => {
@@ -213,22 +216,7 @@ const LayoutForMobile = () => {
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose}>
-        <div
-          className={`eighteen-plus  ${BetType}-border  ${BetTypeFooter ? "" : "modal-design"
-            } ${cssClsssssssssssss ? cssClsssssssssssss : ""}`}
-            style={{marginLeft:"0px"}}
-        >
-          <Modal.Body style={{ marginLeft: "-72% !important" }}>
-            <BitPopup
-              bitValue={bitValue}
-              datatattatattat={datatattatattat}
-              cssClasssss={cssClasssss}
-              closePopUp={closePopUp}
-            />
-          </Modal.Body>
-        </div>
-      </Modal>
+
     </>
   );
 };

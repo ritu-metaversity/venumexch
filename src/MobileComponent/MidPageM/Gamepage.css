@@ -220,4 +220,7 @@
     width: 100%;
     display: block;
     height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

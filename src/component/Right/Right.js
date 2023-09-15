@@ -5,7 +5,7 @@ import { PostBalance } from "../../App/Features/auth/authActions";
 import Betslip from "./Betslip";
 import "./Right.css";
 
-const Right = ({ gamedetailsData, setGameDetailData,gameNmeForOpenBet }) => {
+const Right = ({ gamedetailsData, setGameDetailData, gameNmeForOpenBet }) => {
    const dispatch = useDispatch();
    const { id } = useParams();
 
@@ -171,7 +171,7 @@ const Right = ({ gamedetailsData, setGameDetailData,gameNmeForOpenBet }) => {
                                     <div className="score-inner">
                                        <iframe
                                           // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
-                                          src={`http://43.205.116.130/tv.php?eventId=${id}`}
+                                          src={`https://sqmrtv.in/btv.php?eventId=${id}`}
                                           width="100%"
                                           className="score-card desk_score_card"
                                           title="scorecord"
@@ -184,7 +184,7 @@ const Right = ({ gamedetailsData, setGameDetailData,gameNmeForOpenBet }) => {
                      }
                   </> : ""
                }
-               <Betslip BackBlack={BackBlack} setGameDetailData={setGameDetailData} gamedetailsData={gamedetailsData} gameNmeForOpenBet={gameNmeForOpenBet}/>
+               <Betslip BackBlack={BackBlack} setGameDetailData={setGameDetailData} gamedetailsData={gamedetailsData} gameNmeForOpenBet={gameNmeForOpenBet} />
 
             </div>
          </div>

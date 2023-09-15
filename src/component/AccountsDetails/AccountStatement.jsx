@@ -39,7 +39,7 @@ const AccountStatement = () => {
 
   const handleSelectGame = (e) => {
     let inputValue = e.target.value;
-    console.log(inputValue, "dasjdhadhas");
+    // console.log(inputValue, "dasjdhadhas");
     setGameNameForType(inputValue);
   };
 
@@ -54,7 +54,7 @@ const AccountStatement = () => {
       setPageNumber(PostTransferStatementData?.data?.totalPages);
     }
   };
-  console.log(pageNumber, "hello");
+  // console.log(pageNumber, "hello");
 
   useEffect(() => {
     // let d = new Date();
@@ -66,13 +66,12 @@ const AccountStatement = () => {
       toDate: endDate,
       type: gameNameForType,
     };
-    // console.log("apiiiiiii");
     dispatch(PostTransferStatement(data));
-    // console.log();
+
   }, [endDate, pageNumber, startDate, gameNameForType]);
 
   const handleDetailsStatement = (item1, item2) => {
-    console.log(item1, item2, "item1,item2")
+
     setMatchId({ matchid: item1, remark: item2 });
     setTrueee(true);
   };
@@ -206,7 +205,7 @@ const AccountStatement = () => {
                             handleDetailsStatement(el?.marketid, el?.remark)
                           }
                         > {" "}
-                          {console.log(el, "elelelel")}
+
                           {moment(el?.date).format("YYYY-MM-DD  - h:mm")}</td>
                         <td className="text-right">  {" "}
                           {el?.credit}</td>
@@ -282,10 +281,15 @@ const AccountStatement = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton style={{ width: "100%" }} className="back1">
+        <Modal.Header closeButton style={{
+          width: "100%", display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          margin: "auto"
+        }} className="back1">
           <Modal.Title
             id="contained-modal-title-vcenter"
-            style={{ marginBottom: "-30px" }}
+          // style={{ marginBottom: "-30px" }}
           >
             Result
           </Modal.Title>
