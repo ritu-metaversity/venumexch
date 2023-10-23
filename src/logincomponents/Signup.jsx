@@ -24,6 +24,7 @@ const Signup = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorMobile, setErrorMobile] = useState(false);
   const [signUpClose, setSignUpClose] = useState(false);
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const { PostuserselfregisterData, PostuserselfregisterDataError } =
     useSelector((state) => state.auth);
@@ -95,7 +96,7 @@ const Signup = () => {
   useEffect(() => {
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -275,7 +276,7 @@ const Signup = () => {
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
 
-                      {selfAllowedd?.selfAllowed === true ?
+                      {selfAllowedd?.isDemoIdLoginAllowed === true ?
                         <button className="btn btn-login" onClick={handleDemoLogin}>
                           Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>

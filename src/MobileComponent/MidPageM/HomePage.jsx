@@ -16,6 +16,7 @@ import Casinolist from "../Livecasino/Casinolist";
 import UpperBanner from "./UpperBanner";
 import Modal from "react-bootstrap/Modal";
 import BitPopup from "../../MobileComponent/Modal/BitPopup";
+import AllProviderName from "../CasinoAllGames/AllProviderName/AllProviderName";
 
 
 const HomePage = () => {
@@ -162,63 +163,65 @@ const HomePage = () => {
 
   const [allMatchId, setAllMatchId] = useState()
   useEffect(() => {
+    if (token) {
 
-    const time = setInterval(() => {
 
-      axios
-        .get("https://oddsapi.247idhub.com/betfair_api/active_match/v2")
-        .then((res) => {
-          const allMatddchiddddd = [];
-          if (res?.data?.data?.length) for (let x of res.data.data) for (let y of x.matchList) allMatddchiddddd.push(y.matchId);
-          // setAllMatchId(allMatddchiddddd)
-          console.log(allMatddchiddddd, "sdfsdfsdf")
-          setGamesData(res?.data?.data);
-          setIsloading(false)
-          if (res?.data) {
-            axios
-              .post(
-                `${REACT_APP_API_URL}/enduser/user-odds-pnl-by-match-ids`, { "matchIds": allMatddchiddddd },
-                {
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                  },
-                }
-              )
-              .then((res) => {
-                const pnlObj = {}
-                res?.data?.data?.forEach(item => {
-                  const pnlNumberObj = {
-                    [item.selection1]: item.pnl1,
-                    [item.selection2]: item.pnl2,
-                    [item.selection3]: item.pnl3
+      const time = setInterval(() => {
+        axios
+          .get("https://oddsapi.247idhub.com/betfair_api/active_match/v2")
+          .then((res) => {
+            const allMatddchiddddd = [];
+            if (res?.data?.data?.length) for (let x of res.data.data) for (let y of x.matchList) allMatddchiddddd.push(y.matchId);
+            // setAllMatchId(allMatddchiddddd)
+            console.log(allMatddchiddddd, "sdfsdfsdf")
+            setGamesData(res?.data?.data);
+            setIsloading(false)
+            if (res?.data) {
+              axios
+                .post(
+                  `${REACT_APP_API_URL}/enduser/user-odds-pnl-by-match-ids`, { "matchIds": allMatddchiddddd },
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${token}`,
+                    },
                   }
-                  item.pnlObj = pnlNumberObj;
-                  if (pnlObj[item.matchId]) {
-                    pnlObj[item.matchId][item.marketId] = item
-                  } else {
-                    pnlObj[item.matchId] = {
-                      [item.marketId]: item
-                    };
-                  }
-                })
-                setPnlData(pnlObj)
-                console.log(res, "sdfsdfsdf")
+                )
+                .then((res) => {
+                  const pnlObj = {}
+                  res?.data?.data?.forEach(item => {
+                    const pnlNumberObj = {
+                      [item.selection1]: item.pnl1,
+                      [item.selection2]: item.pnl2,
+                      [item.selection3]: item.pnl3
+                    }
+                    item.pnlObj = pnlNumberObj;
+                    if (pnlObj[item.matchId]) {
+                      pnlObj[item.matchId][item.marketId] = item
+                    } else {
+                      pnlObj[item.matchId] = {
+                        [item.marketId]: item
+                      };
+                    }
+                  })
+                  setPnlData(pnlObj)
+                  console.log(res, "sdfsdfsdf")
 
-                // console.log(pnlObj, "sdfsdffdsd");
-                // setEditStack(res?.data)
+                  // console.log(pnlObj, "sdfsdffdsd");
+                  // setEditStack(res?.data)
 
-                // console.log(res?.data?.data, "yguhvjuiyfghv");
-              });
-          }
-        });
-    }, 5000);
-
-    return () => clearInterval(time);
-
+                  // console.log(res?.data?.data, "yguhvjuiyfghv");
+                });
+            }
+          });
+      }, 5000);
+      return () => clearInterval(time);
+    }
   }, [id, token]);
-  let data = [2384234, 234234234]
-  console.log(allMatchId, data, "sdfsdffdsd");
+
+
+  // let data = [2384234, 234234234]
+  // console.log(allMatchId, data, "sdfsdffdsd");
 
   useEffect(() => {
 
@@ -270,11 +273,10 @@ const HomePage = () => {
         </div> :
 
 
-        <section style={{ marginTop: "0px" }}>
+        <section style={{ marginTop: "-20px" }}>
           {
             localStorage.getItem("TokenId") !== null ? "" : <UpperBanner />
           }
-
 
           <div
             className="in-play page-title m-t-20 m-l-15"
@@ -304,16 +306,12 @@ const HomePage = () => {
                 </Link> : ""
             }
           </>
-
-
           <div>
             <div className="home_card_mainPage">
 
               {gamesData && gamesData?.length > 0 ? (
                 Object.keys(gamesData).map((key, item) => (
-                  gamesData &&
-                  gamesData[key] &&
-                  gamesData[key]?.matchList.map((item, index) => (
+                  gamesData && gamesData[key] && gamesData[key]?.matchList.map((item, index) => (
                     <div className="main_card_for_homepage">
                       <div className="inner_card_for_homepage1">
                         <div className="gamename_card_img_inplay" style={{ width: "10%" }}>
@@ -333,7 +331,6 @@ const HomePage = () => {
                       </div>
 
                       {item?.runners?.map((item1, index) => {
-                        console.log(item, "item");
                         return (
                           <>
                             <div className="inner_card_for_homepage2"
@@ -380,8 +377,9 @@ const HomePage = () => {
 
 
             </div>
-
-            <Casinolist />
+            <div className="AllProvideName_HomePage">
+              <AllProviderName />
+            </div>
           </div >
           <Modal show={show} onHide={handleClose}>
             <div

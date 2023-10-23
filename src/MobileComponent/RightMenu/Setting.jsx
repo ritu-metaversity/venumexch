@@ -14,7 +14,7 @@ const Setting = () => {
   const [stakeState, setStakeState] = useState({});
   const [stakeTwo, setStackUpadte] = useState(false);
   const [EditStake, setEditStake] = useState(false);
-
+console.log(stakeState,"stakeState");
   const { PostGetStack, PostEditStackData, PostEditStackDataError } =
     useSelector((state) => state.auth);
 

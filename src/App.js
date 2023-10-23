@@ -27,6 +27,38 @@ function App() {
   const { pathname } = useLocation();
   let appUrll = window.location.hostname;
   const token = localStorage.getItem("TokenId");
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
+
+
+  useEffect(() => {
+
+    if (token) {
+
+
+      const timers = setInterval(
+        () => {
+          axios
+            .post(
+              `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+              {},
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((response) => {
+              localStorage.setItem("GameToken", response?.data?.data?.access_token);
+            })
+
+
+        }, 2000)
+      return () => clearInterval(timers)
+    }
+
+  }, [token])
 
   useEffect(() => {
 
@@ -108,7 +140,7 @@ function App() {
   useEffect(() => {
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {

@@ -40,16 +40,28 @@ import AboutUs from "./MobileComponent/MMFooter/AboutUs";
 import TermsandConditions from "./MobileComponent/MMFooter/TermsandConditions";
 import WithDraw1 from "./MobileComponent/RightMenu/WithDrawPage/WithDraw1";
 import Signup from "./LoginForDesktop/Signup";
+import IndianCasinoHome from "./MobileComponent/CasinoAllGames/IndianCasion/IndianCasinoHome";
+import InterNationalCasinoHome from "./MobileComponent/CasinoAllGames/InterNationalCasino/InterNationalCasinoHome";
+import SlotGamesHome from "./MobileComponent/CasinoAllGames/SlotGames/SlotGamesHome";
+import OurCasinoHome from "./MobileComponent/CasinoAllGames/OurCasino/OurCasinoHome";
+import LotteryGameHome from "./MobileComponent/CasinoAllGames/LotteryGames/LotteryGameHome";
+import FantasyGameHome from "./MobileComponent/CasinoAllGames/FantasyGame/FantasyGameHome";
+import SuperNowaPage from "./MobileComponent/CasinoAllGames/IndianCasion/SuperNowa/SuperNowaPage";
+import MainGamePageCasino from "./MobileComponent/CasinoAllGames/MainGamePageCasino";
+import LotteryGamesPage from "./MobileComponent/CasinoAllGames/LotteryGames/LotteryGamesPage";
+import SlotGamesList from "./MobileComponent/CasinoAllGames/SlotGames/SlotGamesList";
+import FantasyGamePage from "./MobileComponent/CasinoAllGames/FantasyGame/FantasyGamePage";
+import SuperNowa from "./MobileComponent/CasinoAllGames/IndianCasion/SuperNowa/SuperNowa";
 // const Login = lazy(() => import('./logincomponents/Login'))
 const RouteMobile = () => {
   const { pathname } = useLocation();
 
   return (
-    <div>
+    <div >
       {/* <BrowserRouter>
     <Suspense> */}
 
-      <Routes>
+      <Routes >
 
         <Route path="m" element={<LayoutForMobile />}>
 
@@ -74,20 +86,34 @@ const RouteMobile = () => {
           <Route path="/m/game/:id" element={<Gamepage />} />
           <Route path="/m/gamedetail/:id" element={<GameDetails />} />
           <Route path="casino-list" element={<Casinolist />} />
+
+
           <Route path="/m/casino/:id" element={<Casino />} />
+
+          {/* New Casino */}
+
+          <Route path="/m/Indian-home" element={<IndianCasinoHome />} />
+          <Route path="/m/International-home" element={<InterNationalCasinoHome />} />
+          <Route path="/m/Our-home" element={<OurCasinoHome />} />
+          <Route path="/m/Lottery-home" element={<LotteryGameHome />} />
+          <Route path="/m/Lottery-Game-List" element={<LotteryGamesPage />} />
+          <Route path="/m/Slot-home" element={<SlotGamesHome />} />
+          <Route path="/m/Slot-List" element={<SlotGamesList />} />
+          <Route path="/m/Fantasy-home" element={<FantasyGameHome />} />
+          <Route path="/m/Fantasy-List" element={<FantasyGamePage />} />
+          <Route path="/m/SuperNowa_casion" element={<SuperNowa />} />
+
           {/* <Route path="/m/login" element={<Login />} /> */}
           <Route path="AboutUs" element={<AboutUs />} />
           <Route path="changepassword" element={<ChangePassword />} />
-
-
         </Route>
-
-
         <Route path="/m/Singup1" element={<SingupBanner1 />} />
         <Route path="/m/Singup2" element={<SingupBanner2 />} />
         <Route path="/m/Singup3" element={<SingupBanner3 />} />
         <Route path="/m/Singup4" element={<SingupBanner4 />} />
         <Route path="/m/Singup5" element={<SingupBanner5 />} />
+        <Route path="/m/SuperNowa-Game-page" element={<SuperNowaPage />} />
+        <Route path="/m/All-Games-page" element={<MainGamePageCasino />} />
         <Route path="/m/login" element={<><Login /></>} />
         <Route
           path="/m/signup"

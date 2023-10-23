@@ -619,7 +619,8 @@ const DestGamePage = ({ datatataProps,gamenameOpenbet }) => {
                                     <div className="scorecard scorecard-mobile">
                                         <div className="score-inner ">
                                             <iframe
-                                                src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                                            src={`https://100tun.online/web/${id}.html`}
+                                                // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                                 width="100%"
                                                 className="score-card desk_score_card"
                                                 title="scorecord"

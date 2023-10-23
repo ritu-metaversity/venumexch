@@ -434,6 +434,10 @@ header.header {
     float: left;
     position: fixed;
     z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .header-b-menu {
@@ -571,4 +575,57 @@ a:-webkit-any-link {
         justify-content: end !important;
         width: 41%;
     }
+}
+
+/* NewCasion */
+
+.headerCasionSwip_Scrolll {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #045e6c82;
+
+}
+
+.headerCasionSwip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 80%;
+    overflow: auto;
+    white-space: nowrap;
+    /* padding: 7px 0px; */
+}
+
+/* .headerCasionSwip li {
+    margin: 0px 9px;
+} */
+
+.headerCasionSwip_Scrolll {
+    overflow: auto;
+}
+
+.inner_game_name_caison_header {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    flex-direction: row;
+    padding: 0px 9px;
+    cursor: pointer;
+}
+
+.inner_game_name_caison_header_Scroll {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+
+.innterimg_casion_header {
+    width: 20px;
 }

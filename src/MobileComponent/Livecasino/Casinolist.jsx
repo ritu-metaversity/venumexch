@@ -8,7 +8,7 @@ import "./CasinoList.css";
 import Modal from "react-bootstrap/Modal";
 import { RxCross2 } from 'react-icons/rx'
 import CasinoModals from "./CasinoModals";
-const Casinolist = () => {
+const Casinolistt = () => {
   const { PostcasinoData } = useSelector((state) => state.auth);
   const [sportId, setSportId] = useState(323334);
   const [casinoList, setCasinoList] = useState(323334);
@@ -185,4 +185,4 @@ const Casinolist = () => {
     </>
   );
 };
-export default Casinolist;
+export default Casinolistt;

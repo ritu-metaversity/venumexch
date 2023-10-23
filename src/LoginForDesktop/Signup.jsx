@@ -13,6 +13,10 @@ import "./signip.css"
 export let setShowRegisterModalRefDesktop
 
 const Signup = () => {
+
+
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
   const [signUpShow, setSignUpShow] = useState(false);
   const [signUpClose, setSignUpClose] = useState(false);
   const [open, setOpen] = useState(false);
@@ -238,7 +242,7 @@ const Signup = () => {
     // let appUrll = "localhost";
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -347,7 +351,7 @@ const Signup = () => {
                         Sign Up
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
-                      {selfAllowedd?.selfAllowed === true ?
+                      {selfAllowedd?.isDemoIdLoginAllowed === true ?
                         <button className="btn btn-login" onClick={handleDemoLogin}>
                           Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>

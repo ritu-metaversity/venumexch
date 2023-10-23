@@ -1,0 +1,26 @@
+.back_icon {
+    font-size: 15px;
+}
+
+.bacnk-btn-v-ca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    background-color: #dc143c;
+    border: unset;
+    border-radius: 5px;
+    color: white;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.main_back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 2px 0px;
+    background-color: #2c4f58;
+    gap: 3%;
+}

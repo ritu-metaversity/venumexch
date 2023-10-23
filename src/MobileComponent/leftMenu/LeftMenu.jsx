@@ -76,105 +76,40 @@ const LeftMenu = (props) => {
                      </div>
                   </div>
                </li>))) : ""}
-         {/* 
-   <li>
-       <a onClick={()=>handleRoute("1","Football")}    className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" ><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/1.png" alt=''   className="game-icon"/> <span   className="menu-name">Football</span></div>
-          </div>
-       </a>
-    </li>
-     <li>
-       <a   className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("2","Tennis")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/2.png" alt=''   className="game-icon"/> <span   className="menu-name">Tennis</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a    className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("4","Cricket")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/4.png" alt=''    className="game-icon"/> <span   className="menu-name">Cricket</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a   className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("70","Table Tennis")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/70.png" alt=''   className="game-icon"/> <span   className="menu-name">Table Tennis</span></div>
-          </div>
 
-
-          
-       </a>
-    </li>
-    <li>
-       <a    className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("3503","Darts")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/3503.png" alt=''   className="game-icon"/> <span   className="menu-name">Darts</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a    className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("71","Badminton")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/71.png" alt=''   className="game-icon"/> <span   className="menu-name">Badminton</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a    className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("52","Kabaddi")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/52.png" alt=''   className="game-icon"/> <span   className="menu-name">Kabaddi</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a   className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("6","Boxing")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/6.png" alt=''   className="game-icon"/> <span   className="menu-name">Boxing</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a    className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("26420387","Mixed Martial Arts")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/26420387.png"   className="game-icon"/> <span   className="menu-name">Mixed Martial Arts</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a   className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("8","Motor Sport")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/8.png"   className="game-icon"/> <span   className="menu-name">Motor Sport</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a    className="favourites-a">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("7522","Basketball")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/7522.png"   className="game-icon"/> <span   className="menu-name">Basketball</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a href="/lottery-list"   className="">
-          <div   className="menu-lvl-1">
-             <div   className="item" onClick={()=>handleRoute("lottery","Lottery Casino")}><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/lottery.png"   className="game-icon"/> <span   className="menu-name">Lottery Casino</span></div>
-          </div>
-       </a>
-    </li>
-    <li>
-       <a href="/casino-list"   className="">
-          <div   className="menu-lvl-1">
-             <div   className="item"><img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/casino.jpg"   className="game-icon"/> <span   className="menu-name download-apk">Live Casino</span></div>
-          </div>
-       </a>
-    </li> */}
          <li>
-            <Link to="/m/casino-list" className="">
+            <Link to="/m/Indian-home" className="">
                <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                  <div className="item"><img alt="" src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/casino.jpg" className="game-icon" /> <span className="menu-name download-apk">Live Casino</span></div>
+                  <div className="item"><img alt="" src="https://11bet24.com/indian-casino.png" /> <span className="menu-name download-apk">Indian Casino</span></div>
+               </div>
+            </Link>
+         </li>
+
+         <li>
+            <Link to="/m/International-home" className="">
+               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                  <div className="item"><img alt="" src="https://11bet24.com/international-casinoletest.png" className="game-icon" /> <span className="menu-name download-apk">International Casino</span></div>
+               </div>
+            </Link>
+         </li>
+         <li>
+            <Link to="/m/Lottery-home" className="">
+               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                  <div className="item"><img alt="" src="https://11bet24.com/lottery.png" className="game-icon" /> <span className="menu-name download-apk"> Lottery</span></div>
+               </div>
+            </Link>
+         </li>
+         <li>
+            <Link to="/m/Slot-home" className="">
+               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                  <div className="item"><img alt="" src="https://11bet24.com/slots.png" className="game-icon" /> <span className="menu-name download-apk">Slots Games</span></div>
+               </div>
+            </Link>
+         </li>
+         <li>
+            <Link to="/m/Fantasy-home" className="">
+               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                  <div className="item"><img alt="" src="https://11bet24.com/fantasy-game.png" className="game-icon" /> <span className="menu-name download-apk">Fantasy Games</span></div>
                </div>
             </Link>
          </li>

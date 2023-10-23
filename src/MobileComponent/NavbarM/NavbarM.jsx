@@ -1,16 +1,19 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setMrqueeClose as setMarqueeClose } from "../../App/Features/auth/authSlice";
 import { PostBalance } from "../../App/Features/auth/authActions";
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 
 import "./NavbarM.css";
 
 
 const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   let navigate = useNavigate();
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [isSelfloading, setIsSelfLoading] = useState(true)
@@ -18,6 +21,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   const [sideBarOpen, setRightBar] = useState(false);
   const [leftBar, setLeftBar] = useState(false);
   const MrqueeClose = useSelector((state) => state.auth.MrqueeClose);
+  const [scrollX, setscrollX] = useState(0);
   // console.log(isSelfloading, "isSelfloadingisSelfloading");
 
 
@@ -160,7 +164,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   useEffect(() => {
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -170,7 +174,15 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
 
       });
   }, [appUrll]);
-  console.log(selfAllowedd)
+  console.log(selfAllowedd);
+
+  const ref = useRef(null);
+
+  const scroll = (scrollOffset) => {
+    ref.current.scrollLeft += scrollOffset;
+    ref.current.scroll({ left: ref.current.scrollLeft + scrollOffset })
+    setscrollX(scrollX + scrollOffset);
+  };
 
   return (
     <div>
@@ -258,6 +270,17 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
             }
           </div>
         </nav>
+        <div className="headerCasionSwip_Scrolll">
+
+          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/International-home")}>International Casino</li>
+          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Indian-home")}>Indian Casino</li>
+          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Lottery-home")}>Lottery</li>
+          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Slot-home")}>Slot Games</li>
+          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Fantasy-home")}>Fantasy Games</li>
+
+
+
+        </div>
       </header>
     </div>
   );
