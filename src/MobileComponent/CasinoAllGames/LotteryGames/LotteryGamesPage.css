@@ -1,0 +1,29 @@
+.main_wrap_game_logog_lottery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0px 10px;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 121px;
+}
+
+.game_logog_lottery {
+    width: 44%;
+}
+
+@media screen and (min-width:1024px) {
+    .game_logog_lottery {
+        width: 23%;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .main_wrap_game_logog_lottery {
+
+        padding-top: 10px;
+    }
+
+}

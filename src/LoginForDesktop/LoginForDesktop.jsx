@@ -37,6 +37,7 @@ const LoginForMobile = () => {
     setUserName("")
     setShow(false)
   };
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const {
     postLoginData,
@@ -172,7 +173,7 @@ const LoginForMobile = () => {
   useEffect(() => {
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -180,7 +181,7 @@ const LoginForMobile = () => {
       });
   }, [appUrll]);
 
-  // http://${REACT_APP_API_URL}/admin-new-apis/login/is-self-by-app-url
+
 
   // useEffect(() => {
   //   dispatch(Postisselfbyappurl({ appUrl: appUrll }));
@@ -282,7 +283,7 @@ const LoginForMobile = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        {selfAllowedd?.selfAllowed === true ?
+                        {selfAllowedd?.isDemoIdLoginAllowed === true ?
                           <button className="btn btn-login" onClick={handleDemoLogin}>
                             Login with demo ID
                             <i className="ml-2 fas fa-sign-in-alt"></i>

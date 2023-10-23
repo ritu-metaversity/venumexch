@@ -22,11 +22,12 @@ const NavBar = () => {
   const userTypeInfo = localStorage.getItem("userTypeInfo");
   const usernameDemo = localStorage.getItem("usernameDemo");
   const [isSelfloading, setIsSelfLoading] = useState(true)
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/enduser/get-user-message"
+        `${REACT_APP_API_URL}/enduser/get-user-message`,
       )
       .then((response) => {
 
@@ -119,7 +120,7 @@ const NavBar = () => {
 
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -203,7 +204,7 @@ const NavBar = () => {
 
                 data-toggle="dropdown"
                 className="dropdown-toggle"
-                style={{color:"#ffecc6 !important"}}
+                style={{ color: "#ffecc6 !important" }}
               >
                 ( {showZone}
                 <i className="fas fa-angle-down m-l-5  "></i> )
@@ -220,7 +221,7 @@ const NavBar = () => {
 
                   className="dropdown-item"
                   onClick={() => hanldletimeZone("+05:30")}
-                  
+
                 >
                   Your computer time - (GMT +05:30)
                 </Link>{" "}
@@ -292,8 +293,8 @@ const NavBar = () => {
               </li>
               <li   >
                 <Link  >
-                  <i style={{color:"#ffecc6"}} className="fas fa-ruler-vertical m-r-5"></i>{" "}
-                  <span style={{color:"#ffecc6"}} onClick={handleModal}>Rules</span>
+                  <i style={{ color: "#ffecc6" }} className="fas fa-ruler-vertical m-r-5"></i>{" "}
+                  <span style={{ color: "#ffecc6" }} onClick={handleModal}>Rules</span>
                 </Link>
               </li>
               <Modal
@@ -330,7 +331,7 @@ const NavBar = () => {
                     className="dropdown-toggle"
                     onClick={handleAccount}
                   >
-                    <i style={{color:"#ffecc6"}} className="fas fa-user m-r-5"></i> <span style={{color:"#ffecc6"}}>Account</span>
+                    <i style={{ color: "#ffecc6" }} className="fas fa-user m-r-5"></i> <span style={{ color: "#ffecc6" }}>Account</span>
                   </Link>
                   {/* <div   className="dropdown-menu show"> */}
                   <div
@@ -412,7 +413,7 @@ const NavBar = () => {
                 </li> : ""}
 
               {token === null ? <>
-                <li className="login_btn"  style={{color:"#ffecc6"}}>
+                <li className="login_btn" style={{ color: "#ffecc6" }}>
                   <Link to="./login">
                     <i className="fas fa-running m-r-5"></i>{" "}
                     <span onClick={handlogout}>LogIn</span>
@@ -421,19 +422,19 @@ const NavBar = () => {
                 {isSelfloading === true ? ""
                   :
                   selfAllowedd?.selfAllowed === true ?
-                    <li className="login_btn" style={{color:"#ffecc6"}}>
+                    <li className="login_btn" style={{ color: "#ffecc6" }}>
                       <Link to="./signup">
-                        <i className="fas fa-running m-r-5" style={{color:"#ffecc6"}}></i>{" "}
-                        <span onClick={handlogout} style={{color:"#ffecc6"}}>SignUp</span>
+                        <i className="fas fa-running m-r-5" style={{ color: "#ffecc6" }}></i>{" "}
+                        <span onClick={handlogout} style={{ color: "#ffecc6" }}>SignUp</span>
                       </Link>
                     </li>
                     : ""}
 
               </> :
-                <li style={{color:"#ffecc6"}}>
+                <li style={{ color: "#ffecc6" }}>
                   <Link to="./login">
-                    <i className="fas fa-running m-r-5" style={{color:"#ffecc6"}}></i>{" "}
-                    <span onClick={handlogout} style={{color:"#ffecc6"}}>LogOut</span>
+                    <i className="fas fa-running m-r-5" style={{ color: "#ffecc6" }}></i>{" "}
+                    <span onClick={handlogout} style={{ color: "#ffecc6" }}>LogOut</span>
                   </Link>
                 </li>
 

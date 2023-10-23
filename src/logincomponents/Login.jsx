@@ -43,12 +43,14 @@ const Login = () => {
     PostuserselfregisterData,
     postisselfbyappurlData
   } = useSelector((state) => state.auth);
+  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
 
   useEffect(() => {
     if (localStorage.getItem("TokenId") !== null && pathname.includes("login")) {
       navigate("./home");
     }
   }, [pathname])
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     dispatch(clearLoginInfo())
@@ -66,6 +68,20 @@ const Login = () => {
         localStorage.setItem("SportId", 4);
         axios.defaults.headers.common.Authorization = `Bearer ${postLoginData?.data?.token}`;
         // console.log("fisrt")
+        axios
+          .post(
+            `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+            {},
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${postLoginData?.data?.token}`,
+              },
+            }
+          )
+          .then((response) => {
+            localStorage.setItem("GameToken", response?.data?.data?.access_token);
+          })
         if (postLoginData?.data?.passwordtype === "old") {
           // console.log("second")
           navigate("/m/changepassword");
@@ -103,7 +119,7 @@ const Login = () => {
       userId: userName,
       password: password,
       appUrl: window.location.hostname,
-      // appUrl: "localhost"
+      // appUrl: "247idhub.com"
     });
 
 
@@ -165,7 +181,7 @@ const Login = () => {
   useEffect(() => {
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -275,7 +291,7 @@ const Login = () => {
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        {selfAllowedd?.selfAllowed === true ?
+                        {selfAllowedd?.isDemoIdLoginAllowed === true ?
                           <button className="btn btn-login" onClick={handleDemoLogin}>
                             Login with demo ID
                             <i className="ml-2 fas fa-sign-in-alt"></i>

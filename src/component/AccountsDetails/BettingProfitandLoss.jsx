@@ -54,6 +54,7 @@ const BettingProfitandLoss = () => {
     setActive(val1);
     setPageSports(val2);
   };
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 
   console.log(PostprofitlossmatchwiseDatatataLoading, "PostprofitlossmatchwiseDatatataLoadingPostprofitlossmatchwiseDatatataLoading")
@@ -77,7 +78,7 @@ const BettingProfitandLoss = () => {
 
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/enduser/active-match-sport-wise-open",
+        `${REACT_APP_API_URL}/enduser/active-match-sport-wise-open`,
         { sportId: inputValue }
       )
       .then((res) => {
@@ -179,7 +180,7 @@ const BettingProfitandLoss = () => {
 
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types",
+        `${REACT_APP_API_URL}/casino/casino-tables-by-types`,
         id
       )
       .then((res) => {
@@ -190,7 +191,7 @@ const BettingProfitandLoss = () => {
   useEffect(() => {
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/enduser/active-match-sport-wise-open",
+        `${REACT_APP_API_URL}/active-match-sport-wise-open`,
         { sportId: "4" }
       )
       .then((res) => {
@@ -206,7 +207,7 @@ const BettingProfitandLoss = () => {
     };
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/casino/casino-tables-by-types",
+        `${REACT_APP_API_URL}/casino/casino-tables-by-types`,
         id
       )
       .then((res) => {

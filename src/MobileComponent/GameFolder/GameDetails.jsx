@@ -723,7 +723,8 @@ const GameDetails = () => {
                             <div className="scorecard scorecard-mobile">
                               <div className="score-inner">
                                 <iframe
-                                  src={`https://sqmrtv.in/btv.php?eventId=${id}`}
+
+                                  src={`https://100tun.online/web/${id}.html`}
                                   // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                   width="100%"
                                   height="290px"

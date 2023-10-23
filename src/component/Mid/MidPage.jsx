@@ -6,6 +6,7 @@ import "./Midpage.css";
 import { useNavigate } from "react-router-dom";
 import UpperBanner from "../../MobileComponent/MidPageM/UpperBanner";
 import Casinolist from "../../component/SideBar/Casinolist";
+import AllProviderName from "../../MobileComponent/CasinoAllGames/AllProviderName/AllProviderName";
 
 const MidPage = () => {
    const { id } = useParams();
@@ -51,7 +52,6 @@ const MidPage = () => {
 
    return (
       <div>
-
          <div className="mid-pane">
             <div>
                {/*{
@@ -176,7 +176,7 @@ const MidPage = () => {
                   )}
 
 
-                  <Casinolist />
+                  <AllProviderName />
                </div>
             </div>
          </div>
