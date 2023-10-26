@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./InterNationalCasinoHome.css"
 import Qtech from "./qtechlogo.png"
 import { useNavigate } from 'react-router';
+import Modal from "react-bootstrap/Modal";
+import CasinoModals from "../../Livecasino/CasinoModals"
+
 
 export const casinoProviderList = [
   {
@@ -83,16 +86,24 @@ const InterNationalCasinoHome = () => {
   const navigate = useNavigate();
   // const TokenId = localStorage.getItem("token");
   const TokenGame = localStorage.getItem("GameToken");
+  const [show, setShow] = useState(false)
+  const [allDatta, setAllDatta] = useState()
+  const handleClose = () => setShow(false);
 
-  const handleChangeaa = (val) => {
+
+  const handleAgree = () => {
     if (localStorage.getItem("TokenId")) {
 
-      navigate("/m/All-Games-page", { state: { item1: val, item2: "/m/International-home" } })
+      navigate("/m/All-Games-page", { state: { item1: allDatta, item2: "/m/International-home" } })
+      setShow(false)
     } else {
       navigate("/m/login")
     }
-    // } else {
-    // }
+  }
+
+  const handleChangeaa = (val) => {
+    setAllDatta(val)
+    setShow(true)
 
   };
 
@@ -110,6 +121,15 @@ const InterNationalCasinoHome = () => {
           </div>
         ))
         }</div>
+      <Modal centered show={show} onHide={handleClose}>
+        <Modal.Body className="casino_modals_body">
+          <CasinoModals type={"qtech"} />
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={() => setShow(false)}>No, I Don't Agree</button>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   )
 }

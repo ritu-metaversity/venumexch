@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./AllProviderName.css"
 import Qtech from "./qtechlogo.png"
 import { useNavigate } from 'react-router'
+import Modal from "react-bootstrap/Modal";
+import CasinoModals from '../../Livecasino/CasinoModals';
 
 let AllCasinoProviderName =
 {
@@ -428,12 +430,31 @@ let AllCasinoProviderName =
 const AllProviderName = () => {
     let navigate = useNavigate();
     let ViewForLoginRoute = window.innerWidth > 1024 ? "/login" : "/m/login"
+    const [show, setShow] = useState(false)
+    const [allDatta, setAllDatta] = useState()
+    const handleClose = () => setShow(false);
 
-    const handleGamePageroute = (vl, val) => {
-        if (localStorage.getItem("TokenId")) {
-            navigate(vl, { state: { item1: { gameCode: val?.gameCode }, item2: window.location.pathname, } })
+    console.log(allDatta, "fdsfsdfsdfasfsasfcew");
+    const handleGamePageroute = (vl, val, key) => {
+        if (key === "Internation Casino") {
+            setAllDatta(val)
+            setShow(true)
         } else {
-            navigate(ViewForLoginRoute)
+
+            if (localStorage.getItem("TokenId")) {
+                navigate(vl, { state: { item1: { gameCode: val?.gameCode }, item2: window.location.pathname, } })
+            } else {
+                navigate(ViewForLoginRoute)
+            }
+        }
+    }
+
+    const handleAgree = () => {
+        if (localStorage.getItem("TokenId")) {
+            navigate(allDatta?.PageUrl, { state: { item1: { gameCode: allDatta?.gameCode }, item2: window.location.pathname, } })
+            setShow(false)
+        } else {
+            navigate("/m/login")
         }
     }
     return (
@@ -449,7 +470,7 @@ const AllProviderName = () => {
                             {AllCasinoProviderName &&
                                 AllCasinoProviderName[key].map(
                                     (item, index) => (
-                                        <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(item?.PageUrl, item)}>
+                                        <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(item?.PageUrl, item, key)}>
 
                                             <img
                                                 className="complany-logo-warp"
@@ -463,6 +484,15 @@ const AllProviderName = () => {
                         </div>
                     </div>))
             }
+            <Modal centered show={show} onHide={handleClose}>
+                <Modal.Body className="casino_modals_body">
+                    <CasinoModals type={"qtech"} />
+                    <div className="agree_btn">
+                        <button onClick={handleAgree}>Ok I Agree</button>
+                        <button onClick={() => setShow(false)}>No, I Don't Agree</button>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     )
 }
