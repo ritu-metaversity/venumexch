@@ -20,10 +20,15 @@ const IndianCasinoHome = () => {
 
   const handleChangeaa = (val) => {
     console.log(val, "adcnlkscaksdn");
-    if (val?.filterType === "SP-NOWA") {
-      navigate("/m/SuperNowa_casion")
+    if (localStorage.getItem("TokenId")) {
+
+      if (val?.filterType === "SP-NOWA") {
+        navigate("/m/SuperNowa_casion")
+      } else {
+        navigate("/m/casino-list")
+      }
     } else {
-      navigate("/m/casino-list")
+      navigate("/m/login")
 
     }
 

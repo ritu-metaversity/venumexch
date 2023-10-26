@@ -31,7 +31,7 @@
 
 @media screen and (min-width: 800px) {
     .lottery_Casino_main_wrapper {
-        padding-top: unset;
-        
+        padding-top: 20px 0px !important;
+
     }
 }

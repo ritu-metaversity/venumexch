@@ -30,7 +30,8 @@
 }
 
 @media screen and (min-width: 800px) {
-    .International_Casino_main_wrapper{
-        padding: unset;
+    .International_Casino_main_wrapper {
+
+        padding: 20px 0px;
     }
 }

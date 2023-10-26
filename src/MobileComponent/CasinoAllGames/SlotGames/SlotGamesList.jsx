@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
+import Modal from "react-bootstrap/Modal";
+import CasinoModals from "../../Livecasino/CasinoModals"
+
 
 const SlotGamesList = () => {
     const { state } = useLocation()
@@ -11,6 +14,8 @@ const SlotGamesList = () => {
     const navigate = useNavigate();
     const TokenGame = localStorage.getItem("GameToken");
 
+    const [show, setShow] = useState(false)
+    const [allDatta, setAllDatta] = useState()
 
     useEffect(() => {
 
@@ -41,33 +46,54 @@ const SlotGamesList = () => {
 
         }
     }, [])
+    const handleClose = () => setShow(false);
+    const handleAgree = () => {
+        navigate("/m/All-Games-page", { state: { item1: { gameCode: allDatta }, item2: window.location.pathname, backUrl: state } })
+        setShow(false)
 
+    }
     const handleChangeaa = (val) => {
         console.log(val, "dafusiyhbdchuwdb");
-        navigate("/m/All-Games-page", { state: { item1: { gameCode: val }, item2: window.location.pathname, backUrl: state } })
+        
+        setAllDatta(val)
+        setShow(true)
     }
+
+
     console.log(gameFilter, "statestatestatestate");
 
     return (
-        <div className="main_wrap_game_logog_lottery">
+        <>
+            <div className="main_wrap_game_logog_lottery">
 
 
-            {gameFilter.map((key) => (
-
-
-
-                <img
-                    onClick={() => handleChangeaa(key?.id)}
-
-                    className="game_logog_lottery"
-                    src={key?.images[1]?.url}
-                    alt="" />
+                {gameFilter.map((key) => (
 
 
 
-            ))
-            }
-        </div>
+                    <img
+                        onClick={() => handleChangeaa(key?.id)}
+
+                        className="game_logog_lottery"
+                        src={key?.images[1]?.url}
+                        alt="" />
+
+
+
+                ))
+                }
+
+            </div>
+            <Modal centered show={show} onHide={handleClose}>
+                <Modal.Body className="casino_modals_body">
+                    <CasinoModals type={"qtech"}/>
+                    <div className="agree_btn">
+                        <button onClick={handleAgree}>Ok I Agree</button>
+                        <button onClick={() => setShow(false)}>No, I Don't Agree</button>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        </>
     )
 }
 

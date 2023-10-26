@@ -2,31 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Link, useNavigate } from "react-router-dom";
-// import { casinoService } from "../../../../utils/api/casino/service";
-// import { LoaderContext } from "../../../../App";
-// import CasinoModals from "../../../Livecasino/CasinoModals";
-// import { LocalDining } from "@mui/icons-material";
-
-
-
-// const StyledTab = styled(Tab)(({ theme }) => ({
-//   borderRadius: "20px",
-//   marginRight: "10px",
-//   paddingTop: "2px",
-//   paddingBottom: "2px",
-//   minHeight: 50,
-//   border: "2px solid #3c444b",
-//   [`&.${tabClasses.selected}`]: {
-//     borderColor: theme.palette.primary.main,
-//   },
-// }));
-
-// export interface CasinoList {
-//   gameId: number;
-//   gameCode: string;
-//   gameName: string;
-//   imageUrl: string;
-// }
+import CasinoModals from "../../../Livecasino/CasinoModals"
 
 const SuperNowa = () => {
 
@@ -34,27 +10,13 @@ const SuperNowa = () => {
 
   const [casinoList, setCasinoList] = useState([]);
   // const [trueee, setTrueee] = useState(false);
-  const [casionId, setCasionId] = useState("")
   const nav = useNavigate();
-  // const getCasinoList = async () => {
-  //   const isSignedIn = localStorage.getItem("token");
-  //   if (!isSignedIn) {
-  //     nav("/");
-  //     return;
-  //   }
-  //   const { response } = await casinoService.getCasinoListByType(Number(value));
-  //   if (response) {
-  //     setCasinoList(response.data || []);
-  //   } else {
-  //     setCasinoList([]);
-  //   }
-  // };
-  const [Casinoshow, setCasinoShow] = useState(false);
-  // const { setLoading, loading } = useContext(LoaderContext);
-  // const token = localStorage.getItem("token");
-  const [isLoading, setIsloading] = useState(true)
 
+  const [casionId, setCasionId] = useState("")
+  const [Casinoshow, setCasinoShow] = useState(false);
+  const [isLoading, setIsloading] = useState(true)
   const TokenId = localStorage.getItem("TokenId");
+
   useEffect(() => {
     const TokenId = localStorage.getItem("TokenId");
     axios
@@ -81,32 +43,22 @@ const SuperNowa = () => {
   }, [])
 
 
+  // const [show, setShow] = useState(false)
+  const [allDatta, setAllDatta] = useState()
+
 
   const handleClose = () => setCasinoShow(false);
   const [show, setShow] = useState(false)
 
-
-  const [confirmPopup, setConfirmPopup] = useState(false)
-  const handleNotAgree = () => {
-    setConfirmPopup(false)
-  }
-  // const handleClose = () => setConfirmPopup(false);
-
   const handleAgree = () => {
-    nav("/SuperNowa-Game-page", { state: casionId })
-
-    setConfirmPopup(false)
+    nav("/m/SuperNowa-Game-page", { state: allDatta })
+    setShow(false)
   }
+
+
   const handleChangeaa = (val) => {
-    console.log(val, "uygtfvgbhnjuytfrvb");
-
-    if (TokenId) {
-      nav("/m/SuperNowa-Game-page", { state: val })
-
-      // setCasionId(val)
-      // setConfirmPopup(true)
-    } else {
-    }
+    setAllDatta(val)
+    setShow(true)
   };
 
   return (
@@ -129,6 +81,15 @@ const SuperNowa = () => {
 
           ))}
         </div>}
+      <Modal centered show={show} onHide={handleClose}>
+        <Modal.Body className="casino_modals_body">
+          <CasinoModals type="supernowa" />
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={() => setShow(false)}>No, I Don't Agree</button>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
 
   )
