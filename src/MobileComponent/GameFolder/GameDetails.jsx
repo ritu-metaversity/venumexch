@@ -34,7 +34,7 @@ const GameDetails = () => {
   const [previousState, setPreviousState] = useState({});
   // NEW CODE- BETPOPUP
   const [bitValue, setBitValue] = useState({});
-
+console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
   //state for fancy for blinker After filter
   const [previousStateFancyBlinker, setPreviousStateFancyBlinker] = useState(
     {}
