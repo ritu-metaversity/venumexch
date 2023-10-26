@@ -27,11 +27,17 @@ export const FantasyGamedata = [
 ];
 const FantasyGameHome = () => {
 
-    const navigate = useNavigate();
+    let ViewForLoginRoute = window.innerWidth > 1024 ? "/login" : "/m/login"
 
+    const navigate = useNavigate();
+    console.log(ViewForLoginRoute, "ViewForLoginRoute");
     const handleChangeaa = (val) => {
-        console.log(val, "dfsdfsdfsdfsdfsd");
-        navigate("/m/Fantasy-List", { state: { item1: { gameCode: val?.gameCode } } })
+        if (localStorage.getItem("TokenId")) {
+            navigate("/m/Fantasy-List", { state: { item1: { gameCode: val?.gameCode } } })
+        } else {
+            navigate(ViewForLoginRoute)
+
+        }
     }
 
     return (

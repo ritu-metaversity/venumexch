@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import CasinoModals from "../../Livecasino/CasinoModals"
+import Modal from "react-bootstrap/Modal";
 
 
 export const FgameData = [
@@ -190,7 +192,10 @@ const FantasyGamePage = () => {
     const [GameLists, setGameLists] = useState([]);
     const navigate = useNavigate();
 
-    console.log(state, "dfsdfhsbfhsbd");
+    // const [Casinoshow, setCasinoShow] = useState(false);
+    // const [gameFilter, setGameFilter] = useState([])
+    const [show, setShow] = useState(false)
+    const [allDatta, setAllDatta] = useState()
 
     useEffect(() => {
         if (state?.item1?.gameCode) {
@@ -202,10 +207,16 @@ const FantasyGamePage = () => {
         }
     }, [state?.item1?.gameCode]);
 
+    const handleClose = () => setShow(false);
 
+    const handleAgree = () => {
+        navigate("/m/All-Games-page", { state: { item1: { gameCode: allDatta }, item2: window.location.pathname, item3: state?.item1?.gameCode, backUrl: state } })
+        setShow(false)
+
+    }
     const handleChangeaa = (val) => {
-        console.log(val, state, "dafusiyhbdchuwdb");
-        navigate("/m/All-Games-page", { state: { item1: { gameCode: val }, item2: window.location.pathname, item3: state?.item1?.gameCode, backUrl: state } })
+        setAllDatta(val)
+        setShow(true)
     }
 
 
@@ -230,6 +241,15 @@ const FantasyGamePage = () => {
                 ))
                 }
             </div>
+            <Modal centered show={show} onHide={handleClose}>
+                <Modal.Body className="casino_modals_body">
+                    <CasinoModals  type={"qtech"}/>
+                    <div className="agree_btn">
+                        <button onClick={handleAgree}>Ok I Agree</button>
+                        <button onClick={() => setShow(false)}>No, I Don't Agree</button>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     )
 }

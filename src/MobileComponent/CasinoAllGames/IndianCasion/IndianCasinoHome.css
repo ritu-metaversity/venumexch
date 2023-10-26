@@ -30,8 +30,8 @@
 }
 
 @media screen and (min-width: 800px) {
-    .Indian_Casino_main_wrapper{
-        padding: unset;
+    .Indian_Casino_main_wrapper {
+        padding: 20px 0px;
         align-items: unset;
     }
 }

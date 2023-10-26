@@ -85,10 +85,12 @@ const InterNationalCasinoHome = () => {
   const TokenGame = localStorage.getItem("GameToken");
 
   const handleChangeaa = (val) => {
-    // if (
-    //   TokenGame
-    // ) {
-    navigate("/m/All-Games-page", { state: { item1: val, item2: "/m/International-home" } })
+    if (localStorage.getItem("TokenId")) {
+
+      navigate("/m/All-Games-page", { state: { item1: val, item2: "/m/International-home" } })
+    } else {
+      navigate("/m/login")
+    }
     // } else {
     // }
 
@@ -96,19 +98,19 @@ const InterNationalCasinoHome = () => {
 
   return (
     <div>
-    <div className='International_Casino_main_wrapper'>
-      {casinoProviderList.map((item) => (
+      <div className='International_Casino_main_wrapper'>
+        {casinoProviderList.map((item) => (
 
-        <div className="MainBtn_warp_International_casinos" style={{ border: "0.5px solid" }} onClick={() => handleChangeaa(item)}>
-          <img
-            className="complany-logo-warp"
-            src={item?.logo}
-            alt="" />
-          <span className="complany-name-wrap">{item?.name}</span>
-        </div>
-      ))
-      }</div>
-      </div>
+          <div className="MainBtn_warp_International_casinos" style={{ border: "0.5px solid" }} onClick={() => handleChangeaa(item)}>
+            <img
+              className="complany-logo-warp"
+              src={item?.logo}
+              alt="" />
+            <span className="complany-name-wrap">{item?.name}</span>
+          </div>
+        ))
+        }</div>
+    </div>
   )
 }
 

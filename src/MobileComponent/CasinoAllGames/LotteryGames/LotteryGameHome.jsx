@@ -74,7 +74,12 @@ const LotteryGameHome = () => {
 
   const handleChangeaa = (val) => {
     console.log(val, "iu87ytfgvbjiuy7t6f");
-    navigate("/m/Lottery-Game-List", { state: { item1: { gameCode: val?.gameCode } } })
+    if (localStorage.getItem("TokenId")) {
+
+      navigate("/m/Lottery-Game-List", { state: { item1: { gameCode: val?.gameCode } } })
+    } else {
+      navigate("/m/login")
+    }
     // navigate("/lottery-Game-list", { state: val, })
   }
 

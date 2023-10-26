@@ -791,7 +791,7 @@ export const psotbetsingleusevalue = createAsyncThunk('auth/psotbetsingleusevalu
     try {
         // console.log("loooogogoogogogoog")
         // https://api.247365.exchange/enduser/left-menu-data-open
-        const psotbetsingleusevaluedataa = await axios.post(`${REACT_APP_API_URL}/bet-modifier/single-user-value`,
+        const psotbetsingleusevaluedataa = await axios.post(`${REACT_APP_API_URL}/api/getOneUserBetResult`,
         )
         return psotbetsingleusevaluedataa
     } catch (err) {

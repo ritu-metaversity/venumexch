@@ -13,7 +13,10 @@ const MarketPage = () => {
   const [myMarket, setMyMarket] = useState([]);
 
   useEffect(() => {
-    let data = { betType: 1, index: 0, noOfRecords: 5, sportType: 1 };
+    let data = {
+      betType: 1, index: 0, noOfRecords: 5, sportType: 1,
+      isDeleted: false
+    };
 
     dispatch(Postunsettleddddd(data));
   }, [dispatch]);

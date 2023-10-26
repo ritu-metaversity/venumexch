@@ -171,9 +171,13 @@ const SlotGamesHome = () => {
   const navigate = useNavigate();
 
   const handleChangeaa = (val) => {
-    console.log(val);
-    navigate("/m/Slot-List", { state: { item1: { gameCode: val?.gameCode } } })
+    if (localStorage.getItem("TokenId")) {
 
+      navigate("/m/Slot-List", { state: { item1: { gameCode: val?.gameCode } } })
+    } else {
+      navigate("/m/login")
+
+    }
 
   }
   return (

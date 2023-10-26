@@ -426,13 +426,15 @@ let AllCasinoProviderName =
 }
 
 const AllProviderName = () => {
-    console.log(AllCasinoProviderName, "AllCasinoProviderName");
     let navigate = useNavigate();
+    let ViewForLoginRoute = window.innerWidth > 1024 ? "/login" : "/m/login"
 
     const handleGamePageroute = (vl, val) => {
-        // navigate(vl)
-        console.log(vl, val, "vlvlvlvlvl");
-        navigate(vl, { state: { item1: { gameCode: val?.gameCode }, item2: window.location.pathname, } })
+        if (localStorage.getItem("TokenId")) {
+            navigate(vl, { state: { item1: { gameCode: val?.gameCode }, item2: window.location.pathname, } })
+        } else {
+            navigate(ViewForLoginRoute)
+        }
     }
     return (
         <div className='Main_header_for_game_provide_Incasino'>
