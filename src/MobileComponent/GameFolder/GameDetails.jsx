@@ -1016,7 +1016,7 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                               );
                             })}
 
-                          {gameDetailsData?.data?.Bookmaker?.length > 0 ? (
+                          {gameDetailsData?.data?.Bookmaker.filter(i => i.t !== "TOSS")?.length > 0 ? (
                             <div>
                               <div className="bm1">
                                 <div className=" m-b-10 main-market w-100 float-left">
@@ -1057,7 +1057,8 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                                     </span>
                                   </div>
 
-                                  {gameDetailsData?.data?.Bookmaker?.map(
+                                  {gameDetailsData?.data?.Bookmaker.filter(i => i.t !== "TOSS")?.map(
+
                                     (item, index) => {
                                       return (
                                         <>
@@ -1065,7 +1066,7 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                                             data-title="OPEN"
                                             className="table-body"
                                           >
-
+                                            {console.log(item, "verberv")}
                                             <div
                                               data-title={`${item?.gstatus === "SUSPENDED"
                                                 ? "SUSPENDED"
@@ -1153,7 +1154,7 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                                                   ? "dis-none"
                                                   : ""
                                                   }${item?.b1 !==
-                                                    previousState?.data?.Bookmaker[
+                                                    previousState?.data?.Bookmaker.filter(i => i.t === "TOSS")[
                                                       index
                                                     ]?.b1
                                                     ? "blink1"
@@ -1187,7 +1188,7 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                                                   ? "dis-none light-bg"
                                                   : ""
                                                   }${item?.l1 !==
-                                                    previousState?.data?.Bookmaker[
+                                                    previousState?.data?.Bookmaker.filter(i => i.t === "TOSS")[
                                                       index
                                                     ]?.l1
                                                     ? "blink1"
@@ -1248,7 +1249,247 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
 
                               <marquee className="news-line">
                                 {gameDetailsData?.data &&
-                                  gameDetailsData?.data?.Bookmaker[0]
+                                  gameDetailsData?.data?.Bookmaker.filter(i => i.t !== "TOSS")[0]
+                                    ?.display_message}
+                              </marquee>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                          {gameDetailsData?.data?.Bookmaker.filter(i => i.t === "TOSS")?.length > 0 ? (
+                            <div>
+                              <div className="bm1">
+                                <div className=" m-b-10 main-market w-100 float-left">
+                                  <div className="table-header">
+                                    <div
+                                      className="float-left box-w4 country-name"
+                                      style={{ marginBottom: "4px" }}
+                                    >
+                                      <b> TOSS</b>
+                                    </div>
+                                    <div className="box-w3 float-left hidden-portrait dis-none"></div>
+                                    <div className="box-w3 float-left hidden-portrait dis-none"></div>
+                                    <div className=" box-w3 float-left text-uppercase">
+                                      Back
+                                    </div>
+                                    <div className=" box-w3 float-left text-uppercase">
+                                      lay
+                                    </div>
+                                    <div className="box-w3 float-left hidden-portrait "></div>
+                                    <div className="box-w3 float-left hidden-portrait "></div>
+                                  </div>
+
+                                  <div className="max">
+                                    <span>
+                                      Min :{" "}
+                                      {PostMinMaxGameDetailsData &&
+                                        PostMinMaxGameDetailsData?.Bookmaker &&
+                                        PostMinMaxGameDetailsData?.Bookmaker[0]
+                                          ?.minBet}
+                                    </span>
+
+                                    <span className="ms">
+                                      Max :{" "}
+                                      {PostMinMaxGameDetailsData &&
+                                        PostMinMaxGameDetailsData?.Bookmaker &&
+                                        PostMinMaxGameDetailsData?.Bookmaker[0]
+                                          ?.maxBet}
+                                    </span>
+                                  </div>
+
+                                  {gameDetailsData?.data?.Bookmaker.filter(i => i.t === "TOSS")?.map(
+
+                                    (item, index) => {
+                                      return (
+                                        <>
+                                          <div
+                                            data-title="OPEN"
+                                            className="table-body"
+                                          >
+                                            {console.log(item, "verberv")}
+                                            <div
+                                              data-title={`${item?.gstatus === "SUSPENDED"
+                                                ? "SUSPENDED"
+                                                : item.gstatus ===
+                                                  "BALL RUNNING"
+                                                  ? "Ball Running"
+                                                  : ""
+                                                }`}
+                                              className={`table-row ${item?.gstatus === "SUSPENDED"
+                                                ? "suspend"
+                                                : item.gstatus ===
+                                                  "BALL RUNNING"
+                                                  ? "ballrunning"
+                                                  : ""
+                                                }`}
+                                            >
+
+                                              <div className="float-left box-w6 country-name">
+                                                <span
+                                                  className="team-name"
+                                                  style={{ fontSize: "14px" }}
+                                                >
+                                                  <b> {item?.nation}</b>
+                                                </span>
+                                                <p className="box-w4">
+                                                  { }
+                                                  {profits.Bookmaker?.find(
+                                                    (profit) =>
+                                                      profit?.sid === item.sid
+                                                  )?.value < 0 ? (
+                                                    <span
+                                                      className="float-left ubook"
+                                                      style={{ color: "red" }}
+                                                    >
+                                                      {" "}
+                                                      {
+                                                        profits.Bookmaker?.find(
+                                                          (profit) =>
+                                                            profit?.sid ===
+                                                            item.sid
+                                                        )?.value
+                                                      }
+                                                    </span>
+                                                  ) : (
+                                                    <span
+                                                      className="float-left ubook"
+                                                      style={{ color: "green" }}
+                                                    >
+                                                      {" "}
+                                                      {
+                                                        profits.Bookmaker?.find(
+                                                          (profit) =>
+                                                            profit?.sid ===
+                                                            item.sid
+                                                        )?.value
+                                                      }
+                                                    </span>
+                                                  )}
+                                                </p>
+                                              </div>
+                                              <div className="box-w3 float-left back ">
+                                                <button
+                                                  type="button"
+                                                  className="back light-bg"
+                                                >
+                                                  <span className="odd">0</span>
+                                                  <span>
+                                                    <span>0</span>
+                                                  </span>
+                                                </button>
+                                              </div>
+                                              <div className="box-w3 float-left back ">
+                                                <button
+                                                  type="button"
+                                                  className="back light-bg"
+                                                >
+                                                  <span className="odd">0</span>
+                                                  <span>
+                                                    <span>0</span>
+                                                  </span>
+                                                </button>
+                                              </div>
+                                              <div
+                                                className={`box-w3 float-left back hidden-portrait ${id === 0 || id === 1
+                                                  ? "dis-none"
+                                                  : ""
+                                                  }${item?.b1 !==
+                                                    previousState?.data?.Bookmaker.filter(i => i.t === "TOSS")[
+                                                      index
+                                                    ]?.b1
+                                                    ? "blink1"
+                                                    : " "
+                                                  }`}
+                                              >
+                                                <button
+                                                  type="button"
+                                                  className="back"
+                                                  onClick={() =>
+                                                    handleBitValueBookmaker(
+                                                      item?.b1,
+                                                      "Bookmaker",
+                                                      "back",
+                                                      item,
+                                                      bookmakerPnl
+                                                    )
+                                                  }
+                                                >
+                                                  <span className="odd">
+                                                    {item?.b1}
+                                                  </span>
+                                                  <span>
+                                                    <span>{item?.bs1}</span>
+                                                  </span>
+                                                </button>
+                                              </div>
+
+                                              <div
+                                                className={`box-w3 float-left lay hidden-portrait ${id === 0 || id === 1
+                                                  ? "dis-none light-bg"
+                                                  : ""
+                                                  }${item?.l1 !==
+                                                    previousState?.data?.Bookmaker.filter(i => i.t === "TOSS")[
+                                                      index
+                                                    ]?.l1
+                                                    ? "blink1"
+                                                    : " "
+                                                  }`}
+                                              >
+                                                <button
+                                                  type="button"
+                                                  className="lay"
+                                                  onClick={() =>
+                                                    handleBitValueBookmaker(
+                                                      item?.l1,
+                                                      "Bookmaker",
+                                                      "lay",
+                                                      item
+                                                    )
+                                                  }
+                                                >
+                                                  <span className="odd">
+                                                    {item?.l1}
+                                                  </span>
+                                                  <span>
+                                                    <span>{item?.ls1}</span>
+                                                  </span>
+                                                </button>
+                                              </div>
+                                              <div className="box-w3 la light-bg float-left ">
+                                                <button
+                                                  type="button"
+                                                  className=" lay light-bg"
+                                                >
+                                                  <span className="odd">0</span>
+                                                  <span>
+                                                    <span>0</span>
+                                                  </span>
+                                                </button>
+                                              </div>
+                                              <div className="box-w3 lay float-left ">
+                                                <button
+                                                  type="button"
+                                                  className="lay light-bg"
+                                                >
+                                                  <span className="odd">0</span>{" "}
+                                                  <span>
+                                                    <span>0</span>
+                                                  </span>
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </>
+                                      );
+                                    }
+                                  )}
+                                </div>
+                              </div>
+
+
+                              <marquee className="news-line">
+                                {gameDetailsData?.data &&
+                                  gameDetailsData?.data?.Bookmaker.filter(i => i.t === "TOSS")[0]
                                     ?.display_message}
                               </marquee>
                             </div>
@@ -1256,7 +1497,6 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                             ""
                           )}
 
-                          {/*  */}
 
                           <div className="fancy-market-container w-100 float-left">
                             <div className="fancy-market">
@@ -1757,7 +1997,7 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
           </ModalBody>
         </Modal>
 
-      </div>
+      </div >
       <Modal show={show} onHide={handleClose}>
         <div
           className={`eighteen-plus  ${BetType}-border  ${BetTypeFooter ? "" : "modal-design"
