@@ -1527,7 +1527,7 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                                                     <span data-v-e03c6f20="">
                                                       {key}
                                                     </span>
-                                                    dfs
+
                                                   </b>
                                                 </div>
                                                 <div
@@ -1663,8 +1663,20 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                                                                     "11px",
                                                                   marginLeft:
                                                                     "-9px",
+                                                                  display: "flex",
+                                                                  alignItems: "center",
+                                                                  justifyContent: "flex-start",
+                                                                  width: "100%"
                                                                 }}
                                                               >
+                                                                {
+                                                                  key === "BallByBall" ?
+                                                                    <span className="BallBYball_RoundData">
+                                                                      {item?.ball}
+                                                                      1
+                                                                    </span>
+                                                                    : ""
+                                                                }
                                                                 <b data-v-e03c6f20="">
                                                                   {item?.nation}
                                                                 </b>

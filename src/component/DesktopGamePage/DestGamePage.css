@@ -37,6 +37,9 @@ h5.d-inline-block.m-b-0 {
 .dest_para {
     margin-left: 2px;
     margin-top: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 p.m-b-0.dest_para.dest_width {
@@ -114,4 +117,18 @@ iframe.score-card.desk_score_card {
 .score_name {
     font-size: 18px;
     padding-left: 12px;
+}
+
+.BallBYball_RoundData {
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(53, 94, 59);
 }
