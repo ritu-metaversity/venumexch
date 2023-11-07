@@ -11,7 +11,7 @@ import PnlModals from "./PnlModals";
 import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
 import { Modal, ModalBody, ModalHeader, ModalTitle } from "react-bootstrap";
 
-const DestGamePage = ({ datatataProps,gamenameOpenbet }) => {
+const DestGamePage = ({ datatataProps, gamenameOpenbet }) => {
 
     const token = localStorage.getItem("TokenId");
 
@@ -619,7 +619,7 @@ const DestGamePage = ({ datatataProps,gamenameOpenbet }) => {
                                     <div className="scorecard scorecard-mobile">
                                         <div className="score-inner ">
                                             <iframe
-                                            src={`https://100tun.online/web/${id}.html`}
+                                                src={`https://100tun.online/web/${id}.html`}
                                                 // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                                 width="100%"
                                                 className="score-card desk_score_card"
@@ -1040,6 +1040,15 @@ const DestGamePage = ({ datatataProps,gamenameOpenbet }) => {
                                                                             style={{ borderBottom: 0 }}
                                                                         >
                                                                             <p className="m-b-0 dest_para dest_width">
+                                                                                {
+                                                                                    key === "BallByBall" ?
+                                                                                        <span className="BallBYball_RoundData">
+                                                                                            {item?.ball}
+                                                                                            1
+                                                                                        </span>
+                                                                                        : ""
+                                                                                }
+
                                                                                 <p>{item?.nation}</p>
                                                                                 <p
                                                                                     data-v-e03c6f20=""
