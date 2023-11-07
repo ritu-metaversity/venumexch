@@ -17,7 +17,7 @@ import UpperBanner from "./UpperBanner";
 import Modal from "react-bootstrap/Modal";
 import BitPopup from "../../MobileComponent/Modal/BitPopup";
 import AllProviderName from "../CasinoAllGames/AllProviderName/AllProviderName";
-
+import Upcoming from "./Upcoming"
 
 const HomePage = () => {
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -36,7 +36,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const [gamesData, setGamesData] = useState("");
   const token = localStorage.getItem("TokenId");
-
+  console.log(gamesData, "sdfiwgyuvjhbnwi");
   useEffect(() => {
     localStorage.setItem("SportId", id);
   }, [id]);
@@ -257,6 +257,17 @@ const HomePage = () => {
   }, [isRight])
   // console.log(PostunsettledData?.data, "PostunsettledData");
 
+  const [upcomingInplay, setUpcomingInplay] = useState(false)
+
+
+  const handleInPlayUpcoming = () => {
+    if (upcomingInplay === false) {
+      setUpcomingInplay(true)
+    } else {
+      setUpcomingInplay(false)
+    }
+  }
+
   return (
     <>
       {" "}
@@ -273,20 +284,32 @@ const HomePage = () => {
         </div> :
 
 
-        <section style={{ marginTop: "-20px" }}>
+        <section >
           {
             localStorage.getItem("TokenId") !== null ? "" : <UpperBanner />
           }
 
           <div
             className="in-play page-title m-t-20 m-l-15"
-            style={{ paddingTop: "0px" }}
+            style={{ paddingTop: "0px", cursor: "pointer" }}
+            onClick={handleInPlayUpcoming}
           >
             <i className="fas fa-play-circle"></i>
-            {""}
-
-            <span className="label">In Play</span>
+            <span className="label"
+              style={{ borderBottom: upcomingInplay === true ? "" : "1px solid" }}>
+              In Play
+            </span>
           </div>
+          <div
+            className="in-play page-title m-t-20 m-l-15"
+            onClick={handleInPlayUpcoming}
+            style={{ paddingTop: "0px", color: "black", cursor: "pointer", fontWeight: "500" }}>
+            <span className="label"
+              style={{ borderBottom: upcomingInplay === true ? "1px solid" : "" }}>
+              Upcoming
+            </span>
+          </div>
+
 
           <>
             {
@@ -309,92 +332,104 @@ const HomePage = () => {
           <div>
             <div className="home_card_mainPage">
 
-              {gamesData && gamesData?.length > 0 ? (
-                Object.keys(gamesData).map((key, item) => (
-                  gamesData && gamesData[key] && gamesData[key]?.matchList.map((item, index) => (
-                    <div className="main_card_for_homepage">
-                      <div className="inner_card_for_homepage1">
-                        <div className="gamename_card_img_inplay" style={{ width: "10%" }}>
+              {
+                upcomingInplay === false ?
 
-                          <img className="card_logo_homePage" src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${gamesData[key]?.sportid}.png`} alt="das" />
-                        </div>
 
-                        <div className="card_Name_Date_homepage" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
-                          <div className="card_Name_homepage">{item?.matchName}</div>
-                          <div className="card_Date_homepage"> {item?.openDate}</div>
-                        </div>
 
-                        <div style={{ width: "5%", color: "#2aa033" }}>
-                          <i className="fas fa-play-circle"></i>
 
-                        </div>
-                      </div>
+                  gamesData && gamesData?.length > 0 ? (
+                    Object.keys(gamesData).map((key, item) => (
+                      gamesData && gamesData[key] && gamesData[key]?.matchList.map((item, index) => (
+                        <div className="main_card_for_homepage">
+                          <div className="inner_card_for_homepage1">
+                            <div className="gamename_card_img_inplay" style={{ width: "10%" }}>
 
-                      {item?.runners?.map((item1, index) => {
-                        return (
-                          <>
-                            <div className="inner_card_for_homepage2"
-                              style={{ borderBottom: "1px solid #f2f2f2" }}>
-                              <div className="inner_card_nameAndpnl_homepage">
-                                <span className="game_name_btxi">{item1?.runnerName}</span>
-                                <span className="game_name_pnllll" style={{ color: pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] >= 0 ? "green" : (pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] <= 0) ? "red" : "black" }}> {pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] || 0}</span>
-                              </div>
-                              {console.log(pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId], "sdfsddfsd")}
-                              <div className="inner_card_rate_homepage">
-
-                                <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back" >
-                                  <span className="oddddddssss">{item1?.back3}</span>
-                                </div>
-                                <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back">
-                                  <span className="oddddddssss">{item1?.back2}</span>
-                                </div>
-                                <div className="inner_card_back mainnnnnn">
-                                  <span className="oddddddssss" onClick={() => handleHomeBet(item1, "back", item?.matchName, item?.matchId, item1?.back1, item1?.selectionId, item?.marketId)}>{item1?.back1}</span>
-                                </div>
-                                <div className="inner_card_lay mainnnnnn">
-                                  <span className="oddddddssss" onClick={() => handleHomeBet(item1, "lay", item?.matchName, item?.matchId, item1?.lay1, item1?.selectionId, item?.marketId)}>{item1?.lay1}</span>
-
-                                </div>
-                                <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
-                                  <span className="oddddddssss">{item1?.lay2}</span>
-
-                                </div>
-                                <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
-                                  <span className="oddddddssss">{item1?.lay3}</span>
-
-                                </div>
-                              </div>
+                              <img className="card_logo_homePage" src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${gamesData[key]?.sportid}.png`} alt="das" />
                             </div>
 
-                          </>)
-                      })}
+                            <div className="card_Name_Date_homepage" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
+                              <div className="card_Name_homepage">{item?.matchName}</div>
+                              <div className="card_Date_homepage"> {item?.openDate}</div>
+                            </div>
 
-                    </div>))
-                ))) : (
+                            <div style={{ width: "5%", color: "#2aa033" }}>
+                              <i className="fas fa-play-circle"></i>
 
-                <div className="noLiveMatch">No live match now</div>
-              )}
+                            </div>
+                          </div>
+
+                          {item?.runners?.map((item1, index) => {
+                            return (
+                              <>
+                                <div className="inner_card_for_homepage2"
+                                  style={{ borderBottom: "1px solid #f2f2f2" }}>
+                                  <div className="inner_card_nameAndpnl_homepage">
+                                    <span className="game_name_btxi">{item1?.runnerName}</span>
+                                    <span className="game_name_pnllll" style={{ color: pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] >= 0 ? "green" : (pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] <= 0) ? "red" : "black" }}> {pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] || 0}</span>
+                                  </div>
+                                  {console.log(pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId], "sdfsddfsd")}
+                                  <div className="inner_card_rate_homepage">
+
+                                    <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back" >
+                                      <span className="oddddddssss">{item1?.back3}</span>
+                                    </div>
+                                    <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back">
+                                      <span className="oddddddssss">{item1?.back2}</span>
+                                    </div>
+                                    <div className="inner_card_back mainnnnnn">
+                                      <span className="oddddddssss" onClick={() => handleHomeBet(item1, "back", item?.matchName, item?.matchId, item1?.back1, item1?.selectionId, item?.marketId)}>{item1?.back1}</span>
+                                    </div>
+                                    <div className="inner_card_lay mainnnnnn">
+                                      <span className="oddddddssss" onClick={() => handleHomeBet(item1, "lay", item?.matchName, item?.matchId, item1?.lay1, item1?.selectionId, item?.marketId)}>{item1?.lay1}</span>
+
+                                    </div>
+                                    <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
+                                      <span className="oddddddssss">{item1?.lay2}</span>
+
+                                    </div>
+                                    <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
+                                      <span className="oddddddssss">{item1?.lay3}</span>
+
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </>)
+                          })}
+
+                        </div>))
+                    ))) : (
+
+                    <div className="noLiveMatch">No live match now</div>
+                  )
 
 
+
+                  :
+                  <Upcoming />
+              }
             </div>
+
             <div className="AllProvideName_HomePage">
               <AllProviderName />
             </div>
+
+            <Modal show={show} onHide={handleClose}>
+              <div
+                className={`eighteen-plus  ${betTypeeee}-border`}
+                style={{ marginLeft: "0px" }}>
+                <Modal.Body style={{ marginLeft: "-72% !important" }}>
+                  {<BitPopup
+                    bitValue={bitValue}
+
+
+                    closePopUp={closePopUp}
+                  />}
+                </Modal.Body>
+              </div>
+            </Modal>
           </div >
-          <Modal show={show} onHide={handleClose}>
-            <div
-              className={`eighteen-plus  ${betTypeeee}-border`}
-              style={{ marginLeft: "0px" }}>
-              <Modal.Body style={{ marginLeft: "-72% !important" }}>
-                {<BitPopup
-                  bitValue={bitValue}
-
-
-                  closePopUp={closePopUp}
-                />}
-              </Modal.Body>
-            </div>
-          </Modal>
         </section >
       }
     </>

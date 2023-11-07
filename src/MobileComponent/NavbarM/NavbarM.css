@@ -608,14 +608,15 @@ a:-webkit-any-link {
 }
 
 .inner_game_name_caison_header {
-    width: 120px;
-    display: flex;
     align-items: center;
-    white-space: nowrap;
-    justify-content: center;
-    flex-direction: row;
-    padding: 0px 9px;
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px 12px;
+    white-space: nowrap;
+    /* width: 120px; */
+    font-size: 12px;
 }
 
 .inner_game_name_caison_header_Scroll {

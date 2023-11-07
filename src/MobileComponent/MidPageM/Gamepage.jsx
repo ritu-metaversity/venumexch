@@ -10,6 +10,8 @@ import {
 } from "../../App/Features/auth/authActions";
 import "./Gamepage.css";
 import moment from "moment"
+import "../MidPageM/HomePage.css";
+
 
 
 const Gamepage = () => {
@@ -22,29 +24,22 @@ const Gamepage = () => {
   const { id } = useParams();
   let GameName = state?.id2;
   const dispatch = useDispatch();
-  // console.log(id,"hellooooooooo")
-  const [gamesData, setGamesData] = useState("");
-  const token = localStorage.getItem("TokenId");
-  // const { PostGamesById } = useSelector(state => state.auth)
-  // console.log(PostGamesById,"Dushyant")
-  const { Postmatchsport } = useSelector((state) => state.auth);
 
-  // console.log(alert(id))
+  const [gamesData, setGamesData] = useState("");
+  const [pnlData, setPnlData] = useState({})
+
+
+  const token = localStorage.getItem("TokenId");
+
+  const { Postmatchsport } = useSelector((state) => state.auth);
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     localStorage.setItem("SportId", id);
   }, [id]);
 
-  // useEffect(()=>{
-  //   console.log("log")
-  //   axios.post("http://api.a2zscore.com/admin-new-apis/enduser/active-match-sport-wise-open",{sportId:"4"})
-  //   .then((response) => {
-  //     console.log(response.data,"gammmmmmmiddddidididiidididididididididdii");
-  //   })
-  // },[])
-  // console.log
   const handleGameDetails = (id, item) => {
-    // console.log("home page load ")
-    // console.log(item?.openDate)
+
     const token = localStorage.getItem("TokenId");
 
     if (token) {
@@ -63,28 +58,30 @@ const Gamepage = () => {
 
     }
   };
-  // console.log(gamesData, "gamesData");
-
-  const handleInput = (vl) => {
-    // console.log("das")
-    // datatata(vl)
-  };
 
   useEffect(() => {
-    const activeMatchSportWise = id ? id : "4";
+    // if (token) {
+    // 
+
 
     axios
-      .get(
-        ` https://oddsapi.247idhub.com/betfair_api/active_match/${activeMatchSportWise}`
-      )
+      .get(`https://oddsapi.247idhub.com/betfair_api/active_match/v2/${id}`)
       .then((res) => {
+
+        console.log(res?.data?.data, "sdfiwgyuvjhbnwi")
+
         setGamesData(res?.data?.data);
+
       });
-  }, [id, token]);
+
+
+    // }
+  }, [id]);
+
 
   useEffect(() => {
     const get = document.getElementsByClassName("inplay-item__back")
-    // console.log(get)
+
     for (let i = 0; i < get.length; i++) {
       if (isRight) {
 
@@ -99,11 +96,6 @@ const Gamepage = () => {
 
   const { PostunsettledData } = useSelector((state) => state.auth);
 
-  // console.log(PostunsettledData?.data?.dataList?.length)
-
-  // const dispatch = useDispatch();
-  // console.log(PostBetListByMatchIdData ,"dushyant")
-
   useEffect(() => {
     if (token) {
 
@@ -113,9 +105,12 @@ const Gamepage = () => {
     }
   }, [token]);
 
+
+  const handleHomeBet = () => {
+  }
   return (
     <>
-      <div style={{ marginTop: "108px" }}>
+      <div style={{ marginTop: "115px" }}>
         {/*   {token ? <Link to="/m/mybets" className="openbetsssss" >
           <span className="open-bets-link">
             Open Bets {""}(
@@ -135,85 +130,88 @@ const Gamepage = () => {
             <span><img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${id}.png `} alt="" width="22px" /></span>
             <span style={{ marginLeft: "4px" }}>{GameName}</span>
           </div>
-          <div className=" numberval">
 
-            <span>1</span>
-            <span>X</span>
-            <span>2</span>
+          <div className="home_card_mainPage">
+
+
 
           </div>
+
         </div>
       </div>
       <div class="" style={{ marginTop: "2px" }}>
-        <div class="inplay-item__content">
-          {gamesData?.length && gamesData.map((item) => {
-            return (
-              <div class={"inplay-item__row " + (isRight ? " " : "")} >
-                <div class="inplay-item__score" onClick={() => handleGameDetails(item?.matchId, item)}>
-                  <div class="score-content empty">
-                    <div class="date-content"><span class="inPlayDate-content__date" style={{ color: "#247b23" }}> {moment(item?.openDate).format('D-MM-YYYY h:mm')}</span></div>
-                  </div>
-                </div>
-                <div class="inplay-item__players box-w2"><p class="inplay-item__player" onClick={() => handleGameDetails(item?.matchId, item)}> {item?.matchName}</p>
-                  <div className="inplayyyy">
-                    {item?.inPlay === true ? (
-                      <i className="fas fa-play-circle "></i>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-                <div onClick={() => setIsRight(o => !o)} class={"inplay-item__back" + (isRight ? " isRight" : "")}>
-                  <div class="inplay-item__back-inner">
-                    <div class="inplay-item__back-inner inplay-item__back-inner-left">
-                      <span class="odd-button back     ">
-                        <span class="odd-button__inner odd-button__inner--centered ">
-                          <div class="odd-button__price text-center">{item?.team1Back}</div>
-                          <div class="odd-button__volume text-center">0</div>
-                        </span>
-                      </span>
-                      <span class="odd-button back not-active    ">
-                        <span class="odd-button__inner odd-button__inner--centered ">
-                          <div class="odd-button__price text-center">{item?.team2Back}</div>
-                          <div class="odd-button__volume text-center">0</div>
-                        </span>
-                      </span>
-                      <span class="odd-button back     ">
-                        <span class="odd-button__inner odd-button__inner--centered ">
-                          <div class="odd-button__price text-center">{item?.drawBack}</div>
-                          <div class="odd-button__volume text-center">0</div>
-                        </span>
-                      </span>
-                      <span class="odd-button lay     ">
-                        <span class="odd-button__inner odd-button__inner--centered ">
-                          <div class="odd-button__price text-center">{item?.drawLay}</div>
-                          <div class="odd-button__volume text-center">0</div>
-                        </span>
-                      </span>
-                      <span class="odd-button lay     ">
-                        <span class="odd-button__inner odd-button__inner--centered ">
-                          <div class="odd-button__price text-center">{item?.team1Lay}</div>
-                          <div class="odd-button__volume text-center">0</div>
-                        </span>
-                      </span>
-                      <span class="odd-button lay not-active    ">
-                        <span class="odd-button__inner odd-button__inner--centered ">
-                          <div class="odd-button__price text-center">{item?.team2Lay}</div>
-                          <div class="odd-button__volume text-center">0</div>
+        {gamesData && gamesData?.length > 0 ? (
 
-                        </span>
-                      </span>
 
-                    </div>
-                  </div>
+          gamesData.map((item, key) => (
+
+
+            <div className="main_card_for_homepage" >
+              {console.log(item, "hyguftgvjbk")}
+              <div className="inner_card_for_homepage1" style={{ justifyContent: "space-between" }}>
+
+
+                <div className="card_Name_Date_homepage" onClick={() => handleGameDetails(item?.matchId, item, gamesData[key] && gamesData[key]?.sportid)}>
+                  <div className="card_Name_homepage">{item?.matchName}</div>
+                  <div className="card_Date_homepage"> {item?.openDate}</div>
+                </div>
+
+                <div style={{ width: "5%", color: "#2aa033" }}>
+
+                  <i className="fas fa-play-circle"></i>
+
                 </div>
               </div>
-            )
 
-          })}
+              {item?.runners?.map((item1, index) => {
+                return (
+                  <>
+                    <div className="inner_card_for_homepage2"
+                      style={{ borderBottom: "1px solid #f2f2f2" }}>
+                      <div className="inner_card_nameAndpnl_homepage">
+                        <span className="game_name_btxi">{item1?.runnerName}</span>
+                        <span className="game_name_pnllll" style={{ color: pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] >= 0 ? "green" : (pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] <= 0) ? "red" : "black" }}> {pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] || 0}</span>
+                      </div>
+                      {console.log(pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId], "sdfsddfsd")}
+                      <div className="inner_card_rate_homepage">
 
-        </div>
-      </div>
+                        <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back" >
+                          <span className="oddddddssss">{item1?.back3}</span>
+                        </div>
+                        <div className="inner_card_back mobile_to_desktop_view_block mainnnnnn blurrrrrrr_back">
+                          <span className="oddddddssss">{item1?.back2}</span>
+                        </div>
+                        <div className="inner_card_back mainnnnnn">
+                          <span className="oddddddssss" onClick={() => handleHomeBet(item1, "back", item?.matchName, item?.matchId, item1?.back1, item1?.selectionId, item?.marketId)}>{item1?.back1}</span>
+                        </div>
+                        <div className="inner_card_lay mainnnnnn">
+                          <span className="oddddddssss" onClick={() => handleHomeBet(item1, "lay", item?.matchName, item?.matchId, item1?.lay1, item1?.selectionId, item?.marketId)}>{item1?.lay1}</span>
+
+                        </div>
+                        <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
+                          <span className="oddddddssss">{item1?.lay2}</span>
+
+                        </div>
+                        <div className="inner_card_lay mobile_to_desktop_view_block mainnnnnn blurrrrrrr_lay">
+                          <span className="oddddddssss">{item1?.lay3}</span>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </>)
+              })}
+
+            </div>
+
+
+          ))) : (
+
+          <div className="noLiveMatch">No live match now</div>
+        )}
+
+
+      </div >
 
 
     </>

@@ -11,7 +11,7 @@ body::-webkit-scrollbar {
 }
 
 .home-page {
-    margin-top: 111px;
+    margin-top: 115px;
     margin-left: -5px;
     margin-right: -5px;
 }
@@ -201,7 +201,7 @@ div {
 .event-title {
     padding: 5px;
     font-weight: bold;
-    margin-top: -4px;
+    margin-top: -7px;
 }
 
 .nav-tabs {
