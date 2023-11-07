@@ -105,11 +105,11 @@ const Transferstatement = () => {
   }
   return (
     <>
-      <div className="home-page">
+      <div >
 
 
 
-        <div className="container-inner">
+        <div className="accountStatment_nameCssss">
           <section className="m-t-10 transfer">
             <h2 className="page-title p-l-15">Account Statement</h2>
 

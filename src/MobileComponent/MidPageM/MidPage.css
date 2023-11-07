@@ -1,36 +1,26 @@
-
 i {
     font-style: italic;
 }
-.home-page .in-play {
-    color: #2aa033;
-}
-.home-page .in-play {
-    font-weight: 700;
-    font-size: 18px;
-    float: left;
-}
-.page-title {
-    font-size: 18px;
-    font-weight: bold;
-}
 
 .home-page .in-play {
     color: #2aa033;
 }
 
-.home-page .in-play {
-    font-weight: 700;
-    font-size: 18px;
-    float: left;
-}
 .page-title {
     font-size: 18px;
     font-weight: bold;
 }
+
+
+.page-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .m-l-15 {
     margin-left: 15px !important;
 }
+
 .m-t-20 {
     margin-top: 20px !important;
 }
@@ -40,6 +30,7 @@ form {
     margin-top: 0em;
     margin-block-end: 1em;
 }
+
 .market-listing {
     float: left;
     width: 100%;
@@ -48,12 +39,17 @@ form {
 .m-t-10 {
     margin-top: 10px !important;
 }
-ul, li {
+
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-ol, ul, dl {
+
+ol,
+ul,
+dl {
     margin-top: 0;
     margin-bottom: 1rem;
 }
@@ -72,41 +68,45 @@ ul {
     float: left;
     width: 100%;
 }
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
     display: block;
 }
 
 section {
     display: block;
 }
-home-page .in-play {
-    color: #2aa033;
-}
 
-.home-page .in-play {
-    font-weight: 700;
-    font-size: 18px;
-    float: left;
-}
 .page-title {
     font-size: 18px;
     font-weight: bold;
 }
+
 .m-l-15 {
     margin-left: 15px !important;
 }
+
 .m-t-20 {
     margin-top: 20px !important;
 }
 
 
-.market-list-item{
-margin-bottom: 2px;
-padding-left: 11px;
-padding-right: 11px;
-background-color: #fff;
-border-radius: 3px;
-padding: 10px;
+.market-list-item {
+    margin-bottom: 2px;
+    padding-left: 11px;
+    padding-right: 11px;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 10px;
 }
 
 .item-inner img {
@@ -122,29 +122,37 @@ img {
     overflow-clip-margin: content-box;
     overflow: clip;
 }
-a, a:hover, a:focus, a:active {
+
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-user agent stylesheet
-a:-webkit-any-link {
+
+user agent stylesheet a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
 }
-ul, li {
+
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
-li {
+
+user agent stylesheet li {
     text-align: -webkit-match-parent;
 }
+
 .game-name {
     font-size: 16px;
 }
@@ -152,6 +160,7 @@ li {
 .v-m {
     vertical-align: middle;
 }
+
 .m-l-10 {
     margin-left: 10px !important;
 }
@@ -161,24 +170,25 @@ a {
     text-decoration: none;
     background-color: transparent;
 }
-user agent stylesheet
-a:-webkit-any-link {
+
+user agent stylesheet a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
 }
-ul, li {
+
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
 
-user agent stylesheet
-ul {
+user agent stylesheet user agent stylesheet ul {
     list-style-type: disc;
 }
-.events-icons{
-color: #2aa033;
+
+.events-icons {
+    color: #2aa033;
 }
 
 .float-right {
@@ -186,41 +196,55 @@ color: #2aa033;
 }
 
 
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-user agent stylesheet
-a:-webkit-any-link {
+
+user agent stylesheet a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
 }
-ul, li {
+
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
-li {
+
+user agent stylesheet li {
     text-align: -webkit-match-parent;
 }
-user agent stylesheet
-ul {
+
+user agent stylesheet ul {
     list-style-type: disc;
 }
+
 .fas {
     font-weight: 900;
 }
 
-.fa, .far, .fas {
+.fa,
+.far,
+.fas {
     font-family: "Font Awesome 5 Free";
 }
-.fa, .fab, .fal, .far, .fas {
+
+.fa,
+.fab,
+.fal,
+.far,
+.fas {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     display: inline-block;
@@ -233,20 +257,31 @@ ul {
 i {
     font-style: italic;
 }
+
 .events-icons {
     color: #2aa033;
 }
+
 .m-l-5 {
     margin-left: 5px !important;
 }
 
-.fa, .fas {
+.fa,
+.fas {
     font-weight: 900;
 }
-.fa, .far, .fas {
+
+.fa,
+.far,
+.fas {
     font-family: "Font Awesome 5 Free";
 }
-.fa, .fab, .fal, .far, .fas {
+
+.fa,
+.fab,
+.fal,
+.far,
+.fas {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     display: inline-block;
@@ -259,73 +294,88 @@ i {
 i {
     font-style: italic;
 }
+
 .events-icons {
     color: #2aa033;
 }
-a, a:hover, a:focus, a:active {
+
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-user agent stylesheet
-a:-webkit-any-link {
+
+user agent stylesheet a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
 }
-ul, li {
+
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
-li {
+
+user agent stylesheet li {
     text-align: -webkit-match-parent;
 }
 
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
     color: #000;
     text-decoration: none;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-user agent stylesheet
-a:-webkit-any-link {
+
+user agent stylesheet a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
 }
-ul, li {
+
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
-li {
+
+user agent stylesheet li {
     text-align: -webkit-match-parent;
 }
-user agent stylesheet
-ul {
+
+user agent stylesheet ul {
     list-style-type: disc;
 }
 
 
-ul, li {
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
-li {
+
+user agent stylesheet li {
     text-align: -webkit-match-parent;
 }
-user agent stylesheet
-ul {
+
+user agent stylesheet ul {
     list-style-type: disc;
 }
 
@@ -335,57 +385,62 @@ ul {
 
 
 
-ul, li {
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
-li {
+
+user agent stylesheet li {
     text-align: -webkit-match-parent;
 }
-user agent stylesheet
-ul {
+
+user agent stylesheet ul {
     list-style-type: disc;
 }
 
 
-ul, li {
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
-li {
+
+user agent stylesheet li {
     text-align: -webkit-match-parent;
 }
-user agent stylesheet
-ul {
+
+user agent stylesheet ul {
     list-style-type: disc;
 }
+
 .table-row {
     background-color: #fff;
     border-bottom: 1px solid #f2f2f2;
 }
 
-.table-header, .table-row {
+.table-header,
+.table-row {
     display: flex;
     display: -ms-flex;
     display: -webkit-flex;
 }
 
 
-ul, li {
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
-li {
+
+user agent stylesheet li {
     text-align: -webkit-match-parent;
 }
-user agent stylesheet
-ul {
+
+user agent stylesheet ul {
     list-style-type: disc;
 }
 
@@ -393,18 +448,25 @@ ul {
 
 
 
-.main-market .table-header .country-name, .main-market .table-row .country-name, .fancy-market .table-header .country-name, .fancy-market .table-row .country-name, .bookmaker-market .table-header .country-name, .bookmaker-market .table-row .country-name {
+.main-market .table-header .country-name,
+.main-market .table-row .country-name,
+.fancy-market .table-header .country-name,
+.fancy-market .table-row .country-name,
+.bookmaker-market .table-header .country-name,
+.bookmaker-market .table-row .country-name {
     /* width: 60%; */
     font-size: 14px;
     text-align: left;
 }
 
-.table-row>div:first-child, .table-header>div:first-child {
+.table-row>div:first-child,
+.table-header>div:first-child {
     padding-left: 5px;
     padding-right: 5px;
     vertical-align: middle;
     border-left: 0;
 }
+
 .table-row>div {
     border: solid #fff;
     min-height: 41px;
@@ -412,9 +474,12 @@ ul {
     border-width: 1px;
     position: relative;
 }
-.table-row>div, .table-header>div {
+
+.table-row>div,
+.table-header>div {
     border: 0;
 }
+
 /* @media screen and (orientation: portrait) */
 /* .box-w4 {
     width: 60%;
@@ -424,6 +489,7 @@ ul {
 .country-name {
     font-size: 14px !important;
 }
+
 /* .box-w4 {
     width: 40%;
     max-width: 40%;
@@ -432,351 +498,408 @@ ul {
 [class*="box-w"] {
     text-align: center;
 }
+
 .float-left {
     float: left !important;
 }
 
 /*  */
-ul, li {
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-user agent stylesheet
-li {
+
+user agent stylesheet li {
     text-align: -webkit-match-parent;
 }
-user agent stylesheet
-ul {
-    list-style-type: disc;}
 
-    .home-page .in-play {
-        color: #2aa033;
-    }
-    .home-page .in-play {
-        font-weight: 700;
-        font-size: 18px;
-        float: left;
-    }.home-page .in-play {
-        font-weight: 700;
-        font-size: 18px;
-        float: left;
-    }
-    .page-title {
-        font-size: 18px;
-        font-weight: bold;
-    }
-    .home-page .in-play {
-        font-weight: 700;
-        font-size: 18px;
-        float: left;
-    }
-    .home-page .open-bets-link {
-        float: right;
-        text-decoration: underline;
-        margin-top: 20px;
-    }
-    .market-listing {
-        float: left;
-        width: 100%;
-    }
-    .m-t-10 {
-        margin-top: 10px !important;
-    }
-    .market-list-item {
-        margin-bottom: 2px;
-        padding-left: 11px;
-        padding-right: 11px;
-        background-color: #fff;
-        border-radius: 3px;
-        padding: 10px;
-    }
-    ul, li {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .table-row {
-        background-color: #fff;
-        border-bottom: 1px solid #f2f2f2;
-    }
-    .main-market .table-header .country-name, .main-market .table-row .country-name, .fancy-market .table-header .country-name, .fancy-market .table-row .country-name, .bookmaker-market .table-header .country-name, .bookmaker-market .table-row .country-name {
-        /* width: 60%; */
-        font-size: 14px;
-        text-align: left;
-    }
-    .table-row>div:first-child, .table-header>div:first-child {
-        padding-left: 5px;
-        padding-right: 5px;
-        vertical-align: middle;
-        border-left: 0;
-    }
-    .table-row>div {
-        border: solid #fff;
-        min-height: 41px;
-        padding: 2px 8px;
-        border-width: 1px;
-        position: relative;
-    }
-    .ubook {
-        font-size: 12px;
-    }
-    .home-page .open-bets-link {
-        float: right;
-        text-decoration: underline;
-        margin-top: 20px;
-        color: #000;
-    }
-    .market-listing {
-        float: left;
-        width: 100%;
-    }
-    .m-t-10 {
-        margin-top: 10px !important;
+user agent stylesheet ul {
+    list-style-type: disc;
+}
+
+.page-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.home-page .open-bets-link {
+    float: right;
+    text-decoration: underline;
+    margin-top: 20px;
+}
+
+.market-listing {
+    float: left;
+    width: 100%;
+}
+
+.m-t-10 {
+    margin-top: 10px !important;
+}
+
+.market-list-item {
+    margin-bottom: 2px;
+    padding-left: 11px;
+    padding-right: 11px;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.table-row {
+    background-color: #fff;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.main-market .table-header .country-name,
+.main-market .table-row .country-name,
+.fancy-market .table-header .country-name,
+.fancy-market .table-row .country-name,
+.bookmaker-market .table-header .country-name,
+.bookmaker-market .table-row .country-name {
+    /* width: 60%; */
+    font-size: 14px;
+    text-align: left;
+}
+
+.table-row>div:first-child,
+.table-header>div:first-child {
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle;
+    border-left: 0;
+}
+
+.table-row>div {
+    border: solid #fff;
+    min-height: 41px;
+    padding: 2px 8px;
+    border-width: 1px;
+    position: relative;
+}
+
+.ubook {
+    font-size: 12px;
+}
+
+.home-page .open-bets-link {
+    float: right;
+    text-decoration: underline;
+    margin-top: 20px;
+    color: #000;
+}
+
+.market-listing {
+    float: left;
+    width: 100%;
+}
+
+.m-t-10 {
+    margin-top: 10px !important;
+}
+
+.market-list-item {
+    margin-bottom: 2px;
+    padding-left: 11px;
+    padding-right: 11px;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.item-inner img {
+    width: 18px;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+.game-name {
+    font-size: 16px;
+}
+
+.v-m {
+    vertical-align: middle;
+}
+
+.m-l-10 {
+    margin-left: 10px !important;
+}
+
+.events-icons {
+    color: #2aa033;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.m-l-5 {
+    margin-left: 5px !important;
+}
+
+.event-info {
+    padding-left: 31px;
+    margin-top: -10px;
+}
+
+.event-info p {
+    color: #666;
+}
+
+.m-b-10 {
+    margin-bottom: 10px !important;
+}
+
+.table-row {
+    background-color: #fff;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.main-market .table-header .country-name,
+.main-market .table-row .country-name,
+.fancy-market .table-header .country-name,
+.fancy-market .table-row .country-name,
+.bookmaker-market .table-header .country-name,
+.bookmaker-market .table-row .country-name {
+    /* width: 60%; */
+    font-size: 14px;
+    text-align: left;
+}
+
+.table-row>div:first-child,
+.table-header>div:first-child {
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle;
+    border-left: 0;
+}
+
+.table-row>div {
+    border: solid #fff;
+    min-height: 41px;
+    padding: 2px 8px;
+    border-width: 1px;
+    position: relative;
+}
+
+.box-w4 {
+    width: 40%;
+    max-width: 40%;
+    min-width: 40%;
+}
+
+.box-w4 {
+    width: 40%;
+    max-width: 40%;
+    min-width: 40%;
+}
+
+[class*="box-w"] {
+    text-align: center;
+}
+
+.float-left {
+    float: left !important;
+}
+
+.back.light-bg {
+    background-color: #e3f3fe;
+}
+
+.table-row>div {
+    border: solid #fff;
+    min-height: 41px;
+    padding: 2px 8px;
+    border-width: 1px;
+    position: relative;
+}
+
+.lay {
+    background-color: #FAA9BA;
+}
+
+.table-row>div button .odd {
+    font-weight: bold;
+    font-size: 12px;
+    color: #000;
+}
+
+.table-row>div button span {
+    display: block;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.odd {
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+.table-row>div button span {
+    display: block;
+    font-size: 10px;
+    line-height: 12px;
+    color: #000;
+}
+
+.back {
+    background-color: #72BBEF;
+}
+
+.box-w1 {
+    width: 10%;
+    max-width: 10%;
+    min-width: 10%;
+}
+
+.table-row>div {
+    border: solid #fff;
+    min-height: 41px;
+    padding: 2px 8px;
+    border-width: 1px;
+    position: relative;
+}
+
+.table-row>div button {
+    background: none;
+    padding: 0;
+    border: 0;
+}
+
+.table-row>div button {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+button:not(:disabled),
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled) {
+    cursor: pointer;
+}
+
+.home-page .in-play {
+    font-weight: 700;
+    font-size: 18px;
+    float: left;
+    margin-bottom: 0px !important;
+}
+
+.main-content section {
+    float: left;
+    width: 100%;
+}
+
+.mobile-view {
+    display: none;
+}
+
+
+
+
+
+
+@media screen and (max-width: 794px) {
+    .mobile-view {
+        display: flex;
     }
 
-    .market-list-item {
-        margin-bottom: 2px;
-        padding-left: 11px;
-        padding-right: 11px;
-        background-color: #fff;
-        border-radius: 3px;
-        padding: 10px;
-    }
-    
-    ul, li {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .item-inner img {
-        width: 18px;
-    }
-    
-    img {
-        vertical-align: middle;
-        border-style: none;
-    }
-    .game-name {
-        font-size: 16px;
-    }
-    
-    .v-m {
-        vertical-align: middle;
-    }
-    .m-l-10 {
-        margin-left: 10px !important;
-    }
-    .events-icons {
-        color: #2aa033;
-    }
-    
-    .float-right {
-        float: right !important;
-    }
-    .m-l-5 {
-        margin-left: 5px !important;
-    }
-    .event-info {
-        padding-left: 31px;
-        margin-top: -10px;
-    }
-    .event-info p {
-        color: #666;
-    }
-    .m-b-10 {
-        margin-bottom: 10px !important;
-    }
-    .table-row {
-        background-color: #fff;
-        border-bottom: 1px solid #f2f2f2;
-    }
-    .main-market .table-header .country-name, .main-market .table-row .country-name, .fancy-market .table-header .country-name, .fancy-market .table-row .country-name, .bookmaker-market .table-header .country-name, .bookmaker-market .table-row .country-name {
-        /* width: 60%; */
-        font-size: 14px;
-        text-align: left;
-    }
-    .table-row>div:first-child, .table-header>div:first-child {
-        padding-left: 5px;
-        padding-right: 5px;
-        vertical-align: middle;
-        border-left: 0;
-    }
-
-    .table-row>div {
-        border: solid #fff;
-        min-height: 41px;
-        padding: 2px 8px;
-        border-width: 1px;
-        position: relative;
-    }
-    .box-w4 {
-        width: 40%;
-        max-width: 40%;
-        min-width: 40%;
-    }
-    .box-w4 {
-        width: 40%;
-        max-width: 40%;
-        min-width: 40%;
-    }
-    [class*="box-w"] {
-        text-align: center;
-    }
-
-    .float-left {
-        float: left !important;
-    }
-    .back.light-bg {
-        background-color: #e3f3fe;
-    }
-    .table-row>div {
-        border: solid #fff;
-        min-height: 41px;
-        padding: 2px 8px;
-        border-width: 1px;
-        position: relative;
-    }
-    .lay {
-        background-color: #FAA9BA;
-    }
-    .table-row>div button .odd {
-        font-weight: bold;
-        font-size: 12px;
-        color: #000;
-    }
-    .table-row>div button span {
-        display: block;
-        font-size: 10px;
-        line-height: 12px;
-    }
-    .odd {
-        font-weight: bold;
-        font-size: 14px;
-        text-align: center;
-    }
-    .table-row>div button span {
-        display: block;
-        font-size: 10px;
-        line-height: 12px;
-        color: #000;
-    }
-    .back {
-        background-color: #72BBEF;
-    }
-    .box-w1 {
-        width: 10%;
-        max-width: 10%;
-        min-width: 10%;
-    }
-    .table-row>div {
-        border: solid #fff;
-        min-height: 41px;
-        padding: 2px 8px;
-        border-width: 1px;
-        position: relative;
-    }
-    .table-row>div button {
-        background: none;
-        padding: 0;
-        border: 0;
-    }
-    .table-row>div button {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-    button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled) {
-        cursor: pointer;
-    }
-
-    .home-page .in-play {
-        color: #2aa033;
-    }
-    .home-page .in-play {
-        font-weight: 700;
-        font-size: 18px;
-        float: left;
-        margin-bottom: 0px !important;
-    }
-    .main-content section {
-        float: left;
-        width: 100%;
-    }
-
-    .mobile-view{
+    .disk-view {
         display: none;
     }
-    
 
-
-
-
-
-    @media screen and (max-width: 794px) {
-        .mobile-view{
-            display: flex;
-        }
-        .disk-view{
-            display: none;
-        }
-        .table-row {
-            background-color: #fff;
-            border-bottom: 1px solid #f2f2f2;
-        }
-        .main-market .table-row .country-name, .fancy-market .table-header .country-name, .fancy-market .table-row .country-name, .bookmaker-market .table-header .country-name, .bookmaker-market .table-row .country-name {
-            /* width: 60%; */
-            font-size: 14px;
-            text-align: left;
-        }
-        .table-row>div:first-child, .table-header>div:first-child {
-            padding-left: 5px;
-            padding-right: 5px;
-            vertical-align: middle;
-            border-left: 0;
-        }
-        .table-row>div {
-            border: solid #fff;
-            min-height: 41px;
-            padding: 2px 8px;
-            border-width: 1px;
-            position: relative;
-        }
-        
-        .box-w4 {
-            width: 60%;
-            min-width: 60%;
-            max-width: 60%;
-        }
-        .country-name {
-            font-size: 14px !important;
-        }
-        .box-w1 {
-            width: 20%;
-            min-width: 20%;
-            max-width: 20%;
-        }
-        
-        li.market-list-item {
-            position: relative !important;
-        }
+    .table-row {
+        background-color: #fff;
+        border-bottom: 1px solid #f2f2f2;
     }
-    li.market-list-item {
+
+    .main-market .table-row .country-name,
+    .fancy-market .table-header .country-name,
+    .fancy-market .table-row .country-name,
+    .bookmaker-market .table-header .country-name,
+    .bookmaker-market .table-row .country-name {
+        /* width: 60%; */
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .table-row>div:first-child,
+    .table-header>div:first-child {
+        padding-left: 5px;
+        padding-right: 5px;
+        vertical-align: middle;
+        border-left: 0;
+    }
+
+    .table-row>div {
+        border: solid #fff;
+        min-height: 41px;
+        padding: 2px 8px;
+        border-width: 1px;
         position: relative;
     }
 
-    .box-w1.float-left.lay.light-bg.hidden-portrait {
-        background-color: #fdeef2 !important;
+    .box-w4 {
+        width: 60%;
+        min-width: 60%;
+        max-width: 60%;
     }
-    .box-w1.float-left.back.light-bg {
-        background-color: #e3f3fe !important;
-    }
-    button.lay.light-bg {
-        background-color: #fdeef2 !important;
-    }
-    .box-w1.lay.float-left.dis-none.light-bg {
-        background-color: #fdeef2 !important;
 
+    .country-name {
+        font-size: 14px !important;
     }
+
+    .box-w1 {
+        width: 20%;
+        min-width: 20%;
+        max-width: 20%;
+    }
+
+    li.market-list-item {
+        position: relative !important;
+    }
+}
+
+li.market-list-item {
+    position: relative;
+}
+
+.box-w1.float-left.lay.light-bg.hidden-portrait {
+    background-color: #fdeef2 !important;
+}
+
+.box-w1.float-left.back.light-bg {
+    background-color: #e3f3fe !important;
+}
+
+button.lay.light-bg {
+    background-color: #fdeef2 !important;
+}
+
+.box-w1.lay.float-left.dis-none.light-bg {
+    background-color: #fdeef2 !important;
+
+}

@@ -56,13 +56,13 @@ console.log(stakeState,"stakeState");
   return (
     <>
       <div className="home-page home-page-news">
-        <div className="home-page">
+        <div >
           <div className="master-flash-message">
             <div className="flash__wrapper"></div>
           </div>
           <div className="setting-page">
-            <div className="eroorrr">
-              {/* {  PostEditStackDataError === "Request failed with status code 400" ? " Enter Stacks more then 100 " : ""}
+            {/*  <div className="eroorrr">
+              {  PostEditStackDataError === "Request failed with status code 400" ? " Enter Stacks more then 100 " : ""}
 {  PostEditStackData?.message === "Stake Button Values Saved" ? "Stake successfully updated" : ""}
   */}
               {/* {PostEditStackDataError === "Request failed with status code 400"  ? (
@@ -78,9 +78,9 @@ console.log(stakeState,"stakeState");
         </div>
       ) : (
         ""
-      )} */}
-            </div>
-            <div className="stake-buttons m-t-20" style={{ paddingTop: "0px" }}>
+      )} 
+            </div>*/}
+            <div className="stake-buttons m-t-20slick-slide" style={{ paddingTop: "0px" }}>
               <h2 className="page-title">Edit Stakes</h2>
               <div>
                 <div className="stake-group">

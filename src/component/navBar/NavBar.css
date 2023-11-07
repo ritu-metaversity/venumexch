@@ -616,3 +616,12 @@ li.login_btn a {
     top: 0;
     left: 0;
 }
+
+.boxed-layout-wrapperfwefwefwefwe {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 70%;
+    margin-left: -8%;
+}

@@ -161,24 +161,23 @@ const NavBar = () => {
         <marquee className="marquee">
           <div>{movingMessage}</div>
         </marquee>
-        <div className="boxed-layout-wrapper">
+        <div className="boxed-layout-wrapperfwefwefwefwe">
           <Link
 
             to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/home"}
             className="router-link-exact-active router-link-active"
           >
-            <div className="logo-area float-left">
-              <img
-                // onClick={handleroute}
-                alt=""
-                src={selfAllowedd?.logo}
-                className="logo"
-                style={{
-                  height: " 90px",
-                  width: "116px"
-                }}
-              />
-            </div>
+
+            <img
+              // onClick={handleroute}
+              alt=""
+              src={selfAllowedd?.logo}
+              className="logo"
+              style={{
+                height: "90px", width: "116px"
+              }}
+            />
+
           </Link>
           <div className="clock float-left">
             <span>
