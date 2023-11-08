@@ -171,7 +171,8 @@ const Right = ({ gamedetailsData, setGameDetailData, gameNmeForOpenBet }) => {
                                     <div className="score-inner">
                                        <iframe
                                           // src={`https://stream.openhomepageforapi.live/YGapp/play.html?name=ttfour&amp;autoplay=true`}
-                                          src={`https://sqmrtv.in/btv.php?eventId=${id}`}
+                                          // src={`https://sqmrtv.in/btv.php?eventId=${id}`}
+                                          src={`https://100tun.online/web/${id}.html`}
                                           width="100%"
                                           className="score-card desk_score_card"
                                           title="scorecord"

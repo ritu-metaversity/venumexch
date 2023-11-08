@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useOutletContext, useParams } from 'react-router';
+import { useLocation, useOutletContext, useParams } from 'react-router';
 import { PostBetListByMatchId, Postuserfancybook, PostUserfancypnl, PostUserOddPnl } from '../../App/Features/auth/authActions';
 import Betslip from '../Right/Betslip'
 import "./DestGamePage.css"
@@ -17,6 +17,10 @@ const DestGamePage = ({ datatataProps, gamenameOpenbet }) => {
 
     let { id } = useParams();
     // console.log(datatataProps, "valuevaluevalue")
+    const {state} = useLocation()
+
+
+    console.log(state, "sdjfsuhidb")
 
     const dispatch = useDispatch();
 
@@ -606,7 +610,8 @@ const DestGamePage = ({ datatataProps, gamenameOpenbet }) => {
                                     <div className="scorecard scorecard-mobile">
                                         <div className="score-inner">
                                             <iframe
-                                                src={`http://15.207.182.173:3050/event/${id}?theme=crazy-diamond`}
+                                                // src={`http://15.207.182.173:3050/event/${id}?theme=crazy-diamond`}
+                                                src={`https://score.247idhub.com/index.html/event/${id}?theme=crazy-diamond`}
                                                 width="100%"
                                                 className="score-card desk_score_card"
                                                 title="scorecord"
@@ -619,7 +624,7 @@ const DestGamePage = ({ datatataProps, gamenameOpenbet }) => {
                                     <div className="scorecard scorecard-mobile">
                                         <div className="score-inner ">
                                             <iframe
-                                                src={`https://100tun.online/web/${id}.html`}
+                                                src={`https://score.247idhub.com/go-score/template/${state}/${id}`}
                                                 // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                                 width="100%"
                                                 className="score-card desk_score_card"

@@ -6,7 +6,7 @@ const Upcoming = () => {
     let navigate = useNavigate();
     const [gamesData, setGamesData] = useState("");
 
-    const handleGameDetails = (id, item) => {
+    const handleGameDetails = (id, item,sportId) => {
 
         const token = localStorage.getItem("TokenId");
 
@@ -23,6 +23,8 @@ const Upcoming = () => {
             navigate(`/m/login`)
 
         }
+    localStorage.setItem("SportId", sportId);
+
     };
 
     useEffect(() => {
