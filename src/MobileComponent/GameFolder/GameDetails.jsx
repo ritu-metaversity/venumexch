@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { useOutletContext, useParams } from "react-router";
+import { useLocation, useOutletContext, useParams } from "react-router";
 import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
 import {
   PostBetListByMatchId,
@@ -25,6 +25,8 @@ import BitPopup from "../Modal/BitPopup";
 const GameDetails = () => {
   let { id } = useParams();
   const dispatch = useDispatch();
+  const { state } = useLocation()
+  console.log(state, "sdjfsuhidb")
   // const datatata = useOutletContext({});
   const [market, setMarket] = useState(true);
   const [openBet, setOpenBet] = useState(false);
@@ -34,7 +36,7 @@ const GameDetails = () => {
   const [previousState, setPreviousState] = useState({});
   // NEW CODE- BETPOPUP
   const [bitValue, setBitValue] = useState({});
-console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
+  console.log(gameDetailsData, "fgdfedfsgdbfdafsv");
   //state for fancy for blinker After filter
   const [previousStateFancyBlinker, setPreviousStateFancyBlinker] = useState(
     {}
@@ -740,8 +742,8 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                           <div className="scorecard scorecard-mobile">
                             <div className="score-inner">
                               <iframe
-                                src={`http://15.207.182.173:3050/event/${id}`}
-
+                                // src={`http://15.207.182.173:3050/event/${id}`}
+                                src={`https://score.247idhub.com/go-score/template/${iddd}/${id}`}
                                 // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                                 width="100%"
                                 height="290px"
@@ -759,7 +761,8 @@ console.log(gameDetailsData,"fgdfedfsgdbfdafsv");
                                 <iframe
                                   //  src={`http://15.207.182.173:3050/event/${id}`}
 
-                                  src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                                  // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                                  src={`https://score.247idhub.com/index.html/event/${id}?theme=crazy-diamond`}
                                   width="100%"
                                   height="290px"
                                   className="score-card"

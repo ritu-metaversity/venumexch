@@ -27,7 +27,12 @@ const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
   }, [sideGameData])
 
   // console.log(postleftmenudataopenData, "fsdfsdfsdsfsd")
+  const handleChanges = (vl) => {
+    console.log(vl, sideGameData?.sportsid, "fsdfkdshbjncklsd");
+    navigate(`/gamedetails/${vl}`, { state: sideGameData?.sportsid })
 
+    // navigator(`gamedetails/${match.matchId}`,state:item2)
+  }
   return (
     <div>
 
@@ -74,19 +79,22 @@ const SubSideBar = ({ valueForGame, sideGameData, sendData }) => {
 
 
 
-                    <Link to={`gamedetails/${match.matchId}`}>
+
+                    <div onClick={() => handleChanges(match.matchId)}>
+                      {console.log(match, "sdfsfsfsdfsdf")}
                       <li data-v-91c481c8="">
-                        <a data-v-91c481c8="" href="/game/4/101480" class="menu-link menu_list sport-type-Cricket">
+                        <div class="menu-link menu_list sport-type-Cricket">
                           <p data-v-91c481c8="" class="link-name">{match.matchName}</p>
                           <p>
                             <i data-v-91c481c8="" class="fas fa-angle-right "></i>
                           </p>
-                        </a>
+                        </div>
                       </li>
                       {/*  <div className="subside-leftmenudata">
                         {match.matchName}{" "}({match.date})
                   </div>*/}
-                    </Link>
+                    </div>
+
                   )}
                 </li>
 

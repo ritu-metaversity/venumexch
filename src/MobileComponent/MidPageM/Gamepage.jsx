@@ -157,8 +157,11 @@ const Gamepage = () => {
                 </div>
 
                 <div style={{ width: "5%", color: "#2aa033" }}>
+                  {item?.inPlay === false ?
+                    "" :
 
-                  <i className="fas fa-play-circle"></i>
+                    <i className="fas fa-play-circle"></i>
+                  }
 
                 </div>
               </div>

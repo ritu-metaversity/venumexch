@@ -19,12 +19,14 @@ const MidPage = () => {
 
 
 
-   const handleEnterMatch = (item) => {
+   const handleEnterMatch = (item, item2) => {
       if (token == null) {
          navigator("/login")
 
       } else {
-         navigator(`/gamedetails/${item}`)
+         navigator(`/gamedetails/${item}`,{state:item2})
+         console.log(item2, "dsjhcgjvhsb");
+         // localStorage.setItem()
       }
    }
 
@@ -66,6 +68,7 @@ const MidPage = () => {
                            <div className="events">
                               <h1 className="event-heading">
                                  {gamesData[key]?.name}
+                                 {console.log(gamesData[key]?.sportid, "kljkhuygtfrded")}
                                  <span className="starts-in-label">
                                     Betting from 30 mins before start
                                  </span>
@@ -99,7 +102,7 @@ const MidPage = () => {
                                           gamesData[key]?.matchList.map((item, index) => (
                                              <tr>
                                                 <td>
-                                                   <div className="maindiv" onClick={() => handleEnterMatch(item?.matchId)}>
+                                                   <div className="maindiv" onClick={() => handleEnterMatch(item?.matchId, gamesData[key]?.sportid)}>
                                                       <div>
                                                          <div className="eventIcon">
                                                             <img src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/ic_vir.png" alt="" class="icon-vir" />

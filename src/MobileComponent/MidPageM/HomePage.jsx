@@ -257,14 +257,14 @@ const HomePage = () => {
   }, [isRight])
   // console.log(PostunsettledData?.data, "PostunsettledData");
 
-  const [upcomingInplay, setUpcomingInplay] = useState(false)
+  const [upcomingInplay, setUpcomingInplay] = useState(1)
 
 
-  const handleInPlayUpcoming = () => {
-    if (upcomingInplay === false) {
-      setUpcomingInplay(true)
+  const handleInPlayUpcoming = (vl) => {
+    if (vl === "1") {
+      setUpcomingInplay(1)
     } else {
-      setUpcomingInplay(false)
+      setUpcomingInplay(2)
     }
   }
 
@@ -292,20 +292,20 @@ const HomePage = () => {
           <div
             className="in-play page-title m-t-20 m-l-15"
             style={{ paddingTop: "0px", cursor: "pointer" }}
-            onClick={handleInPlayUpcoming}
+            onClick={() => handleInPlayUpcoming("1")}
           >
             <i className="fas fa-play-circle"></i>
             <span className="label"
-              style={{ borderBottom: upcomingInplay === true ? "" : "1px solid" }}>
+              style={{ borderBottom: upcomingInplay === 1 ? "1px solid" : "" }}>
               In Play
             </span>
           </div>
           <div
             className="in-play page-title m-t-20 m-l-15"
-            onClick={handleInPlayUpcoming}
+            onClick={() => handleInPlayUpcoming("2")}
             style={{ paddingTop: "0px", color: "black", cursor: "pointer", fontWeight: "500" }}>
             <span className="label"
-              style={{ borderBottom: upcomingInplay === true ? "1px solid" : "" }}>
+              style={{ borderBottom: upcomingInplay === 2 ? "1px solid" : "" }}>
               Upcoming
             </span>
           </div>
@@ -333,7 +333,7 @@ const HomePage = () => {
             <div className="home_card_mainPage">
 
               {
-                upcomingInplay === false ?
+                upcomingInplay === 1 ?
 
 
 
@@ -401,7 +401,7 @@ const HomePage = () => {
                         </div>))
                     ))) : (
 
-                    <div className="noLiveMatch">No live match now</div>
+                    <div className="noLiveMatch" style={{ width: "100%" }}>No live match now</div>
                   )
 
 
