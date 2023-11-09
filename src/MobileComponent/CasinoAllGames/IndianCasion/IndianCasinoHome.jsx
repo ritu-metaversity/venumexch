@@ -12,11 +12,12 @@ const IndianCasinoHome = () => {
       url: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
       filterType: "SP-NOWA"
     },
-    {
-      name: "Aura",
-      url: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
-      filterType: "AURA"
-    }]
+    // {
+    //   name: "Aura",
+    //   url: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+    //   filterType: "AURA"
+    // }
+  ]
 
   const handleChangeaa = (val) => {
     console.log(val, "adcnlkscaksdn");
