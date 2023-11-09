@@ -14,13 +14,14 @@ let AllCasinoProviderName =
             gameCode: "SP-NOWA",
             PageUrl: "/m/SuperNowa_casion"
         },
-        {
-            name: "Aura",
-            logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
-            gameCode: "AURA",
-            PageUrl: "/m/casino-list"
+        // {
+        //     name: "Aura",
+        //     logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+        //     gameCode: "AURA",
+        //     PageUrl: "/m/casino-list"
 
-        }],
+        // }
+    ],
     "Internation Casino": [
         {
             name: "EVOLUTION",
