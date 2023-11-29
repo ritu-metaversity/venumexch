@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { psotbetsingleusevalue } from "../../App/Features/auth/authActions";
 import "./casionmodal.css"
 import cassionimg from "./casino.png"
-const CasinoModals = () => {
+const CasinoModals = (type) => {
     const [singleUserValue, setSingleUserValue] = useState()
     const dispatch = useDispatch();
     const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
@@ -15,6 +15,11 @@ const CasinoModals = () => {
         // })
         dispatch(psotbetsingleusevalue())
     }, [])
+    useEffect(() => {
+
+        setSingleUserValue(psotbetsingleusevalueData?.data[type?.type])
+    }, [])
+    console.log(psotbetsingleusevalueData, "sfdghrgterfdasx");
     // {psotbetsingleusevalueData?.data?.value}
     return (
         <>
@@ -23,15 +28,15 @@ const CasinoModals = () => {
                 <div className="casino_message">
                     <img src={cassionimg} alt="" className="casion_alt_popup" />
                     <p className="please_note">Please Note</p>
-                    <p className="points">(1 Points = ₹{psotbetsingleusevalueData?.data?.value})</p>
+                    <p className="points">(1 Points = ₹{singleUserValue})</p>
                     <div className="casino_dis">
                         <p>
                             <span>For Example:</span> If you place ₹100 your bet will be ₹
-                            {100 * psotbetsingleusevalueData?.data?.value} Win or Loss according to the above
+                            {100 * singleUserValue} Win or Loss according to the above
                             calculation.
                         </p>
                         <p>
-                            यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या हार ₹ {100 * 1} होगी।
+                            यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या हार ₹ {100 * singleUserValue} होगी।
                         </p>
                     </div>
                 </div>

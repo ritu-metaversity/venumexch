@@ -12,17 +12,16 @@ const IndianCasinoHome = () => {
       url: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
       filterType: "SP-NOWA"
     },
-    // {
-    //   name: "Aura",
-    //   url: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
-    //   filterType: "AURA"
-    // }
+    {
+      name: "Aura",
+      url: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+      filterType: "AURA"
+    }
   ]
 
   const handleChangeaa = (val) => {
     console.log(val, "adcnlkscaksdn");
     if (localStorage.getItem("TokenId")) {
-
       if (val?.filterType === "SP-NOWA") {
         navigate("/m/SuperNowa_casion")
       } else {
@@ -30,10 +29,7 @@ const IndianCasinoHome = () => {
       }
     } else {
       navigate("/m/login")
-
     }
-
-
   }
 
   return (
