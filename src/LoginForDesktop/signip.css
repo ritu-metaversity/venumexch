@@ -5,3 +5,11 @@
         margin-left: 15%;
     }
 }
+
+.comm-data-new {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+}

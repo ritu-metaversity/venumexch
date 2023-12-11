@@ -236,16 +236,19 @@ const Signup = () => {
       setUserNameError("");
     }
   };
+  const [allData, setAllData] = useState()
 
   useEffect(() => {
-    let appUrll = window.location.hostname;
-    // let appUrll = "localhost";
+    let appUrll = window.location.hostname.replace("www.", "");
+    // let appUrll = window.location.hostname;
+    // let appUrll = "maggibook.com";
     axios
       .post(
         `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {
+        setAllData(res?.data)
         // console.log(res, "dadasdas")
         // SetselfAllowedd(res?.data?.data?.logo);
         setLogo(res?.data?.data?.logo);
@@ -347,6 +350,34 @@ const Signup = () => {
 
                       </div>
 
+
+
+                      <div className='form-group comm-data-new' style={{ maxWidth: "407px" }}>
+                        {allData?.data?.fancyComm === 0 ?
+
+                          "" :
+                          <span>
+                            <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Odds Comm..</label>
+                            <input value={allData?.data?.oddsComm} disabled style={{ width: "100%", padding: "unset" }} />
+                          </span>
+                        }
+
+                        {allData?.data?.fancyComm === 0 ?
+
+                          "" :
+                          <span>
+                            <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Fancy Comm..</label>
+                            <input placeholder={allData?.data?.fancyComm} disabled style={{ width: "100%", padding: "unset" }} />
+                          </span>}
+                        {allData?.data?.casinoComm === 0 ?
+
+                          "" :
+                          <span>
+                            <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Casino Comm..</label>
+                            <input placeholder={allData?.data?.casinoComm} disabled style={{ width: "100%", padding: "unset" }} />
+                          </span>
+                        }
+                      </div>
                       <button className="btn btn-login" onClick={handleLogin}>
                         Sign Up
                         <i className="ml-2 fas fa-sign-in-alt"></i>
