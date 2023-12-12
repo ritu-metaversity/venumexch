@@ -88,6 +88,7 @@ const Signup = () => {
     }
     return true;
   };
+  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
 
 
   const handleLogin = async () => {
@@ -99,6 +100,9 @@ const Signup = () => {
       confirmPassword: confirmPassword,
       mobile: mobileNumber,
       userId: UserName,
+      casinoComm: allData?.data?.casinoComm,
+      fancyComm: allData?.data?.fancyComm,
+      oddsComm: allData?.data?.oddsComm
     }
     if (handleValidation()) {
 
@@ -108,18 +112,56 @@ const Signup = () => {
         )
         .then((res) => {
           if (res?.status) {
-            setOpen(true)
-            toast.success(res?.data?.message || "", {
-              style: {
-                background: "rgb(74,117,67)", minHeight: 40,
-                padding: 0,
-                color: "white",
+
+
+            if (res?.data?.token) {
+              localStorage.setItem("TokenId", res?.data?.token);
+              localStorage.setItem("PassWordType", res?.data?.passwordtype);
+              localStorage.setItem("userId", res?.data?.userId);
+              localStorage.setItem("SportId", 4);
+              axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`;
+              axios
+                .post(
+                  `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+                  {},
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${res?.data?.token}`,
+                    },
+                  }
+                )
+                .then((response) => {
+                  localStorage.setItem("GameToken", response?.data?.data?.access_token);
+                })
+              if (window.innerWidth > 1000) {
+                navigate("./m/home");
+
+              } else {
+                navigate("/home");
+
               }
-            });
-            // snackBarUtil.success(res?.data?.message);
-            // console.log(res?.data)
-            setSignUpShow(true)
-            setNewCredAfterRegister(res?.data);
+
+
+              console.log(res, "afddsfsdfsdf");
+            } else {
+              console.log(res, "afddsfsdfsdf");
+
+
+              setOpen(true)
+              toast.success(res?.data?.message || "", {
+                style: {
+                  background: "rgb(74,117,67)", minHeight: 40,
+                  padding: 0,
+                  color: "white",
+                }
+              });
+              // snackBarUtil.success(res?.data?.message);
+              // console.log(res?.data)
+              setSignUpShow(true)
+              setNewCredAfterRegister(res?.data);
+            }
+
           } else {
             toast.error(res?.data?.message || "", {
               style: {
