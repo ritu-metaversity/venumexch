@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Postcasino } from "../../App/Features/auth/authActions";
+import { Postcasino, psotbetsingleusevalue } from "../../App/Features/auth/authActions";
 import "./CasinoList.css";
 import Modal from "react-bootstrap/Modal";
 import { RxCross2 } from 'react-icons/rx'
 import CasinoModals from "./CasinoModals";
 const Casinolistt = () => {
-  const { PostcasinoData } = useSelector((state) => state.auth);
+  const { PostcasinoData, psotbetsingleusevalueData } = useSelector((state) => state.auth);
   const [sportId, setSportId] = useState(323334);
   const [casinoList, setCasinoList] = useState(323334);
   let navigate = useNavigate();
@@ -18,6 +18,12 @@ const Casinolistt = () => {
   // console.log(PostunsettledData?.data?.dataList)
 
   const dispatch = useDispatch();
+
+  console.log(psotbetsingleusevalueData?.data, "kjhgfcvbhuytfv")
+
+  useEffect(() => {
+    dispatch(psotbetsingleusevalue())
+  }, [])
   // console.log(PostcasinoData, "dushyant");
   const token = localStorage.getItem("TokenId");
   const [Casinoshow, setCasinoShow] = useState(false);
@@ -58,18 +64,26 @@ const Casinolistt = () => {
   const handleChangeaa = (val) => {
     // console.log(val)
     // /m/casino/:id
-    if (
-      token
-    ) {
-      setCasionId(val)
-      // setTrueee(true)
-      setShow(true)
 
-      // navigate(`/m/casino/${val}`);
+
+    if (psotbetsingleusevalueData?.data?.aura === 1) {
+      setTrueee(true)
+      setShow(false)
     } else {
-      navigate("/m/login");
-      // setCasionId(val)
-      // setTrueee(true)
+
+      if (
+        token
+      ) {
+        setCasionId(val)
+        // setTrueee(true)
+        setShow(true)
+
+        // navigate(`/m/casino/${val}`);
+      } else {
+        navigate("/m/login");
+        // setCasionId(val)
+        // setTrueee(true)
+      }
     }
   };
 

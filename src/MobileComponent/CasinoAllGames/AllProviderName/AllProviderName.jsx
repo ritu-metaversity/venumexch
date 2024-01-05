@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./AllProviderName.css"
 import Qtech from "./qtechlogo.png"
 import { useNavigate } from 'react-router'
 import Modal from "react-bootstrap/Modal";
 import CasinoModals from '../../Livecasino/CasinoModals';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { psotbetsingleusevalue } from '../../../App/Features/auth/authActions';
 
 let AllCasinoProviderName =
 {
     "Indian Casino": [
         {
-            name: "Super nowa",
+            name: "Super Nova",
             logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
             gameCode: "SP-NOWA",
             PageUrl: "/m/SuperNowa_casion"
@@ -430,18 +433,33 @@ let AllCasinoProviderName =
 
 const AllProviderName = () => {
     let navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
+
+    // console.log(psotbetsingleusevalueData?.data, "kjhgfcvbhuytfv")
+    useEffect(() => {
+
+        dispatch(psotbetsingleusevalue())
+    }, [])
+
     let ViewForLoginRoute = window.innerWidth > 1024 ? "/login" : "/m/login"
     const [show, setShow] = useState(false)
     const [allDatta, setAllDatta] = useState()
     const handleClose = () => setShow(false);
 
-    console.log(allDatta, "fdsfsdfsdfasfsasfcew");
+    console.log(psotbetsingleusevalueData, "csdcsdcsdcsd");
     const handleGamePageroute = (vl, val, key) => {
         if (key === "Internation Casino") {
-            setAllDatta(val)
-            setShow(true)
-        } else {
 
+            if (psotbetsingleusevalueData?.data?.qtech === 1) {
+                navigate(val?.PageUrl, { state: { item1: { gameCode: val?.gameCode }, item2: window.location.pathname, } })
+                setShow(false)
+            } else {
+                setAllDatta(val)
+                setShow(true)
+            }
+
+        } else {
             if (localStorage.getItem("TokenId")) {
                 navigate(vl, { state: { item1: { gameCode: val?.gameCode }, item2: window.location.pathname, } })
             } else {
@@ -458,33 +476,161 @@ const AllProviderName = () => {
             navigate("/m/login")
         }
     }
+
+    const token = localStorage.getItem("TokenId");
+
+
+    const [gameQtech, setGameQTech] = useState()
+    const [gameAura, setGameAura] = useState()
+    const [gameSuperNova, setGameSuperNova] = useState()
+
+    useEffect(() => {
+        axios.post(
+            "https://api.247365.exchange/admin-new-apis/user/alloted-casino-list", {},
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+            .then((response) => {
+                // console.log(response?.data?.data, "gamenamedetaios")
+                setGameQTech(response?.data?.data.find((item) => item?.name === "QTech"))
+                setGameAura(response?.data?.data.find((item) => item?.name === "Aura"))
+                setGameSuperNova(response?.data?.data.find((item) => item?.name === "Super Nova"))
+            })
+    }, [])
+    // === ["Slot Games", "Lottery", "Fantasy Games", "Internation Casino"].includes(key)
+
+
     return (
         <div className='Main_header_for_game_provide_Incasino'>
+
             {Object.keys(AllCasinoProviderName).map(
                 (key, item) => (
                     <div className='Inner_header_for_game_provide_Incasin'>
+                        {console.log(key, gameQtech, "gamenamedetaios")}
 
-                        <h3 className='provider_name_details'>{key}</h3>
+
+
+
+                        {gameAura?.active === true && "Indian Casino" === key
+                            ?
+                            <h3 className='provider_name_details'>
+
+                                {key}
+                            </h3>
+                            :
+                            (gameSuperNova?.active === true) && ("Indian Casino" === key) ?
+
+                                <h3 className='provider_name_details'>
+
+                                    {key}
+
+                                </h3> : ""
+                        }
+                        <h3 className='provider_name_details'>
+                            {gameQtech?.active === true && ["Slot Games", "Lottery", "Fantasy Games", "Internation Casino"].includes(key)
+                                ? key : ""
+
+                            }
+                        </h3>
+
+
+                        {token ? "" :
+                            <h3 className='provider_name_details'>
+                                {key}
+                            </h3>
+                        }
+
                         <div className="main_wrap_live-casion">
+                            {gameAura?.active === true && "Indian Casino" === key
+                                ?
 
 
-                            {AllCasinoProviderName &&
-                                AllCasinoProviderName[key].map(
-                                    (item, index) => (
-                                        <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(item?.PageUrl, item, key)}>
+                                < div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(AllCasinoProviderName[key][1]?.PageUrl, AllCasinoProviderName[key][1], key)}>
 
-                                            <img
-                                                className="complany-logo-warp"
-                                                src={item?.logo}
-                                                alt="" />
-                                            <span className="complany-name-wrap">{item?.name}</span>
-                                        </div>
+                                    <img
+                                        className="complany-logo-warp"
+                                        src={AllCasinoProviderName &&
+                                            AllCasinoProviderName[key][1]?.logo}
+                                        alt="" />
+                                    <span className="complany-name-wrap">{AllCasinoProviderName &&
+                                        AllCasinoProviderName[key][1]?.name}</span>
+                                </div>
+                                : ""}
+                            {
+                                (gameSuperNova?.active === true) && ("Indian Casino" === key) ?
 
-                                    ))}
 
+
+
+
+                                    <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(AllCasinoProviderName[key][0]?.PageUrl, AllCasinoProviderName[key][0], key)}>
+
+                                        <img
+                                            className="complany-logo-warp"
+                                            src={AllCasinoProviderName &&
+                                                AllCasinoProviderName[key][0]?.logo}
+                                            alt="" />
+                                        <span className="complany-name-wrap">{AllCasinoProviderName &&
+                                            AllCasinoProviderName[key][0]?.name}</span>
+                                    </div>
+
+                                    : ""
+                            }
                         </div>
+
+
+
+                        {gameQtech?.active === true && ["Slot Games", "Lottery", "Fantasy Games", "Internation Casino"].includes(key)
+                            ? <div className="main_wrap_live-casion">
+
+
+                                {AllCasinoProviderName &&
+                                    AllCasinoProviderName[key].map(
+                                        (item, index) => (
+                                            <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(item?.PageUrl, item, key)}>
+
+                                                <img
+                                                    className="complany-logo-warp"
+                                                    src={item?.logo}
+                                                    alt="" />
+                                                <span className="complany-name-wrap">{item?.name}</span>
+                                            </div>
+
+                                        ))}
+
+                            </div> : ""
+
+                        }
+
+                        {token ? "" :
+
+                            <div className="main_wrap_live-casion">
+
+
+                                {AllCasinoProviderName &&
+                                    AllCasinoProviderName[key].map(
+                                        (item, index) => (
+                                            <div className="MainBtn_warp" style={{ border: "0.5px solid" }}>
+
+                                                <img
+                                                    className="complany-logo-warp"
+                                                    src={item?.logo}
+                                                    alt="" />
+                                                <span className="complany-name-wrap">{item?.name}</span>
+                                            </div>
+
+                                        ))}
+
+                            </div>
+                        }
+
                     </div>))
             }
+
             <Modal centered show={show} onHide={handleClose}>
                 <Modal.Body className="casino_modals_body">
                     <CasinoModals type={"qtech"} />
@@ -494,7 +640,7 @@ const AllProviderName = () => {
                     </div>
                 </Modal.Body>
             </Modal>
-        </div>
+        </div >
     )
 }
 

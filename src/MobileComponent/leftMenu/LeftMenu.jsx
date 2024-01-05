@@ -5,6 +5,7 @@ import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import { getActiveSportList, postleftmenudataopen } from '../../App/Features/auth/authActions';
 import "./LeftMenu.css"
 import hours from "./sideBarHorse.6c8a9ff3.svg"
+import axios from 'axios';
 
 const LeftMenu = (props) => {
    const dispatch = useDispatch();
@@ -51,7 +52,28 @@ const LeftMenu = (props) => {
       props.eftMenuClose(false)
 
    }
+   const token = localStorage.getItem("TokenId");
 
+   const [gameQtech, setGameQTech] = useState()
+   const [gameAura, setGameAura] = useState()
+   const [gameSuperNova, setGameSuperNova] = useState()
+
+   useEffect(() => {
+      axios.post(
+         "https://api.247365.exchange/admin-new-apis/user/alloted-casino-list", {},
+         {
+            headers: {
+               "Content-Type": "application/json",
+               Authorization: `Bearer ${token}`,
+            },
+         }
+      )
+         .then((response) => {
+            setGameQTech(response?.data?.data.find((item) => item?.name === "QTech"))
+            setGameAura(response?.data?.data.find((item) => item?.name === "Aura"))
+            setGameSuperNova(response?.data?.data.find((item) => item?.name === "Super Nova"))
+         })
+   }, [])
    return (
       <>
          {/* <div   className='left-menu'></div> */}
@@ -76,43 +98,55 @@ const LeftMenu = (props) => {
                      </div>
                   </div>
                </li>))) : ""}
-
-         <li>
-            <Link to="/m/Indian-home" className="">
-               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                  <div className="item"><img alt="" src="https://11bet24.com/indian-casino.png" /> <span className="menu-name download-apk">Indian Casino</span></div>
-               </div>
-            </Link>
-         </li>
-
-         <li>
-            <Link to="/m/International-home" className="">
-               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                  <div className="item"><img alt="" src="https://11bet24.com/international-casinoletest.png" className="game-icon" /> <span className="menu-name download-apk">International Casino</span></div>
-               </div>
-            </Link>
-         </li>
-         <li>
-            <Link to="/m/Lottery-home" className="">
-               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                  <div className="item"><img alt="" src="https://11bet24.com/lottery.png" className="game-icon" /> <span className="menu-name download-apk"> Lottery</span></div>
-               </div>
-            </Link>
-         </li>
-         <li>
-            <Link to="/m/Slot-home" className="">
-               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                  <div className="item"><img alt="" src="https://11bet24.com/slots.png" className="game-icon" /> <span className="menu-name download-apk">Slots Games</span></div>
-               </div>
-            </Link>
-         </li>
-         <li>
-            <Link to="/m/Fantasy-home" className="">
-               <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                  <div className="item"><img alt="" src="https://11bet24.com/fantasy-game.png" className="game-icon" /> <span className="menu-name download-apk">Fantasy Games</span></div>
-               </div>
-            </Link>
-         </li>
+         {gameAura?.active === true ?
+            <li>
+               <Link to="/m/Indian-home" className="">
+                  <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                     <div className="item"><img alt="" src="https://11bet24.com/indian-casino.png" /> <span className="menu-name download-apk">Indian Casino</span></div>
+                  </div>
+               </Link>
+            </li>
+            :
+            (gameSuperNova?.active === true ?
+               <li>
+                  <Link to="/m/Indian-home" className="">
+                     <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                        <div className="item"><img alt="" src="https://11bet24.com/indian-casino.png" /> <span className="menu-name download-apk">Indian Casino</span></div>
+                     </div>
+                  </Link>
+               </li> : "")}
+         {gameQtech?.active === true ?
+            <>
+               <li>
+                  <Link to="/m/International-home" className="">
+                     <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                        <div className="item"><img alt="" src="https://11bet24.com/international-casinoletest.png" className="game-icon" /> <span className="menu-name download-apk">International Casino</span></div>
+                     </div>
+                  </Link>
+               </li>
+               <li>
+                  <Link to="/m/Lottery-home" className="">
+                     <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                        <div className="item"><img alt="" src="https://11bet24.com/lottery.png" className="game-icon" /> <span className="menu-name download-apk"> Lottery</span></div>
+                     </div>
+                  </Link>
+               </li>
+               <li>
+                  <Link to="/m/Slot-home" className="">
+                     <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                        <div className="item"><img alt="" src="https://11bet24.com/slots.png" className="game-icon" /> <span className="menu-name download-apk">Slots Games</span></div>
+                     </div>
+                  </Link>
+               </li>
+               <li>
+                  <Link to="/m/Fantasy-home" className="">
+                     <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
+                        <div className="item"><img alt="" src="https://11bet24.com/fantasy-game.png" className="game-icon" /> <span className="menu-name download-apk">Fantasy Games</span></div>
+                     </div>
+                  </Link>
+               </li>
+            </>
+            : ""}
       </>
    )
 }

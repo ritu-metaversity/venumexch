@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
 import Modal from "react-bootstrap/Modal";
 import CasinoModals from "../../Livecasino/CasinoModals"
+import { useDispatch, useSelector } from "react-redux";
+import { psotbetsingleusevalue } from "../../../App/Features/auth/authActions";
 
 
 const SlotGamesList = () => {
@@ -16,6 +18,14 @@ const SlotGamesList = () => {
 
     const [show, setShow] = useState(false)
     const [allDatta, setAllDatta] = useState()
+
+    const dispatch = useDispatch();
+    const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        dispatch(psotbetsingleusevalue())
+    }, [])
+
 
     useEffect(() => {
 
@@ -53,10 +63,17 @@ const SlotGamesList = () => {
 
     }
     const handleChangeaa = (val) => {
-        console.log(val, "dafusiyhbdchuwdb");
-        
-        setAllDatta(val)
-        setShow(true)
+        if (psotbetsingleusevalueData?.data?.qtech === 1) {
+            navigate("/m/All-Games-page", { state: { item1: { gameCode: val }, item2: window.location.pathname, backUrl: state } })
+            setShow(false)
+
+        } else {
+
+            console.log(val, "dafusiyhbdchuwdb");
+
+            setAllDatta(val)
+            setShow(true)
+        }
     }
 
 
@@ -86,7 +103,7 @@ const SlotGamesList = () => {
             </div>
             <Modal centered show={show} onHide={handleClose}>
                 <Modal.Body className="casino_modals_body">
-                    <CasinoModals type={"qtech"}/>
+                    <CasinoModals type={"qtech"} />
                     <div className="agree_btn">
                         <button onClick={handleAgree}>Ok I Agree</button>
                         <button onClick={() => setShow(false)}>No, I Don't Agree</button>

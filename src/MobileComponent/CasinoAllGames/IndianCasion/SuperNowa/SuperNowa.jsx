@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Link, useNavigate } from "react-router-dom";
 import CasinoModals from "../../../Livecasino/CasinoModals"
+import { useDispatch, useSelector } from "react-redux";
+import { psotbetsingleusevalue } from "../../../../App/Features/auth/authActions";
 
 const SuperNowa = () => {
 
@@ -11,6 +13,14 @@ const SuperNowa = () => {
   const [casinoList, setCasinoList] = useState([]);
   // const [trueee, setTrueee] = useState(false);
   const nav = useNavigate();
+  const dispatch = useDispatch();
+
+  const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
+  console.log(psotbetsingleusevalueData?.data, "kjhgfcvbhuytfv")
+
+  useEffect(() => {
+    dispatch(psotbetsingleusevalue())
+  }, [])
 
   const [casionId, setCasionId] = useState("")
   const [Casinoshow, setCasinoShow] = useState(false);
@@ -57,8 +67,15 @@ const SuperNowa = () => {
 
 
   const handleChangeaa = (val) => {
-    setAllDatta(val)
-    setShow(true)
+    if (psotbetsingleusevalueData?.data?.supernowa === 1) {
+      nav("/m/SuperNowa-Game-page", { state: val })
+      setShow(false)
+
+    } else {
+
+      setAllDatta(val)
+      setShow(true)
+    }
   };
 
   return (

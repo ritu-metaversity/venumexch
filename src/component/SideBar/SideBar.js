@@ -6,6 +6,7 @@ import { getActiveSportList, postleftmenudataopen } from '../../App/Features/aut
 import './SideBar.css'
 import SubSideBar from './SubSideBar';
 import hours from "./sideBarHorse.6c8a9ff3.svg"
+import axios from 'axios';
 
 const SideBar = () => {
   const { pathname } = useLocation();
@@ -85,6 +86,29 @@ const SideBar = () => {
   //     navigate("/home")
   //   }
   // }
+
+
+  const [gameQtech, setGameQTech] = useState()
+  const [gameAura, setGameAura] = useState()
+  const [gameSuperNova, setGameSuperNova] = useState()
+  const token = localStorage.getItem("TokenId");
+
+  useEffect(() => {
+    axios.post(
+      "https://api.247365.exchange/admin-new-apis/user/alloted-casino-list", {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        setGameQTech(response?.data?.data.find((item) => item?.name === "QTech"))
+        setGameAura(response?.data?.data.find((item) => item?.name === "Aura"))
+        setGameSuperNova(response?.data?.data.find((item) => item?.name === "Super Nova"))
+      })
+  }, [])
   return (
     <>
       <div data-v-4732acba="" className="left-pane fdsfsdffs">
@@ -124,42 +148,58 @@ const SideBar = () => {
                             {item?.sportName}
                           </span></Link>
                       </li>))) : ""}
+                  {gameAura?.active === true ?
+                    <Link
+                      to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Indian-home"}
+                      class="favourites-link download-apk">
+                      <img data-v-91c481c8="" src="https://11bet24.com/indian-casino.png" class="game-icon" />
+                      <span data-v-91c481c8=""
+                        class="link-name">India Casino</span>
+                    </Link>
+                    :
+                    (gameSuperNova?.active === true ?
+                      <Link
+                        to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Indian-home"}
+                        class="favourites-link download-apk">
+                        <img data-v-91c481c8="" src="https://11bet24.com/indian-casino.png" class="game-icon" />
+                        <span data-v-91c481c8=""
+                          class="link-name">India Casino</span>
+                      </Link>
+                      : "")}
 
-                  <Link
-                    to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Indian-home"}
-                    class="favourites-link download-apk">
-                    <img data-v-91c481c8="" src="https://11bet24.com/indian-casino.png" class="game-icon" />
-                    <span data-v-91c481c8=""
-                      class="link-name">India Casino</span>
-                  </Link>
-                  <Link
-                    to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/International-home"}
-                    class="favourites-link download-apk">
-                    <img data-v-91c481c8="" src="https://11bet24.com/international-casinoletest.png" class="game-icon" />
-                    <span data-v-91c481c8=""
-                      class="link-name">International Casino</span>
-                  </Link>
-                  <Link
-                    to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Lottery-home"}
-                    class="favourites-link download-apk">
-                    <img data-v-91c481c8="" src="https://11bet24.com/lottery.png" class="game-icon" />
-                    <span data-v-91c481c8=""
-                      class="link-name">Lottery </span>
-                  </Link>
-                  <Link
-                    to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Slot-home"}
-                    class="favourites-link download-apk">
-                    <img data-v-91c481c8="" src="https://11bet24.com/slots.png" class="game-icon" />
-                    <span data-v-91c481c8=""
-                      class="link-name">Slots Games</span>
-                  </Link>
-                  <Link
-                    to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Fantasy-home"}
-                    class="favourites-link download-apk">
-                    <img data-v-91c481c8="" src="https://11bet24.com/fantasy-game.png" class="game-icon" />
-                    <span data-v-91c481c8=""
-                      class="link-name">Fantasy Games</span>
-                  </Link>
+                  {gameQtech?.active === true ?
+                    <>
+                      <Link
+                        to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/International-home"}
+                        class="favourites-link download-apk">
+                        <img data-v-91c481c8="" src="https://11bet24.com/international-casinoletest.png" class="game-icon" />
+                        <span data-v-91c481c8=""
+                          class="link-name">International Casino</span>
+                      </Link>
+                      <Link
+                        to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Lottery-home"}
+                        class="favourites-link download-apk">
+                        <img data-v-91c481c8="" src="https://11bet24.com/lottery.png" class="game-icon" />
+                        <span data-v-91c481c8=""
+                          class="link-name">Lottery </span>
+                      </Link>
+                      <Link
+                        to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Slot-home"}
+                        class="favourites-link download-apk">
+                        <img data-v-91c481c8="" src="https://11bet24.com/slots.png" class="game-icon" />
+                        <span data-v-91c481c8=""
+                          class="link-name">Slots Games</span>
+                      </Link>
+                      <Link
+                        to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Fantasy-home"}
+                        class="favourites-link download-apk">
+                        <img data-v-91c481c8="" src="https://11bet24.com/fantasy-game.png" class="game-icon" />
+                        <span data-v-91c481c8=""
+                          class="link-name">Fantasy Games</span>
+                      </Link>
+                    </> : ""
+                  }
+
                 </ul>
 
               </div>

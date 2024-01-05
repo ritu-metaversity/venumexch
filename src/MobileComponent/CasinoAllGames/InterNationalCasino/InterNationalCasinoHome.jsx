@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./InterNationalCasinoHome.css"
 import Qtech from "./qtechlogo.png"
 import { useNavigate } from 'react-router';
 import Modal from "react-bootstrap/Modal";
 import CasinoModals from "../../Livecasino/CasinoModals"
+import { useDispatch, useSelector } from 'react-redux';
+import { psotbetsingleusevalue } from '../../../App/Features/auth/authActions';
 
 
 export const casinoProviderList = [
@@ -83,6 +85,15 @@ export const casinoProviderList = [
 ];
 const InterNationalCasinoHome = () => {
 
+
+  const dispatch = useDispatch();
+
+  const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
+  console.log(psotbetsingleusevalueData?.data, "kjhgfcvbhuytfv")
+
+  useEffect(() => {
+    dispatch(psotbetsingleusevalue())
+  }, [])
   const navigate = useNavigate();
   // const TokenId = localStorage.getItem("token");
   const TokenGame = localStorage.getItem("GameToken");
@@ -102,8 +113,15 @@ const InterNationalCasinoHome = () => {
   }
 
   const handleChangeaa = (val) => {
-    setAllDatta(val)
-    setShow(true)
+
+    if (psotbetsingleusevalueData?.data?.qtech === 1) {
+      navigate("/m/All-Games-page", { state: { item1: val, item2: "/m/International-home" } })
+
+    } else {
+
+      setAllDatta(val)
+      setShow(true)
+    }
 
   };
 

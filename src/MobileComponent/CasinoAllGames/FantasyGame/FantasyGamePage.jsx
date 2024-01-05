@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import CasinoModals from "../../Livecasino/CasinoModals"
 import Modal from "react-bootstrap/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { psotbetsingleusevalue } from "../../../App/Features/auth/authActions";
 
 
 export const FgameData = [
@@ -192,6 +194,15 @@ const FantasyGamePage = () => {
     const [GameLists, setGameLists] = useState([]);
     const navigate = useNavigate();
 
+
+    const dispatch = useDispatch();
+    const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
+    console.log(psotbetsingleusevalueData?.data, "kjhgfcvbhuytfv")
+
+    useEffect(() => {
+        dispatch(psotbetsingleusevalue())
+    }, [])
+
     // const [Casinoshow, setCasinoShow] = useState(false);
     // const [gameFilter, setGameFilter] = useState([])
     const [show, setShow] = useState(false)
@@ -215,8 +226,14 @@ const FantasyGamePage = () => {
 
     }
     const handleChangeaa = (val) => {
-        setAllDatta(val)
-        setShow(true)
+        if (psotbetsingleusevalueData?.data?.qtech === 1) {
+            navigate("/m/All-Games-page", { state: { item1: { gameCode: val }, item2: window.location.pathname, item3: state?.item1?.gameCode, backUrl: state } })
+            setShow(false)
+        } else {
+
+            setAllDatta(val)
+            setShow(true)
+        }
     }
 
 
@@ -243,7 +260,7 @@ const FantasyGamePage = () => {
             </div>
             <Modal centered show={show} onHide={handleClose}>
                 <Modal.Body className="casino_modals_body">
-                    <CasinoModals  type={"qtech"}/>
+                    <CasinoModals type={"qtech"} />
                     <div className="agree_btn">
                         <button onClick={handleAgree}>Ok I Agree</button>
                         <button onClick={() => setShow(false)}>No, I Don't Agree</button>

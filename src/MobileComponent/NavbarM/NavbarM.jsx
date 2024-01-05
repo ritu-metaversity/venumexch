@@ -184,6 +184,28 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
     setscrollX(scrollX + scrollOffset);
   };
 
+  // const token = localStorage.getItem("token");
+  const [gameQtech, setGameQTech] = useState()
+  const [gameAura, setGameAura] = useState()
+  const [gameSuperNova, setGameSuperNova] = useState()
+
+  useEffect(() => {
+    axios.post(
+      "https://api.247365.exchange/admin-new-apis/user/alloted-casino-list", {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        setGameQTech(response?.data?.data.find((item) => item?.name === "QTech"))
+        setGameAura(response?.data?.data.find((item) => item?.name === "Aura"))
+        setGameSuperNova(response?.data?.data.find((item) => item?.name === "Super Nova"))
+      })
+  }, [])
+
   return (
     <div>
       <header className="header">
@@ -270,17 +292,36 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
             }
           </div>
         </nav>
-        <div className="headerCasionSwip_Scrolll">
+        {token ?
+          <div className="headerCasionSwip_Scrolll">
+            {gameQtech?.active === true ?
+              <li className="inner_game_name_caison_header" onClick={() => navigate("/m/International-home")}>International Casino</li>
+              : ""}
+            {gameAura?.active === true ?
+              <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Indian-home")}>Indian Casino</li>
+              :
+              (gameSuperNova?.active === true ?
+                <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Indian-home")}>Indian Casino</li>
+                : "")}
+            {gameQtech?.active === true ?
+              <>  <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Lottery-home")}>Lottery</li>
+                <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Slot-home")}>Slot Games</li>
+                <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Fantasy-home")}>Fantasy Games</li></>
+              : ""
+            }
+          </div>
+          :
+          <div className="headerCasionSwip_Scrolll">
 
-          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/International-home")}>International Casino</li>
-          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Indian-home")}>Indian Casino</li>
-          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Lottery-home")}>Lottery</li>
-          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Slot-home")}>Slot Games</li>
-          <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Fantasy-home")}>Fantasy Games</li>
+            <li className="inner_game_name_caison_header" >International Casino</li>
+            <li className="inner_game_name_caison_header" >Indian Casino</li>
+            <li className="inner_game_name_caison_header">Lottery</li>
+            <li className="inner_game_name_caison_header" >Slot Games</li>
+            <li className="inner_game_name_caison_header" >Fantasy Games</li>
 
 
-
-        </div>
+          </div>
+        }
       </header>
     </div>
   );

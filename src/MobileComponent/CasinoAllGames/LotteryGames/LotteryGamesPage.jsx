@@ -4,10 +4,21 @@ import { useLocation, useNavigate } from "react-router-dom"
 import "./LotteryGamesPage.css"
 import Modal from "react-bootstrap/Modal";
 import CasinoModals from "../../Livecasino/CasinoModals"
+import { psotbetsingleusevalue } from "../../../App/Features/auth/authActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const LotteryGamesPage = () => {
     let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
     const TokenId = localStorage.getItem("TokenId");
+
+    const dispatch = useDispatch();
+    const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
+
+    console.log(psotbetsingleusevalueData?.data, "kjhgfcvbhuytfv")
+    useEffect(() => {
+
+        dispatch(psotbetsingleusevalue())
+    }, [])
 
     const { state } = useLocation()
     const navigate = useNavigate();
@@ -52,8 +63,15 @@ const LotteryGamesPage = () => {
 
     }
     const handleChangeaa = (val) => {
-        setAllDatta(val)
-        setShow(true)
+
+        if (psotbetsingleusevalueData?.data?.qtech === 1) {
+            navigate("/m/All-Games-page", { state: { item1: { gameCode: val }, item2: window.location.pathname, backUrl: state }, })
+            setShow(false)
+        } else {
+            setAllDatta(val)
+            setShow(true)
+        }
+
     }
 
     return (
@@ -72,7 +90,7 @@ const LotteryGamesPage = () => {
             </div>
             <Modal centered show={show} onHide={handleClose}>
                 <Modal.Body className="casino_modals_body">
-                    <CasinoModals type={"qtech"}/>
+                    <CasinoModals type={"qtech"} />
                     <div className="agree_btn">
                         <button onClick={handleAgree}>Ok I Agree</button>
                         <button onClick={() => setShow(false)}>No, I Don't Agree</button>
