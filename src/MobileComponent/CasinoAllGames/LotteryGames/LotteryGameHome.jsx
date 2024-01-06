@@ -1,7 +1,9 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
 import "./LotteryGameHome.css"
 import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { postFindProviderList } from '../../../App/Features/auth/authActions';
+import axios from 'axios';
 
 
 export const lotteryprovidersList = [
@@ -70,13 +72,34 @@ export const lotteryprovidersList = [
 const LotteryGameHome = () => {
 
 
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
+  const [casionProviderData, setCasinoProviderData] = useState()
+  const token = localStorage.getItem("TokenId");
+
+  useEffect(() => {
+    axios
+      .post(
+        "https://api.247idhub.com/api/qtech/provider", { gameType: "LOTTERY" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        setCasinoProviderData(response?.data)
+      })
+
+  }, [])
   const handleChangeaa = (val) => {
     console.log(val, "iu87ytfgvbjiuy7t6f");
     if (localStorage.getItem("TokenId")) {
 
-      navigate("/m/Lottery-Game-List", { state: { item1: { gameCode: val?.gameCode } } })
+      navigate("/m/Lottery-Game-List", { state: { item1: { gameCode: val?.providerId } } })
     } else {
       navigate("/m/login")
     }
@@ -87,14 +110,14 @@ const LotteryGameHome = () => {
     <div>
 
       <div className='lottery_Casino_main_wrapper'>
-        {lotteryprovidersList.map((item) => (
+        {casionProviderData?.data.map((item) => (
 
           <div className="MainBtn_warp_lottery_casinos" style={{ border: "0.5px solid" }} onClick={() => handleChangeaa(item)}>
             <img
               className="complany-logo-warp"
-              src={item?.logo}
+              src={item?.image}
               alt="" />
-            <span className="complany-name-wrap">{item?.name}</span>
+            <span className="complany-name-wrap">{item?.providerName}</span>
           </div>
         ))
         }

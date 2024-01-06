@@ -801,3 +801,16 @@ export const psotbetsingleusevalue = createAsyncThunk('auth/psotbetsingleusevalu
         return rejectWithValue(err.response.data)
     }
 })
+export const postFindProviderList = createAsyncThunk('auth/postFindProviderList', async (data, { rejectWithValue }) => {
+    try {
+        // https://api.247idhub.com/api/qtech/provider
+        const postPorviderListData = await axios.post("https://api.247idhub.com/api/qtech/provider", data
+        )
+        return postPorviderListData
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./FantasyGameHome.css"
 import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { postFindProviderList } from '../../../App/Features/auth/authActions';
 
 
 export const FantasyGamedata = [
@@ -29,8 +31,22 @@ const FantasyGameHome = () => {
 
     let ViewForLoginRoute = window.innerWidth > 1024 ? "/login" : "/m/login"
 
+
+    const dispatch = useDispatch()
+
+    const { postFindProviderListData } = useSelector((state) => state.auth);
+
+
+
+    useEffect(() => {
+        dispatch(postFindProviderList({ gameType: "ALL" }
+        ))
+    }, [])
+
+    console.log(postFindProviderListData?.data, "mklkonjihbugvyfctdxrs")
+
     const navigate = useNavigate();
-    console.log(ViewForLoginRoute, "ViewForLoginRoute");
+
     const handleChangeaa = (val) => {
         if (localStorage.getItem("TokenId")) {
             navigate("/m/Fantasy-List", { state: { item1: { gameCode: val?.gameCode } } })
@@ -39,6 +55,24 @@ const FantasyGameHome = () => {
 
         }
     }
+
+
+    // {FantasyGamedata && FantasyGamedata?.map((ele) =>
+    //     Object?.values(newProviderList)
+    //         ?.reduce((a, c) => [...a, ...c], [])
+    //         .find((item1) => ele.gameCode === item1?.providerId)
+    // )?.map((item, id) => {
+    //     return (
+    //         <div className="MainBtn_warp_Fantasy_casinos" style={{ border: "0.5px solid" }} onClick={() => handleChangeaa(item)}>
+    //             <img
+    //                 className="complany-logo-warp"
+    //                 src={item?.image}
+    //                 alt="" />
+    //             <span className="complany-name-wrap">{item?.providerName}</span>
+    //         </div>
+
+    //     );
+    // })}
 
     return (
         <div className='w-100'>
@@ -53,6 +87,7 @@ const FantasyGameHome = () => {
                         <span className="complany-name-wrap">{item?.name}</span>
                     </div>
                 ))}
+
             </div>
         </div>
     )

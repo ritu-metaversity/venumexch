@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./SlotGamesHome.css"
 import { useNavigate } from 'react-router';
+import { postFindProviderList } from '../../../App/Features/auth/authActions';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 export const slotProviderList = [
   {
@@ -167,13 +170,38 @@ export const slotProviderList = [
 
 const SlotGamesHome = () => {
 
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
+  // const { postFindProviderListData } = useSelector((state) => state.auth);
+
+  const [casionProviderData, setCasinoProviderData] = useState()
+  const token = localStorage.getItem("TokenId");
+
+  useEffect(() => {
+    axios
+      .post(
+        "https://api.247idhub.com/api/qtech/provider", { gameType: "SLOT" },
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        setCasinoProviderData(response?.data)
+      })
+
+  }, [])
+
+  console.log(casionProviderData, "iuhytresdfxcgvhbj")
   const handleChangeaa = (val) => {
     if (localStorage.getItem("TokenId")) {
 
-      navigate("/m/Slot-List", { state: { item1: { gameCode: val?.gameCode } } })
+      navigate("/m/Slot-List", { state: { item1: { gameCode: val?.providerId } } })
     } else {
       navigate("/m/login")
 
@@ -184,16 +212,16 @@ const SlotGamesHome = () => {
 
     <div>
       <div className='slot_Casino_main_wrapper'>
-        {slotProviderList.map((item) => (
+        {casionProviderData?.data.map((item) => (
 
           <div className="MainBtn_warp_slot_casinos" style={{ border: "0.5px solid" }}
             onClick={() => handleChangeaa(item)}
           >
             <img
               className="complany-logo-warp"
-              src={item?.logo}
+              src={item?.image}
               alt="" />
-            <span className="complany-name-wrap">{item?.name}</span>
+            <span className="complany-name-wrap">{item?.providerName}</span>
           </div>
         ))
         }

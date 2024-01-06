@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import CasinoModals from '../../Livecasino/CasinoModals';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { psotbetsingleusevalue } from '../../../App/Features/auth/authActions';
+import { postFindProviderList, psotbetsingleusevalue } from '../../../App/Features/auth/authActions';
 
 let AllCasinoProviderName =
 {
@@ -423,13 +423,56 @@ let AllCasinoProviderName =
             gameCode: "TRB",
             PageUrl: "/m/Lottery-Game-List"
         },
-        // {
-        //   logo: "https://wazdan.com/wp-content/themes/wazdan/assets/images/logo.svg",
-        //   name: "WAZDAN",
-        //   gameCode: "WAZ",
-        // },
     ]
 }
+let IndianCasinoLive =
+{
+    "Indian Casino": [
+        {
+            name: "Super Nova",
+            logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
+            gameCode: "SP-NOWA",
+            PageUrl: "/m/SuperNowa_casion"
+        },
+        {
+            name: "Aura",
+            logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+            gameCode: "AURA",
+            PageUrl: "/m/casino-list"
+
+        }
+    ],
+}
+let FantasyGamesLibe =
+{
+    "Fantasy Games": [
+        {
+            name: "Aviator",
+            logo: "https://sitethemedata.com/casino_icons/fantasy/aviator.png",
+            gameCode: "SPB",
+            PageUrl: "/m/Fantasy-List"
+        },
+        {
+            name: "Relex",
+            logo: "https://cf-cdn.relax-gaming.com/static/img/logo.svg",
+            gameCode: "RLX",
+            PageUrl: "/m/Fantasy-List"
+        },
+        {
+            name: "Thunder Kick",
+            logo: "https://www.thunderkick.com/wp-content/uploads/2021/04/thunderkick-logo-horizontal-white.svg",
+            gameCode: "TK",
+            PageUrl: "/m/Fantasy-List"
+        },
+        {
+            name: "Nolimit City",
+            logo: "https://www.nolimitcity.com/img/site-img/nolimit-city.png",
+            gameCode: "NLC",
+            PageUrl: "/m/Fantasy-List"
+        },
+    ],
+}
+
 
 const AllProviderName = () => {
     let navigate = useNavigate();
@@ -449,28 +492,49 @@ const AllProviderName = () => {
 
     console.log(psotbetsingleusevalueData, "csdcsdcsdcsd");
     const handleGamePageroute = (vl, val, key) => {
-        if (key === "Internation Casino") {
 
-            if (psotbetsingleusevalueData?.data?.qtech === 1) {
-                navigate(val?.PageUrl, { state: { item1: { gameCode: val?.gameCode }, item2: window.location.pathname, } })
-                setShow(false)
-            } else {
-                setAllDatta(val)
-                setShow(true)
-            }
-
+        if (localStorage.getItem("TokenId")) {
+            navigate(vl?.PageUrl, { state: { item1: { gameCode: vl?.gameCode }, item2: window.location.pathname, } })
         } else {
-            if (localStorage.getItem("TokenId")) {
-                navigate(vl, { state: { item1: { gameCode: val?.gameCode }, item2: window.location.pathname, } })
-            } else {
-                navigate(ViewForLoginRoute)
-            }
+            navigate(ViewForLoginRoute)
+        }
+        // }
+    }
+    const handleGamePageInternatinola = (item) => {
+        if (psotbetsingleusevalueData?.data?.qtech === 1) {
+            navigate("/m/All-Games-page", { state: { item1: { gameCode: item?.providerId }, item2: window.location.pathname, } })
+            setShow(false)
+        } else {
+            setAllDatta(item)
+            setShow(true)
         }
     }
+    const handleGamePageLottery = (item) => {
+
+        // if (psotbetsingleusevalueData?.data?.qtech === 1) {
+        navigate("/m/Lottery-Game-List", { state: { item1: { gameCode: item?.providerId }, item2: window.location.pathname, } })
+        setShow(false)
+        // } else {
+        //     setAllDatta(item)
+        //     setShow(true)
+        // }
+    }
+    const handleGamePageSlot = (item) => {
+
+        // if (psotbetsingleusevalueData?.data?.qtech === 1) {
+        navigate("/m/Slot-List", { state: { item1: { gameCode: item?.providerId }, item2: window.location.pathname, } })
+        //     setShow(false)
+        // } else {
+        //     setAllDatta(item)
+        //     setShow(true)
+        // }
+
+    }
+
 
     const handleAgree = () => {
         if (localStorage.getItem("TokenId")) {
-            navigate(allDatta?.PageUrl, { state: { item1: { gameCode: allDatta?.gameCode }, item2: window.location.pathname, } })
+            navigate("/m/All-Games-page", { state: { item1: { gameCode: allDatta?.gameCode }, item2: window.location.pathname, } })
             setShow(false)
         } else {
             navigate("/m/login")
@@ -504,113 +568,195 @@ const AllProviderName = () => {
     // === ["Slot Games", "Lottery", "Fantasy Games", "Internation Casino"].includes(key)
 
 
+    const [casionProviderData, setCasinoProviderData] = useState({})
+
+    useEffect(() => {
+        axios
+            .post(
+                "https://api.247idhub.com/api/qtech/provider", { gameType: "ALL" },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
+            .then((response) => {
+                setCasinoProviderData(response?.data)
+            })
+
+    }, [])
+
+
+    console.log(casionProviderData, "casionProviderData");
     return (
         <div className='Main_header_for_game_provide_Incasino'>
+            {token ?
 
-            {Object.keys(AllCasinoProviderName).map(
-                (key, item) => (
-                    <div className='Inner_header_for_game_provide_Incasin'>
-                        {console.log(key, gameQtech, "gamenamedetaios")}
+                <>
 
+                    {gameAura?.active === true ?
 
-
-
-                        {gameAura?.active === true && "Indian Casino" === key
-                            ?
-                            <h3 className='provider_name_details'>
-
-                                {key}
-                            </h3>
-                            :
-                            (gameSuperNova?.active === true) && ("Indian Casino" === key) ?
-
-                                <h3 className='provider_name_details'>
-
-                                    {key}
-
-                                </h3> : ""
-                        }
-                        <h3 className='provider_name_details'>
-                            {gameQtech?.active === true && ["Slot Games", "Lottery", "Fantasy Games", "Internation Casino"].includes(key)
-                                ? key : ""
-
-                            }
-                        </h3>
+                        Object.keys(IndianCasinoLive).map(
+                            (key, item) => (
+                                <div className='Inner_header_for_game_provide_Incasin'>
 
 
-                        {token ? "" :
-                            <h3 className='provider_name_details'>
-                                {key}
-                            </h3>
-                        }
+                                    <h3 className='provider_name_details'>
+                                        {key}
+                                    </h3>
 
-                        <div className="main_wrap_live-casion">
-                            {gameAura?.active === true && "Indian Casino" === key
-                                ?
+                                    <div className="main_wrap_live-casion">
+                                        {IndianCasinoLive &&
+                                            IndianCasinoLive[key].map(
+                                                (item, index) => (
+                                                    <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(item)}>
 
-
-                                < div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(AllCasinoProviderName[key][1]?.PageUrl, AllCasinoProviderName[key][1], key)}>
-
-                                    <img
-                                        className="complany-logo-warp"
-                                        src={AllCasinoProviderName &&
-                                            AllCasinoProviderName[key][1]?.logo}
-                                        alt="" />
-                                    <span className="complany-name-wrap">{AllCasinoProviderName &&
-                                        AllCasinoProviderName[key][1]?.name}</span>
-                                </div>
-                                : ""}
-                            {
-                                (gameSuperNova?.active === true) && ("Indian Casino" === key) ?
-
-
-
-
-
-                                    <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(AllCasinoProviderName[key][0]?.PageUrl, AllCasinoProviderName[key][0], key)}>
-
-                                        <img
-                                            className="complany-logo-warp"
-                                            src={AllCasinoProviderName &&
-                                                AllCasinoProviderName[key][0]?.logo}
-                                            alt="" />
-                                        <span className="complany-name-wrap">{AllCasinoProviderName &&
-                                            AllCasinoProviderName[key][0]?.name}</span>
+                                                        <img
+                                                            className="complany-logo-warp"
+                                                            src={item?.logo}
+                                                            alt="" />
+                                                        <span className="complany-name-wrap">{item?.name}</span>
+                                                    </div>
+                                                ))}
                                     </div>
 
-                                    : ""
-                            }
-                        </div>
+                                </div>
+
+                            )) :
+                        gameSuperNova?.active === true ?
+                            Object.keys(IndianCasinoLive).map(
+                                (key, item) => (
+                                    <div className='Inner_header_for_game_provide_Incasin'>
 
 
+                                        <h3 className='provider_name_details'>
+                                            {key}
+                                        </h3>
 
-                        {gameQtech?.active === true && ["Slot Games", "Lottery", "Fantasy Games", "Internation Casino"].includes(key)
-                            ? <div className="main_wrap_live-casion">
+                                        <div className="main_wrap_live-casion">
+                                            {IndianCasinoLive &&
+                                                IndianCasinoLive[key].map(
+                                                    (item, index) => (
+                                                        <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(item)}>
+
+                                                            <img
+                                                                className="complany-logo-warp"
+                                                                src={item?.logo}
+                                                                alt="" />
+                                                            <span className="complany-name-wrap">{item?.name}</span>
+                                                        </div>
+                                                    ))}
+                                        </div>
+
+                                    </div>
+
+                                )) : ""}
+
+                    {gameQtech?.active === true ?
+                        <>
+
+                            <div className='Inner_header_for_game_provide_Incasin'>
+                                <h3 className='provider_name_details'>
+                                    International Casino
+                                </h3>
+                                <div className="main_wrap_live-casion">
+                                    {casionProviderData && casionProviderData?.data &&
+                                        casionProviderData?.data.liveCasino.map(
+                                            (item, index) => (
+                                                <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageInternatinola(item)}>
+
+                                                    <img
+                                                        className="complany-logo-warp"
+                                                        src={item?.image}
+                                                        alt="" />
+                                                    <span className="complany-name-wrap">{item?.providerName}</span>
+                                                </div>
+                                            ))}
+                                </div>
+                            </div>
+                            <div className='Inner_header_for_game_provide_Incasin'>
+                                <h3 className='provider_name_details'>
+                                    Lottery
+                                </h3>
+                                <div className="main_wrap_live-casion">
+                                    {casionProviderData && casionProviderData?.data &&
+                                        casionProviderData?.data.lottery.map(
+                                            (item, index) => (
+                                                <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageLottery(item)}>
+
+                                                    <img
+                                                        className="complany-logo-warp"
+                                                        src={item?.image}
+                                                        alt="" />
+                                                    <span className="complany-name-wrap">{item?.providerName}</span>
+                                                </div>
+                                            ))}
+                                </div>
+                            </div>
+                            <div className='Inner_header_for_game_provide_Incasin'>
+                                <h3 className='provider_name_details'>
+                                    Slot
+                                </h3>
+                                <div className="main_wrap_live-casion">
+                                    {casionProviderData && casionProviderData?.data &&
+                                        casionProviderData?.data.slot.map(
+                                            (item, index) => (
+                                                <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageSlot(item)}>
+
+                                                    <img
+                                                        className="complany-logo-warp"
+                                                        src={item?.image}
+                                                        alt="" />
+                                                    <span className="complany-name-wrap">{item?.providerName}</span>
+                                                </div>
+                                            ))}
+                                </div>
+                            </div>
+                            {Object.keys(FantasyGamesLibe).map(
+                                (key, item) => (
+                                    <div className='Inner_header_for_game_provide_Incasin'>
 
 
-                                {AllCasinoProviderName &&
-                                    AllCasinoProviderName[key].map(
-                                        (item, index) => (
-                                            <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(item?.PageUrl, item, key)}>
+                                        <h3 className='provider_name_details'>
+                                            {key}
+                                        </h3>
 
-                                                <img
-                                                    className="complany-logo-warp"
-                                                    src={item?.logo}
-                                                    alt="" />
-                                                <span className="complany-name-wrap">{item?.name}</span>
-                                            </div>
+                                        <div className="main_wrap_live-casion">
+                                            {FantasyGamesLibe &&
+                                                FantasyGamesLibe[key].map(
+                                                    (item, index) => (
+                                                        <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleGamePageroute(item)}>
 
-                                        ))}
+                                                            <img
+                                                                className="complany-logo-warp"
+                                                                src={item?.logo}
+                                                                alt="" />
+                                                            <span className="complany-name-wrap">{item?.name}</span>
+                                                        </div>
+                                                    ))}
+                                        </div>
 
-                            </div> : ""
+                                    </div>
 
-                        }
+                                ))}
+                        </> : ""}
 
-                        {token ? "" :
+                </>
+
+
+                :
+
+                Object.keys(AllCasinoProviderName).map(
+                    (key, item) => (
+                        <div className='Inner_header_for_game_provide_Incasin'>
+
+
+                            <h3 className='provider_name_details'>
+                                {key}
+                            </h3>
 
                             <div className="main_wrap_live-casion">
-
-
                                 {AllCasinoProviderName &&
                                     AllCasinoProviderName[key].map(
                                         (item, index) => (
@@ -622,14 +768,15 @@ const AllProviderName = () => {
                                                     alt="" />
                                                 <span className="complany-name-wrap">{item?.name}</span>
                                             </div>
-
                                         ))}
-
                             </div>
-                        }
 
-                    </div>))
+                        </div>
+
+                    ))
+
             }
+
 
             <Modal centered show={show} onHide={handleClose}>
                 <Modal.Body className="casino_modals_body">

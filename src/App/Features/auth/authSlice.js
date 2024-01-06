@@ -5,7 +5,7 @@ import {
     Postunsettleddddd, Postcasino, Postprofitlossmatchwise, postBetMarketAndUser, Postisselfbyappurl, Postdepsositrequestclient, Postpaymnetdetailapp,
     Postselfdepositapp, Postselfwithdrawapp, Postwithdrawrequestclient, Postvalidatejwttoken, Postuserselfregister, PostMinMaxGameDetails, PostUserOddPnl, PostUserfancypnl,
     Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition, getResponsibleGaming, postLoginDemoUser, postBetHistory, postleftmenudataopen
-    , postpendingapppii, psotbetsingleusevalue
+    , postpendingapppii, psotbetsingleusevalue, postFindProviderList
 } from './authActions'
 
 const INITAL_STATE = {
@@ -177,6 +177,10 @@ const INITAL_STATE = {
     psotbetsingleusevalueData: null,
     psotbetsingleusevalueDataLoading: false,
     psotbetsingleusevalueDataError: null,
+
+    postFindProviderListData: null,
+    postFindProviderListDataLoading: false,
+    postFindProviderListDataError: null,
 
 
 
@@ -718,6 +722,20 @@ const authSlice = createSlice({
                 state.psotbetsingleusevalueData = action.payload.data;
                 state.psotbetsingleusevalueDataLoading = false;
                 state.psotbetsingleusevalueDataError = null;
+            })
+
+            .addCase(postFindProviderList.pending, (state) => {
+                state.postFindProviderListData = null;
+                state.postFindProviderListDataLoading = true;
+                state.postFindProviderListDataError = null;
+            }).addCase(postFindProviderList.rejected, (state, action) => {
+                state.postFindProviderListData = null;
+                state.postFindProviderListDataLoading = false;
+                state.postFindProviderListDataError = action.error.message;
+            }).addCase(postFindProviderList.fulfilled, (state, action) => {
+                state.postFindProviderListData = action.payload.data;
+                state.postFindProviderListDataLoading = false;
+                state.postFindProviderListDataError = null;
             })
 
     }
