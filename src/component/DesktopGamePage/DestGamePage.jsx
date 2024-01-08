@@ -2,7 +2,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useOutletContext, useParams } from 'react-router';
-import { PostBetListByMatchId, Postuserfancybook, PostUserfancypnl, PostUserOddPnl } from '../../App/Features/auth/authActions';
+import { PostBetListByMatchId, Postuserfancybook, PostUserfancypnl, PostUserOddPnl, postUserWinnerPnl } from '../../App/Features/auth/authActions';
 import Betslip from '../Right/Betslip'
 import "./DestGamePage.css"
 import { createProfits } from './eventUtils';
@@ -17,7 +17,7 @@ const DestGamePage = ({ datatataProps, gamenameOpenbet }) => {
 
     let { id } = useParams();
     // console.log(datatataProps, "valuevaluevalue")
-    const {state} = useLocation()
+    const { state } = useLocation()
 
 
     console.log(state, "sdjfsuhidb")
@@ -75,8 +75,40 @@ const DestGamePage = ({ datatataProps, gamenameOpenbet }) => {
         PostBetingOnGameDetailError,
 
         PostBetingOnGameDetailErrorrr,
+        postUserWinnerPnlData
+
     } = useSelector((state) => state.auth);
     const iddd = localStorage.getItem("SportId");
+
+    useEffect(() => {
+        // if (token) {
+
+        // let timer = setInterval(
+        // () => {
+        if (gameDetailsData?.data?.Odds[0]?.Name.toLowerCase().includes("winner")) {
+            dispatch(postUserWinnerPnl({ marketId: gameDetailsData?.data?.Odds[0]?.marketId }))
+        }
+        //     },
+        //     5000
+        // );
+        // return () => {
+        //     clearInterval(timer);
+        // };
+        // }
+    }, [gameDetailsData?.data?.Odds]);
+
+    // useEffect(() => {
+
+
+    //     if (gameDetailsData?.data?.Odds[0]?.Name.toLowerCase().includes("winner")) {
+    //         dispatch(postUserWinnerPnl({ marketId: gameDetailsData?.data?.Odds[0]?.marketId }))
+    //     }
+
+
+
+    // }, [gameDetailsData?.data?.Odds])
+
+
 
     useEffect(() => {
         setGameIframeId(iddd);
@@ -678,32 +710,53 @@ const DestGamePage = ({ datatataProps, gamenameOpenbet }) => {
                                                                     >
                                                                         {item1?.name}
                                                                     </div>
-                                                                    <p data-v-22b1a176="" className="m-b-0 dest_para">
-                                                                        <span
-                                                                            className="float-left ubook"
-                                                                            style={{
-                                                                                color:
+                                                                    <p data-v-22b1a176="" className="m-b-0 dest_para" 
+                                                                    >
+
+                                                                        {gameDetailsData?.data?.Odds[0]?.Name.toLowerCase().includes("winner") ?
+                                                                            <span
+                                                                                className=" ubook"
+                                                                                style={{
+                                                                                    color:
+                                                                                        postUserWinnerPnlData?.data?.find((itemPnl) => itemPnl.selctionId == item1.selectionId)?.liability
+                                                                                            < 0
+                                                                                            ? "red"
+                                                                                            : "green",
+                                                                                }}
+                                                                            >
+                                                                                {
+                                                                                    postUserWinnerPnlData?.data?.find((itemPnl) => itemPnl.selctionId == item1.selectionId)?.liability
+
+                                                                                }
+                                                                            </span> :
+                                                                            <span
+                                                                                className="float-left ubook"
+                                                                                style={{
+                                                                                    color:
+                                                                                        profits.Odds[
+                                                                                            item11?.marketId
+                                                                                        ]?.find(
+                                                                                            (itemPnl) =>
+                                                                                                itemPnl.sid ==
+                                                                                                item1.selectionId
+                                                                                        )?.value < 0
+                                                                                            ? "red"
+                                                                                            : "green",
+                                                                                }}
+                                                                            >
+                                                                                {
                                                                                     profits.Odds[
                                                                                         item11?.marketId
                                                                                     ]?.find(
                                                                                         (itemPnl) =>
                                                                                             itemPnl.sid ==
                                                                                             item1.selectionId
-                                                                                    )?.value < 0
-                                                                                        ? "red"
-                                                                                        : "green",
-                                                                            }}
-                                                                        >
-                                                                            {
-                                                                                profits.Odds[
-                                                                                    item11?.marketId
-                                                                                ]?.find(
-                                                                                    (itemPnl) =>
-                                                                                        itemPnl.sid ==
-                                                                                        item1.selectionId
-                                                                                )?.value
-                                                                            }
-                                                                        </span>
+                                                                                    )?.value
+                                                                                }
+                                                                            </span>}
+
+
+
                                                                         <span
                                                                             data-v-22b1a176=""
                                                                             style={{ display: "none", color: "black" }}

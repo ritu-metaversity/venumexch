@@ -5,7 +5,7 @@ import {
     Postunsettleddddd, Postcasino, Postprofitlossmatchwise, postBetMarketAndUser, Postisselfbyappurl, Postdepsositrequestclient, Postpaymnetdetailapp,
     Postselfdepositapp, Postselfwithdrawapp, Postwithdrawrequestclient, Postvalidatejwttoken, Postuserselfregister, PostMinMaxGameDetails, PostUserOddPnl, PostUserfancypnl,
     Postuserfancybook, Postloginlogout, postUserBannerList, getAboutUs, getTermAndCondition, getResponsibleGaming, postLoginDemoUser, postBetHistory, postleftmenudataopen
-    , postpendingapppii, psotbetsingleusevalue, postFindProviderList
+    , postpendingapppii, psotbetsingleusevalue, postFindProviderList, postUserWinnerPnl
 } from './authActions'
 
 const INITAL_STATE = {
@@ -182,6 +182,9 @@ const INITAL_STATE = {
     postFindProviderListDataLoading: false,
     postFindProviderListDataError: null,
 
+    postUserWinnerPnlData: null,
+    postUserWinnerPnlDataLoading: false,
+    postUserWinnerPnlDataError: null,
 
 
 }
@@ -736,6 +739,21 @@ const authSlice = createSlice({
                 state.postFindProviderListData = action.payload.data;
                 state.postFindProviderListDataLoading = false;
                 state.postFindProviderListDataError = null;
+            })
+
+
+            .addCase(postUserWinnerPnl.pending, (state) => {
+                state.postUserWinnerPnlData = null;
+                state.postUserWinnerPnlDataLoading = true;
+                state.postUserWinnerPnlDataError = null;
+            }).addCase(postUserWinnerPnl.rejected, (state, action) => {
+                state.postUserWinnerPnlData = null;
+                state.postUserWinnerPnlDataLoading = false;
+                state.postUserWinnerPnlDataError = action.error.message;
+            }).addCase(postUserWinnerPnl.fulfilled, (state, action) => {
+                state.postUserWinnerPnlData = action.payload.data;
+                state.postUserWinnerPnlDataLoading = false;
+                state.postUserWinnerPnlDataError = null;
             })
 
     }

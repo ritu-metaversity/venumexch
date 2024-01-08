@@ -814,3 +814,16 @@ export const postFindProviderList = createAsyncThunk('auth/postFindProviderList'
         return rejectWithValue(err.response.data)
     }
 })
+export const postUserWinnerPnl = createAsyncThunk('auth/postUserWinnerPnl', async (data, { rejectWithValue }) => {
+    try {
+        // https://api.247idhub.com/api/qtech/provider
+        const postUserWinnerPnlData = await axios.post(`${REACT_APP_API_URL}/enduser/user-winner-pnl`, data
+        )
+        return postUserWinnerPnlData
+    } catch (err) {
+        if (err) {
+            throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
+})

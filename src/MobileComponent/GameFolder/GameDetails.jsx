@@ -9,6 +9,7 @@ import {
   PostMinMaxGameDetails,
   PostUserfancypnl,
   PostUserOddPnl,
+  postUserWinnerPnl,
 } from "../../App/Features/auth/authActions";
 import "./GameDetails.css";
 import moment from "moment";
@@ -74,6 +75,7 @@ const GameDetails = () => {
     PostBetingOnGameDetailError,
 
     PostBetingOnGameDetailErrorrr,
+    postUserWinnerPnlData
   } = useSelector((state) => state.auth);
   const iddd = localStorage.getItem("SportId");
 
@@ -87,6 +89,14 @@ const GameDetails = () => {
     Fancy: [],
   });
 
+  useEffect(() => {
+
+    if (gameDetailsData?.data?.Odds[0]?.Name.toLowerCase().includes("winner")) {
+      dispatch(postUserWinnerPnl({ marketId: gameDetailsData?.data?.Odds[0]?.marketId }))
+    }
+  }, [gameDetailsData?.data?.Odds])
+
+  console.log(postUserWinnerPnlData?.data, "mkjhguytfrdes")
 
   const handleUnmatched = () => {
     if (unmatchedBets === true) {
@@ -870,34 +880,51 @@ const GameDetails = () => {
                                                   >
                                                     <b>{item1?.name}</b>
                                                   </span>
+                                                  {gameDetailsData?.data?.Odds[0]?.Name.toLowerCase().includes("winner") ?
 
-                                                  <p className="box-w4">
-                                                    <span
-                                                      className="float-left ubook"
-                                                      style={{
-                                                        color:
+
+                                                    <p className="box-w4">
+                                                      <span className="float-left ubook"
+                                                        style={{
+                                                          color:
+                                                            postUserWinnerPnlData?.data?.find((itemPnl) => itemPnl.selctionId == item1.selectionId)?.liability < 0 ? "red" : "green",
+                                                        }}>
+                                                        {
+                                                          postUserWinnerPnlData?.data?.find((itemPnl) => itemPnl.selctionId == item1.selectionId)?.liability
+
+                                                        }
+                                                      </span>
+                                                    </p>
+                                                    :
+                                                    <p className="box-w4">
+                                                      <span className="float-left ubook"
+                                                        style={{
+                                                          color:
+                                                            profits.Odds[
+                                                              item11?.marketId
+                                                            ]?.find(
+                                                              (itemPnl) =>
+                                                                itemPnl.sid ==
+                                                                item1.selectionId
+                                                            )?.value < 0
+                                                              ? "red"
+                                                              : "green",
+                                                        }}>
+                                                        {
                                                           profits.Odds[
                                                             item11?.marketId
                                                           ]?.find(
                                                             (itemPnl) =>
                                                               itemPnl.sid ==
                                                               item1.selectionId
-                                                          )?.value < 0
-                                                            ? "red"
-                                                            : "green",
-                                                      }}
-                                                    >
-                                                      {
-                                                        profits.Odds[
-                                                          item11?.marketId
-                                                        ]?.find(
-                                                          (itemPnl) =>
-                                                            itemPnl.sid ==
-                                                            item1.selectionId
-                                                        )?.value
-                                                      }
-                                                    </span>
-                                                  </p>
+                                                          )?.value
+                                                        }
+                                                      </span>
+                                                    </p>
+
+                                                  }
+
+
                                                 </div>
 
                                                 {item1?.ex?.availableToBack
@@ -1008,7 +1035,7 @@ const GameDetails = () => {
                                                     );
                                                   }
                                                 )}
-                                              </div>
+                                              </div >
                                             </>
                                           );
                                         })}

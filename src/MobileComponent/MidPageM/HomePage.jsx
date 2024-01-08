@@ -9,6 +9,7 @@ import {
   Postunsettleddddd,
   postUserBannerList,
   PostUserOddPnl,
+  postUserWinnerPnl,
 } from "../../App/Features/auth/authActions";
 import "./HomePage.css";
 import moment from "moment"
@@ -35,6 +36,7 @@ const HomePage = () => {
   // let GameName = state?.id2;
   const dispatch = useDispatch();
   const [gamesData, setGamesData] = useState("");
+  const [gamesUserWinnerPnl, setGamesUserWinnerPnl] = useState("");
   const token = localStorage.getItem("TokenId");
   console.log(gamesData, "sdfiwgyuvjhbnwi");
   useEffect(() => {
@@ -59,7 +61,17 @@ const HomePage = () => {
     Bookmaker: [],
     Fancy: [],
   });
+
+
+  // useEffect(() => {
+  //   if (gameDetailsData?.data?.Odds[0]?.Name.toLowerCase().includes("winner")) {
+  //     dispatch(postUserWinnerPnl({ marketId: gameDetailsData?.data?.Odds[0]?.marketId }))
+  //   }
+  // }, [gameDetailsData?.data?.Odds])
+  console.log(gamesData && gamesData.find((item) => (item?.name == "Cricket")), "dsfsdfdsjhghfgh")
+  // console.log(gamesData, "jhuygtrdefgc")
   // const token = localStorage.getItem("TokenId");
+
   const handleHomeBet = (vl1, vl2, matchName, matchid, oddss, selectionId, marketId) => {
     // console.log(vl1, vl2, matchName, matchid, marketId, oddss, "dfsfsdfsd")
     if (localStorage.getItem("TokenId")) {
@@ -175,6 +187,8 @@ const HomePage = () => {
             // setAllMatchId(allMatddchiddddd)
             console.log(allMatddchiddddd, "sdfsdfsdf")
             setGamesData(res?.data?.data);
+            setGamesUserWinnerPnl(res?.data?.data.find((item) => (item?.name == "Cricket")));
+
             setIsloading(false)
             if (res?.data) {
               axios
@@ -221,7 +235,7 @@ const HomePage = () => {
 
 
   // let data = [2384234, 234234234]
-  // console.log(allMatchId, data, "sdfsdffdsd");
+  console.log(gamesUserWinnerPnl?.matchList?.find((item) => item?.matchName === "Twenty20 Big Bash"), "MKPONBHVFTDRSE");
 
   useEffect(() => {
 
@@ -267,6 +281,15 @@ const HomePage = () => {
       setUpcomingInplay(2)
     }
   }
+
+  // pnl
+
+  // <span className="game_name_pnllll" style={{
+  //   color: pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] >= 0 ? "green" :
+  //     (pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] <= 0) ? "red" : "black"
+  // }}>
+  //   {pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] || 0}
+  //   </span>
 
   return (
     <>
@@ -366,7 +389,15 @@ const HomePage = () => {
                                   style={{ borderBottom: "1px solid #f2f2f2" }}>
                                   <div className="inner_card_nameAndpnl_homepage">
                                     <span className="game_name_btxi">{item1?.runnerName}</span>
-                                    <span className="game_name_pnllll" style={{ color: pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] >= 0 ? "green" : (pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] <= 0) ? "red" : "black" }}> {pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId] || 0}</span>
+
+
+
+
+
+
+
+
+
                                   </div>
                                   {console.log(pnlData?.[item.matchId]?.[item.marketId]?.pnlObj?.[item1.selectionId], "sdfsddfsd")}
                                   <div className="inner_card_rate_homepage">
