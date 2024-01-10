@@ -82,7 +82,7 @@ const Mybets = () => {
           aria-expanded="true"
         // aria-expanded={`${unmatchedBets===true? "true":"false"}`}
         >
-          <span>Matched Bets</span>{" "}
+          <span>Matched  Bets</span>{" "}
           <i
             className="fas fa-angle-down toggle-icon float-right m-r-10 "
             onClick={handlematched}

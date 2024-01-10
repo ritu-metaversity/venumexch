@@ -303,6 +303,7 @@ const Mybets = () => {
                       <th>Market Name</th>
                       <th>Nation</th>
                       <th className="text-right" >User Rate</th>
+                      <th className="text-right" >User Price</th>
                       <th className="text-right"> P & L</th>
                       <th className="text-right">Amount</th>
                       <th className="text-right">Time</th>
@@ -324,6 +325,7 @@ const Mybets = () => {
                             <td className="text-left">{item?.marketname}</td>
                             <td className="text-left">{item?.nation}</td>
                             <td className="text-right">{item?.rate}</td>
+                            <td className="text-right">{item?.price}</td>
                             <td className="text-right">{item?.pnl}</td>
                             <td className="text-right">{item?.amount}</td>
 

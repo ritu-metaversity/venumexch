@@ -1974,7 +1974,7 @@ const GameDetails = () => {
                                         >
                                           <u>
                                             {item?.back === true ? "BACK" : "LAY"}{" "}
-                                            {item?.nation} for {item?.amount} @{" "}
+                                            {item?.nation} for {item?.priveValue} @{" "}
                                             {item?.rate}{" "}
                                           </u>
                                         </Link>

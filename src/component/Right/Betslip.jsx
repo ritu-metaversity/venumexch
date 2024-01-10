@@ -222,7 +222,8 @@ const Betslip = ({ props, gamedetailsData, setGameDetailData, gameNmeForOpenBet 
                                   }}> {key}</div>
                                   <tr className="odds-header">
                                     <td className="text-left">Nation</td>
-                                    <td className="text-left">Odds</td>
+                                    <td className="text-left">Rate</td>
+                                    <td className="text-left">Price</td>
                                     <td className="text-right">Stake</td>
                                     <td className="text-right">Profit/Liability</td>
                                   </tr>
@@ -230,6 +231,7 @@ const Betslip = ({ props, gamedetailsData, setGameDetailData, gameNmeForOpenBet 
                                     <>
                                       <tr className={`back ${item?.back === false ? "lay" : "back"}`}>
                                         <td className="text-left">{item?.nation}</td>
+                                        <td className="text-left">{item?.rate}</td>
                                         <td className="text-left">{item?.priveValue}</td>
                                         <td className="text-right">{item?.amount}</td>
 
