@@ -95,7 +95,7 @@ const SideBar = () => {
 
   useEffect(() => {
     axios.post(
-      "https://api.247365.exchange/admin-new-apis/user/alloted-casino-list", {},
+      "https://adminapi.247idhub.com/admin-new-apis/user/alloted-casino-list", {},
       {
         headers: {
           "Content-Type": "application/json",

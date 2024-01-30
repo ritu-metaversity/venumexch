@@ -12,7 +12,7 @@ import { navRef } from "../../../Layout/LayoutForMobile"
 const token = localStorage.getItem("TokenId");
 
 let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-// "https://api.247365.exchange/admin-new-apis"
+// "https://adminapi.247idhub.com/admin-new-apis"
 axios.defaults.headers.common.Authorization = `Bearer ${token}`
 
 export const getAllPostsComments = createAsyncThunk('auth/getAllPostsComments', async (_, { rejectWithValue }) => {
@@ -760,7 +760,7 @@ export const postBetHistory = createAsyncThunk('auth/postBetHistory', async (dat
 export const postleftmenudataopen = createAsyncThunk('auth/postleftmenudataopen', async (data, { rejectWithValue }) => {
     try {
         // console.log("loooogogoogogogoog")
-        // https://api.247365.exchange/enduser/left-menu-data-open
+        // https://adminapi.247idhub.com/enduser/left-menu-data-open
         const postleftmenudataopenDataa = await axios.post(`${REACT_APP_API_URL}/enduser/left-menu-data-open`, data
         )
         return postleftmenudataopenDataa
@@ -775,7 +775,7 @@ export const postleftmenudataopen = createAsyncThunk('auth/postleftmenudataopen'
 export const postDemoLogin = createAsyncThunk('auth/postDemoLogin', async (data, { rejectWithValue }) => {
     try {
         // console.log("loooogogoogogogoog")
-        // https://api.247365.exchange/enduser/left-menu-data-open
+        // https://adminapi.247idhub.com/enduser/left-menu-data-open
         const postDemoLoginDataa = await axios.post(`${REACT_APP_API_URL}/enduser/left-menu-data-open`, data
         )
         return postDemoLoginDataa
@@ -790,7 +790,7 @@ export const postDemoLogin = createAsyncThunk('auth/postDemoLogin', async (data,
 export const psotbetsingleusevalue = createAsyncThunk('auth/psotbetsingleusevalue', async (data, { rejectWithValue }) => {
     try {
         // console.log("loooogogoogogogoog")
-        // https://api.247365.exchange/enduser/left-menu-data-open
+        // https://adminapi.247idhub.com/enduser/left-menu-data-open
         const psotbetsingleusevaluedataa = await axios.post(`${REACT_APP_API_URL}/api/getOneUserBetResult`,
         )
         return psotbetsingleusevaluedataa

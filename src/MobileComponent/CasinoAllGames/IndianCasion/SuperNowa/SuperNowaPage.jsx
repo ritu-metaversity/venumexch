@@ -70,8 +70,8 @@ const SuperNowaPage = () => {
         }
       })
   }, [])
-  // https://api.247365.exchange/admin-new-apis/api/supernowa/v1/authentication
-  // https://api.247365.exchange/admin-new-apis/api/supernowa/v1/authentication
+  // https://adminapi.247idhub.com/admin-new-apis/api/supernowa/v1/authentication
+  // https://adminapi.247idhub.com/admin-new-apis/api/supernowa/v1/authentication
 
   return (
     <div className='main_div_for_back_and_game'>

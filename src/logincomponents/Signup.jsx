@@ -107,7 +107,7 @@ const Signup = () => {
   const handleDemoLogin = () => {
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        "https://adminapi.247idhub.com/admin-new-apis/login/demo-user-creation-login",
         { appUrl: window.location.hostname }
       )
       .then((res) => {
