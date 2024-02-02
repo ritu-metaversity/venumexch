@@ -526,7 +526,7 @@ const GameDetails = () => {
   };
   const [TvShow, setTvShow] = useState(false)
   const [toggleBtn1, settoggleBtn1] = useState(false)
-  const [toggleBtn2, settoggleBtn2] = useState(true)
+  const [toggleBtn2, settoggleBtn2] = useState(false)
 
   const handleTvShow = () => {
     if (TvShow === false) {
