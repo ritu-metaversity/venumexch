@@ -32,11 +32,11 @@ function App() {
 
 
   useEffect(() => {
-
+    let timers;
     if (token) {
 
 
-      const timers = setInterval(
+      timers = setInterval(
         () => {
           axios
             .post(
@@ -54,9 +54,9 @@ function App() {
             })
 
 
-        }, 2000)
+        }, 3600000)
+      }
       return () => clearInterval(timers)
-    }
 
   }, [token])
 
