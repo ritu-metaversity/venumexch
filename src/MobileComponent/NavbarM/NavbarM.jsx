@@ -158,7 +158,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
   };
   const userTypeInfo = localStorage.getItem("userTypeInfo");
 
-  let appUrll = window.location.hostname;
+  let appUrll = window.location.hostname.replace("www.","");
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {

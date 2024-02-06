@@ -18,7 +18,7 @@ const Right = ({ gamedetailsData, setGameDetailData, gameNmeForOpenBet }) => {
    );
    const { pathname } = useLocation();
    const usernameDemo = localStorage.getItem("usernameDemo");
-   let appUrll = window.location.hostname;
+   let appUrll = window.location.hostname.replace("www.","");
    const token = localStorage.getItem("TokenId");
    // useEffect(() => {
    //    if (token) {

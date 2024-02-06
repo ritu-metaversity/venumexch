@@ -118,7 +118,7 @@ const Login = () => {
     setLogin({
       userId: userName,
       password: password,
-      appUrl: window.location.hostname,
+      appUrl: window.location.hostname.replace("www.",""),
       // appUrl: "247idhub.com"
     });
 
@@ -173,7 +173,7 @@ const Login = () => {
   const handleSignUp = () => {
     navigate("/m/signup");
   };
-  let appUrll = window.location.hostname;
+  let appUrll = window.location.hostname.replace("www.","");
   // let appUrll = "localhost";
   // let appUrll = "localhost";
 
@@ -201,7 +201,7 @@ const Login = () => {
     axios
       .post(
         "https://adminapi.247idhub.com/admin-new-apis/login/demo-user-creation-login",
-        { appUrl: window.location.hostname }
+        { appUrl: window.location.hostname.replace("www.","") }
       )
       .then((res) => {
         if (res?.data?.token) {

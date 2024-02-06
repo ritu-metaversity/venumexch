@@ -13,6 +13,7 @@ import { ImCross } from "react-icons/im";
 import { useDispatch } from "react-redux";
 import { PostBalance, Postvalidatejwttoken } from "./App/Features/auth/authActions";
 import axios from "axios";
+import QtechAuthenticationModel from "./QtechAuthenticationModel.js";
 
 // import { Provider } from "react-redux";
 // import store from "./Store";
@@ -25,40 +26,10 @@ function App() {
   const [mobileRoutes, setMoileRoutes] = useState(null);
 
   const { pathname } = useLocation();
-  let appUrll = window.location.hostname;
+  let appUrll = window.location.hostname.replace("www.","");
   const token = localStorage.getItem("TokenId");
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
 
-
-  useEffect(() => {
-    let timers;
-    if (token) {
-
-
-      timers = setInterval(
-        () => {
-          axios
-            .post(
-              `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-              {},
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            )
-            .then((response) => {
-              localStorage.setItem("GameToken", response?.data?.data?.access_token);
-            })
-
-
-        }, 3600000)
-      }
-      return () => clearInterval(timers)
-
-  }, [token])
 
   useEffect(() => {
 
@@ -154,7 +125,7 @@ function App() {
 
 
   useEffect(() => {
-    document.title = window.location.hostname;
+    document.title = window.location.hostname.replace("www.","");
   }, []);
 
   // useEffect(() => {
@@ -189,7 +160,7 @@ function App() {
         progress={undefined}
       />
 
-
+      {token ? <QtechAuthenticationModel /> : ""}
       {mobileRoutes === true ?
         <RouteMobile />
         : mobileRoutes === false ? <RoutesPages /> : <></>

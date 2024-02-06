@@ -51,7 +51,7 @@ const Casinolistt = () => {
 
     const idd = {
       id: sportId,
-      appUrl: window.location.hostname,
+      appUrl: window.location.hostname.replace("www.",""),
     };
     fetch("https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/lords.json").then(res => res.json())
       .then((res) => {

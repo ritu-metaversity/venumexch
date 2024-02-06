@@ -6,7 +6,7 @@ import { getAboutUs } from '../../App/Features/auth/authActions'
 const AboutUs = () => {
 
     const dispatch = useDispatch()
-    let appUrl = window.location.hostname;
+    let appUrl = window.location.hostname.replace("www.","");
 
     const { getAboutUsData } = useSelector((state) => state.auth);
     useEffect(() => {

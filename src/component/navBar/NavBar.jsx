@@ -111,12 +111,12 @@ const NavBar = () => {
 
   useEffect(() => {
     setInterval(liveTime, 5000);
-    let appUrll = window.location.hostname;
+    let appUrll = window.location.hostname.replace("www.","");
     dispatch(Postisselfbyappurl({ appUrl: appUrll }));
   }, []);
 
   useEffect(() => {
-    let appUrll = window.location.hostname;
+    let appUrll = window.location.hostname.replace("www.","");
 
     axios
       .post(

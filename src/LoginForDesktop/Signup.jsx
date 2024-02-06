@@ -94,7 +94,7 @@ const Signup = () => {
   const handleLogin = async () => {
     setStatusVal(true);
     let data = {
-      appUrl: window.location.hostname,
+      appUrl: window.location.hostname.replace("www.",""),
       username: UserName,
       password: password,
       confirmPassword: confirmPassword,
@@ -198,7 +198,7 @@ const Signup = () => {
     axios
       .post(
         "https://adminapi.247idhub.com/admin-new-apis/login/demo-user-creation-login",
-        { appUrl: window.location.hostname }
+        { appUrl: window.location.hostname.replace("www.","") }
       )
       .then((res) => {
         if (res?.data?.token) {
@@ -281,8 +281,8 @@ const Signup = () => {
   const [allData, setAllData] = useState()
 
   useEffect(() => {
-    let appUrll = window.location.hostname.replace("www.", "");
-    // let appUrll = window.location.hostname;
+    let appUrll = window.location.hostname.replace("www.","").replace("www.", "");
+    // let appUrll = window.location.hostname.replace("www.","");
     // let appUrll = "maggibook.com";
     axios
       .post(

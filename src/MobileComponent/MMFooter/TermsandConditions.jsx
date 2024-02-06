@@ -7,7 +7,7 @@ const TermsandConditions = () => {
 
 
   const { getTermAndConditionData } = useSelector((state) => state.auth);
-  let appUrl = window.location.hostname;
+  let appUrl = window.location.hostname.replace("www.","");
 
   useEffect(() => {
     dispatch(getTermAndCondition({ appUrl }))

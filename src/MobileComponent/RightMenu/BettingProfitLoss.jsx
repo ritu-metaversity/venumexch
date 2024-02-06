@@ -173,7 +173,7 @@ const BettingProfitLoss = () => {
   useEffect(() => {
     const id = {
       id: "323334",
-      appUrl: window.location.hostname,
+      appUrl: window.location.hostname.replace("www.",""),
     };
     setCasinoId("323334");
 

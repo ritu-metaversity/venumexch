@@ -90,7 +90,7 @@ const Signup = () => {
   // username
   // :
   // "anish2512"
-  let appUrll = window.location.hostname;
+  let appUrll = window.location.hostname.replace("www.","");
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
@@ -108,7 +108,7 @@ const Signup = () => {
     axios
       .post(
         "https://adminapi.247idhub.com/admin-new-apis/login/demo-user-creation-login",
-        { appUrl: window.location.hostname }
+        { appUrl: window.location.hostname.replace("www.","") }
       )
       .then((res) => {
         if (res?.data?.token) {
@@ -134,7 +134,7 @@ const Signup = () => {
     let data = {
       username: userName,
       password: password,
-      appUrl: window.location.hostname,
+      appUrl: window.location.hostname.replace("www.",""),
       mobile: mobileNumber,
       userId: userName,
     };
