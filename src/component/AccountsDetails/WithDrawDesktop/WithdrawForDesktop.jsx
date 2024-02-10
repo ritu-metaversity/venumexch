@@ -440,40 +440,8 @@ const WithdrawForDesktop = () => {
                                                         {item?.status}
                                                     </td>
                                                 )}
-                                                <td> {item.status === "Pending" ?
-                                                    < button onClick={() => handlepennding(item.id)} className="handlepennfoifjfi" > <IoCloseCircleOutline size={25} color={"black"} />
-                                                    </button>
-                                                    : ""
-                                                }
+                                                <td> 
 
-                                                    <Modal
-                                                        show={pendingmodal}
-                                                        onHide={() => setpendingmodal(false)}
-
-                                                        aria-labelledby="contained-modal-title-vcenter"
-                                                        centered
-                                                    >
-                                                        <Modal.Header closeButton style={{ height: "39px" }}>
-                                                            <Modal.Title id="contained-modal-title-vcenter">
-                                                                Cancel Request
-                                                                <button onClick={handleCloseFancyModal} className="closebtnonpnl" style={{ top: "6px" }}>
-                                                                    <IoCloseCircleOutline size={25} color={"black"} />
-                                                                </button>
-                                                            </Modal.Title>
-                                                        </Modal.Header>
-                                                        <Modal.Body style={{ width: "100%" }}>
-                                                            <div className="modalldatata">
-                                                                <div style={{ padding: "12px" }}>
-                                                                    Are you sure want to cancel this request ?
-                                                                </div>
-                                                                <div className="butonnnn butonnnn1">
-
-                                                                    <button className="bynnnn bynnnn1" onClick={() => setpendingmodal(false)}>Close</button>
-                                                                    <button className="bynnnn bynnnn1" onClick={() => handlependingsucesss()}>Submit</button>
-                                                                </div>
-                                                            </div>
-                                                        </Modal.Body>
-                                                    </Modal>
                                                 </td>
 
                                             </tr>

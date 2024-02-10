@@ -421,11 +421,7 @@ const WithDraw = () => {
 
                                   {item?.status}
                                 </div>
-                                <div onClick={handlependingg}>
-                                  {item?.status === "Pending" ? <button onClick={handlepennding} className="handlepennfoifjfi" >
-                                    <IoCloseCircleOutline size={25} color={"black"} />
-                                  </button> : ""}
-                                </div>
+                               
                               </div>
                               <Modal
                                 show={pendingmodal}

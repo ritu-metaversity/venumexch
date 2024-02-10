@@ -906,7 +906,7 @@ const WithDraw1 = () => {
                                                         aria-colindex="5"
                                                         className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
                                                             }`}>
-                                                        {item?.accountType}fsdfd
+                                                        {item?.accountType}
                                                     </td>
                                                     <td
                                                         style={{ cursor: "pointer" }}
@@ -953,38 +953,6 @@ const WithDraw1 = () => {
                 </div>
 
             </div >
-            <Modal
-                show={show}
-                onHide={handleClose}
-                aria-labelledby="parent-modal-title"
-                aria-describedby="parent-modal-description"
-                style={{ marginTop: "53px", padding: "25px" }}
-            >
-
-                <div className="main-count">
-                    <div className="headdddd">
-                        Do you want to save the Bank Details?
-                    </div>
-
-                    <div className="Bet-succccccc">
-
-                        <button
-                            className='tbnnnn'
-
-                            onClick={handleClose}>
-                            Cancel
-                        </button>
-                        <button
-                            className='tbnnnn'
-
-                            variant=""
-                            onClick={handleSaveDetail}>
-                            Save
-                        </button>
-                    </div>
-                </div>
-
-            </Modal>
 
 
             <div className="table-responsive withdrow-table">
@@ -1135,11 +1103,6 @@ const WithDraw1 = () => {
 
                                                     {item?.status}
                                                 </div>
-                                                <div onClick={() => handlependingg(item?.id)}>
-                                                    {item?.status === "Pending" ? <button onClick={() => handlependingg(item?.id)} className="handlepennfoifjfi" >
-                                                        <IoCloseCircleOutline size={25} color={"black"} />
-                                                    </button> : ""}
-                                                </div>
                                             </div>
 
                                         </td>
@@ -1160,41 +1123,6 @@ const WithDraw1 = () => {
                     </tbody>
                 </table>
             </div>
-            <Modal
-                show={pendingmodal}
-                className="custom_wothdraw_pending_popup"
-                onHide={() => setpendingmodal(false)}
-                size="sm"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-
-            // style={{ width: "30%" }}
-            >
-                <Modal.Header closeButton style={{ height: "39px" }}>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Cancel Request
-                        <button onClick={handleCloseFancyModal} className="closebtnonpnl" style={{ top: "6px" }}>
-                            <IoCloseCircleOutline size={25} color={"black"} />
-                        </button>
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    margin: "auto"
-                }}>
-                    <div className="modalldatata">
-                        <div>
-                            Are you sure want to cancel this request ?
-                        </div>
-                        <div className="butonnnn">
-                            <button className="withdraw-popup-btn" onClick={() => setpendingmodal(false)}>Close</button>
-                            <button className="withdraw-popup-btn" onClick={handlependingsucesss}>Submit</button>
-                        </div>
-                    </div>
-                </Modal.Body>
-            </Modal>
         </div >
     )
 }
