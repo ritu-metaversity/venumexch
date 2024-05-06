@@ -265,44 +265,62 @@ const DestGamePage = ({ datatataProps, gamenameOpenbet }) => {
     const [OddSocketConnected, setOddSocketConnected] = useState({});
     const [isLoading, setIsloading] = useState(true);
 
-    const oddFromSocketSlower = (res) => {
-        if (res) {
+    // const oddFromSocketSlower = (res) => {
+    //     if (res) {
+    //         setPostMinMaxGameDetailsData(res);
+    //         setIsloading(false);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     socket.on("connect", () => {
+    //         setOddSocketConnected(false);
+    //     });
+    //     socket.on("OddsUpdated", oddFromSocketSlower);
+    //     socket.on("JoinedSuccessfully", () => {
+    //         setOddSocketConnected(true);
+    //     });
+    // }, []);
+
+    useEffect(()=>{
+        let timer = setInterval(
+          () =>
+          fetch(`https://oddsapi.247idhub.com/betfair_api/fancy/${id}`)
+          .then((res) => res.json())
+          .then((res) => {
             setPostMinMaxGameDetailsData(res);
             setIsloading(false);
-        }
-    };
-
-    useEffect(() => {
-        socket.on("connect", () => {
-            setOddSocketConnected(false);
-        });
-        socket.on("OddsUpdated", oddFromSocketSlower);
-        socket.on("JoinedSuccessfully", () => {
-            setOddSocketConnected(true);
-        });
-    }, []);
+          }),
+          1000
+        );
+        return () => {
+          clearInterval(timer);
+        };
+        
+    
+      }, [id])
 
 
-    useEffect(() => {
-        if (token) {
+    // useEffect(() => {
+    //     if (token) {
 
-            let timer = setInterval(
-                () =>
-                    !OddSocketConnected &&
-                    socket.emit("JoinRoom", {
-                        eventId: id,
-                    }),
-                500
-            );
-            return () => {
-                clearInterval(timer);
-            };
-        }
-    }, [token, OddSocketConnected, id]);
+    //         let timer = setInterval(
+    //             () =>
+    //                 !OddSocketConnected &&
+    //                 socket.emit("JoinRoom", {
+    //                     eventId: id,
+    //                 }),
+    //             500
+    //         );
+    //         return () => {
+    //             clearInterval(timer);
+    //         };
+    //     }
+    // }, [token, OddSocketConnected, id]);
 
-    useEffect(() => {
-        OddSocketConnected && setOddSocketConnected(false);
-    }, [id]);
+    // useEffect(() => {
+    //     OddSocketConnected && setOddSocketConnected(false);
+    // }, [id]);
 
     const handlematched = () => {
         if (matchedBets === true) {

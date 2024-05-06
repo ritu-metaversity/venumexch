@@ -257,44 +257,62 @@ const GameDetails = () => {
   const [OddSocketConnected, setOddSocketConnected] = useState({});
   const [isLoading, setIsloading] = useState(true);
 
-  const oddFromSocketSlower = (res) => {
-    if (res) {
-      setPostMinMaxGameDetailsData(res);
-      setIsloading(false);
-    }
-  };
+  // const oddFromSocketSlower = (res) => {
+  //   if (res) {
+  //     setPostMinMaxGameDetailsData(res);
+  //     setIsloading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      setOddSocketConnected(false);
-    });
-    socket.on("OddsUpdated", oddFromSocketSlower);
-    socket.on("JoinedSuccessfully", () => {
-      setOddSocketConnected(true);
-    });
-  }, []);
+  // useEffect(() => {
+  //   socket.on("connect", () => {
+  //     setOddSocketConnected(false);
+  //   });
+  //   socket.on("OddsUpdated", oddFromSocketSlower);
+  //   socket.on("JoinedSuccessfully", () => {
+  //     setOddSocketConnected(true);
+  //   });
+  // }, []);
+
+  useEffect(()=>{
+    let timer = setInterval(
+      () =>
+      fetch(`https://oddsapi.247idhub.com/betfair_api/fancy/${id}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setPostMinMaxGameDetailsData(res);
+        setIsloading(false);
+      }),
+      1000
+    );
+    return () => {
+      clearInterval(timer);
+    };
+    
+
+  }, [id])
   const token = localStorage.getItem("TokenId");
 
-  useEffect(() => {
-    if (token) {
+  // useEffect(() => {
+  //   if (token) {
 
-      let timer = setInterval(
-        () =>
-          !OddSocketConnected &&
-          socket.emit("JoinRoom", {
-            eventId: id,
-          }),
-        1000
-      );
-      return () => {
-        clearInterval(timer);
-      };
-    }
-  }, [token, OddSocketConnected, id]);
+  //     let timer = setInterval(
+  //       () =>
+  //         !OddSocketConnected &&
+  //         socket.emit("JoinRoom", {
+  //           eventId: id,
+  //         }),
+  //       1000
+  //     );
+  //     return () => {
+  //       clearInterval(timer);
+  //     };
+  //   }
+  // }, [token, OddSocketConnected, id]);
 
-  useEffect(() => {
-    OddSocketConnected && setOddSocketConnected(false);
-  }, [id]);
+  // useEffect(() => {
+  //   OddSocketConnected && setOddSocketConnected(false);
+  // }, [id]);
 
   const handlematched = () => {
     if (matchedBets === true) {
