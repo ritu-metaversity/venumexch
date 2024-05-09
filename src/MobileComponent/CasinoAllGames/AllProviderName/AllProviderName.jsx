@@ -10,21 +10,21 @@ import { postFindProviderList, psotbetsingleusevalue } from '../../../App/Featur
 
 let AllCasinoProviderName =
 {
-    "Indian Casino": [
-        {
-            name: "Super Nova",
-            logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
-            gameCode: "SP-NOWA",
-            PageUrl: "/m/SuperNowa_casion"
-        },
-        {
-            name: "Aura",
-            logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
-            gameCode: "AURA",
-            PageUrl: "/m/casino-list"
+    // "Indian Casino": [
+    //     {
+    //         name: "Super Nova",
+    //         logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
+    //         gameCode: "SP-NOWA",
+    //         PageUrl: "/m/SuperNowa_casion"
+    //     },
+    //     {
+    //         name: "Aura",
+    //         logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+    //         gameCode: "AURA",
+    //         PageUrl: "/m/casino-list"
 
-        }
-    ],
+    //     }
+    // ],
     "Internation Casino": [
         {
             name: "EVOLUTION",
@@ -427,21 +427,21 @@ let AllCasinoProviderName =
 }
 let IndianCasinoLive =
 {
-    "Indian Casino": [
-        {
-            name: "Super Nova",
-            logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
-            gameCode: "SP-NOWA",
-            PageUrl: "/m/SuperNowa_casion"
-        },
-        {
-            name: "Aura",
-            logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
-            gameCode: "AURA",
-            PageUrl: "/m/casino-list"
+    // "Indian Casino": [
+    //     {
+    //         name: "Super Nova",
+    //         logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
+    //         gameCode: "SP-NOWA",
+    //         PageUrl: "/m/SuperNowa_casion"
+    //     },
+    //     {
+    //         name: "Aura",
+    //         logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+    //         gameCode: "AURA",
+    //         PageUrl: "/m/casino-list"
 
-        }
-    ],
+    //     }
+    // ],
 }
 let FantasyGamesLibe =
 {

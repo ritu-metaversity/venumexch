@@ -122,14 +122,14 @@ const SideBar = () => {
             <nav data-v-4732acba="" className="tree-menu">
               <div data-v-4732acba="" className="left-menu-inner">
                 <ul data-v-4732acba="" className="menu-column menu-lvl-0">
-                  <Link data-v-91c481c8="" to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/home"} class="favourites-link download-apk">
+                  <Link  to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/home"} className="favourites-link download-apk">
                     <img
                       src="https://d1arlbwbznybm5.cloudfront.net/v1/static/front/images/icons/inplay.png"
                       alt=""
                       className='game-icon'
                     />
-                    <span data-v-91c481c8=""
-                      class="link-name"> In-Play</span></Link>
+                    <span 
+                      className="link-name"> In-Play</span></Link>
                   {postleftmenudataopenData?.data &&
                     postleftmenudataopenData?.data ? (
                     postleftmenudataopenData?.data.map((item) => (
@@ -140,62 +140,62 @@ const SideBar = () => {
 
                         <Link data-v-4732acba="" className="favourites-link" onClick={() => handleRoute(item?.sportId, item?.sportName)}>
                           {item?.sportId === 77 ?
-                            <img src={hours} alt='' className="game-icon" />
+                            <img src={hours}  className="game-icon" alt="" />
                             :
-                            <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId === 14 ? 52 : item?.sportId}.png`} alt='' className="game-icon" />
+                            <img src={`https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/gicons/${item?.sportId === 14 ? 52 : item?.sportId}.png`} alt='' className="game-icon" alt="" />
                           }
                           <span data-v-4732acba="" className="link-name">
                             {item?.sportName}
                           </span></Link>
                       </li>))) : ""}
-                  {gameAura?.active === true ?
+                  {/* {gameAura?.active === true ?
                     <Link
                       to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Indian-home"}
-                      class="favourites-link download-apk">
-                      <img data-v-91c481c8="" src="https://11bet24.com/indian-casino.png" class="game-icon" />
-                      <span data-v-91c481c8=""
-                        class="link-name">India Casino</span>
+                      className="favourites-link download-apk">
+                      <img  src="/Casino_Logo/indian-casino.png" className="game-icon" alt="" />
+                      <span 
+                        className="link-name">India Casino</span>
                     </Link>
                     :
                     (gameSuperNova?.active === true ?
                       <Link
                         to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Indian-home"}
-                        class="favourites-link download-apk">
-                        <img data-v-91c481c8="" src="https://11bet24.com/indian-casino.png" class="game-icon" />
-                        <span data-v-91c481c8=""
-                          class="link-name">India Casino</span>
+                        className="favourites-link download-apk">
+                        <img  src="/Casino_Logo/indian-casino.png" className="game-icon" alt="" />
+                        <span 
+                          className="link-name">India Casino</span>
                       </Link>
-                      : "")}
+                      : "")} */}
 
                   {gameQtech?.active === true ?
                     <>
                       <Link
                         to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/International-home"}
-                        class="favourites-link download-apk">
-                        <img data-v-91c481c8="" src="https://11bet24.com/international-casinoletest.png" class="game-icon" />
-                        <span data-v-91c481c8=""
-                          class="link-name">International Casino</span>
+                        className="favourites-link download-apk">
+                        <img  src="/Casino_Logo/international-casinoletest.png" className="game-icon" alt="" />
+                        <span 
+                          className="link-name">International Casino</span>
                       </Link>
                       <Link
                         to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Lottery-home"}
-                        class="favourites-link download-apk">
-                        <img data-v-91c481c8="" src="https://11bet24.com/lottery.png" class="game-icon" />
-                        <span data-v-91c481c8=""
-                          class="link-name">Lottery </span>
+                        className="favourites-link download-apk">
+                        <img  src="/Casino_Logo/lottery.png" className="game-icon" alt="" />
+                        <span 
+                          className="link-name">Lottery </span>
                       </Link>
                       <Link
                         to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Slot-home"}
-                        class="favourites-link download-apk">
-                        <img data-v-91c481c8="" src="https://11bet24.com/slots.png" class="game-icon" />
-                        <span data-v-91c481c8=""
-                          class="link-name">Slots Games</span>
+                        className="favourites-link download-apk">
+                        <img  src="/Casino_Logo/slots.png" className="game-icon" alt="" />
+                        <span 
+                          className="link-name">Slots Games</span>
                       </Link>
                       <Link
                         to={localStorage.getItem("PassWordType") === "old" ? "/changepassword" : "/m/Fantasy-home"}
-                        class="favourites-link download-apk">
-                        <img data-v-91c481c8="" src="https://11bet24.com/fantasy-game.png" class="game-icon" />
-                        <span data-v-91c481c8=""
-                          class="link-name">Fantasy Games</span>
+                        className="favourites-link download-apk">
+                        <img  src="/Casino_Logo/fantasy-game.png" className="game-icon" alt="" />
+                        <span 
+                          className="link-name">Fantasy Games</span>
                       </Link>
                     </> : ""
                   }

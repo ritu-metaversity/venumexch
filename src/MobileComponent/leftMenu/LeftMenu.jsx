@@ -98,7 +98,7 @@ const LeftMenu = (props) => {
                      </div>
                   </div>
                </li>))) : ""}
-         {gameAura?.active === true ?
+         {/* {gameAura?.active === true ?
             <li>
                <Link to="/m/Indian-home" className="">
                   <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
@@ -114,34 +114,34 @@ const LeftMenu = (props) => {
                         <div className="item"><img alt="" src="https://11bet24.com/indian-casino.png" /> <span className="menu-name download-apk">Indian Casino</span></div>
                      </div>
                   </Link>
-               </li> : "")}
+               </li> : "")} */}
          {gameQtech?.active === true ?
             <>
                <li>
                   <Link to="/m/International-home" className="">
                      <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                        <div className="item"><img alt="" src="https://11bet24.com/international-casinoletest.png" className="game-icon" /> <span className="menu-name download-apk">International Casino</span></div>
+                        <div className="item"><img alt="" src="/Casino-Logo/international-casinoletest.png" className="game-icon" /> <span className="menu-name download-apk">International Casino</span></div>
                      </div>
                   </Link>
                </li>
                <li>
                   <Link to="/m/Lottery-home" className="">
                      <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                        <div className="item"><img alt="" src="https://11bet24.com/lottery.png" className="game-icon" /> <span className="menu-name download-apk"> Lottery</span></div>
+                        <div className="item"><img alt="" src="/Casino-Logo/lottery.png" className="game-icon" /> <span className="menu-name download-apk"> Lottery</span></div>
                      </div>
                   </Link>
                </li>
                <li>
                   <Link to="/m/Slot-home" className="">
                      <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                        <div className="item"><img alt="" src="https://11bet24.com/slots.png" className="game-icon" /> <span className="menu-name download-apk">Slots Games</span></div>
+                        <div className="item"><img alt="" src="/Casino-Logo/slots.png" className="game-icon" /> <span className="menu-name download-apk">Slots Games</span></div>
                      </div>
                   </Link>
                </li>
                <li>
                   <Link to="/m/Fantasy-home" className="">
                      <div className="menu-lvl-1" onClick={() => props.eftMenuClose(false)()}>
-                        <div className="item"><img alt="" src="https://11bet24.com/fantasy-game.png" className="game-icon" /> <span className="menu-name download-apk">Fantasy Games</span></div>
+                        <div className="item"><img alt="" src="/Casino-Logo/fantasy-game.png" className="game-icon" /> <span className="menu-name download-apk">Fantasy Games</span></div>
                      </div>
                   </Link>
                </li>

@@ -297,12 +297,12 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
             {gameQtech?.active === true ?
               <li className="inner_game_name_caison_header" onClick={() => navigate("/m/International-home")}>International Casino</li>
               : ""}
-            {gameAura?.active === true ?
+            {/* {gameAura?.active === true ?
               <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Indian-home")}>Indian Casino</li>
               :
               (gameSuperNova?.active === true ?
                 <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Indian-home")}>Indian Casino</li>
-                : "")}
+                : "")} */}
             {gameQtech?.active === true ?
               <>  <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Lottery-home")}>Lottery</li>
                 <li className="inner_game_name_caison_header" onClick={() => navigate("/m/Slot-home")}>Slot Games</li>
@@ -314,7 +314,7 @@ const NavbarM = ({ RightSideBar, LiftSideBar, RightValue, LeftValue }) => {
           <div className="headerCasionSwip_Scrolll">
 
             <li className="inner_game_name_caison_header" >International Casino</li>
-            <li className="inner_game_name_caison_header" >Indian Casino</li>
+            {/* <li className="inner_game_name_caison_header" >Indian Casino</li> */}
             <li className="inner_game_name_caison_header">Lottery</li>
             <li className="inner_game_name_caison_header" >Slot Games</li>
             <li className="inner_game_name_caison_header" >Fantasy Games</li>
