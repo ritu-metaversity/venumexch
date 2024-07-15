@@ -9,12 +9,10 @@ import ValidationFile from "../Validation/ValidationFile";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "./signip.css"
-export let setShowRegisterModalRefDesktop
+import "./signip.css";
+export let setShowRegisterModalRefDesktop;
 
 const Signup = () => {
-
-
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const [signUpShow, setSignUpShow] = useState(false);
@@ -90,11 +88,10 @@ const Signup = () => {
   };
   let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
 
-
   const handleLogin = async () => {
     setStatusVal(true);
     let data = {
-      appUrl: window.location.hostname.replace("www.",""),
+      appUrl: window.location.hostname.replace("www.", ""),
       username: UserName,
       password: password,
       confirmPassword: confirmPassword,
@@ -102,18 +99,16 @@ const Signup = () => {
       userId: UserName,
       casinoComm: allData?.data?.casinoComm,
       fancyComm: allData?.data?.fancyComm,
-      oddsComm: allData?.data?.oddsComm
-    }
+      oddsComm: allData?.data?.oddsComm,
+    };
     if (handleValidation()) {
-
       axios
         .post(
-          "https://adminapi.247idhub.com/admin-new-apis/user/self-register", data
+          "https://adminapi.foldexch.com/admin-new-apis/user/self-register",
+          data
         )
         .then((res) => {
           if (res?.status) {
-
-
             if (res?.data?.token) {
               localStorage.setItem("TokenId", res?.data?.token);
               localStorage.setItem("PassWordType", res?.data?.passwordtype);
@@ -132,43 +127,43 @@ const Signup = () => {
                   }
                 )
                 .then((response) => {
-                  localStorage.setItem("GameToken", response?.data?.data?.access_token);
-                })
+                  localStorage.setItem(
+                    "GameToken",
+                    response?.data?.data?.access_token
+                  );
+                });
               if (window.innerWidth > 1000) {
                 navigate("./m/home");
-
               } else {
                 navigate("/home");
-
               }
-
 
               console.log(res, "afddsfsdfsdf");
             } else {
               console.log(res, "afddsfsdfsdf");
 
-
-              setOpen(true)
+              setOpen(true);
               toast.success(res?.data?.message || "", {
                 style: {
-                  background: "rgb(74,117,67)", minHeight: 40,
+                  background: "rgb(74,117,67)",
+                  minHeight: 40,
                   padding: 0,
                   color: "white",
-                }
+                },
               });
               // snackBarUtil.success(res?.data?.message);
               // console.log(res?.data)
-              setSignUpShow(true)
+              setSignUpShow(true);
               setNewCredAfterRegister(res?.data);
             }
-
           } else {
             toast.error(res?.data?.message || "", {
               style: {
-                background: "rgb(156,74,70)", minHeight: 40,
+                background: "rgb(156,74,70)",
+                minHeight: 40,
                 padding: 0,
                 color: "white",
-              }
+              },
             });
             // snackBarUtil.error(res?.data?.message);
           }
@@ -176,10 +171,11 @@ const Signup = () => {
         .catch((error) => {
           toast.error(error.response.data.message || "", {
             style: {
-              background: "rgb(156,74,70)", minHeight: 40,
+              background: "rgb(156,74,70)",
+              minHeight: 40,
               padding: 0,
               color: "white",
-            }
+            },
           });
           // snackBarUtil.error(error.response.data.message);
           // setStatusCode(error.response.status);
@@ -197,23 +193,20 @@ const Signup = () => {
   const handleDemoLogin = () => {
     axios
       .post(
-        "https://adminapi.247idhub.com/admin-new-apis/login/demo-user-creation-login",
-        { appUrl: window.location.hostname.replace("www.","") }
+        "https://adminapi.foldexch.com/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: window.location.hostname.replace("www.", "") }
       )
       .then((res) => {
         if (res?.data?.token) {
-
           navigate("/home");
-          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
+          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`;
 
           localStorage.setItem("TokenId", res?.data?.token);
           localStorage.setItem("usernameDemo", res?.data?.username);
           localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
-
         }
-      })
+      });
   };
-
 
   const handlePassWordsValidation = (e) => {
     setPassword(e.target.value);
@@ -246,7 +239,6 @@ const Signup = () => {
     }
   };
 
-
   const handleMobileNumber = (e) => {
     // console.log(e.target.value, "luhbnoihb")
     if (e.target.value.match(/^[0-9]{0,10}$/) !== null) {
@@ -260,7 +252,6 @@ const Signup = () => {
       setmobileNumberError("");
     }
   };
-
 
   const handleUserName = (e) => {
     setUserName(e.target.value);
@@ -278,38 +269,36 @@ const Signup = () => {
       setUserNameError("");
     }
   };
-  const [allData, setAllData] = useState()
+  const [allData, setAllData] = useState();
 
   useEffect(() => {
-    let appUrll = window.location.hostname.replace("www.","").replace("www.", "");
+    let appUrll = window.location.hostname
+      .replace("www.", "")
+      .replace("www.", "");
     // let appUrll = window.location.hostname.replace("www.","");
     // let appUrll = "maggibook.com";
     axios
-      .post(
-        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
-        { appUrl: appUrll }
-      )
+      .post(`${REACT_APP_API_URL}/login/is-self-by-app-url`, {
+        appUrl: appUrll,
+      })
       .then((res) => {
-        setAllData(res?.data)
+        setAllData(res?.data);
         // console.log(res, "dadasdas")
         // SetselfAllowedd(res?.data?.data?.logo);
         setLogo(res?.data?.data?.logo);
-        SetselfAllowedd(res?.data?.data)
+        SetselfAllowedd(res?.data?.data);
         // setStatusBtn(res?.data?.data?.selfAllowed);
         // setIsDemoIdLoginAllowed(res?.data?.data?.isDemoIdLoginAllowed)
         if (res?.data?.data?.selfAllowed === false) {
-
-          navigate("/sign-in")
+          navigate("/sign-in");
         } else {
-
         }
       });
   }, []);
 
   const handleClickLogin = () => {
-    navigate("/login")
-
-  }
+    navigate("/login");
+  };
   return (
     <div id="app">
       <div>
@@ -348,7 +337,6 @@ const Signup = () => {
                           onChange={handleUserName}
                         />
                         <label style={{ color: "red" }}>{userNameError}</label>
-
                       </div>
                       <div className="form-group">
                         <input
@@ -356,12 +344,13 @@ const Signup = () => {
                           type="number"
                           placeholder="Mobile Number"
                           className="form-control"
-
                           maxlength="10"
                           value={mobileNumber}
-                          onChange={handleMobileNumber} />
-                        <label style={{ color: "red" }}>{mobileNumberError}</label>
-
+                          onChange={handleMobileNumber}
+                        />
+                        <label style={{ color: "red" }}>
+                          {mobileNumberError}
+                        </label>
                       </div>
                       <div className="form-group">
                         <input
@@ -376,61 +365,103 @@ const Signup = () => {
                       </div>
 
                       <div className="form-group">
-
                         <input
                           required
                           name="confirmPassword"
                           placeholder="Confirm Password"
                           type="password"
                           className="form-control"
-
                           // value={register?.confirmPassword}
                           onChange={handleConfirmPasswordsValidation}
                         />
-                        <label style={{ color: "red" }}>{confirmPasswordError}</label>
-
-
+                        <label style={{ color: "red" }}>
+                          {confirmPasswordError}
+                        </label>
                       </div>
 
-
-
-                      <div className='form-group comm-data-new' style={{ maxWidth: "407px" }}>
-                        {allData?.data?.fancyComm === 0 ?
-
-                          "" :
+                      <div
+                        className="form-group comm-data-new"
+                        style={{ maxWidth: "407px" }}>
+                        {allData?.data?.fancyComm === 0 ? (
+                          ""
+                        ) : (
                           <span>
-                            <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Odds Comm..</label>
-                            <input value={allData?.data?.oddsComm} disabled style={{ width: "100%", padding: "unset" }} />
+                            <label
+                              style={{
+                                color: "white",
+                                fontSize: "12px",
+                                width: "100%",
+                                textAlign: "left",
+                              }}>
+                              Odds Comm..
+                            </label>
+                            <input
+                              value={allData?.data?.oddsComm}
+                              disabled
+                              style={{ width: "100%", padding: "unset" }}
+                            />
                           </span>
-                        }
+                        )}
 
-                        {allData?.data?.fancyComm === 0 ?
-
-                          "" :
+                        {allData?.data?.fancyComm === 0 ? (
+                          ""
+                        ) : (
                           <span>
-                            <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Fancy Comm..</label>
-                            <input placeholder={allData?.data?.fancyComm} disabled style={{ width: "100%", padding: "unset" }} />
-                          </span>}
-                        {allData?.data?.casinoComm === 0 ?
-
-                          "" :
-                          <span>
-                            <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Casino Comm..</label>
-                            <input placeholder={allData?.data?.casinoComm} disabled style={{ width: "100%", padding: "unset" }} />
+                            <label
+                              style={{
+                                color: "white",
+                                fontSize: "12px",
+                                width: "100%",
+                                textAlign: "left",
+                              }}>
+                              Fancy Comm..
+                            </label>
+                            <input
+                              placeholder={allData?.data?.fancyComm}
+                              disabled
+                              style={{ width: "100%", padding: "unset" }}
+                            />
                           </span>
-                        }
+                        )}
+                        {allData?.data?.casinoComm === 0 ? (
+                          ""
+                        ) : (
+                          <span>
+                            <label
+                              style={{
+                                color: "white",
+                                fontSize: "12px",
+                                width: "100%",
+                                textAlign: "left",
+                              }}>
+                              Casino Comm..
+                            </label>
+                            <input
+                              placeholder={allData?.data?.casinoComm}
+                              disabled
+                              style={{ width: "100%", padding: "unset" }}
+                            />
+                          </span>
+                        )}
                       </div>
                       <button className="btn btn-login" onClick={handleLogin}>
                         Sign Up
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
-                      {selfAllowedd?.isDemoIdLoginAllowed === true ?
-                        <button className="btn btn-login" onClick={handleDemoLogin}>
+                      {selfAllowedd?.isDemoIdLoginAllowed === true ? (
+                        <button
+                          className="btn btn-login"
+                          onClick={handleDemoLogin}>
                           Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>
-                        </button> : ""}
+                        </button>
+                      ) : (
+                        ""
+                      )}
 
-                      <button className="btn btn-login" onClick={handleClickLogin}>
+                      <button
+                        className="btn btn-login"
+                        onClick={handleClickLogin}>
                         <i className="ml-2 fas fa-sign-in-alt rotate-btn"></i>
                         Back
                       </button>
@@ -464,13 +495,11 @@ const Signup = () => {
               onHide={handleSignUpShow}
               backdrop="static"
               keyboard={false}
-              centered
-
-            >
+              centered>
               <Modal.Header className="register-head" closeButton>
                 <Modal.Title className="regTital">Register</Modal.Title>
               </Modal.Header>
-              <Modal.Body className="singn_popup" >
+              <Modal.Body className="singn_popup">
                 <div>
                   <div>
                     <div className="">
@@ -502,9 +531,8 @@ const Signup = () => {
         </>
       </div>
       <FooterForDesktop />
-    </div >
+    </div>
   );
 };
 
 export default Signup;
-

@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { RxCross2 } from 'react-icons/rx'
-import { IoMdArrowRoundBack } from 'react-icons/io'
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { RxCross2 } from "react-icons/rx";
+import { IoMdArrowRoundBack } from "react-icons/io";
 // import { userServices } from '../../../../utils/api/user/services'
-import axios from 'axios'
-import "./SuperNowa.css"
-import { useDispatch, useSelector } from 'react-redux'
-import { PostBalance } from '../../../../App/Features/auth/authActions'
+import axios from "axios";
+import "./SuperNowa.css";
+import { useDispatch, useSelector } from "react-redux";
+import { PostBalance } from "../../../../App/Features/auth/authActions";
 const SuperNowaPage = () => {
-  const { state } = useLocation()
+  const { state } = useLocation();
   const token = localStorage.getItem("token");
   console.log(state, "statestatestatestate");
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-  const { PostTotalBalance } = useSelector(
-    (state) => state.auth
-  );
+  const { PostTotalBalance } = useSelector((state) => state.auth);
   console.log(PostTotalBalance, "PostTotalBalance");
 
   const navigate = useNavigate();
 
-
-
   const handleBackToVCasion = () => {
-    navigate("/m/SuperNowa_casion")
-  }
-
+    navigate("/m/SuperNowa_casion");
+  };
 
   const [walletBalance, setWalletbalance] = useState();
   const [casionUrl, setCasionUrl] = useState();
@@ -35,25 +30,24 @@ const SuperNowaPage = () => {
     dispatch(PostBalance());
   }, []);
 
-
-
   useEffect(() => {
     const TokenId = localStorage.getItem("TokenId");
 
     let dtatata = {
-      "game": {
-        "gameCode": state?.code,
-        "providerCode": state?.providerCode,
+      game: {
+        gameCode: state?.code,
+        providerCode: state?.providerCode,
       },
-      "timestamp": new Date().getTime(),
+      timestamp: new Date().getTime(),
       user: {
         currency: "INR",
         backUrl: `${window.location.protocol}//${window.location.hostname}/m/Slot-Game-list`,
-      }
-    }
+      },
+    };
     axios
       .post(
-        `${REACT_APP_API_URL}/api/supernowa/v1/authentication`, dtatata,
+        `${REACT_APP_API_URL}/api/supernowa/v1/authentication`,
+        dtatata,
 
         {
           headers: {
@@ -64,28 +58,31 @@ const SuperNowaPage = () => {
       )
       .then((response) => {
         if (response) {
-          setCasionUrl(response?.data?.data?.launchURL)
-          console.log(response?.data?.data?.launchURL, "sdfsdfsdfsdfsdfsdfsd")
+          setCasionUrl(response?.data?.data?.launchURL);
+          console.log(response?.data?.data?.launchURL, "sdfsdfsdfsdfsdfsdfsd");
         } else {
         }
-      })
-  }, [])
-  // https://adminapi.247idhub.com/admin-new-apis/api/supernowa/v1/authentication
-  // https://adminapi.247idhub.com/admin-new-apis/api/supernowa/v1/authentication
+      });
+  }, []);
+  // https://adminapi.foldexch.com/admin-new-apis/api/supernowa/v1/authentication
+  // https://adminapi.foldexch.com/admin-new-apis/api/supernowa/v1/authentication
 
   return (
-    <div className='main_div_for_back_and_game'>
-      <div className='main_back'>
-
-        <button className='bacnk-btn-v-ca' onClick={handleBackToVCasion}>
-
+    <div className="main_div_for_back_and_game">
+      <div className="main_back">
+        <button className="bacnk-btn-v-ca" onClick={handleBackToVCasion}>
           <IoMdArrowRoundBack color="white" className="back_icon" />
-          <span>
-            Back
-          </span>
+          <span>Back</span>
         </button>
-        <span>Chips: {Number(PostTotalBalance?.data?.data?.balance).toFixed(2)}</span>
-        <span>Expo : <span style={{ color: "red" }}>{Number(PostTotalBalance?.data?.data?.libality).toFixed(2)}</span></span>
+        <span>
+          Chips: {Number(PostTotalBalance?.data?.data?.balance).toFixed(2)}
+        </span>
+        <span>
+          Expo :{" "}
+          <span style={{ color: "red" }}>
+            {Number(PostTotalBalance?.data?.data?.libality).toFixed(2)}
+          </span>
+        </span>
       </div>
 
       <iframe
@@ -96,8 +93,7 @@ const SuperNowaPage = () => {
         style={{ minHeight: "100vh" }}
         title="mobile"
         className="for_Desktop"
-        allowFullScreen={true}
-      ></iframe>
+        allowFullScreen={true}></iframe>
       <iframe
         src={casionUrl}
         // height="82vh"
@@ -106,11 +102,9 @@ const SuperNowaPage = () => {
         style={{ minHeight: "90vh" }}
         title="mobile"
         className="For_mobile"
-        allowFullScreen={true}
-
-      ></iframe>
+        allowFullScreen={true}></iframe>
     </div>
-  )
-}
+  );
+};
 
-export default SuperNowaPage
+export default SuperNowaPage;

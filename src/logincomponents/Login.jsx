@@ -9,16 +9,14 @@ import Footer from "../component/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Postisselfbyappurl,
-  postLogin, postLoginDemoUser
+  postLogin,
+  postLoginDemoUser,
 } from "../App/Features/auth/authActions";
 import { clearLoginInfo } from "../App/Features/auth/authSlice";
-
-
 
 const Login = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
-
 
   const [login, setLogin] = useState({});
   const [userName, setUserName] = useState("");
@@ -32,29 +30,32 @@ const Login = () => {
   const [apiHit, setApiHit] = useState(false);
   const [show, setShow] = useState(false);
   const handleClose = () => {
-    setPassword("")
-    setUserName("")
-    setShow(false)
+    setPassword("");
+    setUserName("");
+    setShow(false);
   };
 
   const {
     postLoginData,
     postLoginDataError,
     PostuserselfregisterData,
-    postisselfbyappurlData
+    postisselfbyappurlData,
   } = useSelector((state) => state.auth);
   let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
 
   useEffect(() => {
-    if (localStorage.getItem("TokenId") !== null && pathname.includes("login")) {
+    if (
+      localStorage.getItem("TokenId") !== null &&
+      pathname.includes("login")
+    ) {
       navigate("./home");
     }
-  }, [pathname])
+  }, [pathname]);
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    dispatch(clearLoginInfo())
-  }, [])
+    dispatch(clearLoginInfo());
+  }, []);
 
   useEffect(() => {
     if (apiHit === true) {
@@ -80,8 +81,11 @@ const Login = () => {
             }
           )
           .then((response) => {
-            localStorage.setItem("GameToken", response?.data?.data?.access_token);
-          })
+            localStorage.setItem(
+              "GameToken",
+              response?.data?.data?.access_token
+            );
+          });
         if (postLoginData?.data?.passwordtype === "old") {
           // console.log("second")
           navigate("/m/changepassword");
@@ -93,7 +97,6 @@ const Login = () => {
     }
     setLoginData(postLoginData);
   }, [postLoginData]);
-
 
   const handleInput = (e) => {
     let inputName = e.target.name;
@@ -114,14 +117,12 @@ const Login = () => {
   };
 
   const handleLogin = (vl) => {
-
     setLogin({
       userId: userName,
       password: password,
-      appUrl: window.location.hostname.replace("www.",""),
+      appUrl: window.location.hostname.replace("www.", ""),
       // appUrl: "247idhub.com"
     });
-
 
     if (userName === "" && password === "") {
       setErrorPassword(true);
@@ -134,20 +135,12 @@ const Login = () => {
       setErrorPassword(true);
       setShow(false);
     } else {
-
-      setShow(true)
+      setShow(true);
     }
-
-
-
   };
   const handleHome = () => {
     navigate("/m/home");
-
   };
-
-
-
 
   const handleLoginConfirm = (val) => {
     if (userName === "" && password === "") {
@@ -161,29 +154,25 @@ const Login = () => {
       setErrorPassword(true);
       setShow(false);
     } else {
-
-
       dispatch(postLogin(login));
       setShow(false);
       setApiHit(true);
-
     }
   };
 
   const handleSignUp = () => {
     navigate("/m/signup");
   };
-  let appUrll = window.location.hostname.replace("www.","");
+  let appUrll = window.location.hostname.replace("www.", "");
   // let appUrll = "localhost";
   // let appUrll = "localhost";
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
     axios
-      .post(
-        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
-        { appUrl: appUrll }
-      )
+      .post(`${REACT_APP_API_URL}/login/is-self-by-app-url`, {
+        appUrl: appUrll,
+      })
       .then((res) => {
         // console.log(res, "dadasdas")
         SetselfAllowedd(res?.data?.data);
@@ -200,22 +189,20 @@ const Login = () => {
   const handleDemoLogin = () => {
     axios
       .post(
-        "https://adminapi.247idhub.com/admin-new-apis/login/demo-user-creation-login",
-        { appUrl: window.location.hostname.replace("www.","") }
+        "https://adminapi.foldexch.com/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: window.location.hostname.replace("www.", "") }
       )
       .then((res) => {
         if (res?.data?.token) {
-          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
+          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`;
 
           navigate("/m/home");
           localStorage.setItem("TokenId", res?.data?.token);
           localStorage.setItem("usernameDemo", res?.data?.username);
           localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
-
         }
-      })
+      });
   };
-
 
   return (
     <div id="app">
@@ -223,7 +210,9 @@ const Login = () => {
         <div className="login">
           <div className="">
             <div className="login-container" style={{ overflow: "scroll " }}>
-              <div className="login-form" style={{ justifyContent: "center", marginTop: "6%" }}>
+              <div
+                className="login-form"
+                style={{ justifyContent: "center", marginTop: "6%" }}>
                 <div className="login-panel">
                   <div className="panel-heading">
                     <div className="logo">
@@ -238,8 +227,7 @@ const Login = () => {
                   <div className="panel-body panel">
                     <form
                       data-vv-scope="form-login"
-                      onSubmit={(e) => e.preventDefault()}
-                    >
+                      onSubmit={(e) => e.preventDefault()}>
                       <div className="m-b-10">
                         <div className="flash__wrapper"></div>
                       </div>
@@ -285,31 +273,38 @@ const Login = () => {
                             <span className="text-danger">
                               {postLoginData?.data?.message}
                             </span>
-                          ) : ""}
+                          ) : (
+                            ""
+                          )}
                         </div>
                         <button className="btn btn-login" onClick={handleLogin}>
                           Login
                           <i className="ml-2 fas fa-sign-in-alt"></i>
                         </button>
-                        {selfAllowedd?.isDemoIdLoginAllowed === true ?
-                          <button className="btn btn-login" onClick={handleDemoLogin}>
+                        {selfAllowedd?.isDemoIdLoginAllowed === true ? (
+                          <button
+                            className="btn btn-login"
+                            onClick={handleDemoLogin}>
                             Login with demo ID
                             <i className="ml-2 fas fa-sign-in-alt"></i>
-                          </button> : ""}
+                          </button>
+                        ) : (
+                          ""
+                        )}
 
-                        {selfAllowedd?.selfAllowed === true ?
-                          <button className="btn btn-login" onClick={handleSignUp}>
+                        {selfAllowedd?.selfAllowed === true ? (
+                          <button
+                            className="btn btn-login"
+                            onClick={handleSignUp}>
                             Sign Up
                             <i className="ml-2 fas fa-sign-in-alt"></i>
                           </button>
-                          :
+                        ) : (
                           ""
-                        }
+                        )}
                         <button className="btn btn-login" onClick={handleHome}>
                           Back
-
                         </button>
-
 
                         <p className="m-b-0">
                           <small className="recaptchaTerms">
@@ -343,8 +338,7 @@ const Login = () => {
             style={{ marginLeft: "1%" }}
             onHide={handleClose}
             backdrop="static"
-            keyboard={false}
-          >
+            keyboard={false}>
             <Modal.Header style={{ width: "100%", textAlign: "center" }}>
               <Modal.Title className="modaltitleeee">
                 Please Confirm
@@ -356,14 +350,16 @@ const Login = () => {
             </Modal.Body>
             <div className="confirm">
               <Modal.Footer>
-                <Button variant="secondary" style={{ backgroundColor: "#dc3545" }} onClick={handleClose}>
+                <Button
+                  variant="secondary"
+                  style={{ backgroundColor: "#dc3545" }}
+                  onClick={handleClose}>
                   Exit
                 </Button>
                 <Button
                   className="confirmation btn-info"
                   variant=""
-                  onClick={() => handleLoginConfirm("true")}
-                >
+                  onClick={() => handleLoginConfirm("true")}>
                   Confirm
                 </Button>
               </Modal.Footer>

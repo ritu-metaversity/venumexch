@@ -4,12 +4,15 @@ import { useNavigate } from "react-router";
 
 import Footer from "../component/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { postLoginDemoUser, Postuserselfregister } from "../App/Features/auth/authActions";
+import {
+  postLoginDemoUser,
+  Postuserselfregister,
+} from "../App/Features/auth/authActions";
 import ValidationFile from "../Validation/ValidationFile";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 
-export let setShowRegisterModalRef
+export let setShowRegisterModalRef;
 const Signup = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -90,15 +93,14 @@ const Signup = () => {
   // username
   // :
   // "anish2512"
-  let appUrll = window.location.hostname.replace("www.","");
+  let appUrll = window.location.hostname.replace("www.", "");
 
   const [selfAllowedd, SetselfAllowedd] = useState("");
   useEffect(() => {
     axios
-      .post(
-        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
-        { appUrl: appUrll }
-      )
+      .post(`${REACT_APP_API_URL}/login/is-self-by-app-url`, {
+        appUrl: appUrll,
+      })
       .then((res) => {
         SetselfAllowedd(res?.data?.data);
       });
@@ -107,26 +109,23 @@ const Signup = () => {
   const handleDemoLogin = () => {
     axios
       .post(
-        "https://adminapi.247idhub.com/admin-new-apis/login/demo-user-creation-login",
-        { appUrl: window.location.hostname.replace("www.","") }
+        "https://adminapi.foldexch.com/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: window.location.hostname.replace("www.", "") }
       )
       .then((res) => {
         if (res?.data?.token) {
-
           navigate("/m/home");
-          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`
+          axios.defaults.headers.common.Authorization = `Bearer ${res?.data?.token}`;
 
           localStorage.setItem("TokenId", res?.data?.token);
           localStorage.setItem("usernameDemo", res?.data?.username);
           localStorage.setItem("userTypeInfo", res?.data?.userTypeInfo);
-
         }
-      })
+      });
   };
 
   const handleHome = () => {
     navigate("/m/home");
-
   };
   const handleSignup = (e) => {
     setInfoError(true);
@@ -134,7 +133,7 @@ const Signup = () => {
     let data = {
       username: userName,
       password: password,
-      appUrl: window.location.hostname.replace("www.",""),
+      appUrl: window.location.hostname.replace("www.", ""),
       mobile: mobileNumber,
       userId: userName,
     };
@@ -167,7 +166,9 @@ const Signup = () => {
         <div className="login">
           <div className="login-view">
             <div className="login-container">
-              <div className="login-form" style={{ justifyContent: "center", marginTop: "6%" }}>
+              <div
+                className="login-form"
+                style={{ justifyContent: "center", marginTop: "6%" }}>
                 <div className="login-panel">
                   <div className="panel-heading">
                     <div className="logo">
@@ -176,7 +177,6 @@ const Signup = () => {
                         src={selfAllowedd?.logo}
                         className="logo"
                         style={{ height: "100px", width: "200px" }}
-
                       />
                     </div>
                   </div>
@@ -207,7 +207,6 @@ const Signup = () => {
                           ""
                         )}
                       </div>
-
                       <div className="form-group">
                         <input
                           name="Password"
@@ -247,7 +246,7 @@ const Signup = () => {
                           ""
                         )}
                         {PostuserselfregisterData?.message ===
-                          "Mobile Number Already Registered" ? (
+                        "Mobile Number Already Registered" ? (
                           <span className="text-danger">
                             Mobile Number Already Registered
                           </span>
@@ -255,7 +254,7 @@ const Signup = () => {
                           ""
                         )}
                         {PostuserselfregisterData?.message ===
-                          "mobile: must be greater than or equal to 1111111111" ? (
+                        "mobile: must be greater than or equal to 1111111111" ? (
                           <span className="text-danger">
                             Mobile Number must be between 9-10
                           </span>
@@ -263,7 +262,7 @@ const Signup = () => {
                           ""
                         )}
                         {PostuserselfregisterData?.message ===
-                          "mobile: must be less than or equal to 9999999999" ? (
+                        "mobile: must be less than or equal to 9999999999" ? (
                           <span className="text-danger">
                             Mobile Number must be between 9-10
                           </span>
@@ -275,18 +274,21 @@ const Signup = () => {
                         Sign Up
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
-
-                      {selfAllowedd?.isDemoIdLoginAllowed === true ?
-                        <button className="btn btn-login" onClick={handleDemoLogin}>
+                      {selfAllowedd?.isDemoIdLoginAllowed === true ? (
+                        <button
+                          className="btn btn-login"
+                          onClick={handleDemoLogin}>
                           Login with demo ID
                           <i className="ml-2 fas fa-sign-in-alt"></i>
-                        </button> : ""})
-
+                        </button>
+                      ) : (
+                        ""
+                      )}
+                      )
                       <button className="btn btn-login" onClick={handleHome}>
                         Back
                         <i className="ml-2 fas fa-sign-in-alt"></i>
                       </button>
-
                       <p className="m-b-0">
                         <small className="recaptchaTerms">
                           This site is protected by reCAPTCHA and the Google
@@ -317,8 +319,7 @@ const Signup = () => {
               onHide={handleSignUpShow}
               backdrop="static"
               keyboard={false}
-              centered
-            >
+              centered>
               <Modal.Header className="register-head" closeButton>
                 <Modal.Title className="regTital">Register</Modal.Title>
               </Modal.Header>
