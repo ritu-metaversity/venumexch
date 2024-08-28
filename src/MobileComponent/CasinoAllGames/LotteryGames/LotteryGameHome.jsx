@@ -82,7 +82,7 @@ const LotteryGameHome = () => {
   useEffect(() => {
     axios
       .post(
-        "https://api.247idhub.com/api/qtech/provider", { gameType: "LOTTERY" },
+        "https://api.247idhub.com/FOLDEXCH/api/qtech/provider", { gameType: "LOTTERY" },
         {
           headers: {
             "Content-Type": "application/json",

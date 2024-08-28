@@ -567,7 +567,7 @@ const AllProviderName = () => {
   useEffect(() => {
     axios
       .post(
-        "https://api.247idhub.com/api/qtech/provider",
+        "https://api.247idhub.com/FOLDEXCH/api/qtech/provider",
         { gameType: "ALL" },
         {
           headers: {

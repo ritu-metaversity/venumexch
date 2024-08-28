@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.326b1312.css",
-    "main.js": "/static/js/main.91eacbf6.js",
+    "main.js": "/static/js/main.888b2523.js",
     "static/media/lords 2_2.png": "/static/media/lords 2_2.0399ac5c603c4a608ee7.png",
     "static/media/lords 2_1.png": "/static/media/lords 2_1.7d5a6a4c165225dd6bcc.png",
     "static/media/lords 3_1.png": "/static/media/lords 3_1.85a6a4c29608d0022798.png",
@@ -19,10 +19,10 @@
     "index.html": "/index.html",
     "static/media/sideBarHorse.6c8a9ff3.svg": "/static/media/sideBarHorse.6c8a9ff3.404cbe68857d2d9721462949c4df0f80.svg",
     "main.326b1312.css.map": "/static/css/main.326b1312.css.map",
-    "main.91eacbf6.js.map": "/static/js/main.91eacbf6.js.map"
+    "main.888b2523.js.map": "/static/js/main.888b2523.js.map"
   },
   "entrypoints": [
     "static/css/main.326b1312.css",
-    "static/js/main.91eacbf6.js"
+    "static/js/main.888b2523.js"
   ]
 }

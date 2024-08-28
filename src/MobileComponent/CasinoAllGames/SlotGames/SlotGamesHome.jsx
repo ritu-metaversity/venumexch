@@ -182,7 +182,7 @@ const SlotGamesHome = () => {
   useEffect(() => {
     axios
       .post(
-        "https://api.247idhub.com/api/qtech/provider", { gameType: "SLOT" },
+        "https://api.247idhub.com/FOLDEXCH/api/qtech/provider", { gameType: "SLOT" },
         {},
         {
           headers: {

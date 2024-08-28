@@ -1004,7 +1004,7 @@ export const postFindProviderList = createAsyncThunk(
     try {
       // https://api.247idhub.com/api/qtech/provider
       const postPorviderListData = await axios.post(
-        "https://api.247idhub.com/api/qtech/provider",
+        "https://api.247idhub.com/FOLDEXCH/api/qtech/provider",
         data
       );
       return postPorviderListData;
