@@ -61,20 +61,19 @@ const PayManually = (props) => {
   useEffect(() => {
     const TokenId = localStorage.getItem("TokenId");
 
-    axios.post(
-      `${REACT_APP_API_URL}/deposit-type/get_sub`,
-      {
+    axios
+      .post(`${REACT_APP_API_URL}/deposit-type/get_sub`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${TokenId}`,
         },
-      }
-    ).then((res) => {
-      // console.log(res, "dsfsdfsdf");
-      setPayMethods(res?.data);
-      setUpiDetail(res?.data);
-      setAllDatataa(res?.data);
-    });
+      })
+      .then((res) => {
+        // console.log(res, "dsfsdfsdf");
+        setPayMethods(res?.data);
+        setUpiDetail(res?.data);
+        setAllDatataa(res?.data);
+      });
   }, []);
   // useEffect(() => {
   //   const token = localStorage.getItem("TokenId");
@@ -83,7 +82,6 @@ const PayManually = (props) => {
   //     dispatch(Postpaymnetdetailapp());
   //   }
   // }, []);
-
 
   const [DepositType, setDepositeType] = useState();
 
@@ -94,7 +92,6 @@ const PayManually = (props) => {
   };
   const handleSubmit = () => {
     try {
-
       setAlertBtnshow(false);
       setIsLoading(true);
       if (Bitvalue === 0 || Bitvalue === NaN) {
@@ -120,35 +117,32 @@ const PayManually = (props) => {
       // if (Bitvalue > 99 && Bitvalue !== "" && Bitvalue != NaN) {
       const TokenId = localStorage.getItem("TokenId");
       // console.log(Bitvalue, files, "sdfdsd")
-      axios.post(
-        `${REACT_APP_API_URL}/enduser/self-deposit-app`, (data),
-        {
+      axios
+        .post(`${REACT_APP_API_URL}/enduser/self-deposit-app`, data, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${TokenId}`,
           },
+        })
+        .then((res) => {
+          // console.log(res, "sdfdsda")
 
-        }
-      ).then((res) => {
-        // console.log(res, "sdfdsda")
-
-        setIsLoading(false);
-        // props?.UpdateDetails(true);
-        setMessege(res.data.message);
-        setColor("success");
-        setAlertBtnshow(true);
-        if (res?.data.status === true) {
-          setBitValue(0);
-          setFiles(null);
-          setPaymentMode("UPI");
-          setActive(0);
-          // console.log(res.status, "hgfds")
-          props.UpdateList(true);
-          setBitValue(0)
-          setFiles(null)
-        }
-
-      })
+          setIsLoading(false);
+          // props?.UpdateDetails(true);
+          setMessege(res.data.message);
+          setColor("success");
+          setAlertBtnshow(true);
+          if (res?.data.status === true) {
+            setBitValue(0);
+            setFiles(null);
+            setPaymentMode("UPI");
+            setActive(0);
+            // console.log(res.status, "hgfds")
+            props.UpdateList(true);
+            setBitValue(0);
+            setFiles(null);
+          }
+        })
         .catch((error) => {
           // console.log(Bitvalue, files, error, "sdfdsdab")
 
@@ -159,9 +153,9 @@ const PayManually = (props) => {
         });
       // }
       // console.log("not errror");
+    } catch {
+      console.log("errrordasdfghjkl;");
     }
-    catch { console.log("errrordasdfghjkl;"); }
-
   };
 
   const [AllBetData, setAllBetData] = useState();
@@ -201,7 +195,6 @@ const PayManually = (props) => {
 
   return (
     <div>
-
       {isLoading ? (
         <p className="lodder depositLoading">
           <i className="fa fa-spinner fa-spin"></i>
@@ -214,10 +207,7 @@ const PayManually = (props) => {
         <div className="enter_amount_div">
           <span className="enter_amount_name">Enter Amount</span>
           <div>
-
-            <button
-              className="enter_amount_decrement"
-              onClick={decrement}>
+            <button className="enter_amount_decrement" onClick={decrement}>
               <span
                 className="fa fa-minus"
                 aria-hidden="true"
@@ -231,9 +221,7 @@ const PayManually = (props) => {
               onChange={handleStaticAmountInput}
               value={Number(Bitvalue)}
             />
-            <button
-              className="enter_amount_decrement"
-              onClick={increment}>
+            <button className="enter_amount_decrement" onClick={increment}>
               <span
                 style={{ color: "#fff" }}
                 className="fa fa-plus"
@@ -243,16 +231,13 @@ const PayManually = (props) => {
           </div>
         </div>
 
-
         <div className="stack_box_mobile">
           {AllBetData?.data.map(({ value, key }) => (
-
             <button
               className="stack_box_mobile_btn"
               onClick={() => handleStaticAmount(value)}>
               {key}
             </button>
-
           ))}
         </div>
         <div className="Pay_Manually_ui">
@@ -261,23 +246,19 @@ const PayManually = (props) => {
         </div>
       </div>
 
-
       <div className="paymethods">
         <Container>
-
           <div className="upload_file" style={{ height: "200px" }}>
             <div className="main_banks_div">
-
               {payMethods?.data?.length &&
                 payMethods?.data?.map((item, id) => {
                   return (
-
                     // className={item.methodName === "Bank" ? "d-none" : ""}
 
                     <div
-                      className={`inner_banks_div ${active === id ? "active3" : ""
-                        } `}
-
+                      className={`inner_banks_div ${
+                        active === id ? "active3" : ""
+                      } `}
                       key={item.methodName + id}
                       onClick={() =>
                         handlePaymentDetails(
@@ -287,21 +268,18 @@ const PayManually = (props) => {
                         )
                       }>
                       <img
-
                         src={item.image}
                         className="banks_looggoog"
                         alt="Bank"
                       />
                       <span className="banks_name">{item.depositType}</span>
                     </div>
-
                   );
                 })}
             </div>
           </div>
         </Container>
-      </div >
-
+      </div>
 
       <div className="paymethods">
         {payMethods?.data?.map((res) => {
@@ -315,8 +293,6 @@ const PayManually = (props) => {
                       <div className="qr_inner_box">
                         <span className="Qr_code_img">QR Code For Payment</span>
                         <span className="Qr_code_img">Display Name</span>
-
-
                       </div>
                       <Modal
                         show={showModals}
@@ -361,55 +337,45 @@ const PayManually = (props) => {
                 <Container>
                   <div className="upload_file">
                     <div className="qr_main_box">
-
                       <div className="qr_inner_box">
-
                         <span className=" Qr_code_img">Mode</span>
-
 
                         <span className="Qr_code_img ">Display Name </span>
 
-
-
                         <span className="Qr_code_img">UPI Detail</span>
-
                       </div>
 
                       <div className="qr_inner_box">
-
                         <span className="Qr_code_img">{res?.depositType}</span>
-                        <span className="Qr_code_img ">{res?.accountHolderName}</span>
-                        <span className="Qr_code_img">{res?.accountNumber}</span>
-
+                        <span className="Qr_code_img ">
+                          {res?.accountHolderName}
+                        </span>
+                        <span className="Qr_code_img">
+                          {res?.accountNumber}
+                        </span>
                       </div>
                     </div>
                   </div>
                 </Container>
               )}
-              {
-                DepositType === "BANK" &&
+              {DepositType === "BANK" && (
                 <Container>
                   <div className="upload_file">
-
                     <div className="qr_main_box">
-
                       <div className="qr_inner_box">
                         <span className="Typography-root root">Bank Name</span>
 
+                        <span className="Typography-root root">
+                          Account Number
+                        </span>
 
-
-
-                        <span className="Typography-root root">Account Number</span>
-
-
-
-                        <span className="Typography-root root">Account Holder Name</span>
+                        <span className="Typography-root root">
+                          Account Holder Name
+                        </span>
                         <span className="Typography-root root">IFSC Code</span>
                       </div>
 
-
                       <div className="qr_inner_box">
-
                         <span className="Typography-root text-right">
                           {res?.accountNumber}
                         </span>
@@ -423,13 +389,43 @@ const PayManually = (props) => {
                           {res?.ifsc}
                         </span>
                       </div>
-
-
                     </div>
                   </div>
-
                 </Container>
-              }
+              )}
+              {DepositType === "G PAY" && (
+                <Container>
+                  <div className="upload_file">
+                    <div className="qr_main_box">
+                      <div className="qr_inner_box">
+                        <span className="Typography-root root">Mobile No.</span>
+                      </div>
+                      <div className="qr_inner_box">
+                        <span className="Typography-root text-right">
+                          {res?.accountHolderName}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Container>
+              )}
+
+              {DepositType === "PHONE PE" && (
+                <Container>
+                  <div className="upload_file">
+                    <div className="qr_main_box">
+                      <div className="qr_inner_box">
+                        <span className="Typography-root root">Mobile No.</span>
+                      </div>
+                      <div className="qr_inner_box">
+                        <span className="Typography-root text-right">
+                          {res?.accountHolderName}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Container>
+              )}
             </>
           );
         })}
@@ -606,9 +602,7 @@ const PayManually = (props) => {
 
       <div className="paymethods">
         <Container>
-
           <label className="upload_file">
-
             {!files && (
               <div className="upload_file_btnnn">
                 <i className="fa fa-plus" aria-hidden="true"></i>
@@ -635,11 +629,12 @@ const PayManually = (props) => {
                   } else {
                     toast.error("Only image files allowed.", {
                       style: {
-                        background: "rgb(156,74,70)", minHeight: 40,
+                        background: "rgb(156,74,70)",
+                        minHeight: 40,
                         padding: 0,
                         color: "white",
-                      }
-                    })
+                      },
+                    });
                   }
                 }
               }}
@@ -647,30 +642,20 @@ const PayManually = (props) => {
               accept="image/*"
               hidden
             />
-
-
           </label>
-
         </Container>
       </div>
 
-
-
-      {
-        files !== null && Bitvalue !== 0 ? (
-          <div className="deposit_button_btnnn">
-            <button
-              className="deposit_button_main"
-              onClick={handleSubmit}>
-              Submit
-            </button>
-
-          </div>
-        ) : (
-          ""
-        )
-      }
-    </div >
+      {files !== null && Bitvalue !== 0 ? (
+        <div className="deposit_button_btnnn">
+          <button className="deposit_button_main" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
   );
 };
 
