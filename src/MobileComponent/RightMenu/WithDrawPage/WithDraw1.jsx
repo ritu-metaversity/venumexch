@@ -363,7 +363,7 @@ const WithDraw1 = () => {
                 setIsLoading(false);
                 return false;
             }
-        } else if (withType === "PAYTM") {
+        } else if (withType === "PAYTM" || withType === "G PAY" || withType === "PHONE PE") {
             // console.log("heloo");
             if (
                 withCoinValue === "" ||
@@ -760,10 +760,10 @@ const WithDraw1 = () => {
                                 } accountWith`}>
                             <div className="mx-input-wrapper account-field asdfghjkl">
                                 <label className="account-lable">
-                                    {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
+                                    {(withType === "PAYTM" || withType === "G PAY" || withType === "PHONE PE") ? "Mobile No" : "UPI ID"}
                                 </label>
 
-                                {withType === "PAYTM" ? (
+                                {(withType === "PAYTM" || withType === "G PAY" || withType === "PHONE PE") ? (
                                     <input
                                         // type="number"
                                         className="account-input"
@@ -790,7 +790,7 @@ const WithDraw1 = () => {
                             </div>
                             <div className="mx-input-wrapper account-field asdfghjkl">
                                 <label className="account-lable">
-                                    {withType === "PAYTM" ? "Name" : "Account Name"}
+                                    {(withType === "PAYTM" || withType === "G PAY" || withType === "PHONE PE") ? "Name" : "Account Name"}
                                 </label>
 
                                 <input

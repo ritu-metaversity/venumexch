@@ -50,8 +50,7 @@ const Layout = lazy(() => import("./Layout/LayoutForDesktop"));
 const RoutesPages = () => {
   return (
     <div>
-      {/* <BrowserRouter>
-        <Suspense > */}
+
       <Routes>
         <Route path="login" element={<LoginForMobile />} />
         <Route exact path="/" element={<LayoutForDesktop />}>

@@ -17,6 +17,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Postvalidatejwttoken } from "../App/Features/auth/authActions";
 import { modalClasses } from "@mui/material";
+import WhatsAppIcon from "../component/WhatsAppIcon";
+import axios from "axios";
 
 export let navRef;
 const LayoutForMobile = () => {
@@ -40,8 +42,38 @@ const LayoutForMobile = () => {
   const RightSideBarClose = (vl) => {
     setRightValue(false);
   };
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  const [selfAllowedd, setSelfAllowedd] = useState();
+  const [whatsAppIconPosition, setWhatsAppIconPosition] = useState({
+    top: "10px",
+    right: "10px",
+  });
 
-  useEffect(() => { }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      const newTop = window.scrollY;
+      setWhatsAppIconPosition({ top: newTop });
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    let appUrll = window.location.hostname.replace("www.","");
+
+    axios
+      .post(
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+
+        setSelfAllowedd(res?.data?.data);
+
+      });
+  }, []);
 
   // passwordtype
   // :
@@ -210,6 +242,9 @@ const LayoutForMobile = () => {
         </button>
 
         {/* </div> */}
+        {
+        selfAllowedd?.selfAllowed &&  <WhatsAppIcon top={whatsAppIconPosition.top} />
+      }
 
         <div className="bottom-icon" style={{ width: "40px", height: "40px" }}>
           <Eyeicon style={{ fontSize: "22px" }} />

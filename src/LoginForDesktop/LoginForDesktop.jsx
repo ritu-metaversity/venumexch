@@ -355,6 +355,7 @@ const LoginForMobile = () => {
         {/* </> */}
       </div>
       <Footer />
+     
     </div>
   );
 };
