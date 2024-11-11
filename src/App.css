@@ -1333,3 +1333,10 @@ footer .upper-footer img:hover {
     padding: 6px !important;
     text-align: center !important;
 }
+
+
+@media screen and (max-width:700px) {
+    .col-md-3.fansty_casino {
+        width: 50%;
+    }
+}

@@ -13,12 +13,13 @@ import {
 } from "../../App/Features/auth/authActions";
 import "./HomePage.css";
 import moment from "moment"
-import Casinolist from "../Livecasino/Casinolist";
 import UpperBanner from "./UpperBanner";
 import Modal from "react-bootstrap/Modal";
 import BitPopup from "../../MobileComponent/Modal/BitPopup";
 import AllProviderName from "../CasinoAllGames/AllProviderName/AllProviderName";
 import Upcoming from "./Upcoming"
+import Casinolist from "../../component/SideBar/Casinolist";
+import HomeCasino from "../../component/Mid/HomeCasino";
 
 const HomePage = () => {
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -443,7 +444,9 @@ const HomePage = () => {
             </div>
 
             <div className="AllProvideName_HomePage">
-              <AllProviderName />
+              {/* <AllProviderName /> */}
+              <HomeCasino lnk="/m/login"/>
+              <Casinolist lnk="/m/login"/>
             </div>
 
             <Modal show={show} onHide={handleClose}>

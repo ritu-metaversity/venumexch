@@ -23,7 +23,7 @@
 @media screen and (min-width: 800px) {
     .main_wrap_game_logog_lottery {
 
-        padding-top: 10px;
+        padding-top: 10px !important;
     }
 
 }

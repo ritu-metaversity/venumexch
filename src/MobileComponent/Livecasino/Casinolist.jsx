@@ -11,7 +11,7 @@ import CasinoModals from "./CasinoModals";
 const Casinolistt = () => {
   const { PostcasinoData, psotbetsingleusevalueData } = useSelector((state) => state.auth);
   const [sportId, setSportId] = useState(323334);
-  const [casinoList, setCasinoList] = useState(323334);
+  const [casinoList, setCasinoList] = useState();
   let navigate = useNavigate();
   const [trueee, setTrueee] = useState(false);
   const [casionId, setCasionId] = useState("")
@@ -104,32 +104,32 @@ const Casinolistt = () => {
         </ul> */}
 
         <div>
-          <section data-v-6a7f44cc="" className="m-t-10 ">
-            <div data-v-6a7f44cc="" className="container-fluid">
-              <h2 data-v-6a7f44cc="" className="page-title text-center m-t-10">
+          <section className="m-t-10 ">
+            <div className="container-fluid">
+              <h2 className="page-title text-center m-t-10">
                 Live Casino
               </h2>
-              <div data-v-6a7f44cc="" className="row row5 _margin">
+              <div className="row row5 _margin">
                 {casinoList?.length &&
                   casinoList.map((item) => {
                     return (
                       <div
-                        data-v-6a7f44cc=""
+                       
                         className="colllcsss m-b-10"
                         onClick={() => handleChangeaa(item.gameId)}
                       >
-                        <div data-v-6a7f44cc="" className="events ">
+                        <div className="events ">
                           <div
-                            data-v-6a7f44cc=""
+                           
                             className="events-row text-center"
                           >
-                            <div data-v-6a7f44cc="" className="d-inline-block ">
+                            <div className="d-inline-block ">
                               <div className=" iconshadow">
                                 {/* {console.log(item)} */}
-                                <Link data-v-6a7f44cc="" className="buttonsize">
+                                <Link className="buttonsize">
                                   <img
                                     alt=""
-                                    data-v-6a7f44cc=""
+                                   
                                     src={item.imageUrl}
                                     className="img-fluid casino-body-images "
                                   />
